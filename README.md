@@ -1,6 +1,6 @@
 # Festispec-B
 
-The application for Festispec
+De applicatie voor Festispec
 
 # Gebruik van Github
 
