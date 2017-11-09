@@ -3,10 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ProofOfConcept.Geodan"
+        xmlns:xaml="clr-namespace:Mapsui.UI.Wpf;assembly=Mapsui.UI.Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <xaml:MapControl Name="MyMapControl"></xaml:MapControl>
+        <TextBox x:Name="searchTextBox" HorizontalAlignment="Left" Height="23" Margin="135,286,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="searchButton" Content="Button" HorizontalAlignment="Left" Margin="280,286,0,0" VerticalAlignment="Top" Width="75"/>
+
     </Grid>
 </Window>
