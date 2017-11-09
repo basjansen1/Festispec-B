@@ -7,9 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <xaml:MapControl Name="MyMapControl"></xaml:MapControl>
-        <TextBox x:Name="searchTextBox" HorizontalAlignment="Left" Height="23" Margin="135,286,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="searchButton" Content="Button" HorizontalAlignment="Left" Margin="280,286,0,0" VerticalAlignment="Top" Width="75"/>
+        <xaml:MapControl Name="MyMapControl">
+        </xaml:MapControl>
+        <TextBox x:Name="searchTextBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="168"/>
+        <ComboBox x:Name="typeComboBox" HorizontalAlignment="Left" Margin="10,38,0,0" VerticalAlignment="Top" Width="85" SelectedIndex="0">
+            <ComboBoxItem Content=""></ComboBoxItem>
+            <ComboBoxItem Content="city"></ComboBoxItem>
+            <ComboBoxItem Content="street"></ComboBoxItem>
+        </ComboBox>
+        <Button x:Name="searchButton" Content="Button" HorizontalAlignment="Left" Margin="103,38,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>

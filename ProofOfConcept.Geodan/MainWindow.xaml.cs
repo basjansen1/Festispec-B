@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using BruTile.Predefined;
 using Mapsui.Geometries.WellKnownText;
 using Mapsui.Layers;
+using Mapsui.Projection;
 using Newtonsoft.Json;
 
 namespace ProofOfConcept.Geodan
@@ -29,36 +30,68 @@ namespace ProofOfConcept.Geodan
         {
             InitializeComponent();
 
+            // Generate the map
             MyMapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()));
-
+            
             searchButton.Click += OnSearch;
         }
 
-        private async void OnSearch(object sender, RoutedEventArgs e)
+        private void OnSearch(object sender, RoutedEventArgs e)
         {
+            // Get UI input
             var searchText = searchTextBox.Text;
+            var type = typeComboBox.SelectionBoxItem as string;
 
-            var data = FindAddress(searchText);
+            // Find address by input
+            var data = FindAddress(searchText, type);
 
-            // WKT Parser
+            // No data found
+            if (data == null) return;
+
+            // Parse data to geometry with GeometryFromWKT
             var geometry = GeometryFromWKT.Parse(data);
 
-            var a = geometry;
+            // Get centroid and convert from lonlat to spherical mercator
+            var centroid = geometry.GetBoundingBox().GetCentroid();
+            var centroidFromLonLat = SphericalMercator.FromLonLat(centroid.X, centroid.Y);
+
+            // Navigate
+            MyMapControl.Map.NavigateTo(centroidFromLonLat);
+            // Zoom
+            MyMapControl.Map.NavigateTo(MyMapControl.Map.Resolutions[16]);
+        }
+
+        public string FindAddress(string query, string type)
+        {
+            // Check for type
+            if (!string.IsNullOrEmpty(type))
+            {
+                query += $" AND type:{type}";
+            }
+            return FindAddress(query);
         }
 
         public string FindAddress(string query)
         {
-            var url = $"https://services.geodan.nl/geosearch/free?q=" + query +
-                      "&q.op=OR&wt=json&start=0&rows=10&servicekey=19aca9fb-6705-11e7-a442-005056805b87";
+            // Build url with query
+            var url =
+                $"https://services.geodan.nl/geosearch/free?q={query}&q.op=OR&wt=json&start=0&rows=10&servicekey=19aca9fb-6705-11e7-a442-005056805b87";
 
+            // Get http
             using (var httpClient = new HttpClient())
             {
                 var response = httpClient.GetStringAsync(url).Result;
 
                 dynamic json = JsonConvert.DeserializeObject(response);
+                
+                if (json.response.docs == null || json.response.docs.Count == 0)
+                {
+                    return null;
+                }
 
+                // Return geometry data
                 return json.response.docs[0].geom;
             }
         }
-}
+    }
 }
