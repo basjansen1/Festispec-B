@@ -56,9 +56,9 @@
       <End Role="Inspector" EntitySet="Address_Inspector" />
       <End Role="Planning" EntitySet="Planning" />
     </AssociationSet>
-    <AssociationSet Name="EmployeeEmployee" Association="Festispec.Store.EmployeeEmployee">
+    <AssociationSet Name="EmployeeEmployee" Association="Festispec.Store.EmployeeManager">
+      <End Role="Manager_Id" EntitySet="Address_Employee" />
       <End Role="Employee" EntitySet="Address_Employee" />
-      <End Role="Employee1" EntitySet="Address_Employee" />
     </AssociationSet>
     <AssociationSet Name="QuestionTypeQuestion" Association="Festispec.Store.QuestionTypeQuestion">
       <End Role="QuestionType" EntitySet="QuestionType" />
@@ -207,7 +207,7 @@
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Role_Role" Type="nvarchar" MaxLength="64" Nullable="false" />
-    <Property Name="Employees_Id" Type="int" Nullable="false" />
+    <Property Name="Manager_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Address_Inspector">
     <Key>
@@ -332,15 +332,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="EmployeeEmployee">
-    <End Role="Employee" Type="Festispec.Store.Address_Employee" Multiplicity="1" />
-    <End Role="Employee1" Type="Festispec.Store.Address_Employee" Multiplicity="*" />
+  <Association Name="EmployeeManager">
+    <End Role="Manager_Id" Type="Festispec.Store.Address_Employee" Multiplicity="1" />
+    <End Role="Employee" Type="Festispec.Store.Address_Employee" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Employee">
+      <Principal Role="Manager_Id">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Employee1">
-        <PropertyRef Name="Employees_Id" />
+      <Dependent Role="Employee">
+        <PropertyRef Name="Manager_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -545,9 +545,9 @@
             <End Role="Inspector" EntitySet="Address" />
             <End Role="Planning" EntitySet="Planning" />
           </AssociationSet>
-          <AssociationSet Name="EmployeeEmployee" Association="Festispec.EmployeeEmployee">
+          <AssociationSet Name="EmployeeEmployee" Association="Festispec.EmployeeManager">
+            <End Role="Manager_Id" EntitySet="Address" />
             <End Role="Employee" EntitySet="Address" />
-            <End Role="Employee1" EntitySet="Address" />
           </AssociationSet>
           <EntitySet Name="Regulation" EntityType="Festispec.Regulation" />
           <EntitySet Name="Question" EntityType="Festispec.Question" />
@@ -589,8 +589,8 @@
           <NavigationProperty Name="Role" Relationship="Festispec.EmployeeRoleEmployee" FromRole="Employee" ToRole="EmployeeRole" />
           <Property Name="Username" Type="String" Nullable="false" />
           <Property Name="Password" Type="String" Nullable="false" />
-          <NavigationProperty Name="Manager" Relationship="Festispec.EmployeeEmployee" FromRole="Employee" ToRole="Employee1" />
-          <NavigationProperty Name="Employees" Relationship="Festispec.EmployeeEmployee" FromRole="Employee1" ToRole="Employee" />
+          <NavigationProperty Name="Employees" Relationship="Festispec.EmployeeManager" FromRole="Manager_Id" ToRole="Employee" />
+          <NavigationProperty Name="Manager" Relationship="Festispec.EmployeeManager" FromRole="Employee" ToRole="Manager_Id" />
         </EntityType>
         <EntityType Name="EmployeeRole">
           <Key>
@@ -703,9 +703,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="EmployeeEmployee">
-          <End Type="Festispec.Employee" Role="Employee" Multiplicity="1" />
-          <End Type="Festispec.Employee" Role="Employee1" Multiplicity="*" />
+        <Association Name="EmployeeManager">
+          <End Type="Festispec.Employee" Role="Manager_Id" Multiplicity="1" />
+          <End Type="Festispec.Employee" Role="Employee" Multiplicity="*" />
         </Association>
         <EntityType Name="Regulation">
           <Key>
@@ -949,11 +949,11 @@
         <ScalarProperty Name="Id" ColumnName="Inspections_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="EmployeeEmployee" TypeName="Festispec.EmployeeEmployee" StoreEntitySet="Address_Employee">
-      <EndProperty Name="Employee">
-        <ScalarProperty Name="Id" ColumnName="Employees_Id" />
+    <AssociationSetMapping Name="EmployeeEmployee" TypeName="Festispec.EmployeeManager" StoreEntitySet="Address_Employee">
+      <EndProperty Name="Manager_Id">
+        <ScalarProperty Name="Id" ColumnName="Manager_Id" />
       </EndProperty>
-      <EndProperty Name="Employee1">
+      <EndProperty Name="Employee">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

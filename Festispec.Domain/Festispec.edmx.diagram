@@ -28,7 +28,7 @@
         <EntityTypeShape EntityType="Festispec.Planning" Width="1.5" PointX="9.625" PointY="8.875" />
         <AssociationConnector Association="Festispec.InspectionPlanning" />
         <AssociationConnector Association="Festispec.InspectorPlanning" />
-        <AssociationConnector Association="Festispec.EmployeeEmployee" />
+        <AssociationConnector Association="Festispec.EmployeeManager" />
         <EntityTypeShape EntityType="Festispec.Regulation" Width="1.5" PointX="7.25" PointY="2.75" />
         <EntityTypeShape EntityType="Festispec.Question" Width="1.5" PointX="15.125" PointY="6.75" />
         <EntityTypeShape EntityType="Festispec.QuestionType" Width="1.5" PointX="17.375" PointY="6.875" />

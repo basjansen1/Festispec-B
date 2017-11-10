@@ -17,7 +17,7 @@ namespace Festispec.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
-            this.Manager = new HashSet<Employee>();
+            this.Employees = new HashSet<Employee>();
         }
     
         public string Username { get; set; }
@@ -25,7 +25,7 @@ namespace Festispec.Domain
     
         public virtual EmployeeRole Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employee> Manager { get; set; }
-        public virtual Employee Employees { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
+        public virtual Employee Manager { get; set; }
     }
 }

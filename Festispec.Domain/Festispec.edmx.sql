@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/10/2017 13:59:34
+-- Date Created: 11/10/2017 14:13:04
 -- Generated from EDMX file: C:\Workspace\Avans\Projects\42IN06SOb\Festispec\Festispec.Domain\Festispec.edmx
 -- --------------------------------------------------
 
@@ -41,8 +41,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_InspectorPlanning]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Planning] DROP CONSTRAINT [FK_InspectorPlanning];
 GO
-IF OBJECT_ID(N'[dbo].[FK_EmployeeEmployee]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Address_Employee] DROP CONSTRAINT [FK_EmployeeEmployee];
+IF OBJECT_ID(N'[dbo].[FK_EmployeeManager]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Address_Employee] DROP CONSTRAINT [FK_EmployeeManager];
 GO
 IF OBJECT_ID(N'[dbo].[FK_QuestionTypeQuestion]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Question] DROP CONSTRAINT [FK_QuestionTypeQuestion];
@@ -240,7 +240,7 @@ CREATE TABLE [dbo].[Address_Employee] (
     [Password] nvarchar(max)  NOT NULL,
     [Id] int  NOT NULL,
     [Role_Role] nvarchar(64)  NOT NULL,
-    [Employees_Id] int  NOT NULL
+    [Manager_Id] int  NOT NULL
 );
 GO
 
@@ -518,19 +518,19 @@ ON [dbo].[Planning]
     ([Inspector_Id]);
 GO
 
--- Creating foreign key on [Employees_Id] in table 'Address_Employee'
+-- Creating foreign key on [Manager_Id] in table 'Address_Employee'
 ALTER TABLE [dbo].[Address_Employee]
-ADD CONSTRAINT [FK_EmployeeEmployee]
-    FOREIGN KEY ([Employees_Id])
+ADD CONSTRAINT [FK_EmployeeManager]
+    FOREIGN KEY ([Manager_Id])
     REFERENCES [dbo].[Address_Employee]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_EmployeeEmployee'
-CREATE INDEX [IX_FK_EmployeeEmployee]
+-- Creating non-clustered index for FOREIGN KEY 'FK_EmployeeManager'
+CREATE INDEX [IX_FK_EmployeeManager]
 ON [dbo].[Address_Employee]
-    ([Employees_Id]);
+    ([Manager_Id]);
 GO
 
 -- Creating foreign key on [QuestionType_Type] in table 'Question'
