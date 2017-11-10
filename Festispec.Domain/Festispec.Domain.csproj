@@ -94,6 +94,9 @@
     <Compile Include="Inspection.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="InspectionQuestion.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="InspectionStatus.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
@@ -107,7 +110,22 @@
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Question.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QuestionType.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Regulation.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Schedule.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Template.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateQuestion.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
