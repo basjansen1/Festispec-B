@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/10/2017 13:51:39
+-- Date Created: 11/10/2017 13:56:09
 -- Generated from EDMX file: C:\Workspace\Avans\Projects\42IN06SOb\Festispec\Festispec.Domain\Festispec.edmx
 -- --------------------------------------------------
 
@@ -203,7 +203,7 @@ GO
 CREATE TABLE [dbo].[Question] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL,
+    [Description] nvarchar(max)  NULL,
     [QuestionType_Type] nvarchar(64)  NOT NULL
 );
 GO
@@ -219,7 +219,7 @@ GO
 CREATE TABLE [dbo].[Template] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL
+    [Description] nvarchar(max)  NULL
 );
 GO
 

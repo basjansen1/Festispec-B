@@ -170,7 +170,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="QuestionType_Type" Type="nvarchar" MaxLength="64" Nullable="false" />
   </EntityType>
   <EntityType Name="QuestionType">
@@ -722,7 +722,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
           <NavigationProperty Name="QuestionType" Relationship="Festispec.QuestionTypeQuestion" FromRole="Question" ToRole="QuestionType" />
         </EntityType>
         <EntityType Name="QuestionType">
@@ -750,7 +750,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" />
-          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="true" />
           <NavigationProperty Name="Questions" Relationship="Festispec.TemplateTemplateQuestion" FromRole="Template" ToRole="TemplateQuestion" />
         </EntityType>
         <Association Name="TemplateTemplateQuestion">
