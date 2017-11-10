@@ -30,8 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +51,104 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contact.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeRole.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Festispec.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Festispec.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Festispec.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Festispec.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Festispec.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Festispec.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="FestispecModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FestispecModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FestispecModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inspection.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InspectionStatus.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inspector.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Note.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Planning.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedule.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Festispec.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Festispec.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Festispec.edmx.diagram">
+      <DependentUpon>Festispec.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Festispec.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Festispec.Context.cs</LastGenOutput>
+      <DependentUpon>Festispec.edmx</DependentUpon>
+    </Content>
+    <Content Include="Festispec.edmx.sql" />
+    <Content Include="Festispec.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Festispec.cs</LastGenOutput>
+      <DependentUpon>Festispec.edmx</DependentUpon>
+    </Content>
+    <Content Include="FestispecModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FestispecModel.Context.cs</LastGenOutput>
+      <DependentUpon>Festispec.edmx</DependentUpon>
+    </Content>
+    <Content Include="FestispecModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FestispecModel.cs</LastGenOutput>
+      <DependentUpon>Festispec.edmx</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0c3f7037040646c3b622e45d6214b03f" Name="Diagram1" ZoomLevel="67" >
+        <EntityTypeShape EntityType="Festispec.Address" Width="1.5" PointX="4.25" PointY="2.875" />
+        <EntityTypeShape EntityType="Festispec.Contact" Width="1.5" PointX="4.25" PointY="5.875" />
+        <EntityTypeShape EntityType="Festispec.Employee" Width="1.5" PointX="0.625" PointY="5.875" />
+        <InheritanceConnector EntityType="Festispec.Contact" />
+        <InheritanceConnector EntityType="Festispec.Employee" />
+        <EntityTypeShape EntityType="Festispec.EmployeeRole" Width="1.5" PointX="1.125" PointY="3.25" />
+        <AssociationConnector Association="Festispec.EmployeeRoleEmployee" />
+        <EntityTypeShape EntityType="Festispec.Inspector" Width="1.5" PointX="0.5" PointY="8.625" />
+        <InheritanceConnector EntityType="Festispec.Inspector" />
+        <EntityTypeShape EntityType="Festispec.Schedule" Width="1.5" PointX="0.625" PointY="11.125" />
+        <AssociationConnector Association="Festispec.InspectorSchedule" />
+        <EntityTypeShape EntityType="Festispec.Customer" Width="1.5" PointX="6.75" PointY="8.5" />
+        <InheritanceConnector EntityType="Festispec.Customer" />
+        <EntityTypeShape EntityType="Festispec.Note" Width="1.5" PointX="4.25" PointY="8.5" />
+        <AssociationConnector Association="Festispec.CustomerNote" />
+        <EntityTypeShape EntityType="Festispec.Inspection" Width="1.5" PointX="9.5" PointY="4.125" />
+        <InheritanceConnector EntityType="Festispec.Inspection" />
+        <EntityTypeShape EntityType="Festispec.InspectionStatus" Width="1.5" PointX="12" PointY="3.25" />
+        <AssociationConnector Association="Festispec.InspectionStatusInspection" />
+        <AssociationConnector Association="Festispec.CustomerInspection" />
+        <EntityTypeShape EntityType="Festispec.Planning" Width="1.5" PointX="9.625" PointY="8.875" />
+        <AssociationConnector Association="Festispec.InspectionPlanning" />
+        <AssociationConnector Association="Festispec.InspectorPlanning" />
+        <AssociationConnector Association="Festispec.EmployeeEmployee" />
+        <EntityTypeShape EntityType="Festispec.Regulation" Width="1.5" PointX="7.25" PointY="2.75" />
+        <EntityTypeShape EntityType="Festispec.Question" Width="1.5" PointX="15.125" PointY="6.75" />
+        <EntityTypeShape EntityType="Festispec.QuestionType" Width="1.5" PointX="17.375" PointY="6.875" />
+        <AssociationConnector Association="Festispec.QuestionTypeQuestion" />
+        <EntityTypeShape EntityType="Festispec.InspectionQuestion" Width="1.5" PointX="12.125" PointY="6" />
+        <InheritanceConnector EntityType="Festispec.InspectionQuestion" />
+        <EntityTypeShape EntityType="Festispec.TemplateQuestion" Width="1.5" PointX="13" PointY="9" />
+        <InheritanceConnector EntityType="Festispec.TemplateQuestion" />
+        <EntityTypeShape EntityType="Festispec.Template" Width="1.5" PointX="12.5" PointY="10.875" />
+        <AssociationConnector Association="Festispec.TemplateTemplateQuestion" />
+        <AssociationConnector Association="Festispec.PlanningInspectionQuestion" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
