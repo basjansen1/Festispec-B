@@ -119,6 +119,14 @@
     <Compile Include="Regulation.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\Factory\InspectionRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IInspectionRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\RepositoryFactory.cs" />
+    <Compile Include="Repository\GenericRepository.cs" />
+    <Compile Include="Repository\InspectionRepository.cs" />
+    <Compile Include="Repository\Interface\IGenericRepository.cs" />
+    <Compile Include="Repository\Interface\IInspectionRepository.cs" />
     <Compile Include="Schedule.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
