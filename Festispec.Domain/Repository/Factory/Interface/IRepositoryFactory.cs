@@ -1,4 +1,5 @@
-﻿using Festispec.Domain.Repository.Interface;
+﻿using System.Data.Entity;
+using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository.Factory.Interface
 {

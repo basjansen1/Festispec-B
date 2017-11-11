@@ -9,6 +9,8 @@
  DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 */
 
+using Festispec.Domain.Repository.Factory;
+using Festispec.Domain.Repository.Factory.Interface;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
@@ -21,18 +23,18 @@ namespace Festispec.ViewModels
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             // Register repositories
-//            SimpleIoc.Default.Register<IAAARepository, AAARepository>();
-
+            SimpleIoc.Default.Register<IInspectionRepositoryFactory, InspectionRepositoryFactory>();
+            
             // Register viewmodels
 //            SimpleIoc.Default.Register<AAAViewModel>();
         }
 
         #region Singleton Repositories
-//        public IAAARepository NinjaRepository = ServiceLocator.Current.GetInstance<IAAARepository>();
+        public IInspectionRepositoryFactory InspectionRepositoryFactory = ServiceLocator.Current.GetInstance<IInspectionRepositoryFactory>();
         #endregion
 
         #region Singleton ViewModels 
-//        public AAAViewModel NinjaList => ServiceLocator.Current.GetInstance<AAAViewModel>();
+//        public AAAViewModel Test => ServiceLocator.Current.GetInstance<AAAViewModel>();
         #endregion
 
         #region ViewModels

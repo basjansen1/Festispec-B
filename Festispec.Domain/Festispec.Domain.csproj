@@ -81,11 +81,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Festispec.edmx</DependentUpon>
     </Compile>
-    <Compile Include="FestispecModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FestispecModel.Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="FestispecModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -160,11 +155,6 @@
     <Content Include="Festispec.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Festispec.cs</LastGenOutput>
-      <DependentUpon>Festispec.edmx</DependentUpon>
-    </Content>
-    <Content Include="FestispecModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>FestispecModel.Context.cs</LastGenOutput>
       <DependentUpon>Festispec.edmx</DependentUpon>
     </Content>
     <Content Include="FestispecModel.tt">

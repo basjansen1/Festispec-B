@@ -8,16 +8,16 @@ using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository
 {
-    public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity>, IDisposable
+    public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity>
         where TEntity : class
     {
-        private readonly FestispecContainer _dbContext;
+        private readonly DbContext _dbContext;
 
         /// <summary>
         ///     Uses dependency injection to get an instance of the database context.
         /// </summary>
         /// <param name="dbContext"></param>
-        protected GenericRepository(FestispecContainer dbContext)
+        protected GenericRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
         }

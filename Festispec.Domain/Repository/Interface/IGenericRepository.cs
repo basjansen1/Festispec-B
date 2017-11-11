@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Festispec.Domain.Repository.Interface
 {
-    public interface IGenericRepository<TEntity>
+    public interface IGenericRepository<TEntity> : IDisposable
         where TEntity : class
     {
         IQueryable<TEntity> Get();
