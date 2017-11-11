@@ -4,14 +4,14 @@ using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository.Factory
 {
-    public abstract class GenericRepositoryFactory<TEntity> : IGenericRepositoryFactory<TEntity>
+    public abstract class RepositoryFactoryBase<TEntity> : IRepositoryFactory<TEntity>
         where TEntity : class
     {
         /// <summary>
         ///     Creates a repository of the given TEntity
         /// </summary>
         /// <returns> A new repository of the given TEntity. </returns>
-        public abstract IGenericRepository<TEntity> CreateRepository();
+        public abstract IRepository<TEntity> CreateRepository();
 
         /// <summary>
         ///     Creates an instance of the DbContext

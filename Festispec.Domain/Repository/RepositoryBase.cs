@@ -8,7 +8,7 @@ using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository
 {
-    public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity>
+    public abstract class RepositoryBase<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
         private readonly DbContext _dbContext;
@@ -17,7 +17,7 @@ namespace Festispec.Domain.Repository
         ///     Uses dependency injection to get an instance of the database context.
         /// </summary>
         /// <param name="dbContext"></param>
-        protected GenericRepository(DbContext dbContext)
+        protected RepositoryBase(DbContext dbContext)
         {
             _dbContext = dbContext;
         }

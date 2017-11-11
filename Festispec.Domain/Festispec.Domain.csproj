@@ -116,11 +116,11 @@
     </Compile>
     <Compile Include="Repository\Factory\InspectionRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IInspectionRepositoryFactory.cs" />
-    <Compile Include="Repository\Factory\Interface\IGenericRepositoryFactory.cs" />
-    <Compile Include="Repository\Factory\GenericRepositoryFactory.cs" />
-    <Compile Include="Repository\GenericRepository.cs" />
+    <Compile Include="Repository\Factory\Interface\IRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\RepositoryFactoryBase.cs" />
+    <Compile Include="Repository\RepositoryBase.cs" />
     <Compile Include="Repository\InspectionRepository.cs" />
-    <Compile Include="Repository\Interface\IGenericRepository.cs" />
+    <Compile Include="Repository\Interface\IRepository.cs" />
     <Compile Include="Repository\Interface\IInspectionRepository.cs" />
     <Compile Include="Schedule.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
