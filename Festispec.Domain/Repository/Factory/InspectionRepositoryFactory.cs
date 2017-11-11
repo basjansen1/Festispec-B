@@ -3,7 +3,7 @@ using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository.Factory
 {
-    public class InspectionRepositoryFactory : RepositoryFactory<Inspection>, IInspectionRepositoryFactory
+    public class InspectionRepositoryFactory : GenericRepositoryFactory<Inspection>, IInspectionRepositoryFactory
     {
         public override IGenericRepository<Inspection> CreateRepository()
         {

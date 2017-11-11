@@ -116,8 +116,8 @@
     </Compile>
     <Compile Include="Repository\Factory\InspectionRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IInspectionRepositoryFactory.cs" />
-    <Compile Include="Repository\Factory\Interface\IRepositoryFactory.cs" />
-    <Compile Include="Repository\Factory\RepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IGenericRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\GenericRepositoryFactory.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
     <Compile Include="Repository\InspectionRepository.cs" />
     <Compile Include="Repository\Interface\IGenericRepository.cs" />

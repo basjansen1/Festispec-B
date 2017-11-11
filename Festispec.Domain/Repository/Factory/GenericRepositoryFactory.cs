@@ -4,7 +4,7 @@ using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository.Factory
 {
-    public abstract class RepositoryFactory<TEntity> : IRepositoryFactory<TEntity>
+    public abstract class GenericRepositoryFactory<TEntity> : IGenericRepositoryFactory<TEntity>
         where TEntity : class
     {
         /// <summary>

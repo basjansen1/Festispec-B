@@ -1,6 +1,6 @@
 ﻿namespace Festispec.Domain.Repository.Factory.Interface
 {
-    public interface IInspectionRepositoryFactory : IRepositoryFactory<Inspection>
+    public interface IInspectionRepositoryFactory : IGenericRepositoryFactory<Inspection>
     {
     }
 }
