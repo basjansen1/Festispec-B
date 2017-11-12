@@ -75,6 +75,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\InspectionProcessing\AddInspectionVM.cs" />
+    <Compile Include="ViewModels\InspectionProcessing\EditInspectionVM.cs" />
+    <Compile Include="ViewModels\InspectionProcessing\ProcessInspectionVM.cs" />
+    <Compile Include="ViewModels\InspectionProcessing\InspectionListVM.cs" />
+    <Compile Include="ViewModels\InspectionProcessing\InspectionVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
