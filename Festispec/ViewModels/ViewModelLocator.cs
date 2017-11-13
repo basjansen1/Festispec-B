@@ -9,7 +9,8 @@
  DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 */
 
-using System;
+using Festispec.Domain.Repository.Factory;
+using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.ViewModels.Factory;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
@@ -30,6 +31,8 @@ namespace Festispec.ViewModels
             // Register repositories
             SimpleIoc.Default.Register<ITemplateRepositoryFactory, TemplateRepositoryFactory>();
             SimpleIoc.Default.Register<ITemplateViewModelFactory, TemplateViewModelFactory>();
+
+            SimpleIoc.Default.Register<IInspectionRepositoryFactory, InspectionRepositoryFactory>();
 
             // Register viewmodels
             SimpleIoc.Default.Register<MainViewModel>();
@@ -60,6 +63,9 @@ namespace Festispec.ViewModels
 
         public ITemplateViewModelFactory TemplateViewModelFactory =
             ServiceLocator.Current.GetInstance<ITemplateViewModelFactory>();
+
+        public IInspectionRepositoryFactory InspectionRepositoryFactory =
+            ServiceLocator.Current.GetInstance<IInspectionRepositoryFactory>();
 
         #endregion
 
