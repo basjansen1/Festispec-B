@@ -1,27 +1,22 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
-using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.Interface;
 using Festispec.ViewModels.NavigationService;
-using Festispec.ViewModels.Template;
 using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels
 {
-    public abstract class AddOrUpdateViewModelBase<TViewModelFactory, TEntityViewModel, TEntity> : NavigatableViewModelBase,
+    public abstract class AddOrUpdateViewModelBase<TViewModelFactory, TEntityViewModel, TEntity> :
+        NavigatableViewModelBase,
         IAddOrUpdateViewModel
         where TViewModelFactory : IViewModelFactory<TEntityViewModel, TEntity>
         where TEntityViewModel : class, IEntityViewModel<TEntity>
         where TEntity : class
     {
-        protected readonly IRepositoryFactory<TEntity> RepositoryFactory;
         private readonly TViewModelFactory _viewModelFactory;
-        public ICommand NavigateBackCommand { get; }
-        public ICommand SaveEntityCommand { get; }
-
-        public TEntityViewModel EntityViewModel { get; set; }
+        protected readonly IRepositoryFactory<TEntity> RepositoryFactory;
 
         protected AddOrUpdateViewModelBase(INavigationService navigationService,
             IRepositoryFactory<TEntity> repositoryFactory, TViewModelFactory viewModelFactory) : base(navigationService)
@@ -34,25 +29,13 @@ namespace Festispec.ViewModels
             NavigateBackCommand = new RelayCommand(() => NavigationService.GoBack());
             SaveEntityCommand = new RelayCommand(Save);
 
-            NavigationService.PropertyChanged += OnPropertyChanged;
+            NavigationService.PropertyChanged += OnNavigationServicePropertyChange;
         }
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs args)
-        {
-            if (args.PropertyName != "CurrentPageKey") return;
+        public ICommand NavigateBackCommand { get; }
+        public ICommand SaveEntityCommand { get; }
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.TemplateUpdate.Key &&
-                NavigationService.CurrentPageKey != Routes.Routes.TemplateAdd.Key) return;
-
-            UpdateEntityViewModelFromNavigationParameter();
-        }
-
-        private void UpdateEntityViewModelFromNavigationParameter()
-        {
-            var entityViewModel = NavigationService.Parameter as TEntityViewModel;
-            // Create copy or new instance of TEntityViewModel
-            EntityViewModel = entityViewModel != null ? _viewModelFactory.CreateViewModel(entityViewModel.Entity) : _viewModelFactory.CreateViewModel();
-        }
+        public TEntityViewModel EntityViewModel { get; set; }
 
         public virtual void Save()
         {
@@ -60,6 +43,17 @@ namespace Festispec.ViewModels
             EntityViewModel.Save();
 
             NavigationService.GoBack(EntityViewModel);
+        }
+
+        public abstract void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args);
+
+        protected void UpdateEntityViewModelFromNavigationParameter()
+        {
+            var entityViewModel = NavigationService.Parameter as TEntityViewModel;
+            // Create copy or new instance of TEntityViewModel
+            EntityViewModel = entityViewModel != null
+                ? _viewModelFactory.CreateViewModel(entityViewModel.Entity)
+                : _viewModelFactory.CreateViewModel();
         }
     }
 }

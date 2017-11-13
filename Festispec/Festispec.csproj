@@ -89,6 +89,7 @@
     <Compile Include="ViewModels\AddQuestionViewModel.cs" />
     <Compile Include="ViewModels\EntityViewModelBase.cs" />
     <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateViewModelFactory.cs" />
     <Compile Include="ViewModels\Interface\IAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Interface\IEntityViewModel.cs" />
