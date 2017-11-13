@@ -12,7 +12,7 @@ namespace Festispec.ViewModels.RequestProcessing
         // ...
 
         // field
-        private Request _request; // if the models are created through the edmx file this error will disappear
+        private Inspection _inspection; // if the models are created through the edmx file this error will disappear
 
         // constructors
         // ...
