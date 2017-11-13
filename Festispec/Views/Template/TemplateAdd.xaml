@@ -9,5 +9,10 @@
     <StackPanel>
         <Button Grid.Column="0" Content="Back" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
         <TextBox Text="{Binding Path=EntityViewModel.Name}"></TextBox>
+        <Grid>
+            <Button x:Name="AddQuestion" Content="Vraag Toevoegen" Margin="250,17,442,-83" RenderTransformOrigin="1.263,1.329" Command="{Binding NavigateToAddQuestionCommand}"/>
+            <Button x:Name="RemoveQuestion" Content="Vraag Verwijderen" Margin="437,17,255,-83" RenderTransformOrigin="1.263,1.329"/>
+        </Grid>
     </StackPanel>
+
 </Page>

@@ -10,7 +10,7 @@
             <RowDefinition Height="80" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -19,9 +19,9 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="2" Content="Add Template" Margin="5px 10px" Command="{Binding NavigateToTemplateAddCommand}" />
-            <Button Grid.Column="3" Content="Update Template" Margin="5px 10px" Command="{Binding NavigateToTemplateUpdateCommand}" />
+            <Button Grid.Column="2" Content="Update Template" Margin="0,10,5,10" Command="{Binding NavigateToTemplateUpdateCommand}" />
         </Grid>
-        
+
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"></RowDefinition>
@@ -35,7 +35,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        
+
         <Frame Grid.Row="2" Name="MainFrame"></Frame>
     </Grid>
 </Page>
