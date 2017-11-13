@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Festispec.Domain;
+using GalaSoft.MvvmLight;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,16 +8,75 @@ using System.Threading.Tasks;
 
 namespace Festispec.ViewModels.RequestProcessing
 {
-    public class InspectionVM
+    public class InspectionVM : ViewModelBase
     {
         // getters and setters
-        // ...
+        public string Name
+        {
+            get
+            {
+                return _inspection.Name;
+            }
+            set
+            {
+                _inspection.Name = value;
+                RaisePropertyChanged("Name");
+            }
+        }
+
+        public string Website
+        {
+            get
+            {
+                return _inspection.Website;
+            }
+            set
+            {
+                _inspection.Website = value;
+                RaisePropertyChanged("Website");
+            }
+        }
+
+        public DateTime StartDate
+        {
+            get
+            {
+                return _inspection.Start;
+            }
+            set
+            {
+                _inspection.Start = value;
+                RaisePropertyChanged("StartDate");
+            }
+        }
+
+        public DateTime EndDate
+        {
+            get
+            {
+                return _inspection.End;
+            } 
+            set
+            {
+                _inspection.End = value;
+                RaisePropertyChanged("EndDate");
+            }
+        }
 
         // field
-        private Inspection _inspection; // if the models are created through the edmx file this error will disappear
+        private Inspection _inspection;
 
         // constructors
-        // ...
+        
+        public InspectionVM()
+        {
+            _inspection = new Inspection();
+        }
+
+        public InspectionVM(Inspection i)
+        {
+            _inspection = i;
+        }
 
     }
 }
