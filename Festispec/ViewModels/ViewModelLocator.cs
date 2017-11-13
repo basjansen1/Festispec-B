@@ -11,6 +11,7 @@
 
 using Festispec.Domain.Repository.Factory;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.ViewModels.RequestProcessing;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
@@ -38,6 +39,10 @@ namespace Festispec.ViewModels
         #endregion
 
         #region ViewModels
+            public InspectionListVM GetInspectionList()
+        {
+            return new InspectionListVM(InspectionRepositoryFactory);
+        }
         #endregion
 
         public static void Cleanup()
