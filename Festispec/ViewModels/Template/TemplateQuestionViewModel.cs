@@ -38,6 +38,16 @@ namespace Festispec.ViewModels.Template
             }
         }
 
+        public Domain.Template Template
+        {
+            get { return Entity.Template; }
+            set
+            {
+                Entity.Template = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public override void Save()
         {
             using (var templateRepository = RepositoryFactory.CreateRepository())
@@ -60,7 +70,8 @@ namespace Festispec.ViewModels.Template
             {
                 Id = Id,
                 Name = Name,
-                Description = Description
+                Description = Description,
+                Template = Template,
             };
         }
     }

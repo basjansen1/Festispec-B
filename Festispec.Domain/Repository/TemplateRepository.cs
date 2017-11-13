@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository
@@ -7,6 +8,11 @@ namespace Festispec.Domain.Repository
     {
         public TemplateRepository(DbContext dbContext) : base(dbContext)
         {
+        }
+
+        IQueryable<Template> IRepository<Template>.Get()
+        {
+            return Get().Include(template => template.Questions);
         }
     }
 }

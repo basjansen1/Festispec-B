@@ -15,14 +15,14 @@ namespace Festispec.ViewModels
         where TEntityViewModel : class, IEntityViewModel<TEntity>
         where TEntity : class
     {
-        private readonly TViewModelFactory _viewModelFactory;
+        protected readonly TViewModelFactory ViewModelFactory;
         protected readonly IRepositoryFactory<TEntity> RepositoryFactory;
 
         protected AddOrUpdateViewModelBase(INavigationService navigationService,
             IRepositoryFactory<TEntity> repositoryFactory, TViewModelFactory viewModelFactory) : base(navigationService)
         {
             RepositoryFactory = repositoryFactory;
-            _viewModelFactory = viewModelFactory;
+            ViewModelFactory = viewModelFactory;
 
             UpdateEntityViewModelFromNavigationParameter();
 
@@ -47,13 +47,13 @@ namespace Festispec.ViewModels
 
         public abstract void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args);
 
-        protected void UpdateEntityViewModelFromNavigationParameter()
+        protected virtual void UpdateEntityViewModelFromNavigationParameter()
         {
             var entityViewModel = NavigationService.Parameter as TEntityViewModel;
             // Create copy or new instance of TEntityViewModel
             EntityViewModel = entityViewModel != null
-                ? _viewModelFactory.CreateViewModel(entityViewModel.Entity)
-                : _viewModelFactory.CreateViewModel();
+                ? ViewModelFactory.CreateViewModel(entityViewModel.Entity)
+                : ViewModelFactory.CreateViewModel();
         }
     }
 }

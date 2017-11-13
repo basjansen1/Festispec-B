@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using Festispec.Domain;
+using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
 using Festispec.ViewModels.Template;
-using Festispec.ViewModels.Factory.Interface;
-using Festispec.Domain.Repository.Factory.Interface;
-using System.ComponentModel;
 
 namespace Festispec.ViewModels
 {
-    public class AddQuestionViewModel : AddOrUpdateViewModelBase<ITemplateQuestionViewModelFactory, TemplateQuestionViewModel, Domain.TemplateQuestion>
+    public class AddQuestionViewModel :
+        AddOrUpdateViewModelBase<ITemplateQuestionViewModelFactory, TemplateQuestionViewModel, TemplateQuestion>
     {
-        
-        public AddQuestionViewModel(INavigationService navigationService, ITemplateQuestionRepositoryFactory RepositoryFactory, ITemplateQuestionViewModelFactory TemplateVMFactory) : base(navigationService, RepositoryFactory, TemplateVMFactory)
+        public AddQuestionViewModel(INavigationService navigationService,
+            ITemplateQuestionRepositoryFactory RepositoryFactory, ITemplateQuestionViewModelFactory TemplateVMFactory)
+            : base(navigationService, RepositoryFactory, TemplateVMFactory)
         {
         }
+
+        private TemplateViewModel _templateViewModel;
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
@@ -27,10 +27,30 @@ namespace Festispec.ViewModels
             UpdateEntityViewModelFromNavigationParameter();
         }
 
-        public override void Save()
+        protected override void UpdateEntityViewModelFromNavigationParameter()
         {
-            NavigationService.GoBack(EntityViewModel);
+            var templateViewModel = NavigationService.Parameter as TemplateViewModel;
+            // Create copy or new instance of TEntityViewModel
+            if (templateViewModel == null) return;
+
+            _templateViewModel = templateViewModel;
+
+            if (_templateViewModel.SelectedQuestion != null)
+            {
+                EntityViewModel = ViewModelFactory.CreateViewModel(_templateViewModel.SelectedQuestion);
+            }
+            else
+            {
+                EntityViewModel = ViewModelFactory.CreateViewModel();
+
+                EntityViewModel.Template = _templateViewModel.Entity;
+            }
         }
 
+        public override void Save()
+        {
+            _templateViewModel.Questions.Add(EntityViewModel.Entity);
+            NavigationService.GoBack(_templateViewModel);
+        }
     }
 }

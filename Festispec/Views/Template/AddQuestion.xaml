@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="AddQuestion"
-      DataContext="{Binding Source={StaticResource Locator}, Path=QuestionAdd}">
+      DataContext="{Binding Source={StaticResource Locator}, Path=AddQuestion}">
 
     <StackPanel>
         <Button Grid.Column="0" Content="Back" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />

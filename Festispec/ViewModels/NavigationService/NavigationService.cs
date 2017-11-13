@@ -83,7 +83,7 @@ namespace Festispec.ViewModels.NavigationService
                     frame.Source = _pagesByKey[pageKey];
                 }
                 Parameter = parameter;
-                _historic.Add(pageKey);
+                if(_historic.Count == 0 || _historic.Last() != pageKey) _historic.Add(pageKey);
                 CurrentPageKey = pageKey;
             }
         }

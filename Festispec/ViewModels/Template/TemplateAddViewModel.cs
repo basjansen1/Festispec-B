@@ -18,7 +18,7 @@ namespace Festispec.ViewModels.Template
         }
         private void RegisterCommands()
         {
-          NavigateToAddQuestionCommand = new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.AddQuestion.Key), () => EntityViewModel != null);
+          NavigateToAddQuestionCommand = new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.AddQuestion.Key, EntityViewModel), () => EntityViewModel != null);
         }
     }
 }

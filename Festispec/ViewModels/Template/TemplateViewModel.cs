@@ -55,6 +55,8 @@ namespace Festispec.ViewModels.Template
             }
         }
 
+        public TemplateQuestion SelectedQuestion { get; set; }
+
         public override void Save()
         {
             using (var templateRepository = RepositoryFactory.CreateRepository())
