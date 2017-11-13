@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.ViewModels.Factory.Interface;
@@ -11,12 +14,18 @@ namespace Festispec.ViewModels
         AddOrUpdateViewModelBase<ITemplateQuestionViewModelFactory, TemplateQuestionViewModel, TemplateQuestion>
     {
         public AddQuestionViewModel(INavigationService navigationService,
-            ITemplateQuestionRepositoryFactory RepositoryFactory, ITemplateQuestionViewModelFactory TemplateVMFactory)
-            : base(navigationService, RepositoryFactory, TemplateVMFactory)
+            ITemplateQuestionRepositoryFactory repositoryFactory, ITemplateQuestionViewModelFactory viewModelFactory, IQuestionTypeRepositoryFactory questionTypeRepositoryFactory)
+            : base(navigationService, repositoryFactory, viewModelFactory)
         {
+            using (var questionTypeRepository = questionTypeRepositoryFactory.CreateRepository())
+            {
+                QuestionTypes = questionTypeRepository.Get().ToList();
+            }
         }
 
         private TemplateViewModel _templateViewModel;
+
+        public IEnumerable<QuestionType> QuestionTypes { get; }
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
