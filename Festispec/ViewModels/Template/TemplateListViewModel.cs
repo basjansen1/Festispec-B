@@ -1,28 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
-using GalaSoft.MvvmLight;
+using System.Windows.Input;
+using Festispec.ViewModels.Factory.Interface;
+using Festispec.ViewModels.NavigationService;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels.Template
 {
-    public class TemplateListViewModel : ViewModelBase
+    public class TemplateListViewModel : NavigatableViewModelBase
     {
+        private readonly INavigationService _navigationService;
         private readonly ITemplateRepositoryFactory _templateRepositoryFactory;
         private readonly ITemplateViewModelFactory _templateViewModelFactory;
 
-        public TemplateListViewModel(ITemplateRepositoryFactory templateRepositoryFactory,
-            ITemplateViewModelFactory templateViewModelFactory)
+        public TemplateListViewModel(INavigationService navigationService,
+            ITemplateRepositoryFactory templateRepositoryFactory,
+            ITemplateViewModelFactory templateViewModelFactory) : base(navigationService)
         {
+            _navigationService = navigationService;
             _templateRepositoryFactory = templateRepositoryFactory;
             _templateViewModelFactory = templateViewModelFactory;
 
+            RegisterCommands();
             LoadTemplates();
+
+            NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
         }
+
+        private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName != "CurrentPageKey") return;
+            
+            if (NavigationService.CurrentPageKey != Routes.Routes.TemplateUpdate.Key &&
+                NavigationService.CurrentPageKey != Routes.Routes.TemplateAdd.Key) return;
+
+            UpdateTemplatesFromNavigationParameter();
+        }
+
+        private void UpdateTemplatesFromNavigationParameter()
+        {
+            var templateViewModel = NavigationService.Parameter as TemplateViewModel;
+            if (templateViewModel == null) return;
+
+            var existing = Templates.First(template => template.Id == templateViewModel.Id);
+            if (existing == null) Templates.Add(templateViewModel);
+            else
+            {
+                var index = Templates.IndexOf(existing);
+                Templates.RemoveAt(index);
+                Templates.Insert(index, templateViewModel);
+            }
+        }
+
+        public ICommand NavigateToTemplateAddCommand { get; set; }
+        public ICommand NavigateToTemplateUpdateCommand { get; set; }
 
         public ObservableCollection<TemplateViewModel> Templates { get; private set; }
 
         public TemplateViewModel SelectedTemplate { get; set; }
+
+        private void RegisterCommands()
+        {
+            NavigateToTemplateAddCommand = new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateAdd.Key));
+            NavigateToTemplateUpdateCommand = new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateUpdate.Key, SelectedTemplate), () => SelectedTemplate != null);
+        }
 
         private void LoadTemplates()
         {
@@ -37,9 +81,10 @@ namespace Festispec.ViewModels.Template
         }
     }
 
-    /// <summary>
-    ///     Temporary classes
-    /// </summary>
+    #region Temporary classes
+
+    #region Models
+
     public class Template
     {
         public int Id { get; set; }
@@ -47,41 +92,8 @@ namespace Festispec.ViewModels.Template
         public string Description { get; set; }
     }
 
-    #region ViewModelFactories
-
-    public interface IViewModelFactory<out TViewModel, in TEntity> where TViewModel : ViewModelBase
-        where TEntity : class
-    {
-        TViewModel CreateViewModel();
-        TViewModel CreateViewModel(TEntity template);
-    }
-
-    public interface ITemplateViewModelFactory : IViewModelFactory<TemplateViewModel, Template>
-    {
-    }
-
-    public class TemplateViewModelFactory : ITemplateViewModelFactory
-    {
-        private readonly ITemplateRepositoryFactory _templateRepositoryFactory;
-
-        public TemplateViewModelFactory(ITemplateRepositoryFactory templateRepositoryFactory)
-        {
-            _templateRepositoryFactory = templateRepositoryFactory;
-        }
-
-        public TemplateViewModel CreateViewModel()
-        {
-            return new TemplateViewModel(_templateRepositoryFactory);
-        }
-
-        public TemplateViewModel CreateViewModel(Template template)
-        {
-            return new TemplateViewModel(_templateRepositoryFactory, template);
-        }
-    }
-
     #endregion
-
+    
     #region RepositoryFactory
 
     public interface IRepositoryFactory<out TRepository>
@@ -159,6 +171,8 @@ namespace Festispec.ViewModels.Template
         {
         }
     }
+
+    #endregion
 
     #endregion
 }

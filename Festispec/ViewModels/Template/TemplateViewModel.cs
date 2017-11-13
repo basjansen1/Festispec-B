@@ -1,34 +1,25 @@
-﻿using Festispec.ViewModels.Interface;
-using GalaSoft.MvvmLight;
-
-namespace Festispec.ViewModels.Template
+﻿namespace Festispec.ViewModels.Template
 {
-    public class TemplateViewModel : ViewModelBase, IEntityViewModel
+    public class TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, ITemplateRepository, Template>
     {
-        private readonly Template _template;
-        private readonly ITemplateRepositoryFactory _templateRepositoryFactory;
-
-        public TemplateViewModel(ITemplateRepositoryFactory templateRepositoryFactory)
+        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
-            _templateRepositoryFactory = templateRepositoryFactory;
-            _template = new Template();
         }
 
-        public TemplateViewModel(ITemplateRepositoryFactory templateRepositoryFactory, Template template)
+        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory, Template entity)
+            : base(repositoryFactory, entity)
         {
-            _templateRepositoryFactory = templateRepositoryFactory;
-            _template = template;
         }
 
-        public int Id => _template.Id;
+        public int Id => Entity.Id;
 
 
         public string Name
         {
-            get { return _template.Name; }
+            get { return Entity.Name; }
             set
             {
-                _template.Name = value;
+                Entity.Name = value;
                 RaisePropertyChanged();
                 // TODO: Figure out which one works...
                 //RaisePropertyChanged();
@@ -41,28 +32,38 @@ namespace Festispec.ViewModels.Template
 
         public string Description
         {
-            get { return _template.Description; }
+            get { return Entity.Description; }
             set
             {
-                _template.Description = value;
+                Entity.Description = value;
                 RaisePropertyChanged();
             }
         }
 
-        public void Save()
+        public override void Save()
         {
-            using (var templateRepository = _templateRepositoryFactory.CreateRepository())
+            using (var templateRepository = RepositoryFactory.CreateRepository())
             {
                 // TODO: Implement AddOrUpdate in generic repository
-                if (_template.Id == 0)
+                if (Entity.Id == 0)
                 {
-                    templateRepository.Add(_template);
+                    templateRepository.Add(Entity);
                 }
                 else
                 {
-                    templateRepository.Update(_template, _template.Id);
+                    templateRepository.Update(Entity, Entity.Id);
                 }
             }
+        }
+
+        public override Template Copy()
+        {
+            return new Template
+            {
+                Id = Id,
+                Name = Name,
+                Description = Description
+            };
         }
     }
 }

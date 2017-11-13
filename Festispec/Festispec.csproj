@@ -75,17 +75,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ViewModels\AddOrUpdateViewModel.cs" />
+    <Compile Include="Properties\Annotations1.cs" />
+    <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
+    <Compile Include="ViewModels\EntityViewModelBase.cs" />
+    <Compile Include="ViewModels\Factory\TemplateViewModelFactory.cs" />
     <Compile Include="ViewModels\Interface\IAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Interface\IEntityViewModel.cs" />
-    <Compile Include="ViewModels\Template\AddTemplateViewModel.cs" />
+    <Compile Include="ViewModels\Factory\Interface\ITemplateViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IViewModelFactory.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\NavigatableViewModelBase.cs" />
+    <Compile Include="ViewModels\NavigationService\NavigationService.cs" />
+    <Compile Include="ViewModels\NavigationService\INavigationService.cs" />
+    <Compile Include="ViewModels\Routes\Route.cs" />
+    <Compile Include="ViewModels\Routes\Routes.cs" />
+    <Compile Include="ViewModels\Template\TemplateAddViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateListViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateViewModel.cs" />
-    <Compile Include="ViewModels\Template\AddOrUpdateTemplateViewModel.cs" />
-    <Compile Include="ViewModels\Template\UpdateTemplateViewModel.cs" />
+    <Compile Include="ViewModels\Template\TemplateAddOrUpdateViewModel.cs" />
+    <Compile Include="ViewModels\Template\TemplateUpdateViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\Template\TemplateList.xaml.cs">
       <DependentUpon>TemplateList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Template\TemplateAdd.xaml.cs">
+      <DependentUpon>TemplateAdd.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -100,6 +114,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Template\TemplateList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Template\TemplateAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
