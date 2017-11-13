@@ -6,8 +6,8 @@ namespace Festispec.ViewModels.Template
 {
     public class TemplateUpdateViewModel : TemplateAddOrUpdateViewModel
     {
-        public TemplateUpdateViewModel(INavigationService navigationService, ITemplateRepositoryFactory repositoryFactory, ITemplateViewModelFactory templateViewModelFactory)
-            : base(navigationService, repositoryFactory, templateViewModelFactory)
+        public TemplateUpdateViewModel(INavigationService navigationService, ITemplateRepositoryFactory repositoryFactory, ITemplateQuestionRepositoryFactory templateQuestionRepositoryFactory, ITemplateViewModelFactory templateViewModelFactory)
+            : base(navigationService, repositoryFactory, templateQuestionRepositoryFactory, templateViewModelFactory)
         {
         }
     }

@@ -11,7 +11,7 @@ namespace Festispec.Domain.Repository
     public abstract class RepositoryBase<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
-        private readonly DbContext _dbContext;
+        protected readonly DbContext _dbContext;
 
         /// <summary>
         ///     Uses dependency injection to get an instance of the database context.

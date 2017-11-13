@@ -12,7 +12,7 @@ namespace Festispec.Domain.Repository
 
         IQueryable<Template> IRepository<Template>.Get()
         {
-            return Get().Include(template => template.Questions);
+            return Get().Include(template => template.Questions).AsNoTracking();
         }
     }
 }

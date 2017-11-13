@@ -11,8 +11,8 @@ namespace Festispec.ViewModels.Template
         public ICommand NavigateToAddQuestionCommand { get; set; }
 
         public TemplateAddViewModel(INavigationService navigationService,
-            ITemplateRepositoryFactory repositoryFactory, ITemplateViewModelFactory templateViewModelFactory)
-            : base(navigationService, repositoryFactory, templateViewModelFactory)
+            ITemplateRepositoryFactory repositoryFactory, ITemplateQuestionRepositoryFactory templateQuestionRepositoryFactory, ITemplateViewModelFactory templateViewModelFactory)
+            : base(navigationService, repositoryFactory, templateQuestionRepositoryFactory, templateViewModelFactory)
         {
             RegisterCommands();
         }

@@ -13,7 +13,16 @@ namespace Festispec.Domain.Repository
 
         IQueryable<TemplateQuestion> IRepository<TemplateQuestion>.Get()
         {
-            return Get().Include(templateQuestion => templateQuestion.QuestionType);
+            return Get().Include(templateQuestion => templateQuestion.QuestionType).AsNoTracking();
+        }
+
+        TemplateQuestion IRepository<TemplateQuestion>.Add(TemplateQuestion entity)
+        {
+            // Set relations to unchanged to prevent updating them
+            _dbContext.Entry(entity.QuestionType).State = EntityState.Unchanged;
+            _dbContext.Entry(entity.Template).State = EntityState.Unchanged;
+
+            return Add(entity);
         }
     }
 }

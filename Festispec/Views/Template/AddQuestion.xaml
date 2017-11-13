@@ -13,8 +13,7 @@
         <Button Grid.Column="0" Content="Back" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
         <TextBox Text="{Binding Path=EntityViewModel.Name}" />
         <ComboBox ItemsSource="{Binding Path=QuestionTypes}" 
-            DisplayMemberPath="Type" 
-            SelectedValuePath="Type" 
+            DisplayMemberPath="Type"
             SelectedValue="{Binding Path=EntityViewModel.QuestionType}" />
         <Button Content="Save" Margin="5px 10px" Command="{Binding SaveEntityCommand}"/>
     </StackPanel>
