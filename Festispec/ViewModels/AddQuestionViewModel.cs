@@ -7,7 +7,7 @@ using Festispec.ViewModels.NavigationService;
 
 namespace Festispec.ViewModels
 {
-    class AddQuestionViewModel : NavigatableViewModelBase
+    public class AddQuestionViewModel : NavigatableViewModelBase
     {
         
         public AddQuestionViewModel(INavigationService navigationService) : base(navigationService)
