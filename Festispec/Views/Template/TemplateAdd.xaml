@@ -9,12 +9,18 @@
     <StackPanel>
         <Button Content="Back" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
         <TextBox Text="{Binding Path=EntityViewModel.Name}"></TextBox>
+        <Button Content="Save" Margin="5px 10px" Command="{Binding SaveEntityCommand}"/>
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestion}" ItemsSource="{Binding EntityViewModel.Questions}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="#" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Grid>
             <Button x:Name="AddQuestion" Content="Vraag Toevoegen" Margin="250,45,442,-111" RenderTransformOrigin="1.263,1.329" Command="{Binding NavigateToAddQuestionCommand}"/>
             <Button x:Name="RemoveQuestion" Content="Vraag Verwijderen" Margin="437,45,255,-111" RenderTransformOrigin="1.263,1.329"/>
         </Grid>
-
-        <Button Content="Save" Margin="5px 10px" Command="{Binding SaveEntityCommand}"/>
     </StackPanel>
+    
 
 </Page>
