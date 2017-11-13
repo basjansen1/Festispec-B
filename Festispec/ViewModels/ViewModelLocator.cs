@@ -31,6 +31,8 @@ namespace Festispec.ViewModels
             // Register repositories
             SimpleIoc.Default.Register<ITemplateRepositoryFactory, TemplateRepositoryFactory>();
             SimpleIoc.Default.Register<ITemplateViewModelFactory, TemplateViewModelFactory>();
+            SimpleIoc.Default.Register<ITemplateQuestionRepositoryFactory, TemplateQuestionRepositoryFactory>();
+            SimpleIoc.Default.Register<ITemplateQuestionViewModelFactory, TemplateQuestionViewModelFactory>();
 
             SimpleIoc.Default.Register<IInspectionRepositoryFactory, InspectionRepositoryFactory>();
 
@@ -64,6 +66,12 @@ namespace Festispec.ViewModels
 
         public ITemplateViewModelFactory TemplateViewModelFactory =
             ServiceLocator.Current.GetInstance<ITemplateViewModelFactory>();
+
+        public ITemplateQuestionRepositoryFactory TemplateQuestionRepositoryFactory =
+            ServiceLocator.Current.GetInstance<ITemplateQuestionRepositoryFactory>();
+
+        public ITemplateQuestionViewModelFactory TemplateQuestionViewModelFactory =
+            ServiceLocator.Current.GetInstance<ITemplateQuestionViewModelFactory>();
 
         public IInspectionRepositoryFactory InspectionRepositoryFactory =
             ServiceLocator.Current.GetInstance<IInspectionRepositoryFactory>();
