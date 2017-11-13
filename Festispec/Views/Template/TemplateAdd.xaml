@@ -7,7 +7,8 @@
         Title="TemplateAdd" Height="600" Width="800"
         DataContext="{Binding Source={StaticResource Locator}, Path=TemplateAdd}">
     <StackPanel>
-        <Button Grid.Column="0" Content="Back" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
+        <Button Content="Back" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
         <TextBox Text="{Binding Path=EntityViewModel.Name}"></TextBox>
+        <Button Content="Save" Margin="5px 10px" Command="{Binding SaveEntityCommand}"/>
     </StackPanel>
 </Page>

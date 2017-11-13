@@ -35,8 +35,7 @@ namespace Festispec.ViewModels.Template
         {
             if (args.PropertyName != "CurrentPageKey") return;
             
-            if (NavigationService.CurrentPageKey != Routes.Routes.TemplateUpdate.Key &&
-                NavigationService.CurrentPageKey != Routes.Routes.TemplateAdd.Key) return;
+            if (NavigationService.CurrentPageKey != Routes.Routes.TemplateList.Key) return;
 
             UpdateTemplatesFromNavigationParameter();
         }
@@ -46,7 +45,7 @@ namespace Festispec.ViewModels.Template
             var templateViewModel = NavigationService.Parameter as TemplateViewModel;
             if (templateViewModel == null) return;
 
-            var existing = Templates.First(template => template.Id == templateViewModel.Id);
+            var existing = Templates.SingleOrDefault(template => template.Id == templateViewModel.Id);
             if (existing == null) Templates.Add(templateViewModel);
             else
             {

@@ -18,8 +18,8 @@
                 <ColumnDefinition Width="100"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="2" Content="Add Template" Margin="5px 10px" Command="{Binding NavigateToTemplateAddCommand}" />
-            <Button Grid.Column="3" Content="Update Template" Margin="5px 10px" Command="{Binding NavigateToTemplateUpdateCommand}" />
+            <Button Grid.Column="1" Content="Add Template" Margin="5px 10px" Command="{Binding NavigateToTemplateAddCommand}" />
+            <Button Grid.Column="2" Content="Update Template" Margin="5px 10px" Command="{Binding NavigateToTemplateUpdateCommand}" />
         </Grid>
         
         <Grid Grid.Row="1">
