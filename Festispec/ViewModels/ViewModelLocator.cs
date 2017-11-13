@@ -48,6 +48,7 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.TemplateList.Key, Routes.Routes.TemplateList.PageType);
             navigationService.Configure(Routes.Routes.TemplateAdd.Key, Routes.Routes.TemplateAdd.PageType);
             navigationService.Configure(Routes.Routes.TemplateUpdate.Key, Routes.Routes.TemplateUpdate.PageType);
+            navigationService.Configure(Routes.Routes.AddQuestion.Key, Routes.Routes.AddQuestion.PageType);
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }
