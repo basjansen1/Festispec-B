@@ -1,4 +1,6 @@
-﻿using Festispec.Domain.Repository.Factory.Interface;
+﻿using System.Collections.Generic;
+using Festispec.Domain;
+using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.ViewModels.Template
@@ -39,6 +41,16 @@ namespace Festispec.ViewModels.Template
             set
             {
                 Entity.Description = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public ICollection<TemplateQuestion> Questions
+        {
+            get { return Entity.Questions; }
+            set
+            {
+                Entity.Questions = value;
                 RaisePropertyChanged();
             }
         }
