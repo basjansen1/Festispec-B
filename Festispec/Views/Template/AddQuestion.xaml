@@ -11,7 +11,8 @@
 
     <StackPanel>
         <Button Grid.Column="0" Content="Back" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
-        <TextBox Text="{Binding Path=EntityViewModel.Name}"></TextBox>
+        <TextBox Text="{Binding Path=EntityViewModel.Name}" />
         <Button Content="Save" Margin="5px 10px" Command="{Binding SaveEntityCommand}"/>
     </StackPanel>
 </Page>
+

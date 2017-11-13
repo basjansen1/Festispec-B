@@ -10,16 +10,16 @@
 
         <Grid Height="50">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="100"></ColumnDefinition>
-                <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="100" />
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="1" x:Name="AddQuestion" Content="Vraag Toevoegen" Margin="5px 10px" Command="{Binding NavigateToAddQuestionCommand}"/>
             <Button Grid.Column="2" x:Name="RemoveQuestion" Content="Vraag Verwijderen" Margin="5px 10px" />
         </Grid>
         <Button Content="Back" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
-        <TextBox Text="{Binding Path=EntityViewModel.Name}"></TextBox>
+        <TextBox Text="{Binding Path=EntityViewModel.Name}" />
         <Button Content="Save" Margin="5px 10px" Command="{Binding SaveEntityCommand}"/>
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestion}" ItemsSource="{Binding EntityViewModel.Questions}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
             <DataGrid.Columns>
@@ -31,3 +31,18 @@
     
 
 </Page>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

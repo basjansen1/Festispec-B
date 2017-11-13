@@ -1,15 +1,16 @@
-﻿using Festispec.Domain.Repository.Factory.Interface;
+﻿using Festispec.Domain;
+using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.ViewModels.Template
 {
-    public class TemplateQuestionViewModel : EntityViewModelBase<ITemplateQuestionRepositoryFactory, Domain.TemplateQuestion>
+    public class TemplateQuestionViewModel : EntityViewModelBase<ITemplateQuestionRepositoryFactory, TemplateQuestion>
     {
         public TemplateQuestionViewModel(ITemplateQuestionRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
         }
 
-        public TemplateQuestionViewModel(ITemplateQuestionRepositoryFactory repositoryFactory, Domain.TemplateQuestion entity)
+        public TemplateQuestionViewModel(ITemplateQuestionRepositoryFactory repositoryFactory, TemplateQuestion entity)
             : base(repositoryFactory, entity)
         {
         }
@@ -48,6 +49,16 @@ namespace Festispec.ViewModels.Template
             }
         }
 
+        public QuestionType QuestionType
+        {
+            get { return Entity.QuestionType; }
+            set
+            {
+                Entity.QuestionType = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public override void Save()
         {
             using (var templateRepository = RepositoryFactory.CreateRepository())
@@ -64,14 +75,15 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        public override Domain.TemplateQuestion Copy()
+        public override TemplateQuestion Copy()
         {
-            return new Domain.TemplateQuestion
+            return new TemplateQuestion
             {
                 Id = Id,
                 Name = Name,
                 Description = Description,
                 Template = Template,
+                QuestionType = QuestionType
             };
         }
     }
