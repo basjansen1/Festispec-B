@@ -1,4 +1,5 @@
-﻿using Festispec.ViewModels.Factory.Interface;
+﻿using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
 
 namespace Festispec.ViewModels.Template

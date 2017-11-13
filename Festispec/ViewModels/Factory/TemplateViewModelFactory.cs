@@ -1,4 +1,5 @@
-﻿using Festispec.ViewModels.Factory.Interface;
+﻿using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.Template;
 
 namespace Festispec.ViewModels.Factory
@@ -16,7 +17,7 @@ namespace Festispec.ViewModels.Factory
             return new TemplateViewModel(_templateRepositoryFactory);
         }
 
-        public TemplateViewModel CreateViewModel(Template.Template entity)
+        public TemplateViewModel CreateViewModel(Domain.Template entity)
         {
             return new TemplateViewModel(_templateRepositoryFactory, entity);
         }

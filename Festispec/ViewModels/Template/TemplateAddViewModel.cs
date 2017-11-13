@@ -1,4 +1,5 @@
-﻿using Festispec.ViewModels.Factory.Interface;
+﻿using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
 using GalaSoft.MvvmLight.Command;
 using System.Windows.Input;
