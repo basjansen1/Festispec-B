@@ -1,10 +1,11 @@
-﻿using Festispec.ViewModels.Factory.Interface;
+﻿using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
 
 namespace Festispec.ViewModels.Template
 {
     public abstract class TemplateAddOrUpdateViewModel :
-        AddOrUpdateViewModelBase<ITemplateRepository, ITemplateViewModelFactory, TemplateViewModel, Template>
+        AddOrUpdateViewModelBase<ITemplateViewModelFactory, TemplateViewModel, Domain.Template>
     {
         protected TemplateAddOrUpdateViewModel(INavigationService navigationService,
             ITemplateRepositoryFactory repositoryFactory, ITemplateViewModelFactory templateViewModelFactory)

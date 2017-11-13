@@ -1,12 +1,15 @@
-﻿namespace Festispec.ViewModels.Template
+﻿using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Domain.Repository.Interface;
+
+namespace Festispec.ViewModels.Template
 {
-    public class TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, ITemplateRepository, Template>
+    public class TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, Domain.Template>
     {
         public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
         }
 
-        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory, Template entity)
+        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory, Domain.Template entity)
             : base(repositoryFactory, entity)
         {
         }
@@ -56,9 +59,9 @@
             }
         }
 
-        public override Template Copy()
+        public override Domain.Template Copy()
         {
-            return new Template
+            return new Domain.Template
             {
                 Id = Id,
                 Name = Name,
