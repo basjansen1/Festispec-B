@@ -1,28 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using BruTile.Predefined;
+using Mapsui.Geometries;
 using Mapsui.Geometries.WellKnownText;
 using Mapsui.Layers;
 using Mapsui.Projection;
+using Mapsui.Providers;
+using Mapsui.Styles;
 using Newtonsoft.Json;
+using Point = Mapsui.Geometries.Point;
 
 namespace ProofOfConcept.Geodan
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    ///     Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -32,7 +25,7 @@ namespace ProofOfConcept.Geodan
 
             // Generate the map
             MyMapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()));
-            
+
             searchButton.Click += OnSearch;
         }
 
@@ -50,15 +43,34 @@ namespace ProofOfConcept.Geodan
 
             // Parse data to geometry with GeometryFromWKT
             var geometry = GeometryFromWKT.Parse(data);
+            
+//            var layer = new Layer
+//            {
+//                DataSource = new MemoryProvider(geometry),
+//                Style = new VectorStyle
+//                {
+//                    Fill = new Brush(new Color(150, 150, 30, 128)),
+//                    Outline = new Pen(Color.Orange, 2),
+//                }
+//            };
+//            MyMapControl.Map.Layers.Add(layer);
 
             // Get centroid and convert from lonlat to spherical mercator
             var centroid = geometry.GetBoundingBox().GetCentroid();
             var centroidFromLonLat = SphericalMercator.FromLonLat(centroid.X, centroid.Y);
+            
+            // Add point
+            MyMapControl.Map.Layers.Add(new Layer
+            {
+                DataSource = new MemoryProvider(centroidFromLonLat),
+                Style = new VectorStyle { Fill = new Brush(Color.Blue) }
+            });
 
             // Navigate
             MyMapControl.Map.NavigateTo(centroidFromLonLat);
             // Zoom
             MyMapControl.Map.NavigateTo(MyMapControl.Map.Resolutions[16]);
+
         }
 
         public string FindAddress(string query, string type)
@@ -83,15 +95,25 @@ namespace ProofOfConcept.Geodan
                 var response = httpClient.GetStringAsync(url).Result;
 
                 dynamic json = JsonConvert.DeserializeObject(response);
-                
+
                 if (json.response.docs == null || json.response.docs.Count == 0)
                 {
                     return null;
                 }
 
                 // Return geometry data
-                return json.response.docs[0].geom;
+                return GetFirstAddress(json.response.docs);
+//                return json.response.docs[0].geom;
             }
+        }
+
+        public string GetFirstAddress(dynamic docs)
+        {
+            for (int i = 0, l = docs.Count; i < l; i++)
+            {
+                if (docs[i].type == "address") return docs[i].geom;
+            }
+            return null;
         }
     }
 }
