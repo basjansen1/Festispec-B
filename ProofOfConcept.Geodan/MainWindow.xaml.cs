@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Windows;
 using BruTile.Predefined;
@@ -59,12 +60,28 @@ namespace ProofOfConcept.Geodan
             var centroid = geometry.GetBoundingBox().GetCentroid();
             var centroidFromLonLat = SphericalMercator.FromLonLat(centroid.X, centroid.Y);
             
+            // Add points
+            using (var addressRepository = new AddressDummyRepository())
+            {
+                foreach (var address in addressRepository.Get())
+                {
+                    var sphericalMercatorPointFromLonLat = SphericalMercator.FromLonLat(address.Point.X, address.Point.Y);
+
+                    MyMapControl.Map.Layers.Add(new Layer
+                    {
+                        DataSource = new MemoryProvider(sphericalMercatorPointFromLonLat),
+                        Style = new VectorStyle { Fill = new Brush(address.Color) }
+                    });
+                }
+            }
+
             // Add point
             MyMapControl.Map.Layers.Add(new Layer
             {
                 DataSource = new MemoryProvider(centroidFromLonLat),
                 Style = new VectorStyle { Fill = new Brush(Color.Blue) }
             });
+
 
             // Navigate
             MyMapControl.Map.NavigateTo(centroidFromLonLat);
@@ -114,5 +131,46 @@ namespace ProofOfConcept.Geodan
             }
             return null;
         }
+    }
+
+    public class AddressDummyRepository : IDisposable
+    {
+        private List<Address> Addresses = new List<Address>
+        {
+            new Customer {Point = new Point(5.02955, 51.79262)},
+            new Inspector {Point = new Point(5.29153, 51.69769)},
+            new Inspection {Point = new Point(5.28709, 51.68864)},
+
+        };
+
+        public IQueryable<Address> Get()
+        {
+            return new EnumerableQuery<Address>(Addresses);
+        }
+
+        public void Dispose()
+        {
+        }
+    }
+
+    abstract public class Address
+    {
+        public Point Point { get; set; }
+        public abstract Color Color { get; }
+    }
+
+    public class Customer : Address
+    {
+        public override Color Color => Color.Blue;
+    }
+
+    public class Inspector : Address
+    {
+        public override Color Color => Color.Gray;
+    }
+
+    public class Inspection : Address
+    {
+        public override Color Color => Color.Indigo;
     }
 }
