@@ -70,7 +70,6 @@ namespace ProofOfConcept.Geodan
             MyMapControl.Map.NavigateTo(centroidFromLonLat);
             // Zoom
             MyMapControl.Map.NavigateTo(MyMapControl.Map.Resolutions[16]);
-
         }
 
         public string FindAddress(string query, string type)
