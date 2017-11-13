@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Festispec.Domain.Repository.Factory.Interface;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
@@ -56,9 +57,9 @@ namespace Festispec.ViewModels.RequestProcessing
         private string _selectedFilterOption;
 
         // constructor
-        public InspectionListVM()
+        public InspectionListVM(IInspectionRepositoryFactory InspectionRepositoryFactory)
         {
-            InspectionVMList = new ObservableCollection<InspectionVM>();
+            List<InspectionVM> InspectionList;
 
             // instantiate commands 
             ShowAddInspectionWindowCommand = new RelayCommand(ShowAddInspectionWindow);
@@ -67,6 +68,13 @@ namespace Festispec.ViewModels.RequestProcessing
             DeleteInspectionCommand = new RelayCommand(DeleteSelectedInspection);
             FilterInspectionVMListCommand = new RelayCommand(FilterInspectionVMList);
             SearchInspectionCommand = new RelayCommand(RenderSearchedInspection);
+
+            using(var _templateRepository = InspectionRepositoryFactory.CreateRepository())
+            {
+                InspectionList = _templateRepository.Get().Select(i => new InspectionVM(i)).ToList();
+            }
+
+            InspectionVMList = new ObservableCollection<InspectionVM>(InspectionList);
         }
 
         // methods
