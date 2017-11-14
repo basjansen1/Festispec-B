@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
@@ -31,10 +29,22 @@ namespace Festispec.ViewModels.Template
             NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
         }
 
+        public ICommand NavigateToTemplateAddCommand { get; set; }
+        public ICommand NavigateToTemplateUpdateCommand { get; set; }
+        public ICommand TemplateDeleteCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+
+        public ObservableCollection<TemplateViewModel> Templates { get; private set; }
+
+        public TemplateViewModel SelectedTemplate { get; set; }
+
+        public string SearchName { get; set; } = "";
+        public string SearchDescription { get; set; } = "";
+
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
             if (args.PropertyName != "CurrentPageKey") return;
-            
+
             if (NavigationService.CurrentPageKey != Routes.Routes.TemplateList.Key) return;
 
             UpdateTemplatesFromNavigationParameter();
@@ -46,7 +56,10 @@ namespace Festispec.ViewModels.Template
             if (templateViewModel == null) return;
 
             var existing = Templates.SingleOrDefault(template => template.Id == templateViewModel.Id);
-            if (existing == null) Templates.Add(templateViewModel);
+            if (existing == null)
+            {
+                Templates.Add(templateViewModel);
+            }
             else
             {
                 var index = Templates.IndexOf(existing);
@@ -55,19 +68,15 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        public ICommand NavigateToTemplateAddCommand { get; set; }
-        public ICommand NavigateToTemplateUpdateCommand { get; set; }
-        public ICommand TemplateDeleteCommand { get; set; }
-
-        public ObservableCollection<TemplateViewModel> Templates { get; private set; }
-
-        public TemplateViewModel SelectedTemplate { get; set; }
-
         private void RegisterCommands()
         {
-            NavigateToTemplateAddCommand = new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateAdd.Key));
-            NavigateToTemplateUpdateCommand = new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateUpdate.Key, SelectedTemplate), () => SelectedTemplate != null);
+            NavigateToTemplateAddCommand =
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateAdd.Key));
+            NavigateToTemplateUpdateCommand = new RelayCommand(
+                () => _navigationService.NavigateTo(Routes.Routes.TemplateUpdate.Key, SelectedTemplate),
+                () => SelectedTemplate != null);
             TemplateDeleteCommand = new RelayCommand(() => SelectedTemplate.Delete(), () => SelectedTemplate != null);
+            SearchCommand = new RelayCommand(LoadTemplates);
         }
 
         private void LoadTemplates()
@@ -77,104 +86,13 @@ namespace Festispec.ViewModels.Template
                 Templates =
                     new ObservableCollection<TemplateViewModel>(
                         templateRepository.Get()
+                            .Where(template =>
+                                template.Name.Contains(SearchName)
+                                && template.Description.Contains(SearchDescription))
                             .ToList()
                             .Select(template => _templateViewModelFactory.CreateViewModel(template)));
+                RaisePropertyChanged(nameof(Templates));
             }
         }
     }
-
-//    #region Temporary classes
-//
-//    #region Models
-//
-//    public class Template
-//    {
-//        public int Id { get; set; }
-//        public string Name { get; set; }
-//        public string Description { get; set; }
-//    }
-//
-//    #endregion
-//    
-//    #region RepositoryFactory
-//
-//    public interface IRepositoryFactory<out TRepository>
-//    {
-//        TRepository CreateRepository();
-//    }
-//
-//    public interface ITemplateRepositoryFactory : IRepositoryFactory<ITemplateRepository>
-//    {
-//    }
-//
-//    public class TemplateRepositoryFactory : ITemplateRepositoryFactory
-//    {
-//        public ITemplateRepository CreateRepository()
-//        {
-//            return new TemplateRepository();
-//        }
-//    }
-//
-//    #endregion
-//
-//    #region Repository
-//
-//    public interface IRepository<TEntity>
-//    {
-//        IQueryable<TEntity> Get();
-//        TEntity Add(TEntity entity);
-//        TEntity Update(TEntity updated, int key);
-//    }
-//
-//    public interface ITemplateRepository : IRepository<Template>, IDisposable
-//    {
-//    }
-//
-//    public class TemplateRepository : ITemplateRepository
-//    {
-//        private readonly List<Template> _templates = new List<Template>
-//        {
-//            new Template {Id = 1, Name = "Template 1"},
-//            new Template {Id = 2, Name = "Template 2"},
-//            new Template {Id = 3, Name = "Template 3"},
-//            new Template {Id = 4, Name = "Template 4"},
-//            new Template {Id = 5, Name = "Template 5"},
-//            new Template {Id = 6, Name = "Template 6"},
-//            new Template {Id = 7, Name = "Template 7"},
-//            new Template {Id = 8, Name = "Template 8"},
-//            new Template {Id = 9, Name = "Template 9"},
-//            new Template {Id = 10, Name = "Template 10"}
-//        };
-//
-//        public IQueryable<Template> Get()
-//        {
-//            return new EnumerableQuery<Template>(_templates);
-//        }
-//
-//        public Template Add(Template entity)
-//        {
-//            _templates.Add(entity);
-//            return entity;
-//        }
-//
-//        public Template Update(Template updated, int id)
-//        {
-//            if (updated == null) throw new ArgumentNullException(nameof(updated));
-//            if (id == 0) throw new ArgumentNullException(nameof(id));
-//
-//            var existingIndex = _templates.FindIndex(template => template.Id == id);
-//            _templates.RemoveAt(existingIndex);
-//            _templates.Insert(existingIndex, updated);
-//
-//            return updated;
-//        }
-//
-//        public void Dispose()
-//        {
-//        }
-//    }
-//
-//    #endregion
-//
-//    #endregion
 }
