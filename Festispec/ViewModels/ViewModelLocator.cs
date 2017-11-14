@@ -40,8 +40,7 @@ namespace Festispec.ViewModels
             // Register viewmodels
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<TemplateListViewModel>();
-            SimpleIoc.Default.Register<TemplateAddViewModel>();
-            SimpleIoc.Default.Register<TemplateUpdateViewModel>();
+            SimpleIoc.Default.Register<TemplateAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<AddQuestionViewModel>();
         }
 
@@ -50,8 +49,7 @@ namespace Festispec.ViewModels
             var navigationService = new NavigationService.NavigationService();
             navigationService.Configure(Routes.Routes.Home.Key, Routes.Routes.Home.PageType);
             navigationService.Configure(Routes.Routes.TemplateList.Key, Routes.Routes.TemplateList.PageType);
-            navigationService.Configure(Routes.Routes.TemplateAdd.Key, Routes.Routes.TemplateAdd.PageType);
-            navigationService.Configure(Routes.Routes.TemplateUpdate.Key, Routes.Routes.TemplateUpdate.PageType);
+            navigationService.Configure(Routes.Routes.TemplateAddOrUpdate.Key, Routes.Routes.TemplateAddOrUpdate.PageType);
             navigationService.Configure(Routes.Routes.AddQuestion.Key, Routes.Routes.AddQuestion.PageType);
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
@@ -87,8 +85,7 @@ namespace Festispec.ViewModels
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
         public TemplateListViewModel TemplateList => ServiceLocator.Current.GetInstance<TemplateListViewModel>();
-        public TemplateAddViewModel TemplateAdd => ServiceLocator.Current.GetInstance<TemplateAddViewModel>();
-        public TemplateUpdateViewModel TemplateUpdate => ServiceLocator.Current.GetInstance<TemplateUpdateViewModel>();
+        public TemplateAddOrUpdateViewModel TemplateAddOrUpdate => ServiceLocator.Current.GetInstance<TemplateAddOrUpdateViewModel>();
         public AddQuestionViewModel AddQuestion => ServiceLocator.Current.GetInstance<AddQuestionViewModel>();
 
         #endregion

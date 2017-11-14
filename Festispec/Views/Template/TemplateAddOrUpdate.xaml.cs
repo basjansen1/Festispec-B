@@ -6,9 +6,9 @@ namespace Festispec.Views.Template
     /// <summary>
     /// Interaction logic for TemplateList.xaml
     /// </summary>
-    public partial class TemplateAdd : Page
+    public partial class TemplateAddOrUpdate : Page
     {
-        public TemplateAdd()
+        public TemplateAddOrUpdate()
         {
             InitializeComponent();
         }

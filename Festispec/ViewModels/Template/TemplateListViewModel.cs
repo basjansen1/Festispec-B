@@ -71,9 +71,9 @@ namespace Festispec.ViewModels.Template
         private void RegisterCommands()
         {
             NavigateToTemplateAddCommand =
-                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateAdd.Key));
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate.Key));
             NavigateToTemplateUpdateCommand = new RelayCommand(
-                () => _navigationService.NavigateTo(Routes.Routes.TemplateUpdate.Key, SelectedTemplate),
+                () => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate.Key, SelectedTemplate),
                 () => SelectedTemplate != null);
             TemplateDeleteCommand = new RelayCommand(() => SelectedTemplate.Delete(), () => SelectedTemplate != null);
             SearchCommand = new RelayCommand(LoadTemplates);

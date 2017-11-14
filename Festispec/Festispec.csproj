@@ -109,12 +109,10 @@
     <Compile Include="ViewModels\NavigationService\INavigationService.cs" />
     <Compile Include="ViewModels\Routes\Route.cs" />
     <Compile Include="ViewModels\Routes\Routes.cs" />
-    <Compile Include="ViewModels\Template\TemplateAddViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateListViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateQuestionViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateAddOrUpdateViewModel.cs" />
-    <Compile Include="ViewModels\Template\TemplateUpdateViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\Template\AddQuestion.xaml.cs">
       <DependentUpon>AddQuestion.xaml</DependentUpon>
@@ -122,8 +120,8 @@
     <Compile Include="Views\Template\TemplateList.xaml.cs">
       <DependentUpon>TemplateList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Template\TemplateAdd.xaml.cs">
-      <DependentUpon>TemplateAdd.xaml</DependentUpon>
+    <Compile Include="Views\Template\TemplateAddOrUpdate.xaml.cs">
+      <DependentUpon>TemplateAddOrUpdate.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -145,7 +143,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Template\TemplateAdd.xaml">
+    <Page Include="Views\Template\TemplateAddOrUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
