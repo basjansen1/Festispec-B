@@ -57,6 +57,7 @@ namespace Festispec.ViewModels.Template
 
         public ICommand NavigateToTemplateAddCommand { get; set; }
         public ICommand NavigateToTemplateUpdateCommand { get; set; }
+        public ICommand TemplateDeleteCommand { get; set; }
 
         public ObservableCollection<TemplateViewModel> Templates { get; private set; }
 
@@ -66,6 +67,7 @@ namespace Festispec.ViewModels.Template
         {
             NavigateToTemplateAddCommand = new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateAdd.Key));
             NavigateToTemplateUpdateCommand = new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateUpdate.Key, SelectedTemplate), () => SelectedTemplate != null);
+            TemplateDeleteCommand = new RelayCommand(() => SelectedTemplate.Delete(), () => SelectedTemplate != null);
         }
 
         private void LoadTemplates()

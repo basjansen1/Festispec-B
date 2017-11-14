@@ -11,7 +11,7 @@ namespace Festispec.Domain.Repository
     public abstract class RepositoryBase<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
-        protected readonly DbContext _dbContext;
+        protected readonly DbContext DbContext;
 
         /// <summary>
         ///     Uses dependency injection to get an instance of the database context.
@@ -19,15 +19,13 @@ namespace Festispec.Domain.Repository
         /// <param name="dbContext"></param>
         protected RepositoryBase(DbContext dbContext)
         {
-            _dbContext = dbContext;
+            DbContext = dbContext;
         }
 
-        /// <summary>
-        ///     Calls the protected Dispose method on the database context.
-        /// </summary>
+        /// <inheritdoc />
         public void Dispose()
         {
-            _dbContext?.Dispose();
+            DbContext?.Dispose();
         }
 
         /// <summary>
@@ -35,9 +33,9 @@ namespace Festispec.Domain.Repository
         ///     <see cref="T:System.Data.Entity.DbContext" />.
         /// </summary>
         /// <returns> A new query with NoTracking applied. </returns>
-        public IQueryable<TEntity> Get()
+        public virtual IQueryable<TEntity> Get()
         {
-            return _dbContext.Set<TEntity>().AsNoTracking();
+            return DbContext.Set<TEntity>().AsNoTracking();
         }
 
         /// <summary>
@@ -67,9 +65,9 @@ namespace Festispec.Domain.Repository
         ///     the key values for the entity type to be found.
         /// </exception>
         /// <exception cref="T:System.InvalidOperationException">Thrown if the context has been disposed.</exception>
-        public TEntity Get(params object[] keyValues)
+        public virtual TEntity Get(params object[] keyValues)
         {
-            return _dbContext.Set<TEntity>().Find(keyValues);
+            return DbContext.Set<TEntity>().Find(keyValues);
         }
 
         /// <summary>
@@ -88,9 +86,9 @@ namespace Festispec.Domain.Repository
         /// </remarks>
         /// <param name="keyValues"> The values of the primary key for the entity to be found. </param>
         /// <returns> A task that represents the asynchronous find operation. The task result contains the entity found, or null. </returns>
-        public async Task<TEntity> GetAsync(params object[] keyValues)
+        public virtual async Task<TEntity> GetAsync(params object[] keyValues)
         {
-            return await _dbContext.Set<TEntity>().FindAsync(keyValues);
+            return await DbContext.Set<TEntity>().FindAsync(keyValues);
         }
 
         /// <summary>
@@ -106,9 +104,9 @@ namespace Festispec.Domain.Repository
         /// <exception cref="T:System.ArgumentNullException">
         ///     <paramref name="predicate" /> is <c>null</c>.
         /// </exception>
-        public TEntity Find(Expression<Func<TEntity, bool>> predicate)
+        public virtual TEntity Find(Expression<Func<TEntity, bool>> predicate)
         {
-            return _dbContext.Set<TEntity>().SingleOrDefault(predicate);
+            return DbContext.Set<TEntity>().SingleOrDefault(predicate);
         }
 
         /// <summary>
@@ -129,9 +127,9 @@ namespace Festispec.Domain.Repository
         /// <exception cref="T:System.ArgumentNullException">
         ///     <paramref name="predicate" /> is <c>null</c>.
         /// </exception>
-        public async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
+        public virtual async Task<TEntity> FindAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await _dbContext.Set<TEntity>().SingleOrDefaultAsync(predicate);
+            return await DbContext.Set<TEntity>().SingleOrDefaultAsync(predicate);
         }
 
         /// <summary>
@@ -145,9 +143,9 @@ namespace Festispec.Domain.Repository
         /// <exception cref="T:System.ArgumentNullException">
         ///     <paramref name="predicate" /> is <c>null</c>.
         /// </exception>
-        public ICollection<TEntity> FindAll(Expression<Func<TEntity, bool>> predicate)
+        public virtual ICollection<TEntity> FindAll(Expression<Func<TEntity, bool>> predicate)
         {
-            return _dbContext.Set<TEntity>().Where(predicate).ToList();
+            return DbContext.Set<TEntity>().Where(predicate).ToList();
         }
 
         /// <summary>
@@ -166,9 +164,9 @@ namespace Festispec.Domain.Repository
         /// <exception cref="T:System.ArgumentNullException">
         ///     <paramref name="predicate" /> is <c>null</c>.
         /// </exception>
-        public async Task<ICollection<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate)
+        public virtual async Task<ICollection<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await _dbContext.Set<TEntity>().Where(predicate).ToListAsync();
+            return await DbContext.Set<TEntity>().Where(predicate).ToListAsync();
         }
 
         /// <summary>
@@ -183,10 +181,10 @@ namespace Festispec.Domain.Repository
         /// <exception cref="T:System.ArgumentNullException">
         ///     <paramref name="entity" /> is <c>null</c>.
         /// </exception>
-        public TEntity Add(TEntity entity)
+        public virtual TEntity Add(TEntity entity)
         {
-            _dbContext.Set<TEntity>().Add(entity);
-            _dbContext.SaveChanges();
+            entity = DbContext.Set<TEntity>().Add(entity);
+            DbContext.SaveChanges();
             return entity;
         }
 
@@ -201,10 +199,10 @@ namespace Festispec.Domain.Repository
         /// </remarks>
         /// <param name="entity"> The entity to add. </param>
         /// <returns> A task that represents the asynchronous add operation. The task result contains the entity added. </returns>
-        public async Task<TEntity> AddAsync(TEntity entity)
+        public virtual async Task<TEntity> AddAsync(TEntity entity)
         {
-            _dbContext.Set<TEntity>().Add(entity);
-            await _dbContext.SaveChangesAsync();
+            DbContext.Set<TEntity>().Add(entity);
+            await DbContext.SaveChangesAsync();
             return entity;
         }
 
@@ -222,7 +220,7 @@ namespace Festispec.Domain.Repository
         /// <exception cref="T:System.ArgumentNullException">
         ///     <paramref name="keyValues" /> is <c>null</c>.
         /// </exception>
-        public TEntity Update(TEntity updated, params object[] keyValues)
+        public virtual TEntity Update(TEntity updated, params object[] keyValues)
         {
             if (updated == null)
                 throw new ArgumentNullException(nameof(updated));
@@ -232,8 +230,8 @@ namespace Festispec.Domain.Repository
             if (existing == null)
                 return null;
 
-            _dbContext.Entry(existing).CurrentValues.SetValues(updated);
-            _dbContext.SaveChanges();
+            DbContext.Entry(existing).CurrentValues.SetValues(updated);
+            DbContext.SaveChanges();
             return existing;
         }
 
@@ -255,7 +253,7 @@ namespace Festispec.Domain.Repository
         /// <exception cref="T:System.ArgumentNullException">
         ///     <paramref name="keyValues" /> is <c>null</c>.
         /// </exception>
-        public async Task<TEntity> UpdateAsync(TEntity updated, params object[] keyValues)
+        public virtual async Task<TEntity> UpdateAsync(TEntity updated, params object[] keyValues)
         {
             if (updated == null)
                 throw new ArgumentNullException(nameof(updated));
@@ -265,8 +263,8 @@ namespace Festispec.Domain.Repository
             if (existing == null)
                 return null;
 
-            _dbContext.Entry(existing).CurrentValues.SetValues(updated);
-            await _dbContext.SaveChangesAsync();
+            DbContext.Entry(existing).CurrentValues.SetValues(updated);
+            await DbContext.SaveChangesAsync();
             return existing;
         }
 
@@ -285,10 +283,11 @@ namespace Festispec.Domain.Repository
         /// <exception cref="T:System.ArgumentNullException">
         ///     <paramref name="entity" /> is <c>null</c>.
         /// </exception>
-        public int Delete(TEntity entity)
+        public virtual int Delete(TEntity entity)
         {
-            _dbContext.Set<TEntity>().Remove(entity);
-            return _dbContext.SaveChanges();
+            DbContext.Set<TEntity>().Attach(entity);
+            DbContext.Set<TEntity>().Remove(entity);
+            return DbContext.SaveChanges();
         }
 
         /// <summary>
@@ -311,10 +310,10 @@ namespace Festispec.Domain.Repository
         /// <exception cref="T:System.ArgumentNullException">
         ///     <paramref name="entity" /> is <c>null</c>.
         /// </exception>
-        public async Task<int> DeleteAsync(TEntity entity)
+        public virtual async Task<int> DeleteAsync(TEntity entity)
         {
-            _dbContext.Set<TEntity>().Remove(entity);
-            return await _dbContext.SaveChangesAsync();
+            DbContext.Set<TEntity>().Remove(entity);
+            return await DbContext.SaveChangesAsync();
         }
 
         /// <summary>
@@ -323,9 +322,9 @@ namespace Festispec.Domain.Repository
         /// <returns>
         ///     The number of elements in the sequence.
         /// </returns>
-        public int Count()
+        public virtual int Count()
         {
-            return _dbContext.Set<TEntity>().Count();
+            return DbContext.Set<TEntity>().Count();
         }
 
         /// <summary>
@@ -339,9 +338,9 @@ namespace Festispec.Domain.Repository
         ///     A task that represents the asynchronous operation.
         ///     The task result contains the number of elements in the input sequence.
         /// </returns>
-        public async Task<int> CountAsync()
+        public virtual async Task<int> CountAsync()
         {
-            return await _dbContext.Set<TEntity>().CountAsync();
+            return await DbContext.Set<TEntity>().CountAsync();
         }
     }
 }

@@ -58,7 +58,7 @@ namespace Festispec.ViewModels.Template
                     if (templateQuestion.Id == 0)
                         templateQuestionRepository.Add(templateQuestion);
                     else
-                        templateQuestionRepository.Update(templateQuestion);
+                        templateQuestionRepository.Update(templateQuestion, templateQuestion.Id);
             }
 
             NavigationService.GoBack(EntityViewModel);

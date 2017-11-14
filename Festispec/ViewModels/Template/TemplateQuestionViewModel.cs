@@ -61,17 +61,25 @@ namespace Festispec.ViewModels.Template
 
         public override void Save()
         {
-            using (var templateRepository = RepositoryFactory.CreateRepository())
+            using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
             {
                 // TODO: Implement AddOrUpdate in generic repository
                 if (Entity.Id == 0)
                 {
-                    templateRepository.Add(Entity);
+                    templateQuestionRepository.Add(Entity);
                 }
                 else
                 {
-                    templateRepository.Update(Entity, Entity.Id);
+                    templateQuestionRepository.Update(Entity, Entity.Id);
                 }
+            }
+        }
+
+        public override void Delete()
+        {
+            using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
+            {
+                templateQuestionRepository.Delete(Entity);
             }
         }
 

@@ -14,12 +14,14 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Content="Add Template" Margin="5px 10px" Command="{Binding NavigateToTemplateAddCommand}" />
-            <Button Grid.Column="2" Content="Update Template" Margin="5px 10px" Command="{Binding NavigateToTemplateUpdateCommand}" />
+            <Button Grid.Column="1" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToTemplateAddCommand}" />
+            <Button Grid.Column="2" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToTemplateUpdateCommand}" />
+            <Button Grid.Column="3" Content="Verwijder" Margin="5px 10px" Command="{Binding TemplateDeleteCommand}" />
         </Grid>
 
         <Grid Grid.Row="1">

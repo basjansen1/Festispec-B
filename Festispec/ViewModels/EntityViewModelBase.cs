@@ -11,21 +11,47 @@ namespace Festispec.ViewModels
         where TEntity : class, new()
     {
         public TEntity Entity { get; }
+        public TEntity UpdatedEntity { get; }
+
         protected readonly TRepositoryFactory RepositoryFactory;
 
         protected EntityViewModelBase(TRepositoryFactory repositoryFactory)
         {
             RepositoryFactory = repositoryFactory;
             Entity = new TEntity();
+            UpdatedEntity = Copy();
         }
 
         protected EntityViewModelBase(TRepositoryFactory repositoryFactory, TEntity entity)
         {
             RepositoryFactory = repositoryFactory;
             Entity = entity;
+            UpdatedEntity = Copy();
         }
 
         public abstract void Save();
+//        {
+//            using (var repository = RepositoryFactory.CreateRepository())
+//            {
+//                // TODO: Implement AddOrUpdate in generic repository
+//                if (Entity.Id == 0)
+//                {
+//                    repository.Add(Entity);
+//                }
+//                else
+//                {
+//                    repository.Update(Entity, Entity.Id);
+//                }
+//            }
+//        }
+
+        public virtual void Delete()
+        {
+            using (var repository = RepositoryFactory.CreateRepository())
+            {
+                repository.Delete(Entity);
+            }
+        }
         public abstract TEntity Copy();
     }
 }

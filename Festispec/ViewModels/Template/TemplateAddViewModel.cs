@@ -9,6 +9,8 @@ namespace Festispec.ViewModels.Template
     public class TemplateAddViewModel : TemplateAddOrUpdateViewModel
     {
         public ICommand NavigateToAddQuestionCommand { get; set; }
+        public ICommand NavigateToUpdateQuestionCommand { get; set; }
+        public ICommand DeleteQuestionCommand { get; set; }
 
         public TemplateAddViewModel(INavigationService navigationService,
             ITemplateRepositoryFactory repositoryFactory, ITemplateQuestionRepositoryFactory templateQuestionRepositoryFactory, ITemplateViewModelFactory templateViewModelFactory)
@@ -16,9 +18,18 @@ namespace Festispec.ViewModels.Template
         {
             RegisterCommands();
         }
+
         private void RegisterCommands()
         {
-          NavigateToAddQuestionCommand = new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.AddQuestion.Key, EntityViewModel), () => EntityViewModel != null);
+            NavigateToAddQuestionCommand =
+                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.AddQuestion.Key, EntityViewModel),
+                    () => EntityViewModel != null);
+            NavigateToUpdateQuestionCommand = new RelayCommand(
+                () => NavigationService.NavigateTo(Routes.Routes.UpdateQuestion.Key, EntityViewModel),
+                () => EntityViewModel.SelectedQuestion != null);
+            DeleteQuestionCommand =
+                new RelayCommand(() => EntityViewModel.SelectedQuestion.Delete(),
+                    () => EntityViewModel.SelectedQuestion != null);
         }
     }
 }

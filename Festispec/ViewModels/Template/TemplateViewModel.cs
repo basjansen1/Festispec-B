@@ -55,10 +55,16 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        public TemplateQuestion SelectedQuestion { get; set; }
+        public TemplateQuestionViewModel SelectedQuestion { get; set; }
 
         public override void Save()
         {
+            // Map updated values
+            Entity.Id = UpdatedEntity.Id;
+            Entity.Name = UpdatedEntity.Name;
+            Entity.Description = UpdatedEntity.Description;
+            Entity.Questions = UpdatedEntity.Questions;
+
             using (var templateRepository = RepositoryFactory.CreateRepository())
             {
                 // TODO: Implement AddOrUpdate in generic repository
@@ -73,13 +79,22 @@ namespace Festispec.ViewModels.Template
             }
         }
 
+        public override void Delete()
+        {
+            using (var templateRepository = RepositoryFactory.CreateRepository())
+            {
+                templateRepository.Delete(Entity);
+            }
+        }
+
         public override Domain.Template Copy()
         {
             return new Domain.Template
             {
                 Id = Id,
                 Name = Name,
-                Description = Description
+                Description = Description,
+                Questions = Questions
             };
         }
     }

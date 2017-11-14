@@ -9,20 +9,10 @@ namespace Festispec.Domain.Repository
         public TemplateQuestionRepository(DbContext dbContext) : base(dbContext)
         {
         }
-
-
-        IQueryable<TemplateQuestion> IRepository<TemplateQuestion>.Get()
+        
+        public override IQueryable<TemplateQuestion> Get()
         {
-            return Get().Include(templateQuestion => templateQuestion.QuestionType).AsNoTracking();
-        }
-
-        TemplateQuestion IRepository<TemplateQuestion>.Add(TemplateQuestion entity)
-        {
-            // Set relations to unchanged to prevent updating them
-            _dbContext.Entry(entity.QuestionType).State = EntityState.Unchanged;
-            _dbContext.Entry(entity.Template).State = EntityState.Unchanged;
-
-            return Add(entity);
+            return base.Get().Include(templateQuestion => templateQuestion.QuestionType).AsNoTracking();
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Festispec.ViewModels
 
             if (_templateViewModel.SelectedQuestion != null)
             {
-                EntityViewModel = ViewModelFactory.CreateViewModel(_templateViewModel.SelectedQuestion);
+                EntityViewModel = _templateViewModel.SelectedQuestion;
             }
             else
             {
