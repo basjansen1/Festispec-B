@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Festispec.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,7 @@ namespace Festispec.ViewModels.RequestProcessing
         // methods
         public void ApproveInspection()
         {
-
+            
         }
 
         public void RejectInspection()

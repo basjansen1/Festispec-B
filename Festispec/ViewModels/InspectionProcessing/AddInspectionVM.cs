@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Festispec.Domain;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +29,28 @@ namespace Festispec.ViewModels.RequestProcessing
         // methods
         public bool CanAddInspection()
         {
-            
+            if (NewInspection.Name != null && NewInspection.StartDate != null
+                && NewInspection.EndDate != null)
+                return true;
+
+            return false;
         }
 
         public void AddInspection()
         {
+            if (CanAddInspection())
+            {
+                using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
+                {
+                    inspectionRepository.Add(NewInspection.toModel());
+                }
 
+                InspectionList.InspectionVMList.Add(NewInspection);
+
+                return;
+            }
+
+            Console.WriteLine("Can't add inspection!");
         }
     }
 }
