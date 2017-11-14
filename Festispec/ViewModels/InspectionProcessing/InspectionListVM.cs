@@ -18,7 +18,6 @@ namespace Festispec.ViewModels.RequestProcessing
     {
         // getters and setters
         public ObservableCollection<InspectionVM> InspectionVMList { get; set; }
-        public ObservableCollection<string> FilterOptions { get; set; } // not sure whether this variable will be in this class
         public InspectionVM SelectedInspection
         {
             get
