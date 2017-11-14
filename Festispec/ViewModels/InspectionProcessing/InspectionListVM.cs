@@ -31,20 +31,6 @@ namespace Festispec.ViewModels.RequestProcessing
             }
         }
 
-        public string SelectedFilterOption
-        {
-            get
-            {
-                return _selectedFilterOption;
-            }
-            set
-            {
-                _selectedFilterOption = value;
-                RaisePropertyChanged("SelectedFilterOption");
-                this.FilterInspectionVMList();
-            }
-        }
-
         public IInspectionRepositoryFactory InspectionRepositoryFactory;
 
         // Commands
@@ -53,7 +39,6 @@ namespace Festispec.ViewModels.RequestProcessing
         public ICommand ShowProcessInspectionWindowCommand;
         public ICommand DeleteInspectionCommand;
         public ICommand FilterInspectionVMListCommand;
-        public ICommand SearchInspectionCommand;
 
         // fields
         private InspectionVM _selectedInspection;
@@ -70,8 +55,6 @@ namespace Festispec.ViewModels.RequestProcessing
             ShowEditInspectionWindowCommand = new RelayCommand(ShowEditInspectionWindow);
             ShowProcessInspectionWindowCommand = new RelayCommand(ShowProcessInspectionWindow);
             DeleteInspectionCommand = new RelayCommand(DeleteSelectedInspection);
-            FilterInspectionVMListCommand = new RelayCommand(FilterInspectionVMList);
-            SearchInspectionCommand = new RelayCommand(RenderSearchedInspection);
 
             using(var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
@@ -109,16 +92,6 @@ namespace Festispec.ViewModels.RequestProcessing
                 inspectionRepository.Delete(SelectedInspection.toModel());
             }
             this.InspectionVMList.Remove(SelectedInspection);
-        }
-
-        public void FilterInspectionVMList()
-        {
-
-        }
-
-        public void RenderSearchedInspection()
-        {
-
         }
     }
 }

@@ -3,11 +3,13 @@ using Festispec.Domain.Repository.Factory;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.RequestProcessing;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Festispec.ViewModels.InspectionProcessing
 {
@@ -16,6 +18,8 @@ namespace Festispec.ViewModels.InspectionProcessing
         // getters and setters
 
         // commands
+        public ICommand FilterByStartDateCommand;
+        public ICommand FilterByEndDateCommand;
 
         // fields
         private InspectionListVM _inspectionList;
@@ -26,62 +30,67 @@ namespace Festispec.ViewModels.InspectionProcessing
         {
             _inspectionList = InspectionList;
             inspectionRepository = _inspectionList.InspectionRepositoryFactory.CreateRepository();
+
+            FilterByStartDateCommand = new RelayCommand<int>(FilterByStartDate);
+            FilterByEndDateCommand = new RelayCommand<int>(FilterByEndDate);
         }
 
         // methods
-        public void FilterFromByDate(string month)
+        public void FilterByStartDate(int month)
         {
             this.ClearInspectionList();
-            switch (month)
+            List<Inspection> inspectionlist;
+
+            using(inspectionRepository)
             {
-                case "Januari":
-                    _inspectionList.InspectionVMList.Add()
-                    break;
-                case "Februari":
-                    break;
-                case "Maart":
-                    break;
-                case "April":
-                    break;
-                case "Mei":
-                    break;
-                case "Juni":
-                    break;
-                case "Juli":
-                    break;
-                case "Augustus":
-                    break;
-                case "September":
-                    break;
-                case "Oktober":
-                    break;
-                case "November":
-                    break;
-                case "December":
-                    break;
+             inspectionlist = inspectionRepository.Get().Where(i => i.Start.Month == month).ToList();
             }
+
+            inspectionlist.ForEach(i => _inspectionList.InspectionVMList.Add(new InspectionVM(i)));
+        }
+
+        public void FilterByEndDate(int month)
+        {
+            this.ClearInspectionList();
+            List<Inspection> inspectionlist;
+
+            using (inspectionRepository)
+            {
+                inspectionlist = inspectionRepository.Get().Where(i => i.End.Month == month).ToList();
+            }
+
+            inspectionlist.ForEach(i => _inspectionList.InspectionVMList.Add(new InspectionVM(i)));
         }
 
         public void FilterByName(string name)
         {
+            this.ClearInspectionList();
+            List<Inspection> inspectionlist;
 
-        }
+            using (inspectionRepository)
+            {
+                inspectionlist = inspectionRepository.Get().Where(i => i.Name == name).ToList();
+            }
 
-        public void FilterByStatus(string status)
-        {
-
+            inspectionlist.ForEach(i => _inspectionList.InspectionVMList.Add(new InspectionVM(i)));
         }
 
         public void ClearFilters()
         {
+            this.ClearInspectionList();
+            List<Inspection> inspectionlist;
 
+            using (inspectionRepository)
+            {
+                inspectionlist = inspectionRepository.Get().ToList();
+            }
+
+            inspectionlist.ForEach(i => _inspectionList.InspectionVMList.Add(new InspectionVM(i)));
         }
 
         public void ClearInspectionList()
         {
             _inspectionList.InspectionVMList.Clear();
         }
-
-        // more filter options...
     }
 }
