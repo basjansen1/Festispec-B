@@ -78,5 +78,9 @@ namespace Festispec.ViewModels.RequestProcessing
             _inspection = i;
         }
 
+        public Inspection toModel()
+        {
+            return _inspection;
+        }
     }
 }

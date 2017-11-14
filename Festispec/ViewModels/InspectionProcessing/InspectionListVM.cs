@@ -1,4 +1,6 @@
-﻿using Festispec.Domain.Repository.Factory.Interface;
+﻿using Festispec.Domain;
+using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Domain.Repository.Interface;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -44,6 +46,8 @@ namespace Festispec.ViewModels.RequestProcessing
             }
         }
 
+        public IInspectionRepositoryFactory InspectionRepositoryFactory;
+
         // Commands
         public ICommand ShowAddInspectionWindowCommand;
         public ICommand ShowEditInspectionWindowCommand;
@@ -57,9 +61,10 @@ namespace Festispec.ViewModels.RequestProcessing
         private string _selectedFilterOption;
 
         // constructor
-        public InspectionListVM(IInspectionRepositoryFactory InspectionRepositoryFactory)
+        public InspectionListVM(IInspectionRepositoryFactory inspectionRepositoryFactory)
         {
             List<InspectionVM> InspectionList;
+            InspectionRepositoryFactory = inspectionRepositoryFactory;
 
             // instantiate commands 
             ShowAddInspectionWindowCommand = new RelayCommand(ShowAddInspectionWindow);
@@ -69,9 +74,9 @@ namespace Festispec.ViewModels.RequestProcessing
             FilterInspectionVMListCommand = new RelayCommand(FilterInspectionVMList);
             SearchInspectionCommand = new RelayCommand(RenderSearchedInspection);
 
-            using(var _templateRepository = InspectionRepositoryFactory.CreateRepository())
+            using(var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
-                InspectionList = _templateRepository.Get().Select(i => new InspectionVM(i)).ToList();
+                InspectionList = inspectionRepository.Get().Select(i => new InspectionVM(i)).ToList();
             }
 
             InspectionVMList = new ObservableCollection<InspectionVM>(InspectionList);
@@ -100,7 +105,11 @@ namespace Festispec.ViewModels.RequestProcessing
 
         public void DeleteSelectedInspection()
         {
-
+            using(var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
+            {
+                inspectionRepository.Delete(SelectedInspection.toModel());
+            }
+            this.InspectionVMList.Remove(SelectedInspection);
         }
 
         public void FilterInspectionVMList()
