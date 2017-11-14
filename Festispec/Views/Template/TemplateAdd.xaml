@@ -18,7 +18,7 @@
             <Button Grid.Column="1" x:Name="AddQuestion" Content="Vraag Toevoegen" Margin="5px 10px" Command="{Binding NavigateToAddQuestionCommand}"/>
             <Button Grid.Column="2" x:Name="RemoveQuestion" Content="Vraag Verwijderen" Margin="5px 10px" />
         </Grid>
-        <Button Content="Back" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
+        <Button Content="Cancel" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
         <TextBox Text="{Binding Path=EntityViewModel.Name}" />
         <Button Content="Save" Margin="5px 10px" Command="{Binding SaveEntityCommand}"/>
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestion}" ItemsSource="{Binding EntityViewModel.Questions}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">

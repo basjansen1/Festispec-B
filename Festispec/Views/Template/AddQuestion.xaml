@@ -10,7 +10,7 @@
       DataContext="{Binding Source={StaticResource Locator}, Path=AddQuestion}">
 
     <StackPanel>
-        <Button Grid.Column="0" Content="Back" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
+        <Button Grid.Column="0" Content="Cancel" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
         <TextBox Text="{Binding Path=EntityViewModel.Name}" />
         <ComboBox ItemsSource="{Binding Path=QuestionTypes}" 
             DisplayMemberPath="Type"
