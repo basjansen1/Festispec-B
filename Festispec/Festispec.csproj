@@ -35,6 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
       <Private>True</Private>
@@ -60,6 +68,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -83,6 +92,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Properties\Annotations1.cs" />
+    <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
+    <Compile Include="ViewModels\AddQuestionViewModel.cs" />
+    <Compile Include="ViewModels\EntityViewModelBase.cs" />
+    <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\TemplateViewModelFactory.cs" />
+    <Compile Include="ViewModels\Interface\IAddOrUpdateViewModel.cs" />
+    <Compile Include="ViewModels\Interface\IEntityViewModel.cs" />
+    <Compile Include="ViewModels\Factory\Interface\ITemplateViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IViewModelFactory.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\NavigatableViewModelBase.cs" />
+    <Compile Include="ViewModels\NavigationService\NavigationService.cs" />
+    <Compile Include="ViewModels\NavigationService\INavigationService.cs" />
+    <Compile Include="ViewModels\Routes\Route.cs" />
+    <Compile Include="ViewModels\Routes\Routes.cs" />
+    <Compile Include="ViewModels\Template\TemplateListViewModel.cs" />
+    <Compile Include="ViewModels\Template\TemplateQuestionViewModel.cs" />
+    <Compile Include="ViewModels\Template\TemplateViewModel.cs" />
+    <Compile Include="ViewModels\Template\TemplateAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\InspectionProcessing\AddInspectionVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\EditInspectionVM.cs" />
@@ -91,6 +121,15 @@
     <Compile Include="ViewModels\InspectionProcessing\InspectionListVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\Template\AddQuestion.xaml.cs">
+      <DependentUpon>AddQuestion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Template\TemplateList.xaml.cs">
+      <DependentUpon>TemplateList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Template\TemplateAddOrUpdate.xaml.cs">
+      <DependentUpon>TemplateAddOrUpdate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -106,6 +145,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Template\AddQuestion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Template\TemplateList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Template\TemplateAddOrUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -139,6 +190,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup />
   <ItemGroup>
     <Folder Include="ViewModels\Employees\" />
     <Folder Include="Views\" />

@@ -31,6 +31,10 @@ namespace Festispec.Domain.Repository.Interface
 
         Task<TEntity> UpdateAsync(TEntity updated, params object[] keyValues);
 
+        TEntity AddOrUpdate(TEntity entity);
+
+        Task<TEntity> AddOrUpdateAsync(TEntity entity);
+
         int Delete(TEntity entity);
 
         Task<int> DeleteAsync(TEntity entity);

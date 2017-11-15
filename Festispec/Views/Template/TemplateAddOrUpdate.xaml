@@ -1,0 +1,59 @@
+﻿<Page x:Class="Festispec.Views.Template.TemplateAddOrUpdate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="TemplateAddOrUpdate"
+        DataContext="{Binding Source={StaticResource Locator}, Path=TemplateAddOrUpdate}">
+    <StackPanel>
+        <Grid Height="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="1" x:Name="AddQuestion" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToAddQuestionCommand}"/>
+            <Button Grid.Column="2" x:Name="UpdateQuestion" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToUpdateQuestionCommand}" />
+            <Button Grid.Column="3" x:Name="RemoveQuestion" Content="Verwijderen" Margin="5px 10px" Command="{Binding DeleteQuestionCommand}" />
+        </Grid>
+        <Label>Naam</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Name}" />
+        <Label>Omschrijving</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Description}" />
+        <Label>Vragen</Label>
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding EntityViewModel.SelectedQuestion}" ItemsSource="{Binding EntityViewModel.UpdatedEntity.Questions}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="#" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Height="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content="Cancel" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
+            <Button Grid.Column="1"  Content="Save" Margin="5px 10px" Command="{Binding SaveEntityCommand}"/>
+        </Grid>
+    </StackPanel>
+</Page>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
