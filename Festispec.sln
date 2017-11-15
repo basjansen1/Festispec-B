@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festispec.Domain", "Festisp
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Festispec.Database", "Festispec.Database\Festispec.Database.sqlproj", "{3D8617C6-BA61-473A-AB35-78FC7DDE853B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Festispec.Test", "Festispec.Test\Festispec.Test.csproj", "{07E32F2F-B79B-410F-890D-B397E3F90CC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProofOfConcept.Geodan", "ProofOfConcept.Geodan\ProofOfConcept.Geodan.csproj", "{86E3678B-98F7-4E37-BE12-D682B3F7D7AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,14 @@ Global
 		{3D8617C6-BA61-473A-AB35-78FC7DDE853B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D8617C6-BA61-473A-AB35-78FC7DDE853B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3D8617C6-BA61-473A-AB35-78FC7DDE853B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{07E32F2F-B79B-410F-890D-B397E3F90CC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07E32F2F-B79B-410F-890D-B397E3F90CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07E32F2F-B79B-410F-890D-B397E3F90CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07E32F2F-B79B-410F-890D-B397E3F90CC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86E3678B-98F7-4E37-BE12-D682B3F7D7AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86E3678B-98F7-4E37-BE12-D682B3F7D7AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86E3678B-98F7-4E37-BE12-D682B3F7D7AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86E3678B-98F7-4E37-BE12-D682B3F7D7AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
