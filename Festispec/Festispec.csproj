@@ -113,6 +113,13 @@
     <Compile Include="ViewModels\Template\TemplateQuestionViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateAddOrUpdateViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\InspectionProcessing\AddInspectionVM.cs" />
+    <Compile Include="ViewModels\InspectionProcessing\EditInspectionVM.cs" />
+    <Compile Include="ViewModels\InspectionProcessing\InspectionListFilterVM.cs" />
+    <Compile Include="ViewModels\InspectionProcessing\ProcessInspectionVM.cs" />
+    <Compile Include="ViewModels\InspectionProcessing\InspectionListVM.cs" />
+    <Compile Include="ViewModels\InspectionProcessing\InspectionVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\Template\AddQuestion.xaml.cs">
       <DependentUpon>AddQuestion.xaml</DependentUpon>
@@ -122,6 +129,9 @@
     </Compile>
     <Compile Include="Views\Template\TemplateAddOrUpdate.xaml.cs">
       <DependentUpon>TemplateAddOrUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -144,6 +154,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Template\TemplateAddOrUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,6 +192,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\Employees\" />
+    <Folder Include="Views\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Festispec.Domain\Festispec.Domain.csproj">
       <Project>{09979796-e638-48d5-8666-fa0ac1f54a2e}</Project>
