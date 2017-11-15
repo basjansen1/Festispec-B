@@ -61,17 +61,16 @@ namespace Festispec.ViewModels.Template
 
         public override void Save()
         {
+            // Map updated values
+//            Entity.Id = UpdatedEntity.Id;
+//            Entity.Name = UpdatedEntity.Name;
+//            Entity.Description = UpdatedEntity.Description;
+//            Entity.QuestionType = UpdatedEntity.QuestionType;
+//            Entity.Template = UpdatedEntity.Template;
+
             using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
             {
-                // TODO: Implement AddOrUpdate in generic repository
-                if (Entity.Id == 0)
-                {
-                    templateQuestionRepository.Add(Entity);
-                }
-                else
-                {
-                    templateQuestionRepository.Update(Entity, Entity.Id);
-                }
+                templateQuestionRepository.AddOrUpdate(Entity);
             }
         }
 

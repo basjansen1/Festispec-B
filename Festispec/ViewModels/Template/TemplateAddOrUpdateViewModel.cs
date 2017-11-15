@@ -58,12 +58,6 @@ namespace Festispec.ViewModels.Template
             var existing = EntityViewModel.Questions.SingleOrDefault(templateQuestion =>
                 templateQuestion.Id == templateQuestionViewModel.Id);
             if (existing == null) EntityViewModel.Questions.Add(templateQuestionViewModel.Entity);
-//            else
-//            {
-//                var index = EntityViewModel.Questions.IndexOf(existing);
-//                EntityViewModel.Questions.RemoveAt(index);
-//                EntityViewModel.Questions.Insert(index, templateQuestionViewModel);
-//            }
         }
 
         public override void Save()
@@ -71,14 +65,11 @@ namespace Festispec.ViewModels.Template
             // TODO: Validation
             EntityViewModel.Save();
 
-            using (var templateQuestionRepository = _templateQuestionRepositoryFactory.CreateRepository())
-            {
-                foreach (var templateQuestion in EntityViewModel.Questions)
-                    if (templateQuestion.Id == 0)
-                        templateQuestionRepository.Add(templateQuestion);
-                    else
-                        templateQuestionRepository.Update(templateQuestion, templateQuestion.Id);
-            }
+//            using (var templateQuestionRepository = _templateQuestionRepositoryFactory.CreateRepository())
+//            {
+//                foreach (var templateQuestion in EntityViewModel.UpdatedEntity.Questions)
+//                    templateQuestionRepository.AddOrUpdate(templateQuestion);
+//            }
 
             NavigationService.GoBack(EntityViewModel);
         }

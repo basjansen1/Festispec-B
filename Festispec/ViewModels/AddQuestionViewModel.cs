@@ -58,8 +58,9 @@ namespace Festispec.ViewModels
 
         public override void Save()
         {
-            EntityViewModel.Template.Questions.Add(EntityViewModel.Entity);
-//            _templateViewModel.Questions.Add(EntityViewModel.Entity);
+//            EntityViewModel.Template.Questions.Add(EntityViewModel.Entity);
+            EntityViewModel.Save();
+
             NavigationService.GoBack(_templateViewModel);
         }
     }

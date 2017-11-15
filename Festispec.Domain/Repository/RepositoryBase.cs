@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -266,6 +267,20 @@ namespace Festispec.Domain.Repository
             DbContext.Entry(existing).CurrentValues.SetValues(updated);
             await DbContext.SaveChangesAsync();
             return existing;
+        }
+
+        public virtual TEntity AddOrUpdate(TEntity entity)
+        {
+            DbContext.Set<TEntity>().AddOrUpdate(entity);
+            DbContext.SaveChanges();
+            return entity;
+        }
+
+        public virtual async Task<TEntity> AddOrUpdateAsync(TEntity entity)
+        {
+            DbContext.Set<TEntity>().AddOrUpdate(entity);
+            await DbContext.SaveChangesAsync();
+            return entity;
         }
 
         /// <summary>
