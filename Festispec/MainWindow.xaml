@@ -6,7 +6,14 @@
         xmlns:local="clr-namespace:Festispec"
         mc:Ignorable="d"
         DataContext="{Binding Source={StaticResource Locator}, Path=Test}"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+
+        >
     <Grid>
         
     </Grid>
