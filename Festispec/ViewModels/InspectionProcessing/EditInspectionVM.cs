@@ -27,12 +27,19 @@ namespace Festispec.ViewModels.RequestProcessing
         // methods
         public bool CanEditInspection()
         {
+            if (InspectionVM.Name != null && InspectionVM.StartDate != null
+                 && InspectionVM.EndDate != null)
+                return true;
 
+            return false;
         }
 
         public void SaveChanges()
         {
+            if (CanEditInspection())
+            {
 
+            }
         }
     }
 }
