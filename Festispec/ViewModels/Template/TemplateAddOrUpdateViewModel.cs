@@ -57,12 +57,13 @@ namespace Festispec.ViewModels.Template
 
             var existing = EntityViewModel.Questions.SingleOrDefault(templateQuestion =>
                 templateQuestion.Id == templateQuestionViewModel.Id);
-            if (existing == null) EntityViewModel.Questions.Add(templateQuestionViewModel.Entity);
+            if (existing == null) EntityViewModel.Questions.Add(templateQuestionViewModel);
         }
 
         public override void Save()
         {
             // TODO: Validation
+
             EntityViewModel.Save();
 
 //            using (var templateQuestionRepository = _templateQuestionRepositoryFactory.CreateRepository())

@@ -1,19 +1,27 @@
 ﻿using System.Collections.Generic;
-using Festispec.Domain;
+using System.Linq;
 using Festispec.Domain.Repository.Factory.Interface;
-using Festispec.Domain.Repository.Interface;
+using Festispec.ViewModels.Factory.Interface;
 
 namespace Festispec.ViewModels.Template
 {
     public class TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, Domain.Template>
     {
-        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory) : base(repositoryFactory)
+        private readonly ITemplateQuestionViewModelFactory _templateQuestionViewModelFactory;
+
+        private TemplateQuestionViewModel _selectedQuestion;
+
+        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory,
+            ITemplateQuestionViewModelFactory templateQuestionViewModelFactory) : base(repositoryFactory)
         {
+            _templateQuestionViewModelFactory = templateQuestionViewModelFactory;
         }
 
-        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory, Domain.Template entity)
+        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory,
+            ITemplateQuestionViewModelFactory templateQuestionViewModelFactory, Domain.Template entity)
             : base(repositoryFactory, entity)
         {
+            _templateQuestionViewModelFactory = templateQuestionViewModelFactory;
         }
 
         public int Id => Entity.Id;
@@ -45,17 +53,31 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        public ICollection<TemplateQuestion> Questions
+        public ICollection<TemplateQuestionViewModel> Questions
         {
-            get { return Entity.Questions; }
+            get
+            {
+                return
+                    Entity.Questions.Select(
+                        templateQuestion => _templateQuestionViewModelFactory?.CreateViewModel(templateQuestion))
+                        .ToList();
+            }
             set
             {
-                Entity.Questions = value;
+                Entity.Questions = value.Select(templateQuestionViewModel => templateQuestionViewModel.Entity).ToList();
                 RaisePropertyChanged();
             }
         }
 
-        public TemplateQuestionViewModel SelectedQuestion { get; set; }
+        public TemplateQuestionViewModel SelectedQuestion
+        {
+            get { return _selectedQuestion; }
+            set
+            {
+                _selectedQuestion = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public override void Save()
         {
@@ -86,7 +108,7 @@ namespace Festispec.ViewModels.Template
                 Id = Id,
                 Name = Name,
                 Description = Description,
-                Questions = Questions
+                Questions = Entity.Questions
             };
         }
     }

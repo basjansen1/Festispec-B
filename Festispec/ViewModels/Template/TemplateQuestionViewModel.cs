@@ -59,6 +59,8 @@ namespace Festispec.ViewModels.Template
             }
         }
 
+        public bool Deleted { get; set; } = false;
+
         public override void Save()
         {
             // Map updated values

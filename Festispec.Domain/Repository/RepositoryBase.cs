@@ -280,7 +280,7 @@ namespace Festispec.Domain.Repository
         {
             DbContext.Set<TEntity>().AddOrUpdate(entity);
             await DbContext.SaveChangesAsync();
-            return entity;
+            return entity;  
         }
 
         /// <summary>
