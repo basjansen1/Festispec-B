@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Festispec.Domain;
+using Festispec.Domain.Repository.Interface;
+using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +23,7 @@ namespace Festispec.ViewModels.RequestProcessing
         // constructors
         public EditInspectionVM(InspectionVM InspectionVM)
         {
-
+            this.InspectionVM = InspectionVM;
         }
 
         // methods
@@ -38,7 +40,12 @@ namespace Festispec.ViewModels.RequestProcessing
         {
             if (CanEditInspection())
             {
+                using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
+                {
+                    inspectionRepository.Add(InspectionVM.toModel());
+                }
 
+                return;
             }
         }
     }
