@@ -18,6 +18,7 @@ using Festispec.ViewModels.Template;
 using Festispec.ViewModels.RequestProcessing;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using Festispec.ViewModels.CustomerCRUD;
 
 namespace Festispec.ViewModels
 {
@@ -43,6 +44,8 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<TemplateListViewModel>();
             SimpleIoc.Default.Register<TemplateAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<AddQuestionViewModel>();
+            SimpleIoc.Default.Register<AddCustomerVM>();
+            SimpleIoc.Default.Register<CustomersOverviewVM>();
         }
 
         private static void RegisterNavigationService()
@@ -88,6 +91,8 @@ namespace Festispec.ViewModels
         public TemplateListViewModel TemplateList => ServiceLocator.Current.GetInstance<TemplateListViewModel>();
         public TemplateAddOrUpdateViewModel TemplateAddOrUpdate => ServiceLocator.Current.GetInstance<TemplateAddOrUpdateViewModel>();
         public AddQuestionViewModel AddQuestion => ServiceLocator.Current.GetInstance<AddQuestionViewModel>();
+        public AddCustomerVM AddCustomer => ServiceLocator.Current.GetInstance<AddCustomerVM>();
+        public CustomersOverviewVM CustomersOverview => ServiceLocator.Current.GetInstance<CustomersOverviewVM>();
 
         #endregion
 
@@ -96,6 +101,7 @@ namespace Festispec.ViewModels
         {
             return new InspectionListVM(InspectionRepositoryFactory);
         }
+
         #endregion
     }
 }
