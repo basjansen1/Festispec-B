@@ -13,24 +13,24 @@ namespace Festispec.ViewModels.RequestProcessing
     public class EditInspectionVM : ViewModelBase
     {
         // getters and setters
-        public InspectionVM InspectionVM { get; set; }
+        public InspectionListVM InspectionList { get; set; }
 
         // commands
         public ICommand EditInspectionCommand { get; set; }
 
         // fields
+        private IRepository<Inspection> _inspectionRepository;
 
         // constructors
         public EditInspectionVM(InspectionVM InspectionVM)
         {
-            this.InspectionVM = InspectionVM;
         }
 
         // methods
         public bool CanEditInspection()
         {
-            if (InspectionVM.Name != null && InspectionVM.StartDate != null
-                 && InspectionVM.EndDate != null)
+            if (InspectionList.SelectedInspection.Name != null && InspectionList.SelectedInspection.StartDate != null
+                 && InspectionList.SelectedInspection.EndDate != null)
                 return true;
 
             return false;
@@ -42,10 +42,8 @@ namespace Festispec.ViewModels.RequestProcessing
             {
                 using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
                 {
-                    inspectionRepository.Add(InspectionVM.toModel());
+                    inspectionRepository.Add(InspectionList.SelectedInspection.toModel());
                 }
-
-                return;
             }
         }
     }
