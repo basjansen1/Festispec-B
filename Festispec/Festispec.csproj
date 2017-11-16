@@ -93,6 +93,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Properties\Annotations1.cs" />
+    <Compile Include="ViewModels\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
     <Compile Include="ViewModels\AddQuestionViewModel.cs" />
     <Compile Include="ViewModels\EntityViewModelBase.cs" />
@@ -121,6 +122,9 @@
     <Compile Include="ViewModels\InspectionProcessing\InspectionListVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\CRUD_Employee\CRUD_Employee.xaml.cs">
+      <DependentUpon>CRUD_Employee.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Template\AddQuestion.xaml.cs">
       <DependentUpon>AddQuestion.xaml</DependentUpon>
     </Compile>
@@ -145,6 +149,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\CRUD_Employee\CRUD_Employee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Template\AddQuestion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -192,10 +200,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="ViewModels\Employees\" />
-    <Folder Include="Views\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Festispec.Domain\Festispec.Domain.csproj">
       <Project>{09979796-e638-48d5-8666-fa0ac1f54a2e}</Project>

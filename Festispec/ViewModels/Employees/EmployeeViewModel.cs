@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace Festispec.ViewModels.Employees
 {
-    public class InspectionVM : ViewModelBase
+    public class EmployeeViewModel : ViewModelBase
     {
         // getters and setters
         public string Name
         {
             get
             {
-                return _inspection.Name;
+                return _Employee.Name;
             }
             set
             {
-                _inspection.Name = value;
+                _Employee.Name = value;
                 RaisePropertyChanged("Name");
             }
         }
@@ -28,11 +28,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.Website;
+                return _Employee.Website;
             }
             set
             {
-                _inspection.Website = value;
+                _Employee.Website = value;
                 RaisePropertyChanged("Website");
             }
         }
@@ -41,11 +41,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.Start;
+                return _Employee.Start;
             }
             set
             {
-                _inspection.Start = value;
+                _Employee.Start = value;
                 RaisePropertyChanged("StartDate");
             }
         }
@@ -54,33 +54,33 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.End;
-            } 
+                return _Employee.End;
+            }
             set
             {
-                _inspection.End = value;
+                _Employee.End = value;
                 RaisePropertyChanged("EndDate");
             }
         }
 
         // field
-        private Inspection _inspection;
+        private Employee _Employee;
 
         // constructors
-        
-        public InspectionVM()
+
+        public EmployeeViewModel()
         {
-            _inspection = new Inspection();
+            _Employee = new Employee();
         }
 
-        public InspectionVM(Inspection i)
+        public EmployeeViewModel(Employee i)
         {
-            _inspection = i;
+            _Employee = i;
         }
 
-        public Inspection toModel()
+        public Employee toModel()
         {
-            return _inspection;
+            return _Employee;
         }
     }
 }

@@ -8,27 +8,27 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModels.Employees
 {
-    public class EditInspectionVM : ViewModelBase
+    public class EditEmployeeViewModel : ViewModelBase
     {
         // getters and setters
-        public InspectionVM InspectionVM { get; set; }
+        public EmployeeViewModel EmployeeViewModel { get; set; }
 
         // commands
-        public ICommand EditInspectionCommand { get; set; }
+        public ICommand EditEmployeeCommand { get; set; }
 
         // fields
 
         // constructors
-        public EditInspectionVM(InspectionVM InspectionVM)
+        public EditEmployeeViewModel(EmployeeViewModel EmployeeViewModel)
         {
 
         }
 
         // methods
-        public bool CanEditInspection()
+        public bool CanEditEmployee()
         {
-            if (InspectionVM.Name != null && InspectionVM.StartDate != null
-                 && InspectionVM.EndDate != null)
+            if (EmployeeViewModel.Name != null && EmployeeViewModel.StartDate != null
+                 && EmployeeViewModel.EndDate != null)
                 return true;
 
             return false;
@@ -36,7 +36,7 @@ namespace Festispec.ViewModels.Employees
 
         public void SaveChanges()
         {
-            if (CanEditInspection())
+            if (CanEditEmployee())
             {
 
             }
