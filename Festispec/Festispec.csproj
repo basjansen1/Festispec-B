@@ -93,9 +93,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Properties\Annotations1.cs" />
-    <Compile Include="ViewModels\AddEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\Employees\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
     <Compile Include="ViewModels\AddQuestionViewModel.cs" />
+    <Compile Include="ViewModels\Employees\EmployeeListViewModel.cs" />
+    <Compile Include="ViewModels\Employees\EmployeeViewModel.cs" />
+    <Compile Include="ViewModels\Employees\IEmployeeRepositoryFactory.cs" />
     <Compile Include="ViewModels\EntityViewModelBase.cs" />
     <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
@@ -194,6 +197,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Compile Include="ViewModels\Employees\EditEmployeeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
