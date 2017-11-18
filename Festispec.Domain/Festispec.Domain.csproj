@@ -66,8 +66,6 @@
     <Compile Include="EmployeeRole.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ExtendedTemplateQuestion.cs" />
-    <Compile Include="ExtendedQuestionType.cs" />
     <Compile Include="ExtendedQuestion.cs" />
     <Compile Include="Festispec.Context.cs">
       <AutoGen>True</AutoGen>

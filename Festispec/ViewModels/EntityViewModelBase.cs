@@ -6,8 +6,9 @@ using GalaSoft.MvvmLight;
 
 namespace Festispec.ViewModels
 {
-    public abstract class EntityViewModelBase<TRepositoryFactory, TEntity> : ViewModelBase, IEntityViewModel<TEntity>
-        where TRepositoryFactory : IRepositoryFactory<TEntity>
+    public abstract class EntityViewModelBase<TRepositoryFactory, TRepository, TEntity> : ViewModelBase, IEntityViewModel<TEntity>
+        where TRepositoryFactory : IRepositoryFactory<TRepository, TEntity>
+        where TRepository : IRepository<TEntity>
         where TEntity : class, new()
     {
         public TEntity Entity { get; }

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
 using GalaSoft.MvvmLight.Command;
@@ -9,7 +10,7 @@ using GalaSoft.MvvmLight.Command;
 namespace Festispec.ViewModels.Template
 {
     public class TemplateAddOrUpdateViewModel :
-        AddOrUpdateViewModelBase<ITemplateViewModelFactory, TemplateViewModel, Domain.Template>
+        AddOrUpdateViewModelBase<ITemplateViewModelFactory, TemplateViewModel, ITemplateRepository, Domain.Template>
     {
         private readonly ITemplateQuestionRepositoryFactory _templateQuestionRepositoryFactory;
 
@@ -47,17 +48,6 @@ namespace Festispec.ViewModels.Template
             if (NavigationService.CurrentPageKey != Routes.Routes.TemplateAddOrUpdate.Key) return;
 
             UpdateEntityViewModelFromNavigationParameter();
-            UpdateTemplateQuestionsFromNavigationParameter();
-        }
-
-        private void UpdateTemplateQuestionsFromNavigationParameter()
-        {
-            var templateQuestionViewModel = NavigationService.Parameter as TemplateQuestionViewModel;
-            if (templateQuestionViewModel == null) return;
-
-            var existing = EntityViewModel.Questions.SingleOrDefault(templateQuestion =>
-                templateQuestion.Id == templateQuestionViewModel.Id);
-            if (existing == null) EntityViewModel.Questions.Add(templateQuestionViewModel);
         }
 
         public override void Save()
@@ -66,7 +56,7 @@ namespace Festispec.ViewModels.Template
 
             EntityViewModel.Save();
 
-            NavigationService.GoBack(EntityViewModel);
+            GoBack(EntityViewModel);
         }
     }
 }

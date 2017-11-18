@@ -6,7 +6,7 @@ using Festispec.ViewModels.Factory.Interface;
 
 namespace Festispec.ViewModels.Template
 {
-    public class TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, Domain.Template>
+    public class TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, ITemplateRepository, Domain.Template>
     {
         private readonly ITemplateQuestionViewModelFactory _templateQuestionViewModelFactory;
 
@@ -82,24 +82,23 @@ namespace Festispec.ViewModels.Template
 
         public override void Save()
         {
-            // Map updated values
-//            Entity.Id = UpdatedEntity.Id;
-//            Entity.Name = UpdatedEntity.Name;
-//            Entity.Description = UpdatedEntity.Description;
-//            Entity.Questions = UpdatedEntity.Questions;
-
             Domain.Template updated;
             using (var templateRepository = RepositoryFactory.CreateRepository())
             {
-                updated = Entity.Id == 0 ? templateRepository.Add(Entity) : templateRepository.Update(Entity, Entity.Id);
+                updated = UpdatedEntity.Id == 0
+                    ? templateRepository.Add(UpdatedEntity)
+                    : templateRepository.Update(UpdatedEntity, UpdatedEntity.Id);
             }
 
+            // Map updated values
             Entity.Id = updated.Id;
             Entity.Name = updated.Name;
             Entity.Description = updated.Description;
 
             foreach (var templateQuestionViewModel in Questions)
             {
+                // Manually attach the template by id
+                templateQuestionViewModel.UpdatedEntity.Template_Id = Entity.Id;
                 templateQuestionViewModel.Save();
             }
         }

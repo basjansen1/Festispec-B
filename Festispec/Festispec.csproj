@@ -95,7 +95,7 @@
     </ApplicationDefinition>
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
-    <Compile Include="ViewModels\AddQuestionViewModel.cs" />
+    <Compile Include="ViewModels\Template\AddQuestionViewModel.cs" />
     <Compile Include="ViewModels\EntityViewModelBase.cs" />
     <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
