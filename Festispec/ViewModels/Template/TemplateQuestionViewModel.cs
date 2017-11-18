@@ -70,10 +70,18 @@ namespace Festispec.ViewModels.Template
 //            Entity.QuestionType = UpdatedEntity.QuestionType;
 //            Entity.Template = UpdatedEntity.Template;
 
+            TemplateQuestion updated;
             using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
             {
-                templateQuestionRepository.AddOrUpdate(Entity);
+                updated = UpdatedEntity.Id == 0
+                    ? templateQuestionRepository.Add(UpdatedEntity)
+                    : templateQuestionRepository.Update(UpdatedEntity, UpdatedEntity.Id);
             }
+
+            // Map updated values
+            Entity.Id = updated.Id;
+            Entity.Name = updated.Name;
+            Entity.Description = updated.Description;
         }
 
         public override void Delete()

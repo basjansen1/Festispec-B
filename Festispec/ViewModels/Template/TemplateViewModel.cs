@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
 
 namespace Festispec.ViewModels.Template
@@ -87,9 +88,19 @@ namespace Festispec.ViewModels.Template
 //            Entity.Description = UpdatedEntity.Description;
 //            Entity.Questions = UpdatedEntity.Questions;
 
+            Domain.Template updated;
             using (var templateRepository = RepositoryFactory.CreateRepository())
             {
-                var updated = templateRepository.AddOrUpdate(Entity);
+                updated = Entity.Id == 0 ? templateRepository.Add(Entity) : templateRepository.Update(Entity, Entity.Id);
+            }
+
+            Entity.Id = updated.Id;
+            Entity.Name = updated.Name;
+            Entity.Description = updated.Description;
+
+            foreach (var templateQuestionViewModel in Questions)
+            {
+                templateQuestionViewModel.Save();
             }
         }
 

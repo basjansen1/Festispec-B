@@ -30,20 +30,6 @@ namespace Festispec.ViewModels
         }
 
         public abstract void Save();
-//        {
-//            using (var repository = RepositoryFactory.CreateRepository())
-//            {
-//                // TODO: Implement AddOrUpdate in generic repository
-//                if (Entity.Id == 0)
-//                {
-//                    repository.Add(Entity);
-//                }
-//                else
-//                {
-//                    repository.Update(Entity, Entity.Id);
-//                }
-//            }
-//        }
 
         public virtual void Delete()
         {
@@ -52,6 +38,7 @@ namespace Festispec.ViewModels
                 repository.Delete(Entity);
             }
         }
+
         public abstract TEntity Copy();
     }
 }

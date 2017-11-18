@@ -14,6 +14,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -190,12 +191,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup />
   <ItemGroup>
     <Folder Include="ViewModels\Employees\" />
-    <Folder Include="Views\" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Festispec.Domain\Festispec.Domain.csproj">
       <Project>{09979796-e638-48d5-8666-fa0ac1f54a2e}</Project>

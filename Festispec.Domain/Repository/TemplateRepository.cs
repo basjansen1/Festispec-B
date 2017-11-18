@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Linq;
 using Festispec.Domain.Repository.Interface;
 
@@ -11,31 +10,9 @@ namespace Festispec.Domain.Repository
         {
         }
 
-
         public override IQueryable<Template> Get()
         {
-            return base.Get().Include(template => template.Questions.Select(question => question.QuestionType)).AsNoTracking();
-        }
-
-        public override Template AddOrUpdate(Template entity)
-        {
-            foreach (var templateQuestion in entity.Questions)
-            {
-                DbContext.Entry(templateQuestion.Template);
-                if (templateQuestion.IsDeleted)
-                {
-                    DbContext.Set<TemplateQuestion>().Remove(templateQuestion);
-                }
-                else
-                {
-                    if(DbContext.Set<QuestionType>().Local.Any(questionType => questionType.Type == templateQuestion.QuestionType.Type)) DbContext.Entry(templateQuestion.QuestionType).State = EntityState.Unchanged;
-                    DbContext.Set<TemplateQuestion>().AddOrUpdate(templateQuestion);
-                }
-                
-            }
-            DbContext.SaveChanges();
-
-            return base.AddOrUpdate(entity);
+            return base.Get().Include(template => template.Questions.Select(question => question.QuestionType));
         }
 
         public override int Delete(Template entity)
@@ -47,6 +24,13 @@ namespace Festispec.Domain.Repository
             }
 
             return base.Delete(entity);
+        }
+
+        public void AddQuestion(Template template, TemplateQuestion templateQuestion)
+        {
+            templateQuestion.Template = null;
+            template.Questions.Add(templateQuestion);
+            DbContext.SaveChanges();
         }
     }
 }

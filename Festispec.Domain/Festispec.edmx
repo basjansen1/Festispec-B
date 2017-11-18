@@ -724,6 +724,7 @@
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="true" />
           <NavigationProperty Name="QuestionType" Relationship="Festispec.QuestionTypeQuestion" FromRole="Question" ToRole="QuestionType" />
+          <Property Name="QuestionType_Type" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="QuestionType">
           <Key>
@@ -736,6 +737,14 @@
         <Association Name="QuestionTypeQuestion">
           <End Type="Festispec.QuestionType" Role="QuestionType" Multiplicity="1" />
           <End Type="Festispec.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionType">
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="QuestionType_Type" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityType Name="InspectionQuestion" BaseType="Festispec.Question" >
           <Property Name="Answer" Type="String" Nullable="true" />
@@ -743,6 +752,7 @@
         </EntityType>
         <EntityType Name="TemplateQuestion" BaseType="Festispec.Question" >
           <NavigationProperty Name="Template" Relationship="Festispec.TemplateTemplateQuestion" FromRole="TemplateQuestion" ToRole="Template" />
+          <Property Name="Template_Id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Template">
           <Key>
@@ -756,6 +766,14 @@
         <Association Name="TemplateTemplateQuestion">
           <End Type="Festispec.Template" Role="Template" Multiplicity="1" />
           <End Type="Festispec.TemplateQuestion" Role="TemplateQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateQuestion">
+              <PropertyRef Name="Template_Id" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <Association Name="PlanningInspectionQuestion">
           <End Type="Festispec.Planning" Role="Planning" Multiplicity="1" />
@@ -875,14 +893,16 @@
     <EntitySetMapping Name="Question">
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.Question)">
         <MappingFragment StoreEntitySet="Question">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="QuestionType_Type" ColumnName="QuestionType_Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.TemplateQuestion)">
         <MappingFragment StoreEntitySet="Question_TemplateQuestion">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Template_Id" ColumnName="Template_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.InspectionQuestion)">
@@ -954,22 +974,6 @@
         <ScalarProperty Name="Id" ColumnName="Manager_Id" />
       </EndProperty>
       <EndProperty Name="Employee">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="QuestionTypeQuestion" TypeName="Festispec.QuestionTypeQuestion" StoreEntitySet="Question">
-      <EndProperty Name="QuestionType">
-        <ScalarProperty Name="Type" ColumnName="QuestionType_Type" />
-      </EndProperty>
-      <EndProperty Name="Question">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="TemplateTemplateQuestion" TypeName="Festispec.TemplateTemplateQuestion" StoreEntitySet="Question_TemplateQuestion">
-      <EndProperty Name="Template">
-        <ScalarProperty Name="Id" ColumnName="Template_Id" />
-      </EndProperty>
-      <EndProperty Name="TemplateQuestion">
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>

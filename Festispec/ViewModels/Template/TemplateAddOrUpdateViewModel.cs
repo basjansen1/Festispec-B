@@ -66,12 +66,6 @@ namespace Festispec.ViewModels.Template
 
             EntityViewModel.Save();
 
-//            using (var templateQuestionRepository = _templateQuestionRepositoryFactory.CreateRepository())
-//            {
-//                foreach (var templateQuestion in EntityViewModel.UpdatedEntity.Questions)
-//                    templateQuestionRepository.AddOrUpdate(templateQuestion);
-//            }
-
             NavigationService.GoBack(EntityViewModel);
         }
     }

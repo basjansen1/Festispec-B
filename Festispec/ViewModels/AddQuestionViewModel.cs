@@ -58,9 +58,9 @@ namespace Festispec.ViewModels
 
         public override void Save()
         {
-            EntityViewModel.Entity.IsAdded = true;
+            //TODO: Validation
+
             EntityViewModel.Template.Questions.Add(EntityViewModel.Entity);
-//            EntityViewModel.Save();
 
             NavigationService.GoBack(_templateViewModel);
         }
