@@ -17,6 +17,7 @@ namespace Festispec.Domain
         public int Id { get; set; }
         public System.DateTime NotAvailableFrom { get; set; }
         public System.DateTime NotAvailableTo { get; set; }
+        public int Inspector_Id { get; set; }
     
         public virtual Inspector Inspector { get; set; }
     }

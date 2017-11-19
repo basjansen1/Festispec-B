@@ -591,6 +591,8 @@
           <Property Name="Password" Type="String" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="Festispec.EmployeeManager" FromRole="Manager_Id" ToRole="Employee" />
           <NavigationProperty Name="Manager" Relationship="Festispec.EmployeeManager" FromRole="Employee" ToRole="Manager_Id" />
+          <Property Name="Role_Role" Type="String" Nullable="false" MaxLength="64" />
+          <Property Name="Manager_Id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="EmployeeRole">
           <Key>
@@ -602,6 +604,14 @@
         <Association Name="EmployeeRoleEmployee">
           <End Type="Festispec.EmployeeRole" Role="EmployeeRole" Multiplicity="1" />
           <End Type="Festispec.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeRole">
+              <PropertyRef Name="Role" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Role_Role" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityType Name="Inspector" BaseType="Festispec.Employee">
           <Property Name="CertificationFrom" Type="DateTime" Nullable="false" />
@@ -617,10 +627,19 @@
           <Property Name="NotAvailableFrom" Type="DateTime" Nullable="false" />
           <Property Name="NotAvailableTo" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Inspector" Relationship="Festispec.InspectorSchedule" FromRole="Schedule" ToRole="Inspector" />
+          <Property Name="Inspector_Id" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="InspectorSchedule">
           <End Type="Festispec.Inspector" Role="Inspector" Multiplicity="1" />
           <End Type="Festispec.Schedule" Role="Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="Inspector_Id" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityType Name="Customer" BaseType="Festispec.Contact">
           <Property Name="KVK" Type="String" Nullable="false" />
@@ -634,10 +653,19 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Content" Type="String" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Festispec.CustomerNote" FromRole="Note" ToRole="Customer" />
+          <Property Name="Customer_Id" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="CustomerNote">
           <End Type="Festispec.Customer" Role="Customer" Multiplicity="1" />
           <End Type="Festispec.Note" Role="Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityType Name="Inspection" BaseType="Festispec.Address" >
           <Property Name="Name" Type="String" Nullable="false" />
@@ -647,6 +675,7 @@
           <NavigationProperty Name="Status" Relationship="Festispec.InspectionStatusInspection" FromRole="Inspection" ToRole="InspectionStatus" />
           <NavigationProperty Name="Customers" Relationship="Festispec.CustomerInspection" FromRole="Inspection" ToRole="Customer" />
           <NavigationProperty Name="Planning" Relationship="Festispec.InspectionPlanning" FromRole="Inspection" ToRole="Planning" />
+          <Property Name="Status_Status" Type="String" Nullable="false" MaxLength="128" />
         </EntityType>
         <EntityType Name="InspectionStatus">
           <Key>
@@ -658,6 +687,14 @@
         <Association Name="InspectionStatusInspection">
           <End Type="Festispec.InspectionStatus" Role="InspectionStatus" Multiplicity="1" />
           <End Type="Festispec.Inspection" Role="Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InspectionStatus">
+              <PropertyRef Name="Status" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Status_Status" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <Association Name="CustomerInspection">
           <End Type="Festispec.Customer" Role="Customer" Multiplicity="*" />
@@ -706,6 +743,14 @@
         <Association Name="EmployeeManager">
           <End Type="Festispec.Employee" Role="Manager_Id" Multiplicity="1" />
           <End Type="Festispec.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manager_Id">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Manager_Id" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityType Name="Regulation">
           <Key>
@@ -724,6 +769,7 @@
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="true" />
           <NavigationProperty Name="QuestionType" Relationship="Festispec.QuestionTypeQuestion" FromRole="Question" ToRole="QuestionType" />
+          <Property Name="QuestionType_Type" Type="String" Nullable="false" MaxLength="64" />
         </EntityType>
         <EntityType Name="QuestionType">
           <Key>
@@ -736,13 +782,25 @@
         <Association Name="QuestionTypeQuestion">
           <End Type="Festispec.QuestionType" Role="QuestionType" Multiplicity="1" />
           <End Type="Festispec.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionType">
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="QuestionType_Type" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityType Name="InspectionQuestion" BaseType="Festispec.Question" >
           <Property Name="Answer" Type="String" Nullable="true" />
           <NavigationProperty Name="Planning" Relationship="Festispec.PlanningInspectionQuestion" FromRole="InspectionQuestion" ToRole="Planning" />
+          <Property Name="Planning_Inspection_Id" Type="Int32" Nullable="false" />
+          <Property Name="Planning_Inspector_Id" Type="Int32" Nullable="false" />
+          <Property Name="Planning_Date" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="TemplateQuestion" BaseType="Festispec.Question" >
           <NavigationProperty Name="Template" Relationship="Festispec.TemplateTemplateQuestion" FromRole="TemplateQuestion" ToRole="Template" />
+          <Property Name="Template_Id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Template">
           <Key>
@@ -756,10 +814,30 @@
         <Association Name="TemplateTemplateQuestion">
           <End Type="Festispec.Template" Role="Template" Multiplicity="1" />
           <End Type="Festispec.TemplateQuestion" Role="TemplateQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateQuestion">
+              <PropertyRef Name="Template_Id" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <Association Name="PlanningInspectionQuestion">
           <End Type="Festispec.Planning" Role="Planning" Multiplicity="1" />
           <End Type="Festispec.InspectionQuestion" Role="InspectionQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Inspection_Id" />
+              <PropertyRef Name="Inspector_Id" />
+              <PropertyRef Name="Date" />
+            </Principal>
+            <Dependent Role="InspectionQuestion">
+              <PropertyRef Name="Planning_Inspection_Id" />
+              <PropertyRef Name="Planning_Inspector_Id" />
+              <PropertyRef Name="Planning_Date" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -791,7 +869,9 @@
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.Employee)">
         <MappingFragment StoreEntitySet="Address_Employee">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Manager_Id" ColumnName="Manager_Id" />
+                <ScalarProperty Name="Role_Role" ColumnName="Role_Role" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
         </MappingFragment>
@@ -811,7 +891,8 @@
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.Inspection)">
         <MappingFragment StoreEntitySet="Address_Inspection">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Status_Status" ColumnName="Status_Status" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Website" ColumnName="Website" />
           <ScalarProperty Name="Start" ColumnName="Start" />
@@ -829,7 +910,8 @@
     <EntitySetMapping Name="Schedule">
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.Schedule)">
         <MappingFragment StoreEntitySet="Schedule">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Inspector_Id" ColumnName="Inspector_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="NotAvailableFrom" ColumnName="NotAvailableFrom" />
           <ScalarProperty Name="NotAvailableTo" ColumnName="NotAvailableTo" />
         </MappingFragment>
@@ -838,7 +920,8 @@
     <EntitySetMapping Name="Note">
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.Note)">
         <MappingFragment StoreEntitySet="Note">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Content" ColumnName="Content" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -875,19 +958,24 @@
     <EntitySetMapping Name="Question">
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.Question)">
         <MappingFragment StoreEntitySet="Question">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="QuestionType_Type" ColumnName="QuestionType_Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.TemplateQuestion)">
         <MappingFragment StoreEntitySet="Question_TemplateQuestion">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Template_Id" ColumnName="Template_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.InspectionQuestion)">
         <MappingFragment StoreEntitySet="Question_InspectionQuestion">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Planning_Date" ColumnName="Planning_Date" />
+                <ScalarProperty Name="Planning_Inspector_Id" ColumnName="Planning_Inspector_Id" />
+                <ScalarProperty Name="Planning_Inspection_Id" ColumnName="Planning_Inspection_Id" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Answer" ColumnName="Answer" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -909,78 +997,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="EmployeeRoleEmployee" TypeName="Festispec.EmployeeRoleEmployee" StoreEntitySet="Address_Employee">
-      <EndProperty Name="EmployeeRole">
-        <ScalarProperty Name="Role" ColumnName="Role_Role" />
-      </EndProperty>
-      <EndProperty Name="Employee">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="InspectorSchedule" TypeName="Festispec.InspectorSchedule" StoreEntitySet="Schedule">
-      <EndProperty Name="Inspector">
-        <ScalarProperty Name="Id" ColumnName="Inspector_Id" />
-      </EndProperty>
-      <EndProperty Name="Schedule">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="CustomerNote" TypeName="Festispec.CustomerNote" StoreEntitySet="Note">
-      <EndProperty Name="Customer">
-        <ScalarProperty Name="Id" ColumnName="Customer_Id" />
-      </EndProperty>
-      <EndProperty Name="Note">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="InspectionStatusInspection" TypeName="Festispec.InspectionStatusInspection" StoreEntitySet="Address_Inspection">
-      <EndProperty Name="InspectionStatus">
-        <ScalarProperty Name="Status" ColumnName="Status_Status" />
-      </EndProperty>
-      <EndProperty Name="Inspection">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
     <AssociationSetMapping Name="CustomerInspection" TypeName="Festispec.CustomerInspection" StoreEntitySet="CustomerInspection">
       <EndProperty Name="Customer">
         <ScalarProperty Name="Id" ColumnName="Customers_Id" />
       </EndProperty>
       <EndProperty Name="Inspection">
         <ScalarProperty Name="Id" ColumnName="Inspections_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="EmployeeEmployee" TypeName="Festispec.EmployeeManager" StoreEntitySet="Address_Employee">
-      <EndProperty Name="Manager_Id">
-        <ScalarProperty Name="Id" ColumnName="Manager_Id" />
-      </EndProperty>
-      <EndProperty Name="Employee">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="QuestionTypeQuestion" TypeName="Festispec.QuestionTypeQuestion" StoreEntitySet="Question">
-      <EndProperty Name="QuestionType">
-        <ScalarProperty Name="Type" ColumnName="QuestionType_Type" />
-      </EndProperty>
-      <EndProperty Name="Question">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="TemplateTemplateQuestion" TypeName="Festispec.TemplateTemplateQuestion" StoreEntitySet="Question_TemplateQuestion">
-      <EndProperty Name="Template">
-        <ScalarProperty Name="Id" ColumnName="Template_Id" />
-      </EndProperty>
-      <EndProperty Name="TemplateQuestion">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="PlanningInspectionQuestion" TypeName="Festispec.PlanningInspectionQuestion" StoreEntitySet="Question_InspectionQuestion">
-      <EndProperty Name="Planning">
-        <ScalarProperty Name="Inspection_Id" ColumnName="Planning_Inspection_Id" />
-        <ScalarProperty Name="Inspector_Id" ColumnName="Planning_Inspector_Id" />
-        <ScalarProperty Name="Date" ColumnName="Planning_Date" />
-      </EndProperty>
-      <EndProperty Name="InspectionQuestion">
-        <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

@@ -25,6 +25,7 @@ namespace Festispec.Domain
         public string Website { get; set; }
         public System.DateTime Start { get; set; }
         public System.DateTime End { get; set; }
+        public string Status_Status { get; set; }
     
         public virtual InspectionStatus Status { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
