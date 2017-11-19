@@ -1,9 +1,9 @@
 ﻿CREATE TABLE [dbo].[Address_Employee] (
     [Username]   NVARCHAR (MAX) NOT NULL,
     [Password]   NVARCHAR (MAX) NOT NULL,
-    [Id]         INT            NOT NULL,
     [Role_Role]  NVARCHAR (64)  NOT NULL,
     [Manager_Id] INT            NOT NULL,
+    [Id]         INT            NOT NULL,
     CONSTRAINT [PK_Address_Employee] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_Employee_inherits_Contact] FOREIGN KEY ([Id]) REFERENCES [dbo].[Address_Contact] ([Id]) ON DELETE CASCADE,
     CONSTRAINT [FK_EmployeeManager] FOREIGN KEY ([Manager_Id]) REFERENCES [dbo].[Address_Employee] ([Id]),
