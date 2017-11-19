@@ -44,7 +44,10 @@ namespace Festispec.ViewModels
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 Application.Current.MainWindow.Close();
-                
+            }
+            else
+            {
+                MessageBox.Show("Gebruikersnaam of wachtwoord is verkeerd");
             }
 
         }
