@@ -17,7 +17,6 @@ namespace Festispec.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Inspection()
         {
-            this.Customers = new HashSet<Customer>();
             this.Planning = new HashSet<Planning>();
         }
     
@@ -26,10 +25,10 @@ namespace Festispec.Domain
         public System.DateTime Start { get; set; }
         public System.DateTime End { get; set; }
         public string Status_Status { get; set; }
+        public int Customer_Id { get; set; }
     
         public virtual InspectionStatus Status { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual Customer Customers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Planning> Planning { get; set; }
     }
