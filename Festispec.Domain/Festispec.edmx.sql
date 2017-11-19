@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/19/2017 14:26:12
+-- Date Created: 11/19/2017 17:07:55
 -- Generated from EDMX file: C:\Workspace\Avans\Projects\42IN06SOb\Festispec\Festispec.Domain\Festispec.edmx
 -- --------------------------------------------------
 
@@ -236,7 +236,7 @@ CREATE TABLE [dbo].[Address_Employee] (
     [Username] nvarchar(max)  NOT NULL,
     [Password] nvarchar(max)  NOT NULL,
     [Role_Role] nvarchar(64)  NOT NULL,
-    [Manager_Id] int  NOT NULL,
+    [Manager_Id] int  NULL,
     [Id] int  NOT NULL
 );
 GO

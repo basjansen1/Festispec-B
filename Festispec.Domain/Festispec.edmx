@@ -204,7 +204,7 @@
     <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Role_Role" Type="nvarchar" Nullable="false" MaxLength="64" />
-    <Property Name="Manager_Id" Type="int" Nullable="false" />
+    <Property Name="Manager_Id" Type="int" Nullable="true" />
     <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Address_Inspector">
@@ -337,7 +337,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="EmployeeManager">
-    <End Role="Manager_Id" Type="Festispec.Store.Address_Employee" Multiplicity="1" />
+    <End Role="Manager_Id" Type="Festispec.Store.Address_Employee" Multiplicity="0..1" />
     <End Role="Employee" Type="Festispec.Store.Address_Employee" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Manager_Id">
@@ -575,7 +575,7 @@
           <NavigationProperty Name="Employees" Relationship="Festispec.EmployeeManager" FromRole="Manager_Id" ToRole="Employee" />
           <NavigationProperty Name="Manager" Relationship="Festispec.EmployeeManager" FromRole="Employee" ToRole="Manager_Id" />
           <Property Name="Role_Role" Type="String" Nullable="false" MaxLength="64" />
-          <Property Name="Manager_Id" Type="Int32" Nullable="false" />
+          <Property Name="Manager_Id" Type="Int32" Nullable="true" />
         </EntityType>
         <EntityType Name="EmployeeRole">
           <Key>
@@ -734,7 +734,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="EmployeeManager">
-          <End Type="Festispec.Employee" Role="Manager_Id" Multiplicity="1" />
+          <End Type="Festispec.Employee" Role="Manager_Id" Multiplicity="0..1" />
           <End Type="Festispec.Employee" Role="Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Manager_Id">
