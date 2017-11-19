@@ -19,20 +19,20 @@ INSERT INTO [dbo].[Address] ([Id], [Street], [HouseNumber], [PostalCode], [City]
 INSERT INTO [dbo].[Address] ([Id], [Street], [HouseNumber], [PostalCode], [City], [Country], [Municipality], [Location], [Long], [Lat]) VALUES (18, N'Oostbroekerweg', N'2', N'1981LR', N'Velsen-Zuid', N'Nederland', N'Velsen', geography::STGeomFromText('POINT(4.67034 52.44816)', 4326), N'4.67034', N'52.44816') -- Dutch Valley
 SET IDENTITY_INSERT [dbo].[Address] OFF
 
-INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Henk', N'Randers', N'haha@hotmail.com', N'072-5837294', N'NL74RABO0118236819', 1)
-INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Tom', N'Frans', N'hooppdle@hotmail.com', N'072-5837294', N'NL74RABO0118236819', 2)
-INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Henk', N'Randers', N'haha@hotmail.com', N'072-5837294', N'NL74RABO01181356319', 3)
-INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Frans', N'Middel', N'hegf@hotmail.com', N'072-58342454', N'NL74RABO0115676819', 4)
-INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Kam', N'Randers', N'gdeed@hotmail.com', N'072-58341234', N'NL74RABO013455619', 5)
-INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Frans', N'Ham', N'rtyg@hotmail.com', N'072-5676294', N'NL74RABO0118567619', 6)
-INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Rick', N'Mande', N'ujtr@hotmail.com', N'072-5865394', N'NL74RABO0114565819', 7)
-INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Pim', N'Lenss', N'bvng@hotmail.com', N'072-5837544', N'NL74RABO011826769', 8)
-INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Pim', N'Lenss', N'bvng@hotmail.com', N'072-5837544', N'NL74RABO011826769', 9)
-INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Pim', N'Lenss', N'bvng@hotmail.com', N'072-5837544', N'NL74RABO011826769', 10)
-INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Hans', N'Slijkk', N'uityd@hotmail.com', N'072-588764', N'NL74RABO0118276549', 11)  -- Paaspop
-INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Hans', N'Slijkk', N'uityd@hotmail.com', N'072-588764', N'NL74RABO0118276549', 13) -- Festyland
-INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Hans', N'Slijkk', N'uityd@hotmail.com', N'072-588764', N'NL74RABO0118276549', 15) -- Mysteryland
-INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Hans', N'Slijkk', N'uityd@hotmail.com', N'072-588764', N'NL74RABO0118276549', 17) -- Dutch Valley
+INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Minke', N'Achterkamp', N'minke.achterkamp@festispec.nl', N'06-51712894', N'NL26RABO0367742883', 1)
+INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Lucinde', N'Wijnman', N'lucinde.wijnman@festispec.nl', N'06-88462703', N'NL78SNSB0638135273', 2)
+INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Pieter', N'Kaspers', N'pieter.kaspers@gmail.com', N'06-61249971', N'NL77ABNA0506660438', 3)
+INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Katy', N'Fase', N'katy.fase@gmail.com', N'06-61380229', N'NL42RABO0134854713', 4)
+INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Luke', N'Rotman', N'luke.rotman@gmail.com', N'06-38659203', N'NL21ABNA0993190748', 5)
+INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'David', N'Wiedijk', N'david.wiedijk@festispec.com', N'06-18303291', N'NL82SNSB0966021003', 6)
+INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Niels', N'Voeren', N'niels.voeren@festispec.com', N'06-69128949', N'NL54RABO0302000241', 7)
+INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Kevin', N'Langeweg', N'kevin.langeweg@festispec.com', N'06-56072857', N'NL61ABNA0808266803', 8)
+INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Anne', N'Goorhuis', N'anne.goorhuis@gmail.com', N'06-76441316', N'NL70ABNA0499437556', 9)
+INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Kim', N'Goossens', N'kim.goossens@gmail.com', N'06-76995509', N'NL96ABNA0984187022', 10)
+INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Suzan', N'Huijzer', N'suzan.huijzer@paaspop.nl', N'072-588764', null, 11) -- Paaspop
+INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Floyd', N'Wildenberg', N'floyd.wildenberg@festyland.nl', N'072-396734', null, 13) -- Festyland
+INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Paul', N'Lagendijk', N'paul.lagendijk@mysteryland.nl', N'020-893846', null, 15) -- Mysteryland
+INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Niko', N'Snoek', N'niko.snoek@dutchvalley.nl', N'020-632479', null, 17) -- Dutch Valley
 
 INSERT INTO [dbo].[Address_Customer] ([Name], [KVK], [Id]) VALUES (N'Paaspop', N'KVKNoClue', 11)  -- Paaspop
 INSERT INTO [dbo].[Address_Customer] ([Name], [KVK], [Id]) VALUES (N'Festyland', N'KVKWattes', 13) -- Festyland
@@ -43,16 +43,16 @@ INSERT INTO [dbo].[EmployeeRole] ([Role]) VALUES (N'Manager')
 INSERT INTO [dbo].[EmployeeRole] ([Role]) VALUES (N'Medewerker')
 INSERT INTO [dbo].[EmployeeRole] ([Role]) VALUES (N'Inspecteur')
 
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'UsernameN', N'123', 1, N'Manager', null)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'UsernameLW', N'woord', 2, N'Medewerker', 1)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'UsernameNW', N'woord123', 3, N'Inspecteur', 1)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'UsernameUW', N'WOORD', 4, N'Inspecteur', 1)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'UsernameLWS', N'woord!', 5, N'Inspecteur', 1)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'UsernameUWS', N'WOORD!', 6, N'Manager', null)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'UsernameUWS', N'WOORD!', 7, N'Medewerker', 2)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'UsernameUWS', N'WOORD!', 8, N'Medewerker', 2)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'UsernameUWS', N'WOORD!', 9, N'Inspecteur', 2)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'UsernameUWS', N'WOORD!', 10, N'Inspecteur', 2)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'Minke', N'Minke123', 1, N'Manager', null)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'Lucinde', N'Lucinde123', 2, N'Medewerker', 1)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'Pieter', N'Pieter123', 3, N'Inspecteur', 1)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'Katy', N'Katy123', 4, N'Inspecteur', 1)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'Luke', N'Luke123', 5, N'Inspecteur', 1)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'david', N'david123', 6, N'Manager', null)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'Niels', N'Niels123', 7, N'Medewerker', 2)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'Kevin', N'Kevin123', 8, N'Medewerker', 2)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'Anne', N'Anne123', 9, N'Inspecteur', 2)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id]) VALUES (N'Kim', N'Kim123', 10, N'Inspecteur', 2)
 
 INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'Accepted')
 INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'Declined')
