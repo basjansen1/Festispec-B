@@ -5,16 +5,16 @@ using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository
 {
-    internal class LoginRepository : RepositoryBase<Employee>, ILoginRepository
+    public class LoginRepository : RepositoryBase<Employee>, ILoginRepository
     {
         public LoginRepository(DbContext dbContext) : base(dbContext)
         {
 
         }
 
-        public void tryLogin()
+        public void TryLogin(Expression<Func<Employee, bool>> employee)
         {
-            
+            Find(employee);
         }
     }
 }

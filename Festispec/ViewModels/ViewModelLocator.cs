@@ -89,7 +89,7 @@ namespace Festispec.ViewModels
         public TemplateListViewModel TemplateList => ServiceLocator.Current.GetInstance<TemplateListViewModel>();
         public TemplateAddOrUpdateViewModel TemplateAddOrUpdate => ServiceLocator.Current.GetInstance<TemplateAddOrUpdateViewModel>();
         public AddQuestionViewModel AddQuestion => ServiceLocator.Current.GetInstance<AddQuestionViewModel>();
-
+        public LoginViewModel LoginViewModel => ServiceLocator.Current.GetInstance<LoginViewModel>();
         #endregion
 
         #region ViewModels
