@@ -577,6 +577,9 @@
           <Property Name="City" Type="String" Nullable="false" />
           <Property Name="Country" Type="String" Nullable="false" />
           <Property Name="Municipality" Type="String" Nullable="false" />
+          <Property Name="Location" Type="Geography" Nullable="false" />
+          <Property Name="Long" Type="Double" Nullable="false" />
+          <Property Name="Lat" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="Contact" BaseType="Festispec.Address">
           <Property Name="FirstName" Type="String" Nullable="true" />
@@ -645,6 +648,7 @@
           <Property Name="KVK" Type="String" Nullable="false" />
           <NavigationProperty Name="Notes" Relationship="Festispec.CustomerNote" FromRole="Customer" ToRole="Note" />
           <NavigationProperty Name="Inspections" Relationship="Festispec.CustomerInspection" FromRole="Customer" ToRole="Inspection" />
+          <Property Name="Name" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Note">
           <Key>
@@ -713,7 +717,7 @@
           <Property Name="Date" Type="DateTime" Nullable="false" />
           <Property Name="TimeFrom" Type="Time" Nullable="false" />
           <Property Name="TimeTo" Type="Time" Nullable="false" />
-          <Property Name="Hours" Type="Int32" Nullable="true" />
+          <Property Name="Hours" Type="Time" Nullable="true" />
           <NavigationProperty Name="Questions" Relationship="Festispec.PlanningInspectionQuestion" FromRole="Planning" ToRole="InspectionQuestion" />
         </EntityType>
         <Association Name="InspectionPlanning">

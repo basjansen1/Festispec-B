@@ -21,5 +21,8 @@ namespace Festispec.Domain
         public string City { get; set; }
         public string Country { get; set; }
         public string Municipality { get; set; }
+        public System.Data.Entity.Spatial.DbGeography Location { get; set; }
+        public double Long { get; set; }
+        public double Lat { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace Festispec.Domain
         public System.DateTime Date { get; set; }
         public System.TimeSpan TimeFrom { get; set; }
         public System.TimeSpan TimeTo { get; set; }
-        public Nullable<int> Hours { get; set; }
+        public Nullable<System.TimeSpan> Hours { get; set; }
     
         public virtual Inspection Inspection { get; set; }
         public virtual Inspector Inspector { get; set; }
