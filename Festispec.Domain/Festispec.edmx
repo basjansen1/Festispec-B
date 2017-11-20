@@ -4,489 +4,490 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Festispec.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="FestispecStoreContainer">
-    <EntitySet Name="Address" EntityType="Festispec.Store.Address" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="EmployeeRole" EntityType="Festispec.Store.EmployeeRole" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Schedule" EntityType="Festispec.Store.Schedule" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Note" EntityType="Festispec.Store.Note" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="InspectionStatus" EntityType="Festispec.Store.InspectionStatus" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Planning" EntityType="Festispec.Store.Planning" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Regulation" EntityType="Festispec.Store.Regulation" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Question" EntityType="Festispec.Store.Question" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="QuestionType" EntityType="Festispec.Store.QuestionType" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Template" EntityType="Festispec.Store.Template" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Address_Contact" EntityType="Festispec.Store.Address_Contact" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Address_Employee" EntityType="Festispec.Store.Address_Employee" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Address_Inspector" EntityType="Festispec.Store.Address_Inspector" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Address_Customer" EntityType="Festispec.Store.Address_Customer" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Address_Inspection" EntityType="Festispec.Store.Address_Inspection" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Question_TemplateQuestion" EntityType="Festispec.Store.Question_TemplateQuestion" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Question_InspectionQuestion" EntityType="Festispec.Store.Question_InspectionQuestion" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="EmployeeRoleEmployee" Association="Festispec.Store.EmployeeRoleEmployee">
-      <End Role="EmployeeRole" EntitySet="EmployeeRole" />
-      <End Role="Employee" EntitySet="Address_Employee" />
-    </AssociationSet>
-    <AssociationSet Name="InspectorSchedule" Association="Festispec.Store.InspectorSchedule">
-      <End Role="Inspector" EntitySet="Address_Inspector" />
-      <End Role="Schedule" EntitySet="Schedule" />
-    </AssociationSet>
-    <AssociationSet Name="CustomerNote" Association="Festispec.Store.CustomerNote">
-      <End Role="Customer" EntitySet="Address_Customer" />
-      <End Role="Note" EntitySet="Note" />
-    </AssociationSet>
-    <AssociationSet Name="InspectionStatusInspection" Association="Festispec.Store.InspectionStatusInspection">
-      <End Role="InspectionStatus" EntitySet="InspectionStatus" />
-      <End Role="Inspection" EntitySet="Address_Inspection" />
-    </AssociationSet>
-    <AssociationSet Name="CustomerInspection" Association="Festispec.Store.CustomerInspection">
-      <End Role="Customer" EntitySet="Address_Customer" />
-      <End Role="Inspection" EntitySet="Address_Inspection" />
-    </AssociationSet>
-    <AssociationSet Name="InspectionPlanning" Association="Festispec.Store.InspectionPlanning">
-      <End Role="Inspection" EntitySet="Address_Inspection" />
-      <End Role="Planning" EntitySet="Planning" />
-    </AssociationSet>
-    <AssociationSet Name="InspectorPlanning" Association="Festispec.Store.InspectorPlanning">
-      <End Role="Inspector" EntitySet="Address_Inspector" />
-      <End Role="Planning" EntitySet="Planning" />
-    </AssociationSet>
-    <AssociationSet Name="EmployeeEmployee" Association="Festispec.Store.EmployeeManager">
-      <End Role="Manager_Id" EntitySet="Address_Employee" />
-      <End Role="Employee" EntitySet="Address_Employee" />
-    </AssociationSet>
-    <AssociationSet Name="QuestionTypeQuestion" Association="Festispec.Store.QuestionTypeQuestion">
-      <End Role="QuestionType" EntitySet="QuestionType" />
-      <End Role="Question" EntitySet="Question" />
-    </AssociationSet>
-    <AssociationSet Name="TemplateTemplateQuestion" Association="Festispec.Store.TemplateTemplateQuestion">
-      <End Role="Template" EntitySet="Template" />
-      <End Role="TemplateQuestion" EntitySet="Question_TemplateQuestion" />
-    </AssociationSet>
-    <AssociationSet Name="PlanningInspectionQuestion" Association="Festispec.Store.PlanningInspectionQuestion">
-      <End Role="Planning" EntitySet="Planning" />
-      <End Role="InspectionQuestion" EntitySet="Question_InspectionQuestion" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Contact_inherits_Address" Association="Festispec.Store.FK_Contact_inherits_Address">
-      <End Role="Address" EntitySet="Address" />
-      <End Role="Contact" EntitySet="Address_Contact" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Employee_inherits_Contact" Association="Festispec.Store.FK_Employee_inherits_Contact">
-      <End Role="Contact" EntitySet="Address_Contact" />
-      <End Role="Employee" EntitySet="Address_Employee" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Inspector_inherits_Employee" Association="Festispec.Store.FK_Inspector_inherits_Employee">
-      <End Role="Employee" EntitySet="Address_Employee" />
-      <End Role="Inspector" EntitySet="Address_Inspector" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Customer_inherits_Contact" Association="Festispec.Store.FK_Customer_inherits_Contact">
-      <End Role="Contact" EntitySet="Address_Contact" />
-      <End Role="Customer" EntitySet="Address_Customer" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Inspection_inherits_Address" Association="Festispec.Store.FK_Inspection_inherits_Address">
-      <End Role="Address" EntitySet="Address" />
-      <End Role="Inspection" EntitySet="Address_Inspection" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TemplateQuestion_inherits_Question" Association="Festispec.Store.FK_TemplateQuestion_inherits_Question">
-      <End Role="Question" EntitySet="Question" />
-      <End Role="TemplateQuestion" EntitySet="Question_TemplateQuestion" />
-    </AssociationSet>
-    <AssociationSet Name="FK_InspectionQuestion_inherits_Question" Association="Festispec.Store.FK_InspectionQuestion_inherits_Question">
-      <End Role="Question" EntitySet="Question" />
-      <End Role="InspectionQuestion" EntitySet="Question_InspectionQuestion" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Address">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Street" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="HouseNumber" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PostalCode" Type="nvarchar" Nullable="false" MaxLength="6" />
-    <Property Name="City" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Municipality" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Location" Type="geography" Nullable="false" SRID="4326" />
-    <Property Name="Long" Type="float" Nullable="false" />
-    <Property Name="Lat" Type="float" Nullable="false" />
-  </EntityType>
-  <EntityType Name="EmployeeRole">
-    <Key>
-      <PropertyRef Name="Role" />
-    </Key>
-    <Property Name="Role" Type="nvarchar" Nullable="false" MaxLength="64" />
-  </EntityType>
-  <EntityType Name="Schedule">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="NotAvailableFrom" Type="datetime" Nullable="false" />
-    <Property Name="NotAvailableTo" Type="datetime" Nullable="false" />
-    <Property Name="Inspector_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Note">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Customer_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="InspectionStatus">
-    <Key>
-      <PropertyRef Name="Status" />
-    </Key>
-    <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="128" />
-  </EntityType>
-  <EntityType Name="Planning">
-    <Key>
-      <PropertyRef Name="Inspection_Id" />
-      <PropertyRef Name="Inspector_Id" />
-      <PropertyRef Name="Date" />
-    </Key>
-    <Property Name="Inspection_Id" Type="int" Nullable="false" />
-    <Property Name="Inspector_Id" Type="int" Nullable="false" />
-    <Property Name="Date" Type="datetime" Nullable="false" />
-    <Property Name="TimeFrom" Type="time" Nullable="false" />
-    <Property Name="TimeTo" Type="time" Nullable="false" />
-    <Property Name="Hours" Type="time" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Regulation">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Municipality" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Question">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="QuestionType_Type" Type="nvarchar" Nullable="false" MaxLength="64" />
-  </EntityType>
-  <EntityType Name="QuestionType">
-    <Key>
-      <PropertyRef Name="Type" />
-    </Key>
-    <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="64" />
-    <Property Name="Metadata" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Template">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Address_Contact">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="FirstName" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Telephone" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="IBAN" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Address_Employee">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Role_Role" Type="nvarchar" Nullable="false" MaxLength="64" />
-    <Property Name="Manager_Id" Type="int" Nullable="true" />
-    <Property Name="Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Address_Inspector">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="CertificationFrom" Type="datetime" Nullable="false" />
-    <Property Name="CertificationTo" Type="datetime" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Address_Customer">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="KVK" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Address_Inspection">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Website" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Start" Type="datetime" Nullable="false" />
-    <Property Name="End" Type="datetime" Nullable="false" />
-    <Property Name="Status_Status" Type="nvarchar" Nullable="false" MaxLength="128" />
-    <Property Name="Customer_Id" Type="int" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Question_TemplateQuestion">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Template_Id" Type="int" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Question_InspectionQuestion">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Answer" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Planning_Inspection_Id" Type="int" Nullable="false" />
-    <Property Name="Planning_Inspector_Id" Type="int" Nullable="false" />
-    <Property Name="Planning_Date" Type="datetime" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="EmployeeRoleEmployee">
-    <End Role="EmployeeRole" Type="Festispec.Store.EmployeeRole" Multiplicity="1" />
-    <End Role="Employee" Type="Festispec.Store.Address_Employee" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EmployeeRole">
-        <PropertyRef Name="Role" />
-      </Principal>
-      <Dependent Role="Employee">
-        <PropertyRef Name="Role_Role" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="InspectorSchedule">
-    <End Role="Inspector" Type="Festispec.Store.Address_Inspector" Multiplicity="1" />
-    <End Role="Schedule" Type="Festispec.Store.Schedule" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Inspector">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Schedule">
-        <PropertyRef Name="Inspector_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CustomerNote">
-    <End Role="Customer" Type="Festispec.Store.Address_Customer" Multiplicity="1" />
-    <End Role="Note" Type="Festispec.Store.Note" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Note">
-        <PropertyRef Name="Customer_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="InspectionStatusInspection">
-    <End Role="InspectionStatus" Type="Festispec.Store.InspectionStatus" Multiplicity="1" />
-    <End Role="Inspection" Type="Festispec.Store.Address_Inspection" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="InspectionStatus">
-        <PropertyRef Name="Status" />
-      </Principal>
-      <Dependent Role="Inspection">
-        <PropertyRef Name="Status_Status" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CustomerInspection">
-    <End Role="Customer" Type="Festispec.Store.Address_Customer" Multiplicity="1" />
-    <End Role="Inspection" Type="Festispec.Store.Address_Inspection" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Inspection">
-        <PropertyRef Name="Customer_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="InspectionPlanning">
-    <End Role="Inspection" Type="Festispec.Store.Address_Inspection" Multiplicity="1" />
-    <End Role="Planning" Type="Festispec.Store.Planning" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Inspection">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Planning">
-        <PropertyRef Name="Inspection_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="InspectorPlanning">
-    <End Role="Inspector" Type="Festispec.Store.Address_Inspector" Multiplicity="1" />
-    <End Role="Planning" Type="Festispec.Store.Planning" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Inspector">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Planning">
-        <PropertyRef Name="Inspector_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="EmployeeManager">
-    <End Role="Manager_Id" Type="Festispec.Store.Address_Employee" Multiplicity="0..1" />
-    <End Role="Employee" Type="Festispec.Store.Address_Employee" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Manager_Id">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Employee">
-        <PropertyRef Name="Manager_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="QuestionTypeQuestion">
-    <End Role="QuestionType" Type="Festispec.Store.QuestionType" Multiplicity="1" />
-    <End Role="Question" Type="Festispec.Store.Question" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="QuestionType">
-        <PropertyRef Name="Type" />
-      </Principal>
-      <Dependent Role="Question">
-        <PropertyRef Name="QuestionType_Type" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="TemplateTemplateQuestion">
-    <End Role="Template" Type="Festispec.Store.Template" Multiplicity="1" />
-    <End Role="TemplateQuestion" Type="Festispec.Store.Question_TemplateQuestion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Template">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TemplateQuestion">
-        <PropertyRef Name="Template_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PlanningInspectionQuestion">
-    <End Role="Planning" Type="Festispec.Store.Planning" Multiplicity="1" />
-    <End Role="InspectionQuestion" Type="Festispec.Store.Question_InspectionQuestion" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Planning">
-        <PropertyRef Name="Inspection_Id" />
-        <PropertyRef Name="Inspector_Id" />
-        <PropertyRef Name="Date" />
-      </Principal>
-      <Dependent Role="InspectionQuestion">
-        <PropertyRef Name="Planning_Inspection_Id" />
-        <PropertyRef Name="Planning_Inspector_Id" />
-        <PropertyRef Name="Planning_Date" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Contact_inherits_Address">
-    <End Role="Address" Type="Festispec.Store.Address" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Contact" Type="Festispec.Store.Address_Contact" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Address">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Contact">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Employee_inherits_Contact">
-    <End Role="Contact" Type="Festispec.Store.Address_Contact" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Employee" Type="Festispec.Store.Address_Employee" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Contact">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Employee">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Inspector_inherits_Employee">
-    <End Role="Employee" Type="Festispec.Store.Address_Employee" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Inspector" Type="Festispec.Store.Address_Inspector" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Employee">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Inspector">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Customer_inherits_Contact">
-    <End Role="Contact" Type="Festispec.Store.Address_Contact" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Customer" Type="Festispec.Store.Address_Customer" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Contact">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Customer">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Inspection_inherits_Address">
-    <End Role="Address" Type="Festispec.Store.Address" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Inspection" Type="Festispec.Store.Address_Inspection" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Address">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Inspection">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_TemplateQuestion_inherits_Question">
-    <End Role="Question" Type="Festispec.Store.Question" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="TemplateQuestion" Type="Festispec.Store.Question_TemplateQuestion" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Question">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="TemplateQuestion">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_InspectionQuestion_inherits_Question">
-    <End Role="Question" Type="Festispec.Store.Question" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="InspectionQuestion" Type="Festispec.Store.Question_InspectionQuestion" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Question">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="InspectionQuestion">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
+      <Schema Namespace="Festispec.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="FestispecStoreContainer">
+          <EntitySet Name="Address" EntityType="Festispec.Store.Address" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmployeeRole" EntityType="Festispec.Store.EmployeeRole" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Schedule" EntityType="Festispec.Store.Schedule" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Note" EntityType="Festispec.Store.Note" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="InspectionStatus" EntityType="Festispec.Store.InspectionStatus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Planning" EntityType="Festispec.Store.Planning" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Regulation" EntityType="Festispec.Store.Regulation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Question" EntityType="Festispec.Store.Question" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="QuestionType" EntityType="Festispec.Store.QuestionType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Template" EntityType="Festispec.Store.Template" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Address_Contact" EntityType="Festispec.Store.Address_Contact" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Address_Employee" EntityType="Festispec.Store.Address_Employee" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Address_Inspector" EntityType="Festispec.Store.Address_Inspector" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Address_Customer" EntityType="Festispec.Store.Address_Customer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Address_Inspection" EntityType="Festispec.Store.Address_Inspection" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Question_TemplateQuestion" EntityType="Festispec.Store.Question_TemplateQuestion" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Question_InspectionQuestion" EntityType="Festispec.Store.Question_InspectionQuestion" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="EmployeeRoleEmployee" Association="Festispec.Store.EmployeeRoleEmployee">
+            <End Role="EmployeeRole" EntitySet="EmployeeRole" />
+            <End Role="Employee" EntitySet="Address_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="InspectorSchedule" Association="Festispec.Store.InspectorSchedule">
+            <End Role="Inspector" EntitySet="Address_Inspector" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="CustomerNote" Association="Festispec.Store.CustomerNote">
+            <End Role="Customer" EntitySet="Address_Customer" />
+            <End Role="Note" EntitySet="Note" />
+          </AssociationSet>
+          <AssociationSet Name="InspectionStatusInspection" Association="Festispec.Store.InspectionStatusInspection">
+            <End Role="InspectionStatus" EntitySet="InspectionStatus" />
+            <End Role="Inspection" EntitySet="Address_Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="CustomerInspection" Association="Festispec.Store.CustomerInspection">
+            <End Role="Customer" EntitySet="Address_Customer" />
+            <End Role="Inspection" EntitySet="Address_Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="InspectionPlanning" Association="Festispec.Store.InspectionPlanning">
+            <End Role="Inspection" EntitySet="Address_Inspection" />
+            <End Role="Planning" EntitySet="Planning" />
+          </AssociationSet>
+          <AssociationSet Name="InspectorPlanning" Association="Festispec.Store.InspectorPlanning">
+            <End Role="Inspector" EntitySet="Address_Inspector" />
+            <End Role="Planning" EntitySet="Planning" />
+          </AssociationSet>
+          <AssociationSet Name="EmployeeEmployee" Association="Festispec.Store.EmployeeManager">
+            <End Role="Manager_Id" EntitySet="Address_Employee" />
+            <End Role="Employee" EntitySet="Address_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="QuestionTypeQuestion" Association="Festispec.Store.QuestionTypeQuestion">
+            <End Role="QuestionType" EntitySet="QuestionType" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="TemplateTemplateQuestion" Association="Festispec.Store.TemplateTemplateQuestion">
+            <End Role="Template" EntitySet="Template" />
+            <End Role="TemplateQuestion" EntitySet="Question_TemplateQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="PlanningInspectionQuestion" Association="Festispec.Store.PlanningInspectionQuestion">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="InspectionQuestion" EntitySet="Question_InspectionQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contact_inherits_Address" Association="Festispec.Store.FK_Contact_inherits_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Contact" EntitySet="Address_Contact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_inherits_Contact" Association="Festispec.Store.FK_Employee_inherits_Contact">
+            <End Role="Contact" EntitySet="Address_Contact" />
+            <End Role="Employee" EntitySet="Address_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspector_inherits_Employee" Association="Festispec.Store.FK_Inspector_inherits_Employee">
+            <End Role="Employee" EntitySet="Address_Employee" />
+            <End Role="Inspector" EntitySet="Address_Inspector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_inherits_Contact" Association="Festispec.Store.FK_Customer_inherits_Contact">
+            <End Role="Contact" EntitySet="Address_Contact" />
+            <End Role="Customer" EntitySet="Address_Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inspection_inherits_Address" Association="Festispec.Store.FK_Inspection_inherits_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Inspection" EntitySet="Address_Inspection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemplateQuestion_inherits_Question" Association="Festispec.Store.FK_TemplateQuestion_inherits_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="TemplateQuestion" EntitySet="Question_TemplateQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InspectionQuestion_inherits_Question" Association="Festispec.Store.FK_InspectionQuestion_inherits_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="InspectionQuestion" EntitySet="Question_InspectionQuestion" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Street" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="HouseNumber" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PostalCode" Type="nvarchar" Nullable="false" MaxLength="6" />
+          <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Municipality" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Location" Type="geography" Nullable="false" SRID="4326" />
+          <Property Name="Long" Type="float" Nullable="false" />
+          <Property Name="Lat" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeeRole">
+          <Key>
+            <PropertyRef Name="Role" />
+          </Key>
+          <Property Name="Role" Type="nvarchar" Nullable="false" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NotAvailableFrom" Type="datetime" Nullable="false" />
+          <Property Name="NotAvailableTo" Type="datetime" Nullable="false" />
+          <Property Name="Inspector_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Customer_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InspectionStatus">
+          <Key>
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Status" Type="nvarchar" Nullable="false" MaxLength="128" />
+        </EntityType>
+        <EntityType Name="Planning">
+          <Key>
+            <PropertyRef Name="Inspection_Id" />
+            <PropertyRef Name="Inspector_Id" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="Inspection_Id" Type="int" Nullable="false" />
+          <Property Name="Inspector_Id" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="TimeFrom" Type="time" Nullable="false" />
+          <Property Name="TimeTo" Type="time" Nullable="false" />
+          <Property Name="Hours" Type="time" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Regulation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Municipality" Type="nvarchar(max)" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="QuestionType_Type" Type="nvarchar" Nullable="false" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="QuestionType">
+          <Key>
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="Metadata" Type="nvarchar(max)" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Template">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Address_Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Telephone" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="IBAN" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Address_Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Role_Role" Type="nvarchar" Nullable="false" MaxLength="64" />
+          <Property Name="Manager_Id" Type="int" Nullable="true" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Address_Inspector">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="CertificationFrom" Type="datetime" Nullable="false" />
+          <Property Name="CertificationTo" Type="datetime" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Address_Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="KVK" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Address_Inspection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Website" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="End" Type="datetime" Nullable="false" />
+          <Property Name="Status_Status" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Customer_Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Question_TemplateQuestion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Template_Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Question_InspectionQuestion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Answer" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Planning_Inspection_Id" Type="int" Nullable="false" />
+          <Property Name="Planning_Inspector_Id" Type="int" Nullable="false" />
+          <Property Name="Planning_Date" Type="datetime" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="EmployeeRoleEmployee">
+          <End Role="EmployeeRole" Type="Festispec.Store.EmployeeRole" Multiplicity="1" />
+          <End Role="Employee" Type="Festispec.Store.Address_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeRole">
+              <PropertyRef Name="Role" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Role_Role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InspectorSchedule">
+          <End Role="Inspector" Type="Festispec.Store.Address_Inspector" Multiplicity="1" />
+          <End Role="Schedule" Type="Festispec.Store.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="Inspector_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CustomerNote">
+          <End Role="Customer" Type="Festispec.Store.Address_Customer" Multiplicity="1" />
+          <End Role="Note" Type="Festispec.Store.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InspectionStatusInspection">
+          <End Role="InspectionStatus" Type="Festispec.Store.InspectionStatus" Multiplicity="1" />
+          <End Role="Inspection" Type="Festispec.Store.Address_Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InspectionStatus">
+              <PropertyRef Name="Status" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Status_Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CustomerInspection">
+          <End Role="Customer" Type="Festispec.Store.Address_Customer" Multiplicity="1" />
+          <End Role="Inspection" Type="Festispec.Store.Address_Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InspectionPlanning">
+          <End Role="Inspection" Type="Festispec.Store.Address_Inspection" Multiplicity="1" />
+          <End Role="Planning" Type="Festispec.Store.Planning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Planning">
+              <PropertyRef Name="Inspection_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InspectorPlanning">
+          <End Role="Inspector" Type="Festispec.Store.Address_Inspector" Multiplicity="1" />
+          <End Role="Planning" Type="Festispec.Store.Planning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Planning">
+              <PropertyRef Name="Inspector_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EmployeeManager">
+          <End Role="Manager_Id" Type="Festispec.Store.Address_Employee" Multiplicity="0..1" />
+          <End Role="Employee" Type="Festispec.Store.Address_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manager_Id">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Manager_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="QuestionTypeQuestion">
+          <End Role="QuestionType" Type="Festispec.Store.QuestionType" Multiplicity="1" />
+          <End Role="Question" Type="Festispec.Store.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionType">
+              <PropertyRef Name="Type" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="QuestionType_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TemplateTemplateQuestion">
+          <End Role="Template" Type="Festispec.Store.Template" Multiplicity="1" />
+          <End Role="TemplateQuestion" Type="Festispec.Store.Question_TemplateQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateQuestion">
+              <PropertyRef Name="Template_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PlanningInspectionQuestion">
+          <End Role="Planning" Type="Festispec.Store.Planning" Multiplicity="1" />
+          <End Role="InspectionQuestion" Type="Festispec.Store.Question_InspectionQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Inspection_Id" />
+              <PropertyRef Name="Inspector_Id" />
+              <PropertyRef Name="Date" />
+            </Principal>
+            <Dependent Role="InspectionQuestion">
+              <PropertyRef Name="Planning_Inspection_Id" />
+              <PropertyRef Name="Planning_Inspector_Id" />
+              <PropertyRef Name="Planning_Date" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contact_inherits_Address">
+          <End Role="Address" Type="Festispec.Store.Address" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Contact" Type="Festispec.Store.Address_Contact" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_inherits_Contact">
+          <End Role="Contact" Type="Festispec.Store.Address_Contact" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employee" Type="Festispec.Store.Address_Employee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspector_inherits_Employee">
+          <End Role="Employee" Type="Festispec.Store.Address_Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inspector" Type="Festispec.Store.Address_Inspector" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inspector">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_inherits_Contact">
+          <End Role="Contact" Type="Festispec.Store.Address_Contact" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Customer" Type="Festispec.Store.Address_Customer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inspection_inherits_Address">
+          <End Role="Address" Type="Festispec.Store.Address" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inspection" Type="Festispec.Store.Address_Inspection" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemplateQuestion_inherits_Question">
+          <End Role="Question" Type="Festispec.Store.Question" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TemplateQuestion" Type="Festispec.Store.Question_TemplateQuestion" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemplateQuestion">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InspectionQuestion_inherits_Question">
+          <End Role="Question" Type="Festispec.Store.Question" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InspectionQuestion" Type="Festispec.Store.Question_InspectionQuestion" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InspectionQuestion">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Festispec" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -762,11 +763,7 @@
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="true" />
           <NavigationProperty Name="QuestionType" Relationship="Festispec.QuestionTypeQuestion" FromRole="Question" ToRole="QuestionType" />
-<<<<<<< HEAD
-          <Property Name="QuestionType_Type" Type="String" Nullable="false" />
-=======
           <Property Name="QuestionType_Type" Type="String" Nullable="false" MaxLength="64" />
->>>>>>> 3d6cfaede237b03a9b7faac176a47978ea8059e3
         </EntityType>
         <EntityType Name="QuestionType">
           <Key>
@@ -836,238 +833,172 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="FestispecStoreContainer" CdmEntityContainer="FestispecContainer">
-    <EntitySetMapping Name="Address">
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.Address)">
-        <MappingFragment StoreEntitySet="Address">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Street" ColumnName="Street" />
-          <ScalarProperty Name="HouseNumber" ColumnName="HouseNumber" />
-          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-          <ScalarProperty Name="City" ColumnName="City" />
-          <ScalarProperty Name="Country" ColumnName="Country" />
-          <ScalarProperty Name="Municipality" ColumnName="Municipality" />
-          <ScalarProperty Name="Location" ColumnName="Location" />
-          <ScalarProperty Name="Long" ColumnName="Long" />
-          <ScalarProperty Name="Lat" ColumnName="Lat" />
-        </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.Contact)">
-        <MappingFragment StoreEntitySet="Address_Contact">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-          <ScalarProperty Name="IBAN" ColumnName="IBAN" />
-        </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.Employee)">
-        <MappingFragment StoreEntitySet="Address_Employee">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="Role_Role" ColumnName="Role_Role" />
-          <ScalarProperty Name="Manager_Id" ColumnName="Manager_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.Inspector)">
-        <MappingFragment StoreEntitySet="Address_Inspector">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="CertificationFrom" ColumnName="CertificationFrom" />
-          <ScalarProperty Name="CertificationTo" ColumnName="CertificationTo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.Customer)">
-        <MappingFragment StoreEntitySet="Address_Customer">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="KVK" ColumnName="KVK" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.Inspection)">
-        <MappingFragment StoreEntitySet="Address_Inspection">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Website" ColumnName="Website" />
-          <ScalarProperty Name="Start" ColumnName="Start" />
-          <ScalarProperty Name="End" ColumnName="End" />
-          <ScalarProperty Name="Status_Status" ColumnName="Status_Status" />
-          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="EmployeeRole">
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.EmployeeRole)">
-        <MappingFragment StoreEntitySet="EmployeeRole">
-          <ScalarProperty Name="Role" ColumnName="Role" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Schedule">
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.Schedule)">
-        <MappingFragment StoreEntitySet="Schedule">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="NotAvailableFrom" ColumnName="NotAvailableFrom" />
-          <ScalarProperty Name="NotAvailableTo" ColumnName="NotAvailableTo" />
-          <ScalarProperty Name="Inspector_Id" ColumnName="Inspector_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Note">
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.Note)">
-        <MappingFragment StoreEntitySet="Note">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Content" ColumnName="Content" />
-          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="InspectionStatus">
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.InspectionStatus)">
-        <MappingFragment StoreEntitySet="InspectionStatus">
-          <ScalarProperty Name="Status" ColumnName="Status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Planning">
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.Planning)">
-        <MappingFragment StoreEntitySet="Planning">
-          <ScalarProperty Name="Inspection_Id" ColumnName="Inspection_Id" />
-          <ScalarProperty Name="Inspector_Id" ColumnName="Inspector_Id" />
-          <ScalarProperty Name="Date" ColumnName="Date" />
-          <ScalarProperty Name="TimeFrom" ColumnName="TimeFrom" />
-          <ScalarProperty Name="TimeTo" ColumnName="TimeTo" />
-          <ScalarProperty Name="Hours" ColumnName="Hours" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Regulation">
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.Regulation)">
-        <MappingFragment StoreEntitySet="Regulation">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Municipality" ColumnName="Municipality" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Question">
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.Question)">
-        <MappingFragment StoreEntitySet="Question">
-          <ScalarProperty Name="QuestionType_Type" ColumnName="QuestionType_Type" />
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FestispecStoreContainer" CdmEntityContainer="FestispecContainer">
+          <EntitySetMapping Name="Address">
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.Address)">
+              <MappingFragment StoreEntitySet="Address">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="QuestionType_Type" ColumnName="QuestionType_Type" />
-        </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.TemplateQuestion)">
-        <MappingFragment StoreEntitySet="Question_TemplateQuestion">
-<<<<<<< HEAD
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="HouseNumber" ColumnName="HouseNumber" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Municipality" ColumnName="Municipality" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Long" ColumnName="Long" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.Contact)">
+              <MappingFragment StoreEntitySet="Address_Contact">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.Employee)">
+              <MappingFragment StoreEntitySet="Address_Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role_Role" ColumnName="Role_Role" />
+                <ScalarProperty Name="Manager_Id" ColumnName="Manager_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.Inspector)">
+              <MappingFragment StoreEntitySet="Address_Inspector">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CertificationFrom" ColumnName="CertificationFrom" />
+                <ScalarProperty Name="CertificationTo" ColumnName="CertificationTo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.Customer)">
+              <MappingFragment StoreEntitySet="Address_Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="KVK" ColumnName="KVK" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.Inspection)">
+              <MappingFragment StoreEntitySet="Address_Inspection">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="End" ColumnName="End" />
+                <ScalarProperty Name="Status_Status" ColumnName="Status_Status" />
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeRole">
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.EmployeeRole)">
+              <MappingFragment StoreEntitySet="EmployeeRole">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedule">
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.Schedule)">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NotAvailableFrom" ColumnName="NotAvailableFrom" />
+                <ScalarProperty Name="NotAvailableTo" ColumnName="NotAvailableTo" />
+                <ScalarProperty Name="Inspector_Id" ColumnName="Inspector_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Note">
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.Note)">
+              <MappingFragment StoreEntitySet="Note">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InspectionStatus">
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.InspectionStatus)">
+              <MappingFragment StoreEntitySet="InspectionStatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Planning">
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.Planning)">
+              <MappingFragment StoreEntitySet="Planning">
+                <ScalarProperty Name="Inspection_Id" ColumnName="Inspection_Id" />
+                <ScalarProperty Name="Inspector_Id" ColumnName="Inspector_Id" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="TimeFrom" ColumnName="TimeFrom" />
+                <ScalarProperty Name="TimeTo" ColumnName="TimeTo" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regulation">
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.Regulation)">
+              <MappingFragment StoreEntitySet="Regulation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Municipality" ColumnName="Municipality" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Question">
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.Question)">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="QuestionType_Type" ColumnName="QuestionType_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.TemplateQuestion)">
+              <MappingFragment StoreEntitySet="Question_TemplateQuestion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Template_Id" ColumnName="Template_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.InspectionQuestion)">
+              <MappingFragment StoreEntitySet="Question_InspectionQuestion">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-=======
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Template_Id" ColumnName="Template_Id" />
->>>>>>> 3d6cfaede237b03a9b7faac176a47978ea8059e3
-        </MappingFragment>
-      </EntityTypeMapping>
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.InspectionQuestion)">
-        <MappingFragment StoreEntitySet="Question_InspectionQuestion">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Answer" ColumnName="Answer" />
-          <ScalarProperty Name="Planning_Inspection_Id" ColumnName="Planning_Inspection_Id" />
-          <ScalarProperty Name="Planning_Inspector_Id" ColumnName="Planning_Inspector_Id" />
-          <ScalarProperty Name="Planning_Date" ColumnName="Planning_Date" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="QuestionType">
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.QuestionType)">
-        <MappingFragment StoreEntitySet="QuestionType">
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="Metadata" ColumnName="Metadata" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Template">
-      <EntityTypeMapping TypeName="IsTypeOf(Festispec.Template)">
-        <MappingFragment StoreEntitySet="Template">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-<<<<<<< HEAD
-    <AssociationSetMapping Name="EmployeeRoleEmployee" TypeName="Festispec.EmployeeRoleEmployee" StoreEntitySet="Address_Employee">
-      <EndProperty Name="EmployeeRole">
-        <ScalarProperty Name="Role" ColumnName="Role_Role" />
-      </EndProperty>
-      <EndProperty Name="Employee">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="InspectorSchedule" TypeName="Festispec.InspectorSchedule" StoreEntitySet="Schedule">
-      <EndProperty Name="Inspector">
-        <ScalarProperty Name="Id" ColumnName="Inspector_Id" />
-      </EndProperty>
-      <EndProperty Name="Schedule">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="CustomerNote" TypeName="Festispec.CustomerNote" StoreEntitySet="Note">
-      <EndProperty Name="Customer">
-        <ScalarProperty Name="Id" ColumnName="Customer_Id" />
-      </EndProperty>
-      <EndProperty Name="Note">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="InspectionStatusInspection" TypeName="Festispec.InspectionStatusInspection" StoreEntitySet="Address_Inspection">
-      <EndProperty Name="InspectionStatus">
-        <ScalarProperty Name="Status" ColumnName="Status_Status" />
-      </EndProperty>
-      <EndProperty Name="Inspection">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="CustomerInspection" TypeName="Festispec.CustomerInspection" StoreEntitySet="CustomerInspection">
-      <EndProperty Name="Customer">
-        <ScalarProperty Name="Id" ColumnName="Customers_Id" />
-      </EndProperty>
-      <EndProperty Name="Inspection">
-        <ScalarProperty Name="Id" ColumnName="Inspections_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="EmployeeEmployee" TypeName="Festispec.EmployeeManager" StoreEntitySet="Address_Employee">
-      <EndProperty Name="Manager_Id">
-        <ScalarProperty Name="Id" ColumnName="Manager_Id" />
-      </EndProperty>
-      <EndProperty Name="Employee">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="PlanningInspectionQuestion" TypeName="Festispec.PlanningInspectionQuestion" StoreEntitySet="Question_InspectionQuestion">
-      <EndProperty Name="Planning">
-        <ScalarProperty Name="Inspection_Id" ColumnName="Planning_Inspection_Id" />
-        <ScalarProperty Name="Inspector_Id" ColumnName="Planning_Inspector_Id" />
-        <ScalarProperty Name="Date" ColumnName="Planning_Date" />
-      </EndProperty>
-      <EndProperty Name="InspectionQuestion">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
-=======
->>>>>>> 3d6cfaede237b03a9b7faac176a47978ea8059e3
-  </EntityContainerMapping>
-</Mapping></edmx:Mappings>
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="Planning_Inspection_Id" ColumnName="Planning_Inspection_Id" />
+                <ScalarProperty Name="Planning_Inspector_Id" ColumnName="Planning_Inspector_Id" />
+                <ScalarProperty Name="Planning_Date" ColumnName="Planning_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionType">
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.QuestionType)">
+              <MappingFragment StoreEntitySet="QuestionType">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Metadata" ColumnName="Metadata" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Template">
+            <EntityTypeMapping TypeName="IsTypeOf(Festispec.Template)">
+              <MappingFragment StoreEntitySet="Template">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
