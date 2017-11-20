@@ -1,86 +1,206 @@
-﻿using Festispec.Domain;
-using GalaSoft.MvvmLight;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Festispec.Domain;
+using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Domain.Repository.Interface;
 
-namespace Festispec.ViewModels.Employees
+namespace Festispec.ViewModels.Employee
 {
-    public class EmployeeViewModel : ViewModelBase
+    public class EmployeeViewModel : EntityViewModelBase<IEmployeeRepositoryFactory, Domain.Employee>
     {
-        // getters and setters
-        public string Name
+        public EmployeeViewModel(IEmployeeRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
-            get
-            {
-                return _Employee.Name;
-            }
+        }
+
+        public EmployeeViewModel(IEmployeeRepositoryFactory repositoryFactory, Domain.Employee entity)
+            : base(repositoryFactory, entity)
+        {
+        }
+
+        public int Id => Entity.Id;
+
+
+        public string Username
+        {
+            get { return Entity.Username; }
             set
             {
-                _Employee.Name = value;
-                RaisePropertyChanged("Name");
+                Entity.Username = value;
+                RaisePropertyChanged();
             }
         }
 
-        public string Website
+
+        public string City
         {
-            get
-            {
-                return _Employee.Website;
-            }
+            get { return Entity.City; }
             set
             {
-                _Employee.Website = value;
-                RaisePropertyChanged("Website");
+                Entity.City = value;
+                RaisePropertyChanged();
             }
         }
 
-        public DateTime StartDate
+        public string Email
         {
-            get
-            {
-                return _Employee.Start;
-            }
+            get { return Entity.Email; }
             set
             {
-                _Employee.Start = value;
-                RaisePropertyChanged("StartDate");
+                Entity.Email = value;
+                RaisePropertyChanged();
             }
         }
 
-        public DateTime EndDate
+        public string Country
         {
-            get
-            {
-                return _Employee.End;
-            }
+            get { return Entity.Country; }
             set
             {
-                _Employee.End = value;
-                RaisePropertyChanged("EndDate");
+                Entity.Country = value;
+                RaisePropertyChanged();
             }
         }
 
-        // field
-        private Employee _Employee;
-
-        // constructors
-
-        public EmployeeViewModel()
+        public string FirstName
         {
-            _Employee = new Employee();
+            get { return Entity.FirstName; }
+            set
+            {
+                Entity.FirstName = value;
+                RaisePropertyChanged();
+            }
+        }
+        public string HouseNumber
+        {
+            get { return Entity.HouseNumber; }
+            set
+            {
+                Entity.HouseNumber = value;
+                RaisePropertyChanged();
+            }
+        }
+        public string IBAN
+        {
+            get { return Entity.IBAN; }
+            set
+            {
+                Entity.IBAN = value;
+                RaisePropertyChanged();
+            }
         }
 
-        public EmployeeViewModel(Employee i)
+        public string LastName
         {
-            _Employee = i;
+            get { return Entity.LastName; }
+            set
+            {
+                Entity.IBAN = value;
+                RaisePropertyChanged();
+            }
+        }
+        public Domain.Employee Manager
+        {
+            get { return Entity.Manager; }
+            set
+            {
+                Entity.Manager = value;
+                RaisePropertyChanged();
+            }
+        }
+        public string Password
+        {
+            get { return Entity.Password; }
+            set
+            {
+                Entity.Password = value;
+                RaisePropertyChanged();
+            }
+        }
+        public string Municipality
+        {
+            get { return Entity.Municipality; }
+            set
+            {
+                Entity.Municipality = value;
+                RaisePropertyChanged();
+            }
+        }
+        public string PostalCode
+        {
+            get { return Entity.PostalCode; }
+            set
+            {
+                Entity.PostalCode = value;
+                RaisePropertyChanged();
+            }
+        }
+        public EmployeeRole Role
+        {
+            get { return Entity.Role; }
+            set
+            {
+                Entity.Role = value;
+                RaisePropertyChanged();
+            }
+        }
+        public string Street
+        {
+            get { return Entity.Street; }
+            set
+            {
+                Entity.Street = value;
+                RaisePropertyChanged();
+            }
+        }
+        public string Telephone
+        {
+            get { return Entity.Telephone; }
+            set
+            {
+                Entity.Telephone = value;
+                RaisePropertyChanged();
+            }
         }
 
-        public Employee toModel()
+        public override void Save()
         {
-            return _Employee;
+
+            using (var EmployeeRepository = RepositoryFactory.CreateRepository())
+            {
+                var updated = UpdatedEntity.Id == 0 
+                    ? EmployeeRepository.Add(UpdatedEntity) 
+                    : EmployeeRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+            }
+        }
+
+        public override void Delete()
+        {
+            using (var EmployeeRepository = RepositoryFactory.CreateRepository())
+            {
+                EmployeeRepository.Delete(Entity);
+            }
+        }
+
+        public override Domain.Employee Copy()
+        {
+            return new Domain.Employee
+            {
+                Id = 0,
+                Email = "yson@avans.nl",
+                City = "Wijchen",
+                Username = "yson",
+                Country = "Nederland",
+                FirstName = "Ylja",
+                HouseNumber = "69",
+                IBAN = "Ibannnnnnnn",
+                LastName = "van Son",
+                Manager = null,
+                Password = "hello123",
+                Municipality = "Wijchen",
+                PostalCode = "2345AB",
+                Role = new EmployeeRole {Role = "Medewerker" },
+                Street = "YljaLaan",
+                Telephone = "+3161927863"
+            };
         }
     }
 }

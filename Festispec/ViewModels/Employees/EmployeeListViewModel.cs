@@ -1,97 +1,98 @@
-﻿using Festispec.Domain;
-using Festispec.Domain.Repository.Factory.Interface;
-using Festispec.Domain.Repository.Interface;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.ViewModels.Factory.Interface;
+using Festispec.ViewModels.NavigationService;
+using GalaSoft.MvvmLight.CommandWpf;
 
-namespace Festispec.ViewModels.Employees
+namespace Festispec.ViewModels.Employee
 {
-    // The view variables and view methods will be implemented when the views are created
-    public class EmployeeListViewModel : ViewModelBase
+    public class EmployeeListViewModel : NavigatableViewModelBase
     {
-        // getters and setters
-        public ObservableCollection<EmployeeViewModel> EmployeeViewModelList { get; set; }
-        public EmployeeViewModel SelectedEmployee
+        private readonly INavigationService _navigationService;
+        private readonly IEmployeeRepositoryFactory _employeeRepositoryFactory;
+        private readonly IEmployeeViewModelFactory _employeeViewModelFactory;
+
+        public EmployeeListViewModel(INavigationService navigationService,
+            IEmployeeRepositoryFactory employeeRepositoryFactory,
+            IEmployeeViewModelFactory employeeViewModelFactory) : base(navigationService)
         {
-            get
+            _navigationService = navigationService;
+            _employeeRepositoryFactory = employeeRepositoryFactory;
+            _employeeViewModelFactory = employeeViewModelFactory;
+
+            RegisterCommands();
+            LoadEmployees();
+
+            //NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
+        }
+
+        public ICommand NavigateToEmployeeAddCommand { get; set; }
+        public ICommand NavigateToEmployeeUpdateCommand { get; set; }
+        public ICommand EmployeeDeleteCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+
+        public ObservableCollection<EmployeeViewModel> Employees { get; private set; }
+
+        public EmployeeViewModel SelectedEmployee { get; set; }
+
+        public string SearchUsername { get; set; } = "";
+        public string SearchEmail { get; set; } = "";
+
+        private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName != "CurrentPageKey") return;
+
+            if (NavigationService.CurrentPageKey != Routes.Routes.EmployeeList.Key) return;
+
+            UpdateEmployeesFromNavigationParameter();
+        }
+
+        private void UpdateEmployeesFromNavigationParameter()
+        {
+            var EmployeeViewModel = NavigationService.Parameter as EmployeeViewModel;
+            if (EmployeeViewModel == null) return;
+
+            var existing = Employees.SingleOrDefault(Employee => Employee.Id == EmployeeViewModel.Id);
+            if (existing == null)
             {
-                return _selectedEmployee;
+                Employees.Add(EmployeeViewModel);
             }
-            set
+            else
             {
-                _selectedEmployee = value;
-                RaisePropertyChanged("SelectedEmployee");
+                var index = Employees.IndexOf(existing);
+                Employees.RemoveAt(index);
+                Employees.Insert(index, EmployeeViewModel);
             }
         }
 
-        public IEmployeeRepositoryFactory EmployeeRepositoryFactory;
-
-        // Commands
-        public ICommand ShowAddEmployeeWindowCommand;
-        public ICommand ShowEditEmployeeWindowCommand;
-        public ICommand ShowProcessEmployeeWindowCommand;
-        public ICommand DeleteEmployeeCommand;
-        public ICommand FilterEmployeeViewModelListCommand;
-
-        // fields
-        private EmployeeViewModel _selectedEmployee;
-        private string _selectedFilterOption;
-
-        // constructor
-        public EmployeeListViewModel(IEmployeeRepositoryFactory EmployeeRepositoryFactory)
+        private void RegisterCommands()
         {
-            List<EmployeeViewModel> EmployeeList;
-            EmployeeRepositoryFactory = EmployeeRepositoryFactory;
+            NavigateToEmployeeAddCommand =
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.EmployeeAddOrUpdate.Key));
+            NavigateToEmployeeUpdateCommand = new RelayCommand(
+                () => _navigationService.NavigateTo(Routes.Routes.EmployeeAddOrUpdate.Key, SelectedEmployee),
+                () => SelectedEmployee != null);
+            EmployeeDeleteCommand = new RelayCommand(() => SelectedEmployee.Delete(), () => SelectedEmployee != null);
+            SearchCommand = new RelayCommand(LoadEmployees);
+        }
 
-            // instantiate commands 
-            ShowAddEmployeeWindowCommand = new RelayCommand(ShowAddEmployeeWindow);
-            ShowEditEmployeeWindowCommand = new RelayCommand(ShowEditEmployeeWindow);
-            ShowProcessEmployeeWindowCommand = new RelayCommand(ShowProcessEmployeeWindow);
-            DeleteEmployeeCommand = new RelayCommand(DeleteSelectedEmployee);
-
-            using (var EmployeeRepository = EmployeeRepositoryFactory.CreateRepository())
+        private void LoadEmployees()
+        {
+            using (var EmployeeRepository = _employeeRepositoryFactory.CreateRepository())
             {
-                EmployeeList = EmployeeRepository.Get().Select(i => new EmployeeViewModel(i)).ToList();
+                Employees =
+                    new ObservableCollection<EmployeeViewModel>(
+                        EmployeeRepository.Get()
+                            .Where(Employee =>
+                                Employee.Username.Contains(SearchUsername)
+                                && Employee.Email.Contains(SearchEmail))
+                            .ToList()
+                            .Select(Employee => _employeeViewModelFactory.CreateViewModel(Employee)));
+                RaisePropertyChanged(nameof(Employees));
             }
-
-            EmployeeViewModelList = new ObservableCollection<EmployeeViewModel>(EmployeeList);
-        }
-
-        // methods
-        public void ShowAddEmployeeWindow()
-        {
-
-        }
-
-        public void HideAddEmployeeWindow()
-        {
-
-        }
-
-        public void ShowEditEmployeeWindow()
-        {
-
-        }
-
-        public void ShowProcessEmployeeWindow()
-        {
-
-        }
-
-        public void DeleteSelectedEmployee()
-        {
-            using (var EmployeeRepository = EmployeeRepositoryFactory.CreateRepository())
-            {
-                EmployeeRepository.Delete(SelectedEmployee.toModel());
-            }
-            this.EmployeeViewModelList.Remove(SelectedEmployee);
         }
     }
 }

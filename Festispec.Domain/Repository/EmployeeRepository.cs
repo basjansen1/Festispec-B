@@ -1,12 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository
 {
-    class EmployeeRepository
+    public class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepository
     {
+        public EmployeeRepository(DbContext dbContext) : base(dbContext)
+        {
+        }
+
+
+        public override IQueryable<Employee> Get()
+        {
+            return base.Get().AsNoTracking();
+        }
+
+        public override int Delete(Employee entity)
+        {
+            return base.Delete(entity);
+        }
     }
 }

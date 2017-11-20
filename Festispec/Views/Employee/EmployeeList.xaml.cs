@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec.Views.CRUD_Employee
+namespace Festispec.Views.Employee
 {
     /// <summary>
-    /// Interaction logic for CRUD_Employee.xaml
+    /// Interaction logic for EmployeeList.xaml
     /// </summary>
-    public partial class CRUD_Employee : Window
+    public partial class EmployeeList : Page
     {
-        public CRUD_Employee()
+        public EmployeeList()
         {
             InitializeComponent();
         }

@@ -93,13 +93,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Properties\Annotations1.cs" />
-    <Compile Include="ViewModels\Employees\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
     <Compile Include="ViewModels\AddQuestionViewModel.cs" />
+    <Compile Include="ViewModels\Employees\EmployeeAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeListViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeViewModel.cs" />
-    <Compile Include="ViewModels\Employees\IEmployeeRepositoryFactory.cs" />
     <Compile Include="ViewModels\EntityViewModelBase.cs" />
+    <Compile Include="ViewModels\Factory\EmployeeViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IEmployeeViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateViewModelFactory.cs" />
@@ -125,8 +126,11 @@
     <Compile Include="ViewModels\InspectionProcessing\InspectionListVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="Views\CRUD_Employee\CRUD_Employee.xaml.cs">
-      <DependentUpon>CRUD_Employee.xaml</DependentUpon>
+    <Compile Include="Views\Employee\EmployeeAddOrUpdate.xaml.cs">
+      <DependentUpon>EmployeeAddOrUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\EmployeeList.xaml.cs">
+      <DependentUpon>EmployeeList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Template\AddQuestion.xaml.cs">
       <DependentUpon>AddQuestion.xaml</DependentUpon>
@@ -152,7 +156,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\CRUD_Employee\CRUD_Employee.xaml">
+    <Page Include="Views\Employee\EmployeeAddOrUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Employee\EmployeeList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,10 +205,11 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <Compile Include="ViewModels\Employees\EditEmployeeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />
