@@ -112,7 +112,7 @@
     </Compile>
     <Compile Include="PDF\LayoutHelper.cs" />
     <Compile Include="PDF\PDFWriter.cs" />
-    <Compile Include="PDF\QuestionFormWriter.cs" />
+    <Compile Include="PDF\PLanningListWriter.cs" />
     <Compile Include="Planning.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>

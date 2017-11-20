@@ -76,7 +76,7 @@ namespace Festispec.ViewModels.PDF
 
         public void OpenDocument(string documentTitle) // TestMethod
         {
-            Process.Start(documentTitle);
+            Process.Start(documentTitle + ".pdf");
         }
     }
 }

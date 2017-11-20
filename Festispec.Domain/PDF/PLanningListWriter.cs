@@ -1,0 +1,69 @@
+﻿using Festispec.ViewModels.PDF;
+using PdfSharp.Charting;
+using PdfSharp.Drawing;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Festispec.Domain.PDF
+{
+    public class PLanningListWriter : PDFWriter
+    {
+        private List<Planning> _planningList;
+
+        public PLanningListWriter()
+        {
+            using (var context = new FestispecContainer())
+            {
+                _planningList = new List<Planning>(context.Planning.ToList());
+            }
+        }
+        public void SetTitle(string title)
+        {
+            SetDocumentTitle(title);
+        }
+
+        public void AddParagraphHeader(string header)
+        {
+            AddEmptyLine();
+            AddParagraphTitle(header);
+        }
+
+        public void AddInspectorData(Inspector inspector)
+        {
+            AddLine("Name: " + inspector.FirstName + " " + inspector.LastName);
+            AddLine("Telephone number: " + inspector.Telephone);
+        }
+
+        public void AddPlanningData(Planning Planning)
+        {
+            AddLine("Start at: " + Planning.TimeFrom);
+            AddLine("Ends at: " + Planning.TimeTo);
+            AddLine("Length: " + Planning.Hours + " hours");
+        }
+
+        public void AddInspectionData(Inspection Inspection)
+        {
+            AddLine("Company name: " + Inspection.Name);
+            AddLine("Company website: " + Inspection.Website);
+        }
+
+        public void CreateDocument()
+        {
+            this.SetTitle("Plannings");
+            foreach (Planning planning in _planningList)
+            {
+                AddParagraphHeader("Planning information " + planning.Date);
+                AddPlanningData(planning);
+                AddParagraphHeader("Inspection information");
+                AddInspectionData(planning.Inspection);
+                AddParagraphHeader("Inspector information: ");
+                AddInspectorData(planning.Inspector);
+                SaveAs("AllPlanningInformation");
+                OpenDocument("AllPlanningInformation");
+            }
+        }
+    }
+}
