@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel;
-using System.Linq;
 using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels.Template
 {
@@ -24,19 +23,20 @@ namespace Festispec.ViewModels.Template
             RegisterCommands();
         }
 
-        public ICommand NavigateToAddQuestionCommand { get; set; }
-        public ICommand NavigateToUpdateQuestionCommand { get; set; }
-        public ICommand DeleteQuestionCommand { get; set; }
+        public ICommand NavigateToQuestionAddCommand { get; set; }
+        public ICommand NavigateToQuestionUpdateCommand { get; set; }
+        public ICommand QuestionDeleteCommand { get; set; }
 
         private void RegisterCommands()
         {
-            NavigateToAddQuestionCommand =
-                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.AddQuestion.Key, EntityViewModel),
+            NavigateToQuestionAddCommand =
+                new RelayCommand(
+                    () => NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAddOrUpdate.Key, EntityViewModel),
                     () => EntityViewModel != null);
-            NavigateToUpdateQuestionCommand = new RelayCommand(
-                () => NavigationService.NavigateTo(Routes.Routes.UpdateQuestion.Key, EntityViewModel),
+            NavigateToQuestionUpdateCommand = new RelayCommand(
+                () => NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAddOrUpdate.Key, EntityViewModel),
                 () => EntityViewModel.SelectedQuestion != null);
-            DeleteQuestionCommand =
+            QuestionDeleteCommand =
                 new RelayCommand(() => EntityViewModel.SelectedQuestion.Delete(),
                     () => EntityViewModel.SelectedQuestion != null);
         }

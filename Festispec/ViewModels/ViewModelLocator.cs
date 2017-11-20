@@ -14,8 +14,8 @@ using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.ViewModels.Factory;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
-using Festispec.ViewModels.Template;
 using Festispec.ViewModels.RequestProcessing;
+using Festispec.ViewModels.Template;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 
@@ -42,7 +42,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<TemplateListViewModel>();
             SimpleIoc.Default.Register<TemplateAddOrUpdateViewModel>();
-            SimpleIoc.Default.Register<AddQuestionViewModel>();
+            SimpleIoc.Default.Register<TemplateQuestionAddOrUpdateViewModel>();
         }
 
         private static void RegisterNavigationService()
@@ -50,8 +50,10 @@ namespace Festispec.ViewModels
             var navigationService = new NavigationService.NavigationService();
             navigationService.Configure(Routes.Routes.Home.Key, Routes.Routes.Home.PageType);
             navigationService.Configure(Routes.Routes.TemplateList.Key, Routes.Routes.TemplateList.PageType);
-            navigationService.Configure(Routes.Routes.TemplateAddOrUpdate.Key, Routes.Routes.TemplateAddOrUpdate.PageType);
-            navigationService.Configure(Routes.Routes.AddQuestion.Key, Routes.Routes.AddQuestion.PageType);
+            navigationService.Configure(Routes.Routes.TemplateAddOrUpdate.Key,
+                Routes.Routes.TemplateAddOrUpdate.PageType);
+            navigationService.Configure(Routes.Routes.TemplateQuestionAddOrUpdate.Key,
+                Routes.Routes.TemplateQuestionAddOrUpdate.PageType);
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }
@@ -59,6 +61,15 @@ namespace Festispec.ViewModels
         public static void Cleanup()
         {
         }
+
+        #region ViewModels
+
+        public InspectionListVM GetInspectionList()
+        {
+            return new InspectionListVM(InspectionRepositoryFactory);
+        }
+
+        #endregion
 
         #region Singleton Repositories
 
@@ -86,16 +97,13 @@ namespace Festispec.ViewModels
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
         public TemplateListViewModel TemplateList => ServiceLocator.Current.GetInstance<TemplateListViewModel>();
-        public TemplateAddOrUpdateViewModel TemplateAddOrUpdate => ServiceLocator.Current.GetInstance<TemplateAddOrUpdateViewModel>();
-        public AddQuestionViewModel AddQuestion => ServiceLocator.Current.GetInstance<AddQuestionViewModel>();
 
-        #endregion
+        public TemplateAddOrUpdateViewModel TemplateAddOrUpdate
+            => ServiceLocator.Current.GetInstance<TemplateAddOrUpdateViewModel>();
 
-        #region ViewModels
-            public InspectionListVM GetInspectionList()
-        {
-            return new InspectionListVM(InspectionRepositoryFactory);
-        }
+        public TemplateQuestionAddOrUpdateViewModel AddQuestion
+            => ServiceLocator.Current.GetInstance<TemplateQuestionAddOrUpdateViewModel>();
+
         #endregion
     }
 }

@@ -15,16 +15,16 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" x:Name="AddQuestion" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToAddQuestionCommand}"/>
-            <Button Grid.Column="2" x:Name="UpdateQuestion" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToUpdateQuestionCommand}" />
-            <Button Grid.Column="3" x:Name="RemoveQuestion" Content="Verwijderen" Margin="5px 10px" Command="{Binding DeleteQuestionCommand}" />
+            <Button Grid.Column="1" x:Name="AddQuestion" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToQuestionAddCommand}"/>
+            <Button Grid.Column="2" x:Name="UpdateQuestion" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToQuestionUpdateCommand}" />
+            <Button Grid.Column="3" x:Name="RemoveQuestion" Content="Verwijderen" Margin="5px 10px" Command="{Binding QuestionDeleteCommand}" />
         </Grid>
         <Label>Naam</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Name}" />
         <Label>Omschrijving</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Description}" />
         <Label>Vragen</Label>
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding EntityViewModel.SelectedQuestion}" ItemsSource="{Binding EntityViewModel.UpdatedEntity.Questions}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding EntityViewModel.SelectedQuestion}" ItemsSource="{Binding EntityViewModel.Questions}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="#" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>

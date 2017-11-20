@@ -54,8 +54,6 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-
-        <Frame Grid.Row="2" Name="MainFrame" />
     </Grid>
 </Page>
 

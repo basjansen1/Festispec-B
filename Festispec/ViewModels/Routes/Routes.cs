@@ -20,16 +20,10 @@ namespace Festispec.ViewModels.Routes
             PageType = new Uri("../Views/Template/TemplateAddOrUpdate.xaml", UriKind.Relative)
         };
 
-        public static Route AddQuestion = new Route
+        public static Route TemplateQuestionAddOrUpdate = new Route
         {
             Key = "AddQuestion",
-            PageType = new Uri("../Views/Template/AddQuestion.xaml", UriKind.Relative)
-        };
-
-        public static Route UpdateQuestion = new Route
-        {
-            Key = "UpdateQuestion",
-            PageType = new Uri("../Views/Template/AddQuestion.xaml", UriKind.Relative)
+            PageType = new Uri("../Views/Template/TemplateQuestionAddOrUpdate.xaml", UriKind.Relative)
         };
 
         #endregion

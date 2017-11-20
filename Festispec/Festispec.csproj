@@ -95,7 +95,7 @@
     </ApplicationDefinition>
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
-    <Compile Include="ViewModels\Template\AddQuestionViewModel.cs" />
+    <Compile Include="ViewModels\Template\TemplateQuestionAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\EntityViewModelBase.cs" />
     <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
@@ -122,8 +122,8 @@
     <Compile Include="ViewModels\InspectionProcessing\InspectionListVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="Views\Template\AddQuestion.xaml.cs">
-      <DependentUpon>AddQuestion.xaml</DependentUpon>
+    <Compile Include="Views\Template\TemplateQuestionAddOrUpdate.xaml.cs">
+      <DependentUpon>TemplateQuestionAddOrUpdate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Template\TemplateList.xaml.cs">
       <DependentUpon>TemplateList.xaml</DependentUpon>
@@ -146,7 +146,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Template\AddQuestion.xaml">
+    <Page Include="Views\Template\TemplateQuestionAddOrUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

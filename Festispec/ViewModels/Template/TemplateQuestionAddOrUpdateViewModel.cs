@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Input;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
@@ -10,11 +9,16 @@ using Festispec.ViewModels.NavigationService;
 
 namespace Festispec.ViewModels.Template
 {
-    public class AddQuestionViewModel :
-        AddOrUpdateViewModelBase<ITemplateQuestionViewModelFactory, TemplateQuestionViewModel, ITemplateQuestionRepository, TemplateQuestion>
+    public class TemplateQuestionAddOrUpdateViewModel :
+        AddOrUpdateViewModelBase
+            <ITemplateQuestionViewModelFactory, TemplateQuestionViewModel, ITemplateQuestionRepository, TemplateQuestion
+                >
     {
-        public AddQuestionViewModel(INavigationService navigationService,
-            ITemplateQuestionRepositoryFactory repositoryFactory, ITemplateQuestionViewModelFactory viewModelFactory, IQuestionTypeRepositoryFactory questionTypeRepositoryFactory)
+        private TemplateViewModel _templateViewModel;
+
+        public TemplateQuestionAddOrUpdateViewModel(INavigationService navigationService,
+            ITemplateQuestionRepositoryFactory repositoryFactory, ITemplateQuestionViewModelFactory viewModelFactory,
+            IQuestionTypeRepositoryFactory questionTypeRepositoryFactory)
             : base(navigationService, repositoryFactory, viewModelFactory)
         {
             using (var questionTypeRepository = questionTypeRepositoryFactory.CreateRepository())
@@ -23,15 +27,13 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        private TemplateViewModel _templateViewModel;
-
         public IEnumerable<QuestionType> QuestionTypes { get; }
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
             if (args.PropertyName != "CurrentPageKey") return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.AddQuestion.Key) return;
+            if (NavigationService.CurrentPageKey != Routes.Routes.TemplateQuestionAddOrUpdate.Key) return;
 
             UpdateEntityViewModelFromNavigationParameter();
         }
@@ -59,7 +61,7 @@ namespace Festispec.ViewModels.Template
         public override void Save()
         {
             //TODO: Validation
-            
+
             _templateViewModel.UpdatedEntity.Questions.Add(EntityViewModel.UpdatedEntity);
 
             GoBack();
