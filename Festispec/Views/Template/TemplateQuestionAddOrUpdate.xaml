@@ -9,12 +9,12 @@
 
     <StackPanel>
         <Label>Vraag</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Name}" />
+        <TextBox Text="{Binding Path=EntityViewModel.Name}" />
         <Label>Vraag type</Label>
         <ComboBox ItemsSource="{Binding Path=QuestionTypes}"
                   DisplayMemberPath="Type"
                   SelectedValuePath="Type"
-                  SelectedValue="{Binding Path=EntityViewModel.UpdatedEntity.QuestionType_Type}" />
+                  SelectedValue="{Binding Path=EntityViewModel.QuestionType_Type}" />
 
         <Grid Height="50">
             <Grid.ColumnDefinitions>
