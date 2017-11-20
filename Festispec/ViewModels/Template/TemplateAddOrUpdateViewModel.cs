@@ -11,15 +11,11 @@ namespace Festispec.ViewModels.Template
     public class TemplateAddOrUpdateViewModel :
         AddOrUpdateViewModelBase<ITemplateViewModelFactory, TemplateViewModel, ITemplateRepository, Domain.Template>
     {
-        private readonly ITemplateQuestionRepositoryFactory _templateQuestionRepositoryFactory;
-
         public TemplateAddOrUpdateViewModel(INavigationService navigationService,
             ITemplateRepositoryFactory repositoryFactory,
-            ITemplateQuestionRepositoryFactory templateQuestionRepositoryFactory,
             ITemplateViewModelFactory templateViewModelFactory)
             : base(navigationService, repositoryFactory, templateViewModelFactory)
         {
-            _templateQuestionRepositoryFactory = templateQuestionRepositoryFactory;
             RegisterCommands();
         }
 
@@ -48,6 +44,13 @@ namespace Festispec.ViewModels.Template
             if (NavigationService.CurrentPageKey != Routes.Routes.TemplateAddOrUpdate.Key) return;
 
             UpdateEntityViewModelFromNavigationParameter();
+        }
+
+        protected override void UpdateEntityViewModelFromNavigationParameter()
+        {
+            base.UpdateEntityViewModelFromNavigationParameter();
+
+            EntityViewModel.SelectedQuestion = null;
         }
 
         public override void Save()
