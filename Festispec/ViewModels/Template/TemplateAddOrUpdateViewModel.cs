@@ -31,7 +31,7 @@ namespace Festispec.ViewModels.Template
         {
             NavigateToQuestionAddCommand =
                 new RelayCommand(
-                    () => NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAddOrUpdate.Key, EntityViewModel),
+                    () => NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAdd.Key, EntityViewModel),
                     () => EntityViewModel != null);
             NavigateToQuestionUpdateCommand = new RelayCommand(
                 () => NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAddOrUpdate.Key, EntityViewModel),

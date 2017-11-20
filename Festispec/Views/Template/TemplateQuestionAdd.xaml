@@ -1,11 +1,11 @@
-﻿<Page x:Class="Festispec.Views.Template.TemplateQuestionAddOrUpdate"
+﻿<Page x:Class="Festispec.Views.Template.TemplateQuestionAdd"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      Title="TemplateQuestionAddOrUpdate"
-      DataContext="{Binding Source={StaticResource Locator}, Path=TemplateQuestionAddOrUpdate}">
+      Title="TemplateQuestionAdd"
+      DataContext="{Binding Source={StaticResource Locator}, Path=TemplateQuestionAdd}">
 
     <StackPanel>
         <Label>Vraag</Label>

@@ -43,6 +43,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<TemplateListViewModel>();
             SimpleIoc.Default.Register<TemplateAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<TemplateQuestionAddOrUpdateViewModel>();
+            SimpleIoc.Default.Register<TemplateQuestionAddViewModel>();
         }
 
         private static void RegisterNavigationService()
@@ -54,6 +55,8 @@ namespace Festispec.ViewModels
                 Routes.Routes.TemplateAddOrUpdate.PageType);
             navigationService.Configure(Routes.Routes.TemplateQuestionAddOrUpdate.Key,
                 Routes.Routes.TemplateQuestionAddOrUpdate.PageType);
+            navigationService.Configure(Routes.Routes.TemplateQuestionAdd.Key,
+                Routes.Routes.TemplateQuestionAdd.PageType);
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }
@@ -101,8 +104,11 @@ namespace Festispec.ViewModels
         public TemplateAddOrUpdateViewModel TemplateAddOrUpdate
             => ServiceLocator.Current.GetInstance<TemplateAddOrUpdateViewModel>();
 
-        public TemplateQuestionAddOrUpdateViewModel AddQuestion
+        public TemplateQuestionAddOrUpdateViewModel TemplateQuestionAddOrUpdate
             => ServiceLocator.Current.GetInstance<TemplateQuestionAddOrUpdateViewModel>();
+
+        public TemplateQuestionAddViewModel TemplateQuestionAdd
+            => ServiceLocator.Current.GetInstance<TemplateQuestionAddViewModel>();
 
         #endregion
     }

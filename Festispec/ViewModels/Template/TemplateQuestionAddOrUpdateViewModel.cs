@@ -14,7 +14,7 @@ namespace Festispec.ViewModels.Template
             <ITemplateQuestionViewModelFactory, TemplateQuestionViewModel, ITemplateQuestionRepository, TemplateQuestion
                 >
     {
-        private TemplateViewModel _templateViewModel;
+        protected TemplateViewModel TemplateViewModel;
 
         public TemplateQuestionAddOrUpdateViewModel(INavigationService navigationService,
             ITemplateQuestionRepositoryFactory repositoryFactory, ITemplateQuestionViewModelFactory viewModelFactory,
@@ -43,17 +43,17 @@ namespace Festispec.ViewModels.Template
             var templateViewModel = NavigationService.Parameter as TemplateViewModel;
             if (templateViewModel == null) return;
 
-            _templateViewModel = templateViewModel;
+            TemplateViewModel = templateViewModel;
 
-            if (_templateViewModel.SelectedQuestion != null)
+            if (TemplateViewModel.SelectedQuestion != null)
             {
-                EntityViewModel = _templateViewModel.SelectedQuestion;
+                EntityViewModel = TemplateViewModel.SelectedQuestion;
             }
             else
             {
                 EntityViewModel = ViewModelFactory.CreateViewModel();
 
-                EntityViewModel.Template = _templateViewModel.Entity;
+                EntityViewModel.Template = TemplateViewModel.Entity;
                 EntityViewModel.Template_Id = templateViewModel.Id;
             }
         }
@@ -61,15 +61,13 @@ namespace Festispec.ViewModels.Template
         public override void Save()
         {
             //TODO: Validation
-
-            _templateViewModel.UpdatedEntity.Questions.Add(EntityViewModel.UpdatedEntity);
-
+            
             GoBack();
         }
 
         public override void GoBack()
         {
-            base.GoBack(_templateViewModel);
+            base.GoBack(TemplateViewModel);
         }
     }
 }

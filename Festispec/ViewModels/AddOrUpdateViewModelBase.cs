@@ -44,7 +44,7 @@ namespace Festispec.ViewModels
             // TODO: Validation
             EntityViewModel.Save();
 
-            NavigationService.GoBack(EntityViewModel);
+            GoBack(EntityViewModel);
         }
 
 
