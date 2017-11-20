@@ -24,8 +24,6 @@ namespace Festispec.Domain.Repository
         protected RepositoryBase(DbContext dbContext)
         {
             DbContext = dbContext;
-            var a = DbContext.ChangeTracker.Entries();
-            a = a;
         }
 
         /// <inheritdoc />

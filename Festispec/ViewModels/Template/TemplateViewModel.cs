@@ -6,7 +6,8 @@ using Festispec.ViewModels.Factory.Interface;
 
 namespace Festispec.ViewModels.Template
 {
-    public class TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, ITemplateRepository, Domain.Template>
+    public class
+        TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, ITemplateRepository, Domain.Template>
     {
         private readonly ITemplateQuestionViewModelFactory _templateQuestionViewModelFactory;
 
@@ -56,19 +57,18 @@ namespace Festispec.ViewModels.Template
 
         public ICollection<TemplateQuestionViewModel> Questions
         {
-            get
-            {
-                return
-                    Entity.Questions.Select(
-                        templateQuestion => _templateQuestionViewModelFactory?.CreateViewModel(templateQuestion))
-                        .ToList();
-            }
+            get { return QuestionsWithDeleted.Where(model => !model.IsDeleted).ToList(); }
             set
             {
                 Entity.Questions = value.Select(templateQuestionViewModel => templateQuestionViewModel.Entity).ToList();
                 RaisePropertyChanged();
             }
         }
+
+        private IEnumerable<TemplateQuestionViewModel> QuestionsWithDeleted => Entity.Questions
+            .Select(
+                templateQuestion => _templateQuestionViewModelFactory?.CreateViewModel(templateQuestion))
+            .ToList();
 
         public TemplateQuestionViewModel SelectedQuestion
         {
@@ -95,7 +95,7 @@ namespace Festispec.ViewModels.Template
             Entity.Name = updated.Name;
             Entity.Description = updated.Description;
 
-            foreach (var templateQuestionViewModel in Questions)
+            foreach (var templateQuestionViewModel in QuestionsWithDeleted)
             {
                 // Manually attach the template by id
                 templateQuestionViewModel.UpdatedEntity.Template_Id = Entity.Id;

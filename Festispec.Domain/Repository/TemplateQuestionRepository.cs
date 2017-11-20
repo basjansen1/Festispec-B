@@ -17,6 +17,19 @@ namespace Festispec.Domain.Repository
 
         public override TemplateQuestion Add(TemplateQuestion entity)
         {
+            entity = CleanRelations(entity);
+
+            return base.Add(entity);
+        }
+
+        public override int Delete(TemplateQuestion entity)
+        {
+            entity = CleanRelations(entity);
+            return base.Delete(entity);
+        }
+
+        private static TemplateQuestion CleanRelations(TemplateQuestion entity)
+        {
             if (entity.Template != null)
             {
                 // Set foreign key and unset the navigation property
@@ -33,7 +46,7 @@ namespace Festispec.Domain.Repository
                 entity.QuestionType = null;
             }
 
-            return base.Add(entity);
+            return entity;
         }
     }
 }

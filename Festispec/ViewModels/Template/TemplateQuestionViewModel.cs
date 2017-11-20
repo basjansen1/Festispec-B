@@ -81,13 +81,27 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        public bool Deleted { get; set; } = false;
+        public bool IsDeleted
+        {
+            get { return Entity.IsDeleted; }
+            set
+            {
+                Entity.IsDeleted = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public override void Save()
         {
             TemplateQuestion updated;
             using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
             {
+                if (Entity.IsDeleted)
+                {
+                    if (UpdatedEntity.Id != 0) Delete();
+                    return;
+                }
+
                 updated = UpdatedEntity.Id == 0
                     ? templateQuestionRepository.Add(UpdatedEntity)
                     : templateQuestionRepository.Update(UpdatedEntity, UpdatedEntity.Id);

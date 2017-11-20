@@ -33,7 +33,11 @@ namespace Festispec.ViewModels.Template
                 () => NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAddOrUpdate.Key, EntityViewModel),
                 () => EntityViewModel.SelectedQuestion != null);
             QuestionDeleteCommand =
-                new RelayCommand(() => EntityViewModel.SelectedQuestion.Delete(),
+                new RelayCommand(() =>
+                    {
+                        EntityViewModel.SelectedQuestion.IsDeleted = true;
+                        RaisePropertyChanged();
+                    },
                     () => EntityViewModel.SelectedQuestion != null);
         }
 
