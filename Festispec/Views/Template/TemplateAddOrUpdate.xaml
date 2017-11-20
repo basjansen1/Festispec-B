@@ -3,9 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converter="clr-namespace:Festispec.Converter"
         mc:Ignorable="d"
         Title="TemplateAddOrUpdate"
         DataContext="{Binding Source={StaticResource Locator}, Path=TemplateAddOrUpdate}">
+    <Page.Resources>
+        <converter:InverseBooleanConverter x:Key="inverseBooleanConverter" />
+    </Page.Resources>
+    
     <StackPanel>
         <Grid Height="50">
             <Grid.ColumnDefinitions>
@@ -29,6 +34,15 @@
                 <DataGridTextColumn Header="#" Binding="{Binding UpdatedEntity.Id}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding UpdatedEntity.Name}" Width="*"/>
             </DataGrid.Columns>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsDeleted, Converter={StaticResource inverseBooleanConverter}}" Value="False">
+                            <Setter Property="Background" Value="Red" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
 
         <Grid Height="50">

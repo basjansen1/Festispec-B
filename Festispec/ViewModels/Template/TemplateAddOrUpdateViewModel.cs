@@ -31,14 +31,14 @@ namespace Festispec.ViewModels.Template
                     () => EntityViewModel != null);
             NavigateToQuestionUpdateCommand = new RelayCommand(
                 () => NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAddOrUpdate.Key, EntityViewModel),
-                () => EntityViewModel.SelectedQuestion != null);
+                () => EntityViewModel.SelectedQuestion != null && !EntityViewModel.SelectedQuestion.IsDeleted);
             QuestionDeleteCommand =
                 new RelayCommand(() =>
                     {
                         EntityViewModel.SelectedQuestion.IsDeleted = true;
-                        RaisePropertyChanged();
+                        EntityViewModel = EntityViewModel;
                     },
-                    () => EntityViewModel.SelectedQuestion != null);
+                    () => EntityViewModel.SelectedQuestion != null && !EntityViewModel.SelectedQuestion.IsDeleted);
         }
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
