@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0c3f7037040646c3b622e45d6214b03f" Name="Diagram1" ZoomLevel="85" >
+      <Diagram DiagramId="0c3f7037040646c3b622e45d6214b03f" Name="Diagram1" ZoomLevel="67" >
         <EntityTypeShape EntityType="Festispec.Address" Width="1.5" PointX="4.25" PointY="2.875" />
         <EntityTypeShape EntityType="Festispec.Contact" Width="1.5" PointX="4.25" PointY="5.875" />
         <EntityTypeShape EntityType="Festispec.Employee" Width="1.5" PointX="0.625" PointY="5.875" />
