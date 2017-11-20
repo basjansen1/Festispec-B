@@ -23,7 +23,6 @@
     <EntitySet Name="Address_Inspection" EntityType="Festispec.Store.Address_Inspection" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Question_TemplateQuestion" EntityType="Festispec.Store.Question_TemplateQuestion" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Question_InspectionQuestion" EntityType="Festispec.Store.Question_InspectionQuestion" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CustomerInspection" EntityType="Festispec.Store.CustomerInspection" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="EmployeeRoleEmployee" Association="Festispec.Store.EmployeeRoleEmployee">
       <End Role="EmployeeRole" EntitySet="EmployeeRole" />
       <End Role="Employee" EntitySet="Address_Employee" />
@@ -40,13 +39,9 @@
       <End Role="InspectionStatus" EntitySet="InspectionStatus" />
       <End Role="Inspection" EntitySet="Address_Inspection" />
     </AssociationSet>
-    <AssociationSet Name="FK_CustomerInspection_Customer" Association="Festispec.Store.FK_CustomerInspection_Customer">
+    <AssociationSet Name="CustomerInspection" Association="Festispec.Store.CustomerInspection">
       <End Role="Customer" EntitySet="Address_Customer" />
-      <End Role="CustomerInspection" EntitySet="CustomerInspection" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CustomerInspection_Inspection" Association="Festispec.Store.FK_CustomerInspection_Inspection">
       <End Role="Inspection" EntitySet="Address_Inspection" />
-      <End Role="CustomerInspection" EntitySet="CustomerInspection" />
     </AssociationSet>
     <AssociationSet Name="InspectionPlanning" Association="Festispec.Store.InspectionPlanning">
       <End Role="Inspection" EntitySet="Address_Inspection" />
@@ -112,6 +107,9 @@
     <Property Name="City" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Municipality" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Location" Type="geography" Nullable="false" SRID="4326" />
+    <Property Name="Long" Type="float" Nullable="false" />
+    <Property Name="Lat" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="EmployeeRole">
     <Key>
@@ -153,7 +151,7 @@
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="TimeFrom" Type="time" Nullable="false" />
     <Property Name="TimeTo" Type="time" Nullable="false" />
-    <Property Name="Hours" Type="int" Nullable="true" />
+    <Property Name="Hours" Type="time" Nullable="true" />
   </EntityType>
   <EntityType Name="Regulation">
     <Key>
@@ -171,7 +169,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="QuestionType_Type" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="QuestionType_Type" Type="nvarchar" Nullable="false" MaxLength="64" />
   </EntityType>
   <EntityType Name="QuestionType">
     <Key>
@@ -205,9 +203,9 @@
     </Key>
     <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Role_Role" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="Manager_Id" Type="int" Nullable="true" />
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Role_Role" Type="nvarchar" MaxLength="64" Nullable="false" />
-    <Property Name="Manager_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Address_Inspector">
     <Key>
@@ -222,6 +220,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="KVK" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Address_Inspection">
@@ -232,33 +231,26 @@
     <Property Name="Website" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Start" Type="datetime" Nullable="false" />
     <Property Name="End" Type="datetime" Nullable="false" />
+    <Property Name="Status_Status" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Customer_Id" Type="int" Nullable="false" />
     <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Status_Status" Type="nvarchar" MaxLength="128" Nullable="false" />
   </EntityType>
   <EntityType Name="Question_TemplateQuestion">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Template_Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Question_InspectionQuestion">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Answer" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Planning_Inspection_Id" Type="int" Nullable="false" />
     <Property Name="Planning_Inspector_Id" Type="int" Nullable="false" />
     <Property Name="Planning_Date" Type="datetime" Nullable="false" />
-  </EntityType>
-  <EntityType Name="CustomerInspection">
-    <Key>
-      <PropertyRef Name="Customers_Id" />
-      <PropertyRef Name="Inspections_Id" />
-    </Key>
-    <Property Name="Customers_Id" Type="int" Nullable="false" />
-    <Property Name="Inspections_Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="EmployeeRoleEmployee">
     <End Role="EmployeeRole" Type="Festispec.Store.EmployeeRole" Multiplicity="1" />
@@ -308,6 +300,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="CustomerInspection">
+    <End Role="Customer" Type="Festispec.Store.Address_Customer" Multiplicity="1" />
+    <End Role="Inspection" Type="Festispec.Store.Address_Inspection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Inspection">
+        <PropertyRef Name="Customer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="InspectionPlanning">
     <End Role="Inspection" Type="Festispec.Store.Address_Inspection" Multiplicity="1" />
     <End Role="Planning" Type="Festispec.Store.Planning" Multiplicity="*" />
@@ -333,7 +337,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="EmployeeManager">
-    <End Role="Manager_Id" Type="Festispec.Store.Address_Employee" Multiplicity="1" />
+    <End Role="Manager_Id" Type="Festispec.Store.Address_Employee" Multiplicity="0..1" />
     <End Role="Employee" Type="Festispec.Store.Address_Employee" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Manager_Id">
@@ -381,30 +385,6 @@
         <PropertyRef Name="Planning_Inspection_Id" />
         <PropertyRef Name="Planning_Inspector_Id" />
         <PropertyRef Name="Planning_Date" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CustomerInspection_Customer">
-    <End Role="Customer" Type="Festispec.Store.Address_Customer" Multiplicity="1" />
-    <End Role="CustomerInspection" Type="Festispec.Store.CustomerInspection" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Customer">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CustomerInspection">
-        <PropertyRef Name="Customers_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CustomerInspection_Inspection">
-    <End Role="CustomerInspection" Type="Festispec.Store.CustomerInspection" Multiplicity="*" />
-    <End Role="Inspection" Type="Festispec.Store.Address_Inspection" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Inspection">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CustomerInspection">
-        <PropertyRef Name="Inspections_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -577,6 +557,9 @@
           <Property Name="City" Type="String" Nullable="false" />
           <Property Name="Country" Type="String" Nullable="false" />
           <Property Name="Municipality" Type="String" Nullable="false" />
+          <Property Name="Location" Type="Geography" Nullable="false" />
+          <Property Name="Long" Type="Double" Nullable="false" />
+          <Property Name="Lat" Type="Double" Nullable="false" />
         </EntityType>
         <EntityType Name="Contact" BaseType="Festispec.Address">
           <Property Name="FirstName" Type="String" Nullable="true" />
@@ -591,6 +574,8 @@
           <Property Name="Password" Type="String" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="Festispec.EmployeeManager" FromRole="Manager_Id" ToRole="Employee" />
           <NavigationProperty Name="Manager" Relationship="Festispec.EmployeeManager" FromRole="Employee" ToRole="Manager_Id" />
+          <Property Name="Role_Role" Type="String" Nullable="false" MaxLength="64" />
+          <Property Name="Manager_Id" Type="Int32" Nullable="true" />
         </EntityType>
         <EntityType Name="EmployeeRole">
           <Key>
@@ -602,6 +587,14 @@
         <Association Name="EmployeeRoleEmployee">
           <End Type="Festispec.EmployeeRole" Role="EmployeeRole" Multiplicity="1" />
           <End Type="Festispec.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeeRole">
+              <PropertyRef Name="Role" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Role_Role" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityType Name="Inspector" BaseType="Festispec.Employee">
           <Property Name="CertificationFrom" Type="DateTime" Nullable="false" />
@@ -617,15 +610,25 @@
           <Property Name="NotAvailableFrom" Type="DateTime" Nullable="false" />
           <Property Name="NotAvailableTo" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Inspector" Relationship="Festispec.InspectorSchedule" FromRole="Schedule" ToRole="Inspector" />
+          <Property Name="Inspector_Id" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="InspectorSchedule">
           <End Type="Festispec.Inspector" Role="Inspector" Multiplicity="1" />
           <End Type="Festispec.Schedule" Role="Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inspector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="Inspector_Id" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityType Name="Customer" BaseType="Festispec.Contact">
           <Property Name="KVK" Type="String" Nullable="false" />
           <NavigationProperty Name="Notes" Relationship="Festispec.CustomerNote" FromRole="Customer" ToRole="Note" />
           <NavigationProperty Name="Inspections" Relationship="Festispec.CustomerInspection" FromRole="Customer" ToRole="Inspection" />
+          <Property Name="Name" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Note">
           <Key>
@@ -634,10 +637,19 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Content" Type="String" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="Festispec.CustomerNote" FromRole="Note" ToRole="Customer" />
+          <Property Name="Customer_Id" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="CustomerNote">
           <End Type="Festispec.Customer" Role="Customer" Multiplicity="1" />
           <End Type="Festispec.Note" Role="Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityType Name="Inspection" BaseType="Festispec.Address" >
           <Property Name="Name" Type="String" Nullable="false" />
@@ -647,6 +659,8 @@
           <NavigationProperty Name="Status" Relationship="Festispec.InspectionStatusInspection" FromRole="Inspection" ToRole="InspectionStatus" />
           <NavigationProperty Name="Customers" Relationship="Festispec.CustomerInspection" FromRole="Inspection" ToRole="Customer" />
           <NavigationProperty Name="Planning" Relationship="Festispec.InspectionPlanning" FromRole="Inspection" ToRole="Planning" />
+          <Property Name="Status_Status" Type="String" Nullable="false" MaxLength="128" />
+          <Property Name="Customer_Id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="InspectionStatus">
           <Key>
@@ -658,10 +672,26 @@
         <Association Name="InspectionStatusInspection">
           <End Type="Festispec.InspectionStatus" Role="InspectionStatus" Multiplicity="1" />
           <End Type="Festispec.Inspection" Role="Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InspectionStatus">
+              <PropertyRef Name="Status" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Status_Status" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <Association Name="CustomerInspection">
-          <End Type="Festispec.Customer" Role="Customer" Multiplicity="*" />
+          <End Type="Festispec.Customer" Role="Customer" Multiplicity="1" />
           <End Type="Festispec.Inspection" Role="Inspection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inspection">
+              <PropertyRef Name="Customer_Id" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityType Name="Planning" >
           <Key>
@@ -676,7 +706,7 @@
           <Property Name="Date" Type="DateTime" Nullable="false" />
           <Property Name="TimeFrom" Type="Time" Nullable="false" />
           <Property Name="TimeTo" Type="Time" Nullable="false" />
-          <Property Name="Hours" Type="Int32" Nullable="true" />
+          <Property Name="Hours" Type="Time" Nullable="true" />
           <NavigationProperty Name="Questions" Relationship="Festispec.PlanningInspectionQuestion" FromRole="Planning" ToRole="InspectionQuestion" />
         </EntityType>
         <Association Name="InspectionPlanning">
@@ -704,8 +734,16 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="EmployeeManager">
-          <End Type="Festispec.Employee" Role="Manager_Id" Multiplicity="1" />
+          <End Type="Festispec.Employee" Role="Manager_Id" Multiplicity="0..1" />
           <End Type="Festispec.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manager_Id">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Manager_Id" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <EntityType Name="Regulation">
           <Key>
@@ -724,7 +762,11 @@
           <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="Description" Type="String" Nullable="true" />
           <NavigationProperty Name="QuestionType" Relationship="Festispec.QuestionTypeQuestion" FromRole="Question" ToRole="QuestionType" />
+<<<<<<< HEAD
           <Property Name="QuestionType_Type" Type="String" Nullable="false" />
+=======
+          <Property Name="QuestionType_Type" Type="String" Nullable="false" MaxLength="64" />
+>>>>>>> 3d6cfaede237b03a9b7faac176a47978ea8059e3
         </EntityType>
         <EntityType Name="QuestionType">
           <Key>
@@ -749,6 +791,9 @@
         <EntityType Name="InspectionQuestion" BaseType="Festispec.Question" >
           <Property Name="Answer" Type="String" Nullable="true" />
           <NavigationProperty Name="Planning" Relationship="Festispec.PlanningInspectionQuestion" FromRole="InspectionQuestion" ToRole="Planning" />
+          <Property Name="Planning_Inspection_Id" Type="Int32" Nullable="false" />
+          <Property Name="Planning_Inspector_Id" Type="Int32" Nullable="false" />
+          <Property Name="Planning_Date" Type="DateTime" Nullable="false" />
         </EntityType>
         <EntityType Name="TemplateQuestion" BaseType="Festispec.Question" >
           <NavigationProperty Name="Template" Relationship="Festispec.TemplateTemplateQuestion" FromRole="TemplateQuestion" ToRole="Template" />
@@ -778,6 +823,18 @@
         <Association Name="PlanningInspectionQuestion">
           <End Type="Festispec.Planning" Role="Planning" Multiplicity="1" />
           <End Type="Festispec.InspectionQuestion" Role="InspectionQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Inspection_Id" />
+              <PropertyRef Name="Inspector_Id" />
+              <PropertyRef Name="Date" />
+            </Principal>
+            <Dependent Role="InspectionQuestion">
+              <PropertyRef Name="Planning_Inspection_Id" />
+              <PropertyRef Name="Planning_Inspector_Id" />
+              <PropertyRef Name="Planning_Date" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -795,6 +852,9 @@
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="Country" ColumnName="Country" />
           <ScalarProperty Name="Municipality" ColumnName="Municipality" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Long" ColumnName="Long" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.Contact)">
@@ -812,6 +872,8 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Role_Role" ColumnName="Role_Role" />
+          <ScalarProperty Name="Manager_Id" ColumnName="Manager_Id" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.Inspector)">
@@ -825,6 +887,7 @@
         <MappingFragment StoreEntitySet="Address_Customer">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="KVK" ColumnName="KVK" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.Inspection)">
@@ -834,6 +897,8 @@
           <ScalarProperty Name="Website" ColumnName="Website" />
           <ScalarProperty Name="Start" ColumnName="Start" />
           <ScalarProperty Name="End" ColumnName="End" />
+          <ScalarProperty Name="Status_Status" ColumnName="Status_Status" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -850,6 +915,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="NotAvailableFrom" ColumnName="NotAvailableFrom" />
           <ScalarProperty Name="NotAvailableTo" ColumnName="NotAvailableTo" />
+          <ScalarProperty Name="Inspector_Id" ColumnName="Inspector_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -858,6 +924,7 @@
         <MappingFragment StoreEntitySet="Note">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -897,18 +964,27 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="QuestionType_Type" ColumnName="QuestionType_Type" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.TemplateQuestion)">
         <MappingFragment StoreEntitySet="Question_TemplateQuestion">
+<<<<<<< HEAD
                 <ScalarProperty Name="Template_Id" ColumnName="Template_Id" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+=======
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Template_Id" ColumnName="Template_Id" />
+>>>>>>> 3d6cfaede237b03a9b7faac176a47978ea8059e3
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.InspectionQuestion)">
         <MappingFragment StoreEntitySet="Question_InspectionQuestion">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Answer" ColumnName="Answer" />
+          <ScalarProperty Name="Planning_Inspection_Id" ColumnName="Planning_Inspection_Id" />
+          <ScalarProperty Name="Planning_Inspector_Id" ColumnName="Planning_Inspector_Id" />
+          <ScalarProperty Name="Planning_Date" ColumnName="Planning_Date" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -929,6 +1005,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+<<<<<<< HEAD
     <AssociationSetMapping Name="EmployeeRoleEmployee" TypeName="Festispec.EmployeeRoleEmployee" StoreEntitySet="Address_Employee">
       <EndProperty Name="EmployeeRole">
         <ScalarProperty Name="Role" ColumnName="Role_Role" />
@@ -987,6 +1064,8 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
+=======
+>>>>>>> 3d6cfaede237b03a9b7faac176a47978ea8059e3
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
