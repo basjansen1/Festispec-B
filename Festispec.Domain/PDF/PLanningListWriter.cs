@@ -17,10 +17,23 @@ namespace Festispec.Domain.PDF
         {
             _planningList = new List<Planning>();
 
-            using (var context = new FestispecContainer())
-            {
-                context.Planning.ToList().ForEach(p => _planningList.Add(p));
-            }
+            //using (var context = new FestispecContainer())
+            //{
+            //    context.Planning.ToList().ForEach(p => _planningList.Add(p));
+            //}
+
+            Planning planning = new Planning();
+            planning.Date = new DateTime(7, 7, 7);
+            planning.Inspection_Id = 1;
+            planning.Inspector_Id = 2;
+            planning.TimeFrom = new TimeSpan(1, 1, 1);
+            planning.TimeTo = new TimeSpan(2, 2, 2);
+
+            _planningList.Add(planning);
+            _planningList.Add(planning);
+            _planningList.Add(planning);
+            _planningList.Add(planning);
+            _planningList.Add(planning);
         }
         public void SetTitle(string title)
         {
@@ -35,8 +48,11 @@ namespace Festispec.Domain.PDF
 
         public void AddInspectorData(Inspector inspector)
         {
-            AddLine("Name: " + inspector.FirstName + " " + inspector.LastName);
-            AddLine("Telephone number: " + inspector.Telephone);
+            if (inspector != null)
+            {
+                AddLine("Name: " + inspector.FirstName + " " + inspector.LastName);
+                AddLine("Telephone number: " + inspector.Telephone);
+            }
         }
 
         public void AddPlanningData(Planning Planning)
@@ -48,8 +64,11 @@ namespace Festispec.Domain.PDF
 
         public void AddInspectionData(Inspection Inspection)
         {
-            AddLine("Company name: " + Inspection.Name);
-            AddLine("Company website: " + Inspection.Website);
+            if (Inspection != null)
+            {
+                AddLine("Company name: " + Inspection.Name);
+                AddLine("Company website: " + Inspection.Website);
+            }
         }
 
         public void CreateDocument()
