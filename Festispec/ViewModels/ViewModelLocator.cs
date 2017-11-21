@@ -46,6 +46,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<AddQuestionViewModel>();
             SimpleIoc.Default.Register<AddCustomerVM>();
             SimpleIoc.Default.Register<CustomersOverviewVM>();
+            SimpleIoc.Default.Register<EditCustomerVM>();
         }
 
         private static void RegisterNavigationService()
@@ -93,6 +94,7 @@ namespace Festispec.ViewModels
         public AddQuestionViewModel AddQuestion => ServiceLocator.Current.GetInstance<AddQuestionViewModel>();
         public AddCustomerVM AddCustomer => ServiceLocator.Current.GetInstance<AddCustomerVM>();
         public CustomersOverviewVM CustomersOverview => ServiceLocator.Current.GetInstance<CustomersOverviewVM>();
+        public EditCustomerVM EditCustomer => ServiceLocator.Current.GetInstance<EditCustomerVM>();
 
         #endregion
 
