@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.ViewModels.InspectionProcessing;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace Festispec.ViewModels.RequestProcessing
         // getters and setters
         public InspectionListVM InspectionList { get; set; }
         public InspectionVM NewInspection { get; set; }
+        public CustomerVM NewCustomer { get; set; }
 
         // commands
         public ICommand AddInspectionCommand { get; set; }
