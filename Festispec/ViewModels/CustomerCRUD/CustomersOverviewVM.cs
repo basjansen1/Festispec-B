@@ -23,6 +23,7 @@ namespace Festispec.ViewModels.CustomerCRUD
             OpenAddCustomerWindow = new RelayCommand(AddCustomerWindow);
             OpenMainMenuWindow = new RelayCommand(MainMenuWindow);
             OpenEditCustomerWindow = new RelayCommand(EditCustomerWindow);
+
         }
 
         private void MainMenuWindow()

@@ -114,6 +114,8 @@
     <Compile Include="Regulation.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\Factory\CustomerRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\ICustomerRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\QuestionTypeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IQuestionTypeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ITemplateQuestionRepositoryFactory.cs" />
@@ -124,6 +126,8 @@
     <Compile Include="Repository\Factory\Interface\IInspectionRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\RepositoryFactoryBase.cs" />
+    <Compile Include="Repository\CustomerRepository.cs" />
+    <Compile Include="Repository\Interface\ICustomerRepository.cs" />
     <Compile Include="Repository\QuestionTypeRepository.cs" />
     <Compile Include="Repository\Interface\ITemplateQuestionRepository.cs" />
     <Compile Include="Repository\Interface\IQuestionTypeRepository.cs" />
