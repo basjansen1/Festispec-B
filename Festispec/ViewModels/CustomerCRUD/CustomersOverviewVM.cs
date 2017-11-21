@@ -15,11 +15,11 @@ namespace Festispec.ViewModels.CustomerCRUD
         public ICommand OpenMainMenuWindow { get; set; }
         public ICommand OpenEditCustomerWindow { get; set; }
 
-        public ObservableCollection<CustomerVM> Customers { get; set; }
+        public ObservableCollection<CustomerViewModel> Customers { get; set; }
 
         public CustomersOverviewVM()
         {
-            Customers = new ObservableCollection<CustomerVM>();
+            Customers = new ObservableCollection<CustomerViewModel>();
             OpenAddCustomerWindow = new RelayCommand(AddCustomerWindow);
             OpenMainMenuWindow = new RelayCommand(MainMenuWindow);
             OpenEditCustomerWindow = new RelayCommand(EditCustomerWindow);

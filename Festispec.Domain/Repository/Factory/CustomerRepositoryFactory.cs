@@ -3,11 +3,11 @@ using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository.Factory
 {
-    public class CustomerRepositoryFactory : RepositoryFactoryBase<Inspection>, IInspectionRepositoryFactory
+    public class CustomerRepositoryFactory : RepositoryFactoryBase<Customer>, ICustomerRepositoryFactory
     {
-        public override IRepository<Inspection> CreateRepository()
+        public override IRepository<Customer> CreateRepository()
         {
-            return new InspectionRepository(GetDbContext());
+            return new CustomerRepository(GetDbContext());
         }
     }
 }

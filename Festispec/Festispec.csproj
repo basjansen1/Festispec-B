@@ -97,10 +97,12 @@
     <Compile Include="ViewModels\AddQuestionViewModel.cs" />
     <Compile Include="ViewModels\CustomerCRUD\AddCustomerVM.cs" />
     <Compile Include="ViewModels\CustomerCRUD\CustomersOverviewVM.cs" />
-    <Compile Include="ViewModels\CustomerCRUD\CustomerVM.cs" />
+    <Compile Include="ViewModels\CustomerCRUD\CustomerViewModel.cs" />
     <Compile Include="ViewModels\CustomerCRUD\EditCustomerVM.cs" />
     <Compile Include="ViewModels\EntityViewModelBase.cs" />
+    <Compile Include="ViewModels\Factory\Interface\ICustomerViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\CustomerViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateViewModelFactory.cs" />
     <Compile Include="ViewModels\Interface\IAddOrUpdateViewModel.cs" />
