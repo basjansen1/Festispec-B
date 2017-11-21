@@ -16,6 +16,7 @@ namespace Festispec.Domain
     {
         public int Id { get; set; }
         public string Content { get; set; }
+        public int Customer_Id { get; set; }
     
         public virtual Customer Customer { get; set; }
     }

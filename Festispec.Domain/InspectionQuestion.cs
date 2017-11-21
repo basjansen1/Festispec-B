@@ -15,6 +15,9 @@ namespace Festispec.Domain
     public partial class InspectionQuestion : Question
     {
         public string Answer { get; set; }
+        public int Planning_Inspection_Id { get; set; }
+        public int Planning_Inspector_Id { get; set; }
+        public System.DateTime Planning_Date { get; set; }
     
         public virtual Planning Planning { get; set; }
     }
