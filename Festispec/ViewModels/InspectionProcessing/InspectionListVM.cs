@@ -1,6 +1,7 @@
 ﻿using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
+using Festispec.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -43,6 +44,9 @@ namespace Festispec.ViewModels.RequestProcessing
         // fields
         private InspectionVM _selectedInspection;
         private string _selectedFilterOption;
+        private AddInspection _addInspectionView;
+        private EditInspection _editInspectionView;
+        private ProcessInspection _processInspectionView;
 
         // constructor
         public InspectionListVM(IInspectionRepositoryFactory inspectionRepositoryFactory)
@@ -56,6 +60,11 @@ namespace Festispec.ViewModels.RequestProcessing
             ShowProcessInspectionWindowCommand = new RelayCommand(ShowProcessInspectionWindow);
             DeleteInspectionCommand = new RelayCommand(DeleteSelectedInspection);
 
+            // instantiate views
+            _addInspectionView = new AddInspection();
+            _editInspectionView = new EditInspection();
+            _processInspectionView = new ProcessInspection();
+
             using(var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
                 InspectionList = inspectionRepository.Get().Select(i => new InspectionVM(i)).ToList();
@@ -67,22 +76,22 @@ namespace Festispec.ViewModels.RequestProcessing
         // methods
         public void ShowAddInspectionWindow()
         {
-           
+            _addInspectionView.Show();
         }
 
         public void HideAddInspectionWindow()
         {
-
+            _addInspectionView.Hide();
         }
 
         public void ShowEditInspectionWindow()
         {
-
+            _editInspectionView.Show();
         }
 
         public void ShowProcessInspectionWindow()
         {
-
+            _processInspectionView.Show();
         }
 
         public void DeleteSelectedInspection()
