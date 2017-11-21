@@ -61,6 +61,11 @@ namespace Festispec.ViewModels.Template
         public override void Save()
         {
             //TODO: Validation
+
+            // Map updated fields
+            EntityViewModel.Name = EntityViewModel.UpdatedEntity.Name;
+            EntityViewModel.Description = EntityViewModel.UpdatedEntity.Description;
+            EntityViewModel.QuestionType_Type = EntityViewModel.UpdatedEntity.QuestionType_Type;
             
             GoBack();
         }
