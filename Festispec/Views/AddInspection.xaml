@@ -21,10 +21,10 @@
         <Label x:Name="lblWebsite" Content="Website:" HorizontalAlignment="Left" Margin="290,123,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
         <Label x:Name="lblDateFrom" Content="Begindatum:" HorizontalAlignment="Left" Margin="290,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
         <Label x:Name="lblDateFrom_Copy" Content="Einddatum:" HorizontalAlignment="Left" Margin="290,174,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
-        <DatePicker x:Name="dpStartDate" HorizontalAlignment="Left" Margin="407,149,0,0" VerticalAlignment="Top" Width="175" DisplayDateEnd="2017-11-18" FirstDayOfWeek="Monday" Cursor="Hand"/>
-        <TextBox x:Name="txtInspection" HorizontalAlignment="Left" Height="23" Margin="407,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
-        <TextBox x:Name="txtInspection_Copy" HorizontalAlignment="Left" Height="23" Margin="407,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
-        <DatePicker x:Name="dpEndDate" HorizontalAlignment="Left" Margin="407,175,0,0" VerticalAlignment="Top" Width="175" FirstDayOfWeek="Monday" Cursor="Hand"/>
+        <DatePicker x:Name="dpStartDate" HorizontalAlignment="Left" Margin="407,149,0,0" VerticalAlignment="Top" Width="175" DisplayDateEnd="2017-11-18" FirstDayOfWeek="Monday" Cursor="Hand" Text="{Binding NewInspection.StartDate}"/>
+        <TextBox x:Name="txtInspection" HorizontalAlignment="Left" Height="23" Margin="407,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewInspection.Name}"/>
+        <TextBox x:Name="txtInspection_Copy" HorizontalAlignment="Left" Height="23" Margin="407,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewInspection.Website}"/>
+        <DatePicker x:Name="dpEndDate" HorizontalAlignment="Left" Margin="407,175,0,0" VerticalAlignment="Top" Width="175" FirstDayOfWeek="Monday" Cursor="Hand" Text="{Binding NewInspection.EndDate}"/>
         <Label x:Name="lblStreetname" Content="Straatnaam:" HorizontalAlignment="Left" Margin="290,205,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
         <Label x:Name="lblPostalCode" Content="Postcode:" HorizontalAlignment="Left" Margin="290,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
         <Label x:Name="lblHousenumber" Content="Nr:" HorizontalAlignment="Left" Margin="503,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
