@@ -84,6 +84,6 @@
     <Build Include="dbo\Tables\Address_Inspection.sql" />
     <Build Include="dbo\Tables\Question_TemplateQuestion.sql" />
     <Build Include="dbo\Tables\Question_InspectionQuestion.sql" />
-    <None Include="dbo\Seeds\SeedScriptPostDeploy.sql" />
+    <PostDeploy Include="dbo\Seeds\SeedScriptPostDeploy.sql" />
   </ItemGroup>
 </Project>
