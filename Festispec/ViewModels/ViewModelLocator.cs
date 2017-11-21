@@ -35,10 +35,11 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<ITemplateQuestionRepositoryFactory, TemplateQuestionRepositoryFactory>();
             SimpleIoc.Default.Register<IQuestionTypeRepositoryFactory, QuestionTypeRepositoryFactory>();
             SimpleIoc.Default.Register<ITemplateQuestionViewModelFactory, TemplateQuestionViewModelFactory>();
-
+            SimpleIoc.Default.Register<ILoginRepositoryFactory, LoginRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectionRepositoryFactory, InspectionRepositoryFactory>();
 
             // Register viewmodels
+            SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<TemplateListViewModel>();
             SimpleIoc.Default.Register<TemplateAddOrUpdateViewModel>();
@@ -109,6 +110,8 @@ namespace Festispec.ViewModels
 
         public TemplateQuestionAddViewModel TemplateQuestionAdd
             => ServiceLocator.Current.GetInstance<TemplateQuestionAddViewModel>();
+
+        public LoginViewModel LoginViewModel => ServiceLocator.Current.GetInstance<LoginViewModel>();
 
         #endregion
     }
