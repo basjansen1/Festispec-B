@@ -21,7 +21,6 @@
 
             <Button Grid.Column="1" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToEmployeeAddCommand}" />
             <Button Grid.Column="2" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToEmployeeUpdateCommand}" />
-            <Button Grid.Column="3" Content="Verwijder" Margin="5px 10px" Command="{Binding EmployeeDeleteCommand}" />
         </Grid>
 
         <Grid Grid.Row="1">
@@ -38,17 +37,16 @@
 
             <DockPanel Grid.Row="0"  Grid.Column="0">
                 <Label>Zoek op gebruikersnaam</Label>
-                <TextBox Text="{Binding SearchName}"></TextBox>
+                <TextBox Text="{Binding SearchUsername}"></TextBox>
             </DockPanel>
             <DockPanel Grid.Row="0" Grid.Column="1">
                 <Label>Zoek op email</Label>
-                <TextBox Text="{Binding SearchDescription}"></TextBox>
+                <TextBox Text="{Binding SearchEmail}"></TextBox>
             </DockPanel>
             <Button Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand}">Zoek</Button>
 
             <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedEmployee}" ItemsSource="{Binding Employees}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="#" Binding="{Binding Id}" />
                     <DataGridTextColumn Header="Naam" Binding="{Binding Username}" Width="*" />
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
                     <DataGridTextColumn Header="Manager" Binding="{Binding Path=Manager.Username}" Width="*" />

@@ -21,7 +21,6 @@
 
             <Button Grid.Column="1" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToInspectorAddCommand}" />
             <Button Grid.Column="2" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToInspectorUpdateCommand}" />
-            <Button Grid.Column="3" Content="Verwijder" Margin="5px 10px" Command="{Binding InspectorDeleteCommand}" />
         </Grid>
 
         <Grid Grid.Row="1">
@@ -48,7 +47,6 @@
 
             <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedInspector}" ItemsSource="{Binding Inspectors}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="#" Binding="{Binding Id}" />
                     <DataGridTextColumn Header="Name" Binding="{Binding Username}" Width="*" />
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
                     <DataGridTextColumn Header="Manager" Binding="{Binding Path=Manager.Username}" Width="*" />
