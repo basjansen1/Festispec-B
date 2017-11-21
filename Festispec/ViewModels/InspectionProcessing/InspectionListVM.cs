@@ -1,6 +1,7 @@
 ﻿using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
+using Festispec.ViewModels.InspectionProcessing;
 using Festispec.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -19,6 +20,8 @@ namespace Festispec.ViewModels.RequestProcessing
     {
         // getters and setters
         public ObservableCollection<InspectionVM> InspectionVMList { get; set; }
+
+
         public InspectionVM SelectedInspection
         {
             get
@@ -29,6 +32,22 @@ namespace Festispec.ViewModels.RequestProcessing
             {
                 _selectedInspection = value;
                 RaisePropertyChanged("SelectedInspection");
+            }
+        }
+
+        public string CustomerName
+        {
+            get
+            {
+                return _customer.FirstName;
+            }
+        }
+
+        public string City
+        {
+            get
+            {
+                return _customer.City;
             }
         }
 
@@ -43,6 +62,11 @@ namespace Festispec.ViewModels.RequestProcessing
 
         // fields
         private InspectionVM _selectedInspection;
+<<<<<<< HEAD
+=======
+        private CustomerVM _customer;
+        private string _selectedFilterOption;
+>>>>>>> 962eba8f8ac4a89ff04cf5977aa50700e83fa323
         private AddInspection _addInspectionView;
         private EditInspection _editInspectionView;
         private ProcessInspection _processInspectionView;
@@ -58,23 +82,25 @@ namespace Festispec.ViewModels.RequestProcessing
             ShowEditInspectionWindowCommand = new RelayCommand(ShowEditInspectionWindow);
             ShowProcessInspectionWindowCommand = new RelayCommand(ShowProcessInspectionWindow);
             DeleteInspectionCommand = new RelayCommand(DeleteSelectedInspection);
-
+            
             // instantiate views
-            _addInspectionView = new AddInspection();
-            _editInspectionView = new EditInspection();
-            _processInspectionView = new ProcessInspection();
+            
+            
+            
 
             using(var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
-                InspectionList = inspectionRepository.Get().Select(i => new InspectionVM(i)).ToList();
+            //    InspectionList = inspectionRepository.Get().Select(i => new InspectionVM(i)).ToList();
             }
 
-            InspectionVMList = new ObservableCollection<InspectionVM>(InspectionList);
+            // InspectionVMList = new ObservableCollection<InspectionVM>(InspectionList);
+            InspectionVMList = new ObservableCollection<InspectionVM>();
         }
 
         // methods
         public void ShowAddInspectionWindow()
         {
+            _addInspectionView = new AddInspection();
             _addInspectionView.Show();
         }
 
@@ -85,11 +111,13 @@ namespace Festispec.ViewModels.RequestProcessing
 
         public void ShowEditInspectionWindow()
         {
+            _editInspectionView = new EditInspection();
             _editInspectionView.Show();
         }
 
         public void ShowProcessInspectionWindow()
         {
+            _processInspectionView = new ProcessInspection();
             _processInspectionView.Show();
         }
 
