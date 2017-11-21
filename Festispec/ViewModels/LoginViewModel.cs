@@ -30,8 +30,8 @@ namespace Festispec.ViewModels
         {
             //Code so you don't need to enter username and password each run
             var password = passwordBox.Password;           
-            if (Employee.Username == null) Employee.Username = "UsernameN";
-            if (passwordBox.Password == "") password = "123";
+            if (Employee.Username == null) Employee.Username = "Minke";
+            if (passwordBox.Password == "") password = "Minke123";
 
 
             Domain.Employee foundEmployee;
