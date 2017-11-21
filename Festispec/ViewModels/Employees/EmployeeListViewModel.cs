@@ -6,6 +6,7 @@ using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
 using GalaSoft.MvvmLight.CommandWpf;
+using System;
 
 namespace Festispec.ViewModels.Employee
 {
@@ -26,7 +27,7 @@ namespace Festispec.ViewModels.Employee
             RegisterCommands();
             LoadEmployees();
 
-            //NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
+            NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
         }
 
         public ICommand NavigateToEmployeeAddCommand { get; set; }
@@ -47,25 +48,7 @@ namespace Festispec.ViewModels.Employee
 
             if (NavigationService.CurrentPageKey != Routes.Routes.EmployeeList.Key) return;
 
-            UpdateEmployeesFromNavigationParameter();
-        }
-
-        private void UpdateEmployeesFromNavigationParameter()
-        {
-            var EmployeeViewModel = NavigationService.Parameter as EmployeeViewModel;
-            if (EmployeeViewModel == null) return;
-
-            var existing = Employees.SingleOrDefault(Employee => Employee.Id == EmployeeViewModel.Id);
-            if (existing == null)
-            {
-                Employees.Add(EmployeeViewModel);
-            }
-            else
-            {
-                var index = Employees.IndexOf(existing);
-                Employees.RemoveAt(index);
-                Employees.Insert(index, EmployeeViewModel);
-            }
+            LoadEmployees();
         }
 
         private void RegisterCommands()
@@ -75,20 +58,26 @@ namespace Festispec.ViewModels.Employee
             NavigateToEmployeeUpdateCommand = new RelayCommand(
                 () => _navigationService.NavigateTo(Routes.Routes.EmployeeAddOrUpdate.Key, SelectedEmployee),
                 () => SelectedEmployee != null);
-            EmployeeDeleteCommand = new RelayCommand(() => SelectedEmployee.Delete(), () => SelectedEmployee != null);
+            EmployeeDeleteCommand = new RelayCommand(() => {
+                SelectedEmployee.Delete();
+                LoadEmployees();
+                }, () => SelectedEmployee != null);
             SearchCommand = new RelayCommand(LoadEmployees);
         }
 
         private void LoadEmployees()
         {
+            DateTime today = DateTime.Today;
             using (var EmployeeRepository = _employeeRepositoryFactory.CreateRepository())
             {
                 Employees =
                     new ObservableCollection<EmployeeViewModel>(
                         EmployeeRepository.Get()
                             .Where(Employee =>
-                                Employee.Username.Contains(SearchUsername)
-                                && Employee.Email.Contains(SearchEmail))
+                                (Employee.HiredTo.HasValue ? Employee.HiredTo.Value > today : true)
+                                && Employee.Username.Contains(SearchUsername)
+                                && Employee.Email.Contains(SearchEmail)
+                                && !Employee.Role_Role.Equals("Inspecteur"))
                             .ToList()
                             .Select(Employee => _employeeViewModelFactory.CreateViewModel(Employee)));
                 RaisePropertyChanged(nameof(Employees));

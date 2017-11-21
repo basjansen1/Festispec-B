@@ -116,7 +116,12 @@
     </Compile>
     <Compile Include="Repository\EmployeeRepository.cs" />
     <Compile Include="Repository\Factory\EmployeeRepositoryFactory.cs" />
+    <Compile Include="Repository\EmployeeRoleRepository.cs" />
+    <Compile Include="Repository\Factory\EmployeeRoleRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\InspectorRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IEmployeeRoleRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IEmployeeRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IInspectorRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\QuestionTypeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IQuestionTypeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ITemplateQuestionRepositoryFactory.cs" />
@@ -127,7 +132,10 @@
     <Compile Include="Repository\Factory\Interface\IInspectionRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\RepositoryFactoryBase.cs" />
+    <Compile Include="Repository\InspectorRepository.cs" />
     <Compile Include="Repository\Interface\IEmployeeRepository.cs" />
+    <Compile Include="Repository\Interface\IEmployeeRoleRepository.cs" />
+    <Compile Include="Repository\Interface\IInspectorRepository.cs" />
     <Compile Include="Repository\QuestionTypeRepository.cs" />
     <Compile Include="Repository\Interface\ITemplateQuestionRepository.cs" />
     <Compile Include="Repository\Interface\IQuestionTypeRepository.cs" />

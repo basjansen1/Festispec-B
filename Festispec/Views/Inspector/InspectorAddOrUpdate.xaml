@@ -1,11 +1,11 @@
-﻿<Page x:Class="Festispec.Views.Employee.EmployeeAddOrUpdate"
+﻿<Page x:Class="Festispec.Views.Inspector.InspectorAddOrUpdate"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="EmployeeAddOrUpdate"
-        DataContext="{Binding Source={StaticResource Locator}, Path=EmployeeAddOrUpdate}">
+        Title="InspectorAddOrUpdate"
+        DataContext="{Binding Source={StaticResource Locator}, Path=InspectorAddOrUpdate}">
     <StackPanel>
         <Label>Gebruikersnaam</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Username}" />
@@ -34,16 +34,16 @@
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Password}" />
         <Label>Postcode</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.PostalCode}" />
-        <Label>Functie</Label>
-        <ComboBox ItemsSource="{Binding Path=Roles}" 
-            DisplayMemberPath="Role" SelectedValuePath="Role"
-            SelectedValue="{Binding Path=EntityViewModel.UpdatedEntity.Role_Role}" />
         <Label>Telefoonnummer</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Telephone}" />
         <Label>In dienst genomen op</Label>
         <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.HiredFrom}"/>
         <Label>Uit dienst gegaan</Label>
         <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.HiredTo}"/>
+        <Label>Certificatie startdatum</Label>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.CertificationFrom}"/>
+        <Label>Certificatie einddatum</Label>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.CertificationTo}"/>
         <Grid Height="50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

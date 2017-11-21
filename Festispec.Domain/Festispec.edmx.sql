@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/19/2017 17:07:55
--- Generated from EDMX file: C:\Workspace\Avans\Projects\42IN06SOb\Festispec\Festispec.Domain\Festispec.edmx
+-- Date Created: 11/20/2017 16:12:47
+-- Generated from EDMX file: C:\Users\ylja0\OneDrive\Documents\GitHub\Festispec-B\Festispec.Domain\Festispec.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -237,14 +237,16 @@ CREATE TABLE [dbo].[Address_Employee] (
     [Password] nvarchar(max)  NOT NULL,
     [Role_Role] nvarchar(64)  NOT NULL,
     [Manager_Id] int  NULL,
+    [HiredFrom] datetime  NOT NULL,
+    [HiredTo] datetime  NULL,
     [Id] int  NOT NULL
 );
 GO
 
 -- Creating table 'Address_Inspector'
 CREATE TABLE [dbo].[Address_Inspector] (
-    [CertificationFrom] datetime  NOT NULL,
-    [CertificationTo] datetime  NOT NULL,
+    [CertificationFrom] datetime  NULL,
+    [CertificationTo] datetime  NULL,
     [Id] int  NOT NULL
 );
 GO

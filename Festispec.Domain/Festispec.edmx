@@ -205,14 +205,16 @@
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Role_Role" Type="nvarchar" Nullable="false" MaxLength="64" />
     <Property Name="Manager_Id" Type="int" Nullable="true" />
+    <Property Name="HiredFrom" Type="datetime" Nullable="false" />
+    <Property Name="HiredTo" Type="datetime" Nullable="true" />
     <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Address_Inspector">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="CertificationFrom" Type="datetime" Nullable="false" />
-    <Property Name="CertificationTo" Type="datetime" Nullable="false" />
+    <Property Name="CertificationFrom" Type="datetime" Nullable="true" />
+    <Property Name="CertificationTo" Type="datetime" Nullable="true" />
     <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Address_Customer">
@@ -576,6 +578,8 @@
           <NavigationProperty Name="Manager" Relationship="Festispec.EmployeeManager" FromRole="Employee" ToRole="Manager_Id" />
           <Property Name="Role_Role" Type="String" Nullable="false" MaxLength="64" />
           <Property Name="Manager_Id" Type="Int32" Nullable="true" />
+          <Property Name="HiredFrom" Type="DateTime" Nullable="false" />
+          <Property Name="HiredTo" Type="DateTime" Nullable="true" />
         </EntityType>
         <EntityType Name="EmployeeRole">
           <Key>
@@ -597,8 +601,8 @@
           </ReferentialConstraint>
         </Association>
         <EntityType Name="Inspector" BaseType="Festispec.Employee">
-          <Property Name="CertificationFrom" Type="DateTime" Nullable="false" />
-          <Property Name="CertificationTo" Type="DateTime" Nullable="false" />
+          <Property Name="CertificationFrom" Type="DateTime" Nullable="true" />
+          <Property Name="CertificationTo" Type="DateTime" Nullable="true" />
           <NavigationProperty Name="Schedule" Relationship="Festispec.InspectorSchedule" FromRole="Inspector" ToRole="Schedule" />
           <NavigationProperty Name="Planning" Relationship="Festispec.InspectorPlanning" FromRole="Inspector" ToRole="Planning" />
         </EntityType>
@@ -870,6 +874,8 @@
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Role_Role" ColumnName="Role_Role" />
           <ScalarProperty Name="Manager_Id" ColumnName="Manager_Id" />
+          <ScalarProperty Name="HiredFrom" ColumnName="HiredFrom" />
+          <ScalarProperty Name="HiredTo" ColumnName="HiredTo" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.Inspector)">

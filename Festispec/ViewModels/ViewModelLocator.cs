@@ -19,6 +19,7 @@ using Festispec.ViewModels.Employees;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using Festispec.ViewModels.Employee;
+using Festispec.ViewModels.Inspector;
 
 namespace Festispec.ViewModels
 {
@@ -39,8 +40,10 @@ namespace Festispec.ViewModels
             
             SimpleIoc.Default.Register<IEmployeeRepositoryFactory, EmployeeRepositoryFactory>();
             SimpleIoc.Default.Register<IEmployeeViewModelFactory, EmployeeViewModelFactory>();
-
+            SimpleIoc.Default.Register<IEmployeeRoleRepositoryFactory, EmployeeRoleRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectionRepositoryFactory, InspectionRepositoryFactory>();
+            SimpleIoc.Default.Register<IInspectorRepositoryFactory, InspectorRepositoryFactory>();
+            SimpleIoc.Default.Register<IInspectorViewModelFactory, InspectorViewModelFactory>();
 
             // Register viewmodels
             SimpleIoc.Default.Register<MainViewModel>();
@@ -49,6 +52,9 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<AddQuestionViewModel>();
             SimpleIoc.Default.Register<EmployeeAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<EmployeeListViewModel>();
+            SimpleIoc.Default.Register<InspectorListViewModel>();
+            SimpleIoc.Default.Register<InspectorAddOrUpdateViewModel>();
+
 
         }
 
@@ -61,7 +67,8 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.AddQuestion.Key, Routes.Routes.AddQuestion.PageType);
             navigationService.Configure(Routes.Routes.EmployeeAddOrUpdate.Key, Routes.Routes.EmployeeAddOrUpdate.PageType);
             navigationService.Configure(Routes.Routes.EmployeeList.Key, Routes.Routes.EmployeeList.PageType);
-
+            navigationService.Configure(Routes.Routes.InspectorList.Key, Routes.Routes.InspectorList.PageType);
+            navigationService.Configure(Routes.Routes.InspectorAddOrUpdate.Key, Routes.Routes.InspectorAddOrUpdate.PageType);
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }
@@ -96,6 +103,14 @@ namespace Festispec.ViewModels
         public IEmployeeViewModelFactory EmployeeViewModelFactory =
             ServiceLocator.Current.GetInstance<IEmployeeViewModelFactory>();
 
+        public IEmployeeRoleRepositoryFactory EmployeeRoleViewModelFactory =
+            ServiceLocator.Current.GetInstance<IEmployeeRoleRepositoryFactory>();
+
+        public IInspectorRepositoryFactory InspectorRepositoryFactory =
+            ServiceLocator.Current.GetInstance<IInspectorRepositoryFactory>();
+
+        public IInspectorViewModelFactory InspectorViewModelFactory =
+            ServiceLocator.Current.GetInstance<IInspectorViewModelFactory>();
         #endregion
 
         #region Singleton ViewModels 
@@ -106,7 +121,8 @@ namespace Festispec.ViewModels
         public AddQuestionViewModel AddQuestion => ServiceLocator.Current.GetInstance<AddQuestionViewModel>();
         public EmployeeAddOrUpdateViewModel EmployeeAddOrUpdate => ServiceLocator.Current.GetInstance<EmployeeAddOrUpdateViewModel>();
         public EmployeeListViewModel EmployeeList => ServiceLocator.Current.GetInstance<EmployeeListViewModel>();
-
+        public InspectorListViewModel InspectorList => ServiceLocator.Current.GetInstance<InspectorListViewModel>();
+        public InspectorAddOrUpdateViewModel InspectorAddOrUpdate => ServiceLocator.Current.GetInstance<InspectorAddOrUpdateViewModel>();
 
         #endregion
 

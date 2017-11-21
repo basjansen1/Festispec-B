@@ -100,10 +100,15 @@
     <Compile Include="ViewModels\Employees\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\EntityViewModelBase.cs" />
     <Compile Include="ViewModels\Factory\EmployeeViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\InspectorViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IEmployeeViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IInspectorViewModelFactory.cs" />
+    <Compile Include="ViewModels\Inspector\InspectorAddOrUpdateViewModel.cs" />
+    <Compile Include="ViewModels\Inspector\InspectorListViewModel.cs" />
+    <Compile Include="ViewModels\Inspector\InspectorViewModel.cs" />
     <Compile Include="ViewModels\Interface\IAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Interface\IEntityViewModel.cs" />
     <Compile Include="ViewModels\Factory\Interface\ITemplateViewModelFactory.cs" />
@@ -131,6 +136,12 @@
     </Compile>
     <Compile Include="Views\Employee\EmployeeList.xaml.cs">
       <DependentUpon>EmployeeList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inspector\InspectorAddOrUpdate.xaml.cs">
+      <DependentUpon>InspectorAddOrUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inspector\InspectorList.xaml.cs">
+      <DependentUpon>InspectorList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Template\AddQuestion.xaml.cs">
       <DependentUpon>AddQuestion.xaml</DependentUpon>
@@ -161,6 +172,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Employee\EmployeeList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Inspector\InspectorAddOrUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Inspector\InspectorList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

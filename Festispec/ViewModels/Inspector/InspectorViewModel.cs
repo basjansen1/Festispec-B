@@ -5,15 +5,15 @@ using Festispec.Domain.Repository.Interface;
 using System.Data.Entity.Spatial;
 using System;
 
-namespace Festispec.ViewModels.Employee
+namespace Festispec.ViewModels.Inspector
 {
-    public class EmployeeViewModel : EntityViewModelBase<IEmployeeRepositoryFactory, Domain.Employee>
+    public class InspectorViewModel : EntityViewModelBase<IInspectorRepositoryFactory, Domain.Inspector>
     {
-        public EmployeeViewModel(IEmployeeRepositoryFactory repositoryFactory) : base(repositoryFactory)
+        public InspectorViewModel(IInspectorRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
         }
 
-        public EmployeeViewModel(IEmployeeRepositoryFactory repositoryFactory, Domain.Employee entity)
+        public InspectorViewModel(IInspectorRepositoryFactory repositoryFactory, Domain.Inspector entity)
             : base(repositoryFactory, entity)
         {
         }
@@ -221,6 +221,15 @@ namespace Festispec.ViewModels.Employee
                 RaisePropertyChanged();
             }
         }
+        public DateTime? CertificationFrom
+        {
+            get { return Entity.CertificationFrom; }
+            set
+            {
+                Entity.CertificationFrom = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public int? Manager_Id
         {
@@ -232,28 +241,38 @@ namespace Festispec.ViewModels.Employee
             }
         }
 
+        public DateTime? CertificationTo
+        {
+            get { return Entity.CertificationTo; }
+            set
+            {
+                Entity.CertificationTo = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public override void Save()
         {
 
-            using (var EmployeeRepository = RepositoryFactory.CreateRepository())
+            using (var InspectorRepository = RepositoryFactory.CreateRepository())
             {
                 var updated = UpdatedEntity.Id == 0
-                    ? EmployeeRepository.Add(UpdatedEntity)
-                    : EmployeeRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                    ? InspectorRepository.Add(UpdatedEntity)
+                    : InspectorRepository.Update(UpdatedEntity, UpdatedEntity.Id);
             }
         }
 
         public override void Delete()
         {
-            using (var EmployeeRepository = RepositoryFactory.CreateRepository())
+            using (var InspectorRepository = RepositoryFactory.CreateRepository())
             {
-                EmployeeRepository.Delete(Entity);
+                InspectorRepository.Delete(Entity);
             }
         }
 
-        public override Domain.Employee Copy()
+        public override Domain.Inspector Copy()
         {
-            return new Domain.Employee
+            return new Domain.Inspector
             {
                 Id = Id,
                 Email = Email,
@@ -264,10 +283,10 @@ namespace Festispec.ViewModels.Employee
                 HouseNumber = HouseNumber,
                 IBAN = IBAN,
                 LastName = LastName,
+                Manager_Id = Manager_Id,
                 Manager = Manager,
                 Password = Password,
                 Municipality = Municipality,
-                Manager_Id = Manager_Id,
                 PostalCode = PostalCode,
                 Role_Role = Role_Role,
                 Role = Role,
@@ -277,7 +296,9 @@ namespace Festispec.ViewModels.Employee
                 Long = Long,
                 Lat = Lat,
                 HiredFrom = HiredFrom,
-                HiredTo = HiredTo
+                HiredTo = HiredTo,
+                CertificationFrom = CertificationFrom,
+                CertificationTo = CertificationTo
             };
         }
     }

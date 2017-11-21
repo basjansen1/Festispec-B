@@ -13,12 +13,26 @@ namespace Festispec.Domain.Repository
 
         public override IQueryable<Employee> Get()
         {
-            return base.Get().AsNoTracking();
+            return base.Get().Include(e => e.Manager);
         }
 
-        public override int Delete(Employee entity)
+        public override Employee Add(Employee entity)
         {
-            return base.Delete(entity);
+            if(entity.Role != null)
+            {
+                if(entity.Role_Role == null)
+                    entity.Role_Role = entity.Role.Role;
+                entity.Role = null;
+            }
+
+            if(entity.Manager != null)
+            {
+                if (entity.Manager_Id == null)
+                    entity.Manager_Id = entity.Manager.Id;
+                entity.Manager = null;
+            }
+
+            return base.Add(entity);
         }
     }
 }
