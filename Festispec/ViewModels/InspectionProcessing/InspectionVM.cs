@@ -63,6 +63,19 @@ namespace Festispec.ViewModels.RequestProcessing
             }
         }
 
+        public Customer Customer
+        {
+            get
+            {
+                return Customer;
+            }
+            set
+            {
+                Customer = value;
+                RaisePropertyChanged("Customer");
+            }
+        }
+
         // field
         private Inspection _inspection;
 

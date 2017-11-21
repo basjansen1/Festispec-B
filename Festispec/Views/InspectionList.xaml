@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="ProcessInspection" Height="600" Width="800" DataContext="{Binding GetInspectionList, Source={StaticResource Locator}}">        
     <Grid>
-        <DataGrid x:Name="dgInspections" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="280" Width="780" ScrollViewer.CanContentScroll="True" 
-      ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding InspectionVMList}" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}" SelectionChanged="dgInspections_SelectionChanged">
+        <DataGrid x:Name="dgInspections" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="280" Width="780" ScrollViewer.CanContentScroll="True" 
+      ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding InspectionVMList}" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Klantnaam" Width="2*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Klantnaam" Width="2*" Binding="{Binding CustomerName}"/>
                 <DataGridTextColumn Header="Naam verzoek" Width="2*" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Datum verzoek" Width="2*" Binding="{Binding Start}"/>
+                <DataGridTextColumn Header="Begin inspectie" Width="2*" Binding="{Binding Start}"/>
                 <DataGridTextColumn Header="Plaats" Width="2*" Binding="{Binding City}"/>
             </DataGrid.Columns>
         </DataGrid>

@@ -79,19 +79,14 @@ namespace Festispec.ViewModels.RequestProcessing
             ShowEditInspectionWindowCommand = new RelayCommand(ShowEditInspectionWindow);
             ShowProcessInspectionWindowCommand = new RelayCommand(ShowProcessInspectionWindow);
             DeleteInspectionCommand = new RelayCommand(DeleteSelectedInspection);
-            
-            // instantiate views
-            
-            
-            
 
+            
+            // instantiate views   
             using(var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
-            //    InspectionList = inspectionRepository.Get().Select(i => new InspectionVM(i)).ToList();
+                InspectionVMList = new ObservableCollection<InspectionVM>(inspectionRepository.Get().ToList().Select(i => new InspectionVM(i)));
             }
-
-            // InspectionVMList = new ObservableCollection<InspectionVM>(InspectionList);
-            InspectionVMList = new ObservableCollection<InspectionVM>();
+            
         }
 
         // methods
