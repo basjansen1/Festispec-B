@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Festispec.ViewModels.RequestProcessing
@@ -34,23 +35,6 @@ namespace Festispec.ViewModels.RequestProcessing
                 RaisePropertyChanged("SelectedInspection");
             }
         }
-
-        public string CustomerName
-        {
-            get
-            {
-                return _customer.FirstName;
-            }
-        }
-
-        public string City
-        {
-            get
-            {
-                return _customer.City;
-            }
-        }
-
         public IInspectionRepositoryFactory InspectionRepositoryFactory;
 
         // Commands
@@ -62,11 +46,7 @@ namespace Festispec.ViewModels.RequestProcessing
 
         // fields
         private InspectionVM _selectedInspection;
-<<<<<<< HEAD
-=======
-        private CustomerVM _customer;
-        private string _selectedFilterOption;
->>>>>>> 962eba8f8ac4a89ff04cf5977aa50700e83fa323
+
         private AddInspection _addInspectionView;
         private EditInspection _editInspectionView;
         private ProcessInspection _processInspectionView;
@@ -82,19 +62,13 @@ namespace Festispec.ViewModels.RequestProcessing
             ShowEditInspectionWindowCommand = new RelayCommand(ShowEditInspectionWindow);
             ShowProcessInspectionWindowCommand = new RelayCommand(ShowProcessInspectionWindow);
             DeleteInspectionCommand = new RelayCommand(DeleteSelectedInspection);
-            
-            // instantiate views
-            
-            
-            
 
+            
+            // instantiate views   
             using(var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
-            //    InspectionList = inspectionRepository.Get().Select(i => new InspectionVM(i)).ToList();
+                InspectionVMList = new ObservableCollection<InspectionVM>(inspectionRepository.Get().ToList().Select(i => new InspectionVM(i)));
             }
-
-            // InspectionVMList = new ObservableCollection<InspectionVM>(InspectionList);
-            InspectionVMList = new ObservableCollection<InspectionVM>();
         }
 
         // methods

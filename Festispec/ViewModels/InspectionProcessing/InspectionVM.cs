@@ -63,6 +63,19 @@ namespace Festispec.ViewModels.RequestProcessing
             }
         }
 
+        public Customer Customer
+        {
+            get
+            {
+                return _inspection.Customers.First(); // ToDo: change relationship between inspection and customer to 1 -> 1
+            }
+            set
+            {
+                Customer = value;
+                RaisePropertyChanged("Customer");
+            }
+        }
+
         // field
         private Inspection _inspection;
 

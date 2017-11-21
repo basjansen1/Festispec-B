@@ -100,7 +100,8 @@ namespace Festispec.ViewModels
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<InspectionListVM>();
+                //return ServiceLocator.Current.GetInstance<InspectionListVM>();
+                return new InspectionListVM(new InspectionRepositoryFactory());
             }
         }
         public AddInspectionVM GetAddInspection
