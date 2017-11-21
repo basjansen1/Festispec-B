@@ -43,7 +43,6 @@ namespace Festispec.ViewModels.RequestProcessing
 
         // fields
         private InspectionVM _selectedInspection;
-        private string _selectedFilterOption;
         private AddInspection _addInspectionView;
         private EditInspection _editInspectionView;
         private ProcessInspection _processInspectionView;
