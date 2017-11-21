@@ -209,6 +209,8 @@
     <Folder Include="bin\Release\" />
     <Folder Include="ViewModels\Employees\" />
   </ItemGroup>
+  <ItemGroup />
+  <ItemGroup />
   <ItemGroup>
     <Content Include="bin\Debug\de\PdfSharp.resources.dll" />
     <Content Include="bin\Debug\EntityFramework.dll" />

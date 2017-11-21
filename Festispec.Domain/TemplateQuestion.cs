@@ -14,6 +14,7 @@ namespace Festispec.Domain
     
     public partial class TemplateQuestion : Question
     {
+        public int Template_Id { get; set; }
     
         public virtual Template Template { get; set; }
     }
