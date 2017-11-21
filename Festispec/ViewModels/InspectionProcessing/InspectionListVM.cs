@@ -1,6 +1,7 @@
 ﻿using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
+using Festispec.ViewModels.InspectionProcessing;
 using Festispec.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -19,6 +20,8 @@ namespace Festispec.ViewModels.RequestProcessing
     {
         // getters and setters
         public ObservableCollection<InspectionVM> InspectionVMList { get; set; }
+
+
         public InspectionVM SelectedInspection
         {
             get
@@ -29,6 +32,22 @@ namespace Festispec.ViewModels.RequestProcessing
             {
                 _selectedInspection = value;
                 RaisePropertyChanged("SelectedInspection");
+            }
+        }
+
+        public string CustomerName
+        {
+            get
+            {
+                return _customer.FirstName;
+            }
+        }
+
+        public string City
+        {
+            get
+            {
+                return _customer.City;
             }
         }
 
@@ -43,6 +62,7 @@ namespace Festispec.ViewModels.RequestProcessing
 
         // fields
         private InspectionVM _selectedInspection;
+        private CustomerVM _customer;
         private string _selectedFilterOption;
         private AddInspection _addInspectionView;
         private EditInspection _editInspectionView;

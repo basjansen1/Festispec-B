@@ -10,6 +10,14 @@ namespace Festispec.ViewModels.InspectionProcessing
 {
     public class CustomerVM : ViewModelBase
     {
+        public string Telephone
+        {
+            get
+            {
+                return _customer.Telephone;
+            }
+        }
+
         public string FirstName
         {
             get
@@ -119,6 +127,19 @@ namespace Festispec.ViewModels.InspectionProcessing
             {
                 _customer.IBAN = value;
                 RaisePropertyChanged("IBAN");
+            }
+        }
+
+        public string Country
+        {
+            get
+            {
+                return _customer.Country;
+            }
+            set
+            {
+                _customer.Country = value;
+                RaisePropertyChanged("Country");
             }
         }
 
