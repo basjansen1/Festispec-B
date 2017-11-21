@@ -82,9 +82,9 @@ namespace Festispec.Domain.PDF
                 AddInspectionData(planning.Inspection);
                 AddParagraphHeader("Inspector information: ");
                 AddInspectorData(planning.Inspector);
-                SaveAs("AllPlanningInformation");
-                OpenDocument("AllPlanningInformation");
             }
+            SaveAs("AllPlanningInformation");
+            OpenDocument("AllPlanningInformation");
         }
     }
 }
