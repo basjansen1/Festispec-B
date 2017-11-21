@@ -15,13 +15,6 @@ namespace Festispec.ViewModels.CustomerCRUD
         public CustomersOverviewVM()
         {
             Customers = new ObservableCollection<CustomerVM>();
-            Customers.Add(new CustomerVM
-            {
-                Name = "Teun",
-                Address = "Sint-Oedenrode",
-                EmailAddress = "GMAIL"
-            }
-                );
         }
     }
 }

@@ -9,9 +9,10 @@
         DataContext="{Binding Source={StaticResource Locator}, Path=CustomersOverview}"
         >
     <Grid>
-        <DataGrid Margin="0,76,0,179.5" ItemsSource="Customers"></DataGrid>
+        <DataGrid Margin="0,76,0,179.5"></DataGrid>
         <Button Margin="0,0,471,534.5">Terug</Button>
-        <Button Margin="445,0,0,534.5" Content="Bewerk geselecteerd"/>
+        <Button Margin="424,0,0,534.5" Content="Bewerk geselecteerd"/>
+        <Button Margin="208,0,218,534.5" Height="38" VerticalAlignment="Bottom">Voeg klant toe</Button>
         <TextBlock Margin="0,393,0,0" Height="20" VerticalAlignment="Top">Beschrijving</TextBlock>
         <TextBlock Margin="0,413,0,0.5"></TextBlock>
     </Grid>
