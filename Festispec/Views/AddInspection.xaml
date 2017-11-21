@@ -15,8 +15,8 @@
         <Label x:Name="lblKlantnaam_Copy" Content="Email:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblKlantnaam_Copy1" Content="Tel nr:" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.644,2.391"/>
         <TextBox x:Name="txtKvk" HorizontalAlignment="Left" Height="23" Margin="100,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" IsEnabled="False" Text="{Binding NewCustomer.KVK}"/>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="100,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" IsEnabled="False"/>
-        <TextBox x:Name="txtTelnr" HorizontalAlignment="Left" Height="23" Margin="100,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" IsEnabled="False"/>
+        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="100,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" IsEnabled="False" Text="{Binding NewCustomer.Email}"/>
+        <TextBox x:Name="txtTelnr" HorizontalAlignment="Left" Height="23" Margin="100,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" IsEnabled="False" Text="{Binding NewCustomer.Telephone}"/>
         <Label x:Name="lblInspection" Content="Naam inspectie:" HorizontalAlignment="Left" Margin="290,97,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
         <Label x:Name="lblWebsite" Content="Website:" HorizontalAlignment="Left" Margin="290,123,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
         <Label x:Name="lblDateFrom" Content="Begindatum:" HorizontalAlignment="Left" Margin="290,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
@@ -30,11 +30,11 @@
         <Label x:Name="lblHousenumber" Content="Nr:" HorizontalAlignment="Left" Margin="503,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
         <Label x:Name="lblCity_" Content="Stad:" HorizontalAlignment="Left" Margin="290,257,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
         <Label x:Name="lblCountry" Content="Land:" HorizontalAlignment="Left" Margin="290,283,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
-        <TextBox x:Name="txtStreetname" HorizontalAlignment="Left" Height="23" Margin="407,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
-        <TextBox x:Name="txtPostalCode" HorizontalAlignment="Left" Height="23" Margin="407,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="91"/>
-        <TextBox x:Name="txtHousenumber" HorizontalAlignment="Left" Height="23" Margin="534,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
-        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Height="23" Margin="407,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
-        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Height="23" Margin="407,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
+        <TextBox x:Name="txtStreetname" HorizontalAlignment="Left" Height="23" Margin="407,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewCustomer.Street}"/>
+        <TextBox x:Name="txtPostalCode" HorizontalAlignment="Left" Height="23" Margin="407,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="91" Text="{Binding NewCustomer.PostalCode}"/>
+        <TextBox x:Name="txtHousenumber" HorizontalAlignment="Left" Height="23" Margin="534,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" Text="{Binding NewCustomer.HouseNumber}"/>
+        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Height="23" Margin="407,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewCustomer.City}"/>
+        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Height="23" Margin="407,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewCustomer.Country}"/>
 
     </Grid>
 </Window>

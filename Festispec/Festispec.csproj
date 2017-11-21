@@ -99,6 +99,7 @@
     <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateViewModelFactory.cs" />
+    <Compile Include="ViewModels\InspectionProcessing\CustomerVM.cs" />
     <Compile Include="ViewModels\Interface\IAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Interface\IEntityViewModel.cs" />
     <Compile Include="ViewModels\Factory\Interface\ITemplateViewModelFactory.cs" />

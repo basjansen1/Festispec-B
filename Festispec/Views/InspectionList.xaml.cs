@@ -23,10 +23,5 @@ namespace Festispec.Views
         {
             InitializeComponent();
         }
-
-        private void dgInspections_Selected(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
