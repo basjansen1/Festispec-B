@@ -15,13 +15,18 @@ using System.Windows.Shapes;
 namespace Festispec.Views
 {
     /// <summary>
-    /// Interaction logic for InspecitonList.xaml
+    /// Interaction logic for InspectionList.xaml
     /// </summary>
-    public partial class InspecitonList : Window
+    public partial class InspectionList : Window
     {
-        public InspecitonList()
+        public InspectionList()
         {
             InitializeComponent();
+        }
+
+        private void dgInspections_Selected(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
