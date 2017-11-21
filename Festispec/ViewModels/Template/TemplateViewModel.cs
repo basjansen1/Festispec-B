@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
@@ -82,24 +83,31 @@ namespace Festispec.ViewModels.Template
 
         public override void Save()
         {
-            Domain.Template updated;
-            using (var templateRepository = RepositoryFactory.CreateRepository())
+            try
             {
-                updated = UpdatedEntity.Id == 0
-                    ? templateRepository.Add(UpdatedEntity)
-                    : templateRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                Domain.Template updated;
+                using (var templateRepository = RepositoryFactory.CreateRepository())
+                {
+                    updated = UpdatedEntity.Id == 0
+                        ? templateRepository.Add(UpdatedEntity)
+                        : templateRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                }
+
+                // Map updated values
+                Entity.Id = updated.Id;
+                Entity.Name = updated.Name;
+                Entity.Description = updated.Description;
+
+                foreach (var templateQuestionViewModel in QuestionsWithDeleted)
+                {
+                    // Manually attach the template by id
+                    templateQuestionViewModel.UpdatedEntity.Template_Id = Entity.Id;
+                    templateQuestionViewModel.Save();
+                }
             }
-
-            // Map updated values
-            Entity.Id = updated.Id;
-            Entity.Name = updated.Name;
-            Entity.Description = updated.Description;
-
-            foreach (var templateQuestionViewModel in QuestionsWithDeleted)
+            catch
             {
-                // Manually attach the template by id
-                templateQuestionViewModel.UpdatedEntity.Template_Id = Entity.Id;
-                templateQuestionViewModel.Save();
+                MessageBox.Show("Er is iets foutgegaan.");
             }
         }
 
