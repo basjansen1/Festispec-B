@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec.Views"
         mc:Ignorable="d"
-        Title="ProcessInspection" Height="300" Width="600">
+        Title="ProcessInspection" Height="300" Width="600" DataContext="{Binding GetEditInspection, Source={StaticResource Locator}}" ResizeMode="NoResize">
     <Grid>
-        <Button x:Name="txtCancel" Content="Cancel" HorizontalAlignment="Left" Margin="382,239,0,0" VerticalAlignment="Top" Width="75" IsCancel="True"/>
-        <Button x:Name="btnConfirmEdit" Content="Verzoek aanpassen" HorizontalAlignment="Left" Margin="462,239,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="txtCancel" Content="Cancel" HorizontalAlignment="Left" Margin="367,227,0,0" VerticalAlignment="Top" Width="75" IsCancel="True" FontSize="11"/>
+        <Button x:Name="btnConfirmEdit" Content="Verzoek aanpassen" HorizontalAlignment="Left" Margin="447,227,0,0" VerticalAlignment="Top" Width="135" FontSize="11"/>
         <Label x:Name="lblKvk" Content="Kvk nummer:" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblCustomerName" Content="Klantnaam:" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblKlantnaam_Copy" Content="Email:" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top"/>

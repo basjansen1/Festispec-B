@@ -44,6 +44,9 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<TemplateAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<AddQuestionViewModel>();
             SimpleIoc.Default.Register<InspectionListVM>();
+            SimpleIoc.Default.Register<AddInspectionVM>();
+            SimpleIoc.Default.Register<EditInspectionVM>();
+            SimpleIoc.Default.Register<ProcessInspectionVM>();
         }
 
         private static void RegisterNavigationService()
@@ -98,6 +101,27 @@ namespace Festispec.ViewModels
             get
             {
                 return ServiceLocator.Current.GetInstance<InspectionListVM>();
+            }
+        }
+        public AddInspectionVM GetAddInspection
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AddInspectionVM>();
+            }
+        }
+        public EditInspectionVM GetEditInspection
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<EditInspectionVM>();
+            }
+        }
+        public ProcessInspectionVM GetProcessInspection
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ProcessInspectionVM>();
             }
         }
         #endregion

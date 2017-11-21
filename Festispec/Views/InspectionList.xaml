@@ -5,9 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec.Views"
         mc:Ignorable="d"
-        Title="ProcessInspection" Height="610" Width="810" DataContext="{Binding GetInspectionList, Source={StaticResource Locator}}" ResizeMode="NoResize"
-        >        
-    <Grid>
+        Title="ProcessInspection" Height="610" Width="810" DataContext="{Binding GetInspectionList, Source={StaticResource Locator}}" ResizeMode="NoResize">
+<Grid>
         <DataGrid x:Name="dgInspections" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="280" Width="780" ScrollViewer.CanContentScroll="True" 
       ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding InspectionVMList}" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}">
             <DataGrid.Columns>
