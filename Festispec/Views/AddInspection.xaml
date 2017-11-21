@@ -30,7 +30,7 @@
         <Label x:Name="lblHousenumber" Content="Nr:" HorizontalAlignment="Left" Margin="503,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
         <Label x:Name="lblCity_" Content="Stad:" HorizontalAlignment="Left" Margin="290,257,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
         <Label x:Name="lblCountry" Content="Land:" HorizontalAlignment="Left" Margin="290,283,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
-        <TextBox x:Name="txtStreetname" HorizontalAlignment="Left" Height="23" Margin="407,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewInspection.Addres.Street}"/>
+        <TextBox x:Name="txtStreetname" HorizontalAlignment="Left" Height="23" Margin="407,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
         <TextBox x:Name="txtPostalCode" HorizontalAlignment="Left" Height="23" Margin="407,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="91"/>
         <TextBox x:Name="txtHousenumber" HorizontalAlignment="Left" Height="23" Margin="534,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
         <TextBox x:Name="txtCity" HorizontalAlignment="Left" Height="23" Margin="407,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
