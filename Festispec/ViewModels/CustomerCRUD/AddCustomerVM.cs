@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Festispec.ViewModels.CustomerCRUD
@@ -23,15 +24,13 @@ namespace Festispec.ViewModels.CustomerCRUD
 
         private void ReturnToMenu()
         {
-
             var window = new CustomersOverviewWindow();
             window.Show();
+            Application.Current.MainWindow.Close();
         }
 
         private void AddCustomerToList()
         {
-
-
 
             //TODO: Add customer to database
         }

@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Festispec.ViewModels.CustomerCRUD
@@ -33,6 +34,7 @@ namespace Festispec.ViewModels.CustomerCRUD
         {   
             var window = new MainWindow();
             window.Show();
+            Application.Current.MainWindow.Close();
         }
 
 
@@ -40,12 +42,14 @@ namespace Festispec.ViewModels.CustomerCRUD
         {
             var window = new EditCustomerWindow();
             window.Show();
+            Application.Current.MainWindow.Close();
         }
 
         private void AddCustomerWindow()
         {
             var window = new AddCustomerWindow();
             window.Show();
+            Application.Current.MainWindow.Close();
         }
     }
 }

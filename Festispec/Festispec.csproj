@@ -98,6 +98,7 @@
     <Compile Include="ViewModels\CustomerCRUD\AddCustomerVM.cs" />
     <Compile Include="ViewModels\CustomerCRUD\CustomersOverviewVM.cs" />
     <Compile Include="ViewModels\CustomerCRUD\CustomerVM.cs" />
+    <Compile Include="ViewModels\CustomerCRUD\EditCustomerVM.cs" />
     <Compile Include="ViewModels\EntityViewModelBase.cs" />
     <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
@@ -130,6 +131,9 @@
     <Compile Include="Views\CustomerCRUD\CustomersOverviewWindow.xaml.cs">
       <DependentUpon>CustomersOverviewWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CustomerCRUD\EditCustomerWindow.xaml.cs">
+      <DependentUpon>EditCustomerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Template\AddQuestion.xaml.cs">
       <DependentUpon>AddQuestion.xaml</DependentUpon>
     </Compile>
@@ -159,6 +163,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CustomerCRUD\CustomersOverviewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CustomerCRUD\EditCustomerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

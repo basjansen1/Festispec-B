@@ -6,12 +6,13 @@
         xmlns:local="clr-namespace:Festispec.Views.CustomerCRUD"
         mc:Ignorable="d"
         Title="EditCustomerWindow" Height="300" Width="300"
-        DataContext="{Binding Source={StaticResource Locator}, Path=EditCustomer}"
+        DataContext="{Binding Source={StaticResource Locator}, Path=EditCustomer}" ResizeMode="CanMinimize"
 >
     <Grid>
         <Button Margin="0,0,468,520" RenderTransformOrigin="0.321,0.518" Command="{Binding BackCommand}">Terug</Button>
         <TextBox  ToolTip="Naam" Margin="69,94,317,440"></TextBox>
-        <TextBox ToolTip="Kantoorlocatie" Margin="312,276,74,258"></TextBox>
+        <TextBox ToolTip="Postcode" Margin="312,276,74,258"></TextBox>
+        <TextBox ToolTip="Stad"></TextBox>
         <TextBox ToolTip="Spreektaal klant" Margin="312,369,74,165"></TextBox>
         <TextBox ToolTip="Telefoonnummer Contactpersoon" Margin="69,184,317,350"></TextBox>
         <TextBox ToolTip="Email contactpersoon" Margin="69,277,317,257"></TextBox>
@@ -19,8 +20,9 @@
         <TextBlock Margin="69,353,317,174"><Run Text="Beschrijving klant (max 500)"/><LineBreak/><Run/></TextBlock>
         <TextBox ToolTip="Beschrijving klant" TextWrapping="Wrap" Margin="0,380,317,0.5"/>
 
+        <TextBlock>Stad</TextBlock>
         <TextBlock Margin="69,59,317,478">Naam klant</TextBlock>
-        <TextBlock Margin="312,241,74,296">Kantoorlocatie Klant</TextBlock>
+        <TextBlock Margin="312,241,74,296">Postcode</TextBlock>
         <TextBlock Margin="312,331,74,203">Spreektaal Klant</TextBlock>
         <TextBlock Margin="69,149,317,388">Telefoon Contactpersoon</TextBlock>
         <TextBlock Margin="69,239,317,295">Email contactperson</TextBlock>
