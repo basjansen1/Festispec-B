@@ -6,6 +6,7 @@ using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using System;
 
 namespace Festispec.ViewModels
 {
@@ -27,28 +28,31 @@ namespace Festispec.ViewModels
 
         private void Login(PasswordBox passwordBox)
         {
+            //Code so you don't need to enter username and password each run
+            var password = passwordBox.Password;           
+            if (Employee.Username == null) Employee.Username = "UsernameN";
+            if (passwordBox.Password == "") password = "123";
+
+
             Domain.Employee foundEmployee;
             var employee = new Employee()
             {
                 Username = Employee.Username,
-                Password = passwordBox.Password
+                //TODO: Change to passwordBox.Password in demo/live
+                Password = password
             };
 
             using (var loginRepository = _iLoginRepositoryFactory.CreateRepository())
             {
-                foundEmployee = loginRepository.Find(s => s.Username.Equals(employee.Username) && s.Password.Equals(employee.Password));
+                foundEmployee = loginRepository.Find(s => s.Username.Equals(employee.Username) && s.Password.Equals(employee.Password));              
             }
-
             if (foundEmployee != null)
             {
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 Application.Current.MainWindow.Close();
             }
-            else
-            {
-                MessageBox.Show("Gebruikersnaam of wachtwoord is verkeerd");
-            }
+            else MessageBox.Show("Gebruikersnaam of wachtwoord is verkeerd");
 
         }
     }
