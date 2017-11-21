@@ -15,9 +15,11 @@ namespace Festispec.Domain.PDF
 
         public PLanningListWriter()
         {
+            _planningList = new List<Planning>();
+
             using (var context = new FestispecContainer())
             {
-                _planningList = new List<Planning>(context.Planning.ToList());
+                context.Planning.ToList().ForEach(p => _planningList.Add(p));
             }
         }
         public void SetTitle(string title)
