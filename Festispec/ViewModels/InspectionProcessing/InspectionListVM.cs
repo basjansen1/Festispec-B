@@ -85,8 +85,7 @@ namespace Festispec.ViewModels.RequestProcessing
             using(var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
                 InspectionVMList = new ObservableCollection<InspectionVM>(inspectionRepository.Get().ToList().Select(i => new InspectionVM(i)));
-            }
-            
+            }            
         }
 
         // methods

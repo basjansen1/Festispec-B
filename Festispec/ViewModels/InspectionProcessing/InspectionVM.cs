@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Festispec.ViewModels.RequestProcessing
 {
@@ -67,6 +68,8 @@ namespace Festispec.ViewModels.RequestProcessing
         {
             get
             {
+                //MessageBox.Show((_inspection.Customers == null).ToString());
+                //return _inspection.Customers.First();
                 return Customer;
             }
             set
