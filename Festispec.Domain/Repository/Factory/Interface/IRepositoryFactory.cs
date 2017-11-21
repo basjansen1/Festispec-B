@@ -1,11 +1,11 @@
-﻿using System.Data.Entity;
-using Festispec.Domain.Repository.Interface;
+﻿using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository.Factory.Interface
 {
-    public interface IRepositoryFactory<TEntity>
+    public interface IRepositoryFactory<out TRepository, TEntity>
+        where TRepository : IRepository<TEntity>
         where TEntity : class
     {
-        IRepository<TEntity> CreateRepository();
+        TRepository CreateRepository();
     }
 }

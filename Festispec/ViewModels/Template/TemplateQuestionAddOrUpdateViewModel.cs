@@ -1,20 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
-using Festispec.ViewModels.Template;
 
-namespace Festispec.ViewModels
+namespace Festispec.ViewModels.Template
 {
-    public class AddQuestionViewModel :
-        AddOrUpdateViewModelBase<ITemplateQuestionViewModelFactory, TemplateQuestionViewModel, TemplateQuestion>
+    public class TemplateQuestionAddOrUpdateViewModel :
+        AddOrUpdateViewModelBase
+            <ITemplateQuestionViewModelFactory, TemplateQuestionViewModel, ITemplateQuestionRepository, TemplateQuestion
+                >
     {
-        public AddQuestionViewModel(INavigationService navigationService,
-            ITemplateQuestionRepositoryFactory repositoryFactory, ITemplateQuestionViewModelFactory viewModelFactory, IQuestionTypeRepositoryFactory questionTypeRepositoryFactory)
+        protected TemplateViewModel TemplateViewModel;
+
+        public TemplateQuestionAddOrUpdateViewModel(INavigationService navigationService,
+            ITemplateQuestionRepositoryFactory repositoryFactory, ITemplateQuestionViewModelFactory viewModelFactory,
+            IQuestionTypeRepositoryFactory questionTypeRepositoryFactory)
             : base(navigationService, repositoryFactory, viewModelFactory)
         {
             using (var questionTypeRepository = questionTypeRepositoryFactory.CreateRepository())
@@ -23,15 +27,13 @@ namespace Festispec.ViewModels
             }
         }
 
-        private TemplateViewModel _templateViewModel;
-
         public IEnumerable<QuestionType> QuestionTypes { get; }
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
             if (args.PropertyName != "CurrentPageKey") return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.AddQuestion.Key) return;
+            if (NavigationService.CurrentPageKey != Routes.Routes.TemplateQuestionAddOrUpdate.Key) return;
 
             UpdateEntityViewModelFromNavigationParameter();
         }
@@ -39,29 +41,33 @@ namespace Festispec.ViewModels
         protected override void UpdateEntityViewModelFromNavigationParameter()
         {
             var templateViewModel = NavigationService.Parameter as TemplateViewModel;
-            // Create copy or new instance of TEntityViewModel
             if (templateViewModel == null) return;
 
-            _templateViewModel = templateViewModel;
+            TemplateViewModel = templateViewModel;
 
-            if (_templateViewModel.SelectedQuestion != null)
+            if (TemplateViewModel.SelectedQuestion != null)
             {
-                EntityViewModel = _templateViewModel.SelectedQuestion;
+                EntityViewModel = TemplateViewModel.SelectedQuestion;
             }
             else
             {
                 EntityViewModel = ViewModelFactory.CreateViewModel();
 
-                EntityViewModel.Template = _templateViewModel.Entity;
+                EntityViewModel.Template = TemplateViewModel.Entity;
+                EntityViewModel.Template_Id = templateViewModel.Id;
             }
         }
 
         public override void Save()
         {
-//            EntityViewModel.Template.Questions.Add(EntityViewModel.Entity);
-            EntityViewModel.Save();
+            //TODO: Validation
+            
+            GoBack();
+        }
 
-            NavigationService.GoBack(_templateViewModel);
+        public override void GoBack()
+        {
+            base.GoBack(TemplateViewModel);
         }
     }
 }

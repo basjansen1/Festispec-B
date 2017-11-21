@@ -1,19 +1,29 @@
 ﻿using System.Collections.Generic;
-using Festispec.Domain;
+using System.Linq;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
+using Festispec.ViewModels.Factory.Interface;
 
 namespace Festispec.ViewModels.Template
 {
-    public class TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, Domain.Template>
+    public class
+        TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, ITemplateRepository, Domain.Template>
     {
-        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory) : base(repositoryFactory)
+        private readonly ITemplateQuestionViewModelFactory _templateQuestionViewModelFactory;
+
+        private TemplateQuestionViewModel _selectedQuestion;
+
+        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory,
+            ITemplateQuestionViewModelFactory templateQuestionViewModelFactory) : base(repositoryFactory)
         {
+            _templateQuestionViewModelFactory = templateQuestionViewModelFactory;
         }
 
-        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory, Domain.Template entity)
+        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory,
+            ITemplateQuestionViewModelFactory templateQuestionViewModelFactory, Domain.Template entity)
             : base(repositoryFactory, entity)
         {
+            _templateQuestionViewModelFactory = templateQuestionViewModelFactory;
         }
 
         public int Id => Entity.Id;
@@ -45,29 +55,51 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        public ICollection<TemplateQuestion> Questions
+        public ICollection<TemplateQuestionViewModel> Questions
         {
-            get { return Entity.Questions; }
+            get { return QuestionsWithDeleted.Where(model => !model.IsDeleted).ToList(); }
             set
             {
-                Entity.Questions = value;
+                Entity.Questions = value.Select(templateQuestionViewModel => templateQuestionViewModel.Entity).ToList();
                 RaisePropertyChanged();
             }
         }
 
-        public TemplateQuestionViewModel SelectedQuestion { get; set; }
+        private IEnumerable<TemplateQuestionViewModel> QuestionsWithDeleted => Entity.Questions
+            .Select(
+                templateQuestion => _templateQuestionViewModelFactory?.CreateViewModel(templateQuestion))
+            .ToList();
+
+        public TemplateQuestionViewModel SelectedQuestion
+        {
+            get { return _selectedQuestion; }
+            set
+            {
+                _selectedQuestion = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public override void Save()
         {
-            // Map updated values
-//            Entity.Id = UpdatedEntity.Id;
-//            Entity.Name = UpdatedEntity.Name;
-//            Entity.Description = UpdatedEntity.Description;
-//            Entity.Questions = UpdatedEntity.Questions;
-
+            Domain.Template updated;
             using (var templateRepository = RepositoryFactory.CreateRepository())
             {
-                var updated = templateRepository.AddOrUpdate(Entity);
+                updated = UpdatedEntity.Id == 0
+                    ? templateRepository.Add(UpdatedEntity)
+                    : templateRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+            }
+
+            // Map updated values
+            Entity.Id = updated.Id;
+            Entity.Name = updated.Name;
+            Entity.Description = updated.Description;
+
+            foreach (var templateQuestionViewModel in QuestionsWithDeleted)
+            {
+                // Manually attach the template by id
+                templateQuestionViewModel.UpdatedEntity.Template_Id = Entity.Id;
+                templateQuestionViewModel.Save();
             }
         }
 
@@ -86,7 +118,7 @@ namespace Festispec.ViewModels.Template
                 Id = Id,
                 Name = Name,
                 Description = Description,
-                Questions = Questions
+                Questions = Entity.Questions
             };
         }
     }
