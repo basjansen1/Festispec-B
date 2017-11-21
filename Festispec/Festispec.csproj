@@ -97,6 +97,7 @@
     <Compile Include="ViewModels\AddQuestionViewModel.cs" />
     <Compile Include="ViewModels\CustomerCRUD\AddCustomerVM.cs" />
     <Compile Include="ViewModels\CustomerCRUD\CustomersOverviewVM.cs" />
+    <Compile Include="ViewModels\CustomerCRUD\CustomerVM.cs" />
     <Compile Include="ViewModels\EntityViewModelBase.cs" />
     <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
