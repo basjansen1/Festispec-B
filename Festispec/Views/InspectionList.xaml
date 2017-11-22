@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec.Views"
         mc:Ignorable="d"
-        Title="ProcessInspection" Height="610" Width="810" DataContext="{Binding GetInspectionList, Source={StaticResource Locator}}" ResizeMode="NoResize">        
+        Title="Inspection List" Height="610" Width="810" DataContext="{Binding GetInspectionList, Source={StaticResource Locator}}" ResizeMode="NoResize">        
     <Grid>
         <DataGrid x:Name="dgInspections" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="280" Width="780" ScrollViewer.CanContentScroll="True" 
       ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding InspectionVMList}" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}">
@@ -14,6 +14,7 @@
                 <DataGridTextColumn Header="Naam verzoek" Width="2*" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Begin inspectie" Width="2*" Binding="{Binding StartDate}"/>
                 <DataGridTextColumn Header="Plaats" Width="2*" Binding="{Binding City}"/>
+                <DataGridTextColumn Header="Status" Width="2*" Binding="{Binding Status}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Border x:Name="bdMap" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="214" Margin="575,325,0,0" VerticalAlignment="Top" Width="215" RenderTransformOrigin="0.766,0.523">
@@ -47,5 +48,7 @@
         <Label x:Name="lblCountry" Content="Land:" HorizontalAlignment="Left" Margin="294,493,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
         <TextBox x:Name="txtPostalCode_Copy" HorizontalAlignment="Left" Height="23" Margin="383,493,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.Country}"/>
         <Button x:Name="addInspection" Content="Voeg een inspectie toe" HorizontalAlignment="Left" Margin="10,548,0,0" VerticalAlignment="Top" Width="125" Height="22" FontSize="11" Command="{Binding ShowAddInspectionWindowCommand}"/>
+        <Label x:Name="lblStatus" Content="Status:" HorizontalAlignment="Left" Margin="21,493,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
+        <TextBox x:Name="txtStatus" HorizontalAlignment="Left" Height="23" Margin="108,493,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.Status}"/>
     </Grid>
 </Window>

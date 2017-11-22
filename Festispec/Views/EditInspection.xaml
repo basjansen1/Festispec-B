@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec.Views"
         mc:Ignorable="d"
-        Title="ProcessInspection" Height="300" Width="600" DataContext="{Binding GetEditInspection, Source={StaticResource Locator}}" ResizeMode="NoResize">
+        Title="Edit Inspection" Height="300" Width="600" DataContext="{Binding GetEditInspection, Source={StaticResource Locator}}" ResizeMode="NoResize">
     <Grid>
         <Button x:Name="txtCancel" Content="Cancel" HorizontalAlignment="Left" Margin="367,227,0,0" VerticalAlignment="Top" Width="75" IsCancel="True" FontSize="11"/>
         <Button x:Name="btnConfirmEdit" Content="Verzoek aanpassen" HorizontalAlignment="Left" Margin="447,227,0,0" VerticalAlignment="Top" Width="135" FontSize="11"/>
@@ -35,6 +35,8 @@
         <TextBox x:Name="txtCity" HorizontalAlignment="Left" Height="23" Margin="407,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
         <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Height="23" Margin="407,193,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
         <TextBox x:Name="txtKvk_Copy" HorizontalAlignment="Left" Height="23" Margin="100,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" IsEnabled="False"/>
+        <Label x:Name="lblStatus" Content="Status:" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.644,2.391"/>
+        <ComboBox x:Name="cbStatus" HorizontalAlignment="Left" Margin="100,188,0,0" VerticalAlignment="Top" Width="175"/>
 
     </Grid>
 </Window>

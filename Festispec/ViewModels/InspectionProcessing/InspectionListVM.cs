@@ -35,15 +35,6 @@ namespace Festispec.ViewModels.RequestProcessing
             }
         }
 
-
-        public string City
-        {
-            get
-            {
-                return _customer.City;
-            }
-        }
-
         public IInspectionRepositoryFactory InspectionRepositoryFactory;
 
         // Commands
@@ -51,7 +42,6 @@ namespace Festispec.ViewModels.RequestProcessing
         public ICommand ShowEditInspectionWindowCommand { get; set; }
         public ICommand ShowProcessInspectionWindowCommand { get; set; }
         public ICommand DeleteInspectionCommand { get; set; }
-        public ICommand FilterInspectionVMListCommand { get; set; }
 
         // fields
         private InspectionVM _selectedInspection;
