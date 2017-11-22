@@ -143,6 +143,30 @@ namespace Festispec.ViewModels.InspectionProcessing
             }
         }
 
+        public string KVK
+        {
+            get
+            {
+                return _customer.KVK;
+            }
+            set
+            {
+                _customer.KVK = value;
+            }
+        }
+
+        public int ID
+        {
+            get
+            {
+                return _customer.Id;
+            }
+            set
+            {
+                _customer.Id = value;
+            }
+        }
+
         private Customer _customer;
 
         public CustomerVM()

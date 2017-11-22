@@ -55,7 +55,6 @@ namespace Festispec.ViewModels.RequestProcessing
         // constructor
         public InspectionListVM(IInspectionRepositoryFactory inspectionRepositoryFactory)
         {
-            List<InspectionVM> InspectionList;
             InspectionRepositoryFactory = inspectionRepositoryFactory;
 
             // instantiate commands 

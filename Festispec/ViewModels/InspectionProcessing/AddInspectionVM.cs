@@ -20,9 +20,23 @@ namespace Festispec.ViewModels.RequestProcessing
         public InspectionListVM InspectionList { get; set; }
         public InspectionVM NewInspection { get; set; }
         public CustomerVM NewCustomer { get; set; }
-        public List<Customer> CustomerList { get; set; }
-
+        public List<CustomerVM> CustomerList { get; set; }
+        public CustomerVM SelectedCustomer
+        {
+            get
+            {
+                return _customer;
+            }
+            set
+            {
+                _customer = value;
+                MessageBox.Show(_customer.Email);
+                NewInspection.CustomerId = _customer.ID;
+                RaisePropertyChanged("customer");
+            }
+        }
         public ICommand AddInspectionCommand { get; set; }
+        public ICommand CloseWindowCommand { get; set; }
 
         public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory)
         {
@@ -34,14 +48,17 @@ namespace Festispec.ViewModels.RequestProcessing
             NewInspection.CustomerId = 11;
 
             NewInspection.Location = DbGeography.PointFromText("POINT(50 5)", 4326);
-            CustomerList = new List<Customer>();
+            CustomerList = new List<CustomerVM>();
             AddInspectionCommand = new RelayCommand(AddInspection);
+            CloseWindowCommand = new RelayCommand(InspectionList.HideAddInspectionWindow); 
 
             using(var customerRepository = customerRepositoryFactory.CreateRepository())
             {
-                customerRepository.Get().ToList().ForEach(c => CustomerList.Add(c));
+                customerRepository.Get().ToList().ForEach(c => CustomerList.Add(new CustomerVM(c)));
             }
         }
+
+        private CustomerVM _customer;
 
         public bool CanAddInspection()
         {
@@ -50,12 +67,7 @@ namespace Festispec.ViewModels.RequestProcessing
                 && NewInspection.Status != null && NewInspection.Street != null
                 && NewInspection.HouseNumber != null && NewInspection.PostalCode != null
                 && NewInspection.Country != null && NewInspection.City != null
-                && NewInspection.Municipality != null
-               // && NewInspection.Location != null
-                //&& NewCustomer.City != null && NewCustomer.Country != null && NewCustomer.Email != null 
-                //&& NewCustomer.FirstName != null && NewCustomer.LastName != null
-                //&& NewCustomer.PostalCode != null && NewCustomer.Street!= null
-                //&& NewCustomer.Telephone != null
+                && NewInspection.Municipality != null && SelectedCustomer != null
                 )
                 return true;
 
