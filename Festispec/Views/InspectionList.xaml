@@ -5,21 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec.Views"
         mc:Ignorable="d"
-        Title="ProcessInspection" Height="610" Width="810" DataContext="{Binding GetInspectionList, Source={StaticResource Locator}}">        
+        Title="ProcessInspection" Height="610" Width="810" DataContext="{Binding GetInspectionList, Source={StaticResource Locator}}" ResizeMode="NoResize">        
     <Grid>
         <DataGrid x:Name="dgInspections" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="280" Width="780" ScrollViewer.CanContentScroll="True" 
       ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding InspectionVMList}" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Klantnaam" Width="2*" Binding="{Binding CustomerName}"/>
+                <DataGridTextColumn Header="Klantnaam" Width="2*" Binding="{Binding Customer.Name}"/>
                 <DataGridTextColumn Header="Naam verzoek" Width="2*" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Begin inspectie" Width="2*" Binding="{Binding StartDate}"/>
-                <DataGridTextColumn Header="Plaats" Width="2*" Binding="{Binding }"/>
+                <DataGridTextColumn Header="Plaats" Width="2*" Binding="{Binding City}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Border x:Name="bdMap" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="214" Margin="575,325,0,0" VerticalAlignment="Top" Width="215" RenderTransformOrigin="0.766,0.523">
             <Label x:Name="label" Content="Placeholder kaart"/>
         </Border>
-        <Button x:Name="btnManage" Content="Beheer inspectie" HorizontalAlignment="Left" Margin="665,544,0,0" VerticalAlignment="Top" Width="125" Height="22" FontSize="11"/>
+        <Button x:Name="btnManage" Content="Beheer inspectie" HorizontalAlignment="Left" Margin="665,544,0,0" VerticalAlignment="Top" Width="125" Height="22" FontSize="11" />
         <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="25" Margin="522,10,0,0" TextWrapping="Wrap" Text="Zoek inspectie" VerticalAlignment="Top" Width="163" Opacity="0.7"/>
 
         <Button x:Name="btnSearch" Content="Zoeken" HorizontalAlignment="Left" Margin="690,10,0,0" VerticalAlignment="Top" Width="98"/>
@@ -49,7 +49,6 @@
         <TextBox x:Name="txtHouseNumber" HorizontalAlignment="Left" Height="23" Margin="504,467,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" IsEnabled="False" Text="{Binding SelectedInspection.HouseNumber}"/>
         <Label x:Name="lblCountry" Content="Land:" HorizontalAlignment="Left" Margin="294,493,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
         <TextBox x:Name="txtPostalCode_Copy" HorizontalAlignment="Left" Height="23" Margin="383,493,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.Country}"/>
-
         <Button x:Name="addInspection" Content="Voeg een inspectie toe" HorizontalAlignment="Left" Margin="10,548,0,0" VerticalAlignment="Top" Width="125" Height="22" FontSize="11" Command="{Binding ShowAddInspectionWindowCommand}"/>
     </Grid>
 </Window>
