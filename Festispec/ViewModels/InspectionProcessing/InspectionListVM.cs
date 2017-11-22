@@ -38,11 +38,10 @@ namespace Festispec.ViewModels.RequestProcessing
         public IInspectionRepositoryFactory InspectionRepositoryFactory;
 
         // Commands
-        public ICommand ShowAddInspectionWindowCommand;
-        public ICommand ShowEditInspectionWindowCommand;
-        public ICommand ShowProcessInspectionWindowCommand;
-        public ICommand DeleteInspectionCommand;
-        public ICommand FilterInspectionVMListCommand;
+        public ICommand ShowAddInspectionWindowCommand { get; set; }
+        public ICommand ShowEditInspectionWindowCommand { get; set; }
+        public ICommand ShowProcessInspectionWindowCommand { get; set; }
+        public ICommand DeleteInspectionCommand { get; set; }
 
         // fields
         private InspectionVM _selectedInspection;
@@ -63,8 +62,7 @@ namespace Festispec.ViewModels.RequestProcessing
             ShowProcessInspectionWindowCommand = new RelayCommand(ShowProcessInspectionWindow);
             DeleteInspectionCommand = new RelayCommand(DeleteSelectedInspection);
 
-            
-            // instantiate views   
+           // MessageBox.Show((InspectionRepositoryFactory.CreateRepository().Get().Count()).ToString());   
             using(var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
                 InspectionVMList = new ObservableCollection<InspectionVM>(inspectionRepository.Get().ToList().Select(i => new InspectionVM(i)));
