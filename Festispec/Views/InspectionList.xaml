@@ -10,7 +10,7 @@
         <DataGrid x:Name="dgInspections" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="280" Width="780" ScrollViewer.CanContentScroll="True" 
       ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding InspectionVMList}" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Klantnaam" Width="2*" Binding="{Binding Customer.FirstName}"/>
+                <DataGridTextColumn Header="Klantnaam" Width="2*" Binding="{Binding CustomerName}"/>
                 <DataGridTextColumn Header="Naam verzoek" Width="2*" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Begin inspectie" Width="2*" Binding="{Binding StartDate}"/>
                 <DataGridTextColumn Header="Plaats" Width="2*" Binding="{Binding }"/>
