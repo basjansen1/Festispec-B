@@ -6,27 +6,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Festispec.ViewModels.RequestProcessing
 {
     public class EditInspectionVM : ViewModelBase
     {
-        // getters and setters
         public InspectionListVM InspectionList { get; set; }
-
-        // commands
         public ICommand EditInspectionCommand { get; set; }
 
-        // fields
         private IRepository<Inspection> _inspectionRepository;
 
-        // constructors
         public EditInspectionVM(InspectionVM InspectionVM)
         {
         }
 
-        // methods
         public bool CanEditInspection()
         {
             if (InspectionList.SelectedInspection.Name != null && InspectionList.SelectedInspection.StartDate != null
@@ -45,6 +40,8 @@ namespace Festispec.ViewModels.RequestProcessing
                     inspectionRepository.Add(InspectionList.SelectedInspection.toModel());
                 }
             }
+            else
+                MessageBox.Show("Er is iets fout gegaan met het bewerken van een inspectie");
         }
     }
 }
