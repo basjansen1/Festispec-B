@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec.Views"
         mc:Ignorable="d"
-        Title="ProcessInspection" Height="400" Width="600" DataContext="{Binding GetAddInspection, Source={StaticResource Locator}}" ResizeMode="NoResize">
+        Title="Add Inspection" Height="400" Width="600" DataContext="{Binding GetAddInspection, Source={StaticResource Locator}}" ResizeMode="NoResize">
     <Grid>
         <Button x:Name="txtCancel" Content="Cancel" HorizontalAlignment="Left" Margin="361,327,0,0" VerticalAlignment="Top" Width="75" IsCancel="True" FontSize="11"/>
         <Button x:Name="btnAddInspection" Content="Verzoek toevoegen" HorizontalAlignment="Left" Margin="441,327,0,0" VerticalAlignment="Top" Width="141" FontSize="11" Command="{Binding AddInspectionCommand}"/>

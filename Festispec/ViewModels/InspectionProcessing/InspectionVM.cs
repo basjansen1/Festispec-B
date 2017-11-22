@@ -126,13 +126,24 @@ namespace Festispec.ViewModels.RequestProcessing
                 RaisePropertyChanged("Country");
             }
         }
+        public string Status
+        {
+            get
+            {
+                return _inspection.Status_Status;
+            }
+            set
+            {
+                Status = value;
+                RaisePropertyChanged("Status");
+            }
+        }
 
         public Customer Customer
         {
             get
-            {//MessageBox.Show((_inspection.Customers == null).ToString());
+            {
                 return _inspection.Customers;
-                //return Customer;
             }
             set
             {

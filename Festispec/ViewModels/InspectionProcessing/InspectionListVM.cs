@@ -36,14 +36,15 @@ namespace Festispec.ViewModels.RequestProcessing
             }
         }
 
-         public IInspectionRepositoryFactory InspectionRepositoryFactory;
+        public IInspectionRepositoryFactory InspectionRepositoryFactory;
 
         // Commands
         public ICommand ShowAddInspectionWindowCommand { get; set; }
         public ICommand ShowEditInspectionWindowCommand { get; set; }
         public ICommand ShowProcessInspectionWindowCommand { get; set; }
         public ICommand DeleteInspectionCommand { get; set; }
-        
+
+
         // fields
         private InspectionVM _selectedInspection;
 

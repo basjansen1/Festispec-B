@@ -8,7 +8,7 @@
         Title="ProcessInspection" Height="610" Width="810" DataContext="{Binding GetProcessInspection, Source={StaticResource Locator}}" ResizeMode="NoResize">
     <Grid>
         <DataGrid x:Name="dgInspections" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="280" Width="780" ScrollViewer.CanContentScroll="True" 
-      ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding InspectionVM.InspectionVMList}" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}">
+      ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding InspectionVMList}" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Klantnaam" Width="2*"/>
                 <DataGridTextColumn Header="Naam verzoek" Width="2*"/>
