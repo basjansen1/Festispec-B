@@ -5,6 +5,7 @@ using Festispec.Domain.Repository.Interface;
 using System.Data.Entity.Spatial;
 using System;
 using System.Windows;
+using System.Linq;
 
 namespace Festispec.ViewModels.Inspector
 {
@@ -267,9 +268,18 @@ namespace Festispec.ViewModels.Inspector
                         ? InspectorRepository.Add(UpdatedEntity)
                         : InspectorRepository.Update(UpdatedEntity, UpdatedEntity.Id);
                 }
-                catch(Exception ex)
+                catch(System.Data.Entity.Validation.DbEntityValidationException ex)
                 {
-                    MessageBox.Show("Er is iets fout gegaan.");
+                    List<string> ErrorList = new List<string>();
+                    foreach (var eve in ex.EntityValidationErrors)
+                    {
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            ErrorList.Add(ve.PropertyName);
+                        }
+                    }
+                    string joined = string.Join(",", ErrorList.Select(x => x));
+                    MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
                 }
             }
         }
