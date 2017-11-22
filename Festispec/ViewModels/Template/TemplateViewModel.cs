@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using Festispec.Domain.Repository.Factory.Interface;
@@ -105,7 +106,7 @@ namespace Festispec.ViewModels.Template
                     templateQuestionViewModel.Save();
                 }
             }
-            catch
+            catch(Exception exception)
             {
                 MessageBox.Show("Er is iets foutgegaan.");
             }

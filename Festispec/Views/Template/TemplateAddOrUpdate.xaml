@@ -31,7 +31,6 @@
         <Label>Vragen</Label>
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding EntityViewModel.SelectedQuestion}" ItemsSource="{Binding EntityViewModel.Questions}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="#" Binding="{Binding UpdatedEntity.Id}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding UpdatedEntity.Name}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.RowStyle>
