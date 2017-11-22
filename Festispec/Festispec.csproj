@@ -14,6 +14,7 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -93,15 +94,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\InverseBooleanConverter.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="State\IState.cs" />
     <Compile Include="State\State.cs" />
     <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
-    <Compile Include="ViewModels\AddQuestionViewModel.cs" />
+    <Compile Include="ViewModels\Template\TemplateQuestionAddViewModel.cs" />
+    <Compile Include="ViewModels\Template\TemplateQuestionAddOrUpdateViewModel.cs" />
+    <Compile Include="ViewModels\Employees\EmployeeAddOrUpdateViewModel.cs" />
+    <Compile Include="ViewModels\Employees\EmployeeListViewModel.cs" />
+    <Compile Include="ViewModels\Employees\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\EntityViewModelBase.cs" />
+    <Compile Include="ViewModels\Factory\EmployeeViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\InspectorViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IEmployeeViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IInspectorViewModelFactory.cs" />
+    <Compile Include="ViewModels\Inspector\InspectorAddOrUpdateViewModel.cs" />
+    <Compile Include="ViewModels\Inspector\InspectorListViewModel.cs" />
+    <Compile Include="ViewModels\Inspector\InspectorViewModel.cs" />
     <Compile Include="ViewModels\Interface\IAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Interface\IEntityViewModel.cs" />
     <Compile Include="ViewModels\Factory\Interface\ITemplateViewModelFactory.cs" />
@@ -124,8 +137,23 @@
     <Compile Include="ViewModels\InspectionProcessing\InspectionListVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="Views\Template\AddQuestion.xaml.cs">
-      <DependentUpon>AddQuestion.xaml</DependentUpon>
+    <Compile Include="Views\Template\TemplateQuestionAdd.xaml.cs">
+      <DependentUpon>TemplateQuestionAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Template\TemplateQuestionAddOrUpdate.xaml.cs">
+      <DependentUpon>TemplateQuestionAddOrUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\EmployeeAddOrUpdate.xaml.cs">
+      <DependentUpon>EmployeeAddOrUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\EmployeeList.xaml.cs">
+      <DependentUpon>EmployeeList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inspector\InspectorAddOrUpdate.xaml.cs">
+      <DependentUpon>InspectorAddOrUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inspector\InspectorList.xaml.cs">
+      <DependentUpon>InspectorList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Template\TemplateList.xaml.cs">
       <DependentUpon>TemplateList.xaml</DependentUpon>
@@ -148,7 +176,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Template\AddQuestion.xaml">
+    <Page Include="Views\Template\TemplateQuestionAdd.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Template\TemplateQuestionAddOrUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Employee\EmployeeAddOrUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Employee\EmployeeList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Inspector\InspectorAddOrUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Inspector\InspectorList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,11 +239,11 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\Employees\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Festispec.Domain\Festispec.Domain.csproj">
       <Project>{09979796-e638-48d5-8666-fa0ac1f54a2e}</Project>

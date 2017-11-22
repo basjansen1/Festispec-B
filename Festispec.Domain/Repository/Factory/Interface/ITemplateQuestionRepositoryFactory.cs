@@ -1,6 +1,8 @@
-﻿namespace Festispec.Domain.Repository.Factory.Interface
+﻿using Festispec.Domain.Repository.Interface;
+
+namespace Festispec.Domain.Repository.Factory.Interface
 {
-    public interface ITemplateQuestionRepositoryFactory : IRepositoryFactory<TemplateQuestion>
+    public interface ITemplateQuestionRepositoryFactory : IRepositoryFactory<ITemplateQuestionRepository, TemplateQuestion>
     {
     }
 }

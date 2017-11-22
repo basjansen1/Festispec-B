@@ -14,19 +14,19 @@ namespace Festispec.ViewModels
     {
         private readonly ILoginRepositoryFactory _iLoginRepositoryFactory;
 
-        public ICommand _loginCommand { get; set; }
+        public ICommand LoginCommand { get; set; }
 
-        private IState _state;
+        private readonly IState _state;
 
-        public Employee Employee { get; set; }
+        public Domain.Employee Employee { get; set; }
         public LoginViewModel(ILoginRepositoryFactory iLoginRepositoryFactory, IState state)
         {
             _iLoginRepositoryFactory = iLoginRepositoryFactory;
             _state = state;
 
-            _loginCommand = new RelayCommand<PasswordBox>(Login);
+            LoginCommand = new RelayCommand<PasswordBox>(Login);
 
-            Employee = new Employee();
+            Employee = new Domain.Employee();
         }
 
         private void Login(PasswordBox passwordBox)
@@ -38,7 +38,7 @@ namespace Festispec.ViewModels
 
 
             Domain.Employee foundEmployee;
-            var employee = new Employee()
+            var employee = new Domain.Employee()
             {
                 Username = Employee.Username,
                 //TODO: Change to passwordBox.Password in demo/live
@@ -52,7 +52,7 @@ namespace Festispec.ViewModels
             if (foundEmployee != null)
             {
                 _state.CurrentUser = foundEmployee;
-                MainWindow mainWindow = new MainWindow();
+                var mainWindow = new MainWindow();
                 mainWindow.Show();
                 Application.Current.MainWindow.Close();
             }

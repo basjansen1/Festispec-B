@@ -22,18 +22,50 @@ namespace Festispec.Routes
             Roles = new[] { "Manager", "Medewerker" }
         };
 
-        public static Route AddQuestion = new Route
+        public static Route TemplateQuestionAddOrUpdate = new Route
         {
             Key = "AddQuestion",
             PageType = new Uri("../Views/Template/AddQuestion.xaml", UriKind.Relative),
             Roles = new[] { "Manager", "Medewerker" }
         };
 
-        public static Route UpdateQuestion = new Route
+        public static Route TemplateQuestionAdd = new Route
         {
             Key = "UpdateQuestion",
             PageType = new Uri("../Views/Template/AddQuestion.xaml", UriKind.Relative),
             Roles = new[] { "Manager", "Medewerker" }
+        };
+
+        #endregion
+
+        #region Employee
+
+        public static Route EmployeeList = new Route
+        {
+            Key = "EmployeeList",
+            PageType = new Uri("../Views/Employee/EmployeeList.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
+        };
+
+        public static Route EmployeeAddOrUpdate = new Route
+        {
+            Key = "EmployeeAddOrUpdate",
+            PageType = new Uri("../Views/Employee/EmployeeAddOrUpdate.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
+        };
+
+        public static Route InspectorList = new Route
+        {
+            Key = "InspectorList",
+            PageType = new Uri("../Views/Inspector/InspectorList.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
+        };
+
+        public static Route InspectorAddOrUpdate = new Route
+        {
+            Key = "InspectorAddOrUpdate",
+            PageType = new Uri("../Views/Inspector/InspectorAddOrUpdate.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
         };
 
         #endregion

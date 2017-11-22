@@ -108,7 +108,7 @@ namespace Festispec.NavigationService
             }
         }
 
-        private static MainWindow GetMainWindow()
+        public static MainWindow GetMainWindow()
         {
             return Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
         }
@@ -138,7 +138,7 @@ namespace Festispec.NavigationService
 
         public bool HasAccess(Route route)
         {
-            return route.Roles.Contains(_state.CurrentUser.Role_Role);
+            return route.Roles.Contains(_state.CurrentUser?.Role_Role);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -47,25 +47,7 @@ namespace Festispec.ViewModels.Template
 
             if (NavigationService.CurrentRoute != Routes.Routes.TemplateList) return;
 
-            UpdateTemplatesFromNavigationParameter();
-        }
-
-        private void UpdateTemplatesFromNavigationParameter()
-        {
-            var templateViewModel = NavigationService.Parameter as TemplateViewModel;
-            if (templateViewModel == null) return;
-
-            var existing = Templates.SingleOrDefault(template => template.Id == templateViewModel.Id);
-            if (existing == null)
-            {
-                Templates.Add(templateViewModel);
-            }
-            else
-            {
-                var index = Templates.IndexOf(existing);
-                Templates.RemoveAt(index);
-                Templates.Insert(index, templateViewModel);
-            }
+            LoadTemplates();
         }
 
         private void RegisterCommands()
@@ -75,7 +57,11 @@ namespace Festispec.ViewModels.Template
             NavigateToTemplateUpdateCommand = new RelayCommand(
                 () => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate, SelectedTemplate),
                 () => SelectedTemplate != null);
-            TemplateDeleteCommand = new RelayCommand(() => SelectedTemplate.Delete(), () => SelectedTemplate != null);
+            TemplateDeleteCommand = new RelayCommand(() =>
+            {
+                SelectedTemplate.Delete();
+                LoadTemplates();
+            }, () => SelectedTemplate != null);
             SearchCommand = new RelayCommand(LoadTemplates);
         }
 
