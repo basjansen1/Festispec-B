@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/10/2017 14:13:04
+-- Date Created: 11/19/2017 17:07:55
 -- Generated from EDMX file: C:\Workspace\Avans\Projects\42IN06SOb\Festispec\Festispec.Domain\Festispec.edmx
 -- --------------------------------------------------
 
@@ -29,11 +29,8 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_InspectionStatusInspection]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Address_Inspection] DROP CONSTRAINT [FK_InspectionStatusInspection];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CustomerInspection_Customer]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CustomerInspection] DROP CONSTRAINT [FK_CustomerInspection_Customer];
-GO
-IF OBJECT_ID(N'[dbo].[FK_CustomerInspection_Inspection]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[CustomerInspection] DROP CONSTRAINT [FK_CustomerInspection_Inspection];
+IF OBJECT_ID(N'[dbo].[FK_CustomerInspection]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Address_Inspection] DROP CONSTRAINT [FK_CustomerInspection];
 GO
 IF OBJECT_ID(N'[dbo].[FK_InspectionPlanning]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Planning] DROP CONSTRAINT [FK_InspectionPlanning];
@@ -130,9 +127,6 @@ GO
 IF OBJECT_ID(N'[dbo].[Question_InspectionQuestion]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Question_InspectionQuestion];
 GO
-IF OBJECT_ID(N'[dbo].[CustomerInspection]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[CustomerInspection];
-GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -146,7 +140,10 @@ CREATE TABLE [dbo].[Address] (
     [PostalCode] nvarchar(6)  NOT NULL,
     [City] nvarchar(max)  NOT NULL,
     [Country] nvarchar(max)  NOT NULL,
-    [Municipality] nvarchar(max)  NOT NULL
+    [Municipality] nvarchar(max)  NOT NULL,
+    [Location] geography  NOT NULL,
+    [Long] float  NOT NULL,
+    [Lat] float  NOT NULL
 );
 GO
 
@@ -186,7 +183,7 @@ CREATE TABLE [dbo].[Planning] (
     [Date] datetime  NOT NULL,
     [TimeFrom] time  NOT NULL,
     [TimeTo] time  NOT NULL,
-    [Hours] int  NULL
+    [Hours] time  NULL
 );
 GO
 
@@ -238,9 +235,9 @@ GO
 CREATE TABLE [dbo].[Address_Employee] (
     [Username] nvarchar(max)  NOT NULL,
     [Password] nvarchar(max)  NOT NULL,
-    [Id] int  NOT NULL,
     [Role_Role] nvarchar(64)  NOT NULL,
-    [Manager_Id] int  NOT NULL
+    [Manager_Id] int  NULL,
+    [Id] int  NOT NULL
 );
 GO
 
@@ -255,6 +252,7 @@ GO
 -- Creating table 'Address_Customer'
 CREATE TABLE [dbo].[Address_Customer] (
     [KVK] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
     [Id] int  NOT NULL
 );
 GO
@@ -265,32 +263,26 @@ CREATE TABLE [dbo].[Address_Inspection] (
     [Website] nvarchar(max)  NULL,
     [Start] datetime  NOT NULL,
     [End] datetime  NOT NULL,
-    [Id] int  NOT NULL,
-    [Status_Status] nvarchar(128)  NOT NULL
+    [Status_Status] nvarchar(128)  NOT NULL,
+    [Customer_Id] int  NOT NULL,
+    [Id] int  NOT NULL
 );
 GO
 
 -- Creating table 'Question_TemplateQuestion'
 CREATE TABLE [dbo].[Question_TemplateQuestion] (
-    [Id] int  NOT NULL,
-    [Template_Id] int  NOT NULL
+    [Template_Id] int  NOT NULL,
+    [Id] int  NOT NULL
 );
 GO
 
 -- Creating table 'Question_InspectionQuestion'
 CREATE TABLE [dbo].[Question_InspectionQuestion] (
     [Answer] nvarchar(max)  NULL,
-    [Id] int  NOT NULL,
     [Planning_Inspection_Id] int  NOT NULL,
     [Planning_Inspector_Id] int  NOT NULL,
-    [Planning_Date] datetime  NOT NULL
-);
-GO
-
--- Creating table 'CustomerInspection'
-CREATE TABLE [dbo].[CustomerInspection] (
-    [Customers_Id] int  NOT NULL,
-    [Inspections_Id] int  NOT NULL
+    [Planning_Date] datetime  NOT NULL,
+    [Id] int  NOT NULL
 );
 GO
 
@@ -400,12 +392,6 @@ ADD CONSTRAINT [PK_Question_InspectionQuestion]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Customers_Id], [Inspections_Id] in table 'CustomerInspection'
-ALTER TABLE [dbo].[CustomerInspection]
-ADD CONSTRAINT [PK_CustomerInspection]
-    PRIMARY KEY CLUSTERED ([Customers_Id], [Inspections_Id] ASC);
-GO
-
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -470,28 +456,19 @@ ON [dbo].[Address_Inspection]
     ([Status_Status]);
 GO
 
--- Creating foreign key on [Customers_Id] in table 'CustomerInspection'
-ALTER TABLE [dbo].[CustomerInspection]
-ADD CONSTRAINT [FK_CustomerInspection_Customer]
-    FOREIGN KEY ([Customers_Id])
+-- Creating foreign key on [Customer_Id] in table 'Address_Inspection'
+ALTER TABLE [dbo].[Address_Inspection]
+ADD CONSTRAINT [FK_CustomerInspection]
+    FOREIGN KEY ([Customer_Id])
     REFERENCES [dbo].[Address_Customer]
         ([Id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Inspections_Id] in table 'CustomerInspection'
-ALTER TABLE [dbo].[CustomerInspection]
-ADD CONSTRAINT [FK_CustomerInspection_Inspection]
-    FOREIGN KEY ([Inspections_Id])
-    REFERENCES [dbo].[Address_Inspection]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_CustomerInspection_Inspection'
-CREATE INDEX [IX_FK_CustomerInspection_Inspection]
-ON [dbo].[CustomerInspection]
-    ([Inspections_Id]);
+-- Creating non-clustered index for FOREIGN KEY 'FK_CustomerInspection'
+CREATE INDEX [IX_FK_CustomerInspection]
+ON [dbo].[Address_Inspection]
+    ([Customer_Id]);
 GO
 
 -- Creating foreign key on [Inspection_Id] in table 'Planning'

@@ -68,7 +68,7 @@ namespace Festispec.ViewModels.RequestProcessing
         {
             get
             {
-                return _inspection.Customers.First(); // ToDo: change relationship between inspection and customer to 1 -> 1
+                return _inspection.Customers; // ToDo: change relationship between inspection and customer to 1 -> 1
             }
             set
             {
