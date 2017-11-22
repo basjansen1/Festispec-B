@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Spatial;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -151,15 +152,15 @@ namespace Festispec.ViewModels.RequestProcessing
             }
         }
 
-        public string Location
+        public DbGeography Location
         {
             get
             {
-                return _inspection.Location.ToString();
+                return _inspection.Location;
             }
             set
             {
-             //   _inspection.Location = value;
+                _inspection.Location = value;
             }
         }
 

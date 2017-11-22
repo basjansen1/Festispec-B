@@ -35,8 +35,9 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<ITemplateQuestionRepositoryFactory, TemplateQuestionRepositoryFactory>();
             SimpleIoc.Default.Register<IQuestionTypeRepositoryFactory, QuestionTypeRepositoryFactory>();
             SimpleIoc.Default.Register<ITemplateQuestionViewModelFactory, TemplateQuestionViewModelFactory>();
-
             SimpleIoc.Default.Register<IInspectionRepositoryFactory, InspectionRepositoryFactory>();
+            SimpleIoc.Default.Register<ICustomerRepositoryFactory, CustomerRepositoryFactory>();
+
 
             // Register viewmodels
             SimpleIoc.Default.Register<MainViewModel>();

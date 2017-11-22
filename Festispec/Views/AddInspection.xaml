@@ -9,7 +9,7 @@
     <Grid>
         <Button x:Name="txtCancel" Content="Cancel" HorizontalAlignment="Left" Margin="363,377,0,0" VerticalAlignment="Top" Width="75" IsCancel="True" FontSize="11"/>
         <Button x:Name="btnAddInspection" Content="Verzoek toevoegen" HorizontalAlignment="Left" Margin="443,377,0,0" VerticalAlignment="Top" Width="141" FontSize="11" Command="{Binding AddInspectionCommand}"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="225" IsReadOnly="True" Text="{Binding Customer}"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="225" IsReadOnly="True" ItemsSource="{Binding CustomerList}"/>
         <Label x:Name="lblKvk" Content="Kvk nummer:" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label" Content="Zoek een klant:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblKlantnaam_Copy" Content="Email:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
@@ -38,6 +38,8 @@
         <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Height="23" Margin="407,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewInspection.Country}"/>
         <Label x:Name="lblLocation" Content="Locatie*:" HorizontalAlignment="Left" Margin="290,309,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
         <Label x:Name="lblMunicipality" Content="Gemeente*:" HorizontalAlignment="Left" Margin="290,335,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
+        <TextBox x:Name="txtLocationBox" HorizontalAlignment="Left" Height="23" Margin="407,311,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="test"/>
+        <TextBox x:Name="txtMunicipalityBox" HorizontalAlignment="Left" Height="23" Margin="407,338,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewInspection.Municipality}"/>
 
     </Grid>
 </Window>
