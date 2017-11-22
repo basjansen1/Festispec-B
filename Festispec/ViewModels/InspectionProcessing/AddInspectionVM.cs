@@ -6,29 +6,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Festispec.ViewModels.RequestProcessing
 {
     public class AddInspectionVM : ViewModelBase
     {
-        // getters and setters
         public InspectionListVM InspectionList { get; set; }
         public InspectionVM NewInspection { get; set; }
         public CustomerVM NewCustomer { get; set; }
 
-        // commands
         public ICommand AddInspectionCommand { get; set; }
 
-        // fields
-
-        // constructor
         public AddInspectionVM(InspectionListVM InspectionList)
         {
 
         }
 
-        // methods
         public bool CanAddInspection()
         {
             if (NewInspection.Name != null && NewInspection.StartDate != null
@@ -46,17 +41,24 @@ namespace Festispec.ViewModels.RequestProcessing
         {
             if (CanAddInspection())
             {
-                using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
+                try
                 {
-                    inspectionRepository.Add(NewInspection.toModel());
-                }
+                    using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
+                    {
+                        inspectionRepository.Add(NewInspection.toModel());
+                    }
 
-                InspectionList.InspectionVMList.Add(NewInspection);
+                    InspectionList.InspectionVMList.Add(NewInspection);
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Er is iets fout gegaan met het toevoegen van een inspectie!");
+                }
 
                 return;
             }
 
-            Console.WriteLine("Can't add inspection!");
+            MessageBox.Show("Er is iets fout gegaan met het toevoegen van een inspectie!");
         }
     }
 }
