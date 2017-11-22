@@ -134,8 +134,44 @@ namespace Festispec.ViewModels.RequestProcessing
             }
             set
             {
-                Status = value;
+                _inspection.Status_Status = value;
                 RaisePropertyChanged("Status");
+            }
+        }
+
+        public int CustomerId
+        {
+            get
+            {
+                return _inspection.Customer_Id;
+            }
+            set
+            {
+                _inspection.Customer_Id = value;
+            }
+        }
+
+        public string Location
+        {
+            get
+            {
+                return _inspection.Location.ToString();
+            }
+            set
+            {
+             //   _inspection.Location = value;
+            }
+        }
+
+        public string Municipality
+        {
+            get
+            {
+                return _inspection.Municipality;
+            }
+            set
+            {
+                _inspection.Municipality = value;
             }
         }
 

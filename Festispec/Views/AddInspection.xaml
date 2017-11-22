@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec.Views"
         mc:Ignorable="d"
-        Title="Add Inspection" Height="400" Width="600" DataContext="{Binding GetAddInspection, Source={StaticResource Locator}}" ResizeMode="NoResize">
+        Title="Add Inspection" Height="450" Width="600" DataContext="{Binding GetAddInspection, Source={StaticResource Locator}}" ResizeMode="NoResize">
     <Grid>
-        <Button x:Name="txtCancel" Content="Cancel" HorizontalAlignment="Left" Margin="361,327,0,0" VerticalAlignment="Top" Width="75" IsCancel="True" FontSize="11"/>
-        <Button x:Name="btnAddInspection" Content="Verzoek toevoegen" HorizontalAlignment="Left" Margin="441,327,0,0" VerticalAlignment="Top" Width="141" FontSize="11" Command="{Binding AddInspectionCommand}"/>
+        <Button x:Name="txtCancel" Content="Cancel" HorizontalAlignment="Left" Margin="363,377,0,0" VerticalAlignment="Top" Width="75" IsCancel="True" FontSize="11"/>
+        <Button x:Name="btnAddInspection" Content="Verzoek toevoegen" HorizontalAlignment="Left" Margin="443,377,0,0" VerticalAlignment="Top" Width="141" FontSize="11" Command="{Binding AddInspectionCommand}"/>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="225" IsReadOnly="True" Text="{Binding Customer}"/>
         <Label x:Name="lblKvk" Content="Kvk nummer:" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label" Content="Zoek een klant:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -17,24 +17,27 @@
         <TextBox x:Name="txtKvk" HorizontalAlignment="Left" Height="23" Margin="100,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" IsEnabled="False" Text="{Binding NewCustomer.KVK}"/>
         <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="100,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" IsEnabled="False" Text="{Binding NewCustomer.Email}"/>
         <TextBox x:Name="txtTelnr" HorizontalAlignment="Left" Height="23" Margin="100,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" IsEnabled="False" Text="{Binding NewCustomer.Telephone}"/>
-        <Label x:Name="lblInspection" Content="Naam inspectie:" HorizontalAlignment="Left" Margin="290,97,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
-        <Label x:Name="lblWebsite" Content="Website:" HorizontalAlignment="Left" Margin="290,123,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
-        <Label x:Name="lblDateFrom" Content="Begindatum:" HorizontalAlignment="Left" Margin="290,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
-        <Label x:Name="lblDateFrom_Copy" Content="Einddatum:" HorizontalAlignment="Left" Margin="290,174,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
+        <Label x:Name="lblInspection" Content="Naam inspectie*:" HorizontalAlignment="Left" Margin="290,97,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
+        <Label x:Name="lblWebsite" Content="Website:*" HorizontalAlignment="Left" Margin="290,123,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
+        <Label x:Name="lblDateFrom" Content="Begindatum*:" HorizontalAlignment="Left" Margin="290,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
+        <Label x:Name="lblDateFrom_Copy" Content="Einddatum:*" HorizontalAlignment="Left" Margin="290,174,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
         <DatePicker x:Name="dpStartDate" HorizontalAlignment="Left" Margin="407,149,0,0" VerticalAlignment="Top" Width="175" DisplayDateEnd="2017-11-18" FirstDayOfWeek="Monday" Cursor="Hand" Text="{Binding NewInspection.StartDate}"/>
         <TextBox x:Name="txtInspection" HorizontalAlignment="Left" Height="23" Margin="407,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewInspection.Name}"/>
         <TextBox x:Name="txtInspection_Copy" HorizontalAlignment="Left" Height="23" Margin="407,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewInspection.Website}"/>
         <DatePicker x:Name="dpEndDate" HorizontalAlignment="Left" Margin="407,175,0,0" VerticalAlignment="Top" Width="175" FirstDayOfWeek="Monday" Cursor="Hand" Text="{Binding NewInspection.EndDate}"/>
-        <Label x:Name="lblStreetname" Content="Straatnaam:" HorizontalAlignment="Left" Margin="290,205,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
-        <Label x:Name="lblPostalCode" Content="Postcode:" HorizontalAlignment="Left" Margin="290,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
-        <Label x:Name="lblHousenumber" Content="Nr:" HorizontalAlignment="Left" Margin="503,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
-        <Label x:Name="lblCity_" Content="Stad:" HorizontalAlignment="Left" Margin="290,257,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
-        <Label x:Name="lblCountry" Content="Land:" HorizontalAlignment="Left" Margin="290,283,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
-        <TextBox x:Name="txtStreetname" HorizontalAlignment="Left" Height="23" Margin="407,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewCustomer.Street}"/>
-        <TextBox x:Name="txtPostalCode" HorizontalAlignment="Left" Height="23" Margin="407,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="91" Text="{Binding NewCustomer.PostalCode}"/>
-        <TextBox x:Name="txtHousenumber" HorizontalAlignment="Left" Height="23" Margin="534,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" Text="{Binding NewCustomer.HouseNumber}"/>
-        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Height="23" Margin="407,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewCustomer.City}"/>
-        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Height="23" Margin="407,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewCustomer.Country}"/>
+        <Label x:Name="lblStreetname" Content="Straatnaam:*" HorizontalAlignment="Left" Margin="290,205,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
+        <Label x:Name="lblPostalCode" Content="Postcode:*" HorizontalAlignment="Left" Margin="290,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
+        <Label x:Name="lblHousenumber" Content="Nr:*" HorizontalAlignment="Left" Margin="503,231,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
+        <Label x:Name="lblCity_" Content="Stad*:" HorizontalAlignment="Left" Margin="290,257,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
+        <Label x:Name="lblCountry" Content="Land*:" HorizontalAlignment="Left" Margin="290,283,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
+        
+        <TextBox x:Name="txtStreetname" HorizontalAlignment="Left" Height="23" Margin="407,205,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewInspection.Street}"/>
+        <TextBox x:Name="txtPostalCode" HorizontalAlignment="Left" Height="23" Margin="407,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="91" Text="{Binding NewInspection.PostalCode}"/>
+        <TextBox x:Name="txtHousenumber" HorizontalAlignment="Left" Height="23" Margin="534,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" Text="{Binding NewInspection.HouseNumber}"/>
+        <TextBox x:Name="txtCity" HorizontalAlignment="Left" Height="23" Margin="407,257,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewInspection.City}"/>
+        <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Height="23" Margin="407,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Text="{Binding NewInspection.Country}"/>
+        <Label x:Name="lblLocation" Content="Locatie*:" HorizontalAlignment="Left" Margin="290,309,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
+        <Label x:Name="lblMunicipality" Content="Gemeente*:" HorizontalAlignment="Left" Margin="290,335,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
 
     </Grid>
 </Window>
