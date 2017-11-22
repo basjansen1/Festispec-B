@@ -37,15 +37,16 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<ITemplateQuestionRepositoryFactory, TemplateQuestionRepositoryFactory>();
             SimpleIoc.Default.Register<IQuestionTypeRepositoryFactory, QuestionTypeRepositoryFactory>();
             SimpleIoc.Default.Register<ITemplateQuestionViewModelFactory, TemplateQuestionViewModelFactory>();
-            
             SimpleIoc.Default.Register<IEmployeeRepositoryFactory, EmployeeRepositoryFactory>();
             SimpleIoc.Default.Register<IEmployeeViewModelFactory, EmployeeViewModelFactory>();
             SimpleIoc.Default.Register<IEmployeeRoleRepositoryFactory, EmployeeRoleRepositoryFactory>();
+            SimpleIoc.Default.Register<ILoginRepositoryFactory, LoginRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectionRepositoryFactory, InspectionRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectorRepositoryFactory, InspectorRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectorViewModelFactory, InspectorViewModelFactory>();
 
             // Register viewmodels
+            SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<TemplateListViewModel>();
             SimpleIoc.Default.Register<TemplateAddOrUpdateViewModel>();
@@ -123,6 +124,7 @@ namespace Festispec.ViewModels
         public EmployeeListViewModel EmployeeList => ServiceLocator.Current.GetInstance<EmployeeListViewModel>();
         public InspectorListViewModel InspectorList => ServiceLocator.Current.GetInstance<InspectorListViewModel>();
         public InspectorAddOrUpdateViewModel InspectorAddOrUpdate => ServiceLocator.Current.GetInstance<InspectorAddOrUpdateViewModel>();
+        public LoginViewModel LoginViewModel => ServiceLocator.Current.GetInstance<LoginViewModel>();
 
         #endregion
 
