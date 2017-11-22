@@ -1,18 +1,15 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
-using GalaSoft.MvvmLight.Command;
-using System.Collections.Generic;
 
 namespace Festispec.ViewModels.Inspector
 {
     public class InspectorAddOrUpdateViewModel :
         AddOrUpdateViewModelBase<IInspectorViewModelFactory, InspectorViewModel, Domain.Inspector>
     {
-
         public InspectorAddOrUpdateViewModel(INavigationService navigationService,
             IInspectorRepositoryFactory repositoryFactory,
             IInspectorViewModelFactory inspectorViewModelFactory, IEmployeeRepositoryFactory employeeRepositoryFactory)
@@ -20,9 +17,12 @@ namespace Festispec.ViewModels.Inspector
         {
             using (var employeeRepository = employeeRepositoryFactory.CreateRepository())
             {
-                Managers = employeeRepository.Get().Where(e => e.Role_Role == "Manager").ToList();
+                Managers = new[] {new Domain.Employee {Id = -1}}.Concat(employeeRepository.Get()
+                    .Where(e => e.Role_Role == "Manager").ToList());
             }
         }
+
+        public IEnumerable<Domain.Employee> Managers { get; }
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
@@ -34,11 +34,8 @@ namespace Festispec.ViewModels.Inspector
             UpdateInspectorFromNavigationParameter();
         }
 
-        public IEnumerable<Domain.Employee> Managers { get; }
-
         private void UpdateInspectorFromNavigationParameter()
         {
-
         }
 
         public override void Save()

@@ -26,16 +26,10 @@
         <Label>IBAN</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.IBAN}" />
         <Label>Manager</Label>
-        <ComboBox SelectedValue="{Binding Path=EntityViewModel.UpdatedEntity.Manager_Id}">
-            <ComboBox.Resources>
-                <CollectionViewSource x:Key="Managers" Source="{Binding Path=Managers}"/>
-            </ComboBox.Resources>
-            <ComboBox.ItemsSource>
-                <CompositeCollection>
-                    <CollectionContainer Collection="{Binding Source ={StaticResource Managers} }"/>
-                </CompositeCollection>
-            </ComboBox.ItemsSource>
-        </ComboBox>
+        <ComboBox ItemsSource="{Binding Managers}"
+                  DisplayMemberPath="Username"
+                  SelectedValuePath="Id"
+                  SelectedValue="{Binding EntityViewModel.UpdatedEntity.Manager_Id}"></ComboBox>
         <Label>Gemeente</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Municipality}" />
         <Label>Password</Label>

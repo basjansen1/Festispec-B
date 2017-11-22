@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Input;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.ViewModels.Employee;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
-using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels.Employees
 {
@@ -22,23 +20,15 @@ namespace Festispec.ViewModels.Employees
         {
             using (var employeeRepository = repositoryFactory.CreateRepository())
             {
-                Managers = employeeRepository.Get().Where(e => e.Role_Role == "Manager" && e.Id != EntityViewModel.Id).ToList();
+                Managers = new[] {new Domain.Employee {Id = -1}}.Concat(employeeRepository.Get()
+                    .Where(e => e.Role_Role == "Manager" && e.Id != EntityViewModel.Id).ToList());
             }
             using (var employeeRoleRepository = employeeRoleRepositoryFactory.CreateRepository())
             {
-                Roles = employeeRoleRepository.Get().Where(e => e.Role != "Manager").ToList();
+                Roles = employeeRoleRepository.Get().Where(e => e.Role != "Inspecteur").ToList();
             }
-
-            ClearManagerCommand = new RelayCommand(() =>
-            {
-                EntityViewModel.UpdatedEntity.Manager = null;
-                EntityViewModel.UpdatedEntity.Manager_Id = null;
-                RaisePropertyChanged(nameof(EntityViewModel.UpdatedEntity.Manager));
-                RaisePropertyChanged(nameof(EntityViewModel.UpdatedEntity.Manager_Id));
-            });
         }
 
-        public ICommand ClearManagerCommand { get; }
         public IEnumerable<Domain.Employee> Managers { get; }
         public IEnumerable<EmployeeRole> Roles { get; }
 
@@ -53,6 +43,12 @@ namespace Festispec.ViewModels.Employees
 
         public override void Save()
         {
+            if (EntityViewModel.UpdatedEntity.Manager_Id == -1)
+            {
+                EntityViewModel.UpdatedEntity.Manager = null;
+                EntityViewModel.UpdatedEntity.Manager_Id = null;
+            }
+
             // TODO: Validation
             EntityViewModel.Save();
 
