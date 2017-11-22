@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\ylja0\OneDrive\Documents\GitHub\Festispec-B\Festispec.Domain\Festispec.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Gebruiker\Documents\Visual Studio 2015\Projects\Festispec-B\Festispec.Domain\Festispec.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
