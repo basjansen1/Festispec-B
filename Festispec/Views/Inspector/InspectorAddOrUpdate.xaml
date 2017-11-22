@@ -1,0 +1,58 @@
+﻿<Page x:Class="Festispec.Views.Inspector.InspectorAddOrUpdate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="InspectorAddOrUpdate"
+        DataContext="{Binding Source={StaticResource Locator}, Path=InspectorAddOrUpdate}">
+    <StackPanel>
+        <Label>Gebruikersnaam</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Username}" />
+        <Label>Email</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Email}" />
+        <Label>Stad</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.City}" />
+        <Label>Straat</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Street}" />
+        <Label>Land</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Country}" />
+        <Label>Voornaam</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.FirstName}" />
+        <Label>Achternaam</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.LastName}" />
+        <Label>Huisnummer</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.HouseNumber}" />
+        <Label>IBAN</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.IBAN}" />
+        <Label>Manager</Label>
+        <ComboBox ItemsSource="{Binding Managers}"
+                  DisplayMemberPath="Username"
+                  SelectedValuePath="Id"
+                  SelectedValue="{Binding EntityViewModel.UpdatedEntity.Manager_Id}"></ComboBox>
+        <Label>Gemeente</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Municipality}" />
+        <Label>Password</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Password}" />
+        <Label>Postcode</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.PostalCode}"  MaxLength="6" />
+        <Label>Telefoonnummer</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Telephone}" />
+        <Label>In dienst genomen op</Label>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.HiredFrom}"/>
+        <Label>Uit dienst gegaan</Label>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.HiredTo}"/>
+        <Label>Certificatie startdatum</Label>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.CertificationFrom}"/>
+        <Label>Certificatie einddatum</Label>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.CertificationTo}"/>
+        <Grid Height="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Cancel" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
+            <Button Grid.Column="1"  Content="Save" Margin="5px 10px" Command="{Binding SaveEntityCommand}"/>
+        </Grid>
+    </StackPanel>
+</Page>

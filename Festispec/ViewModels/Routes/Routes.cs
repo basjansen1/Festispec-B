@@ -33,5 +33,33 @@ namespace Festispec.ViewModels.Routes
         };
 
         #endregion
+
+        #region Employee
+
+        public static Route EmployeeList = new Route
+        {
+            Key = "EmployeeList",
+            PageType = new Uri("../Views/Employee/EmployeeList.xaml", UriKind.Relative)
+        };
+
+        public static Route EmployeeAddOrUpdate = new Route
+        {
+            Key = "EmployeeAddOrUpdate",
+            PageType = new Uri("../Views/Employee/EmployeeAddOrUpdate.xaml", UriKind.Relative)
+        };
+
+        public static Route InspectorList = new Route
+        {
+            Key = "InspectorList",
+            PageType = new Uri("../Views/Inspector/InspectorList.xaml", UriKind.Relative)
+        };
+
+        public static Route InspectorAddOrUpdate = new Route
+        {
+            Key = "InspectorAddOrUpdate",
+            PageType = new Uri("../Views/Inspector/InspectorAddOrUpdate.xaml", UriKind.Relative)
+        };
+
+        #endregion
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Festispec.Domain;
 using Festispec.Domain.Repository.Factory;
 using Festispec.Domain.Repository.Interface;
-using Festispec.ViewModels.RequestProcessing;
+using Festispec.ViewModels.Employees;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;

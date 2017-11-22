@@ -16,14 +16,14 @@ namespace Festispec.ViewModels
 
         public ICommand _loginCommand { get; set; }
 
-        public Employee Employee { get; set; }
+        public Domain.Employee Employee { get; set; }
         public LoginViewModel(ILoginRepositoryFactory iLoginRepositoryFactory)
         {
             _iLoginRepositoryFactory = iLoginRepositoryFactory;
 
             _loginCommand = new RelayCommand<PasswordBox>(Login);
 
-            Employee = new Employee();
+            Employee = new Domain.Employee();
         }
 
         private void Login(PasswordBox passwordBox)
@@ -35,7 +35,7 @@ namespace Festispec.ViewModels
 
 
             Domain.Employee foundEmployee;
-            var employee = new Employee()
+            var employee = new Domain.Employee()
             {
                 Username = Employee.Username,
                 //TODO: Change to passwordBox.Password in demo/live
