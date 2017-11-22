@@ -1,36 +1,96 @@
 ﻿using Festispec.Domain;
+using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.ViewModels.InspectionProcessing;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Spatial;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Festispec.ViewModels.RequestProcessing
 {
     public class AddInspectionVM : ViewModelBase
     {
-        // getters and setters
         public InspectionListVM InspectionList { get; set; }
         public InspectionVM NewInspection { get; set; }
-
-        // commands
-        public ICommand AddInspectionCommand { get; set; }
-
-        // fields
-
-        // constructor
-        public AddInspectionVM(InspectionListVM InspectionList)
+        public CustomerVM NewCustomer { get; set; }
+        public List<CustomerVM> CustomerList { get; set; }
+        public List<string> CustomerNames { get; set; }
+        private Dictionary<string, CustomerVM> CustomerDictionairy { get; set; }
+        public CustomerVM SelectedCustomer
         {
+            get
+            {
+                return _customer;
+            }
+            set
+            {
+                _customer = value;
+                MessageBox.Show(_customer.Email);
+                NewInspection.CustomerId = _customer.ID;
+                RaisePropertyChanged("customer");
+            }
+        }
+        public string SelectedCustomerName
+        {
+            get
+            {
+                return _customerName;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    _customerName = value;
+                    CustomerDictionairy.TryGetValue(value, out _customer);
+                }
+            }
+        }
+        public ICommand AddInspectionCommand { get; set; }
+        public ICommand CloseWindowCommand { get; set; }
 
+        public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory)
+        {
+            InspectionList = inspectionList;
+            NewInspection = new InspectionVM();
+            NewInspection.StartDate = DateTime.Now;
+            NewInspection.EndDate = DateTime.Now;
+            NewInspection.Status = "Pending";
+            NewInspection.CustomerId = 11;
+
+            NewInspection.Location = DbGeography.PointFromText("POINT(50 5)", 4326);
+            CustomerList = new List<CustomerVM>();
+            CustomerNames = new List<string>();
+            CustomerDictionairy = new Dictionary<string, CustomerVM>();
+            AddInspectionCommand = new RelayCommand(AddInspection);
+            CloseWindowCommand = new RelayCommand(InspectionList.HideAddInspectionWindow); 
+
+            using(var customerRepository = customerRepositoryFactory.CreateRepository())
+            {
+                customerRepository.Get().ToList().ForEach(c => CustomerList.Add(new CustomerVM(c)));
+            }
+            CustomerList.ForEach(c => CustomerNames.Add(c.FullName));
+            CustomerList.ForEach(c => CustomerDictionairy.Add(c.FullName, c));
         }
 
-        // methods
+        private CustomerVM _customer;
+        private string _customerName;
+
         public bool CanAddInspection()
         {
             if (NewInspection.Name != null && NewInspection.StartDate != null
-                && NewInspection.EndDate != null)
+                && NewInspection.EndDate != null && NewInspection.Website != null
+                && NewInspection.Status != null && NewInspection.Street != null
+                && NewInspection.HouseNumber != null && NewInspection.PostalCode != null
+                && NewInspection.Country != null && NewInspection.City != null
+                && NewInspection.Municipality != null && _customer != null
+                )
                 return true;
 
             return false;
@@ -40,17 +100,25 @@ namespace Festispec.ViewModels.RequestProcessing
         {
             if (CanAddInspection())
             {
-                using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
+                try
                 {
-                    inspectionRepository.Add(NewInspection.toModel());
+
+                    using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
+                    {
+                        inspectionRepository.Add(NewInspection.toModel());
+                    }
+
+                    InspectionList.InspectionVMList.Add(NewInspection);
+                    InspectionList.HideAddInspectionWindow();
                 }
-
-                InspectionList.InspectionVMList.Add(NewInspection);
-
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Er is iets fout gegaan met het toevoegen van een inspectie!");
+                }
                 return;
             }
 
-            Console.WriteLine("Can't add inspection!");
+            MessageBox.Show("Niet alle verplichte velden zijn ingevoerd");
         }
     }
 }

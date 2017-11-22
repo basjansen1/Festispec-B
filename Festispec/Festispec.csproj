@@ -67,6 +67,10 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -93,12 +97,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Properties\Annotations1.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
     <Compile Include="ViewModels\AddQuestionViewModel.cs" />
     <Compile Include="ViewModels\EntityViewModelBase.cs" />
     <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateViewModelFactory.cs" />
+    <Compile Include="ViewModels\InspectionProcessing\CustomerVM.cs" />
+    <Compile Include="ViewModels\InspectionProcessing\InspectionListFilterVM.cs" />
     <Compile Include="ViewModels\Interface\IAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Interface\IEntityViewModel.cs" />
     <Compile Include="ViewModels\Factory\Interface\ITemplateViewModelFactory.cs" />
@@ -116,11 +123,22 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\InspectionProcessing\AddInspectionVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\EditInspectionVM.cs" />
-    <Compile Include="ViewModels\InspectionProcessing\InspectionListFilterVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\ProcessInspectionVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionListVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\AddInspection.xaml.cs">
+      <DependentUpon>AddInspection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditInspection.xaml.cs">
+      <DependentUpon>EditInspection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InspectionList.xaml.cs">
+      <DependentUpon>InspectionList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProcessInspection.xaml.cs">
+      <DependentUpon>ProcessInspection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Template\AddQuestion.xaml.cs">
       <DependentUpon>AddQuestion.xaml</DependentUpon>
     </Compile>
@@ -145,6 +163,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\AddInspection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EditInspection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InspectionList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ProcessInspection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Template\AddQuestion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -180,6 +214,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages 2.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -190,16 +225,33 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup />
   <ItemGroup>
     <Folder Include="ViewModels\Employees\" />
-    <Folder Include="Views\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Festispec.Domain\Festispec.Domain.csproj">
       <Project>{09979796-e638-48d5-8666-fa0ac1f54a2e}</Project>
       <Name>Festispec.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProofOfConcept.Geodan\ProofOfConcept.Geodan.csproj">
+      <Project>{86E3678B-98F7-4E37-BE12-D682B3F7D7AE}</Project>
+      <Name>ProofOfConcept.Geodan</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

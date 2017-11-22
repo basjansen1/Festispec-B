@@ -1,0 +1,53 @@
+﻿<Window x:Class="Festispec.Views.ProcessInspection"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Festispec.Views"
+        mc:Ignorable="d"
+        Title="ProcessInspection" Height="610" Width="810" DataContext="{Binding GetProcessInspection, Source={StaticResource Locator}}" ResizeMode="NoResize">
+    <Grid>
+        <DataGrid x:Name="dgInspections" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="280" Width="780" ScrollViewer.CanContentScroll="True" 
+      ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding InspectionVMList}" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Klantnaam" Width="2*"/>
+                <DataGridTextColumn Header="Naam verzoek" Width="2*"/>
+                <DataGridTextColumn Header="Datum verzoek" Width="2*"/>
+                <DataGridTextColumn Header="Plaats" Width="2*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border x:Name="bdMap" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="214" Margin="575,325,0,0" VerticalAlignment="Top" Width="215" RenderTransformOrigin="0.766,0.523">
+            <Label x:Name="label" Content="Placeholder kaart"/>
+        </Border>
+        <Button x:Name="btnAccept" Content="Goedkeuren" HorizontalAlignment="Left" Margin="575,544,0,0" VerticalAlignment="Top" Width="100" Height="22" IsCancel="True" FontSize="11"/>
+        <Button x:Name="btnDecline" Content="Afkeuren" HorizontalAlignment="Left" Margin="690,544,0,0" VerticalAlignment="Top" Width="100" Height="22" FontSize="11"/>
+        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="25" Margin="522,10,0,0" TextWrapping="Wrap" Text="Zoek verwerking" VerticalAlignment="Top" Width="163" Opacity="0.7"/>
+        <Button x:Name="btnSearch" Content="Zoeken" HorizontalAlignment="Left" Margin="690,3,0,0" VerticalAlignment="Top" Width="98"/>
+        <Button x:Name="btnHome" Content="Home" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Width="75" IsCancel="True"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="214" Margin="10,325,0,0" Stroke="Black" VerticalAlignment="Top" Width="560"/>
+        <Label x:Name="lblCustomer" Content="Klantgegevens" HorizontalAlignment="Left" Margin="21,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
+        <Label x:Name="lblCustomer_Copy" Content="Klantnaam:" HorizontalAlignment="Left" Margin="21,363,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
+        <TextBox x:Name="txtCustomer" HorizontalAlignment="Left" Height="23" Margin="108,363,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False"/>
+        <Label x:Name="lblCustomer_Copy1" Content="Email adres: " HorizontalAlignment="Left" Margin="21,389,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
+        <Label x:Name="lblCustomer_Copy2" Content="Tel nr:" HorizontalAlignment="Left" Margin="21,415,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
+        <Label x:Name="lblCustomer_Copy3" Content="Inspectiegegevens" HorizontalAlignment="Left" Margin="294,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
+        <TextBox x:Name="txtMail" HorizontalAlignment="Left" Height="23" Margin="108,389,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False"/>
+        <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Height="23" Margin="108,415,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False"/>
+        <Label x:Name="lblInspection" Content="Inspectienaam:" HorizontalAlignment="Left" Margin="294,363,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
+        <Label x:Name="lblDateFrom" Content="Datum van:" HorizontalAlignment="Left" Margin="294,389,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
+        <Label x:Name="lblDateTo" Content="Datum tot:" HorizontalAlignment="Left" Margin="294,415,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
+        <Label x:Name="lblStreetname" Content="Straatnaam:" HorizontalAlignment="Left" Margin="294,441,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
+        <TextBox x:Name="txtInspectionName" HorizontalAlignment="Left" Height="23" Margin="383,363,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.Name}"/>
+        <TextBox x:Name="txtDateFrom" HorizontalAlignment="Left" Height="23" Margin="383,389,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.Start}"/>
+        <TextBox x:Name="txtDateTo" HorizontalAlignment="Left" Height="23" Margin="383,415,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.End}"/>
+        <TextBox x:Name="txtStreetname" HorizontalAlignment="Left" Height="23" Margin="383,441,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.Address.Street}"/>
+        <Label x:Name="lblPostalCode" Content="Postcode:" HorizontalAlignment="Left" Margin="294,467,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
+        <TextBox x:Name="txtPostalCode" HorizontalAlignment="Left" Height="23" Margin="383,467,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" IsEnabled="False" Text="{Binding SelectedInspection.Address.PostalCode}"/>
+        <Label x:Name="lblCustomer_Copy9" Content="Nr:" HorizontalAlignment="Left" Margin="473,467,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
+        <TextBox x:Name="txtHouseNumber" HorizontalAlignment="Left" Height="23" Margin="504,467,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" IsEnabled="False" Text="{Binding SelectedInspection.Address.HouseNumber}"/>
+        <Label x:Name="lblPostalCode_Copy" Content="Land:" HorizontalAlignment="Left" Margin="294,493,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
+        <TextBox x:Name="txtPostalCode_Copy" HorizontalAlignment="Left" Height="23" Margin="383,493,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.Address.Country}"/>
+
+    </Grid>
+
+</Window>
