@@ -35,13 +35,6 @@ namespace Festispec.ViewModels.RequestProcessing
             }
         }
 
-        public string CustomerName
-        {
-            get
-            {
-                return _customer.FirstName;
-            }
-        }
 
         public string City
         {
@@ -54,11 +47,11 @@ namespace Festispec.ViewModels.RequestProcessing
         public IInspectionRepositoryFactory InspectionRepositoryFactory;
 
         // Commands
-        public ICommand ShowAddInspectionWindowCommand;
-        public ICommand ShowEditInspectionWindowCommand;
-        public ICommand ShowProcessInspectionWindowCommand;
-        public ICommand DeleteInspectionCommand;
-        public ICommand FilterInspectionVMListCommand;
+        public ICommand ShowAddInspectionWindowCommand { get; set; }
+        public ICommand ShowEditInspectionWindowCommand { get; set; }
+        public ICommand ShowProcessInspectionWindowCommand { get; set; }
+        public ICommand DeleteInspectionCommand { get; set; }
+        public ICommand FilterInspectionVMListCommand { get; set; }
 
         // fields
         private InspectionVM _selectedInspection;
@@ -80,11 +73,10 @@ namespace Festispec.ViewModels.RequestProcessing
             ShowProcessInspectionWindowCommand = new RelayCommand(ShowProcessInspectionWindow);
             DeleteInspectionCommand = new RelayCommand(DeleteSelectedInspection);
 
-            
             // instantiate views   
-            using(var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
+            using (var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
-                InspectionVMList = new ObservableCollection<InspectionVM>(inspectionRepository.Get().ToList().Select(i => new InspectionVM(i)));
+                 InspectionVMList = new ObservableCollection<InspectionVM>(inspectionRepository.Get().ToList().Select(i => new InspectionVM(i)));
             }            
         }
 

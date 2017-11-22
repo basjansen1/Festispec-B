@@ -56,11 +56,74 @@ namespace Festispec.ViewModels.RequestProcessing
             get
             {
                 return _inspection.End;
-            } 
+            }
             set
             {
                 _inspection.End = value;
                 RaisePropertyChanged("EndDate");
+            }
+        }
+        public string City
+        {
+            get
+            {
+                return _inspection.City;
+            }
+            set
+            {
+                _inspection.City = value;
+                RaisePropertyChanged("City");
+            }
+        }
+        public string Street
+        {
+            get
+            {
+                return _inspection.Street;
+            }
+            set
+            {
+                _inspection.Street = value;
+                RaisePropertyChanged("Street");
+            }
+        }
+
+        public string PostalCode
+        {
+            get
+            {
+                return _inspection.PostalCode;
+            }
+            set
+            {
+                _inspection.PostalCode = value;
+                RaisePropertyChanged("PostalCode");
+            }
+        }
+
+        public string HouseNumber
+        {
+            get
+            {
+                return _inspection.HouseNumber;
+            }
+            set
+            {
+                _inspection.HouseNumber = value;
+                RaisePropertyChanged("HouseNumber");
+            }
+        }
+
+        public string Country
+        {
+            get
+            {
+                return _inspection.Country;
+            }
+            set
+            {
+                _inspection.Country = value;
+                RaisePropertyChanged("Country");
             }
         }
 
@@ -69,8 +132,8 @@ namespace Festispec.ViewModels.RequestProcessing
             get
             {
                 //MessageBox.Show((_inspection.Customers == null).ToString());
-                //return _inspection.Customers.First();
-                return Customer;
+                return _inspection.Customers;
+                //return Customer;
             }
             set
             {
@@ -83,7 +146,7 @@ namespace Festispec.ViewModels.RequestProcessing
         private Inspection _inspection;
 
         // constructors
-        
+
         public InspectionVM()
         {
             _inspection = new Inspection();
