@@ -31,7 +31,7 @@ namespace Festispec.ViewModels.RequestProcessing
             NewInspection.Status = "Pending";
             NewInspection.CustomerId = 1;
 
-           // NewInspection.Location = DbGeography.PointFromText("POINT(50 5)", 4326);
+            NewInspection.Location = DbGeography.PointFromText("POINT(50 5)", 4326);
 
             AddInspectionCommand = new RelayCommand(AddInspection);
         }
