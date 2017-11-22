@@ -35,7 +35,7 @@
         <Label>Password</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Password}" />
         <Label>Postcode</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.PostalCode}" />
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.PostalCode}"  MaxLength="6" />
         <Label>Telefoonnummer</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Telephone}" />
         <Label>In dienst genomen op</Label>
