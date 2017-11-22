@@ -1,4 +1,4 @@
-﻿using Festispec.ViewModels.NavigationService;
+﻿using Festispec.NavigationService;
 using GalaSoft.MvvmLight;
 
 namespace Festispec.ViewModels

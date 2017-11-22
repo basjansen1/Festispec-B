@@ -11,9 +11,10 @@
 
 using Festispec.Domain.Repository.Factory;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.NavigationService;
+using Festispec.State;
 using Festispec.ViewModels.Factory;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
 using Festispec.ViewModels.Template;
 using Festispec.ViewModels.RequestProcessing;
 using GalaSoft.MvvmLight.Ioc;
@@ -27,8 +28,12 @@ namespace Festispec.ViewModels
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            RegisterNavigationService();
+            // Register steate
+            SimpleIoc.Default.Register<IState, State.State>();
 
+            // Register navigation
+            RegisterNavigationService();
+            
             // Register repositories
             SimpleIoc.Default.Register<ITemplateRepositoryFactory, TemplateRepositoryFactory>();
             SimpleIoc.Default.Register<ITemplateViewModelFactory, TemplateViewModelFactory>();
@@ -48,11 +53,11 @@ namespace Festispec.ViewModels
 
         private static void RegisterNavigationService()
         {
-            var navigationService = new NavigationService.NavigationService();
-            navigationService.Configure(Routes.Routes.Home.Key, Routes.Routes.Home.PageType);
-            navigationService.Configure(Routes.Routes.TemplateList.Key, Routes.Routes.TemplateList.PageType);
-            navigationService.Configure(Routes.Routes.TemplateAddOrUpdate.Key, Routes.Routes.TemplateAddOrUpdate.PageType);
-            navigationService.Configure(Routes.Routes.AddQuestion.Key, Routes.Routes.AddQuestion.PageType);
+            var navigationService = new NavigationService.NavigationService(ServiceLocator.Current.GetInstance<IState>());
+            navigationService.Configure(Routes.Routes.Home);
+            navigationService.Configure(Routes.Routes.TemplateList);
+            navigationService.Configure(Routes.Routes.TemplateAddOrUpdate);
+            navigationService.Configure(Routes.Routes.AddQuestion);
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }

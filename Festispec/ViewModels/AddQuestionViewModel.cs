@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.NavigationService;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
 using Festispec.ViewModels.Template;
 
 namespace Festispec.ViewModels
@@ -29,9 +28,9 @@ namespace Festispec.ViewModels
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName != "CurrentPageKey") return;
+            if (args.PropertyName != nameof(NavigationService.CurrentRoute)) return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.AddQuestion.Key) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.AddQuestion) return;
 
             UpdateEntityViewModelFromNavigationParameter();
         }

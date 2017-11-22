@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Festispec.ViewModels.Routes
+namespace Festispec.Routes
 {
     public class Route
     {

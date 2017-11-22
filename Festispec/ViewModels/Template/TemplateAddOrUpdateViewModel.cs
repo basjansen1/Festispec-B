@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.NavigationService;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
 using GalaSoft.MvvmLight.Command;
 
 namespace Festispec.ViewModels.Template
@@ -30,10 +30,10 @@ namespace Festispec.ViewModels.Template
         private void RegisterCommands()
         {
             NavigateToAddQuestionCommand =
-                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.AddQuestion.Key, EntityViewModel),
+                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.AddQuestion, EntityViewModel),
                     () => EntityViewModel != null);
             NavigateToUpdateQuestionCommand = new RelayCommand(
-                () => NavigationService.NavigateTo(Routes.Routes.UpdateQuestion.Key, EntityViewModel),
+                () => NavigationService.NavigateTo(Routes.Routes.UpdateQuestion, EntityViewModel),
                 () => EntityViewModel.SelectedQuestion != null);
             DeleteQuestionCommand =
                 new RelayCommand(() => EntityViewModel.SelectedQuestion.Delete(),
@@ -42,9 +42,9 @@ namespace Festispec.ViewModels.Template
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName != "CurrentPageKey") return;
+            if (args.PropertyName != nameof(NavigationService.CurrentRoute)) return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.TemplateAddOrUpdate.Key) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.TemplateAddOrUpdate) return;
 
             UpdateEntityViewModelFromNavigationParameter();
             UpdateTemplateQuestionsFromNavigationParameter();

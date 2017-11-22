@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using Festispec.ViewModels.NavigationService;
+using Festispec.NavigationService;
 using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels
@@ -16,7 +16,7 @@ namespace Festispec.ViewModels
         public void RegisterCommands()
         {
             NavigateToTemplateListCommand =
-                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.TemplateList.Key));
+                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.TemplateList));
         }
     }
 }
