@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Festispec.ViewModels.RequestProcessing
+namespace Festispec.ViewModels.Employees
 {
     public class ProcessInspectionVM // this VM is intented for approving or rejecting an inspection request
     {

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Festispec.ViewModels.RequestProcessing
+namespace Festispec.ViewModels.Employees
 {
     // The view variables and view methods will be implemented when the views are created
     public class InspectionListVM : ViewModelBase

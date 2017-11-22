@@ -3,9 +3,9 @@ using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository.Factory
 {
-    public class TemplateQuestionRepositoryFactory : RepositoryFactoryBase<TemplateQuestion>, ITemplateQuestionRepositoryFactory
+    public class TemplateQuestionRepositoryFactory : RepositoryFactoryBase<ITemplateQuestionRepository, TemplateQuestion>, ITemplateQuestionRepositoryFactory
     {
-        public override IRepository<TemplateQuestion> CreateRepository()
+        public override ITemplateQuestionRepository CreateRepository()
         {
             return new TemplateQuestionRepository(GetDbContext());
         }

@@ -31,11 +31,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
@@ -75,6 +75,7 @@
     <Compile Include="EmployeeRole.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ExtendedQuestion.cs" />
     <Compile Include="Festispec.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -129,6 +130,14 @@
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\Factory\CustomerRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ICustomerRepositoryFactory.cs" />
+    <Compile Include="Repository\EmployeeRepository.cs" />
+    <Compile Include="Repository\Factory\EmployeeRepositoryFactory.cs" />
+    <Compile Include="Repository\EmployeeRoleRepository.cs" />
+    <Compile Include="Repository\Factory\EmployeeRoleRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\InspectorRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IEmployeeRoleRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IEmployeeRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IInspectorRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ILoginRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\LoginRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\QuestionTypeRepositoryFactory.cs" />
@@ -142,6 +151,10 @@
     <Compile Include="Repository\Factory\Interface\IRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\RepositoryFactoryBase.cs" />
     <Compile Include="Repository\Interface\ICustomerRepository.cs" />
+    <Compile Include="Repository\InspectorRepository.cs" />
+    <Compile Include="Repository\Interface\IEmployeeRepository.cs" />
+    <Compile Include="Repository\Interface\IEmployeeRoleRepository.cs" />
+    <Compile Include="Repository\Interface\IInspectorRepository.cs" />
     <Compile Include="Repository\Interface\ILoginRepository.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="Repository\QuestionTypeRepository.cs" />

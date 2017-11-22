@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Festispec.ViewModels.RequestProcessing
+namespace Festispec.ViewModels.Employees
 {
     public class InspectionVM : ViewModelBase
     {

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec.Views.Template
+namespace Festispec.Views.Inspector
 {
     /// <summary>
-    /// Interaction logic for AddQuestion.xaml
+    /// Interaction logic for InspectorAddOrUpdate.xaml
     /// </summary>
-    public partial class AddQuestion : Page
+    public partial class InspectorAddOrUpdate : Page
     {
-        public AddQuestion()
+        public InspectorAddOrUpdate()
         {
             InitializeComponent();
         }
