@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Festispec.ViewModels.RequestProcessing
+namespace Festispec.ViewModels.Employees
 {
     public class EditInspectionVM : ViewModelBase
     {
