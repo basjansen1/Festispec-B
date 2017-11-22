@@ -21,6 +21,8 @@ namespace Festispec.ViewModels.RequestProcessing
         public InspectionVM NewInspection { get; set; }
         public CustomerVM NewCustomer { get; set; }
         public List<CustomerVM> CustomerList { get; set; }
+        public List<string> CustomerNames { get; set; }
+        private Dictionary<string, CustomerVM> CustomerDictionairy { get; set; }
         public CustomerVM SelectedCustomer
         {
             get
@@ -33,6 +35,21 @@ namespace Festispec.ViewModels.RequestProcessing
                 MessageBox.Show(_customer.Email);
                 NewInspection.CustomerId = _customer.ID;
                 RaisePropertyChanged("customer");
+            }
+        }
+        public string SelectedCustomerName
+        {
+            get
+            {
+                return _customerName;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    _customerName = value;
+                    CustomerDictionairy.TryGetValue(value, out _customer);
+                }
             }
         }
         public ICommand AddInspectionCommand { get; set; }
@@ -49,6 +66,8 @@ namespace Festispec.ViewModels.RequestProcessing
 
             NewInspection.Location = DbGeography.PointFromText("POINT(50 5)", 4326);
             CustomerList = new List<CustomerVM>();
+            CustomerNames = new List<string>();
+            CustomerDictionairy = new Dictionary<string, CustomerVM>();
             AddInspectionCommand = new RelayCommand(AddInspection);
             CloseWindowCommand = new RelayCommand(InspectionList.HideAddInspectionWindow); 
 
@@ -56,9 +75,12 @@ namespace Festispec.ViewModels.RequestProcessing
             {
                 customerRepository.Get().ToList().ForEach(c => CustomerList.Add(new CustomerVM(c)));
             }
+            CustomerList.ForEach(c => CustomerNames.Add(c.FullName));
+            CustomerList.ForEach(c => CustomerDictionairy.Add(c.FullName, c));
         }
 
         private CustomerVM _customer;
+        private string _customerName;
 
         public bool CanAddInspection()
         {
@@ -67,7 +89,7 @@ namespace Festispec.ViewModels.RequestProcessing
                 && NewInspection.Status != null && NewInspection.Street != null
                 && NewInspection.HouseNumber != null && NewInspection.PostalCode != null
                 && NewInspection.Country != null && NewInspection.City != null
-                && NewInspection.Municipality != null && SelectedCustomer != null
+                && NewInspection.Municipality != null && _customer != null
                 )
                 return true;
 
@@ -89,19 +111,10 @@ namespace Festispec.ViewModels.RequestProcessing
                     InspectionList.InspectionVMList.Add(NewInspection);
                     InspectionList.HideAddInspectionWindow();
                 }
-                catch (DbEntityValidationException ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show("Er is iets fout gegaan met het toevoegen van een inspectie!");
-                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                    {
-                        foreach (var validationError in entityValidationErrors.ValidationErrors)
-                        {
-                            MessageBox.Show("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-                        }
-                    }
                 }
-                MessageBox.Show("Dit werkt!");
-
                 return;
             }
 

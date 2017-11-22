@@ -9,14 +9,8 @@
     <Grid>
         <Button x:Name="txtCancel" Content="Cancel" HorizontalAlignment="Left" Margin="363,351,0,0" VerticalAlignment="Top" Width="75" IsCancel="True" FontSize="11" Command="{Binding CloseWindowCommand}"/>
         <Button x:Name="btnAddInspection" Content="Verzoek toevoegen" HorizontalAlignment="Left" Margin="443,351,0,0" VerticalAlignment="Top" Width="141" FontSize="11" Command="{Binding AddInspectionCommand}"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="225" IsReadOnly="True" ItemsSource="{Binding CustomerList}" SelectedItem="{Binding SelectedCustomer}"/>
-        <Label x:Name="lblKvk" Content="Kvk nummer:" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label" Content="Zoek een klant:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblKlantnaam_Copy" Content="Email:" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblKlantnaam_Copy1" Content="Tel nr:" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.644,2.391"/>
-        <TextBox x:Name="txtKvk" HorizontalAlignment="Left" Height="23" Margin="100,97,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" IsEnabled="False" Text="{Binding SelectedCustomer.KVK}"/>
-        <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Height="23" Margin="100,123,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" IsEnabled="False" Text="{Binding SelectedCustomer.Email}"/>
-        <TextBox x:Name="txtTelnr" HorizontalAlignment="Left" Height="23" Margin="100,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" IsEnabled="False" Text="{Binding SelectedCustomer.Telephone}"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="29,110,0,0" VerticalAlignment="Top" Width="225" IsReadOnly="True" ItemsSource="{Binding CustomerNames}" SelectedValue="{Binding SelectedCustomerName}" IsEditable="False"/>
+        <Label x:Name="label" Content="Zoek een klant:" HorizontalAlignment="Left" Margin="29,79,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblInspection" Content="Naam inspectie*:" HorizontalAlignment="Left" Margin="290,97,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
         <Label x:Name="lblWebsite" Content="Website:*" HorizontalAlignment="Left" Margin="290,123,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
         <Label x:Name="lblDateFrom" Content="Begindatum*:" HorizontalAlignment="Left" Margin="290,146,0,0" VerticalAlignment="Top" RenderTransformOrigin="4.18,0.828"/>
