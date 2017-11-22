@@ -32,7 +32,11 @@ namespace Festispec.ViewModels.RequestProcessing
         public bool CanAddInspection()
         {
             if (NewInspection.Name != null && NewInspection.StartDate != null
-                && NewInspection.EndDate != null)
+                && NewInspection.EndDate != null
+                && NewCustomer.City != null && NewCustomer.Country != null && NewCustomer.Email != null 
+                && NewCustomer.FirstName != null && NewCustomer.LastName != null
+                && NewCustomer.PostalCode != null && NewCustomer.Street!= null
+                && NewCustomer.Telephone != null)
                 return true;
 
             return false;
