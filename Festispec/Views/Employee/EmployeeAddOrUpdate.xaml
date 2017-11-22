@@ -36,6 +36,11 @@
                 </CompositeCollection>
             </ComboBox.ItemsSource>
         </ComboBox>
+        <ComboBox ItemsSource="{Binding Managers}"
+                  DisplayMemberPath="Username"
+                  SelectedValuePath="Id"
+                  SelectedItem="{Binding EntityViewModel.UpdatedEntity.Manager, Mode=TwoWay}"></ComboBox>
+        <Button Command="{Binding ClearManagerCommand}"></Button>
         <Label>Gemeente</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Municipality}" />
         <Label>Password</Label>

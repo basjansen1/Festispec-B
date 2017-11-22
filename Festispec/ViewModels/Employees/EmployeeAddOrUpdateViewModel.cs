@@ -1,33 +1,46 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
+using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.ViewModels.Employee;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
-using GalaSoft.MvvmLight.Command;
-using System.Collections.Generic;
+using GalaSoft.MvvmLight.CommandWpf;
 
-namespace Festispec.ViewModels.Employee
+namespace Festispec.ViewModels.Employees
 {
     public class EmployeeAddOrUpdateViewModel :
         AddOrUpdateViewModelBase<IEmployeeViewModelFactory, EmployeeViewModel, Domain.Employee>
     {
-
         public EmployeeAddOrUpdateViewModel(INavigationService navigationService,
-            IEmployeeRepositoryFactory repositoryFactory, 
+            IEmployeeRepositoryFactory repositoryFactory,
             IEmployeeRoleRepositoryFactory employeeRoleRepositoryFactory,
             IEmployeeViewModelFactory employeeViewModelFactory)
             : base(navigationService, repositoryFactory, employeeViewModelFactory)
         {
             using (var employeeRepository = repositoryFactory.CreateRepository())
             {
-                _managers = employeeRepository.Get().Where(e => e.Role_Role == "Manager").ToList();
+                Managers = employeeRepository.Get().Where(e => e.Role_Role == "Manager" && e.Id != EntityViewModel.Id).ToList();
             }
             using (var employeeRoleRepository = employeeRoleRepositoryFactory.CreateRepository())
             {
                 Roles = employeeRoleRepository.Get().Where(e => e.Role != "Manager").ToList();
             }
+
+            ClearManagerCommand = new RelayCommand(() =>
+            {
+                EntityViewModel.UpdatedEntity.Manager = null;
+                EntityViewModel.UpdatedEntity.Manager_Id = null;
+                RaisePropertyChanged(nameof(EntityViewModel.UpdatedEntity.Manager));
+                RaisePropertyChanged(nameof(EntityViewModel.UpdatedEntity.Manager_Id));
+            });
         }
+
+        public ICommand ClearManagerCommand { get; }
+        public IEnumerable<Domain.Employee> Managers { get; }
+        public IEnumerable<EmployeeRole> Roles { get; }
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
@@ -36,28 +49,12 @@ namespace Festispec.ViewModels.Employee
             if (NavigationService.CurrentPageKey != Routes.Routes.EmployeeAddOrUpdate.Key) return;
 
             UpdateEntityViewModelFromNavigationParameter();
-            UpdateEmployeeFromNavigationParameter();
-        }
-
-        private readonly IEnumerable<Domain.Employee> _managers;
-        public IEnumerable<Domain.Employee> Managers { get { return _managers.Where(m => m.Id != EntityViewModel.Id).ToList(); } }
-        public IEnumerable<Domain.EmployeeRole> Roles { get;}
-
-        private void UpdateEmployeeFromNavigationParameter()
-        {
-            
         }
 
         public override void Save()
         {
             // TODO: Validation
             EntityViewModel.Save();
-
-            //            using (var EmployeeQuestionRepository = _EmployeeQuestionRepositoryFactory.CreateRepository())
-            //            {
-            //                foreach (var EmployeeQuestion in EntityViewModel.UpdatedEntity.Questions)
-            //                    EmployeeQuestionRepository.AddOrUpdate(EmployeeQuestion);
-            //            }
 
             NavigationService.GoBack(EntityViewModel);
         }
