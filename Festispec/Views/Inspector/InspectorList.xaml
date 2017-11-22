@@ -37,11 +37,11 @@
 
             <DockPanel Grid.Row="0"  Grid.Column="0">
                 <Label>Zoek op gebruikersnaam</Label>
-                <TextBox Text="{Binding SearchName}"></TextBox>
+                <TextBox Text="{Binding SearchUsername}"></TextBox>
             </DockPanel>
             <DockPanel Grid.Row="0" Grid.Column="1">
                 <Label>Zoek op email</Label>
-                <TextBox Text="{Binding SearchDescription}"></TextBox>
+                <TextBox Text="{Binding SearchEmail}"></TextBox>
             </DockPanel>
             <Button Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand}">Zoek</Button>
 

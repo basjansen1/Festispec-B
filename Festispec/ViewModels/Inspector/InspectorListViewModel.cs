@@ -68,16 +68,16 @@ namespace Festispec.ViewModels.Inspector
         private void LoadInspectors()
         {
             DateTime today = DateTime.Today;
-            using (var InspectorRepository = _inspectorRepositoryFactory.CreateRepository())
+            using (var inspectorRepository = _inspectorRepositoryFactory.CreateRepository())
             {
                 Inspectors =
                     new ObservableCollection<InspectorViewModel>(
-                        InspectorRepository.Get()
-                            .Where(Inspector =>
-                                (Inspector.HiredTo.HasValue ? Inspector.HiredTo.Value > today : true)
-                                && Inspector.Username.Contains(SearchUsername)
-                                && Inspector.Email.Contains(SearchEmail)
-                                && Inspector.Role_Role.Equals("Inspecteur"))
+                        inspectorRepository.Get()
+                            .Where(inspector =>
+                                (!inspector.HiredTo.HasValue || inspector.HiredTo.Value > today)
+                                && inspector.Username.Contains(SearchUsername)
+                                && inspector.Email.Contains(SearchEmail)
+                                && inspector.Role_Role.Equals("Inspecteur"))
                             .ToList()
                             .Select(Inspector => _inspectorViewModelFactory.CreateViewModel(Inspector)));
                 RaisePropertyChanged(nameof(Inspectors));
