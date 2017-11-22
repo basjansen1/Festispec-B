@@ -95,17 +95,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converter\InverseBooleanConverter.cs" />
-    <Compile Include="obj\Debug\App.g.i.cs" />
-    <Compile Include="obj\Debug\Festispec_Content.g.i.cs" />
-    <Compile Include="obj\Debug\GeneratedInternalTypeHelper.g.i.cs" />
-    <Compile Include="obj\Debug\MainWindow.g.i.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="obj\Debug\Views\Login.g.i.cs" />
-    <Compile Include="obj\Debug\Views\Template\AddQuestion.g.i.cs" />
-    <Compile Include="obj\Debug\Views\Template\TemplateAddOrUpdate.g.i.cs" />
-    <Compile Include="obj\Debug\Views\Template\TemplateList.g.i.cs" />
     <Compile Include="Properties\Annotations1.cs" />
     <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
     <Compile Include="ViewModels\Template\TemplateQuestionAddViewModel.cs" />
@@ -202,9 +191,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="bin\Debug\Festispec.exe.config" />
-    <None Include="bin\Debug\Festispec.vshost.exe.config" />
-    <None Include="bin\Debug\Festispec.vshost.exe.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -216,44 +202,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bin\Release\" />
     <Folder Include="ViewModels\Employees\" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup />
-  <ItemGroup>
-    <Content Include="bin\Debug\de\PdfSharp.resources.dll" />
-    <Content Include="bin\Debug\EntityFramework.dll" />
-    <Content Include="bin\Debug\EntityFramework.SqlServer.dll" />
-    <Resource Include="bin\Debug\EntityFramework.SqlServer.xml" />
-    <Resource Include="bin\Debug\EntityFramework.xml" />
-    <Content Include="bin\Debug\Festispec.Domain.dll" />
-    <Content Include="bin\Debug\Festispec.Domain.pdb" />
-    <Content Include="bin\Debug\Festispec.exe" />
-    <Content Include="bin\Debug\Festispec.pdb" />
-    <Content Include="bin\Debug\Festispec.vshost.exe" />
-    <Content Include="bin\Debug\GalaSoft.MvvmLight.dll" />
-    <Content Include="bin\Debug\GalaSoft.MvvmLight.Extras.dll" />
-    <Content Include="bin\Debug\GalaSoft.MvvmLight.Extras.pdb" />
-    <Resource Include="bin\Debug\GalaSoft.MvvmLight.Extras.xml" />
-    <Content Include="bin\Debug\GalaSoft.MvvmLight.pdb" />
-    <Content Include="bin\Debug\GalaSoft.MvvmLight.Platform.dll" />
-    <Content Include="bin\Debug\GalaSoft.MvvmLight.Platform.pdb" />
-    <Resource Include="bin\Debug\GalaSoft.MvvmLight.Platform.xml" />
-    <Resource Include="bin\Debug\GalaSoft.MvvmLight.xml" />
-    <Content Include="bin\Debug\MaterialDesignColors.dll" />
-    <Content Include="bin\Debug\MaterialDesignColors.pdb" />
-    <Content Include="bin\Debug\MaterialDesignThemes.Wpf.dll" />
-    <Content Include="bin\Debug\MaterialDesignThemes.Wpf.pdb" />
-    <Resource Include="bin\Debug\MaterialDesignThemes.Wpf.xml" />
-    <Content Include="bin\Debug\Microsoft.Practices.ServiceLocation.dll" />
-    <Content Include="bin\Debug\Microsoft.Practices.ServiceLocation.pdb" />
-    <Resource Include="bin\Debug\Microsoft.Practices.ServiceLocation.xml" />
-    <Content Include="bin\Debug\PdfSharp.dll" />
-    <Resource Include="bin\Debug\PdfSharp.xml" />
-    <Content Include="bin\Debug\System.Windows.Interactivity.dll" />
-  </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Festispec.Domain\Festispec.Domain.csproj">
       <Project>{09979796-e638-48d5-8666-fa0ac1f54a2e}</Project>
