@@ -13,6 +13,8 @@
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Email}" />
         <Label>Stad</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.City}" />
+        <Label>Straat</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Street}" />
         <Label>Land</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Country}" />
         <Label>Voornaam</Label>
@@ -33,7 +35,7 @@
         <Label>Password</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Password}" />
         <Label>Postcode</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.PostalCode}" />
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.PostalCode}" MaxLength="6" />
         <Label>Functie</Label>
         <ComboBox ItemsSource="{Binding Path=Roles}" 
             DisplayMemberPath="Role" SelectedValuePath="Role"

@@ -11,6 +11,10 @@ namespace Festispec.ViewModels.Employee
     {
         public EmployeeViewModel(IEmployeeRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
+            if(UpdatedEntity.HiredFrom == default(DateTime))
+            {
+                UpdatedEntity.HiredFrom = new DateTime(1990, 1, 1);
+            }
         }
 
         public EmployeeViewModel(IEmployeeRepositoryFactory repositoryFactory, Domain.Employee entity)
@@ -205,7 +209,10 @@ namespace Festispec.ViewModels.Employee
 
         public DateTime HiredFrom
         {
-            get { return Entity.HiredFrom; }
+            get
+            {
+                return Entity.HiredFrom;
+            }
             set
             {
                 Entity.HiredFrom = value;
@@ -273,9 +280,9 @@ namespace Festispec.ViewModels.Employee
                 Role = Role,
                 Street = Street,
                 Telephone = Telephone,
-                Location = Location,
-                Long = Long,
-                Lat = Lat,
+                Location = DbGeography.PointFromText("POINT(50 5)", 4326),
+                Long = 50,
+                Lat = 5,
                 HiredFrom = HiredFrom,
                 HiredTo = HiredTo
             };

@@ -11,6 +11,10 @@ namespace Festispec.ViewModels.Inspector
     {
         public InspectorViewModel(IInspectorRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
+            if (UpdatedEntity.HiredFrom == default(DateTime))
+            {
+                UpdatedEntity.HiredFrom = new DateTime(1990, 1, 1);
+            }
         }
 
         public InspectorViewModel(IInspectorRepositoryFactory repositoryFactory, Domain.Inspector entity)

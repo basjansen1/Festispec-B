@@ -44,7 +44,7 @@
                 <TextBox Text="{Binding SearchEmail}"></TextBox>
             </DockPanel>
             <Button Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand}">Zoek</Button>
-
+    
             <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedEmployee}" ItemsSource="{Binding Employees}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Naam" Binding="{Binding Username}" Width="*" />
