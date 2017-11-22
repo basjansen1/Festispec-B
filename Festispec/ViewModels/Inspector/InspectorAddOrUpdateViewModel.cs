@@ -43,12 +43,6 @@ namespace Festispec.ViewModels.Inspector
             // TODO: Validation
             EntityViewModel.Save();
 
-            //            using (var InspectorQuestionRepository = _InspectorQuestionRepositoryFactory.CreateRepository())
-            //            {
-            //                foreach (var InspectorQuestion in EntityViewModel.UpdatedEntity.Questions)
-            //                    InspectorQuestionRepository.AddOrUpdate(InspectorQuestion);
-            //            }
-
             NavigationService.GoBack(EntityViewModel);
         }
     }

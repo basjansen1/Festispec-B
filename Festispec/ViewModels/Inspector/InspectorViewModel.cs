@@ -267,7 +267,7 @@ namespace Festispec.ViewModels.Inspector
                         ? InspectorRepository.Add(UpdatedEntity)
                         : InspectorRepository.Update(UpdatedEntity, UpdatedEntity.Id);
                 }
-                catch
+                catch(Exception ex)
                 {
                     MessageBox.Show("Er is iets fout gegaan.");
                 }
