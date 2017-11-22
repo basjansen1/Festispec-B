@@ -17,7 +17,7 @@ namespace Festispec.Views
     /// <summary>
     /// Interaction logic for ProcessInspection.xaml
     /// </summary>
-    public partial class ProcessInspection : Window
+    public partial class ProcessInspection
     {
         public ProcessInspection()
         {

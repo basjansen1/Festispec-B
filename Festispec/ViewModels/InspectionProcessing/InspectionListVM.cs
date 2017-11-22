@@ -13,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Festispec.ViewModels.NavigationService;
 
 namespace Festispec.ViewModels.Employees
 {
@@ -37,6 +38,7 @@ namespace Festispec.ViewModels.Employees
         }
 
         public IInspectionRepositoryFactory InspectionRepositoryFactory;
+        private readonly INavigationService _navigationService;
 
         // Commands
         public ICommand ShowAddInspectionWindowCommand { get; set; }
@@ -53,9 +55,10 @@ namespace Festispec.ViewModels.Employees
         private ProcessInspection _processInspectionView;
 
         // constructor
-        public InspectionListVM(IInspectionRepositoryFactory inspectionRepositoryFactory)
+        public InspectionListVM(IInspectionRepositoryFactory inspectionRepositoryFactory, INavigationService navigationService)
         {
             InspectionRepositoryFactory = inspectionRepositoryFactory;
+            _navigationService = navigationService;
 
             // instantiate commands 
             ShowAddInspectionWindowCommand = new RelayCommand(ShowAddInspectionWindow);
@@ -74,25 +77,17 @@ namespace Festispec.ViewModels.Employees
         // methods
         public void ShowAddInspectionWindow()
         {
-            _addInspectionView = new AddInspection();
-            _addInspectionView.Show();
-        }
-
-        public void HideAddInspectionWindow()
-        {
-            _addInspectionView.Hide();
+            _navigationService.NavigateTo(Routes.Routes.AddInspection.Key);
         }
 
         public void ShowEditInspectionWindow()
         {
-            _editInspectionView = new EditInspection();
-            _editInspectionView.Show();
+            _navigationService.NavigateTo(Routes.Routes.EditInspection.Key);
         }
 
         public void ShowProcessInspectionWindow()
         {
-            _processInspectionView = new ProcessInspection();
-            _processInspectionView.Show();
+            _navigationService.NavigateTo(Routes.Routes.ProcessInspection.Key);
         }
 
         public void DeleteSelectedInspection()

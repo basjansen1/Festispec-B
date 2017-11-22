@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Festispec.ViewModels.NavigationService;
 
 namespace Festispec.ViewModels.Employees
 {
@@ -54,10 +55,12 @@ namespace Festispec.ViewModels.Employees
         }
         public ICommand AddInspectionCommand { get; set; }
         public ICommand CloseWindowCommand { get; set; }
+        private readonly INavigationService _navigationService;
 
-        public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory)
+        public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory, INavigationService navigationService)
         {
             InspectionList = inspectionList;
+            _navigationService = navigationService;
             NewInspection = new InspectionVM();
             NewInspection.StartDate = DateTime.Now;
             NewInspection.EndDate = DateTime.Now;
@@ -69,7 +72,7 @@ namespace Festispec.ViewModels.Employees
             CustomerNames = new List<string>();
             CustomerDictionairy = new Dictionary<string, CustomerVM>();
             AddInspectionCommand = new RelayCommand(AddInspection);
-            CloseWindowCommand = new RelayCommand(InspectionList.HideAddInspectionWindow); 
+            CloseWindowCommand = new RelayCommand(_navigationService.GoBack); 
 
             using(var customerRepository = customerRepositoryFactory.CreateRepository())
             {
@@ -109,7 +112,7 @@ namespace Festispec.ViewModels.Employees
                     }
 
                     InspectionList.InspectionVMList.Add(NewInspection);
-                    InspectionList.HideAddInspectionWindow();
+                    _navigationService.GoBack();
                 }
                 catch (Exception ex)
                 {

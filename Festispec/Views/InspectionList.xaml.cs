@@ -17,7 +17,7 @@ namespace Festispec.Views
     /// <summary>
     /// Interaction logic for InspectionList.xaml
     /// </summary>
-    public partial class InspectionList : Window
+    public partial class InspectionList
     {
         public InspectionList()
         {

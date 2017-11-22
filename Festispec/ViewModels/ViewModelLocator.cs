@@ -81,6 +81,9 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.InspectorList.Key, Routes.Routes.InspectorList.PageType);
             navigationService.Configure(Routes.Routes.InspectorAddOrUpdate.Key,
                 Routes.Routes.InspectorAddOrUpdate.PageType);
+            navigationService.Configure(Routes.Routes.InspectionList.Key, Routes.Routes.InspectionList.PageType);
+            navigationService.Configure(Routes.Routes.EditInspection.Key, Routes.Routes.EditInspection.PageType);
+            navigationService.Configure(Routes.Routes.AddInspection.Key, Routes.Routes.AddInspection.PageType);
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }
