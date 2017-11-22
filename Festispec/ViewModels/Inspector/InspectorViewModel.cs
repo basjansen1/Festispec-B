@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Festispec.ViewModels.Inspector
 {
-    public class InspectorViewModel : EntityViewModelBase<IInspectorRepositoryFactory, Domain.Inspector>
+    public class InspectorViewModel : EntityViewModelBase<IInspectorRepositoryFactory, IInspectorRepository, Domain.Inspector>
     {
         public InspectorViewModel(IInspectorRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {

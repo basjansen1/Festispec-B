@@ -3,9 +3,9 @@ using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository.Factory
 {
-    public class EmployeeRoleRepositoryFactory : RepositoryFactoryBase<EmployeeRole>, IEmployeeRoleRepositoryFactory
+    public class EmployeeRoleRepositoryFactory : RepositoryFactoryBase<IEmployeeRoleRepository, EmployeeRole>, IEmployeeRoleRepositoryFactory
     {
-        public override IRepository<EmployeeRole> CreateRepository()
+        public override IEmployeeRoleRepository CreateRepository()
         {
             return new EmployeeRoleRepository(GetDbContext());
         }

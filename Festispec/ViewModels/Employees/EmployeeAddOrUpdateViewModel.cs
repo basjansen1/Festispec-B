@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Employee;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
@@ -10,7 +11,7 @@ using Festispec.ViewModels.NavigationService;
 namespace Festispec.ViewModels.Employees
 {
     public class EmployeeAddOrUpdateViewModel :
-        AddOrUpdateViewModelBase<IEmployeeViewModelFactory, EmployeeViewModel, Domain.Employee>
+        AddOrUpdateViewModelBase<IEmployeeViewModelFactory, EmployeeViewModel, IEmployeeRepository, Domain.Employee>
     {
         public EmployeeAddOrUpdateViewModel(INavigationService navigationService,
             IEmployeeRepositoryFactory repositoryFactory,

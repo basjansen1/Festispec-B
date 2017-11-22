@@ -2,13 +2,14 @@
 using System.ComponentModel;
 using System.Linq;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.NavigationService;
 
 namespace Festispec.ViewModels.Inspector
 {
     public class InspectorAddOrUpdateViewModel :
-        AddOrUpdateViewModelBase<IInspectorViewModelFactory, InspectorViewModel, Domain.Inspector>
+        AddOrUpdateViewModelBase<IInspectorViewModelFactory, InspectorViewModel, IInspectorRepository, Domain.Inspector>
     {
         public InspectorAddOrUpdateViewModel(INavigationService navigationService,
             IInspectorRepositoryFactory repositoryFactory,

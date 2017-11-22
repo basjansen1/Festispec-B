@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Core.Objects.DataClasses;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
@@ -184,7 +187,7 @@ namespace Festispec.Domain.Repository
         /// </exception>
         public virtual TEntity Add(TEntity entity)
         {
-            entity = DbContext.Set<TEntity>().Add(entity);
+            DbContext.Set<TEntity>().Add(entity);
             DbContext.SaveChanges();
             return entity;
         }
@@ -280,7 +283,7 @@ namespace Festispec.Domain.Repository
         {
             DbContext.Set<TEntity>().AddOrUpdate(entity);
             await DbContext.SaveChangesAsync();
-            return entity;
+            return entity;  
         }
 
         /// <summary>
@@ -356,6 +359,26 @@ namespace Festispec.Domain.Repository
         public virtual async Task<int> CountAsync()
         {
             return await DbContext.Set<TEntity>().CountAsync();
+        }
+    }
+
+    public static class DbContextExtensionMethods
+    {
+        public static bool IsAttached(this DbContext dbContext, object entity)
+        {
+            // Get ObjectContext from DbContext
+            var objectContext = ((IObjectContextAdapter)dbContext).ObjectContext;
+
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+            ObjectStateEntry entry;
+            if (objectContext.ObjectStateManager.TryGetObjectStateEntry(entity, out entry))
+            {
+                return (entry.State != EntityState.Detached);
+            }
+            return false;
         }
     }
 }

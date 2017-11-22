@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Festispec.ViewModels.Employee
 {
-    public class EmployeeViewModel : EntityViewModelBase<IEmployeeRepositoryFactory, Domain.Employee>
+    public class EmployeeViewModel : EntityViewModelBase<IEmployeeRepositoryFactory, IEmployeeRepository, Domain.Employee>
     {
         public EmployeeViewModel(IEmployeeRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
