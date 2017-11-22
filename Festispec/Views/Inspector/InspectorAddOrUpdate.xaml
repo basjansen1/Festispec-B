@@ -13,6 +13,8 @@
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Email}" />
         <Label>Stad</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.City}" />
+        <Label>Straat</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Street}" />
         <Label>Land</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Country}" />
         <Label>Voornaam</Label>
@@ -24,10 +26,16 @@
         <Label>IBAN</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.IBAN}" />
         <Label>Manager</Label>
-        <ComboBox ItemsSource="{Binding Path=Managers}" 
-            DisplayMemberPath="Username"
-            SelectedValuePath="Id"
-            SelectedValue="{Binding Path=EntityViewModel.UpdatedEntity.Manager_Id}" />
+        <ComboBox SelectedValue="{Binding Path=EntityViewModel.UpdatedEntity.Manager_Id}">
+            <ComboBox.Resources>
+                <CollectionViewSource x:Key="Managers" Source="{Binding Path=Managers}"/>
+            </ComboBox.Resources>
+            <ComboBox.ItemsSource>
+                <CompositeCollection>
+                    <CollectionContainer Collection="{Binding Source ={StaticResource Managers} }"/>
+                </CompositeCollection>
+            </ComboBox.ItemsSource>
+        </ComboBox>
         <Label>Gemeente</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Municipality}" />
         <Label>Password</Label>

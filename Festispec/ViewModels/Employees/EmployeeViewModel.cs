@@ -4,6 +4,7 @@ using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using System.Data.Entity.Spatial;
 using System;
+using System.Windows;
 
 namespace Festispec.ViewModels.Employee
 {
@@ -244,9 +245,16 @@ namespace Festispec.ViewModels.Employee
 
             using (var EmployeeRepository = RepositoryFactory.CreateRepository())
             {
-                var updated = UpdatedEntity.Id == 0
-                    ? EmployeeRepository.Add(UpdatedEntity)
-                    : EmployeeRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                try
+                {
+                    var updated = UpdatedEntity.Id == 0
+                        ? EmployeeRepository.Add(UpdatedEntity)
+                        : EmployeeRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                }
+                catch
+                {
+                    MessageBox.Show("Er is iets fout gegaan.");
+                }
             }
         }
 

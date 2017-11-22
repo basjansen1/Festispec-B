@@ -4,6 +4,7 @@ using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using System.Data.Entity.Spatial;
 using System;
+using System.Windows;
 
 namespace Festispec.ViewModels.Inspector
 {
@@ -260,9 +261,16 @@ namespace Festispec.ViewModels.Inspector
 
             using (var InspectorRepository = RepositoryFactory.CreateRepository())
             {
-                var updated = UpdatedEntity.Id == 0
-                    ? InspectorRepository.Add(UpdatedEntity)
-                    : InspectorRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                try
+                {
+                    var updated = UpdatedEntity.Id == 0
+                        ? InspectorRepository.Add(UpdatedEntity)
+                        : InspectorRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                }
+                catch
+                {
+                    MessageBox.Show("Er is iets fout gegaan.");
+                }
             }
         }
 
@@ -296,9 +304,9 @@ namespace Festispec.ViewModels.Inspector
                 Role = Role,
                 Street = Street,
                 Telephone = Telephone,
-                Location = Location,
-                Long = Long,
-                Lat = Lat,
+                Location = DbGeography.PointFromText("POINT(50 5)", 4326),
+                Long = 50,
+                Lat = 5,
                 HiredFrom = HiredFrom,
                 HiredTo = HiredTo,
                 CertificationFrom = CertificationFrom,

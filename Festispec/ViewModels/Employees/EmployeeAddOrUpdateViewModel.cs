@@ -25,7 +25,7 @@ namespace Festispec.ViewModels.Employee
             }
             using (var employeeRoleRepository = employeeRoleRepositoryFactory.CreateRepository())
             {
-                Roles = employeeRoleRepository.Get().ToList();
+                Roles = employeeRoleRepository.Get().Where(e => e.Role != "Manager").ToList();
             }
         }
 
