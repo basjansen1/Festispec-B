@@ -13,7 +13,7 @@
                 <DataGridTextColumn Header="Klantnaam" Width="2*" Binding="{Binding CustomerName}"/>
                 <DataGridTextColumn Header="Naam verzoek" Width="2*" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Begin inspectie" Width="2*" Binding="{Binding StartDate}"/>
-                <DataGridTextColumn Header="Plaats" Width="2*" Binding="{Binding }"/>
+                <DataGridTextColumn Header="Plaats" Width="2*" Binding="{Binding City }"/>
             </DataGrid.Columns>
         </DataGrid>
         <Border x:Name="bdMap" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="214" Margin="575,325,0,0" VerticalAlignment="Top" Width="215" RenderTransformOrigin="0.766,0.523">
