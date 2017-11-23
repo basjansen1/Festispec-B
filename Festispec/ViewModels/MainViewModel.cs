@@ -6,8 +6,10 @@ namespace Festispec.ViewModels
 {
     public class MainViewModel : NavigatableViewModelBase
     {
+        private readonly INavigationService _navigationService;
         public MainViewModel(INavigationService navigationService) : base(navigationService)
         {
+            _navigationService = navigationService;
             RegisterCommands();
         }
 
@@ -19,11 +21,11 @@ namespace Festispec.ViewModels
         public void RegisterCommands()
         {
             NavigateToTemplateListCommand =
-                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.TemplateList));
+                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.TemplateList), () => _navigationService.HasAccess(Routes.Routes.TemplateList));
             NavigateToEmployeeListCommand = 
-                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.EmployeeList));
+                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.EmployeeList), () => _navigationService.HasAccess(Routes.Routes.EmployeeList));
             NavigateToInspectorListCommand = 
-                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.InspectorList));
+                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.InspectorList), () => _navigationService.HasAccess(Routes.Routes.InspectorList));
         }
     }
 }
