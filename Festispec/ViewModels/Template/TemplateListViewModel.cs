@@ -3,8 +3,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.NavigationService;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
 using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels.Template
@@ -43,9 +43,9 @@ namespace Festispec.ViewModels.Template
 
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName != "CurrentPageKey") return;
+            if (args.PropertyName != nameof(NavigationService.CurrentRoute)) return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.TemplateList.Key) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.TemplateList) return;
 
             LoadTemplates();
         }
@@ -53,9 +53,9 @@ namespace Festispec.ViewModels.Template
         private void RegisterCommands()
         {
             NavigateToTemplateAddCommand =
-                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate.Key));
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate));
             NavigateToTemplateUpdateCommand = new RelayCommand(
-                () => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate.Key, SelectedTemplate),
+                () => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate, SelectedTemplate),
                 () => SelectedTemplate != null);
             TemplateDeleteCommand = new RelayCommand(() =>
             {

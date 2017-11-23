@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
+using Festispec.NavigationService;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 
@@ -46,7 +46,7 @@ namespace Festispec.ViewModels.Inspector
         {
             if (args.PropertyName != "CurrentPageKey") return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.InspectorList.Key) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.InspectorList) return;
 
             LoadInspectors();
         }
@@ -54,9 +54,9 @@ namespace Festispec.ViewModels.Inspector
         private void RegisterCommands()
         {
             NavigateToInspectorAddCommand =
-                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.InspectorAddOrUpdate.Key));
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.InspectorAddOrUpdate));
             NavigateToInspectorUpdateCommand = new RelayCommand(
-                () => _navigationService.NavigateTo(Routes.Routes.InspectorAddOrUpdate.Key, SelectedInspector),
+                () => _navigationService.NavigateTo(Routes.Routes.InspectorAddOrUpdate, SelectedInspector),
                 () => SelectedInspector != null);
             InspectorDeleteCommand = new RelayCommand(() => {
                 SelectedInspector.Delete();

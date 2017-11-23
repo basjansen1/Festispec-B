@@ -5,7 +5,7 @@ using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
+using Festispec.NavigationService;
 
 namespace Festispec.ViewModels.Template
 {
@@ -33,7 +33,7 @@ namespace Festispec.ViewModels.Template
         {
             if (args.PropertyName != "CurrentPageKey") return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.TemplateQuestionAddOrUpdate.Key) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.TemplateQuestionAddOrUpdate) return;
 
             UpdateEntityViewModelFromNavigationParameter();
         }

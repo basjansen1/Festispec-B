@@ -4,7 +4,7 @@ using System.Linq;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
+using Festispec.NavigationService;
 
 namespace Festispec.ViewModels.Inspector
 {
@@ -29,7 +29,7 @@ namespace Festispec.ViewModels.Inspector
         {
             if (args.PropertyName != "CurrentPageKey") return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.InspectorAddOrUpdate.Key) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.InspectorAddOrUpdate) return;
 
             UpdateEntityViewModelFromNavigationParameter();
             UpdateInspectorFromNavigationParameter();

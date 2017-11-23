@@ -7,34 +7,39 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using Festispec.Annotations;
+using Festispec.Routes;
+using Festispec.State;
 
-namespace Festispec.ViewModels.NavigationService
+namespace Festispec.NavigationService
 {
     internal class NavigationService : INavigationService, INotifyPropertyChanged
     {
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         #region Fields
 
         private readonly Dictionary<string, Uri> _pagesByKey;
-        private readonly List<string> _historic;
-        private string _currentPageKey;
+        private readonly List<Route> _historic;
+        private Route _currentRoute;
+        private readonly IState _state;
 
         #endregion
 
-        #region Properties                                              
+        #region Properties
 
-        public string CurrentPageKey
+        public Route CurrentRoute
         {
-            get { return _currentPageKey; }
-
-            private set
+            get { return _currentRoute; }
+            set
             {
-                if (_currentPageKey == value)
-                {
+                if (_currentRoute == value)
                     return;
-                }
-
-                _currentPageKey = value;
-                OnPropertyChanged("CurrentPageKey");
+                _currentRoute = value;
+                OnPropertyChanged(nameof(CurrentRoute));
             }
         }
 
@@ -44,16 +49,18 @@ namespace Festispec.ViewModels.NavigationService
 
         #region Ctors and Methods
 
-        public NavigationService()
+        public NavigationService(IState state)
         {
+            _state = state;
             _pagesByKey = new Dictionary<string, Uri>();
-            _historic = new List<string>();
+            _historic = new List<Route>();
         }
 
         public void GoBack()
         {
             GoBack(null);
         }
+
         public void GoBack(object parameter)
         {
             if (_historic.Count <= 1) return;
@@ -62,48 +69,46 @@ namespace Festispec.ViewModels.NavigationService
             NavigateTo(_historic.Last(), parameter);
         }
 
-        public void NavigateTo(string pageKey)
+        public void NavigateTo(Route route)
         {
-            NavigateTo(pageKey, null);
+            NavigateTo(route, null);
         }
 
-        public virtual void NavigateTo(string pageKey, object parameter)
+        public virtual void NavigateTo(Route route, object parameter)
         {
             lock (_pagesByKey)
             {
-                if (!_pagesByKey.ContainsKey(pageKey))
+                if (!_pagesByKey.ContainsKey(route.Key))
+                    throw new ArgumentException($@"No such page: {route.Key} ", nameof(route.Key));
+
+                if (!HasAccess(route))
                 {
-                    throw new ArgumentException($"No such page: {pageKey} ", nameof(pageKey));
+                    MessageBox.Show("Geen bevoegdheid om deze pagina te bezoeken");
+                    return;
                 }
 
                 var frame = GetDescendantFromName(GetMainWindow(), "MainFrame") as Frame;
 
                 if (frame != null)
-                {
-                    frame.Source = _pagesByKey[pageKey];
-                }
+                    frame.Source = _pagesByKey[route.Key];
                 Parameter = parameter;
-                if(_historic.Count == 0 || _historic.Last() != pageKey) _historic.Add(pageKey);
-                CurrentPageKey = pageKey;
+                if (_historic.Count == 0 || _historic.Last() != route) _historic.Add(route);
+                CurrentRoute = route;
             }
         }
 
-        public void Configure(string key, Uri pageType)
+        public void Configure(Route route)
         {
             lock (_pagesByKey)
             {
-                if (_pagesByKey.ContainsKey(key))
-                {
-                    _pagesByKey[key] = pageType;
-                }
+                if (_pagesByKey.ContainsKey(route.Key))
+                    _pagesByKey[route.Key] = route.PageType;
                 else
-                {
-                    _pagesByKey.Add(key, pageType);
-                }
+                    _pagesByKey.Add(route.Key, route.PageType);
             }
         }
 
-        private static MainWindow GetMainWindow()
+        public static MainWindow GetMainWindow()
         {
             return Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
         }
@@ -113,9 +118,7 @@ namespace Festispec.ViewModels.NavigationService
             var count = VisualTreeHelper.GetChildrenCount(parent);
 
             if (count < 1)
-            {
                 return null;
-            }
 
             for (var i = 0; i < count; i++)
             {
@@ -124,32 +127,22 @@ namespace Festispec.ViewModels.NavigationService
                 if (frameworkElement == null) continue;
 
                 if (frameworkElement.Name == name)
-                {
                     return frameworkElement;
-                }
 
                 frameworkElement = GetDescendantFromName(frameworkElement, name);
                 if (frameworkElement != null)
-                {
                     return frameworkElement;
-                }
             }
             return null;
         }
 
+        public bool HasAccess(Route route)
+        {
+            return route.Roles.Contains(_state.CurrentUser?.Role_Role);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        //protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        //{
-        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        //}
-
         #endregion
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

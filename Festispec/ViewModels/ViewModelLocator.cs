@@ -11,12 +11,13 @@
 
 using Festispec.Domain.Repository.Factory;
 using Festispec.Domain.Repository.Factory.Interface;
-using Festispec.ViewModels.Employee;
-using Festispec.ViewModels.Employees;
+using Festispec.NavigationService;
+using Festispec.State;
 using Festispec.ViewModels.Factory;
 using Festispec.ViewModels.Factory.Interface;
+using Festispec.ViewModels.Employee;
+using Festispec.ViewModels.Employees;
 using Festispec.ViewModels.Inspector;
-using Festispec.ViewModels.NavigationService;
 using Festispec.ViewModels.Template;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
@@ -29,8 +30,12 @@ namespace Festispec.ViewModels
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            RegisterNavigationService();
+            // Register steate
+            SimpleIoc.Default.Register<IState, State.State>();
 
+            // Register navigation
+            RegisterNavigationService();
+            
             // Register repositories
             SimpleIoc.Default.Register<ITemplateRepositoryFactory, TemplateRepositoryFactory>();
             SimpleIoc.Default.Register<ITemplateViewModelFactory, TemplateViewModelFactory>();
@@ -58,21 +63,16 @@ namespace Festispec.ViewModels
 
         private static void RegisterNavigationService()
         {
-            var navigationService = new NavigationService.NavigationService();
-            navigationService.Configure(Routes.Routes.Home.Key, Routes.Routes.Home.PageType);
-            navigationService.Configure(Routes.Routes.TemplateList.Key, Routes.Routes.TemplateList.PageType);
-            navigationService.Configure(Routes.Routes.TemplateAddOrUpdate.Key,
-                Routes.Routes.TemplateAddOrUpdate.PageType);
-            navigationService.Configure(Routes.Routes.TemplateQuestionAddOrUpdate.Key,
-                Routes.Routes.TemplateQuestionAddOrUpdate.PageType);
-            navigationService.Configure(Routes.Routes.TemplateQuestionAdd.Key,
-                Routes.Routes.TemplateQuestionAdd.PageType);
-            navigationService.Configure(Routes.Routes.EmployeeAddOrUpdate.Key,
-                Routes.Routes.EmployeeAddOrUpdate.PageType);
-            navigationService.Configure(Routes.Routes.EmployeeList.Key, Routes.Routes.EmployeeList.PageType);
-            navigationService.Configure(Routes.Routes.InspectorList.Key, Routes.Routes.InspectorList.PageType);
-            navigationService.Configure(Routes.Routes.InspectorAddOrUpdate.Key,
-                Routes.Routes.InspectorAddOrUpdate.PageType);
+            var navigationService = new NavigationService.NavigationService(ServiceLocator.Current.GetInstance<IState>());
+            navigationService.Configure(Routes.Routes.Home);
+            navigationService.Configure(Routes.Routes.TemplateList);
+            navigationService.Configure(Routes.Routes.TemplateAddOrUpdate);
+            navigationService.Configure(Routes.Routes.TemplateQuestionAddOrUpdate);
+            navigationService.Configure(Routes.Routes.TemplateQuestionAdd);
+            navigationService.Configure(Routes.Routes.EmployeeAddOrUpdate);
+            navigationService.Configure(Routes.Routes.EmployeeList);
+            navigationService.Configure(Routes.Routes.InspectorList);
+            navigationService.Configure(Routes.Routes.InspectorAddOrUpdate);
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }
@@ -153,10 +153,6 @@ namespace Festispec.ViewModels
 
         public InspectorAddOrUpdateViewModel InspectorAddOrUpdate =>
             ServiceLocator.Current.GetInstance<InspectorAddOrUpdateViewModel>();
-
-        #endregion
-
-        #region ViewModels
 
         #endregion
     }

@@ -4,9 +4,9 @@ using System.Linq;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
+using Festispec.NavigationService;
 using Festispec.ViewModels.Employee;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
 
 namespace Festispec.ViewModels.Employees
 {
@@ -37,7 +37,7 @@ namespace Festispec.ViewModels.Employees
         {
             if (args.PropertyName != "CurrentPageKey") return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.EmployeeAddOrUpdate.Key) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.EmployeeAddOrUpdate) return;
 
             UpdateEntityViewModelFromNavigationParameter();
         }

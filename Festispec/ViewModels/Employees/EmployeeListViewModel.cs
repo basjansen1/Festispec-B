@@ -4,9 +4,9 @@ using System.Linq;
 using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
+using Festispec.NavigationService;
 
 namespace Festispec.ViewModels.Employee
 {
@@ -46,7 +46,7 @@ namespace Festispec.ViewModels.Employee
         {
             if (args.PropertyName != "CurrentPageKey") return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.EmployeeList.Key) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.EmployeeList) return;
 
             LoadEmployees();
         }
@@ -54,9 +54,9 @@ namespace Festispec.ViewModels.Employee
         private void RegisterCommands()
         {
             NavigateToEmployeeAddCommand =
-                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.EmployeeAddOrUpdate.Key));
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.EmployeeAddOrUpdate));
             NavigateToEmployeeUpdateCommand = new RelayCommand(
-                () => _navigationService.NavigateTo(Routes.Routes.EmployeeAddOrUpdate.Key, SelectedEmployee),
+                () => _navigationService.NavigateTo(Routes.Routes.EmployeeAddOrUpdate, SelectedEmployee),
                 () => SelectedEmployee != null);
             EmployeeDeleteCommand = new RelayCommand(() => {
                 SelectedEmployee.Delete();

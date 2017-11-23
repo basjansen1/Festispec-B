@@ -3,10 +3,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
+using Festispec.State;
 
 namespace Festispec.ViewModels
 {
@@ -14,14 +14,17 @@ namespace Festispec.ViewModels
     {
         private readonly ILoginRepositoryFactory _iLoginRepositoryFactory;
 
-        public ICommand _loginCommand { get; set; }
+        public ICommand LoginCommand { get; set; }
+
+        private readonly IState _state;
 
         public Domain.Employee Employee { get; set; }
-        public LoginViewModel(ILoginRepositoryFactory iLoginRepositoryFactory)
+        public LoginViewModel(ILoginRepositoryFactory iLoginRepositoryFactory, IState state)
         {
             _iLoginRepositoryFactory = iLoginRepositoryFactory;
+            _state = state;
 
-            _loginCommand = new RelayCommand<PasswordBox>(Login);
+            LoginCommand = new RelayCommand<PasswordBox>(Login);
 
             Employee = new Domain.Employee();
         }
@@ -48,7 +51,8 @@ namespace Festispec.ViewModels
             }
             if (foundEmployee != null)
             {
-                MainWindow mainWindow = new MainWindow();
+                _state.CurrentUser = foundEmployee;
+                var mainWindow = new MainWindow();
                 mainWindow.Show();
                 Application.Current.MainWindow.Close();
             }

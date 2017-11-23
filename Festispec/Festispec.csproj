@@ -96,6 +96,8 @@
     </ApplicationDefinition>
     <Compile Include="Converter\InverseBooleanConverter.cs" />
     <Compile Include="Properties\Annotations1.cs" />
+    <Compile Include="State\IState.cs" />
+    <Compile Include="State\State.cs" />
     <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
     <Compile Include="ViewModels\Template\TemplateQuestionAddViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateQuestionAddOrUpdateViewModel.cs" />
@@ -119,10 +121,10 @@
     <Compile Include="ViewModels\Factory\Interface\IViewModelFactory.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NavigatableViewModelBase.cs" />
-    <Compile Include="ViewModels\NavigationService\NavigationService.cs" />
-    <Compile Include="ViewModels\NavigationService\INavigationService.cs" />
-    <Compile Include="ViewModels\Routes\Route.cs" />
-    <Compile Include="ViewModels\Routes\Routes.cs" />
+    <Compile Include="NavigationService\NavigationService.cs" />
+    <Compile Include="NavigationService\INavigationService.cs" />
+    <Compile Include="Routes\Route.cs" />
+    <Compile Include="Routes\Routes.cs" />
     <Compile Include="ViewModels\Template\TemplateListViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateQuestionViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateViewModel.cs" />
