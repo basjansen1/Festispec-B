@@ -31,6 +31,8 @@
                 <Button Grid.Column="2" Content="Templates" Margin="5px 15px" Command="{Binding NavigateToTemplateListCommand}" />
                 <Button Grid.Column="3" Content="Medewerkers" Margin="5px 15px" Command="{Binding NavigateToEmployeeListCommand}"/>
                 <Button Grid.Column="4" Content="Inspecteurs" Margin="5px 15px" Command="{Binding NavigateToInspectorListCommand}"/>
+                <Button Grid.Column="5" Content="Klanten" Margin="5px 15px" Command="{Binding NavigateToCustomerListCommand}"/>
+
             </Grid>
 
             <Frame Grid.Row="1" Name="MainFrame" NavigationUIVisibility="Hidden"/>

@@ -1,10 +1,12 @@
 ﻿using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.NavigationService;
+using Festispec.ViewModels.Customer;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +14,7 @@ using System.Windows.Input;
 
 namespace Festispec.ViewModels.CustomerCRUD
 {
-    class CustomerListViewModel : NavigatableViewModelBase
+   public class CustomerListViewModel : NavigatableViewModelBase
     {
 
         private readonly INavigationService _navigationService;
@@ -49,7 +51,7 @@ namespace Festispec.ViewModels.CustomerCRUD
         {
             if (args.PropertyName != "CurrentPageKey") return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.CustomerList.Key) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.CustomerList) return;
 
             LoadCustomers();
         }
@@ -57,9 +59,9 @@ namespace Festispec.ViewModels.CustomerCRUD
         private void RegisterCommands()
         {
             NavigateToCustomerAddCommand =
-                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate.Key));
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate));
             NavigateToCustomerUpdateCommand = new RelayCommand(
-                () => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate.Key, SelectedCustomer),
+                () => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate, SelectedCustomer),
                 () => SelectedCustomer != null);
             CustomerDeleteCommand = new RelayCommand(() => {
                 SelectedCustomer.Delete();
@@ -77,10 +79,8 @@ namespace Festispec.ViewModels.CustomerCRUD
                     new ObservableCollection<CustomerViewModel>(
                         CustomerRepository.Get()
                             .Where(Customer =>
-                                (Customer.HiredTo.HasValue ? Customer.HiredTo.Value > today : true)
-                                && Customer.Username.Contains(SearchUsername)
-                                && Customer.Email.Contains(SearchEmail)
-                                && !Customer.Role_Role.Equals("Inspecteur"))
+                                Customer.FirstName.Contains(SearchUsername)
+                                && Customer.Email.Contains(SearchEmail))
                             .ToList()
                             .Select(Customer => _CustomerViewModelFactory.CreateViewModel(Customer)));
                 RaisePropertyChanged(nameof(Customers));

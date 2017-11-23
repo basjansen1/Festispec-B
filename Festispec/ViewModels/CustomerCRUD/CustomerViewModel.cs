@@ -1,18 +1,19 @@
-﻿using Festispec.Domain.Repository.Factory.Interface;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Festispec.Domain;
+using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Domain.Repository.Interface;
 using System.Data.Entity.Spatial;
+using System;
+using System.Windows;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Festispec.ViewModels.CustomerCRUD
+namespace Festispec.ViewModels.Customer
 {
-    class CustomerViewModel : EntityViewModelBase<ICustomerRepositoryFactory, Domain.Customer>
+    public class CustomerViewModel : EntityViewModelBase<ICustomerRepositoryFactory, ICustomerRepository, Domain.Customer>
     {
-
         public CustomerViewModel(ICustomerRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
+           
         }
 
         public CustomerViewModel(ICustomerRepositoryFactory repositoryFactory, Domain.Customer entity)
@@ -23,15 +24,7 @@ namespace Festispec.ViewModels.CustomerCRUD
         public int Id => Entity.Id;
 
 
-        public string CompanyName
-        {
-            get { return Entity.CompanyName; }
-            set
-            {
-                Entity.CompanyName = value;
-                RaisePropertyChanged();
-            }
-        }
+        
 
 
         public string City
@@ -64,6 +57,16 @@ namespace Festispec.ViewModels.CustomerCRUD
             }
         }
 
+        public string FirstName
+        {
+            get { return Entity.FirstName; }
+            set
+            {
+                Entity.FirstName = value;
+                RaisePropertyChanged();
+
+            }
+        }
 
         public string HouseNumber
         {
@@ -83,6 +86,28 @@ namespace Festispec.ViewModels.CustomerCRUD
                 RaisePropertyChanged();
             }
         }
+
+        public string LastName
+        {
+            get { return Entity.LastName; }
+            set
+            {
+                Entity.IBAN = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string Name
+        {
+            get { return Entity.Name; }
+
+            set
+            {
+                Entity.Name = value;
+                RaisePropertyChanged();
+            }
+        }
+
 
         public string Municipality
         {
@@ -154,21 +179,74 @@ namespace Festispec.ViewModels.CustomerCRUD
             }
         }
 
-
-        public override void Save()
+        public ICollection<Inspection> Inspections
         {
-
-            using (var CustomerRepository = RepositoryFactory.CreateRepository())
+            get
             {
-                var updated = UpdatedEntity.Id == 0 ? CustomerRepository.Add(UpdatedEntity) : CustomerRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                return Entity.Inspections;
+            }
+            set
+            {
+                Entity.Inspections = value;
+                RaisePropertyChanged();
             }
         }
 
-        public override void Delete()
+        public String KVK
+        {
+            get { return Entity.KVK; }
+            set {
+                Entity.KVK = value;
+                RaisePropertyChanged();
+                }
+        }
+
+        public ICollection<Note> Notes
+        {
+            get { return Entity.Notes; }
+            set
+            {
+                Entity.Notes = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
+
+        public override bool Save()
+        {
+
+            using (var InspectorRepository = RepositoryFactory.CreateRepository())
+            {
+                try
+                {
+                    var updated = UpdatedEntity.Id == 0
+                        ? InspectorRepository.Add(UpdatedEntity)
+                        : InspectorRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                {
+                    List<string> ErrorList = new List<string>();
+                    foreach (var eve in ex.EntityValidationErrors)
+                    {
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            ErrorList.Add(ve.PropertyName);
+                        }
+                    }
+                    string joined = string.Join(",", ErrorList.Select(x => x));
+                    MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public override bool Delete()
         {
             using (var CustomerRepository = RepositoryFactory.CreateRepository())
             {
-                CustomerRepository.Delete(Entity);
+                return CustomerRepository.Delete(Entity) != 0;
             }
         }
 
@@ -179,17 +257,21 @@ namespace Festispec.ViewModels.CustomerCRUD
                 Id = Id,
                 Email = Email,
                 City = City,
-                CompanyName = CompanyName,
                 Country = Country,
+                FirstName = FirstName,
                 HouseNumber = HouseNumber,
                 IBAN = IBAN,
+                LastName = LastName,
                 Municipality = Municipality,
                 PostalCode = PostalCode,
                 Street = Street,
                 Telephone = Telephone,
-                Location = Location,
-                Long = Long,
-                Lat = Lat,
+                Location = DbGeography.PointFromText("POINT(50 5)", 4326),
+                Long = 50,
+                Lat = 5,
+                Inspections = Inspections,
+                KVK = KVK,
+                Notes = Notes
             };
         }
     }

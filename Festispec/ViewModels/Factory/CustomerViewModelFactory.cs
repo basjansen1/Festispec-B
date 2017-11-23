@@ -1,5 +1,6 @@
 ﻿using Festispec.Domain.Repository.Factory;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.ViewModels.Customer;
 using Festispec.ViewModels.CustomerCRUD;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.Template;

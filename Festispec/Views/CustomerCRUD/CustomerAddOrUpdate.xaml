@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="CustomerAddOrUpdate"
-        DataContext="{Binding Source={StaticResource Locator}, Path=EmployeeAddOrUpdate}">
+        DataContext="{Binding Source={StaticResource Locator}, Path=CustomerAddOrUpdate}">
     <StackPanel>
         <Label>Gebruikersnaam</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Username}" />
