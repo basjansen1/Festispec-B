@@ -50,8 +50,6 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<TemplateListViewModel>();
             SimpleIoc.Default.Register<TemplateAddOrUpdateViewModel>();
-            SimpleIoc.Default.Register<TemplateQuestionAddOrUpdateViewModel>();
-            SimpleIoc.Default.Register<TemplateQuestionAddViewModel>();
             SimpleIoc.Default.Register<EmployeeAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<EmployeeListViewModel>();
             SimpleIoc.Default.Register<InspectorListViewModel>();
@@ -127,6 +125,9 @@ namespace Festispec.ViewModels
         public IInspectorViewModelFactory InspectorViewModelFactory =
             ServiceLocator.Current.GetInstance<IInspectorViewModelFactory>();
 
+        public INavigationService NavigationService = ServiceLocator.Current.GetInstance<INavigationService>();
+
+
         #endregion
 
         #region Singleton ViewModels 
@@ -138,11 +139,9 @@ namespace Festispec.ViewModels
         public TemplateAddOrUpdateViewModel TemplateAddOrUpdate
             => ServiceLocator.Current.GetInstance<TemplateAddOrUpdateViewModel>();
 
-        public TemplateQuestionAddOrUpdateViewModel TemplateQuestionAddOrUpdate
-            => ServiceLocator.Current.GetInstance<TemplateQuestionAddOrUpdateViewModel>();
-
-        public TemplateQuestionAddViewModel TemplateQuestionAdd
-            => ServiceLocator.Current.GetInstance<TemplateQuestionAddViewModel>();
+        public TemplateQuestionAddOrUpdateViewModel TemplateQuestionAddOrUpdate => new TemplateQuestionAddOrUpdateViewModel(NavigationService, TemplateQuestionRepositoryFactory, TemplateQuestionViewModelFactory, QuestionTypeRepositoryFactory);
+            
+        public TemplateQuestionAddViewModel TemplateQuestionAdd => new TemplateQuestionAddViewModel(NavigationService, TemplateQuestionRepositoryFactory, TemplateQuestionViewModelFactory, QuestionTypeRepositoryFactory);
 
         public LoginViewModel LoginViewModel => ServiceLocator.Current.GetInstance<LoginViewModel>();
 
