@@ -69,13 +69,20 @@ namespace Festispec.ViewModels.Template
         {
             using (var templateRepository = _templateRepositoryFactory.CreateRepository())
             {
+                var query = templateRepository.Get();
+
+                if (!string.IsNullOrWhiteSpace(SearchName))
+                {
+                    query = query.Where(template => template.Name.Contains(SearchName));
+                }
+                if (!string.IsNullOrWhiteSpace(SearchDescription))
+                {
+                    query = query.Where(template => template.Description.Contains(SearchDescription));
+                }
+
                 Templates =
                     new ObservableCollection<TemplateViewModel>(
-                        templateRepository.Get()
-                            .Where(template =>
-                                template.Name.Contains(SearchName)
-                                && template.Description.Contains(SearchDescription))
-                            .ToList()
+                        query.ToList()
                             .Select(template => _templateViewModelFactory.CreateViewModel(template)));
                 RaisePropertyChanged(nameof(Templates));
             }
