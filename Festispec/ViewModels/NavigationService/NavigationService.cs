@@ -76,7 +76,7 @@ namespace Festispec.ViewModels.NavigationService
                     throw new ArgumentException($"No such page: {pageKey} ", nameof(pageKey));
                 }
 
-                var frame = GetDescendantFromName(Application.Current.MainWindow, "MainFrame") as Frame;
+                var frame = GetDescendantFromName(GetMainWindow(), "MainFrame") as Frame;
 
                 if (frame != null)
                 {
@@ -101,6 +101,11 @@ namespace Festispec.ViewModels.NavigationService
                     _pagesByKey.Add(key, pageType);
                 }
             }
+        }
+
+        private static MainWindow GetMainWindow()
+        {
+            return Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
         }
 
         private static FrameworkElement GetDescendantFromName(DependencyObject parent, string name)

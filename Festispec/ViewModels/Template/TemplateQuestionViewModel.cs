@@ -4,7 +4,7 @@ using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.ViewModels.Template
 {
-    public class TemplateQuestionViewModel : EntityViewModelBase<ITemplateQuestionRepositoryFactory, TemplateQuestion>
+    public class TemplateQuestionViewModel : EntityViewModelBase<ITemplateQuestionRepositoryFactory, ITemplateQuestionRepository, TemplateQuestion>
     {
         public TemplateQuestionViewModel(ITemplateQuestionRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
@@ -45,6 +45,17 @@ namespace Festispec.ViewModels.Template
             set
             {
                 Entity.Template = value;
+                Entity.Template_Id = value.Id;
+                RaisePropertyChanged();
+            }
+        }
+
+        public int Template_Id
+        {
+            get { return Entity.Template_Id; }
+            set
+            {
+                Entity.Template_Id = value;
                 RaisePropertyChanged();
             }
         }
@@ -55,23 +66,51 @@ namespace Festispec.ViewModels.Template
             set
             {
                 Entity.QuestionType = value;
+                Entity.QuestionType_Type = value.Type;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string QuestionType_Type
+        {
+            get { return Entity.QuestionType_Type; }
+            set
+            {
+                Entity.QuestionType_Type = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public bool IsDeleted
+        {
+            get { return Entity.IsDeleted; }
+            set
+            {
+                Entity.IsDeleted = value;
                 RaisePropertyChanged();
             }
         }
 
         public override void Save()
         {
-            // Map updated values
-//            Entity.Id = UpdatedEntity.Id;
-//            Entity.Name = UpdatedEntity.Name;
-//            Entity.Description = UpdatedEntity.Description;
-//            Entity.QuestionType = UpdatedEntity.QuestionType;
-//            Entity.Template = UpdatedEntity.Template;
-
+            TemplateQuestion updated;
             using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
             {
-                templateQuestionRepository.AddOrUpdate(Entity);
+                if (Entity.IsDeleted)
+                {
+                    if (UpdatedEntity.Id != 0) Delete();
+                    return;
+                }
+
+                updated = UpdatedEntity.Id == 0
+                    ? templateQuestionRepository.Add(UpdatedEntity)
+                    : templateQuestionRepository.Update(UpdatedEntity, UpdatedEntity.Id);
             }
+
+            // Map updated values
+            Entity.Id = updated.Id;
+            Entity.Name = updated.Name;
+            Entity.Description = updated.Description;
         }
 
         public override void Delete()
@@ -90,7 +129,9 @@ namespace Festispec.ViewModels.Template
                 Name = Name,
                 Description = Description,
                 Template = Template,
-                QuestionType = QuestionType
+                Template_Id = Template_Id,
+                QuestionType = QuestionType,
+                QuestionType_Type = QuestionType_Type
             };
         }
     }
