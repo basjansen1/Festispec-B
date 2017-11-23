@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
-using Festispec.Domain;
-using Festispec.Domain.Repository.Factory.Interface;
-using Festispec.Domain.Repository.Interface;
-using System.Data.Entity.Spatial;
+﻿using Festispec.Domain.Repository.Factory.Interface;
 using System;
+using System.Collections.Generic;
+using System.Data.Entity.Spatial;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Festispec.ViewModels.CustomerCRUD
 {
-    public class CustomerViewModel : EntityViewModelBase<ICustomerRepositoryFactory, Domain.Customer>
+    class CustomerViewModel : EntityViewModelBase<ICustomerRepositoryFactory, Domain.Customer>
     {
+
         public CustomerViewModel(ICustomerRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
         }
@@ -19,6 +21,17 @@ namespace Festispec.ViewModels.CustomerCRUD
         }
 
         public int Id => Entity.Id;
+
+
+        public string CompanyName
+        {
+            get { return Entity.CompanyName; }
+            set
+            {
+                Entity.CompanyName = value;
+                RaisePropertyChanged();
+            }
+        }
 
 
         public string City
@@ -51,15 +64,7 @@ namespace Festispec.ViewModels.CustomerCRUD
             }
         }
 
-        public string FirstName
-        {
-            get { return Entity.FirstName; }
-            set
-            {
-                Entity.FirstName = value;
-                RaisePropertyChanged();
-            }
-        }
+
         public string HouseNumber
         {
             get { return Entity.HouseNumber; }
@@ -78,17 +83,6 @@ namespace Festispec.ViewModels.CustomerCRUD
                 RaisePropertyChanged();
             }
         }
-
-        public string LastName
-        {
-            get { return Entity.LastName; }
-            set
-            {
-                Entity.IBAN = value;
-                RaisePropertyChanged();
-            }
-        }
-
 
         public string Municipality
         {
@@ -128,12 +122,45 @@ namespace Festispec.ViewModels.CustomerCRUD
             }
         }
 
+
+
+        public DbGeography Location
+        {
+            get { return Entity.Location; }
+            set
+            {
+                Entity.Location = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public double Long
+        {
+            get { return Entity.Long; }
+            set
+            {
+                Entity.Long = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public double Lat
+        {
+            get { return Entity.Lat; }
+            set
+            {
+                Entity.Lat = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
         public override void Save()
         {
 
             using (var CustomerRepository = RepositoryFactory.CreateRepository())
             {
-               // var updated = UpdatedEntity.Id == 0 ? CustomerRepository.Add(UpdatedEntity) : CustomerRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                var updated = UpdatedEntity.Id == 0 ? CustomerRepository.Add(UpdatedEntity) : CustomerRepository.Update(UpdatedEntity, UpdatedEntity.Id);
             }
         }
 
@@ -141,7 +168,7 @@ namespace Festispec.ViewModels.CustomerCRUD
         {
             using (var CustomerRepository = RepositoryFactory.CreateRepository())
             {
-                //CustomerRepository.Delete(Entity);
+                CustomerRepository.Delete(Entity);
             }
         }
 
@@ -152,15 +179,17 @@ namespace Festispec.ViewModels.CustomerCRUD
                 Id = Id,
                 Email = Email,
                 City = City,
+                CompanyName = CompanyName,
                 Country = Country,
-                FirstName = FirstName,
                 HouseNumber = HouseNumber,
                 IBAN = IBAN,
-                LastName = LastName,
                 Municipality = Municipality,
                 PostalCode = PostalCode,
                 Street = Street,
                 Telephone = Telephone,
+                Location = Location,
+                Long = Long,
+                Lat = Lat,
             };
         }
     }

@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Festispec.Views.CustomerCRUD
 {
     /// <summary>
-    /// Interaction logic for CustomersOverviewWindow.xaml
+    /// Interaction logic for CustomerList.xaml
     /// </summary>
-    public partial class CustomersOverviewWindow : Window
+    public partial class CustomerList : Window
     {
-        public CustomersOverviewWindow()
+        public CustomerList()
         {
             InitializeComponent();
         }
