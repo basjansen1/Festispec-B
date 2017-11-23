@@ -20,16 +20,44 @@ namespace Festispec.ViewModels.Routes
             PageType = new Uri("../Views/Template/TemplateAddOrUpdate.xaml", UriKind.Relative)
         };
 
-        public static Route AddQuestion = new Route
+        public static Route TemplateQuestionAddOrUpdate = new Route
         {
-            Key = "AddQuestion",
-            PageType = new Uri("../Views/Template/AddQuestion.xaml", UriKind.Relative)
+            Key = "TemplateQuestionAddOrUpdate",
+            PageType = new Uri("../Views/Template/TemplateQuestionAddOrUpdate.xaml", UriKind.Relative)
         };
 
-        public static Route UpdateQuestion = new Route
+        public static Route TemplateQuestionAdd = new Route
         {
-            Key = "UpdateQuestion",
-            PageType = new Uri("../Views/Template/AddQuestion.xaml", UriKind.Relative)
+            Key = "TemplateQuestionAdd",
+            PageType = new Uri(" ../Views/Template/TemplateQuestionAdd.xaml", UriKind.Relative)
+        };
+
+        #endregion
+
+        #region Employee
+
+        public static Route EmployeeList = new Route
+        {
+            Key = "EmployeeList",
+            PageType = new Uri("../Views/Employee/EmployeeList.xaml", UriKind.Relative)
+        };
+
+        public static Route EmployeeAddOrUpdate = new Route
+        {
+            Key = "EmployeeAddOrUpdate",
+            PageType = new Uri("../Views/Employee/EmployeeAddOrUpdate.xaml", UriKind.Relative)
+        };
+
+        public static Route InspectorList = new Route
+        {
+            Key = "InspectorList",
+            PageType = new Uri("../Views/Inspector/InspectorList.xaml", UriKind.Relative)
+        };
+
+        public static Route InspectorAddOrUpdate = new Route
+        {
+            Key = "InspectorAddOrUpdate",
+            PageType = new Uri("../Views/Inspector/InspectorAddOrUpdate.xaml", UriKind.Relative)
         };
 
         #endregion

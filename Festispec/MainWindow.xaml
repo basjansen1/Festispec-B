@@ -5,31 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
         Title="MainWindow" Height="600" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <Grid Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0" Text="Logo" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <TextBlock Grid.Column="0" Text="Logo" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-            <Button Grid.Column="2" Content="Templates" Margin="5px 15px" Command="{Binding NavigateToTemplateListCommand}" />
-            <Button Grid.Column="3" Content="Menu Item 2" Margin="5px 15px" />
-            <Button Grid.Column="4" Content="Menu Item 3" Margin="5px 15px" />
+                <Button Grid.Column="2" Content="Templates" Margin="5px 15px" Command="{Binding NavigateToTemplateListCommand}" />
+                <Button Grid.Column="3" Content="Medewerkers" Margin="5px 15px" Command="{Binding NavigateToEmployeeListCommand}"/>
+                <Button Grid.Column="4" Content="Inspecteurs" Margin="5px 15px" Command="{Binding NavigateToInspectorListCommand}"/>
+            </Grid>
+
+            <Frame Grid.Row="1" Name="MainFrame" NavigationUIVisibility="Hidden"/>
         </Grid>
-
-        <Frame Grid.Row="1" Name="MainFrame" NavigationUIVisibility="Hidden" />
-    </Grid>
+    </ScrollViewer>
 </Window>

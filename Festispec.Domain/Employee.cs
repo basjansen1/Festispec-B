@@ -24,6 +24,8 @@ namespace Festispec.Domain
         public string Password { get; set; }
         public string Role_Role { get; set; }
         public Nullable<int> Manager_Id { get; set; }
+        public System.DateTime HiredFrom { get; set; }
+        public Nullable<System.DateTime> HiredTo { get; set; }
     
         public virtual EmployeeRole Role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

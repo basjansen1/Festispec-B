@@ -3,9 +3,9 @@ using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository.Factory
 {
-    public class QuestionTypeRepositoryFactory : RepositoryFactoryBase<QuestionType>, IQuestionTypeRepositoryFactory
+    public class QuestionTypeRepositoryFactory : RepositoryFactoryBase<IQuestionTypeRepository, QuestionType>, IQuestionTypeRepositoryFactory
     {
-        public override IRepository<QuestionType> CreateRepository()
+        public override IQuestionTypeRepository CreateRepository()
         {
             return new QuestionTypeRepository(GetDbContext());
         }

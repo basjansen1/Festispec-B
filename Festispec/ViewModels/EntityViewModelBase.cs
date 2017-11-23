@@ -6,8 +6,9 @@ using GalaSoft.MvvmLight;
 
 namespace Festispec.ViewModels
 {
-    public abstract class EntityViewModelBase<TRepositoryFactory, TEntity> : ViewModelBase, IEntityViewModel<TEntity>
-        where TRepositoryFactory : IRepositoryFactory<TEntity>
+    public abstract class EntityViewModelBase<TRepositoryFactory, TRepository, TEntity> : ViewModelBase, IEntityViewModel<TEntity>
+        where TRepositoryFactory : IRepositoryFactory<TRepository, TEntity>
+        where TRepository : IRepository<TEntity>
         where TEntity : class, new()
     {
         public TEntity Entity { get; }
@@ -29,29 +30,16 @@ namespace Festispec.ViewModels
             UpdatedEntity = Copy();
         }
 
-        public abstract void Save();
-//        {
-//            using (var repository = RepositoryFactory.CreateRepository())
-//            {
-//                // TODO: Implement AddOrUpdate in generic repository
-//                if (Entity.Id == 0)
-//                {
-//                    repository.Add(Entity);
-//                }
-//                else
-//                {
-//                    repository.Update(Entity, Entity.Id);
-//                }
-//            }
-//        }
+        public abstract bool Save();
 
-        public virtual void Delete()
+        public virtual bool Delete()
         {
             using (var repository = RepositoryFactory.CreateRepository())
             {
-                repository.Delete(Entity);
+                return repository.Delete(Entity) != 0;
             }
         }
+
         public abstract TEntity Copy();
     }
 }
