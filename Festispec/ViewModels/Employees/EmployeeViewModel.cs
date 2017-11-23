@@ -241,7 +241,7 @@ namespace Festispec.ViewModels.Employee
             }
         }
 
-        public override void Save()
+        public override bool Save()
         {
 
             using (var InspectorRepository = RepositoryFactory.CreateRepository())
@@ -264,15 +264,17 @@ namespace Festispec.ViewModels.Employee
                     }
                     string joined = string.Join(",", ErrorList.Select(x => x));
                     MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                    return false;
                 }
             }
+            return true;
         }
 
-        public override void Delete()
+        public override bool Delete()
         {
             using (var EmployeeRepository = RepositoryFactory.CreateRepository())
             {
-                EmployeeRepository.Delete(Entity);
+                return EmployeeRepository.Delete(Entity) != 0;
             }
         }
 

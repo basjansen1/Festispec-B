@@ -42,9 +42,9 @@ namespace Festispec.ViewModels.Inspector
         public override void Save()
         {
             // TODO: Validation
-            EntityViewModel.Save();
+            var saved = EntityViewModel.Save();
 
-            NavigationService.GoBack(EntityViewModel);
+            if(saved) NavigationService.GoBack(EntityViewModel);
         }
     }
 }

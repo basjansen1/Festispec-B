@@ -257,7 +257,7 @@ namespace Festispec.ViewModels.Inspector
             }
         }
 
-        public override void Save()
+        public override bool Save()
         {
 
             using (var InspectorRepository = RepositoryFactory.CreateRepository())
@@ -270,25 +270,20 @@ namespace Festispec.ViewModels.Inspector
                 }
                 catch(System.Data.Entity.Validation.DbEntityValidationException ex)
                 {
-                    List<string> ErrorList = new List<string>();
-                    foreach (var eve in ex.EntityValidationErrors)
-                    {
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            ErrorList.Add(ve.PropertyName);
-                        }
-                    }
+                    var ErrorList = (from eve in ex.EntityValidationErrors from ve in eve.ValidationErrors select ve.PropertyName).ToList();
                     string joined = string.Join(",", ErrorList.Select(x => x));
                     MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                    return false;
                 }
             }
+            return true;
         }
 
-        public override void Delete()
+        public override bool Delete()
         {
             using (var InspectorRepository = RepositoryFactory.CreateRepository())
             {
-                InspectorRepository.Delete(Entity);
+                return InspectorRepository.Delete(Entity) != 0;
             }
         }
 

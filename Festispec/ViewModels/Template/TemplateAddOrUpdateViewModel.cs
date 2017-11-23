@@ -61,9 +61,9 @@ namespace Festispec.ViewModels.Template
         {
             // TODO: Validation
 
-            EntityViewModel.Save();
+            var saved = EntityViewModel.Save();
 
-            GoBack(EntityViewModel);
+            if(saved) GoBack(EntityViewModel);
         }
     }
 }

@@ -2,8 +2,8 @@
 {
     public interface IEntityViewModel<out TEntity> where TEntity : class
     {
-        void Save();
-        void Delete();
+        bool Save();
+        bool Delete();
         TEntity Copy();
         TEntity Entity { get; }
     }
