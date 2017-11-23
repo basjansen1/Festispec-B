@@ -30,13 +30,13 @@ namespace Festispec.ViewModels
             UpdatedEntity = Copy();
         }
 
-        public abstract void Save();
+        public abstract bool Save();
 
-        public virtual void Delete()
+        public virtual bool Delete()
         {
             using (var repository = RepositoryFactory.CreateRepository())
             {
-                repository.Delete(Entity);
+                return repository.Delete(Entity) != 0;
             }
         }
 

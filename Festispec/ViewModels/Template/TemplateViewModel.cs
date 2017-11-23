@@ -82,7 +82,7 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        public override void Save()
+        public override bool Save()
         {
             try
             {
@@ -109,14 +109,17 @@ namespace Festispec.ViewModels.Template
             catch(Exception exception)
             {
                 MessageBox.Show("Er is iets foutgegaan.");
+                return false;
             }
+
+            return true;
         }
 
-        public override void Delete()
+        public override bool Delete()
         {
             using (var templateRepository = RepositoryFactory.CreateRepository())
             {
-                templateRepository.Delete(Entity);
+                return templateRepository.Delete(Entity) != 0;
             }
         }
 
