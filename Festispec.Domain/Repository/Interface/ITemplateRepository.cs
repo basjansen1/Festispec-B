@@ -2,5 +2,6 @@
 {
     public interface ITemplateRepository : IRepository<Template>
     {
+        void AddQuestion(Template template, TemplateQuestion templateQuestion);
     }
 }

@@ -9,11 +9,10 @@ namespace Festispec.Domain.Repository
         public TemplateRepository(DbContext dbContext) : base(dbContext)
         {
         }
-        
 
         public override IQueryable<Template> Get()
         {
-            return base.Get().Include(template => template.Questions).AsNoTracking();
+            return base.Get().Include(template => template.Questions.Select(question => question.QuestionType));
         }
 
         public override int Delete(Template entity)
@@ -25,6 +24,13 @@ namespace Festispec.Domain.Repository
             }
 
             return base.Delete(entity);
+        }
+
+        public void AddQuestion(Template template, TemplateQuestion templateQuestion)
+        {
+            templateQuestion.Template = null;
+            template.Questions.Add(templateQuestion);
+            DbContext.SaveChanges();
         }
     }
 }

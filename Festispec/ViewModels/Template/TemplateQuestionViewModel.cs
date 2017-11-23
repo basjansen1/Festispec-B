@@ -1,10 +1,12 @@
-﻿using Festispec.Domain;
+﻿using System.Linq;
+using System.Windows;
+using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.ViewModels.Template
 {
-    public class TemplateQuestionViewModel : EntityViewModelBase<ITemplateQuestionRepositoryFactory, TemplateQuestion>
+    public class TemplateQuestionViewModel : EntityViewModelBase<ITemplateQuestionRepositoryFactory, ITemplateQuestionRepository, TemplateQuestion>
     {
         public TemplateQuestionViewModel(ITemplateQuestionRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
@@ -45,6 +47,17 @@ namespace Festispec.ViewModels.Template
             set
             {
                 Entity.Template = value;
+                Entity.Template_Id = value.Id;
+                RaisePropertyChanged();
+            }
+        }
+
+        public int Template_Id
+        {
+            get { return Entity.Template_Id; }
+            set
+            {
+                Entity.Template_Id = value;
                 RaisePropertyChanged();
             }
         }
@@ -55,30 +68,77 @@ namespace Festispec.ViewModels.Template
             set
             {
                 Entity.QuestionType = value;
+                Entity.QuestionType_Type = value.Type;
                 RaisePropertyChanged();
             }
         }
 
-        public override void Save()
+        public string QuestionType_Type
         {
-            // Map updated values
-//            Entity.Id = UpdatedEntity.Id;
-//            Entity.Name = UpdatedEntity.Name;
-//            Entity.Description = UpdatedEntity.Description;
-//            Entity.QuestionType = UpdatedEntity.QuestionType;
-//            Entity.Template = UpdatedEntity.Template;
-
-            using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
+            get { return Entity.QuestionType_Type; }
+            set
             {
-                templateQuestionRepository.AddOrUpdate(Entity);
+                Entity.QuestionType_Type = value;
+                RaisePropertyChanged();
             }
         }
 
-        public override void Delete()
+        public bool IsDeleted
         {
-            using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
+            get { return Entity.IsDeleted; }
+            set
             {
-                templateQuestionRepository.Delete(Entity);
+                Entity.IsDeleted = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public override bool Save()
+        {
+            try
+            {
+                if (Entity.IsDeleted)
+                {
+                    return UpdatedEntity.Id == 0 || Delete();
+                }
+
+                TemplateQuestion updated;
+                using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
+                {
+                    updated = UpdatedEntity.Id == 0
+                        ? templateQuestionRepository.Add(UpdatedEntity)
+                        : templateQuestionRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                }
+
+                // Map updated values
+                Entity.Id = updated.Id;
+                Entity.Name = updated.Name;
+                Entity.Description = updated.Description;
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                var ErrorList = (from eve in ex.EntityValidationErrors from ve in eve.ValidationErrors select ve.PropertyName).ToList();
+                string joined = string.Join(",", ErrorList.Select(x => x));
+                MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                return false;
+            }
+
+            return true;
+        }
+
+        public override bool Delete()
+        {
+            try
+            {
+                using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
+                {
+                    return templateQuestionRepository.Delete(Entity) != 0;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan");
+                return false;
             }
         }
 
@@ -90,7 +150,9 @@ namespace Festispec.ViewModels.Template
                 Name = Name,
                 Description = Description,
                 Template = Template,
-                QuestionType = QuestionType
+                Template_Id = Template_Id,
+                QuestionType = QuestionType,
+                QuestionType_Type = QuestionType_Type
             };
         }
     }

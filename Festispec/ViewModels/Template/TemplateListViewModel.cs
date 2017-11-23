@@ -3,8 +3,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.NavigationService;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
 using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels.Template
@@ -43,39 +43,25 @@ namespace Festispec.ViewModels.Template
 
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName != "CurrentPageKey") return;
+            if (args.PropertyName != nameof(NavigationService.CurrentRoute)) return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.TemplateList.Key) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.TemplateList) return;
 
-            UpdateTemplatesFromNavigationParameter();
-        }
-
-        private void UpdateTemplatesFromNavigationParameter()
-        {
-            var templateViewModel = NavigationService.Parameter as TemplateViewModel;
-            if (templateViewModel == null) return;
-
-            var existing = Templates.SingleOrDefault(template => template.Id == templateViewModel.Id);
-            if (existing == null)
-            {
-                Templates.Add(templateViewModel);
-            }
-            else
-            {
-                var index = Templates.IndexOf(existing);
-                Templates.RemoveAt(index);
-                Templates.Insert(index, templateViewModel);
-            }
+            LoadTemplates();
         }
 
         private void RegisterCommands()
         {
             NavigateToTemplateAddCommand =
-                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate.Key));
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate));
             NavigateToTemplateUpdateCommand = new RelayCommand(
-                () => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate.Key, SelectedTemplate),
+                () => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate, SelectedTemplate),
                 () => SelectedTemplate != null);
-            TemplateDeleteCommand = new RelayCommand(() => SelectedTemplate.Delete(), () => SelectedTemplate != null);
+            TemplateDeleteCommand = new RelayCommand(() =>
+            {
+                SelectedTemplate.Delete();
+                LoadTemplates();
+            }, () => SelectedTemplate != null);
             SearchCommand = new RelayCommand(LoadTemplates);
         }
 
@@ -83,13 +69,20 @@ namespace Festispec.ViewModels.Template
         {
             using (var templateRepository = _templateRepositoryFactory.CreateRepository())
             {
+                var query = templateRepository.Get();
+
+                if (!string.IsNullOrWhiteSpace(SearchName))
+                {
+                    query = query.Where(template => template.Name.Contains(SearchName));
+                }
+                if (!string.IsNullOrWhiteSpace(SearchDescription))
+                {
+                    query = query.Where(template => template.Description.Contains(SearchDescription));
+                }
+
                 Templates =
                     new ObservableCollection<TemplateViewModel>(
-                        templateRepository.Get()
-                            .Where(template =>
-                                template.Name.Contains(SearchName)
-                                && template.Description.Contains(SearchDescription))
-                            .ToList()
+                        query.ToList()
                             .Select(template => _templateViewModelFactory.CreateViewModel(template)));
                 RaisePropertyChanged(nameof(Templates));
             }

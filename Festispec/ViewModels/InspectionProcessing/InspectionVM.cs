@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Festispec.ViewModels.RequestProcessing
+namespace Festispec.ViewModels.Employees
 {
     public class InspectionVM : ViewModelBase
     {
