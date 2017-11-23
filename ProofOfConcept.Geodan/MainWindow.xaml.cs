@@ -127,7 +127,8 @@ namespace ProofOfConcept.Geodan
         {
             for (int i = 0, l = docs.Count; i < l; i++)
             {
-                if (docs[i].type == "address") return docs[i].geom;
+//                if (docs[i].type == "address")
+                    return docs[i].geom;
             }
             return null;
         }
