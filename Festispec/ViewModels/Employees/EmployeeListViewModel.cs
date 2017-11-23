@@ -44,7 +44,7 @@ namespace Festispec.ViewModels.Employee
 
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName != "CurrentPageKey") return;
+            if (args.PropertyName != "CurrentRoute") return;
 
             if (NavigationService.CurrentRoute != Routes.Routes.EmployeeList) return;
 

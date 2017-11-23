@@ -44,7 +44,7 @@ namespace Festispec.ViewModels.Inspector
 
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName != "CurrentPageKey") return;
+            if (args.PropertyName != "CurrentRoute") return;
 
             if (NavigationService.CurrentRoute != Routes.Routes.InspectorList) return;
 
