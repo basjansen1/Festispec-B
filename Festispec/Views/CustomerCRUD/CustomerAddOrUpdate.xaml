@@ -7,25 +7,18 @@
         Title="CustomerAddOrUpdate"
         DataContext="{Binding Source={StaticResource Locator}, Path=CustomerAddOrUpdate}">
     <StackPanel>
-        <Label>Gebruikersnaam</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Username}" />
         <Label>Email</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Email}" />
         <Label>Stad</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.City}" />
         <Label>Land</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Country}" />
-        <Label>Bedrijfsnaam</Label>
+        <Label>Voornaam Contactpersoon</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.FirstName}" />
         <Label>Huisnummer</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.HouseNumber}" />
         <Label>IBAN</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.IBAN}" />
-        <Label>Manager</Label>
-        <ComboBox ItemsSource="{Binding Path=Managers}" 
-            DisplayMemberPath="Username"
-            SelectedValuePath="Id"
-            SelectedValue="{Binding Path=EntityViewModel.UpdatedEntity.Manager_Id}" />
         <Label>Gemeente</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Municipality}" />
         <Label>Postcode</Label>

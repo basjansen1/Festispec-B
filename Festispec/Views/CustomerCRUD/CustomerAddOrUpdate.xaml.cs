@@ -17,7 +17,7 @@ namespace Festispec.Views.CustomerCRUD
     /// <summary>
     /// Interaction logic for CustomerAddOrUpdate.xaml
     /// </summary>
-    public partial class CustomerAddOrUpdate : Window
+    public partial class CustomerAddOrUpdate : Page
     {
         public CustomerAddOrUpdate()
         {

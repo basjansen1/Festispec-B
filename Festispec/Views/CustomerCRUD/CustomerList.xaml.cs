@@ -17,7 +17,7 @@ namespace Festispec.Views.CustomerCRUD
     /// <summary>
     /// Interaction logic for CustomerList.xaml
     /// </summary>
-    public partial class CustomerList : Window
+    public partial class CustomerList : Page
     {
         public CustomerList()
         {

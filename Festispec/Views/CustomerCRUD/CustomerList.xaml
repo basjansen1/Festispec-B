@@ -37,7 +37,7 @@
 
             <DockPanel Grid.Row="0"  Grid.Column="0">
                 <Label>Zoek op bedrijfsnaam</Label>
-                <TextBox Text="{Binding SearchUsername}"></TextBox>
+                <TextBox Text="{Binding SearchName}"></TextBox>
             </DockPanel>
             <DockPanel Grid.Row="0" Grid.Column="1">
                 <Label>Zoek op email</Label>

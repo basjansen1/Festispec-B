@@ -44,7 +44,7 @@ namespace Festispec.ViewModels.CustomerCRUD
 
         public CustomerViewModel SelectedCustomer { get; set; }
 
-        public string SearchUsername { get; set; } = "";
+        public string SearchName { get; set; } = "";
         public string SearchEmail { get; set; } = "";
 
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
@@ -79,7 +79,7 @@ namespace Festispec.ViewModels.CustomerCRUD
                     new ObservableCollection<CustomerViewModel>(
                         CustomerRepository.Get()
                             .Where(Customer =>
-                                Customer.FirstName.Contains(SearchUsername)
+                                Customer.FirstName.Contains(SearchName)
                                 && Customer.Email.Contains(SearchEmail))
                             .ToList()
                             .Select(Customer => _CustomerViewModelFactory.CreateViewModel(Customer)));
