@@ -21,6 +21,7 @@ using Festispec.ViewModels.Inspector;
 using Festispec.ViewModels.Template;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using Festispec.ViewModels.Regulations;
 
 namespace Festispec.ViewModels
 {
@@ -49,6 +50,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IInspectionRepositoryFactory, InspectionRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectorRepositoryFactory, InspectorRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectorViewModelFactory, InspectorViewModelFactory>();
+            SimpleIoc.Default.Register<IRegulationsRepositoryFactory, RegulationsViewModelFactory>();
 
             // Register viewmodels
             SimpleIoc.Default.Register<LoginViewModel>();
@@ -59,6 +61,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<EmployeeListViewModel>();
             SimpleIoc.Default.Register<InspectorListViewModel>();
             SimpleIoc.Default.Register<InspectorAddOrUpdateViewModel>();
+            SimpleIoc.Default.Register<RegulationsListViewModel>();
         }
 
         private static void RegisterNavigationService()
@@ -73,6 +76,7 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.EmployeeList);
             navigationService.Configure(Routes.Routes.InspectorList);
             navigationService.Configure(Routes.Routes.InspectorAddOrUpdate);
+            navigationService.Configure(Routes.Routes.RegulationsList); 
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }
@@ -91,6 +95,12 @@ namespace Festispec.ViewModels
         #endregion
 
         #region Singleton Repositories
+
+        public IRegulationsRepositoryFactory RegulationsRepositoryFactory =
+            ServiceLocator.Current.GetInstance<IRegulationsRepositoryFactory>();
+
+        public IRegulationsViewModelFactory RegulationsViewModelFactory =
+            ServiceLocator.Current.GetInstance<IRegulationsViewModelFactory>();
 
         public ITemplateRepositoryFactory TemplateRepositoryFactory =
             ServiceLocator.Current.GetInstance<ITemplateRepositoryFactory>();
@@ -133,6 +143,10 @@ namespace Festispec.ViewModels
         #region Singleton ViewModels 
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
+
+        public RegulationsListViewModel RegulationsList => ServiceLocator.Current.GetInstance<RegulationsListViewModel>();
+        public RegulationsAddOrUpdateViewModel RegulationsAddOrUpdate
+            => ServiceLocator.Current.GetInstance<RegulationsAddOrUpdateViewModel>();
 
         public TemplateListViewModel TemplateList => ServiceLocator.Current.GetInstance<TemplateListViewModel>();
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Festispec.Domain.Repository.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Festispec.Domain.Repository.Factory.Interface
 {
-    interface IRegulationsRepositoryFactory
+    public interface IRegulationsRepositoryFactory : IRepositoryFactory<IRegulationsRepository, Regulation>
     {
     }
 }

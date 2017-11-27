@@ -1,12 +1,42 @@
-﻿using System;
+﻿using Festispec.Domain.Repository.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Festispec.Domain.Repository
 {
-    class RegulationsRepository
+    public class RegulationsRepository : RepositoryBase<Regulation>, IRegulationsRepository
     {
+        public RegulationsRepository(DbContext dbContext) : base(dbContext)
+        {
+        }
+
+        public override IQueryable<Regulation> Get()
+        {
+            return null;
+        }
+
+        public override Regulation Add(Regulation entity)
+        {
+            entity = CleanRelations(entity);
+
+            return base.Add(entity);
+        }
+
+        public override Regulation Update(Regulation updated, params object[] keyValues)
+        {
+            updated = CleanRelations(updated);
+
+            return base.Update(updated, keyValues);
+        }
+
+        private Regulation CleanRelations(Regulation entity)
+        {
+            
+            return entity;
+        }
     }
 }

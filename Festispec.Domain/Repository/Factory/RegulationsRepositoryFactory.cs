@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository.Factory
 {
-    class RegulationsRepositoryFactory
+    public class RegulationsRepositoryFactory : RepositoryFactoryBase<IRegulationsRepository, Regulation>, IRegulationsRepositoryFactory
     {
+        public override IRegulationsRepository CreateRepository()
+        {
+            return new RegulationsRepository(GetDbContext());
+        }
     }
 }

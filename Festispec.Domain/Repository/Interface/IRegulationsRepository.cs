@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Festispec.Domain.Repository.Interface
 {
-    interface IRegulationsRepository
+    public interface IRegulationsRepository : IRepository<Regulation>
     {
     }
 }

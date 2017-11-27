@@ -12,16 +12,20 @@ namespace Festispec.ViewModels.Regulations
 {
     public class RegulationsListViewModel : NavigatableViewModelBase
     {
+        private readonly INavigationService _navigationService;
+        private readonly IRegulationsRepositoryFactory _regulationsRepositoryFactory;
+        private readonly IRegulationsViewModelFactory _regulationsViewModelFactory;
+
         public RegulationsListViewModel(INavigationService navigationService,
-            IEmployeeRepositoryFactory employeeRepositoryFactory,
-            IEmployeeViewModelFactory employeeViewModelFactory) : base(navigationService)
+            IRegulationsRepositoryFactory regulationsRepositoryFactory,
+            IRegulationsViewModelFactory regulationsViewModelFactory) : base(navigationService)
         {
             _navigationService = navigationService;
             _regulationsRepositoryFactory = regulationsRepositoryFactory;
             _regulationsViewModelFactory = regulationsViewModelFactory;
 
             RegisterCommands();
-            LoadEmployees();
+            LoadRegulations();
 
             NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
         }
@@ -65,11 +69,11 @@ namespace Festispec.ViewModels.Regulations
                 Regulations =
                     new ObservableCollection<RegulationsViewModel>(
                         RegulationsRepository.Get()
-                            .Where(Regulations =>
-                                Regulations.Name.Contains(SearchName)
-                                && Regulations.Municipality.Contains(SearchMunicipality)
+                            .Where(Regulation =>
+                                Regulation.Name.Contains(SearchName)
+                                && Regulation.Municipality.Contains(SearchMunicipality))
                             .ToList()
-                            .Select(Employee => _regulationsViewModelFactory.CreateViewModel(Regulations)));
+                            .Select(Regulation => _regulationsViewModelFactory.CreateViewModel(Regulation)));
                 RaisePropertyChanged(nameof(Regulations));
             }
         }

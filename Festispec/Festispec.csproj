@@ -99,6 +99,11 @@
     <Compile Include="State\IState.cs" />
     <Compile Include="State\State.cs" />
     <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IRegulationsViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\RegulationsViewModelFactory.cs" />
+    <Compile Include="ViewModels\Regulations\RegulationsAddOrUpdateViewModel.cs" />
+    <Compile Include="ViewModels\Regulations\RegulationsListViewModel.cs" />
+    <Compile Include="ViewModels\Regulations\RegulationsViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateQuestionAddViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateQuestionAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeAddOrUpdateViewModel.cs" />
@@ -137,6 +142,12 @@
     <Compile Include="ViewModels\InspectionProcessing\InspectionListVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\Regulations\RegulationsAddOrUpdate.xaml.cs">
+      <DependentUpon>RegulationsAddOrUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Regulations\RegulationsList.xaml.cs">
+      <DependentUpon>RegulationsList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Template\TemplateQuestionAdd.xaml.cs">
       <DependentUpon>TemplateQuestionAdd.xaml</DependentUpon>
     </Compile>
@@ -176,6 +187,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Regulations\RegulationsAddOrUpdate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Regulations\RegulationsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Template\TemplateQuestionAdd.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

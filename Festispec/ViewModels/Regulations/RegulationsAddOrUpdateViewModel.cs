@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using Festispec.ViewModels.Factory.Interface;
+using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.ViewModels.Regulations
 {

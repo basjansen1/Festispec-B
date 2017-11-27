@@ -8,6 +8,20 @@ namespace Festispec.Routes
 
         #region Template
 
+        public static Route RegulationsList = new Route
+        {
+            Key = "RegulationsList",
+            PageType = new Uri("../views/Template/TemplateList.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+
+        public static Route RegulationsAddOrUpdate = new Route
+        {
+            Key = "RegulationsAddOrUpdate",
+            PageType = new Uri("../Views/Employee/RegulationsAddOrUpdate.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
+        };
+
         public static Route TemplateList = new Route
         {
             Key = "TemplateList",
@@ -37,6 +51,10 @@ namespace Festispec.Routes
         };
 
         #endregion
+
+        
+
+       
 
         #region Employee
 
