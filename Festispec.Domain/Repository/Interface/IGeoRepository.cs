@@ -5,6 +5,6 @@ namespace Festispec.Domain.Repository.Interface
 {
     public interface IGeoRepository : IDisposable
     {
-        IQueryable<Address> GetByPostalCode(string postalCode);
+        IQueryable<Address> Get(string postalCode, string houseNumber);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Festispec.Domain.Repository.Interface;
@@ -7,21 +8,23 @@ namespace Festispec.Domain.Repository
 {
     public class GeoRepository : IGeoRepository
     {
-        private readonly IGeodanApi _geodanApi;
+        private readonly IGeodanSearchApi _geodanSearchApi;
 
-        public GeoRepository(IGeodanApi geodanApi)
+        public GeoRepository(IGeodanSearchApi geodanSearchApi)
         {
-            _geodanApi = geodanApi;
+            _geodanSearchApi = geodanSearchApi;
         }
 
-        public IQueryable<Address> GetByPostalCode(string postalCode)
+        public IQueryable<Address> Get(string postalCode, string houseNumber)
         {
             postalCode = CleanPostalCode(postalCode);
+            
+            var data = _geodanSearchApi.Get();
 
             return null;
         }
 
-        private string CleanPostalCode(string postalCode)
+        private static string CleanPostalCode(string postalCode)
         {
             var cleanedPostalCode = postalCode.Replace(" ", string.Empty);
 
@@ -37,13 +40,32 @@ namespace Festispec.Domain.Repository
             throw new NotImplementedException();
         }
     }
-
-    public interface IGeodanApi
+    
+    public class GeodanApiOptions
     {
-        
+        public string PostalCode { get; set; }
+        public string HouseNumber { get; set; }
     }
 
-    public class GeodanApi
+    public interface IGeodanSearchApi
     {
+        ICollection<object> Get(GeodanApiOptions options);
+    }
+
+    public class GeodanSearchApi : IGeodanSearchApi
+    {
+        private readonly string _apiUrl;
+        private readonly string _apiKey;
+
+        public GeodanSearchApi()
+        {
+            _apiUrl = "https://services.geodan.nl/geosearch/free";
+            _apiKey = "19aca9fb-6705-11e7-a442-005056805b87";
+        }
+
+        public ICollection<object> Get(GeodanApiOptions options)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
