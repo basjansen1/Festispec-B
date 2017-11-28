@@ -7,8 +7,25 @@
         mc:Ignorable="d"
         Title="Inspection List" DataContext="{Binding GetInspectionList, Source={StaticResource Locator}}">        
     <Grid>
-        <DataGrid x:Name="dgInspections" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Height="280" Width="780" ScrollViewer.CanContentScroll="True" 
-      ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding InspectionVMList}" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="txtSearch" TextWrapping="Wrap" Text="Zoek inspectie" Opacity="0.7" Grid.Column="1" Width="150"/>
+            <Button x:Name="btnSearch" Content="Zoeken" Grid.Column="2"/>
+        </Grid>
+          
+        <DataGrid x:Name="dgInspections" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" ScrollViewer.CanContentScroll="True" 
+      ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding InspectionVMList}" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Klantnaam" Width="2*" Binding="{Binding Customer.Name}"/>
                 <DataGridTextColumn Header="Naam verzoek" Width="2*" Binding="{Binding Name}"/>
@@ -17,40 +34,74 @@
                 <DataGridTextColumn Header="Status" Width="2*" Binding="{Binding Status}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Border x:Name="bdMap" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="214" Margin="575,325,0,0" VerticalAlignment="Top" Width="215" RenderTransformOrigin="0.766,0.523">
-            <Label x:Name="label" Content="Placeholder kaart"/>
-        </Border>
-        <Button x:Name="btnManage" Content="Beheer inspectie" HorizontalAlignment="Left" Margin="665,544,0,0" VerticalAlignment="Top" Width="125" Height="22" FontSize="11" />
-        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="25" Margin="522,10,0,0" TextWrapping="Wrap" Text="Zoek inspectie" VerticalAlignment="Top" Width="163" Opacity="0.7"/>
 
-        <Button x:Name="btnSearch" Content="Zoeken" HorizontalAlignment="Left" Margin="690,10,0,0" VerticalAlignment="Top" Width="98"/>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="lblCustomer" Content="Klantgegevens" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
+                <Label x:Name="lblCustomerName" Content="Klantnaam:" Grid.Column="0" Grid.Row="1"/>
+                <TextBox x:Name="txtCustomer" TextWrapping="Wrap" IsEnabled="False" Text="{Binding SelectedInspection.Customer.Name}" Grid.Column="1" Grid.Row="1"/>
+                <Label x:Name="lblEmail" Content="Email adres:" Grid.Column="0" Grid.Row="2"/>
+                <TextBox x:Name="txtMail" TextWrapping="Wrap" IsEnabled="False" Text="{Binding SelectedInspection.Customer.Email}" Grid.Column="1" Grid.Row="2"/>
+                <Label x:Name="lblPhoneNumber" Content="Tel nr:" Grid.Column="0" Grid.Row="3"/>
+                <TextBox x:Name="txtPhone" TextWrapping="Wrap" IsEnabled="False" Text="{Binding SelectedInspection.Customer.Telephone}" Grid.Column="1" Grid.Row="3"/>
+                <Label x:Name="lblStatus" Content="Status:" Grid.Column="0" Grid.Row="6"/>
+                <TextBox x:Name="txtStatus" TextWrapping="Wrap" IsEnabled="False" Text="{Binding SelectedInspection.Status}" Grid.Row="6" Grid.Column="1"/>
 
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="214" Margin="10,325,0,0" Stroke="Black" VerticalAlignment="Top" Width="560"/>
-        <Label x:Name="lblCustomer" Content="Klantgegevens" HorizontalAlignment="Left" Margin="21,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
-        <Label x:Name="lblCustomerName" Content="Klantnaam:" HorizontalAlignment="Left" Margin="21,363,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
-        <TextBox x:Name="txtCustomer" HorizontalAlignment="Left" Height="23" Margin="108,363,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.Customer.Name}"/>
-        <Label x:Name="lblEmail" Content="Email adres: " HorizontalAlignment="Left" Margin="21,389,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
-        <Label x:Name="lblPhoneNumber" Content="Tel nr:" HorizontalAlignment="Left" Margin="21,415,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
-        <Label x:Name="lblInspectionInformation" Content="Inspectiegegevens" HorizontalAlignment="Left" Margin="294,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
-        <TextBox x:Name="txtMail" HorizontalAlignment="Left" Height="23" Margin="108,389,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.Customer.Email}"/>
-        <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Height="23" Margin="108,415,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.Customer.Telephone}"/>
-        <Label x:Name="lblInspection" Content="Inspectienaam:" HorizontalAlignment="Left" Margin="294,363,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
-        <Label x:Name="lblDateFrom" Content="Datum van:" HorizontalAlignment="Left" Margin="294,389,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
-        <Label x:Name="lblDateTo" Content="Datum tot:" HorizontalAlignment="Left" Margin="294,415,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
-        <Label x:Name="lblStreetname" Content="Straatnaam:" HorizontalAlignment="Left" Margin="294,441,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
-        <TextBox x:Name="txtInspectionName" HorizontalAlignment="Left" Height="23" Margin="383,363,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.Name}"/>
-        <TextBox x:Name="txtDateFrom" HorizontalAlignment="Left" Height="23" Margin="383,389,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.StartDate}"/>
-        <TextBox x:Name="txtDateTo" HorizontalAlignment="Left" Height="23" Margin="383,415,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.EndDate}"/>
+                <Label x:Name="lblInspectionInformation" Content="Inspectiegegevens" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2"/>
+                <Label x:Name="lblInspection" Content="Inspectienaam:" Grid.Column="2" Grid.Row="1"/>
+                <TextBox x:Name="txtInspectionName" TextWrapping="Wrap"  IsEnabled="False" Text="{Binding SelectedInspection.Name}" Grid.Column="3" Grid.Row="1"/>
+                <Label x:Name="lblDateFrom" Content="Datum van:" Grid.Column="2" Grid.Row="2"/>
+                <TextBox x:Name="txtDateFrom" TextWrapping="Wrap" IsEnabled="False" Text="{Binding SelectedInspection.StartDate}" Grid.Column="3" Grid.Row="2"/>
+                <Label x:Name="lblDateTo" Content="Datum tot:" Grid.Column="2" Grid.Row="3"/>
+                <TextBox x:Name="txtDateTo" TextWrapping="Wrap" IsEnabled="False" Text="{Binding SelectedInspection.EndDate}" Grid.Column="3" Grid.Row="3"/>
+                <Label x:Name="lblStreetname" Content="Straatnaam:" Grid.Column="2" Grid.Row="4"/>
+                <TextBox x:Name="txtStreetname" TextWrapping="Wrap" IsEnabled="False" Text="{Binding SelectedInspection.Street}" Grid.Column="3" Grid.Row="4"/>
+                <Label x:Name="lblPostalCode" Content="Postcode:" Grid.Column="2" Grid.Row="5"/>
+                <Grid Grid.Column="3" Grid.Row="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="txtPostalCode" TextWrapping="Wrap" IsEnabled="False" Text="{Binding SelectedInspection.PostalCode}" Grid.Column="0"/>
+                    <Label x:Name="lblNumber" Content="Nr:" Grid.Column="1"/>
+                    <TextBox x:Name="txtHouseNumber" TextWrapping="Wrap" IsEnabled="False" Text="{Binding SelectedInspection.HouseNumber}" Grid.Column="2"/>
+                </Grid>
+                <Label x:Name="lblCountry" Content="Land:" Grid.Column="2" Grid.Row="6"/>
+                <TextBox x:Name="txtPostalCode_Copy" TextWrapping="Wrap" IsEnabled="False" Text="{Binding SelectedInspection.Country}" Grid.Column="3" Grid.Row="6"/>
+            </Grid>
+            <Border x:Name="bdMap" BorderBrush="Black" BorderThickness="1" Grid.Column="1">
+                <Label x:Name="label" Content="Placeholder kaart"/>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="addInspection" Content="Voeg een inspectie toe" Command="{Binding ShowAddInspectionWindowCommand}" Grid.Column="0"/>
+            <Button x:Name="btnManage" Content="Beheer inspectie" Grid.Column="2"/>
+        </Grid>
 
-        <TextBox x:Name="txtStreetname" HorizontalAlignment="Left" Height="23" Margin="383,441,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.Street}"/>
-        <Label x:Name="lblPostalCode" Content="Postcode:" HorizontalAlignment="Left" Margin="294,467,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
-        <TextBox x:Name="txtPostalCode" HorizontalAlignment="Left" Height="23" Margin="383,467,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" IsEnabled="False" Text="{Binding SelectedInspection.PostalCode}"/>
-        <Label x:Name="lblCustomer_Copy9" Content="Nr:" HorizontalAlignment="Left" Margin="473,467,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
-        <TextBox x:Name="txtHouseNumber" HorizontalAlignment="Left" Height="23" Margin="504,467,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="53" IsEnabled="False" Text="{Binding SelectedInspection.HouseNumber}"/>
-        <Label x:Name="lblCountry" Content="Land:" HorizontalAlignment="Left" Margin="294,493,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
-        <TextBox x:Name="txtPostalCode_Copy" HorizontalAlignment="Left" Height="23" Margin="383,493,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.Country}"/>
-        <Button x:Name="addInspection" Content="Voeg een inspectie toe" HorizontalAlignment="Left" Margin="10,548,0,0" VerticalAlignment="Top" Width="125" Height="22" FontSize="11" Command="{Binding ShowAddInspectionWindowCommand}"/>
-        <Label x:Name="lblStatus" Content="Status:" HorizontalAlignment="Left" Margin="21,493,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.053,-0.5"/>
-        <TextBox x:Name="txtStatus" HorizontalAlignment="Left" Height="23" Margin="108,493,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="174" IsEnabled="False" Text="{Binding SelectedInspection.Status}"/>
     </Grid>
 </Page>
