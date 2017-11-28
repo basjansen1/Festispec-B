@@ -13,6 +13,6 @@
         <Label x:Name="passwordLabel" Content="Wachtwoord: " HorizontalAlignment="Left" Margin="5,86,0,0" VerticalAlignment="Top"/>
         <PasswordBox x:Name="Password" HorizontalAlignment="Left" Height="23" Margin="112,89,0,0" VerticalAlignment="Top" Width="170" />
 
-        <Button Content="Login" Command="{Binding Path=_loginCommand}" CommandParameter="{Binding ElementName=Password}"/>
+        <Button Content="Login" Command="{Binding Path=LoginCommand}" CommandParameter="{Binding ElementName=Password}"/>
     </Grid>
 </Window>

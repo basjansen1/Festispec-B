@@ -2,9 +2,9 @@
 using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
+using Festispec.NavigationService;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.Interface;
-using Festispec.ViewModels.NavigationService;
 using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels

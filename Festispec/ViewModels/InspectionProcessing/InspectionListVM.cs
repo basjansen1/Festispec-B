@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Festispec.ViewModels.NavigationService;
+using Festispec.NavigationService;
 
 namespace Festispec.ViewModels.Employees
 {
@@ -77,17 +77,17 @@ namespace Festispec.ViewModels.Employees
         // methods
         public void ShowAddInspectionWindow()
         {
-            _navigationService.NavigateTo(Routes.Routes.AddInspection.Key);
+            _navigationService.NavigateTo(Routes.Routes.AddInspection);
         }
 
         public void ShowEditInspectionWindow()
         {
-            _navigationService.NavigateTo(Routes.Routes.EditInspection.Key);
+            _navigationService.NavigateTo(Routes.Routes.EditInspection);
         }
 
         public void ShowProcessInspectionWindow()
         {
-            _navigationService.NavigateTo(Routes.Routes.ProcessInspection.Key);
+            _navigationService.NavigateTo(Routes.Routes.ProcessInspection);
         }
 
         public void DeleteSelectedInspection()

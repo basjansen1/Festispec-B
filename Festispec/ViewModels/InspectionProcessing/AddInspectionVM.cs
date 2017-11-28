@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Festispec.ViewModels.NavigationService;
+using Festispec.NavigationService;
 
 namespace Festispec.ViewModels.Employees
 {

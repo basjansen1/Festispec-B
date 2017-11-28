@@ -4,9 +4,9 @@ using System.Linq;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
+using Festispec.NavigationService;
 using Festispec.ViewModels.Employee;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
 
 namespace Festispec.ViewModels.Employees
 {
@@ -35,9 +35,9 @@ namespace Festispec.ViewModels.Employees
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName != "CurrentPageKey") return;
+            if (args.PropertyName != "CurrentRoute") return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.EmployeeAddOrUpdate.Key) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.EmployeeAddOrUpdate) return;
 
             UpdateEntityViewModelFromNavigationParameter();
         }
@@ -51,9 +51,9 @@ namespace Festispec.ViewModels.Employees
             }
 
             // TODO: Validation
-            EntityViewModel.Save();
+            var saved = EntityViewModel.Save();
 
-            NavigationService.GoBack(EntityViewModel);
+            if(saved) NavigationService.GoBack(EntityViewModel);
         }
     }
 }

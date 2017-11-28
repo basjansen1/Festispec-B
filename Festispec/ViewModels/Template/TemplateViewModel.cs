@@ -82,7 +82,7 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        public override void Save()
+        public override bool Save()
         {
             try
             {
@@ -106,17 +106,22 @@ namespace Festispec.ViewModels.Template
                     templateQuestionViewModel.Save();
                 }
             }
-            catch(Exception exception)
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {
-                MessageBox.Show("Er is iets foutgegaan.");
+                var ErrorList = (from eve in ex.EntityValidationErrors from ve in eve.ValidationErrors select ve.PropertyName).ToList();
+                string joined = string.Join(",", ErrorList.Select(x => x));
+                MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                return false;
             }
+
+            return true;
         }
 
-        public override void Delete()
+        public override bool Delete()
         {
             using (var templateRepository = RepositoryFactory.CreateRepository())
             {
-                templateRepository.Delete(Entity);
+                return templateRepository.Delete(Entity) != 0;
             }
         }
 

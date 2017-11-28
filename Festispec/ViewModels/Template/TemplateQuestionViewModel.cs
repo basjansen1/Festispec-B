@@ -1,4 +1,6 @@
-﻿using Festispec.Domain;
+﻿using System.Linq;
+using System.Windows;
+using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 
@@ -91,33 +93,52 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        public override void Save()
+        public override bool Save()
         {
-            TemplateQuestion updated;
-            using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
+            try
             {
                 if (Entity.IsDeleted)
                 {
-                    if (UpdatedEntity.Id != 0) Delete();
-                    return;
+                    return UpdatedEntity.Id == 0 || Delete();
                 }
 
-                updated = UpdatedEntity.Id == 0
-                    ? templateQuestionRepository.Add(UpdatedEntity)
-                    : templateQuestionRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                TemplateQuestion updated;
+                using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
+                {
+                    updated = UpdatedEntity.Id == 0
+                        ? templateQuestionRepository.Add(UpdatedEntity)
+                        : templateQuestionRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                }
+
+                // Map updated values
+                Entity.Id = updated.Id;
+                Entity.Name = updated.Name;
+                Entity.Description = updated.Description;
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                var ErrorList = (from eve in ex.EntityValidationErrors from ve in eve.ValidationErrors select ve.PropertyName).ToList();
+                string joined = string.Join(",", ErrorList.Select(x => x));
+                MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                return false;
             }
 
-            // Map updated values
-            Entity.Id = updated.Id;
-            Entity.Name = updated.Name;
-            Entity.Description = updated.Description;
+            return true;
         }
 
-        public override void Delete()
+        public override bool Delete()
         {
-            using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
+            try
             {
-                templateQuestionRepository.Delete(Entity);
+                using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
+                {
+                    return templateQuestionRepository.Delete(Entity) != 0;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan");
+                return false;
             }
         }
 

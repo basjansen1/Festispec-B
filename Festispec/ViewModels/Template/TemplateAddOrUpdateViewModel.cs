@@ -2,8 +2,8 @@
 using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
+using Festispec.NavigationService;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
 using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels.Template
@@ -27,25 +27,23 @@ namespace Festispec.ViewModels.Template
         {
             NavigateToQuestionAddCommand =
                 new RelayCommand(
-                    () => NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAdd.Key, EntityViewModel),
+                    () => NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAdd, EntityViewModel),
                     () => EntityViewModel != null);
             NavigateToQuestionUpdateCommand = new RelayCommand(
-                () => NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAddOrUpdate.Key, EntityViewModel),
+                () => NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAddOrUpdate, EntityViewModel),
                 () => EntityViewModel.SelectedQuestion != null && !EntityViewModel.SelectedQuestion.IsDeleted);
-            QuestionDeleteCommand =
-                new RelayCommand(() =>
-                    {
-                        EntityViewModel.SelectedQuestion.IsDeleted = true;
-                        EntityViewModel = EntityViewModel;
-                    },
-                    () => EntityViewModel.SelectedQuestion != null && !EntityViewModel.SelectedQuestion.IsDeleted);
+            QuestionDeleteCommand = new RelayCommand(() =>
+            {
+                EntityViewModel.SelectedQuestion.IsDeleted = true;
+                EntityViewModel = EntityViewModel;
+            }, () => EntityViewModel.SelectedQuestion != null && !EntityViewModel.SelectedQuestion.IsDeleted);
         }
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName != "CurrentPageKey") return;
+            if (args.PropertyName != nameof(NavigationService.CurrentRoute)) return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.TemplateAddOrUpdate.Key) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.TemplateAddOrUpdate) return;
 
             UpdateEntityViewModelFromNavigationParameter();
         }
@@ -61,9 +59,9 @@ namespace Festispec.ViewModels.Template
         {
             // TODO: Validation
 
-            EntityViewModel.Save();
+            var saved = EntityViewModel.Save();
 
-            GoBack(EntityViewModel);
+            if(saved) GoBack(EntityViewModel);
         }
     }
 }

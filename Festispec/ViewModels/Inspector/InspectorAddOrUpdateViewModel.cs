@@ -4,7 +4,7 @@ using System.Linq;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
+using Festispec.NavigationService;
 
 namespace Festispec.ViewModels.Inspector
 {
@@ -27,9 +27,9 @@ namespace Festispec.ViewModels.Inspector
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName != "CurrentPageKey") return;
+            if (args.PropertyName != "CurrentRoute") return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.InspectorAddOrUpdate.Key) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.InspectorAddOrUpdate) return;
 
             UpdateEntityViewModelFromNavigationParameter();
             UpdateInspectorFromNavigationParameter();
@@ -42,9 +42,9 @@ namespace Festispec.ViewModels.Inspector
         public override void Save()
         {
             // TODO: Validation
-            EntityViewModel.Save();
+            var saved = EntityViewModel.Save();
 
-            NavigationService.GoBack(EntityViewModel);
+            if(saved) NavigationService.GoBack(EntityViewModel);
         }
     }
 }
