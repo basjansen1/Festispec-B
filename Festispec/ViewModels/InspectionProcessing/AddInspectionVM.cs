@@ -32,24 +32,8 @@ namespace Festispec.ViewModels.Employees
             set
             {
                 _selectedIndexCustomerList = value;
-                NewInspection.CustomerId = CustomerList.ElementAt(_selectedIndexCustomerList).ID;
-                _customerName = CustomerList.ElementAt(_selectedIndexCustomerList).FullName;
+                NewInspection.Customer = CustomerList.ElementAt(_selectedIndexCustomerList).ToModel();
                 RaisePropertyChanged("customer");
-            }
-        }
-        
-        public string SelectedCustomerName
-        {
-            get
-            {
-                return _customerName;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    _customerName = value;
-                }
             }
         }
         public ICommand AddInspectionCommand { get; set; }
@@ -81,13 +65,11 @@ namespace Festispec.ViewModels.Employees
 
             if (CustomerList.Any())
             {
-                _customerName = CustomerList.ElementAt(0).Name;
-                NewInspection.CustomerId = CustomerList.ElementAt(0).ID;
+                NewInspection.Customer = CustomerList.ElementAt(0).ToModel();
             }
         }
 
         // fields
-        private string _customerName;
         private int _selectedIndexCustomerList;
 
         // methods
@@ -98,7 +80,7 @@ namespace Festispec.ViewModels.Employees
                 && NewInspection.Status != null && NewInspection.Street != null
                 && NewInspection.HouseNumber != null && NewInspection.PostalCode != null
                 && NewInspection.Country != null && NewInspection.City != null
-                && NewInspection.Municipality != null && _customerName != null)
+                && NewInspection.Municipality != null)
                 return true;
 
             return false;

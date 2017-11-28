@@ -184,7 +184,7 @@ namespace Festispec.ViewModels.Employees
             }
             set
             {
-                Customer = value;
+                _inspection.Customers = value;
                 RaisePropertyChanged("Customer");
             }
         }
