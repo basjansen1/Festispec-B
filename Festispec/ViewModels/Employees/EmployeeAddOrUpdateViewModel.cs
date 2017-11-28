@@ -44,10 +44,10 @@ namespace Festispec.ViewModels.Employees
 
         public override void Save()
         {
-            if (EntityViewModel.UpdatedEntity.Manager_Id == -1)
+            if (EntityViewModel.Manager_Id == -1)
             {
-                EntityViewModel.UpdatedEntity.Manager = null;
-                EntityViewModel.UpdatedEntity.Manager_Id = null;
+                EntityViewModel.Manager = null;
+                EntityViewModel.Manager_Id = null;
             }
 
             // TODO: Validation

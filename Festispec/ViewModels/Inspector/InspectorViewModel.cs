@@ -13,9 +13,9 @@ namespace Festispec.ViewModels.Inspector
     {
         public InspectorViewModel(IInspectorRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
-            if (UpdatedEntity.HiredFrom == default(DateTime))
+            if (HiredFrom == default(DateTime))
             {
-                UpdatedEntity.HiredFrom = new DateTime(1990, 1, 1);
+                HiredFrom = new DateTime(1990, 1, 1);
             }
         }
 
@@ -264,9 +264,9 @@ namespace Festispec.ViewModels.Inspector
             {
                 try
                 {
-                    var updated = UpdatedEntity.Id == 0
-                        ? InspectorRepository.Add(UpdatedEntity)
-                        : InspectorRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                    var updated = Id == 0
+                        ? InspectorRepository.Add(Entity)
+                        : InspectorRepository.Update(Entity, Id);
                 }
                 catch(System.Data.Entity.Validation.DbEntityValidationException ex)
                 {

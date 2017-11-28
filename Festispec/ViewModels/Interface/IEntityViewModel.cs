@@ -6,5 +6,6 @@
         bool Delete();
         TEntity Copy();
         TEntity Entity { get; }
+        TEntity OriginalValues { get; }
     }
 }

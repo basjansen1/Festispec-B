@@ -54,7 +54,7 @@ namespace Festispec.ViewModels.Template
                 EntityViewModel = ViewModelFactory.CreateViewModel();
 
                 EntityViewModel.Template = TemplateViewModel.Entity;
-                EntityViewModel.Template_Id = templateViewModel.Id;
+                EntityViewModel.Template_Id = TemplateViewModel.Id;
             }
         }
 
@@ -63,9 +63,10 @@ namespace Festispec.ViewModels.Template
             //TODO: Validation
 
             // Map updated fields
-            EntityViewModel.Name = EntityViewModel.UpdatedEntity.Name;
-            EntityViewModel.Description = EntityViewModel.UpdatedEntity.Description;
-            EntityViewModel.QuestionType_Type = EntityViewModel.UpdatedEntity.QuestionType_Type;
+            // TODO: MapToOriginalValues
+            EntityViewModel.Name = EntityViewModel.Entity.Name;
+            EntityViewModel.Description = EntityViewModel.Entity.Description;
+            EntityViewModel.QuestionType_Type = EntityViewModel.Entity.QuestionType_Type;
             
             GoBack();
         }

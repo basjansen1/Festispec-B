@@ -89,12 +89,13 @@ namespace Festispec.ViewModels.Template
                 Domain.Template updated;
                 using (var templateRepository = RepositoryFactory.CreateRepository())
                 {
-                    updated = UpdatedEntity.Id == 0
-                        ? templateRepository.Add(UpdatedEntity)
-                        : templateRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                    updated = Id == 0
+                        ? templateRepository.Add(Entity)
+                        : templateRepository.Update(Entity, Id);
                 }
 
                 // Map updated values
+                // TODO: MapToOriginalValues
                 Entity.Id = updated.Id;
                 Entity.Name = updated.Name;
                 Entity.Description = updated.Description;
@@ -102,7 +103,7 @@ namespace Festispec.ViewModels.Template
                 foreach (var templateQuestionViewModel in QuestionsWithDeleted)
                 {
                     // Manually attach the template by id
-                    templateQuestionViewModel.UpdatedEntity.Template_Id = Entity.Id;
+                    templateQuestionViewModel.Template_Id = Entity.Id;
                     templateQuestionViewModel.Save();
                 }
             }

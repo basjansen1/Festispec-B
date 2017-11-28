@@ -28,7 +28,7 @@ namespace Festispec.ViewModels.Template
         {
             //TODO: Validation
 
-            TemplateViewModel.UpdatedEntity.Questions.Add(EntityViewModel.UpdatedEntity);
+            TemplateViewModel.Questions.Add(EntityViewModel);
 
             GoBack();
         }

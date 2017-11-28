@@ -97,20 +97,21 @@ namespace Festispec.ViewModels.Template
         {
             try
             {
-                if (Entity.IsDeleted)
+                if (IsDeleted)
                 {
-                    return UpdatedEntity.Id == 0 || Delete();
+                    return Id == 0 || Delete();
                 }
 
                 TemplateQuestion updated;
                 using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
                 {
-                    updated = UpdatedEntity.Id == 0
-                        ? templateQuestionRepository.Add(UpdatedEntity)
-                        : templateQuestionRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                    updated = Id == 0
+                        ? templateQuestionRepository.Add(Entity)
+                        : templateQuestionRepository.Update(Entity, Id);
                 }
 
                 // Map updated values
+                // TODO: MapToOriginalValues
                 Entity.Id = updated.Id;
                 Entity.Name = updated.Name;
                 Entity.Description = updated.Description;

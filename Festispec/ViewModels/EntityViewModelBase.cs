@@ -12,7 +12,7 @@ namespace Festispec.ViewModels
         where TEntity : class, new()
     {
         public TEntity Entity { get; }
-        public TEntity UpdatedEntity { get; }
+        public TEntity OriginalValues { get; set; }
 
         protected readonly TRepositoryFactory RepositoryFactory;
 
@@ -20,14 +20,14 @@ namespace Festispec.ViewModels
         {
             RepositoryFactory = repositoryFactory;
             Entity = new TEntity();
-            UpdatedEntity = Copy();
+            OriginalValues = Copy();
         }
 
         protected EntityViewModelBase(TRepositoryFactory repositoryFactory, TEntity entity)
         {
             RepositoryFactory = repositoryFactory;
             Entity = entity;
-            UpdatedEntity = Copy();
+            OriginalValues = Copy();
         }
 
         public abstract bool Save();
