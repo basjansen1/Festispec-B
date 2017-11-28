@@ -50,7 +50,8 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IInspectionRepositoryFactory, InspectionRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectorRepositoryFactory, InspectorRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectorViewModelFactory, InspectorViewModelFactory>();
-            SimpleIoc.Default.Register<IRegulationsRepositoryFactory, RegulationsViewModelFactory>();
+            SimpleIoc.Default.Register<IRegulationsViewModelFactory, RegulationsViewModelFactory>();
+            SimpleIoc.Default.Register<IRegulationsRepositoryFactory, RegulationsRepositoryFactory>();
 
             // Register viewmodels
             SimpleIoc.Default.Register<LoginViewModel>();

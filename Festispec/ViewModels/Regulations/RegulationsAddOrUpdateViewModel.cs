@@ -12,11 +12,10 @@ using Festispec.Domain.Repository.Interface;
 namespace Festispec.ViewModels.Regulations
 {
     public class RegulationsAddOrUpdateViewModel : 
-        AddOrUpdateViewModelBase<IRegulationsViewModelFactory, RegulationsViewModel, IRegulationsRepository, Domain.Employee>
+        AddOrUpdateViewModelBase<IRegulationsViewModelFactory, RegulationsViewModel, IRegulationsRepository, Domain.Regulation>
     {
         public RegulationsAddOrUpdateViewModel(INavigationService navigationService,
             IRegulationsRepositoryFactory repositoryFactory,
-            IRegulationsRoleRepositoryFactory regulationsRoleRepositoryFactory,
             IRegulationsViewModelFactory regulationsViewModelFactory)
             : base(navigationService, repositoryFactory, regulationsViewModelFactory)
         {

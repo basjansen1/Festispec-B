@@ -14,9 +14,9 @@ namespace Festispec.Domain.Repository
         {
         }
 
-        public override IQueryable<Regulation> Get()
+        public IQueryable<Regulation> GetByMunicipality(string municipality)
         {
-            return null;
+            return base.Get().Where(r => r.Municipality == municipality);
         }
 
         public override Regulation Add(Regulation entity)
