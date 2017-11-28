@@ -30,7 +30,7 @@ namespace GeodanApi
                 dynamic json = JsonConvert.DeserializeObject(response);
 
                 if (json.response.docs == null || json.response.docs.Count == 0)
-                    return null;
+                    throw new ArgumentNullException(nameof(json));
 
                 return json.response.docs[0];
             }

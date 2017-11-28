@@ -9,8 +9,10 @@
  DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 */
 
+using Festispec.Domain.Repository;
 using Festispec.Domain.Repository.Factory;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Domain.Repository.Interface;
 using Festispec.NavigationService;
 using Festispec.State;
 using Festispec.ViewModels.Factory;
@@ -20,6 +22,7 @@ using Festispec.ViewModels.Employees;
 using Festispec.ViewModels.Inspector;
 using Festispec.ViewModels.Template;
 using GalaSoft.MvvmLight.Ioc;
+using GeodanApi;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Festispec.ViewModels
@@ -49,6 +52,8 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IInspectionRepositoryFactory, InspectionRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectorRepositoryFactory, InspectorRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectorViewModelFactory, InspectorViewModelFactory>();
+            SimpleIoc.Default.Register<IGeodanSearchApi, GeodanSearchApi>();
+            SimpleIoc.Default.Register<IGeoRepository, GeoRepository>();
 
             // Register viewmodels
             SimpleIoc.Default.Register<LoginViewModel>();

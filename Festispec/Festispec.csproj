@@ -249,6 +249,10 @@
       <Project>{09979796-e638-48d5-8666-fa0ac1f54a2e}</Project>
       <Name>Festispec.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GeodanApi\GeodanApi.csproj">
+      <Project>{D752A463-81C4-4DC3-A929-9E666EC6BBCB}</Project>
+      <Name>GeodanApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

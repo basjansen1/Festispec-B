@@ -34,9 +34,9 @@ namespace Festispec.Domain.Repository
             var data = _geodanSearchApi.Find(geodanApiOptions);
 
             // Convert geometry data to DbGeography
-            var location = DbGeography.PointFromText(data.geom, CoordinateSystemId);
-            if (!location.Longitude.HasValue || !location.Latitude.HasValue)
-                throw new InvalidOperationException($"Invalid DbGeography from Geometry text: {data.geom}");
+            var location = DbGeography.PointFromText(data.geom.ToString(), CoordinateSystemId);
+//            if (!location.Longitude.HasValue || !location.Latitude.HasValue)
+//                throw new InvalidOperationException($"Invalid DbGeography from Geometry text: {data.geom}");
 
             // Convert data to address
             var address = new Address
@@ -47,8 +47,8 @@ namespace Festispec.Domain.Repository
                 Street = data.street,
                 Municipality = data.municipality,
                 Country = DefaultCountry,
-                Lat = location.Latitude.Value,
-                Long = location.Longitude.Value,
+                Lat = location.Latitude,
+                Long = location.Longitude,
                 Location = location
             };
 
