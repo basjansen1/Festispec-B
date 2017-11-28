@@ -167,6 +167,18 @@ namespace Festispec.ViewModels.InspectionProcessing
             }
         }
 
+        public string Name
+        {
+            get
+            {
+                return _customer.Name;
+            }
+            set
+            {
+                _customer.Name = value;
+            }
+        }
+
         private Customer _customer;
 
         public CustomerVM()

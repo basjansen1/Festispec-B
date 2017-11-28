@@ -18,26 +18,26 @@ namespace Festispec.ViewModels.Employees
 {
     public class AddInspectionVM : ViewModelBase
     {
+        // properties
         public InspectionListVM InspectionList { get; set; }
         public InspectionVM NewInspection { get; set; }
-        public CustomerVM NewCustomer { get; set; }
         public List<CustomerVM> CustomerList { get; set; }
         public List<string> CustomerNames { get; set; }
-        private Dictionary<string, CustomerVM> CustomerDictionairy { get; set; }
-        public CustomerVM SelectedCustomer
+        public int SelectedIndexCustomerList
         {
             get
             {
-                return _customer;
+                return _selectedIndexCustomerList;
             }
             set
             {
-                _customer = value;
-                MessageBox.Show(_customer.Email);
-                NewInspection.CustomerId = _customer.ID;
+                _selectedIndexCustomerList = value;
+                NewInspection.CustomerId = CustomerList.ElementAt(_selectedIndexCustomerList).ID;
+                _customerName = CustomerList.ElementAt(_selectedIndexCustomerList).FullName;
                 RaisePropertyChanged("customer");
             }
         }
+        
         public string SelectedCustomerName
         {
             get
@@ -49,7 +49,6 @@ namespace Festispec.ViewModels.Employees
                 if (value != null)
                 {
                     _customerName = value;
-                    CustomerDictionairy.TryGetValue(value, out _customer);
                 }
             }
         }
@@ -57,6 +56,7 @@ namespace Festispec.ViewModels.Employees
         public ICommand CloseWindowCommand { get; set; }
         private readonly INavigationService _navigationService;
 
+        // constructor
         public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory, INavigationService navigationService)
         {
             InspectionList = inspectionList;
@@ -65,12 +65,11 @@ namespace Festispec.ViewModels.Employees
             NewInspection.StartDate = DateTime.Now;
             NewInspection.EndDate = DateTime.Now;
             NewInspection.Status = "Pending";
-            NewInspection.CustomerId = 11;
 
             NewInspection.Location = DbGeography.PointFromText("POINT(50 5)", 4326);
             CustomerList = new List<CustomerVM>();
             CustomerNames = new List<string>();
-            CustomerDictionairy = new Dictionary<string, CustomerVM>();
+            
             AddInspectionCommand = new RelayCommand(AddInspection);
             CloseWindowCommand = new RelayCommand(_navigationService.GoBack); 
 
@@ -78,13 +77,20 @@ namespace Festispec.ViewModels.Employees
             {
                 customerRepository.Get().ToList().ForEach(c => CustomerList.Add(new CustomerVM(c)));
             }
-            CustomerList.ForEach(c => CustomerNames.Add(c.FullName));
-            CustomerList.ForEach(c => CustomerDictionairy.Add(c.FullName, c));
+            CustomerList.ForEach(c => CustomerNames.Add(c.Name));
+
+            if (CustomerList.Any())
+            {
+                _customerName = CustomerList.ElementAt(0).Name;
+                NewInspection.CustomerId = CustomerList.ElementAt(0).ID;
+            }
         }
 
-        private CustomerVM _customer;
+        // fields
         private string _customerName;
+        private int _selectedIndexCustomerList;
 
+        // methods
         public bool CanAddInspection()
         {
             if (NewInspection.Name != null && NewInspection.StartDate != null
@@ -92,8 +98,7 @@ namespace Festispec.ViewModels.Employees
                 && NewInspection.Status != null && NewInspection.Street != null
                 && NewInspection.HouseNumber != null && NewInspection.PostalCode != null
                 && NewInspection.Country != null && NewInspection.City != null
-                && NewInspection.Municipality != null && _customer != null
-                )
+                && NewInspection.Municipality != null && _customerName != null)
                 return true;
 
             return false;
