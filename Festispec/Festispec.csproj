@@ -275,7 +275,6 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Festispec.Domain\Festispec.Domain.csproj">
       <Project>{09979796-e638-48d5-8666-fa0ac1f54a2e}</Project>
@@ -285,6 +284,9 @@
       <Project>{86E3678B-98F7-4E37-BE12-D682B3F7D7AE}</Project>
       <Name>ProofOfConcept.Geodan</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="State\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

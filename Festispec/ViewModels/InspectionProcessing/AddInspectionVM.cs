@@ -114,6 +114,16 @@ namespace Festispec.ViewModels.Employees
                     InspectionList.InspectionVMList.Add(NewInspection);
                     _navigationService.GoBack();
                 }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            MessageBox.Show("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                        }
+                    }
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Er is iets fout gegaan met het toevoegen van een inspectie!");
