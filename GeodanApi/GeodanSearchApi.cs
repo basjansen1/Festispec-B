@@ -41,7 +41,7 @@ namespace GeodanApi
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
-        private string BuildUrl(GeodanApiOptions options)
+        public string BuildUrl(GeodanApiOptions options)
         {
             if (string.IsNullOrWhiteSpace(options.PostalCode))
                 throw new ArgumentNullException(nameof(options.PostalCode));

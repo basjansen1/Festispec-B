@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPDF", "TestPDF\TestPDF.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeodanApi", "GeodanApi\GeodanApi.csproj", "{D752A463-81C4-4DC3-A929-9E666EC6BBCB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeodanApi.Test", "GeodanApi.Test\GeodanApi.Test.csproj", "{9B5B97A0-5A3F-45F9-AA04-8EA7610F3B01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{D752A463-81C4-4DC3-A929-9E666EC6BBCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D752A463-81C4-4DC3-A929-9E666EC6BBCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D752A463-81C4-4DC3-A929-9E666EC6BBCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B5B97A0-5A3F-45F9-AA04-8EA7610F3B01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B5B97A0-5A3F-45F9-AA04-8EA7610F3B01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B5B97A0-5A3F-45F9-AA04-8EA7610F3B01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B5B97A0-5A3F-45F9-AA04-8EA7610F3B01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
