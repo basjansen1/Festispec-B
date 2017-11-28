@@ -11,7 +11,7 @@ namespace Festispec.Routes
         public static Route RegulationsList = new Route
         {
             Key = "RegulationsList",
-            PageType = new Uri("../views/Regulations/RegulationsList.xaml", UriKind.Relative),
+            PageType = new Uri("../Views/Regulations/RegulationsList.xaml", UriKind.Relative),
             Roles = new[] { "Manager", "Medewerker" }
         };
 

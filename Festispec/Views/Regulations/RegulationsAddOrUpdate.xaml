@@ -9,6 +9,7 @@
       DataContext="{Binding Source={StaticResource Locator}, Path=RegulationsAddOrUpdate}">
 
     <Grid>
-        
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="5,4,0,0" VerticalAlignment="Top" Width="20"/>
+
     </Grid>
 </Page>
