@@ -28,6 +28,9 @@ namespace Festispec.ViewModels.Template
         {
             //TODO: Validation
 
+            // Overwrite the original values with the new entity values
+            EntityViewModel.MapValuesToOriginal();
+            
             TemplateViewModel.Questions.Add(EntityViewModel);
 
             GoBack();

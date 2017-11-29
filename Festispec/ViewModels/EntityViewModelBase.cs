@@ -1,34 +1,36 @@
 ﻿using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Interface;
-using Festispec.ViewModels.Template;
 using GalaSoft.MvvmLight;
 
 namespace Festispec.ViewModels
 {
-    public abstract class EntityViewModelBase<TRepositoryFactory, TRepository, TEntity> : ViewModelBase, IEntityViewModel<TEntity>
+    public abstract class EntityViewModelBase<TRepositoryFactory, TRepository, TEntity> : ViewModelBase,
+        IEntityViewModel<TEntity>
         where TRepositoryFactory : IRepositoryFactory<TRepository, TEntity>
         where TRepository : IRepository<TEntity>
         where TEntity : class, new()
     {
-        public TEntity Entity { get; }
-        public TEntity OriginalValues { get; set; }
-
         protected readonly TRepositoryFactory RepositoryFactory;
 
         protected EntityViewModelBase(TRepositoryFactory repositoryFactory)
         {
             RepositoryFactory = repositoryFactory;
             Entity = new TEntity();
-            OriginalValues = Copy();
+
+            MapValuesToOriginal();
         }
 
         protected EntityViewModelBase(TRepositoryFactory repositoryFactory, TEntity entity)
         {
             RepositoryFactory = repositoryFactory;
             Entity = entity;
-            OriginalValues = Copy();
+
+            MapValuesToOriginal();
         }
+
+        public TEntity Entity { get; }
+        public TEntity OriginalValues { get; set; }
 
         public abstract bool Save();
 
@@ -40,6 +42,18 @@ namespace Festispec.ViewModels
             }
         }
 
-        public abstract TEntity Copy();
+        public virtual void MapValues(TEntity from, TEntity to)
+        {
+            // Get all the properties of the entity
+            var properties = typeof(TEntity).GetProperties();
+            foreach (var property in properties)
+            {
+                // Map all the values
+                property.SetValue(from, to.GetType().GetProperty(property.Name)?.GetValue(to, null));
+            }
+        }
+
+        public void MapValuesFromOriginal() => MapValues(OriginalValues, Entity);
+        public void MapValuesToOriginal() => MapValues(Entity, OriginalValues);
     }
 }

@@ -51,6 +51,7 @@ namespace Festispec.ViewModels.Employees
             }
 
             // TODO: Validation
+
             var saved = EntityViewModel.Save();
 
             if(saved) NavigationService.GoBack(EntityViewModel);

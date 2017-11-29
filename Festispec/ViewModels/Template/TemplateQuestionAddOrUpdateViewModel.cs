@@ -62,11 +62,8 @@ namespace Festispec.ViewModels.Template
         {
             //TODO: Validation
 
-            // Map updated fields
-            // TODO: MapToOriginalValues
-            EntityViewModel.Name = EntityViewModel.Entity.Name;
-            EntityViewModel.Description = EntityViewModel.Entity.Description;
-            EntityViewModel.QuestionType_Type = EntityViewModel.Entity.QuestionType_Type;
+            // Overwrite the original values with the new entity values
+            EntityViewModel.MapValuesToOriginal();
             
             GoBack();
         }

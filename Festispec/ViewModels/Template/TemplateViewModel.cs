@@ -38,11 +38,6 @@ namespace Festispec.ViewModels.Template
             {
                 Entity.Name = value;
                 RaisePropertyChanged();
-                // TODO: Figure out which one works...
-                //RaisePropertyChanged();
-                //RaisePropertyChanged(null);
-                //RaisePropertyChanged("");
-                //RaisePropertyChanged(string.Empty);
             }
         }
 
@@ -87,6 +82,7 @@ namespace Festispec.ViewModels.Template
             try
             {
                 Domain.Template updated;
+                var questionsToUpdate = QuestionsWithDeleted;
                 using (var templateRepository = RepositoryFactory.CreateRepository())
                 {
                     updated = Id == 0
@@ -94,13 +90,12 @@ namespace Festispec.ViewModels.Template
                         : templateRepository.Update(Entity, Id);
                 }
 
-                // Map updated values
-                // TODO: MapToOriginalValues
-                Entity.Id = updated.Id;
-                Entity.Name = updated.Name;
-                Entity.Description = updated.Description;
+                // First we map the updated values to the entity
+                MapValues(updated, Entity);
+                // Then we overwrite the original values with the new entity values
+                MapValuesToOriginal();
 
-                foreach (var templateQuestionViewModel in QuestionsWithDeleted)
+                foreach (var templateQuestionViewModel in questionsToUpdate)
                 {
                     // Manually attach the template by id
                     templateQuestionViewModel.Template_Id = Entity.Id;
@@ -109,32 +104,13 @@ namespace Festispec.ViewModels.Template
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {
-                var ErrorList = (from eve in ex.EntityValidationErrors from ve in eve.ValidationErrors select ve.PropertyName).ToList();
-                string joined = string.Join(",", ErrorList.Select(x => x));
+                var errorList = (from eve in ex.EntityValidationErrors from ve in eve.ValidationErrors select ve.PropertyName).ToList();
+                var joined = string.Join(", ", errorList.Select(x => x));
                 MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
                 return false;
             }
 
             return true;
-        }
-
-        public override bool Delete()
-        {
-            using (var templateRepository = RepositoryFactory.CreateRepository())
-            {
-                return templateRepository.Delete(Entity) != 0;
-            }
-        }
-
-        public override Domain.Template Copy()
-        {
-            return new Domain.Template
-            {
-                Id = Id,
-                Name = Name,
-                Description = Description,
-                Questions = Entity.Questions
-            };
         }
     }
 }

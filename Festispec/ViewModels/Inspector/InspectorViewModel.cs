@@ -286,37 +286,5 @@ namespace Festispec.ViewModels.Inspector
                 return InspectorRepository.Delete(Entity) != 0;
             }
         }
-
-        public override Domain.Inspector Copy()
-        {
-            return new Domain.Inspector
-            {
-                Id = Id,
-                Email = Email,
-                City = City,
-                Username = Username,
-                Country = Country,
-                FirstName = FirstName,
-                HouseNumber = HouseNumber,
-                IBAN = IBAN,
-                LastName = LastName,
-                Manager_Id = Manager_Id,
-                Manager = Manager,
-                Password = Password,
-                Municipality = Municipality,
-                PostalCode = PostalCode,
-                Role_Role = Role_Role,
-                Role = Role,
-                Street = Street,
-                Telephone = Telephone,
-                Location = DbGeography.PointFromText("POINT(50 5)", 4326),
-                Long = 50,
-                Lat = 5,
-                HiredFrom = HiredFrom,
-                HiredTo = HiredTo,
-                CertificationFrom = CertificationFrom,
-                CertificationTo = CertificationTo
-            };
-        }
     }
 }

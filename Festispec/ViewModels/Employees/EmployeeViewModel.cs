@@ -6,6 +6,7 @@ using System.Data.Entity.Spatial;
 using System;
 using System.Windows;
 using System.Linq;
+using System.Reflection;
 
 namespace Festispec.ViewModels.Employee
 {
@@ -276,36 +277,6 @@ namespace Festispec.ViewModels.Employee
             {
                 return EmployeeRepository.Delete(Entity) != 0;
             }
-        }
-
-        public override Domain.Employee Copy()
-        {
-            return new Domain.Employee
-            {
-                Id = Id,
-                Email = Email,
-                City = City,
-                Username = Username,
-                Country = Country,
-                FirstName = FirstName,
-                HouseNumber = HouseNumber,
-                IBAN = IBAN,
-                LastName = LastName,
-                Manager = Manager,
-                Password = Password,
-                Municipality = Municipality,
-                Manager_Id = Manager_Id,
-                PostalCode = PostalCode,
-                Role_Role = Role_Role,
-                Role = Role,
-                Street = Street,
-                Telephone = Telephone,
-                Location = DbGeography.PointFromText("POINT(50 5)", 4326),
-                Long = 50,
-                Lat = 5,
-                HiredFrom = HiredFrom,
-                HiredTo = HiredTo
-            };
         }
     }
 }
