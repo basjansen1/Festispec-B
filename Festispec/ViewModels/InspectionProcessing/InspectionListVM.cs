@@ -82,7 +82,8 @@ namespace Festispec.ViewModels.Employees
 
         public void ShowEditInspectionWindow()
         {
-            _navigationService.NavigateTo(Routes.Routes.EditInspection);
+            if (_selectedInspection != null)
+                _navigationService.NavigateTo(Routes.Routes.EditInspection);
         }
 
         public void ShowProcessInspectionWindow()
