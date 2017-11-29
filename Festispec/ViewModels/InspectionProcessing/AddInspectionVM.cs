@@ -46,8 +46,6 @@ namespace Festispec.ViewModels.Employees
             InspectionList = inspectionList;
             _navigationService = navigationService;
             NewInspection = new InspectionVM();
-            NewInspection.StartDate = DateTime.Now;
-            NewInspection.EndDate = DateTime.Now;
             NewInspection.Status = "Pending";
 
             NewInspection.Location = DbGeography.PointFromText("POINT(50 5)", 4326);

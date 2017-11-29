@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Festispec.Views"
         mc:Ignorable="d"
         Title="Add Inspection" DataContext="{Binding GetAddInspection, Source={StaticResource Locator}}">
@@ -47,8 +48,8 @@
 
             <TextBox x:Name="txtInspection" TextWrapping="Wrap" Text="{Binding NewInspection.Name}" Grid.Column="3" Grid.Row="0"/>
             <TextBox x:Name="txtWebsite" TextWrapping="Wrap" Text="{Binding NewInspection.Website}" Grid.Column="3" Grid.Row="1"/>
-            <DatePicker x:Name="dpStartDate" FirstDayOfWeek="Monday" Cursor="Hand" Text="{Binding NewInspection.StartDate}" Grid.Column="3" Grid.Row="2"/>
-            <DatePicker x:Name="dpEndDate"  FirstDayOfWeek="Monday" Cursor="Hand" Text="{Binding NewInspection.EndDate}" Grid.Column="3" Grid.Row="3"/>
+            <DatePicker x:Name="dpStartDate" FirstDayOfWeek="Monday" Cursor="Hand" Text="{Binding NewInspection.StartDate}" Grid.Column="3" Grid.Row="2" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
+            <DatePicker x:Name="dpEndDate"  FirstDayOfWeek="Monday" Cursor="Hand" Text="{Binding NewInspection.EndDate}" Grid.Column="3" Grid.Row="3" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
             <TextBox x:Name="txtStreetname" TextWrapping="Wrap" Text="{Binding NewInspection.Street}" Grid.Column="3" Grid.Row="4"/>
             <TextBox x:Name="txtPostalCode" TextWrapping="Wrap" Text="{Binding NewInspection.PostalCode}" Grid.Column="3" Grid.Row="5"/>
             <TextBox x:Name="txtHousenumber" TextWrapping="Wrap" Text="{Binding NewInspection.HouseNumber}" Grid.Column="3" Grid.Row="6"/>
