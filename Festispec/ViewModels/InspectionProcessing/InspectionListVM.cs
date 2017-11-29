@@ -38,6 +38,8 @@ namespace Festispec.ViewModels.Employees
         }
 
         public IInspectionRepositoryFactory InspectionRepositoryFactory;
+        private List<InspectionVM> InspectionList;
+        public string SearchInput { get; set; }
         private readonly INavigationService _navigationService;
 
         // Commands
@@ -45,6 +47,8 @@ namespace Festispec.ViewModels.Employees
         public ICommand ShowEditInspectionWindowCommand { get; set; }
         public ICommand ShowProcessInspectionWindowCommand { get; set; }
         public ICommand DeleteInspectionCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+        public ICommand DeleteSearchCommand { get; set; }
 
 
         // fields
@@ -65,6 +69,8 @@ namespace Festispec.ViewModels.Employees
             ShowEditInspectionWindowCommand = new RelayCommand(ShowEditInspectionWindow);
             ShowProcessInspectionWindowCommand = new RelayCommand(ShowProcessInspectionWindow);
             DeleteInspectionCommand = new RelayCommand(DeleteSelectedInspection);
+            SearchCommand = new RelayCommand(Search);
+            DeleteSearchCommand = new RelayCommand(DeleteFilter);
 
             // instantiate views   
             using (var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
@@ -98,6 +104,26 @@ namespace Festispec.ViewModels.Employees
                 inspectionRepository.Delete(SelectedInspection.toModel());
             }
             this.InspectionVMList.Remove(SelectedInspection);
+        }
+
+        private void Search()
+        {
+            if (SearchInput != null)
+            {
+                DeleteFilter();
+                InspectionList.Clear();
+                InspectionVMList.ToList().ForEach(n => InspectionList.Add(n));
+                InspectionVMList.Clear();
+                InspectionList.Where(i => i.Name.StartsWith(SearchInput)).ToList().ForEach(i => InspectionVMList.Add(i));
+            }
+        }
+        private void DeleteFilter()
+        {
+            using (var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
+            {
+                InspectionVMList.Clear();
+                inspectionRepository.Get().ToList().ForEach(i => InspectionVMList.Add(new InspectionVM(i)));
+            }
         }
     }
 }
