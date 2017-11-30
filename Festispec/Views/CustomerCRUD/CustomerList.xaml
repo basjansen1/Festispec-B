@@ -20,7 +20,7 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="1" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToCustomerAddCommand}" />
-            <Button Grid.Column="2" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToCustomerUpdateCommand}" />
+            <Button Grid.Column="2" Content="Wijzigen / Extra informatie" Margin="5px 10px" Command="{Binding NavigateToCustomerUpdateCommand}" />
         </Grid>
 
         <Grid Grid.Row="1">
@@ -50,6 +50,8 @@
                     <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
                     <DataGridTextColumn Header="Gemeente" Binding="{Binding Municipality}" Width="*" />
+                    <DataGridTextColumn Header="Voornaam Contactpersoon" Binding="{Binding FirstName}" Width="*" />
+                    <DataGridTextColumn Header="Achternaam Contactpersoon" Binding="{Binding LastName}" Width="*" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
