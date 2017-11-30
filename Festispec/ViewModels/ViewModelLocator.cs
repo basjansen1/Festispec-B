@@ -63,6 +63,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<InspectorListViewModel>();
             SimpleIoc.Default.Register<InspectorAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<RegulationsListViewModel>();
+            SimpleIoc.Default.Register<RegulationsAddOrUpdateViewModel>();
         }
 
         private static void RegisterNavigationService()
