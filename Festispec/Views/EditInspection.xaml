@@ -37,11 +37,11 @@
             <Label x:Name="lblPhone" Content="Tel nr:" Grid.Column="0" Grid.Row="3"/>
             <Label x:Name="lblStatus" Content="Status:" Grid.Column="0" Grid.Row="9"/>
 
-            <ComboBox x:Name="cbCustomer" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding CustomerNamesList}" SelectedItem="{Binding Name}" IsReadOnly="True"/>
+            <ComboBox x:Name="cbCustomer" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding CustomerNamesList}" SelectedItem="{Binding Name}" IsReadOnly="True" IsEnabled="False"/>
             <TextBox x:Name="txtKvk" TextWrapping="Wrap" IsEnabled="False" Grid.Column="1" Grid.Row="1" Text="{Binding Customer.KVK}"/>
             <TextBox x:Name="txtEmail" TextWrapping="Wrap" IsEnabled="False" Grid.Column="1"  Grid.Row="2" Text="{Binding Customer.Email}"/>
             <TextBox x:Name="txtPhone" TextWrapping="Wrap" IsEnabled="False" Grid.Column="1" Grid.Row="3" Text="{Binding Customer.Telephone}"/>
-            <ComboBox x:Name="cbStatus" Grid.Column="1" Grid.Row="9" ItemsSource="{Binding InspectionList.SelectedInspection.Status}" SelectedItem="{Binding Status}" DisplayMemberPath=""/>
+            <ComboBox x:Name="cbStatus" Grid.Column="1" Grid.Row="9" ItemsSource="{Binding InspectionList.SelectedInspection.Status}" SelectedItem="{Binding Status}"/>
 
             <Label x:Name="lblInspection" Content="Naam inspectie:" Grid.Column="2" Grid.Row="0"/>
             <Label x:Name="lblWebsite" Content="Website:" Grid.Column="2" Grid.Row="1"/>
