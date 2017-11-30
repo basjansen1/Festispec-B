@@ -36,7 +36,7 @@
             </Grid.ColumnDefinitions>
 
             <DockPanel Grid.Row="0"  Grid.Column="0">
-                <Label>Zoek op bedrijfsnaam</Label>
+                <Label>Zoek op naam</Label>
                 <TextBox Text="{Binding SearchName}"></TextBox>
             </DockPanel>
             <DockPanel Grid.Row="0" Grid.Column="1">
@@ -47,10 +47,9 @@
 
             <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Naam" Binding="{Binding Username}" Width="*" />
+                    <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
-                    <DataGridTextColumn Header="Manager" Binding="{Binding Path=Manager.Username}" Width="*" />
-                    <DataGridTextColumn Header="Functie" Binding="{Binding Role_Role}" Width="*" />
+                    <DataGridTextColumn Header="Gemeente" Binding="{Binding Municipality}" Width="*" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

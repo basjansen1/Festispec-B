@@ -271,7 +271,8 @@ namespace Festispec.ViewModels.Customer
                 Lat = 5,
                 Inspections = Inspections,
                 KVK = KVK,
-                Notes = Notes
+                Notes = Notes,
+                Name = Name
             };
         }
     }

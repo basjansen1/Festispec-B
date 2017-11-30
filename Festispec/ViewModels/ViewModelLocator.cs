@@ -62,8 +62,8 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<EmployeeListViewModel>();
             SimpleIoc.Default.Register<InspectorListViewModel>();
             SimpleIoc.Default.Register<InspectorAddOrUpdateViewModel>();
-            SimpleIoc.Default.Register<CustomerAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<CustomerListViewModel>();
+            SimpleIoc.Default.Register<CustomerAddOrUpdateViewModel>();
 
         }
 
@@ -133,11 +133,12 @@ namespace Festispec.ViewModels
         public IInspectorViewModelFactory InspectorViewModelFactory =
             ServiceLocator.Current.GetInstance<IInspectorViewModelFactory>();
 
+        public ICustomerRepositoryFactory CustomerRepositoryFactory =
+            ServiceLocator.Current.GetInstance<ICustomerRepositoryFactory>();
+
         public ICustomerViewModelFactory CustomerViewModelFactory =
             ServiceLocator.Current.GetInstance<ICustomerViewModelFactory>();
 
-        public ICustomerRepositoryFactory CustomerRepositoryFactory =
-            ServiceLocator.Current.GetInstance<ICustomerRepositoryFactory>();
 
 
         public INavigationService NavigationService = ServiceLocator.Current.GetInstance<INavigationService>();

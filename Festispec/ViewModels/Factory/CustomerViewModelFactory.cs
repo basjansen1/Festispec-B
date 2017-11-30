@@ -10,7 +10,7 @@ namespace Festispec.ViewModels.Factory
     public class CustomerViewModelFactory :  ICustomerViewModelFactory
     {
         private readonly ICustomerRepositoryFactory _customerRepositoryFactory;
-        public CustomerViewModelFactory(CustomerRepositoryFactory CustomerRepositoryFactory)
+        public CustomerViewModelFactory(ICustomerRepositoryFactory CustomerRepositoryFactory)
         {
             _customerRepositoryFactory = CustomerRepositoryFactory;
         }

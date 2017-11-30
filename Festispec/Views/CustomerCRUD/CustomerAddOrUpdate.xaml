@@ -7,6 +7,8 @@
         Title="CustomerAddOrUpdate"
         DataContext="{Binding Source={StaticResource Locator}, Path=CustomerAddOrUpdate}">
     <StackPanel>
+        <Label>Naam</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Name}" />
         <Label>Email</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Email}" />
         <Label>Stad</Label>
@@ -15,8 +17,14 @@
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Country}" />
         <Label>Voornaam Contactpersoon</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.FirstName}" />
+        <Label>Achternaam Contactpersoon</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.LastName}" />
+        <Label>Straatnaam</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Street}" />
         <Label>Huisnummer</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.HouseNumber}" />
+        <Label>KVK</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.KVK}" />
         <Label>IBAN</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.IBAN}" />
         <Label>Gemeente</Label>

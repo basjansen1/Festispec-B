@@ -1,4 +1,5 @@
-﻿using Festispec.Domain.Repository.Factory.Interface;
+﻿using Festispec.Domain;
+using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.NavigationService;
 using Festispec.ViewModels.Customer;
 using Festispec.ViewModels.Factory.Interface;
@@ -37,7 +38,6 @@ namespace Festispec.ViewModels.CustomerCRUD
 
         public ICommand NavigateToCustomerAddCommand { get; set; }
         public ICommand NavigateToCustomerUpdateCommand { get; set; }
-        public ICommand CustomerDeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
 
         public ObservableCollection<CustomerViewModel> Customers { get; private set; }
@@ -54,7 +54,11 @@ namespace Festispec.ViewModels.CustomerCRUD
             if (NavigationService.CurrentRoute != Routes.Routes.CustomerList) return;
 
             LoadCustomers();
+
+            NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
         }
+
+
 
         private void RegisterCommands()
         {
@@ -63,10 +67,6 @@ namespace Festispec.ViewModels.CustomerCRUD
             NavigateToCustomerUpdateCommand = new RelayCommand(
                 () => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate, SelectedCustomer),
                 () => SelectedCustomer != null);
-            CustomerDeleteCommand = new RelayCommand(() => {
-                SelectedCustomer.Delete();
-                LoadCustomers();
-            }, () => SelectedCustomer != null);
             SearchCommand = new RelayCommand(LoadCustomers);
         }
 
@@ -79,7 +79,7 @@ namespace Festispec.ViewModels.CustomerCRUD
                     new ObservableCollection<CustomerViewModel>(
                         CustomerRepository.Get()
                             .Where(Customer =>
-                                Customer.FirstName.Contains(SearchName)
+                                Customer.Name.Contains(SearchName)
                                 && Customer.Email.Contains(SearchEmail))
                             .ToList()
                             .Select(Customer => _CustomerViewModelFactory.CreateViewModel(Customer)));
