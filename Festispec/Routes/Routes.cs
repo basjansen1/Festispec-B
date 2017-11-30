@@ -75,22 +75,26 @@ namespace Festispec.Routes
         public static Route InspectionList = new Route
         {
             Key = "InspectionList",
-            PageType = new Uri("../Views/InspectionList.xaml", UriKind.Relative)
+            PageType = new Uri("../Views/InspectionList.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
         };
         public static Route EditInspection = new Route
         {
             Key = "EditInspection",
-            PageType = new Uri("../Views/EditInspection.xaml", UriKind.Relative)
+            PageType = new Uri("../Views/EditInspection.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
         };
         public static Route AddInspection = new Route
         {
             Key = "AddInspection",
-            PageType = new Uri("../Views/AddInspection.xaml", UriKind.Relative)
+            PageType = new Uri("../Views/AddInspection.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
         };
         public static Route ProcessInspection = new Route
         {
             Key = "ProcessInspection",
-            PageType = new Uri("../Views/ProcessInspection.xaml", UriKind.Relative)
+            PageType = new Uri("../Views/ProcessInspection.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
         };
 
         #endregion

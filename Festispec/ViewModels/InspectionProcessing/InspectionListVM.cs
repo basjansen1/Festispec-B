@@ -38,7 +38,7 @@ namespace Festispec.ViewModels.Employees
         }
 
         public IInspectionRepositoryFactory InspectionRepositoryFactory;
-        private List<InspectionVM> InspectionList;
+        private List<InspectionVM> _inspectionList;
         public string SearchInput { get; set; }
         private readonly INavigationService _navigationService;
 
@@ -71,6 +71,7 @@ namespace Festispec.ViewModels.Employees
             DeleteInspectionCommand = new RelayCommand(DeleteSelectedInspection);
             SearchCommand = new RelayCommand(Search);
             DeleteSearchCommand = new RelayCommand(DeleteFilter);
+            _inspectionList = new List<InspectionVM>();
 
             // instantiate views   
             using (var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
@@ -111,10 +112,10 @@ namespace Festispec.ViewModels.Employees
             if (SearchInput != null)
             {
                 DeleteFilter();
-                InspectionList.Clear();
-                InspectionVMList.ToList().ForEach(n => InspectionList.Add(n));
+                _inspectionList.Clear();
+                InspectionVMList.ToList().ForEach(n => _inspectionList.Add(n));
                 InspectionVMList.Clear();
-                InspectionList.Where(i => i.Name.StartsWith(SearchInput)).ToList().ForEach(i => InspectionVMList.Add(i));
+                _inspectionList.Where(i => i.Name.StartsWith(SearchInput)).ToList().ForEach(i => InspectionVMList.Add(i));
             }
         }
         private void DeleteFilter()
