@@ -54,6 +54,11 @@ namespace Festispec.Routes
             Roles = new[] { "Manager" }
         };
 
+        #endregion
+
+        #region Inspector
+
+
         public static Route InspectorList = new Route
         {
             Key = "InspectorList",
@@ -67,7 +72,30 @@ namespace Festispec.Routes
             PageType = new Uri("../Views/Inspector/InspectorAddOrUpdate.xaml", UriKind.Relative),
             Roles = new[] { "Manager" }
         };
-
         #endregion
+
+        #region Schedule
+        public static Route ScheduleList = new Route
+        {
+            Key = "ScheduleList",
+            PageType = new Uri("../Views/Schedule/ScheduleList.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Inspecteur", "Medewerker" }
+        };
+
+        public static Route ScheduleUpdate = new Route
+        {
+            Key = "ScheduleUpdate",
+            PageType = new Uri("../Views/Schedule/ScheduleUpdate.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Inspecteur", "Medewerker" }
+        };
+
+        public static Route ScheduleView = new Route
+        {
+            Key = "ScheduleView",
+            PageType = new Uri("../Views/Schedule/ScheduleView.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Inspecteur", "Medewerker" }
+        };
+        #endregion
+
     }
 }
