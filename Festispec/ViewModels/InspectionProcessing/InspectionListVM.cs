@@ -87,6 +87,8 @@ namespace Festispec.ViewModels.Employees
         {
             if (_selectedInspection != null)
                 _navigationService.NavigateTo(Routes.Routes.EditInspection);
+            else
+                MessageBox.Show("Je moet eerst een inspectie selecteren!");
         }
 
         public void ShowProcessInspectionWindow()
