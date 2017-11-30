@@ -1,4 +1,6 @@
-﻿using Festispec.Domain.Repository.Factory.Interface;
+﻿using System.Collections;
+using System.Reflection;
+using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Interface;
 using GalaSoft.MvvmLight;
@@ -50,8 +52,15 @@ namespace Festispec.ViewModels
             var properties = typeof(TEntity).GetProperties();
             foreach (var property in properties)
             {
-                // Map all the values
-                property.SetValue(to, to.GetType().GetProperty(property.Name)?.GetValue(from, null));
+                try
+                {
+                    // Map the properties
+                    property.SetValue(to, from.GetType().GetProperty(property.Name)?.GetValue(from, null));
+                }
+                catch (TargetInvocationException ex)
+                {
+                    
+                }
             }
         }
 

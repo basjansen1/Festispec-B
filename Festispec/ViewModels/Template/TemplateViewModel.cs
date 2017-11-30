@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
+using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
@@ -19,6 +22,9 @@ namespace Festispec.ViewModels.Template
             ITemplateQuestionViewModelFactory templateQuestionViewModelFactory) : base(repositoryFactory)
         {
             _templateQuestionViewModelFactory = templateQuestionViewModelFactory;
+
+            Questions = new ObservableCollection<TemplateQuestionViewModel>(Entity.Questions.Select(question => _templateQuestionViewModelFactory.CreateViewModel(question)));
+            Questions.CollectionChanged += QuestionsOnCollectionChanged;
         }
 
         public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory,
@@ -26,6 +32,23 @@ namespace Festispec.ViewModels.Template
             : base(repositoryFactory, entity)
         {
             _templateQuestionViewModelFactory = templateQuestionViewModelFactory;
+
+            Questions = new ObservableCollection<TemplateQuestionViewModel>(Entity.Questions.Select(question => _templateQuestionViewModelFactory.CreateViewModel(question)));
+            Questions.CollectionChanged += QuestionsOnCollectionChanged;
+        }
+
+        private void QuestionsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            switch (notifyCollectionChangedEventArgs.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    Entity.Questions.Add(((TemplateQuestionViewModel) notifyCollectionChangedEventArgs.NewItems[0]).Entity);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    Entity.Questions.Remove(((TemplateQuestionViewModel)notifyCollectionChangedEventArgs.OldItems[0]).Entity);
+                    break;
+            }
+//            RaisePropertyChanged(nameof(Entity.Questions));
         }
 
         public int Id => Entity.Id;
@@ -55,20 +78,33 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        public ICollection<TemplateQuestionViewModel> Questions
-        {
-            get { return QuestionsWithDeleted.Where(model => !model.IsDeleted).ToList(); }
-            set
-            {
-                Entity.Questions = value.Select(templateQuestionViewModel => templateQuestionViewModel.Entity).ToList();
-                RaisePropertyChanged();
-            }
-        }
+        public ObservableCollection<TemplateQuestionViewModel> Questions { get; }
+//        public ICollection<TemplateQuestionViewModel> Questions
+//        {
+//            get { return Entity.Questions.Select(question => _templateQuestionViewModelFactory?.CreateViewModel(question)).ToList(); }
+//            set
+//            {
+//                Entity.Questions = value.Select(model => model.Entity).ToList();
+//                RaisePropertyChanged();
+//            }
+//        }
 
-        private IEnumerable<TemplateQuestionViewModel> QuestionsWithDeleted => Entity.Questions
-            .Select(
-                templateQuestion => _templateQuestionViewModelFactory?.CreateViewModel(templateQuestion))
-            .ToList();
+
+        
+//        public ICollection<TemplateQuestionViewModel> Questions
+//        {
+//            get { return QuestionsWithDeleted.Where(model => !model.IsDeleted).ToList(); }
+//            set
+//            {
+//                Entity.Questions = value.Select(templateQuestionViewModel => templateQuestionViewModel.Entity).ToList();
+//                RaisePropertyChanged();
+//            }
+//        }
+//
+//        private IEnumerable<TemplateQuestionViewModel> QuestionsWithDeleted => Entity.Questions
+//            .Select(
+//                templateQuestion => _templateQuestionViewModelFactory?.CreateViewModel(templateQuestion))
+//            .ToList();
 
         public TemplateQuestionViewModel SelectedQuestion
         {
@@ -85,7 +121,7 @@ namespace Festispec.ViewModels.Template
             try
             {
                 Domain.Template updated;
-                var questionsToUpdate = QuestionsWithDeleted;
+                var questionsToUpdate = Questions;
                 using (var templateRepository = RepositoryFactory.CreateRepository())
                 {
                     updated = Id == 0

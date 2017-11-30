@@ -6,6 +6,7 @@ using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.NavigationService;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels.Template
 {
@@ -56,6 +57,13 @@ namespace Festispec.ViewModels.Template
                 EntityViewModel.Template = TemplateViewModel.Entity;
                 EntityViewModel.Template_Id = TemplateViewModel.Id;
             }
+        }
+
+        public override void Cancel()
+        {
+            EntityViewModel.MapValuesFromOriginal();
+
+            GoBack();
         }
 
         public override void Save()
