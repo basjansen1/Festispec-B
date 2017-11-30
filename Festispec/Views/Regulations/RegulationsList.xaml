@@ -21,6 +21,7 @@
 
             <Button Grid.Column="1" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToRegulationsAddCommand}" />
             <Button Grid.Column="2" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToRegulationsUpdateCommand}" />
+            <Button Grid.Column="3" Content="Verwijder" Margin="5px 10px" Command="{Binding RegulationsDeleteCommand}" />
         </Grid>
 
         <Grid Grid.Row="1">
@@ -40,8 +41,8 @@
                 <TextBox Text="{Binding SearchName}"></TextBox>
             </DockPanel>
             <DockPanel Grid.Row="0" Grid.Column="1">
-                <Label>Zoek op beschrijving</Label>
-                <TextBox Text="{Binding SearchDescription}"></TextBox>
+                <Label>Zoek op gemeente</Label>
+                <TextBox Text="{Binding SearchMunicipality}"></TextBox>
             </DockPanel>
             <Button Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand}">Zoek</Button>
 

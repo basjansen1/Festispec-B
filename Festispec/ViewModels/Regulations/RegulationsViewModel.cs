@@ -93,6 +93,7 @@ namespace Festispec.ViewModels.Regulations
             return new Domain.Regulation
             {
                 Id = Id,
+                Description = Description,
                 Municipality = Municipality,
                 Name = Name
             };

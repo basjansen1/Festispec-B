@@ -66,14 +66,21 @@ namespace Festispec.ViewModels.Regulations
         {
             using (var RegulationsRepository = _regulationsRepositoryFactory.CreateRepository())
             {
+                var query = RegulationsRepository.Get();
+
+                if (!string.IsNullOrWhiteSpace(SearchName))
+                {
+                    query = query.Where(regulation => regulation.Name.Contains(SearchName));
+                }
+                if (!string.IsNullOrWhiteSpace(SearchMunicipality))
+                {
+                    query = query.Where(regulation => regulation.Municipality.Contains(SearchMunicipality));
+                }
+
                 Regulations =
                     new ObservableCollection<RegulationsViewModel>(
-                        RegulationsRepository.Get()
-                            .Where(Regulation =>
-                                Regulation.Name.Contains(SearchName)
-                                && Regulation.Municipality.Contains(SearchMunicipality))
-                            .ToList()
-                            .Select(Regulation => _regulationsViewModelFactory.CreateViewModel(Regulation)));
+                        query.ToList()
+                            .Select(regulation => _regulationsViewModelFactory.CreateViewModel(regulation)));
                 RaisePropertyChanged(nameof(Regulations));
             }
         }
