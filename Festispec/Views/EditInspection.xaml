@@ -37,11 +37,11 @@
             <Label x:Name="lblPhone" Content="Tel nr:" Grid.Column="0" Grid.Row="3"/>
             <Label x:Name="lblStatus" Content="Status:" Grid.Column="0" Grid.Row="9"/>
 
-            <ComboBox x:Name="cbCustomer" Grid.Column="1" Grid.Row="0" Text="{Binding Customer.FirstName}"/>
+            <ComboBox x:Name="cbCustomer" Grid.Column="1" Grid.Row="0" ItemsSource="{Binding CustomerNamesList}" SelectedItem="{Binding Name}" IsReadOnly="True"/>
             <TextBox x:Name="txtKvk" TextWrapping="Wrap" IsEnabled="False" Grid.Column="1" Grid.Row="1" Text="{Binding Customer.KVK}"/>
             <TextBox x:Name="txtEmail" TextWrapping="Wrap" IsEnabled="False" Grid.Column="1"  Grid.Row="2" Text="{Binding Customer.Email}"/>
             <TextBox x:Name="txtPhone" TextWrapping="Wrap" IsEnabled="False" Grid.Column="1" Grid.Row="3" Text="{Binding Customer.Telephone}"/>
-            <ComboBox x:Name="cbStatus" Grid.Column="1" Grid.Row="9" Text="{Binding InspectionList.SelectedInspection.Status}"/>
+            <ComboBox x:Name="cbStatus" Grid.Column="1" Grid.Row="9" ItemsSource="{Binding InspectionList.SelectedInspection.Status}" SelectedItem="{Binding Status}" DisplayMemberPath=""/>
 
             <Label x:Name="lblInspection" Content="Naam inspectie:" Grid.Column="2" Grid.Row="0"/>
             <Label x:Name="lblWebsite" Content="Website:" Grid.Column="2" Grid.Row="1"/>
@@ -56,8 +56,8 @@
 
             <TextBox x:Name="txtInspection" TextWrapping="Wrap" Grid.Column="3" Grid.Row="0" Text="{Binding InspectionList.SelectedInspection.Name}"/>
             <TextBox x:Name="txtWebsite" TextWrapping="Wrap" Grid.Column="3" Grid.Row="1" Text="{Binding InspectionList.SelectedInspection.Website}"/>
-            <DatePicker x:Name="dpStartDate" FirstDayOfWeek="Monday" Cursor="Hand" Grid.Column="3" Grid.Row="2" Text="{Binding InspectionList.SelectedInspection.StartDate}"/>
-            <DatePicker x:Name="dpEndDate" FirstDayOfWeek="Monday" Cursor="Hand" Grid.Column="3" Grid.Row="3" Text="{Binding InspectionList.SelectedInspection.EndDate}"/>
+            <DatePicker x:Name="dpStartDate" FirstDayOfWeek="Monday" Cursor="Hand" Grid.Column="3" Grid.Row="2" SelectedDate="{Binding InspectionList.SelectedInspection.StartDate}"/>
+            <DatePicker x:Name="dpEndDate" FirstDayOfWeek="Monday" Cursor="Hand" Grid.Column="3" Grid.Row="3" SelectedDate="{Binding InspectionList.SelectedInspection.EndDate}"/>
             <TextBox x:Name="txtStreetname" TextWrapping="Wrap" Grid.Column="3" Grid.Row="4" Text="{Binding InspectionList.SelectedInspection.Street}"/>
             <TextBox x:Name="txtPostalCode" TextWrapping="Wrap" Grid.Column="3" Grid.Row="5" Text="{Binding InspectionList.SelectedInspection.PostalCode}"/>
             <TextBox x:Name="txtHousenumber" TextWrapping="Wrap" Grid.Column="3" Grid.Row="6" Text="{Binding InspectionList.SelectedInspection.HouseNumber}"/>
@@ -71,8 +71,8 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="txtCancel" Content="Cancel" IsCancel="True" Grid.Column="1"/>
-            <Button x:Name="btnConfirmEdit" Content="Verzoek aanpassen" Grid.Column="2"/>
+            <Button x:Name="txtCancel" Content="Cancel" IsCancel="True" Grid.Column="1" Command="{Binding CancelInspectionCommand}"/>
+            <Button x:Name="btnConfirmEdit" Content="Verzoek aanpassen" Grid.Column="2" Command="{Binding EditInspectionCommand}"/>
         </Grid>
     </Grid>
 </Page>
