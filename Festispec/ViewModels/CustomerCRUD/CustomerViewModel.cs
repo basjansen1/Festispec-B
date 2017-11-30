@@ -239,6 +239,7 @@ namespace Festispec.ViewModels.Customer
                     return false;
                 }
             }
+            RaisePropertyChanged();
             return true;
         }
 
@@ -246,6 +247,7 @@ namespace Festispec.ViewModels.Customer
         {
             using (var CustomerRepository = RepositoryFactory.CreateRepository())
             {
+                RaisePropertyChanged();
                 return CustomerRepository.Delete(Entity) != 0;
             }
         }

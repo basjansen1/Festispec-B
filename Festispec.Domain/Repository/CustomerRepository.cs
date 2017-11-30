@@ -30,7 +30,6 @@ namespace Festispec.Domain.Repository
 
         private Customer CleanRelations(Customer entity)
         {
-            
           return entity;
         }
     }

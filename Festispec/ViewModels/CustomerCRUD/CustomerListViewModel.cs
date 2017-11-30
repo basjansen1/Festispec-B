@@ -49,24 +49,22 @@ namespace Festispec.ViewModels.CustomerCRUD
 
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName != "CurrentPageKey") return;
+            LoadCustomers();
+
+            if (args.PropertyName != nameof(NavigationService.CurrentRoute)) return;
 
             if (NavigationService.CurrentRoute != Routes.Routes.CustomerList) return;
 
-            LoadCustomers();
-
-            NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
         }
-
 
 
         private void RegisterCommands()
         {
+            LoadCustomers();
             NavigateToCustomerAddCommand =
                 new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate));
             NavigateToCustomerUpdateCommand = new RelayCommand(
-                () => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate, SelectedCustomer),
-                () => SelectedCustomer != null);
+                () => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate, SelectedCustomer));
             SearchCommand = new RelayCommand(LoadCustomers);
         }
 

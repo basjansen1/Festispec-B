@@ -15,11 +15,12 @@ namespace Festispec.ViewModels.CustomerCRUD
             ICustomerViewModelFactory CustomerViewModelFactory)
             : base(navigationService, repositoryFactory, CustomerViewModelFactory)
         {
-            
+            RaisePropertyChanged();
         }
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
+            RaisePropertyChanged();
             if (args.PropertyName != "CurrentRoute") return;
 
             if (NavigationService.CurrentRoute != Routes.Routes.CustomerAddOrUpdate) return;
@@ -31,7 +32,7 @@ namespace Festispec.ViewModels.CustomerCRUD
         {
             // TODO: Validation
             var saved = EntityViewModel.Save();
-
+            RaisePropertyChanged();
             if (saved) NavigationService.GoBack(EntityViewModel);
         }
     }
