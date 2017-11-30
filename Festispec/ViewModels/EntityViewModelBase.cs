@@ -48,6 +48,7 @@ namespace Festispec.ViewModels
 
         public virtual void MapValues(TEntity from, TEntity to)
         {
+            // TODO: Slow. Use manual mapping instead
             // Get all the properties of the entity
             var properties = typeof(TEntity).GetProperties();
             foreach (var property in properties)

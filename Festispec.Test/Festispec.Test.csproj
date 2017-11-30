@@ -108,6 +108,7 @@
     <Compile Include="DummyRepository\DummyTemplateQuestionRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DummyRepository\DummyTemplateRepository.cs" />
+    <Compile Include="TemplateAddOrUpdateUnitTest.cs" />
     <Compile Include="TemplateListUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>

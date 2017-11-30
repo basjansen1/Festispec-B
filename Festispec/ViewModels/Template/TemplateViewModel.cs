@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
-using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
@@ -14,16 +12,13 @@ namespace Festispec.ViewModels.Template
     public class
         TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, ITemplateRepository, Domain.Template>
     {
-        private readonly ITemplateQuestionViewModelFactory _templateQuestionViewModelFactory;
-
         private TemplateQuestionViewModel _selectedQuestion;
 
         public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory,
             ITemplateQuestionViewModelFactory templateQuestionViewModelFactory) : base(repositoryFactory)
         {
-            _templateQuestionViewModelFactory = templateQuestionViewModelFactory;
-
-            Questions = new ObservableCollection<TemplateQuestionViewModel>(Entity.Questions.Select(question => _templateQuestionViewModelFactory.CreateViewModel(question)));
+            Questions = new ObservableCollection<TemplateQuestionViewModel>(
+                Entity.Questions.Select(templateQuestionViewModelFactory.CreateViewModel));
             Questions.CollectionChanged += QuestionsOnCollectionChanged;
         }
 
@@ -31,24 +26,9 @@ namespace Festispec.ViewModels.Template
             ITemplateQuestionViewModelFactory templateQuestionViewModelFactory, Domain.Template entity)
             : base(repositoryFactory, entity)
         {
-            _templateQuestionViewModelFactory = templateQuestionViewModelFactory;
-
-            Questions = new ObservableCollection<TemplateQuestionViewModel>(Entity.Questions.Select(question => _templateQuestionViewModelFactory.CreateViewModel(question)));
+            Questions = new ObservableCollection<TemplateQuestionViewModel>(
+                Entity.Questions.Select(templateQuestionViewModelFactory.CreateViewModel));
             Questions.CollectionChanged += QuestionsOnCollectionChanged;
-        }
-
-        private void QuestionsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
-        {
-            switch (notifyCollectionChangedEventArgs.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Entity.Questions.Add(((TemplateQuestionViewModel) notifyCollectionChangedEventArgs.NewItems[0]).Entity);
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Entity.Questions.Remove(((TemplateQuestionViewModel)notifyCollectionChangedEventArgs.OldItems[0]).Entity);
-                    break;
-            }
-//            RaisePropertyChanged(nameof(Entity.Questions));
         }
 
         public int Id => Entity.Id;
@@ -56,10 +36,7 @@ namespace Festispec.ViewModels.Template
 
         public string Name
         {
-            get
-            {
-                return Entity.Name;
-            }
+            get { return Entity.Name; }
             set
             {
                 Entity.Name = value;
@@ -79,32 +56,6 @@ namespace Festispec.ViewModels.Template
         }
 
         public ObservableCollection<TemplateQuestionViewModel> Questions { get; }
-//        public ICollection<TemplateQuestionViewModel> Questions
-//        {
-//            get { return Entity.Questions.Select(question => _templateQuestionViewModelFactory?.CreateViewModel(question)).ToList(); }
-//            set
-//            {
-//                Entity.Questions = value.Select(model => model.Entity).ToList();
-//                RaisePropertyChanged();
-//            }
-//        }
-
-
-        
-//        public ICollection<TemplateQuestionViewModel> Questions
-//        {
-//            get { return QuestionsWithDeleted.Where(model => !model.IsDeleted).ToList(); }
-//            set
-//            {
-//                Entity.Questions = value.Select(templateQuestionViewModel => templateQuestionViewModel.Entity).ToList();
-//                RaisePropertyChanged();
-//            }
-//        }
-//
-//        private IEnumerable<TemplateQuestionViewModel> QuestionsWithDeleted => Entity.Questions
-//            .Select(
-//                templateQuestion => _templateQuestionViewModelFactory?.CreateViewModel(templateQuestion))
-//            .ToList();
 
         public TemplateQuestionViewModel SelectedQuestion
         {
@@ -113,6 +64,22 @@ namespace Festispec.ViewModels.Template
             {
                 _selectedQuestion = value;
                 RaisePropertyChanged();
+            }
+        }
+
+        private void QuestionsOnCollectionChanged(object sender,
+            NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            switch (notifyCollectionChangedEventArgs.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    Entity.Questions.Add(((TemplateQuestionViewModel) notifyCollectionChangedEventArgs.NewItems[0])
+                        .Entity);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    Entity.Questions.Remove(((TemplateQuestionViewModel) notifyCollectionChangedEventArgs.OldItems[0])
+                        .Entity);
+                    break;
             }
         }
 
@@ -141,9 +108,11 @@ namespace Festispec.ViewModels.Template
                     templateQuestionViewModel.Save();
                 }
             }
-            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            catch (DbEntityValidationException ex)
             {
-                var errorList = (from eve in ex.EntityValidationErrors from ve in eve.ValidationErrors select ve.PropertyName).ToList();
+                var errorList = (from eve in ex.EntityValidationErrors
+                    from ve in eve.ValidationErrors
+                    select ve.PropertyName).ToList();
                 var joined = string.Join(", ", errorList.Select(x => x));
                 MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
                 return false;

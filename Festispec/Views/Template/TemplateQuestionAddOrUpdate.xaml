@@ -14,7 +14,6 @@
         <ComboBox ItemsSource="{Binding Path=QuestionTypes}"
                   DisplayMemberPath="Type"
                   SelectedValuePath="Type"
-                  SelectedIndex="0"
                   SelectedValue="{Binding Path=EntityViewModel.QuestionType_Type}" />
 
         <Grid Height="50">

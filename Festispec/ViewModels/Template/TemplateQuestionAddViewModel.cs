@@ -27,13 +27,10 @@ namespace Festispec.ViewModels.Template
         public override void Save()
         {
             //TODO: Validation
-
-            // Overwrite the original values with the new entity values
-            EntityViewModel.MapValuesToOriginal();
             
             TemplateViewModel.Questions.Add(EntityViewModel);
 
-            GoBack();
+            base.Save();
         }
     }
 }

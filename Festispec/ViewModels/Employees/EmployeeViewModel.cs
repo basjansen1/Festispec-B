@@ -102,7 +102,7 @@ namespace Festispec.ViewModels.Employee
             get { return Entity.LastName; }
             set
             {
-                Entity.IBAN = value;
+                Entity.LastName = value;
                 RaisePropertyChanged();
             }
         }

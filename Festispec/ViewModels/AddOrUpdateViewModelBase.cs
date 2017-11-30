@@ -45,9 +45,9 @@ namespace Festispec.ViewModels
         {
             // TODO: Validation
 
-            EntityViewModel.Save();
+            var saved = EntityViewModel.Save();
 
-            GoBack(EntityViewModel);
+            if (saved) GoBack(EntityViewModel);
         }
 
         public virtual void Cancel()
@@ -72,10 +72,7 @@ namespace Festispec.ViewModels
         protected virtual void UpdateEntityViewModelFromNavigationParameter()
         {
             var entityViewModel = NavigationService.Parameter as TEntityViewModel;
-            // Create copy or new instance of TEntityViewModel
-            //            EntityViewModel = entityViewModel != null
-            //                ? ViewModelFactory.CreateViewModel(entityViewModel.Entity)
-            //                : ViewModelFactory.CreateViewModel();
+
             EntityViewModel = entityViewModel ?? ViewModelFactory.CreateViewModel();
         }
     }
