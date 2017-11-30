@@ -1,4 +1,7 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using System.Data.Entity.Spatial;
+using System.Linq;
 using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository
@@ -37,6 +40,13 @@ namespace Festispec.Domain.Repository
             }
 
             return entity;
+        }
+
+        public IQueryable<Inspector> GetAvailableNearby(DateTime dateAvailable, DbGeography center, double radius = 500)
+        {
+            return Get().Where(inspector => !inspector.Schedule.Any(schedule =>
+                schedule.NotAvailableFrom > dateAvailable && schedule.NotAvailableTo < dateAvailable))
+                .OrderBy(inspector => inspector.Location.Distance(center) < radius);
         }
     }
 }
