@@ -47,6 +47,8 @@ namespace Festispec.ViewModels.Employees
             _navigationService = navigationService;
             NewInspection = new InspectionVM();
             NewInspection.Status = "Pending";
+            NewInspection.StartDate = new DateTime(2017, 01, 12);
+            NewInspection.EndDate = new DateTime(2017, 01, 12);
 
             NewInspection.Location = DbGeography.PointFromText("POINT(50 5)", 4326);
             CustomerList = new List<CustomerVM>();
