@@ -20,9 +20,10 @@ namespace Festispec.ViewModels.Employees
     // The view variables and view methods will be implemented when the views are created
     public class InspectionListVM : ViewModelBase
     {
-        // getters and setters
+        #region properties
         public ObservableCollection<InspectionVM> InspectionVMList { get; set; }
-
+        public string SearchInput { get; set; }
+        public IInspectionRepositoryFactory InspectionRepositoryFactory;
 
         public InspectionVM SelectedInspection
         {
@@ -37,32 +38,29 @@ namespace Festispec.ViewModels.Employees
             }
         }
 
-        public IInspectionRepositoryFactory InspectionRepositoryFactory;
-        private List<InspectionVM> _inspectionList;
-        public string SearchInput { get; set; }
-        private readonly INavigationService _navigationService;
+        #endregion
 
-        // Commands
+        #region Commands
         public ICommand ShowAddInspectionWindowCommand { get; set; }
         public ICommand ShowEditInspectionWindowCommand { get; set; }
         public ICommand ShowProcessInspectionWindowCommand { get; set; }
         public ICommand DeleteInspectionCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand DeleteSearchCommand { get; set; }
+        #endregion
 
-
-        // fields
+        #region fields
         private InspectionVM _selectedInspection;
-
-        private AddInspection _addInspectionView;
-        private EditInspection _editInspectionView;
-        private ProcessInspection _processInspectionView;
+        private List<InspectionVM> _inspectionList;
+        private readonly INavigationService _navigationService;
+        #endregion
 
         // constructor
         public InspectionListVM(IInspectionRepositoryFactory inspectionRepositoryFactory, INavigationService navigationService)
         {
             InspectionRepositoryFactory = inspectionRepositoryFactory;
             _navigationService = navigationService;
+            _inspectionList = new List<InspectionVM>();
 
             // instantiate commands 
             ShowAddInspectionWindowCommand = new RelayCommand(ShowAddInspectionWindow);
@@ -71,17 +69,15 @@ namespace Festispec.ViewModels.Employees
             DeleteInspectionCommand = new RelayCommand(DeleteSelectedInspection);
             SearchCommand = new RelayCommand(Search);
             DeleteSearchCommand = new RelayCommand(DeleteFilter);
-            _inspectionList = new List<InspectionVM>();
 
             // instantiate views   
             using (var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
                  InspectionVMList = new ObservableCollection<InspectionVM>(inspectionRepository.Get().ToList().Select(i => new InspectionVM(i)));
             }            
-
         }
 
-        // methods
+        #region methods
         public void ShowAddInspectionWindow()
         {
             _navigationService.NavigateTo(Routes.Routes.AddInspection);
@@ -126,5 +122,6 @@ namespace Festispec.ViewModels.Employees
                 inspectionRepository.Get().ToList().ForEach(i => InspectionVMList.Add(new InspectionVM(i)));
             }
         }
+        #endregion
     }
 }

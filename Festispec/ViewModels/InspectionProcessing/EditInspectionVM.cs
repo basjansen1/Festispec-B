@@ -1,5 +1,8 @@
 ﻿using Festispec.Domain;
+using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
+using Festispec.NavigationService;
+using Festispec.ViewModels.InspectionProcessing;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
@@ -13,18 +16,23 @@ namespace Festispec.ViewModels.Employees
 {
     public class EditInspectionVM : ViewModelBase
     {
-        public InspectionListVM InspectionList { get; set; }
         public ICommand EditInspectionCommand { get; set; }
 
-        private IRepository<Inspection> _inspectionRepository;
+        public InspectionListVM InspectionList { get; set; }
+        public Customer Customer { get; set; }
 
-        public EditInspectionVM(InspectionVM InspectionVM)
+        private INavigationService _navigationService;
+
+        public EditInspectionVM(InspectionListVM inspectionList, INavigationService navigationService)
         {
+            InspectionList = inspectionList;
+            _navigationService = navigationService;
+            Customer = inspectionList.SelectedInspection.Customer;
         }
 
         public bool CanEditInspection()
         {
-            if (InspectionList.SelectedInspection.Name != null && InspectionList.SelectedInspection.StartDate != null
+            if (InspectionList.SelectedInspection.Name != null && InspectionList. SelectedInspection.StartDate != null
                  && InspectionList.SelectedInspection.EndDate != null)
                 return true;
 
@@ -37,7 +45,8 @@ namespace Festispec.ViewModels.Employees
             {
                 using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
                 {
-                    inspectionRepository.Add(InspectionList.SelectedInspection.toModel());
+                    Inspection inspection = InspectionList.SelectedInspection.toModel();
+                    inspectionRepository.Update(inspection);
                 }
             }
             else
