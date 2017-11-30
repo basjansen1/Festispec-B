@@ -33,7 +33,10 @@ namespace Festispec.ViewModels.Template
 
         public string Name
         {
-            get { return Entity.Name; }
+            get
+            {
+                return Entity.Name;
+            }
             set
             {
                 Entity.Name = value;

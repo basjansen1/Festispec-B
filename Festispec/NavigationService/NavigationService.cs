@@ -12,7 +12,7 @@ using Festispec.State;
 
 namespace Festispec.NavigationService
 {
-    internal class NavigationService : INavigationService, INotifyPropertyChanged
+    public class NavigationService : INavigationService, INotifyPropertyChanged
     {
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

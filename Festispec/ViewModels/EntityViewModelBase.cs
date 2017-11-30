@@ -16,6 +16,7 @@ namespace Festispec.ViewModels
         protected EntityViewModelBase(TRepositoryFactory repositoryFactory)
         {
             RepositoryFactory = repositoryFactory;
+            OriginalValues = new TEntity();
             Entity = new TEntity();
 
             MapValuesToOriginal();
@@ -24,6 +25,7 @@ namespace Festispec.ViewModels
         protected EntityViewModelBase(TRepositoryFactory repositoryFactory, TEntity entity)
         {
             RepositoryFactory = repositoryFactory;
+            OriginalValues = new TEntity();
             Entity = entity;
 
             MapValuesToOriginal();
@@ -49,7 +51,7 @@ namespace Festispec.ViewModels
             foreach (var property in properties)
             {
                 // Map all the values
-                property.SetValue(from, to.GetType().GetProperty(property.Name)?.GetValue(to, null));
+                property.SetValue(to, to.GetType().GetProperty(property.Name)?.GetValue(from, null));
             }
         }
 
