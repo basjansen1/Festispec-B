@@ -37,11 +37,11 @@
             <Label x:Name="lblPhone" Content="Tel nr:" Grid.Column="0" Grid.Row="3"/>
             <Label x:Name="lblStatus" Content="Status:" Grid.Column="0" Grid.Row="9"/>
 
-            <ComboBox x:Name="cbCustomer" Grid.Column="1" Grid.Row="0"/>
-            <TextBox x:Name="txtKvk" TextWrapping="Wrap" IsEnabled="False" Grid.Column="1" Grid.Row="1"/>
-            <TextBox x:Name="txtEmail" TextWrapping="Wrap" IsEnabled="False" Grid.Column="1" Grid.Row="2"/>
-            <TextBox x:Name="txtPhone" TextWrapping="Wrap" IsEnabled="False" Grid.Column="1" Grid.Row="3"/>
-            <ComboBox x:Name="cbStatus" Grid.Column="1" Grid.Row="9"/>
+            <ComboBox x:Name="cbCustomer" Grid.Column="1" Grid.Row="0" Text="{Binding Customer.FirstName}"/>
+            <TextBox x:Name="txtKvk" TextWrapping="Wrap" IsEnabled="False" Grid.Column="1" Grid.Row="1" Text="{Binding Customer.KVK}"/>
+            <TextBox x:Name="txtEmail" TextWrapping="Wrap" IsEnabled="False" Grid.Column="1"  Grid.Row="2" Text="{Binding Customer.Email}"/>
+            <TextBox x:Name="txtPhone" TextWrapping="Wrap" IsEnabled="False" Grid.Column="1" Grid.Row="3" Text="{Binding Customer.Telephone}"/>
+            <ComboBox x:Name="cbStatus" Grid.Column="1" Grid.Row="9" Text="{Binding InspectionList.SelectedInspection.Status}"/>
 
             <Label x:Name="lblInspection" Content="Naam inspectie:" Grid.Column="2" Grid.Row="0"/>
             <Label x:Name="lblWebsite" Content="Website:" Grid.Column="2" Grid.Row="1"/>
@@ -54,15 +54,16 @@
             <Label x:Name="lblCountry" Content="Land:" Grid.Column="2" Grid.Row="8"/>
             <Label x:Name="lblMunicipality" Content="Gemeente:" Grid.Column="2" Grid.Row="9"/>
 
-            <DatePicker x:Name="dpStartDate" FirstDayOfWeek="Monday" Cursor="Hand" Grid.Column="3" Grid.Row="0"/>
-            <TextBox x:Name="txtInspection" TextWrapping="Wrap" Grid.Column="3" Grid.Row="2"/>
-            <TextBox x:Name="txtWebsite" TextWrapping="Wrap" Grid.Column="3" Grid.Row="3"/>
-            <DatePicker x:Name="dpEndDate" FirstDayOfWeek="Monday" Cursor="Hand" Grid.Column="3" Grid.Row="4"/>
-            <TextBox x:Name="txtStreetname" TextWrapping="Wrap" Grid.Column="3" Grid.Row="5"/>
-            <TextBox x:Name="txtPostalCode" TextWrapping="Wrap" Grid.Column="3" Grid.Row="6"/>
-            <TextBox x:Name="txtHousenumber" TextWrapping="Wrap" Grid.Column="3" Grid.Row="7"/>
-            <TextBox x:Name="txtCity" TextWrapping="Wrap" Grid.Column="3" Grid.Row="8"/>
-            <TextBox x:Name="txtCountry" TextWrapping="Wrap" Grid.Column="3" Grid.Row="9"/>
+            <TextBox x:Name="txtInspection" TextWrapping="Wrap" Grid.Column="3" Grid.Row="0" Text="{Binding InspectionList.SelectedInspection.Name}"/>
+            <TextBox x:Name="txtWebsite" TextWrapping="Wrap" Grid.Column="3" Grid.Row="1" Text="{Binding InspectionList.SelectedInspection.Website}"/>
+            <DatePicker x:Name="dpStartDate" FirstDayOfWeek="Monday" Cursor="Hand" Grid.Column="3" Grid.Row="2" Text="{Binding InspectionList.SelectedInspection.StartDate}"/>
+            <DatePicker x:Name="dpEndDate" FirstDayOfWeek="Monday" Cursor="Hand" Grid.Column="3" Grid.Row="3" Text="{Binding InspectionList.SelectedInspection.EndDate}"/>
+            <TextBox x:Name="txtStreetname" TextWrapping="Wrap" Grid.Column="3" Grid.Row="4" Text="{Binding InspectionList.SelectedInspection.Street}"/>
+            <TextBox x:Name="txtPostalCode" TextWrapping="Wrap" Grid.Column="3" Grid.Row="5" Text="{Binding InspectionList.SelectedInspection.PostalCode}"/>
+            <TextBox x:Name="txtHousenumber" TextWrapping="Wrap" Grid.Column="3" Grid.Row="6" Text="{Binding InspectionList.SelectedInspection.HouseNumber}"/>
+            <TextBox x:Name="txtCity" TextWrapping="Wrap" Grid.Column="3" Grid.Row="7" Text="{Binding InspectionList.SelectedInspection.City}"/>
+            <TextBox x:Name="txtCountry" TextWrapping="Wrap" Grid.Column="3" Grid.Row="8" Text="{Binding InspectionList.SelectedInspection.Country}"/>
+            <TextBox x:Name="txtMunicapility" TextWrapping="Wrap" Grid.Column="3" Grid.Row="9" Text="{Binding InspectionList.SelectedInspection.Municipality}"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
