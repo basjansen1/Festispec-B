@@ -111,7 +111,7 @@ namespace Festispec.ViewModels.Employees
                 _inspectionList.Clear();
                 InspectionVMList.ToList().ForEach(n => _inspectionList.Add(n));
                 InspectionVMList.Clear();
-                _inspectionList.Where(i => i.Name.StartsWith(SearchInput)).ToList().ForEach(i => InspectionVMList.Add(i));
+                _inspectionList.Where(i => i.Name.ToLower().Contains(SearchInput.ToLower())).ToList().ForEach(i => InspectionVMList.Add(i));
             }
         }
         private void DeleteFilter()

@@ -24,35 +24,8 @@ namespace Festispec.ViewModels.Employees
 
         #region properties
         public InspectionListVM InspectionList { get; set; }
-        public List<CustomerVM> CustomerList { get; set; }
-        public Customer Customer { get; set; }
-        public List<string> CustomerNamesList { get; set; }
-
-        public string Name
-        {
-            get
-            {
-                return Customer.Name;
-            }
-            set
-            {
-                Customer.Name = value;
-                RaisePropertyChanged("CustomerName");
-            }
-        }
-
-        public string Status
-        {
-            get
-            {
-                return InspectionList.SelectedInspection.Status;
-            }
-            set
-            {
-                InspectionList.SelectedInspection.Status = value;
-                RaisePropertyChanged("Status");
-            }
-        }
+        public List<string> InspectionStatusList { get; set; }
+        public string SelectedInspection { get; set; }
         #endregion
 
         #region fields
@@ -60,23 +33,17 @@ namespace Festispec.ViewModels.Employees
         #endregion
 
         #region constructor and methods
-        public EditInspectionVM(InspectionListVM inspectionList, INavigationService navigationService, ICustomerRepositoryFactory customerRepositoryFactory)
+        public EditInspectionVM(InspectionListVM inspectionList, INavigationService navigationService)
         {
             InspectionList = inspectionList;
             _navigationService = navigationService;
-            Customer = inspectionList.SelectedInspection.Customer;
-            CustomerList = new List<CustomerVM>();
-            CustomerNamesList = new List<string>();
 
             EditInspectionCommand = new RelayCommand(SaveChanges);
             CancelInspectionCommand = new RelayCommand(_navigationService.GoBack);
-
-            using (var customerRepository = customerRepositoryFactory.CreateRepository())
-            {
-                customerRepository.Get().ToList().ForEach(c => CustomerList.Add(new CustomerVM(c)));
-            }
-
-            CustomerList.ForEach(c => CustomerNamesList.Add(c.Name));
+            InspectionStatusList = new List<string>();
+            InspectionStatusList.Add("Accepted");
+            InspectionStatusList.Add("Declined");
+            InspectionStatusList.Add("Pending");
         }
 
         public bool CanEditInspection()
@@ -96,6 +63,7 @@ namespace Festispec.ViewModels.Employees
         {
             if (CanEditInspection())
             {
+           //     InspectionList.SelectedInspection.Status = new InspectionStatus() { Status = SelectedInspection };
                 using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
                 {
                     Inspection inspection = InspectionList.SelectedInspection.toModel();
