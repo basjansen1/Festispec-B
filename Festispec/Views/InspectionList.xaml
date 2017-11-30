@@ -102,7 +102,7 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="addInspection" Content="Voeg een inspectie toe" Command="{Binding ShowAddInspectionWindowCommand}" Grid.Column="0"/>
-            <Button x:Name="btnManage" Content="Beheer inspectie" Grid.Column="2"/>
+            <Button x:Name="btnManage" Content="Beheer inspectie" Command="{Binding ShowEditInspectionWindowCommand}" Grid.Column="2"/>
         </Grid>
 
     </Grid>

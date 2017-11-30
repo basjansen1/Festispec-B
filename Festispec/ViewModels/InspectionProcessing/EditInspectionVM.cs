@@ -1,5 +1,7 @@
 ﻿using Festispec.Domain;
+using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
+using Festispec.NavigationService;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
@@ -13,19 +15,21 @@ namespace Festispec.ViewModels.Employees
 {
     public class EditInspectionVM : ViewModelBase
     {
-        public InspectionListVM InspectionList { get; set; }
         public ICommand EditInspectionCommand { get; set; }
 
-        private IRepository<Inspection> _inspectionRepository;
+        private InspectionListVM _inspectionList { get; set; }
+        private INavigationService _navigationService;
 
-        public EditInspectionVM(InspectionVM InspectionVM)
+        public EditInspectionVM(InspectionListVM inspectionList, INavigationService navigationService)
         {
+            _inspectionList = inspectionList;
+            _navigationService = navigationService;
         }
 
         public bool CanEditInspection()
         {
-            if (InspectionList.SelectedInspection.Name != null && InspectionList.SelectedInspection.StartDate != null
-                 && InspectionList.SelectedInspection.EndDate != null)
+            if (_inspectionList.SelectedInspection.Name != null && _inspectionList. SelectedInspection.StartDate != null
+                 && _inspectionList.SelectedInspection.EndDate != null)
                 return true;
 
             return false;
@@ -35,9 +39,10 @@ namespace Festispec.ViewModels.Employees
         {
             if (CanEditInspection())
             {
-                using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
+                using (var inspectionRepository = _inspectionList.InspectionRepositoryFactory.CreateRepository())
                 {
-                    inspectionRepository.Add(InspectionList.SelectedInspection.toModel());
+                    Inspection inspection = _inspectionList.SelectedInspection.toModel();
+                    inspectionRepository.Update(inspection);
                 }
             }
             else
