@@ -8,7 +8,7 @@ using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Test.DummyRepository
 {
-    internal class DummyTemplateQuestionRepository : ITemplateQuestionRepository
+    public class DummyTemplateQuestionRepository : ITemplateQuestionRepository
     {
         public void Dispose()
         {

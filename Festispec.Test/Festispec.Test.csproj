@@ -105,10 +105,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DummyRepository\DummyEmployeeRepository.cs" />
     <Compile Include="DummyRepository\DummyTemplateQuestionRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DummyRepository\DummyTemplateRepository.cs" />
-    <Compile Include="TemplateAddOrUpdateUnitTest.cs" />
+    <Compile Include="EmployeeListUnitTest.cs" />
     <Compile Include="TemplateListUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
