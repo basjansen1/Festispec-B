@@ -26,9 +26,9 @@
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <DataGrid Grid.Row="1" Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedPlanning}" ItemsSource="{Binding Plannings}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+            <DataGrid Grid.Row="1" Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedInspector}" ItemsSource="{Binding Inspectors}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Inspector" Binding="{Binding Inspector.Name}" Width="*" />
+                    <DataGridTextColumn Header="Naam" Binding="{Binding FullName}" Width="*" />
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -42,15 +42,15 @@
 
                     <StackPanel Grid.Row="0">
                         <Label>Date</Label>
-                        <DatePicker Text="{Binding Path=Date}"/>
+                        <DatePicker Text="{Binding Path=EntityViewModel.Date}"/>
                         <Button Content="Search" Command="{Binding SearchAvailableNearbyInspectorsCommand}" Margin="0 0 0 5"></Button>
                     </StackPanel>
                     
                     <StackPanel Grid.Row="1">
                         <Label>TimeFrom</Label>
-                        <DatePicker Text="{Binding Path=TimeFrom}" Margin="0 0 0 5" />
+                        <DatePicker Text="{Binding Path=EntityViewModel.TimeFrom}" Margin="0 0 0 5" />
                         <Label>TimeTo</Label>
-                        <DatePicker Text="{Binding Path=TimeTo}" Margin="0 0 0 5" />
+                        <DatePicker Text="{Binding Path=EntityViewModel.TimeTo}" Margin="0 0 0 5" />
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Orientation="Horizontal">

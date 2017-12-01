@@ -38,6 +38,24 @@ namespace Festispec.Routes
 
         #endregion
 
+        #region Planning
+
+        public static Route PlanningList = new Route
+        {
+            Key = nameof(PlanningList),
+            PageType = new Uri("../Views/Planning/PlanningList.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+
+        public static Route PlanningAddOrUpdate = new Route
+        {
+            Key = nameof(PlanningAddOrUpdate),
+            PageType = new Uri("../Views/Planning/PlanningAddOrUpdate.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+
+        #endregion
+
         #region Employee
 
         public static Route EmployeeList = new Route

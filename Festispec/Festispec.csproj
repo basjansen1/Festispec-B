@@ -133,6 +133,11 @@
     <Compile Include="State\IState.cs" />
     <Compile Include="State\State.cs" />
     <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IPlanningViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\PlanningViewModelFactory.cs" />
+    <Compile Include="ViewModels\Planning\PlanningAddOrUpdateViewModel.cs" />
+    <Compile Include="ViewModels\Planning\PlanningListViewModel.cs" />
+    <Compile Include="ViewModels\Planning\PlanningViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateQuestionAddViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateQuestionAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeAddOrUpdateViewModel.cs" />

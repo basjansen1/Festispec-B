@@ -18,6 +18,7 @@ using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.Employee;
 using Festispec.ViewModels.Employees;
 using Festispec.ViewModels.Inspector;
+using Festispec.ViewModels.Planning;
 using Festispec.ViewModels.Template;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
@@ -49,6 +50,8 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IInspectionRepositoryFactory, InspectionRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectorRepositoryFactory, InspectorRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectorViewModelFactory, InspectorViewModelFactory>();
+            SimpleIoc.Default.Register<IPlanningRepositoryFactory, PlanningRepositoryFactory>();
+            SimpleIoc.Default.Register<IPlanningViewModelFactory, PlanningViewModelFactory>();
 
             // Register viewmodels
             SimpleIoc.Default.Register<LoginViewModel>();
@@ -59,6 +62,8 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<EmployeeListViewModel>();
             SimpleIoc.Default.Register<InspectorListViewModel>();
             SimpleIoc.Default.Register<InspectorAddOrUpdateViewModel>();
+            SimpleIoc.Default.Register<PlanningListViewModel>();
+            SimpleIoc.Default.Register<PlanningAddOrUpdateViewModel>();
         }
 
         private static void RegisterNavigationService()
@@ -73,6 +78,8 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.EmployeeList);
             navigationService.Configure(Routes.Routes.InspectorList);
             navigationService.Configure(Routes.Routes.InspectorAddOrUpdate);
+            navigationService.Configure(Routes.Routes.PlanningList);
+            navigationService.Configure(Routes.Routes.PlanningAddOrUpdate);
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }
@@ -153,6 +160,9 @@ namespace Festispec.ViewModels
 
         public InspectorAddOrUpdateViewModel InspectorAddOrUpdate =>
             ServiceLocator.Current.GetInstance<InspectorAddOrUpdateViewModel>();
+
+        public PlanningListViewModel PlanningList => ServiceLocator.Current.GetInstance<PlanningListViewModel>();
+        public PlanningAddOrUpdateViewModel PlanningAddOrUpdate => ServiceLocator.Current.GetInstance<PlanningAddOrUpdateViewModel>();
 
         #endregion
     }
