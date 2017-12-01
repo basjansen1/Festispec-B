@@ -1,0 +1,61 @@
+﻿<Window x:Class="Festispec.Views.Planning.PlanningList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mapsui="clr-namespace:Mapsui.UI.Wpf;assembly=Mapsui.UI.Wpf"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="PlanningList">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <mapsui:MapControl Name="MyMapControl">
+        </mapsui:MapControl>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid Grid.Row="1" Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedPlanning}" ItemsSource="{Binding Plannings}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Inspector" Binding="{Binding Inspector.Name}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Border Grid.Row="1" Grid.Column="1" Padding="15px">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0">
+                        <Label>Date</Label>
+                        <DatePicker Text="{Binding Path=Date}"/>
+                        <Label>TimeFrom</Label>
+                        <DatePicker Text="{Binding Path=TimeFrom}" />
+                        <Label>TimeTo</Label>
+                        <DatePicker Text="{Binding Path=TimeTo}" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Button Content="Cancel" Command="{Binding CancelEntityCommand}" Margin="0 0 10 0"></Button>
+                        <Button Content="Save" Command="{Binding SaveEntityCommand}"></Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

@@ -56,6 +56,9 @@
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Mapsui.UI.Wpf">
+      <HintPath>..\packages\Mapsui.1.1.3\lib\net45\Mapsui.UI.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
       <Private>True</Private>
@@ -137,6 +140,12 @@
     <Compile Include="ViewModels\InspectionProcessing\InspectionListVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\Planning\PlanningAddOrUpdate.xaml.cs">
+      <DependentUpon>PlanningAddOrUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Planning\PlanningList.xaml.cs">
+      <DependentUpon>PlanningList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Template\TemplateQuestionAdd.xaml.cs">
       <DependentUpon>TemplateQuestionAdd.xaml</DependentUpon>
     </Compile>
@@ -176,6 +185,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Planning\PlanningAddOrUpdate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Planning\PlanningList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Template\TemplateQuestionAdd.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
