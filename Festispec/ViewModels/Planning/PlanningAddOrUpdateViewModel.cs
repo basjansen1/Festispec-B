@@ -16,7 +16,7 @@ namespace Festispec.ViewModels.Planning
         private readonly IInspectorRepositoryFactory _inspectorRepositoryFactory;
 
         public PlanningAddOrUpdateViewModel(INavigationService navigationService,
-            IRepositoryFactory<IPlanningRepository, Domain.Planning> repositoryFactory,
+            IPlanningRepositoryFactory repositoryFactory,
             IPlanningViewModelFactory viewModelFactory, IInspectorRepositoryFactory inspectorRepositoryFactory) : base(
             navigationService, repositoryFactory, viewModelFactory)
         {
@@ -61,6 +61,11 @@ namespace Festispec.ViewModels.Planning
 
             // Raise property changed to update the UI
             RaisePropertyChanged(nameof(Inspectors));
+        }
+
+        public override void GoBack()
+        {
+            base.GoBack(EntityViewModel.InspectionId);
         }
     }
 }
