@@ -40,6 +40,7 @@ namespace Festispec.ViewModels.Employees
 
             EditInspectionCommand = new RelayCommand(SaveChanges);
             CancelInspectionCommand = new RelayCommand(_navigationService.GoBack);
+
             InspectionStatusList = new List<string>();
             InspectionStatusList.Add("Accepted");
             InspectionStatusList.Add("Declined");
@@ -48,12 +49,13 @@ namespace Festispec.ViewModels.Employees
 
         public bool CanEditInspection()
         {
-            if (InspectionList.SelectedInspection.Name != null && InspectionList.SelectedInspection.StartDate != null
-                && InspectionList.SelectedInspection.EndDate != null && InspectionList.SelectedInspection.Website != null
-                && InspectionList.SelectedInspection.Status != null && InspectionList.SelectedInspection.Street != null
-                && InspectionList.SelectedInspection.HouseNumber != null && InspectionList.SelectedInspection.PostalCode != null
-                && InspectionList.SelectedInspection.Country != null && InspectionList.SelectedInspection.City != null
-                && InspectionList.SelectedInspection.Municipality != null)
+            if (InspectionList.SelectedInspection.Name != "" && InspectionList.SelectedInspection.StartDate != null
+                && InspectionList.SelectedInspection.EndDate != null && InspectionList.SelectedInspection.Website != ""
+                && InspectionList.SelectedInspection.Status != "" && InspectionList.SelectedInspection.Street != ""
+                && InspectionList.SelectedInspection.HouseNumber != "" && InspectionList.SelectedInspection.PostalCode != ""
+                && InspectionList.SelectedInspection.Country != "" && InspectionList.SelectedInspection.City != ""
+                && InspectionList.SelectedInspection.Municipality != ""
+                && InspectionList.SelectedInspection.StartDate <= InspectionList.SelectedInspection.EndDate)
                 return true;
 
             return false;
