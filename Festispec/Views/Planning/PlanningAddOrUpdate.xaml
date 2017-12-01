@@ -6,8 +6,7 @@
       xmlns:mapsui="clr-namespace:Mapsui.UI.Wpf;assembly=Mapsui.UI.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
-      Title="PlanningList">
-
+      Title="PlanningAddOrUpdate">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -33,9 +32,10 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Border Grid.Row="1" Grid.Column="1" Padding="15px">
+            <Border Grid.Row="1" Grid.Column="1" Padding="15 10">
                 <Grid>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
                     </Grid.RowDefinitions>
@@ -43,14 +43,18 @@
                     <StackPanel Grid.Row="0">
                         <Label>Date</Label>
                         <DatePicker Text="{Binding Path=Date}"/>
+                        <Button Content="Search" Command="{Binding SearchAvailableNearbyInspectorsCommand}" Margin="0 0 0 5"></Button>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Row="1">
                         <Label>TimeFrom</Label>
-                        <DatePicker Text="{Binding Path=TimeFrom}" />
+                        <DatePicker Text="{Binding Path=TimeFrom}" Margin="0 0 0 5" />
                         <Label>TimeTo</Label>
-                        <DatePicker Text="{Binding Path=TimeTo}" />
+                        <DatePicker Text="{Binding Path=TimeTo}" Margin="0 0 0 5" />
                     </StackPanel>
 
-                    <StackPanel Grid.Row="1" Orientation="Horizontal">
-                        <Button Content="Cancel" Command="{Binding CancelEntityCommand}" Margin="0 0 10 0"></Button>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <Button Content="Cancel" Command="{Binding CancelEntityCommand}" Margin="0 0 5 0"></Button>
                         <Button Content="Save" Command="{Binding SaveEntityCommand}"></Button>
                     </StackPanel>
                 </Grid>
