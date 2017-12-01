@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Festispec.Views.Planning
 {
     /// <summary>
-    /// Interaction logic for PlanningList.xaml
+    /// Interaction logic for PlanningAddOrUpdate.xaml
     /// </summary>
-    public partial class PlanningList
+    public partial class PlanningAddOrUpdate
     {
-        public PlanningList()
+        public PlanningAddOrUpdate()
         {
             InitializeComponent();
         }

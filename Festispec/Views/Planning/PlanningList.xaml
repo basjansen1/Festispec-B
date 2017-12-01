@@ -14,8 +14,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <mapsui:MapControl Name="MyMapControl">
-        </mapsui:MapControl>
+        <mapsui:MapControl></mapsui:MapControl>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
