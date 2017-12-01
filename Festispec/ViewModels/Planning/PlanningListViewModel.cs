@@ -53,7 +53,7 @@ namespace Festispec.ViewModels.Planning
             NavigateToAddPlanningCommand =
                 new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.PlanningAddOrUpdate));
             NavigateToAddOrUpdatePlanningCommand = new RelayCommand(
-                () => NavigationService.NavigateTo(Routes.Routes.PlanningAddOrUpdate), () => SelectedPlanning != null);
+                () => NavigationService.NavigateTo(Routes.Routes.PlanningAddOrUpdate, SelectedPlanning), () => SelectedPlanning != null);
             PlanningDeleteCommand = new RelayCommand(() =>
             {
                 SelectedPlanning.Delete();
