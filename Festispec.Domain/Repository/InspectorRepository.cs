@@ -44,9 +44,13 @@ namespace Festispec.Domain.Repository
 
         public IQueryable<Inspector> GetAvailableNearby(DateTime dateAvailable, DbGeography center, double radius = 500)
         {
-            return Get().Where(inspector => !inspector.Schedule.Any(schedule =>
-                schedule.NotAvailableFrom > dateAvailable && schedule.NotAvailableTo < dateAvailable))
-                .OrderBy(inspector => inspector.Location.Distance(center) < radius);
+            return Get()
+                // Where inspector has no scheduled time off which covers the date available
+                .Where(inspector => !inspector.Schedule.Any(schedule => schedule.NotAvailableFrom > dateAvailable && schedule.NotAvailableTo < dateAvailable))
+                // Where inspector has no planning on the date available
+                .Where(inspector => inspector.Planning.Any(planning => planning.Date == dateAvailable))
+                // Order by distance to center
+                .OrderBy(inspector => inspector.Location.Distance(center));
         }
     }
 }
