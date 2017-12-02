@@ -84,12 +84,15 @@ namespace Festispec.ViewModels.Employees
             {
                 if (NewInspection.StartDate <= NewInspection.EndDate)
                 {
-                    MessageBox.Show(NewInspection.StartDate.ToString() + " en " + NewInspection.EndDate.ToString());
-                    return true;
+                    MessageBox.Show("Een inspectie kan niet eindigen voordat deze begonnen is");
+                    return false;
                 } else
                 {
-                    MessageBox.Show("Een inspectie kan niet eindigen voordat deze begonnen is");
+                    return true;
                 }
+            } else
+            {
+                MessageBox.Show("Niet alle verplichte velden zijn ingevoerd");
             }
 
             return false;
@@ -116,7 +119,7 @@ namespace Festispec.ViewModels.Employees
                     {
                         foreach (var validationError in entityValidationErrors.ValidationErrors)
                         {
-                            MessageBox.Show("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                            MessageBox.Show(validationError.PropertyName + " Error: " + validationError.ErrorMessage);
                         }
                     }
                 }
@@ -126,8 +129,6 @@ namespace Festispec.ViewModels.Employees
                 }
                 return;
             }
-
-            MessageBox.Show("Niet alle verplichte velden zijn ingevoerd");
         }
     }
 }
