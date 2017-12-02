@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Festispec.Views"
         mc:Ignorable="d"
-        Title="Inspection List" DataContext="{Binding GetInspectionList, Source={StaticResource Locator}}">        
+        Title="Inspection List" DataContext="{Binding GetInspectionList, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
@@ -13,19 +13,21 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
-        
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="txtSearch" TextWrapping="Wrap" Text="{Binding SearchInput}" Opacity="0.7" Grid.Column="1" Width="150"/>
-            <Button x:Name="btnSearch" Content="Zoeken" Grid.Column="2" Command="{Binding SearchCommand}"/>
-            <Button x:Name="btnDeleteSearch" Content="Zoekveld wissen" Grid.Column="3" Command="{Binding DeleteSearchCommand}"/>
+            <ComboBox Text="{Binding ..}" Grid.Column="1" Width="100" Height="34" Margin="0,6,0,0"/>
+            <TextBox x:Name="txtSearch" TextWrapping="Wrap" Text="{Binding SearchInput}" Opacity="0.7" Grid.Column="2" Width="150"/>
+            <Button x:Name="btnSearch" Content="Zoeken" Grid.Column="3" Command="{Binding SearchCommand}"/>
+            <Button x:Name="btnDeleteSearch" Content="Zoekveld wissen" Grid.Column="4" Command="{Binding DeleteSearchCommand}"/>
         </Grid>
-          
+
         <DataGrid x:Name="dgInspections" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" ScrollViewer.CanContentScroll="True" 
       ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding InspectionVMList}" SelectedItem="{Binding SelectedInspection, Mode=TwoWay}" Grid.Row="1">
             <DataGrid.Columns>
