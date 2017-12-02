@@ -70,9 +70,11 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="txtCancel" Content="Cancel" IsCancel="True" Grid.Column="1" Command="{Binding CancelInspectionCommand}"/>
-            <Button x:Name="btnConfirmEdit" Content="Verzoek aanpassen" Grid.Column="2" Command="{Binding EditInspectionCommand}"/>
+            <Button x:Name="btnCancel" Content="Cancel" IsCancel="True" Grid.Column="1" Command="{Binding CancelInspectionCommand}"/>
+            <Button x:Name="btnRegulation" Content="Regelgeving" IsCancel="True" Grid.Column="1" Command="{Binding }"/>
+            <Button x:Name="btnConfirmEdit" Content="Verzoek aanpassen" Grid.Column="3" Command="{Binding EditInspectionCommand}"/>
         </Grid>
     </Grid>
 </Page>
