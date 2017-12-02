@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
+using System.Net.Sockets;
 using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository
@@ -27,13 +28,28 @@ namespace Festispec.Domain.Repository
         public override Planning Add(Planning entity)
         {
             entity = CleanRelations(entity);
-            return base.Add(entity);
+            entity = base.Add(entity);
+            LoadRelations(entity);
+            
+            return entity;
         }
 
         public override Planning Update(Planning updated, params object[] keyValues)
         {
             updated = CleanRelations(updated);
-            return base.Update(updated, keyValues);
+            base.Update(updated, keyValues);
+
+            // Due to issues with navigation properties.
+            // Get the fresh model from the database
+            // Load the relations on that model.
+            // Map the navigation properties from the fresh model to the referenced model.
+            // TODO: Remove this when MapValues
+            var entity = Get(keyValues);
+            LoadRelations(entity);
+            updated.Inspection = entity.Inspection;
+            updated.Inspector = entity.Inspector;
+
+            return updated;
         }
 
         public override int Delete(Planning entity)
@@ -61,6 +77,14 @@ namespace Festispec.Domain.Repository
             }
 
             return entity;
+        }
+
+        private void LoadRelations(Planning entity)
+        {
+            DbContext.Entry(entity).Reference(planning => planning.Inspection).Load();
+            DbContext.Entry(entity).Reference(planning => planning.Inspector).Load();
+            // TODO: Enable when inspection questions
+            //DbContext.Entry(entity).Collection(planning => planning.Questions).Load();
         }
     }
 }

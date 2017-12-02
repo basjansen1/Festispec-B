@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
+using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.NavigationService;
@@ -27,7 +29,7 @@ namespace Festispec.ViewModels.Planning
 
         public ICommand SearchInspectors { get; set; }
 
-        public IEnumerable<Domain.Inspector> Inspectors { get; set; }
+        public ObservableCollection<Domain.Inspector> Inspectors { get; set; } = new ObservableCollection<Domain.Inspector>();
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
@@ -55,7 +57,11 @@ namespace Festispec.ViewModels.Planning
 
                 // TODO: Filter
 
-                Inspectors = query.ToList();
+                // Clear inspectors
+                Inspectors.Clear();
+                // Fill inspectors with  new values to trigger observablecollection updates.
+                foreach (var inspector in query)
+                    Inspectors.Add(inspector);
             }
 
             // Raise property changed to update the UI

@@ -17,7 +17,7 @@ namespace Festispec.ViewModels.Planning
         private readonly IPlanningRepositoryFactory _planningRepositoryFactory;
         private readonly IPlanningViewModelFactory _planningViewModelFactory;
 
-        private Inspection _inspection;
+        public Inspection Inspection;
 
         public PlanningListViewModel(INavigationService navigationService,
             IPlanningRepositoryFactory planningRepositoryFactory, IPlanningViewModelFactory planningViewModelFactory) :
@@ -60,16 +60,16 @@ namespace Festispec.ViewModels.Planning
         {
             var parameter = NavigationService.Parameter as Inspection;
             if (parameter != null)
-                _inspection = parameter;
+                Inspection = parameter;
             else
-                throw new ArgumentNullException(nameof(Inspection));
+                throw new ArgumentNullException(nameof(Domain.Inspection));
         }
 
         private void RegisterCommands()
         {
             NavigateToAddPlanningCommand =
                 new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.PlanningAdd,
-                    _planningViewModelFactory.CreateViewModelForInspection(_inspection)));
+                    _planningViewModelFactory.CreateViewModelForInspection(Inspection)));
             NavigateToAddOrUpdatePlanningCommand = new RelayCommand(
                 () => NavigationService.NavigateTo(Routes.Routes.PlanningUpdate, SelectedPlanning),
                 () => SelectedPlanning != null);
@@ -85,7 +85,7 @@ namespace Festispec.ViewModels.Planning
         {
             using (var planningRepository = _planningRepositoryFactory.CreateRepository())
             {
-                var query = planningRepository.GetByInspectionId(_inspection.Id);
+                var query = planningRepository.GetByInspectionId(Inspection.Id);
 
                 if (SearchDate.HasValue)
                     query = query.Where(planning => planning.Date.Equals(SearchDate.Value));

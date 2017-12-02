@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/20/2017 16:12:47
--- Generated from EDMX file: C:\Users\ylja0\OneDrive\Documents\GitHub\Festispec-B\Festispec.Domain\Festispec.edmx
+-- Date Created: 12/02/2017 14:46:12
+-- Generated from EDMX file: C:\Workspace\Avans\Projects\42IN06SOb\Festispec\Festispec.Domain\Festispec.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -548,7 +548,7 @@ ADD CONSTRAINT [FK_PlanningInspectionQuestion]
     FOREIGN KEY ([Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date])
     REFERENCES [dbo].[Planning]
         ([Inspection_Id], [Inspector_Id], [Date])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PlanningInspectionQuestion'
