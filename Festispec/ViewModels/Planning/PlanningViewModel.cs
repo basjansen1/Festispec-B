@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
@@ -110,7 +112,24 @@ namespace Festispec.ViewModels.Planning
 
         public override bool Save()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var planningRepository = RepositoryFactory.CreateRepository())
+                {
+                    planningRepository.AddOrUpdate(Entity);
+                }
+
+                // TODO: MapValues
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                var errorList = ex.EntityValidationErrors.SelectMany(eve => eve.ValidationErrors,
+                    (eve, ve) => ve.PropertyName).ToList();
+                var joined = string.Join(", ", errorList.Select(x => x));
+                MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                return false;
+            }
+            return true;
         }
 
         public override Domain.Planning Copy()

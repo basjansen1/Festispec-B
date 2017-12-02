@@ -22,5 +22,11 @@ namespace Festispec.ViewModels.Factory
         {
             return new PlanningViewModel(_planningRepositoryFactory, entity);
         }
+
+        public PlanningViewModel CreateViewModelForInspection(int inspectionId)
+        {
+            return new PlanningViewModel(_planningRepositoryFactory,
+                new Domain.Planning {Inspection_Id = inspectionId});
+        }
     }
 }

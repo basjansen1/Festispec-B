@@ -66,7 +66,8 @@ namespace Festispec.ViewModels.Planning
         private void RegisterCommands()
         {
             NavigateToAddPlanningCommand =
-                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.PlanningAddOrUpdate));
+                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.PlanningAddOrUpdate,
+                    _planningViewModelFactory.CreateViewModelForInspection(_inspectionId)));
             NavigateToAddOrUpdatePlanningCommand = new RelayCommand(
                 () => NavigationService.NavigateTo(Routes.Routes.PlanningAddOrUpdate, SelectedPlanning),
                 () => SelectedPlanning != null);
