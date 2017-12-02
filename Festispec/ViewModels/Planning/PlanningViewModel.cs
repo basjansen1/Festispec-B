@@ -86,6 +86,10 @@ namespace Festispec.ViewModels.Planning
             set
             {
                 Entity.Inspection = value;
+
+                // Update inspector Id value
+                InspectionId = value.Id;
+
                 RaisePropertyChanged();
             }
         }
@@ -96,6 +100,10 @@ namespace Festispec.ViewModels.Planning
             set
             {
                 Entity.Inspector = value;
+
+                // Update inspector Id value
+                InspectorId = value.Id;
+
                 RaisePropertyChanged();
             }
         }
@@ -114,9 +122,10 @@ namespace Festispec.ViewModels.Planning
         {
             try
             {
+                Domain.Planning updated;
                 using (var planningRepository = RepositoryFactory.CreateRepository())
                 {
-                    planningRepository.AddOrUpdate(Entity);
+                    updated = Entity.IsAdded ? planningRepository.Add(Entity) : planningRepository.Update(Entity, Entity.Inspection_Id, Entity.Inspector_Id, Entity.Date);
                 }
 
                 // TODO: MapValues

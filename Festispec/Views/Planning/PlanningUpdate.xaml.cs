@@ -4,11 +4,11 @@
     ///     <cref></cref>
     /// </inheritdoc>
     /// <summary>
-    ///     Interaction logic for PlanningAddOrUpdate.xaml
+    ///     Interaction logic for PlanningUpdate.xaml
     /// </summary>
-    public partial class PlanningAddOrUpdate
+    public partial class PlanningUpdate
     {
-        public PlanningAddOrUpdate()
+        public PlanningUpdate()
         {
             InitializeComponent();
         }

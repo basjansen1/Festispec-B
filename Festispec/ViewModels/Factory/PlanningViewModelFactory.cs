@@ -1,4 +1,5 @@
-﻿using Festispec.Domain.Repository.Factory.Interface;
+﻿using Festispec.Domain;
+using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.Planning;
 
@@ -23,10 +24,15 @@ namespace Festispec.ViewModels.Factory
             return new PlanningViewModel(_planningRepositoryFactory, entity);
         }
 
-        public PlanningViewModel CreateViewModelForInspection(int inspectionId)
+        public PlanningViewModel CreateViewModelForInspection(Inspection inspection)
         {
             return new PlanningViewModel(_planningRepositoryFactory,
-                new Domain.Planning {Inspection_Id = inspectionId});
+                new Domain.Planning
+                {
+                    Inspection = inspection,
+                    Inspection_Id = inspection.Id,
+                    IsAdded = true
+                });
         }
     }
 }

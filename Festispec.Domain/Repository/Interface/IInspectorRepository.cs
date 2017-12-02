@@ -6,6 +6,6 @@ namespace Festispec.Domain.Repository.Interface
 {
     public interface IInspectorRepository : IRepository<Inspector>
     {
-        IQueryable<Inspector> GetAvailableNearby(DateTime dateAvailable, DbGeography center);
+        IQueryable<Inspector> GetAvailableNearby(DateTime dateAvailable, DbGeography center, int inspectorId = 0);
     }
 }

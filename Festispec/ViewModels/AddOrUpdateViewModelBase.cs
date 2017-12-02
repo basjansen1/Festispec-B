@@ -46,8 +46,7 @@ namespace Festispec.ViewModels
 
             GoBack(EntityViewModel);
         }
-
-
+        
         public virtual void GoBack()
         {
             GoBack(null);

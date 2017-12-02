@@ -66,6 +66,7 @@
     <Compile Include="Contact.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PlanningExtended.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
@@ -75,6 +76,7 @@
     <Compile Include="EmployeeRole.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ContactExtended.cs" />
     <Compile Include="ExtendedQuestion.cs" />
     <Compile Include="Festispec.Context.cs">
       <AutoGen>True</AutoGen>

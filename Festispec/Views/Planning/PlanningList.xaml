@@ -29,7 +29,7 @@
 
             <DataGrid Grid.Row="1" Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedPlanning}" ItemsSource="{Binding Plannings}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Inspector" Binding="{Binding Inspector.FirstName}" Width="*" />
+                    <DataGridTextColumn Header="Inspector" Binding="{Binding Inspector.FullName}" Width="*" />
                     <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="*" />
                     <DataGridTextColumn Header="TimeFrom" Binding="{Binding TimeFrom}" Width="*" />
                     <DataGridTextColumn Header="TimeTo" Binding="{Binding TimeTo}" Width="*" />

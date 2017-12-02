@@ -47,10 +47,17 @@ namespace Festispec.Routes
             Roles = new[] { "Manager", "Medewerker" }
         };
 
-        public static Route PlanningAddOrUpdate = new Route
+        public static Route PlanningAdd = new Route
         {
-            Key = nameof(PlanningAddOrUpdate),
-            PageType = new Uri("../Views/Planning/PlanningAddOrUpdate.xaml", UriKind.Relative),
+            Key = nameof(PlanningAdd),
+            PageType = new Uri("../Views/Planning/PlanningAdd.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+
+        public static Route PlanningUpdate = new Route
+        {
+            Key = nameof(PlanningUpdate),
+            PageType = new Uri("../Views/Planning/PlanningUpdate.xaml", UriKind.Relative),
             Roles = new[] { "Manager", "Medewerker" }
         };
 

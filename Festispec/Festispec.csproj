@@ -176,8 +176,11 @@
     <Compile Include="ViewModels\InspectionProcessing\InspectionListVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="Views\Planning\PlanningAddOrUpdate.xaml.cs">
-      <DependentUpon>PlanningAddOrUpdate.xaml</DependentUpon>
+    <Compile Include="Views\Planning\PlanningUpdate.xaml.cs">
+      <DependentUpon>PlanningUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Planning\PlanningAdd.xaml.cs">
+      <DependentUpon>PlanningAdd.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Planning\PlanningList.xaml.cs">
       <DependentUpon>PlanningList.xaml</DependentUpon>
@@ -221,7 +224,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Planning\PlanningAddOrUpdate.xaml">
+    <Page Include="Views\Planning\PlanningUpdate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Planning\PlanningAdd.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

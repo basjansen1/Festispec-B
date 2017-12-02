@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
+using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.NavigationService;
 using Festispec.ViewModels.Employees;
@@ -16,7 +17,7 @@ namespace Festispec.ViewModels.Planning
         private readonly IPlanningRepositoryFactory _planningRepositoryFactory;
         private readonly IPlanningViewModelFactory _planningViewModelFactory;
 
-        private int _inspectionId;
+        private Inspection _inspection;
 
         public PlanningListViewModel(INavigationService navigationService,
             IPlanningRepositoryFactory planningRepositoryFactory, IPlanningViewModelFactory planningViewModelFactory) :
@@ -57,19 +58,20 @@ namespace Festispec.ViewModels.Planning
 
         private void UpdateEntityViewModelFromNavigationParameter()
         {
-            if (NavigationService.Parameter is int)
-                _inspectionId = (int) NavigationService.Parameter;
+            var parameter = NavigationService.Parameter as Inspection;
+            if (parameter != null)
+                _inspection = parameter;
             else
-                throw new ArgumentNullException(nameof(InspectionVM));
+                throw new ArgumentNullException(nameof(Inspection));
         }
 
         private void RegisterCommands()
         {
             NavigateToAddPlanningCommand =
-                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.PlanningAddOrUpdate,
-                    _planningViewModelFactory.CreateViewModelForInspection(_inspectionId)));
+                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.PlanningAdd,
+                    _planningViewModelFactory.CreateViewModelForInspection(_inspection)));
             NavigateToAddOrUpdatePlanningCommand = new RelayCommand(
-                () => NavigationService.NavigateTo(Routes.Routes.PlanningAddOrUpdate, SelectedPlanning),
+                () => NavigationService.NavigateTo(Routes.Routes.PlanningUpdate, SelectedPlanning),
                 () => SelectedPlanning != null);
             PlanningDeleteCommand = new RelayCommand(() =>
             {
@@ -83,7 +85,7 @@ namespace Festispec.ViewModels.Planning
         {
             using (var planningRepository = _planningRepositoryFactory.CreateRepository())
             {
-                var query = planningRepository.GetByInspectionId(_inspectionId);
+                var query = planningRepository.GetByInspectionId(_inspection.Id);
 
                 if (SearchDate.HasValue)
                     query = query.Where(planning => planning.Date.Equals(SearchDate.Value));

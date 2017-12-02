@@ -32,7 +32,7 @@ namespace Festispec.ViewModels
 
         public ICommand NavigateToInspectionPlanningCommand { get; private set; }
 
-        private Inspection _inspection;
+        private readonly Inspection _inspection;
 
         public void RegisterCommands()
         {
@@ -45,7 +45,7 @@ namespace Festispec.ViewModels
 
 
             // TODO: Temp remove
-            NavigateToInspectionPlanningCommand = new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.PlanningList, _inspection.Id), () => _navigationService.HasAccess(Routes.Routes.PlanningList));
+            NavigateToInspectionPlanningCommand = new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.PlanningList, _inspection), () => _navigationService.HasAccess(Routes.Routes.PlanningList));
         }
     }
 }

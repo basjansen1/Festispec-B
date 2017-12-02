@@ -79,7 +79,8 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.InspectorList);
             navigationService.Configure(Routes.Routes.InspectorAddOrUpdate);
             navigationService.Configure(Routes.Routes.PlanningList);
-            navigationService.Configure(Routes.Routes.PlanningAddOrUpdate);
+            navigationService.Configure(Routes.Routes.PlanningAdd);
+            navigationService.Configure(Routes.Routes.PlanningUpdate);
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }

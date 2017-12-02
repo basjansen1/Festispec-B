@@ -1,0 +1,62 @@
+﻿<Page x:Class="Festispec.Views.Planning.PlanningUpdate"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mapsui="clr-namespace:Mapsui.UI.Wpf;assembly=Mapsui.UI.Wpf"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="PlanningUpdate"
+        DataContext="{Binding Source={StaticResource Locator}, Path=PlanningAddOrUpdate}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <mapsui:MapControl></mapsui:MapControl>
+
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Padding="10">
+                <StackPanel DataContext="{Binding Path=EntityViewModel.Inspector, Mode=TwoWay}">
+                    <Label>Geselecteerde Inspecteur</Label>
+                    <Label>Naam</Label>
+                    <TextBox Text="{Binding Path=FullName, Mode=OneWay}" IsEnabled="False" Margin="0 0 0 5" />
+                    <Label>Email</Label>
+                    <TextBox Text="{Binding Path=Email, Mode=OneWay}" IsEnabled="False" Margin="0 0 0 5" />
+                    <Label>Telefoon</Label>
+                    <TextBox Text="{Binding Path=Telephone, Mode=OneWay}" IsEnabled="False" Margin="0 0 0 5" />
+                </StackPanel>
+            </Border>
+            
+            <Border Grid.Column="1" Padding="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0">
+                        <Label>Date</Label>
+                        <DatePicker SelectedDate="{Binding Path=EntityViewModel.Date, Mode=OneWay}" IsEnabled="False"/>
+                        <Label>TimeFrom</Label>
+                        <TextBox Text="{Binding Path=EntityViewModel.TimeFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 5" />
+                        <Label>TimeTo</Label>
+                        <TextBox Text="{Binding Path=EntityViewModel.TimeTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 5" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Button Content="Cancel" Command="{Binding NavigateBackCommand}" Margin="0 0 5 0"></Button>
+                        <Button Content="Save" Command="{Binding SaveEntityCommand}"></Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>

@@ -24,16 +24,43 @@ namespace Festispec.Domain.Repository
             return Get().Where(planning => planning.Inspection_Id == inspectionId);
         }
 
-        public override Planning AddOrUpdate(Planning entity)
+        public override Planning Add(Planning entity)
         {
-            var exists = Get().Any(planning =>
-                planning.Inspection_Id == entity.Inspection_Id && 
-                planning.Inspector_Id == entity.Inspector_Id &&
-                planning.Date == entity.Date);
+            entity = CleanRelations(entity);
+            return base.Add(entity);
+        }
 
-            return exists
-                ? Update(entity, entity.Inspection_Id, entity.Inspector_Id, entity.Date)
-                : Add(entity);
+        public override Planning Update(Planning updated, params object[] keyValues)
+        {
+            updated = CleanRelations(updated);
+            return base.Update(updated, keyValues);
+        }
+
+        public override int Delete(Planning entity)
+        {
+            entity = CleanRelations(entity);
+            return base.Delete(entity);
+        }
+
+        private static Planning CleanRelations(Planning entity)
+        {
+            if (entity.Inspection != null)
+            {
+                // Set foreign key and unset the navigation property
+                // This is needed because we are working with disconnected entities.
+                entity.Inspection_Id = entity.Inspection.Id;
+                entity.Inspection = null;
+            }
+
+            if (entity.Inspector != null)
+            {
+                // Set foreign key and unset the navigation property
+                // This is needed because we are working with disconnected entities.
+                entity.Inspector_Id = entity.Inspector.Id;
+                entity.Inspector = null;
+            }
+
+            return entity;
         }
     }
 }

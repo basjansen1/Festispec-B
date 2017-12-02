@@ -33,7 +33,7 @@ namespace Festispec.ViewModels.Planning
         {
             if (args.PropertyName != nameof(NavigationService.CurrentRoute)) return;
 
-            if (NavigationService.CurrentRoute != Routes.Routes.PlanningAddOrUpdate) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.PlanningAdd && NavigationService.CurrentRoute != Routes.Routes.PlanningUpdate) return;
 
             UpdateEntityViewModelFromNavigationParameter();
         }
@@ -51,7 +51,7 @@ namespace Festispec.ViewModels.Planning
             using (var inspectorRepository = _inspectorRepositoryFactory.CreateRepository())
             {
                 var query = inspectorRepository.GetAvailableNearby(EntityViewModel.Date,
-                    EntityViewModel.Inspection.Location);
+                    EntityViewModel.Inspection.Location, EntityViewModel.InspectorId);
 
                 // TODO: Filter
 
@@ -62,9 +62,18 @@ namespace Festispec.ViewModels.Planning
             RaisePropertyChanged(nameof(Inspectors));
         }
 
+        public override void Save()
+        {
+            // TODO: Validation
+
+            var saved = EntityViewModel.Save();
+
+            if(saved) GoBack();
+        }
+
         public override void GoBack()
         {
-            base.GoBack(EntityViewModel.InspectionId);
+            base.GoBack(EntityViewModel.Inspection);
         }
     }
 }
