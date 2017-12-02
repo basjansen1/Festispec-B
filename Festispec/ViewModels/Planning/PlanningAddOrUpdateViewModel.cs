@@ -28,7 +28,6 @@ namespace Festispec.ViewModels.Planning
         public ICommand SearchInspectors { get; set; }
 
         public IEnumerable<Domain.Inspector> Inspectors { get; set; }
-        public Domain.Inspector SelectedInspector { get; set; }
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
@@ -47,7 +46,7 @@ namespace Festispec.ViewModels.Planning
         private void LoadInspectors()
         {
             // Reset the selected inspector
-            SelectedInspector = null;
+//            EntityViewModel.Inspector = null;
 
             using (var inspectorRepository = _inspectorRepositoryFactory.CreateRepository())
             {

@@ -17,23 +17,27 @@
         <mapsui:MapControl></mapsui:MapControl>
 
         <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <DataGrid Grid.Row="1" Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedInspector}" ItemsSource="{Binding Inspectors}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+            <DataGrid Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True" SelectedValue="{Binding Path=EntityViewModel.Inspector, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Inspectors}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Naam" Binding="{Binding FirstName}" Width="*" />
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Border Grid.Row="1" Grid.Column="1" Padding="10">
+            <Border Grid.Column="1" Padding="10">
+                <StackPanel DataContext="{Binding Path=EntityViewModel.Inspector}">
+                    <Label>Inspecteur</Label>
+                    <DatePicker Text="{Binding Path=FirstName, Mode=TwoWay}" IsEnabled="False" Margin="0 0 0 5" />
+                </StackPanel>
+            </Border>
+            
+            <Border Grid.Column="2" Padding="10">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
@@ -43,15 +47,15 @@
 
                     <StackPanel Grid.Row="0">
                         <Label>Date</Label>
-                        <DatePicker Text="{Binding Path=EntityViewModel.Date}"/>
+                        <DatePicker SelectedDate="{Binding Path=EntityViewModel.Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         <Button Content="Zoek inspecteurs" Command="{Binding SearchInspectors}" Margin="0 0 0 5"></Button>
                     </StackPanel>
                     
                     <StackPanel Grid.Row="1">
                         <Label>TimeFrom</Label>
-                        <DatePicker Text="{Binding Path=EntityViewModel.TimeFrom}" Margin="0 0 0 5" />
+                        <DatePicker Text="{Binding Path=EntityViewModel.TimeFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 5" />
                         <Label>TimeTo</Label>
-                        <DatePicker Text="{Binding Path=EntityViewModel.TimeTo}" Margin="0 0 0 5" />
+                        <DatePicker Text="{Binding Path=EntityViewModel.TimeTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 5" />
                     </StackPanel>
 
                     <StackPanel Grid.Row="2" Orientation="Horizontal">
