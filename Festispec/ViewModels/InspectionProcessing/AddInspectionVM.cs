@@ -81,7 +81,16 @@ namespace Festispec.ViewModels.Employees
                 && NewInspection.HouseNumber != null && NewInspection.PostalCode != null
                 && NewInspection.Country != null && NewInspection.City != null
                 && NewInspection.Municipality != null)
-                return true;
+            {
+                if (NewInspection.StartDate <= NewInspection.EndDate)
+                {
+                    MessageBox.Show(NewInspection.StartDate.ToString() + " en " + NewInspection.EndDate.ToString());
+                    return true;
+                } else
+                {
+                    MessageBox.Show("Een inspectie kan niet eindigen voordat deze begonnen is");
+                }
+            }
 
             return false;
         }

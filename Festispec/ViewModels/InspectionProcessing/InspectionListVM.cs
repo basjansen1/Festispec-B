@@ -22,7 +22,19 @@ namespace Festispec.ViewModels.Employees
     {
         #region properties
         public ObservableCollection<InspectionVM> InspectionVMList { get; set; }
-        public string SearchInput { get; set; }
+        public string SearchInput
+        {
+            get
+            {
+                return _searchInput;
+            }
+            set
+            {
+                _searchInput = value;
+                RaisePropertyChanged("SearchInput");
+            }
+        }
+        private string _searchInput;
         public IInspectionRepositoryFactory InspectionRepositoryFactory;
 
         public InspectionVM SelectedInspection
@@ -69,6 +81,7 @@ namespace Festispec.ViewModels.Employees
             DeleteInspectionCommand = new RelayCommand(DeleteSelectedInspection);
             SearchCommand = new RelayCommand(Search);
             DeleteSearchCommand = new RelayCommand(DeleteFilter);
+            _searchInput = null;
 
             // instantiate views   
             using (var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
@@ -109,20 +122,34 @@ namespace Festispec.ViewModels.Employees
         {
             if (SearchInput != null)
             {
-                DeleteFilter();
+                ReloadInspectionVMList();
                 _inspectionList.Clear();
                 InspectionVMList.ToList().ForEach(n => _inspectionList.Add(n));
                 InspectionVMList.Clear();
-                _inspectionList.Where(i => i.Name.ToLower().Contains(SearchInput.ToLower())).ToList().ForEach(i => InspectionVMList.Add(i));
+
+                foreach(InspectionVM i in _inspectionList)
+                {
+                    if (i.Name.ToLower().Contains(SearchInput.ToLower()) ||  i.Customer.Name.ToLower().Contains(SearchInput.ToLower()) || 
+                        i.City.ToLower().Contains(SearchInput.ToLower()) || i.Municipality.ToLower().Contains(SearchInput.ToLower()))
+                    {
+                        InspectionVMList.Add(i);
+                    }
+                }
             }
         }
-        private void DeleteFilter()
+
+        private void ReloadInspectionVMList()
         {
             using (var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
                 InspectionVMList.Clear();
                 inspectionRepository.Get().ToList().ForEach(i => InspectionVMList.Add(new InspectionVM(i)));
             }
+        }
+        private void DeleteFilter()
+        {
+            ReloadInspectionVMList();
+            SearchInput = null;
         }
         #endregion
     }

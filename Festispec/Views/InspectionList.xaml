@@ -20,12 +20,10 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <ComboBox Text="{Binding ..}" Grid.Column="1" Width="100" Height="34" Margin="0,6,0,0"/>
-            <TextBox x:Name="txtSearch" TextWrapping="Wrap" Text="{Binding SearchInput}" Opacity="0.7" Grid.Column="2" Width="150"/>
-            <Button x:Name="btnSearch" Content="Zoeken" Grid.Column="3" Command="{Binding SearchCommand}"/>
-            <Button x:Name="btnDeleteSearch" Content="Zoekveld wissen" Grid.Column="4" Command="{Binding DeleteSearchCommand}"/>
+            <TextBox x:Name="txtSearch" TextWrapping="Wrap" Text="{Binding SearchInput}" Opacity="0.7" Grid.Column="1" Width="150"/>
+            <Button x:Name="btnSearch" Content="Zoeken" Grid.Column="2" Command="{Binding SearchCommand}"/>
+            <Button x:Name="btnDeleteSearch" Content="Zoekveld wissen" Grid.Column="3" Command="{Binding DeleteSearchCommand}"/>
         </Grid>
 
         <DataGrid x:Name="dgInspections" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" ScrollViewer.CanContentScroll="True" 
