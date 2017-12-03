@@ -18,11 +18,21 @@ namespace Festispec.ViewModels.Employees
 {
     public class AddInspectionVM : ViewModelBase
     {
-        // properties
+        #region fields
+        private int _selectedIndexCustomerList;
+        private DateTime _fromDate;
+        private DateTime _toDate;
+        private readonly INavigationService _navigationService;
+        #endregion
+
+        #region properties
         public InspectionListVM InspectionList { get; set; }
         public InspectionVM NewInspection { get; set; }
         public List<CustomerVM> CustomerList { get; set; }
         public List<string> CustomerNames { get; set; }
+        public ICommand AddInspectionCommand { get; set; }
+        public ICommand CloseWindowCommand { get; set; }
+
         public int SelectedIndexCustomerList
         {
             get
@@ -64,14 +74,11 @@ namespace Festispec.ViewModels.Employees
                 RaisePropertyChanged();
             }
         }
-        public ICommand AddInspectionCommand { get; set; }
-        public ICommand CloseWindowCommand { get; set; }
-        private readonly INavigationService _navigationService;
+        #endregion
 
-        // constructor
+        #region constructor and methods
         public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory, INavigationService navigationService)
         {
-            MessageBox.Show("New AddInspectionVM constructor!");
             InspectionList = inspectionList;
             _navigationService = navigationService;
             NewInspection = new InspectionVM();
@@ -88,23 +95,16 @@ namespace Festispec.ViewModels.Employees
             {
                 customerRepository.Get().ToList().ForEach(c => CustomerList.Add(new CustomerVM(c)));
             }
+
             CustomerList.ForEach(c => CustomerNames.Add(c.Name));
 
             if (CustomerList.Any())
-            {
                 NewInspection.Customer = CustomerList.ElementAt(0).ToModel();
-            }
+
             _fromDate = DateTime.Now;
             _toDate = DateTime.Now;
-
         }
 
-        // fields
-        private int _selectedIndexCustomerList;
-        private DateTime _fromDate;
-        private DateTime _toDate;
-
-        // methods
         public bool CanAddInspection()
         {
             if (NewInspection.Name != null && NewInspection.StartDate != null
@@ -119,15 +119,11 @@ namespace Festispec.ViewModels.Employees
                     MessageBox.Show("Een inspectie kan niet eindigen voordat deze begonnen is");
                     return false;
                 }
-                else
-                {
-                    return true;
-                }
+
+                return true;
             }
-            else
-            {
-                MessageBox.Show("Niet alle verplichte velden zijn ingevoerd");
-            }
+
+            MessageBox.Show("Niet alle verplichte velden zijn ingevoerd");
 
             return false;
         }
@@ -136,32 +132,15 @@ namespace Festispec.ViewModels.Employees
         {
             if (CanAddInspection())
             {
-                try
+                using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
                 {
-                    using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
-                    {
-                        inspectionRepository.Add(NewInspection.toModel());
-                    }
+                    inspectionRepository.Add(NewInspection.toModel());
+                }
 
-                    InspectionList.InspectionVMList.Add(NewInspection);
-                    _navigationService.GoBack();
-                }
-                catch (DbEntityValidationException ex)
-                {
-                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                    {
-                        foreach (var validationError in entityValidationErrors.ValidationErrors)
-                        {
-                            MessageBox.Show(validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Er is iets fout gegaan met het toevoegen van een inspectie!");
-                }
-                return;
+                InspectionList.InspectionVMList.Add(NewInspection);
+                _navigationService.GoBack();
             }
         }
+        #endregion
     }
 }
