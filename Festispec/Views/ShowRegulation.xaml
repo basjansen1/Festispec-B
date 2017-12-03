@@ -1,4 +1,4 @@
-﻿<Page x:Class="Festispec.Views.AddInspection"
+﻿<Page x:Class="Festispec.Views.ShowRegulation"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Festispec.Views"
         mc:Ignorable="d"
-        Title="Add Inspection" DataContext="{Binding GetRegulationList, Source={StaticResource Locator}}">
+        Title="Regulation" DataContext="{Binding GetRegulationList, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
