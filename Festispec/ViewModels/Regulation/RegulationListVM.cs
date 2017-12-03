@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.NavigationService;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,10 +17,13 @@ namespace Festispec.ViewModels.Regulation
 
         #region fields
         private IRegulationRepositoryFactory _regulationRepositoryFactory;
+        private INavigationService _navigationService;
         #endregion
 
-        public RegulationListVM()
+        public RegulationListVM(IRegulationRepositoryFactory regulationRepositoryFactory, INavigationService navigationService)
         {
+            _navigationService = navigationService;
+
             using (var regulationRepository = _regulationRepositoryFactory.CreateRepository())
             {
                 RegulationVMList = new ObservableCollection<RegulationVM>(regulationRepository.Get().ToList().Select(i => new RegulationVM(i)));

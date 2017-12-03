@@ -98,5 +98,16 @@ namespace Festispec.Routes
         };
 
         #endregion
+
+        #region Regulation
+
+        public static Route Regulation = new Route
+        {
+            Key = "Regulation",
+            PageType = new Uri("../Views/ShowRegulation.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+
+        #endregion
     }
 }

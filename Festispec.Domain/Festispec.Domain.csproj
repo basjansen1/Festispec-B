@@ -144,6 +144,7 @@
     <Compile Include="Repository\Factory\QuestionTypeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IQuestionTypeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ITemplateQuestionRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\RegulationRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\TemplateQuestionRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\TemplateRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\InspectionRepositoryFactory.cs" />
