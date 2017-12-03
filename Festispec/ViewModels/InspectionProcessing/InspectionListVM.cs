@@ -113,7 +113,7 @@ namespace Festispec.ViewModels.Employees
 
         private void ShowRegulationWindow()
         {
-            _navigationService.NavigateTo(Routes.Routes.Regulation);
+            _navigationService.NavigateTo(Routes.Routes.RegulationList);
         }
 
         public void DeleteSelectedInspection()

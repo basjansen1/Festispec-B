@@ -101,9 +101,9 @@ namespace Festispec.Routes
 
         #region Regulation
 
-        public static Route Regulation = new Route
+        public static Route RegulationList = new Route
         {
-            Key = "Regulation",
+            Key = "RegulationList",
             PageType = new Uri("../Views/ShowRegulation.xaml", UriKind.Relative),
             Roles = new[] { "Manager", "Medewerker" }
         };
