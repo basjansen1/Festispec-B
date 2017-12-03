@@ -71,6 +71,7 @@ namespace Festispec.ViewModels.Employees
         // constructor
         public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory, INavigationService navigationService)
         {
+            MessageBox.Show("New AddInspectionVM constructor!");
             InspectionList = inspectionList;
             _navigationService = navigationService;
             NewInspection = new InspectionVM();
@@ -119,7 +120,6 @@ namespace Festispec.ViewModels.Employees
                     return false;
                 } else
                 {
-                    MessageBox.Show("Dit is niet goed"); //
                     return true;
                 }
             } else
