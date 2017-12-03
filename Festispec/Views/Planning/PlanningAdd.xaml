@@ -52,7 +52,10 @@
 
                     <StackPanel Grid.Row="0">
                         <Label>Date</Label>
-                        <DatePicker SelectedDate="{Binding Path=EntityViewModel.Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ComboBox ItemsSource="{Binding Path=InspectionDates, Mode=OneWay}"
+                                  SelectedIndex="0"
+                                  SelectedValue="{Binding Path=EntityViewModel.Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 5" />
+
                         <Button Content="Zoek inspecteurs" Command="{Binding SearchInspectors}" Margin="0 0 0 5"></Button>
                     </StackPanel>
                     

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -28,6 +29,9 @@ namespace Festispec.ViewModels.Planning
         }
 
         public ICommand SearchInspectors { get; set; }
+
+        public IEnumerable<DateTime> InspectionDates => Enumerable.Range(0, 1 + EntityViewModel.Inspection.End.Subtract(EntityViewModel.Inspection.Start).Days)
+            .Select(offset => EntityViewModel.Inspection.Start.AddDays(offset).Date);
 
         public ObservableCollection<Domain.Inspector> Inspectors { get; set; } = new ObservableCollection<Domain.Inspector>();
 
