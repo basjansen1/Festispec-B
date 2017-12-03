@@ -60,11 +60,6 @@ namespace Festispec.ViewModels.Regulation
 
         #region constructors and methods
 
-       // public RegulationVM()
-        //{
-          //  _regulation = new Festispec.Domain.Regulation();
-        //}
-
         public RegulationVM(Festispec.Domain.Regulation i)
         {
             _regulation = i;
