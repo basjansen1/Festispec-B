@@ -21,6 +21,7 @@ using Festispec.ViewModels.Inspector;
 using Festispec.ViewModels.Template;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using Festispec.ViewModels.Regulation;
 
 namespace Festispec.ViewModels
 {
@@ -51,6 +52,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IInspectionRepositoryFactory, InspectionRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectorRepositoryFactory, InspectorRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectorViewModelFactory, InspectorViewModelFactory>();
+            SimpleIoc.Default.Register<IRegulationRepositoryFactory, RegulationRepositoryFactory>();
 
             // Register viewmodels
             SimpleIoc.Default.Register<MainViewModel>();
@@ -67,6 +69,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<EmployeeListViewModel>();
             SimpleIoc.Default.Register<InspectorListViewModel>();
             SimpleIoc.Default.Register<InspectorAddOrUpdateViewModel>();
+            SimpleIoc.Default.Register<RegulationListVM>();
         }
 
         private static void RegisterNavigationService()
@@ -162,7 +165,9 @@ namespace Festispec.ViewModels
 
         public InspectionListVM GetInspectionList => ServiceLocator.Current.GetInstance<InspectionListVM>();
 
-        public AddInspectionVM GetAddInspectionVM => new AddInspectionVM(GetInspectionList, customerRepositoryFactory, NavigationService);
+        public RegulationListVM GetRegulationList => ServiceLocator.Current.GetInstance<RegulationListVM>();
+
+        //public AddInspectionVM GetAddInspectionVM => new AddInspectionVM(GetInspectionList, customerRepositoryFactory, NavigationService);
 
         public EditInspectionVM GetEditInspection => ServiceLocator.Current.GetInstance<EditInspectionVM>();
 

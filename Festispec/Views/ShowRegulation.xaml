@@ -6,7 +6,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Festispec.Views"
         mc:Ignorable="d"
-        Title="Add Inspection" DataContext="{Binding GetAddInspection, Source={StaticResource Locator}}">
+        Title="Add Inspection" DataContext="{Binding GetRegulationList, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -15,9 +15,9 @@
         <DataGrid x:Name="dgInspections" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" ScrollViewer.CanContentScroll="True" 
       ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding RegulationVMList}" Grid.Row="0">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Naam" Width="2*" Binding="{Binding }"/>
-                <DataGridTextColumn Header="Beschrijving" Width="2*" Binding="{Binding }"/>
-                <DataGridTextColumn Header="Gemeente" Width="2*" Binding="{Binding }"/>
+                <DataGridTextColumn Header="Naam" Width="2*" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Beschrijving" Width="2*" Binding="{Binding Description}"/>
+                <DataGridTextColumn Header="Gemeente" Width="2*" Binding="{Binding Municipality}"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="1">

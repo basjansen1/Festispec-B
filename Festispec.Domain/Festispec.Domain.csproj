@@ -139,6 +139,7 @@
     <Compile Include="Repository\Factory\Interface\IEmployeeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IInspectorRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ILoginRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IRegulationRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\LoginRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\QuestionTypeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IQuestionTypeRepositoryFactory.cs" />
@@ -156,10 +157,12 @@
     <Compile Include="Repository\Interface\IEmployeeRoleRepository.cs" />
     <Compile Include="Repository\Interface\IInspectorRepository.cs" />
     <Compile Include="Repository\Interface\ILoginRepository.cs" />
+    <Compile Include="Repository\Interface\IRegulationRepository.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="Repository\QuestionTypeRepository.cs" />
     <Compile Include="Repository\Interface\ITemplateQuestionRepository.cs" />
     <Compile Include="Repository\Interface\IQuestionTypeRepository.cs" />
+    <Compile Include="Repository\RegulationRepository.cs" />
     <Compile Include="Repository\TemplateQuestionRepository.cs" />
     <Compile Include="Repository\TemplateRepository.cs" />
     <Compile Include="Repository\Interface\ITemplateRepository.cs" />

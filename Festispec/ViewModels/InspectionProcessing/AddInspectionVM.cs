@@ -80,11 +80,11 @@ namespace Festispec.ViewModels.Employees
             NewInspection.Location = DbGeography.PointFromText("POINT(50 5)", 4326);
             CustomerList = new List<CustomerVM>();
             CustomerNames = new List<string>();
-            
-            AddInspectionCommand = new RelayCommand(AddInspection);
-            CloseWindowCommand = new RelayCommand(_navigationService.GoBack); 
 
-            using(var customerRepository = customerRepositoryFactory.CreateRepository())
+            AddInspectionCommand = new RelayCommand(AddInspection);
+            CloseWindowCommand = new RelayCommand(_navigationService.GoBack);
+
+            using (var customerRepository = customerRepositoryFactory.CreateRepository())
             {
                 customerRepository.Get().ToList().ForEach(c => CustomerList.Add(new CustomerVM(c)));
             }
@@ -118,11 +118,13 @@ namespace Festispec.ViewModels.Employees
                 {
                     MessageBox.Show("Een inspectie kan niet eindigen voordat deze begonnen is");
                     return false;
-                } else
+                }
+                else
                 {
                     return true;
                 }
-            } else
+            }
+            else
             {
                 MessageBox.Show("Niet alle verplichte velden zijn ingevoerd");
             }
@@ -136,7 +138,6 @@ namespace Festispec.ViewModels.Employees
             {
                 try
                 {
-
                     using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
                     {
                         inspectionRepository.Add(NewInspection.toModel());
