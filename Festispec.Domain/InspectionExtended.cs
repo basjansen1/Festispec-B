@@ -10,5 +10,4 @@ namespace Festispec.Domain
         [NotMapped]
         public IEnumerable<DateTime> Dates => Start.DateRange(End);
     }
-
 }

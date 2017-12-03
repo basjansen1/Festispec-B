@@ -125,7 +125,9 @@ namespace Festispec.ViewModels.Planning
                 Domain.Planning updated;
                 using (var planningRepository = RepositoryFactory.CreateRepository())
                 {
-                    updated = Entity.IsAdded ? planningRepository.Add(Entity) : planningRepository.Update(Entity, Entity.Inspection_Id, Entity.Inspector_Id, Entity.Date);
+                    updated = Entity.IsAdded
+                        ? planningRepository.Add(Entity)
+                        : planningRepository.Update(Entity, Entity.Inspection_Id, Entity.Inspector_Id, Entity.Date);
                 }
 
                 // TODO: MapValues
@@ -136,6 +138,11 @@ namespace Festispec.ViewModels.Planning
                     (eve, ve) => ve.PropertyName).ToList();
                 var joined = string.Join(", ", errorList.Select(x => x));
                 MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                return false;
+            }
+            catch
+            {
+                MessageBox.Show("Er is iets fout gegaan");
                 return false;
             }
             return true;
