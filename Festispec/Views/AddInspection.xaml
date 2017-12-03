@@ -6,7 +6,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Festispec.Views"
         mc:Ignorable="d"
-        Title="Add Inspection" DataContext="{Binding GetAddInspection, Source={StaticResource Locator}}">
+        Title="Add Inspection" DataContext="{Binding GetAddInspectionVM, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
