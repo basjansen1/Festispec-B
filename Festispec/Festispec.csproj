@@ -156,9 +156,6 @@
     <Compile Include="Views\InspectionList.xaml.cs">
       <DependentUpon>InspectionList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProcessInspection.xaml.cs">
-      <DependentUpon>ProcessInspection.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ShowRegulation.xaml.cs">
       <DependentUpon>ShowRegulation.xaml</DependentUpon>
     </Compile>
@@ -242,10 +239,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\InspectionList.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\ProcessInspection.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
