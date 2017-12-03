@@ -6,7 +6,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Festispec.Views"
         mc:Ignorable="d"
-        Title="Regulation" DataContext="{Binding GetRegulationList, Source={StaticResource Locator}}">
+        Title="RegulationList" DataContext="{Binding GetRegulationList, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

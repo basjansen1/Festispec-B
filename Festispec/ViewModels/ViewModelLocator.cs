@@ -70,6 +70,8 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<InspectorListViewModel>();
             SimpleIoc.Default.Register<InspectorAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<RegulationListVM>();
+            SimpleIoc.Default.Register<RegulationVM>();
+
         }
 
         private static void RegisterNavigationService()
@@ -87,6 +89,8 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.InspectionList);
             navigationService.Configure(Routes.Routes.AddInspection);
             navigationService.Configure(Routes.Routes.EditInspection);
+            navigationService.Configure(Routes.Routes.RegulationList);
+
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }

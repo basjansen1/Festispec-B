@@ -31,6 +31,7 @@ namespace Festispec.ViewModels.Employees
 
         #region fields
         private INavigationService _navigationService;
+        private string _selectedMunicipality;
         #endregion
 
         #region constructor and methods
@@ -38,6 +39,7 @@ namespace Festispec.ViewModels.Employees
         {
             InspectionList = inspectionList;
             _navigationService = navigationService;
+            _selectedMunicipality = inspectionList.SelectedInspection.Municipality;
 
             EditInspectionCommand = new RelayCommand(SaveChanges);
             CancelInspectionCommand = new RelayCommand(_navigationService.GoBack);
@@ -79,9 +81,9 @@ namespace Festispec.ViewModels.Employees
                 MessageBox.Show("Er is iets fout gegaan met het bewerken van een inspectie! Vul alle velden in");
         }
 
-        private void OpenRegulation()
+        public void OpenRegulation()
         {
-            _navigationService.NavigateTo(Routes.Routes.RegulationList);
+            _navigationService.NavigateTo(Routes.Routes.RegulationList, _selectedMunicipality);
         }
         #endregion
     }
