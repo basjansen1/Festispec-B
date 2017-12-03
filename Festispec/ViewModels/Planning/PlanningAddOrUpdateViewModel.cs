@@ -30,9 +30,6 @@ namespace Festispec.ViewModels.Planning
 
         public ICommand SearchInspectors { get; set; }
 
-        public IEnumerable<DateTime> InspectionDates => Enumerable.Range(0, 1 + EntityViewModel.Inspection.End.Subtract(EntityViewModel.Inspection.Start).Days)
-            .Select(offset => EntityViewModel.Inspection.Start.AddDays(offset).Date);
-
         public ObservableCollection<Domain.Inspector> Inspectors { get; set; } = new ObservableCollection<Domain.Inspector>();
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)

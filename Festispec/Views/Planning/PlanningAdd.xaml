@@ -52,7 +52,7 @@
 
                     <StackPanel Grid.Row="0">
                         <Label>Date</Label>
-                        <ComboBox ItemsSource="{Binding Path=InspectionDates, Mode=OneWay}"
+                        <ComboBox ItemsSource="{Binding Path=EntityViewModel.Inspection.Dates, Mode=OneWay}"
                                   SelectedIndex="0"
                                   SelectedValue="{Binding Path=EntityViewModel.Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 5" />
 

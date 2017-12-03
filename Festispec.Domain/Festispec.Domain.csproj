@@ -66,6 +66,8 @@
     <Compile Include="Contact.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extension\DateRangeExtension.cs" />
+    <Compile Include="InspectionExtended.cs" />
     <Compile Include="PlanningExtended.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
