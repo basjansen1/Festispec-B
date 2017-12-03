@@ -59,7 +59,6 @@ namespace Festispec.ViewModels.Employees
         public ICommand DeleteInspectionCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand DeleteSearchCommand { get; set; }
-        public ICommand ShowRegulationCommand { get; set; }
         #endregion
 
         #region fields
@@ -80,7 +79,6 @@ namespace Festispec.ViewModels.Employees
             ShowEditInspectionWindowCommand = new RelayCommand(ShowEditInspectionWindow);
             ShowProcessInspectionWindowCommand = new RelayCommand(ShowProcessInspectionWindow);
             DeleteInspectionCommand = new RelayCommand(DeleteSelectedInspection);
-            ShowRegulationCommand = new RelayCommand(ShowRegulationWindow);
             SearchCommand = new RelayCommand(Search);
             DeleteSearchCommand = new RelayCommand(DeleteFilter);
             _searchInput = null;
@@ -109,11 +107,6 @@ namespace Festispec.ViewModels.Employees
         public void ShowProcessInspectionWindow()
         {
             _navigationService.NavigateTo(Routes.Routes.ProcessInspection);
-        }
-
-        private void ShowRegulationWindow()
-        {
-            _navigationService.NavigateTo(Routes.Routes.RegulationList);
         }
 
         public void DeleteSelectedInspection()

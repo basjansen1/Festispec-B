@@ -20,6 +20,7 @@ namespace Festispec.ViewModels.Employees
         #region commands
         public ICommand EditInspectionCommand { get; set; }
         public ICommand CancelInspectionCommand { get; set; }
+        public ICommand ShowRegulationCommand { get; set; }
         #endregion
 
         #region properties
@@ -40,6 +41,7 @@ namespace Festispec.ViewModels.Employees
 
             EditInspectionCommand = new RelayCommand(SaveChanges);
             CancelInspectionCommand = new RelayCommand(_navigationService.GoBack);
+            ShowRegulationCommand = new RelayCommand(OpenRegulation);
 
             InspectionStatusList = new List<string>();
             InspectionStatusList.Add("Accepted");
@@ -75,6 +77,11 @@ namespace Festispec.ViewModels.Employees
             }
             else
                 MessageBox.Show("Er is iets fout gegaan met het bewerken van een inspectie! Vul alle velden in");
+        }
+
+        private void OpenRegulation()
+        {
+            _navigationService.NavigateTo(Routes.Routes.RegulationList);
         }
         #endregion
     }
