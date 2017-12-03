@@ -189,6 +189,9 @@
     <Compile Include="ViewModels\InspectionProcessing\InspectionListVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\Planning\PlanningAdd.cs" />
+    <Compile Include="Views\Planning\PlanningList.cs" />
+    <Compile Include="Views\Planning\PlanningUpdate.cs" />
     <Compile Include="Views\Planning\PlanningUpdate.xaml.cs">
       <DependentUpon>PlanningUpdate.xaml</DependentUpon>
     </Compile>

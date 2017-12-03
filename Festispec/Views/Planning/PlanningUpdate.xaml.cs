@@ -11,6 +11,9 @@
         public PlanningUpdate()
         {
             InitializeComponent();
+
+            // Initialize the map in partial class
+            InitializeMap();
         }
     }
 }
