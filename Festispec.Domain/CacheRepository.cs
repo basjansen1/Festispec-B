@@ -5,101 +5,135 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using System.Collections.ObjectModel;
 
 namespace Festispec.Domain
 {
-    class CacheRepository<T> : IRepository<T>
+    class CacheRepository<T> : IRepository<T> where T : class
     {
-        protected IRepository<T> baserepository;
-        protected List<T> list;
+        protected IRepository<T> _baserepository;
+        protected Collection<T> _cache;
+
         public T Add(T entity)
         {
-            throw new NotImplementedException();
+            
+            EnumerableQuery<T> list = new EnumerableQuery<T>(_cache.GetEnumerator());
+            return _baserepository.Add(entity);
         }
 
         public Task<T> AddAsync(T entity)
         {
-            throw new NotImplementedException();
+            return _baserepository.AddAsync(entity);
         }
 
         public T AddOrUpdate(T entity)
         {
-            throw new NotImplementedException();
+            return _baserepository.AddOrUpdate(entity);
         }
 
         public Task<T> AddOrUpdateAsync(T entity)
         {
-            throw new NotImplementedException();
+            return _baserepository.AddOrUpdateAsync(entity);
         }
 
         public int Count()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _baserepository.Count();
+            }
+            catch
+            {
+                return _cache.Count;
+            }
         }
 
         public Task<int> CountAsync()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _baserepository.CountAsync();
+            }
+            catch(Exception e)
+            {
+                throw new NotSupportedException("Not supported for cache", e);
+            }
         }
 
         public int Delete(T entity)
         {
-            throw new NotImplementedException();
+            return _baserepository.Delete(entity);
         }
 
         public Task<int> DeleteAsync(T entity)
         {
-            throw new NotImplementedException();
+            return _baserepository.DeleteAsync(entity);
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+             _baserepository.Dispose();
         }
 
         public T Find(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _baserepository.Find(predicate);
+            }
+            catch
+            {
+                return _cache.SingleOrDefault(predicate);
+            }
+            
         }
 
         public ICollection<T> FindAll(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _baserepository.FindAll(predicate);
+            }
+            catch
+            {
+                return _cache.Where(predicate);
+            }
+
         }
 
         public Task<ICollection<T>> FindAllAsync(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _baserepository.FindAllAsync(predicate);
         }
 
         public Task<T> FindAsync(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return _baserepository.FindAsync(predicate);
         }
 
         public IQueryable<T> Get()
         {
-            throw new NotImplementedException();
+            return _baserepository.Get();
         }
 
         public T Get(params object[] keyValues)
         {
-            throw new NotImplementedException();
+            return _baserepository.Get(keyValues);
         }
 
         public Task<T> GetAsync(params object[] keyValues)
         {
-            throw new NotImplementedException();
+            return _baserepository.GetAsync(keyValues);
         }
 
         public T Update(T updated, params object[] keyValues)
         {
-            throw new NotImplementedException();
+            return _baserepository.Update(updated, keyValues);
         }
 
         public Task<T> UpdateAsync(T updated, params object[] keyValues)
         {
-            throw new NotImplementedException();
+            return _baserepository.UpdateAsync(updated, keyValues);
         }
     }
 }
