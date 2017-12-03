@@ -36,6 +36,34 @@ namespace Festispec.ViewModels.Employees
                 RaisePropertyChanged("customer");
             }
         }
+
+        public DateTime FromDate
+        {
+            get
+            {
+                return _fromDate;
+            }
+            set
+            {
+                _fromDate = value;
+                NewInspection.StartDate = _fromDate.Date;
+                RaisePropertyChanged();
+            }
+        }
+
+        public DateTime ToDate
+        {
+            get
+            {
+                return _toDate;
+            }
+            set
+            {
+                _toDate = value;
+                NewInspection.EndDate = _toDate.Date;
+                RaisePropertyChanged();
+            }
+        }
         public ICommand AddInspectionCommand { get; set; }
         public ICommand CloseWindowCommand { get; set; }
         private readonly INavigationService _navigationService;
@@ -47,8 +75,6 @@ namespace Festispec.ViewModels.Employees
             _navigationService = navigationService;
             NewInspection = new InspectionVM();
             NewInspection.Status = "Pending";
-            NewInspection.StartDate = new DateTime(2017, 01, 12);
-            NewInspection.EndDate = new DateTime(2017, 01, 12);
 
             NewInspection.Location = DbGeography.PointFromText("POINT(50 5)", 4326);
             CustomerList = new List<CustomerVM>();
@@ -67,10 +93,15 @@ namespace Festispec.ViewModels.Employees
             {
                 NewInspection.Customer = CustomerList.ElementAt(0).ToModel();
             }
+            _fromDate = DateTime.Now;
+            _toDate = DateTime.Now;
+
         }
 
         // fields
         private int _selectedIndexCustomerList;
+        private DateTime _fromDate;
+        private DateTime _toDate;
 
         // methods
         public bool CanAddInspection()
@@ -82,12 +113,13 @@ namespace Festispec.ViewModels.Employees
                 && NewInspection.Country != null && NewInspection.City != null
                 && NewInspection.Municipality != null)
             {
-                if (NewInspection.StartDate <= NewInspection.EndDate)
+                if (DateTime.Compare(NewInspection.StartDate, NewInspection.EndDate) > 0)
                 {
                     MessageBox.Show("Een inspectie kan niet eindigen voordat deze begonnen is");
                     return false;
                 } else
                 {
+                    MessageBox.Show("Dit is niet goed"); //
                     return true;
                 }
             } else
