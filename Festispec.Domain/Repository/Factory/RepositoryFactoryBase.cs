@@ -6,6 +6,7 @@ using System.Data.Common;
 using System.Diagnostics;
 using System.Windows;
 using System.Data;
+using Festispec.Domain.LocalDatabase;
 
 namespace Festispec.Domain.Repository.Factory
 {
@@ -25,36 +26,21 @@ namespace Festispec.Domain.Repository.Factory
         /// <returns> A new instance of the DbContext. </returns>
         protected DbContext GetDbContext()
         {
-
             if (CanConnect())
             {
                 MessageBox.Show("Verbonden met de database!");
+                //database syncen
                 return new FestispecContainer();
             }
             else
             {
-                Debug.WriteLine("Geen verbinding");
+                MessageBox.Show("Error 1337: Niet verbonden met de database!");
                 return null;
             }
         }
+
         protected bool CanConnect()
         {
-            //    string connection = "(localDB)\\dev";
-
-            //    try
-            //    {
-            //        using (var connection = new SqlConnection())
-            //        {
-            //            connection.Open();
-            //            return true;
-            //        }
-            //    }
-            //    catch
-            //    {
-            //        return false;
-            //    }
-            //}
-
             bool canConnectToDatabase = false;
 
             try

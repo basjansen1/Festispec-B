@@ -64,7 +64,6 @@
     <Compile Include="Address.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="CacheRepository.cs" />
     <Compile Include="Contact.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
@@ -109,6 +108,11 @@
     </Compile>
     <Compile Include="Inspector.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LocalDatabase\DataSetLocalDatabase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetLocalDatabase.xsd</DependentUpon>
     </Compile>
     <Compile Include="Note.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
@@ -189,6 +193,17 @@
     <None Include="App.config" />
     <None Include="Festispec.edmx.diagram">
       <DependentUpon>Festispec.edmx</DependentUpon>
+    </None>
+    <None Include="LocalDatabase\DataSetLocalDatabase.xsc">
+      <DependentUpon>DataSetLocalDatabase.xsd</DependentUpon>
+    </None>
+    <None Include="LocalDatabase\DataSetLocalDatabase.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetLocalDatabase.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="LocalDatabase\DataSetLocalDatabase.xss">
+      <DependentUpon>DataSetLocalDatabase.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
