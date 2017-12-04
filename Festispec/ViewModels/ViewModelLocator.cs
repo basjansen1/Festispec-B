@@ -133,6 +133,9 @@ namespace Festispec.ViewModels
         public IInspectorViewModelFactory InspectorViewModelFactory =
             ServiceLocator.Current.GetInstance<IInspectorViewModelFactory>();
 
+        public IPlanningRepositoryFactory PlanningRepositoryFactory = ServiceLocator.Current.GetInstance<IPlanningRepositoryFactory>();
+        public IPlanningViewModelFactory PlanningViewModelFactory = ServiceLocator.Current.GetInstance<IPlanningViewModelFactory>();
+
         public INavigationService NavigationService = ServiceLocator.Current.GetInstance<INavigationService>();
 
 
@@ -163,7 +166,7 @@ namespace Festispec.ViewModels
             ServiceLocator.Current.GetInstance<InspectorAddOrUpdateViewModel>();
 
         public PlanningListViewModel PlanningList => ServiceLocator.Current.GetInstance<PlanningListViewModel>();
-        public PlanningAddOrUpdateViewModel PlanningAddOrUpdate => ServiceLocator.Current.GetInstance<PlanningAddOrUpdateViewModel>();
+        public PlanningAddOrUpdateViewModel PlanningAddOrUpdate => new PlanningAddOrUpdateViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory, InspectorRepositoryFactory);
 
         #endregion
     }
