@@ -136,7 +136,7 @@ namespace Festispec.ViewModels.Employees
             }
         }
 
-        private void ReloadInspectionVMList()
+        public void ReloadInspectionVMList()
         {
             using (var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {

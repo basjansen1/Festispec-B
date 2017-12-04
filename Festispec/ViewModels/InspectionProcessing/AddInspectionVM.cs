@@ -138,6 +138,7 @@ namespace Festispec.ViewModels.Employees
                 }
 
                 InspectionList.InspectionVMList.Add(NewInspection);
+                InspectionList.ReloadInspectionVMList();
                 _navigationService.GoBack();
             }
         }
