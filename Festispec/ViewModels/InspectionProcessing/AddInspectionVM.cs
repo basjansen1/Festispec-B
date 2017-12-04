@@ -134,7 +134,7 @@ namespace Festispec.ViewModels.Employees
             {
                 using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
                 {
-                 //   inspectionRepository.Add(NewInspection.toModel());
+                    inspectionRepository.Add(NewInspection.toModel());
                 }
 
                 InspectionList.InspectionVMList.Add(NewInspection);
