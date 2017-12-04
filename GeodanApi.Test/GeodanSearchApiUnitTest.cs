@@ -11,7 +11,7 @@ namespace GeodanApi.Test
         {
             // 1. Arrange
             var geodanSearchApi = new GeodanSearchApi();
-            var geodanApiOptions = new GeodanApiOptions {PostalCode = "1079MB", HouseNumber = "1"};
+            var geodanApiOptions = new GeodanApiOptions("1079MB", "1");
 
             // 2. Act
             var url = geodanSearchApi.BuildUrl(geodanApiOptions);
@@ -26,12 +26,16 @@ namespace GeodanApi.Test
         {
             // 1. Arrange
             var geodanSearchApi = new GeodanSearchApi();
-            var geodanApiOptions = new GeodanApiOptions {HouseNumber = "1"};
+            
 
             // 2. Act
 
             // 3. Assert that an exception is thrown
-            Assert.Catch<ArgumentNullException>(() => geodanSearchApi.BuildUrl(geodanApiOptions));
+            Assert.Catch<ArgumentNullException>(() =>
+            {
+                var geodanApiOptions = new GeodanApiOptions(null, "1");
+                geodanSearchApi.BuildUrl(geodanApiOptions);
+            });
         }
 
         [Test]
@@ -39,12 +43,15 @@ namespace GeodanApi.Test
         {
             // 1. Arrange
             var geodanSearchApi = new GeodanSearchApi();
-            var geodanApiOptions = new GeodanApiOptions {PostalCode = "1079MB" };
 
             // 2. Act
 
             // 3. Assert that an exception is thrown
-            Assert.Catch<ArgumentNullException>(() => geodanSearchApi.BuildUrl(geodanApiOptions));
+            Assert.Catch<ArgumentNullException>(() =>
+            {
+                var geodanApiOptions = new GeodanApiOptions("1079MB", null);
+                geodanSearchApi.BuildUrl(geodanApiOptions);
+            });
         }
 
         [Test]
@@ -52,7 +59,7 @@ namespace GeodanApi.Test
         {
             // 1. Arrange
             var geodanSearchApi = new GeodanSearchApi();
-            var geodanApiOptions = new GeodanApiOptions { PostalCode = "1079MB", HouseNumber = "1" };
+            var geodanApiOptions = new GeodanApiOptions("1079MB", "1");
 
             // 2. Act
             var data = geodanSearchApi.Find(geodanApiOptions);
