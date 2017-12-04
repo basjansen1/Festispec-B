@@ -58,8 +58,6 @@ namespace Festispec.ViewModels.Inspector
                     var address = _geoRepository.Find(EntityViewModel.UpdatedEntity.PostalCode,
                         EntityViewModel.UpdatedEntity.HouseNumber);
 
-                    EntityViewModel.PostalCode = EntityViewModel.UpdatedEntity.PostalCode = address.PostalCode;
-                    EntityViewModel.HouseNumber = EntityViewModel.UpdatedEntity.HouseNumber = address.HouseNumber;
                     EntityViewModel.Street = EntityViewModel.UpdatedEntity.Street = address.Street;
                     EntityViewModel.City = EntityViewModel.UpdatedEntity.City = address.City;
                     EntityViewModel.Municipality = EntityViewModel.UpdatedEntity.Municipality = address.Municipality;
@@ -84,11 +82,12 @@ namespace Festispec.ViewModels.Inspector
                             break;
                     }
                 }
-                catch (InvalidOperationException)
+                catch (InvalidOperationException exception)
                 {
-                    MessageBox.Show($"{EntityViewModel.PostalCode} is geen geldige postcode");
+                    MessageBox.Show(exception.Message);
                 }
             }
+
             return false;
         }
 

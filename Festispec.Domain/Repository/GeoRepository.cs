@@ -26,11 +26,9 @@ namespace Festispec.Domain.Repository
         /// <returns></returns>
         public Address Find(string postalCode, string houseNumber)
         {
-            // Clean the given postal code
-            postalCode = CleanPostalCode(postalCode);
-
             // Generate options based on postal code and house number
-            var geodanApiOptions = new GeodanApiOptions {PostalCode = postalCode, HouseNumber = houseNumber};
+            var geodanApiOptions = new GeodanApiOptions(postalCode, houseNumber);
+
             var data = _geodanSearchApi.Find(geodanApiOptions);
 
             // Convert geometry data to DbGeography
@@ -41,7 +39,7 @@ namespace Festispec.Domain.Repository
             {
                 City = data.city,
                 PostalCode = data.postcode,
-                HouseNumber = data.housenumber,
+                HouseNumber = data.housenumbers,
                 Street = data.street,
                 Municipality = data.municipality,
                 Country = DefaultCountry,
@@ -55,26 +53,6 @@ namespace Festispec.Domain.Repository
 
         public void Dispose()
         {
-        }
-
-        /// <summary>
-        ///     Cleans the postal code of spaces and checks for valid dutch postal code
-        /// </summary>
-        /// <param name="postalCode"></param>
-        /// <exception cref="InvalidOperationException">Invalid postalcode format</exception>
-        /// <returns></returns>
-        private static string CleanPostalCode(string postalCode)
-        {
-            if (postalCode == null)
-                throw new ArgumentNullException(nameof(postalCode));
-
-            var cleanedPostalCode = postalCode.Replace(" ", string.Empty);
-
-            var postalCodeRegex = new Regex("^[1-9][0-9]{3}(?!sa|sd|ss)[a-z]{2}$", RegexOptions.IgnoreCase);
-            if (!postalCodeRegex.IsMatch(cleanedPostalCode))
-                throw new InvalidOperationException($"{postalCode} is not a valid postal code");
-
-            return cleanedPostalCode;
         }
     }
 }

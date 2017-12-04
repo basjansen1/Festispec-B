@@ -50,7 +50,12 @@ namespace GeodanApi
                 throw new ArgumentNullException(nameof(options.HouseNumber));
 
             var url =
-                $"{_apiUrl}?q=fpostcode:{options.PostalCode}+AND+housenumber:{options.HouseNumber}&servicekey={_apiKey}";
+                $"{_apiUrl}?q=fpostcode:{options.PostalCode}+AND+housenumber:{options.HouseNumber}";
+
+            if (!string.IsNullOrWhiteSpace(options.HouseLetter))
+                url += $"+AND+houseletter:{options.HouseLetter}";
+
+            url += $"&servicekey={_apiKey}";
 
             return url;
         }
