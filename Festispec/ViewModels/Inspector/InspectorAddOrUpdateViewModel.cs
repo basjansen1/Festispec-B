@@ -55,14 +55,15 @@ namespace Festispec.ViewModels.Inspector
             {
                 try
                 {
-                    var address = _geoRepository.Find(EntityViewModel.PostalCode,
-                        EntityViewModel.HouseNumber);
+                    var address = _geoRepository.Find(EntityViewModel.UpdatedEntity.PostalCode,
+                        EntityViewModel.UpdatedEntity.HouseNumber);
 
-
-                    EntityViewModel.Street = address.Street;
-                    EntityViewModel.City = address.City;
-                    EntityViewModel.Municipality = address.Municipality;
-                    EntityViewModel.Country = address.Country;
+                    EntityViewModel.PostalCode = EntityViewModel.UpdatedEntity.PostalCode = address.PostalCode;
+                    EntityViewModel.HouseNumber = EntityViewModel.UpdatedEntity.HouseNumber = address.HouseNumber;
+                    EntityViewModel.Street = EntityViewModel.UpdatedEntity.Street = address.Street;
+                    EntityViewModel.City = EntityViewModel.UpdatedEntity.City = address.City;
+                    EntityViewModel.Municipality = EntityViewModel.UpdatedEntity.Municipality = address.Municipality;
+                    EntityViewModel.Country = EntityViewModel.UpdatedEntity.Country = address.Country;
                 }
                 catch (ArgumentNullException exception)
                 {
@@ -74,7 +75,7 @@ namespace Festispec.ViewModels.Inspector
                             break;
                         case "json":
                             MessageBox.Show(
-                                $"Geen adres gevonden op {EntityViewModel.PostalCode} {EntityViewModel.HouseNumber}");
+                                $"Geen adres gevonden op {EntityViewModel.UpdatedEntity.PostalCode} {EntityViewModel.UpdatedEntity.HouseNumber}");
                             break;
                         default:
                             MessageBox.Show("Er is iets fout gegaan");

@@ -65,6 +65,9 @@ namespace Festispec.Domain.Repository
         /// <returns></returns>
         private static string CleanPostalCode(string postalCode)
         {
+            if (postalCode == null)
+                throw new ArgumentNullException(nameof(postalCode));
+
             var cleanedPostalCode = postalCode.Replace(" ", string.Empty);
 
             var postalCodeRegex = new Regex("^[1-9][0-9]{3}(?!sa|sd|ss)[a-z]{2}$", RegexOptions.IgnoreCase);

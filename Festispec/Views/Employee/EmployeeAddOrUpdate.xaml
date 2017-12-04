@@ -44,12 +44,12 @@
 
             <StackPanel Grid.Column="0">
                 <Label>Postcode</Label>
-                <TextBox Text="{Binding Path=EntityViewModel.PostalCode}" MaxLength="6" />
+                <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.PostalCode}" MaxLength="6" />
             </StackPanel>
 
             <StackPanel Grid.Column="1">
                 <Label>Huisnummer</Label>
-                <TextBox Text="{Binding Path=EntityViewModel.HouseNumber}" />
+                <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.HouseNumber}" />
             </StackPanel>
             
             <Button Grid.Column="2" Command="{Binding SearchAddressCommand}">Zoek adres</Button>
