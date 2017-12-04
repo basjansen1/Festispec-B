@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace Festispec.Domain.LocalDatabase
 {
     public class SyncClasses
     {
-        private SqlConnection objConn;
+        private string ConnectionString;
         public DataSet myDataSet;
 
         public SyncClasses()
@@ -20,30 +21,22 @@ namespace Festispec.Domain.LocalDatabase
 
         public void Connect()
         {
-            myDataSet = new DataSetLocalDatabase();
+            myDataSet = new DataSetLocalDatabase(); //local database
 
-            string sConnectionString;
-            sConnectionString = "Initial Catalog=Festispec;" + "Data Source=(localdb)\\dev";
-            objConn = new SqlConnection(sConnectionString);
-            objConn.Open();
+            ConnectionString = "Data Source=(localdb)\\dev;" + "Initial Catalog=Festispec;"; //connectiestring Festispec Database
+
+            FillDatabase();
         }
 
-        public SqlDataAdapter GetAdapter(string TableName)
+        public void FillDatabase()
         {
-            return new SqlDataAdapter("Select * From " + TableName + "", objConn);
-        }
-
-        public void FillDataSet()
-        {
-            string[] TableList = { "Address"};
+            string[] TableList = { "Address" }; //nog hardcoded, later automatisch opslaan alle tabels van Festispe Database
 
             foreach (string s in TableList)
             {
-                SqlDataAdapter temp = GetAdapter(s);
-
-                temp.FillSchema(myDataSet, SchemaType.Source, s);
-                temp.Fill(myDataSet, s);
+                SqlDataAdapter adp = new SqlDataAdapter("select * from " + s + "", ConnectionString); //maakt connectie tussen dataset en database Festispec
+                adp.Fill(myDataSet, s); //registreert het aantal rijen dat geüpdate worden of gevuld, maar moet nog daadwerkelijk gevuld worden
             }
-        }
+        }       
     }
 }

@@ -29,8 +29,7 @@ namespace Festispec.Domain.Repository.Factory
         {
             if (CanConnect())
             {
-                MessageBox.Show("Verbonden met de database!");
-                //database syncen
+                new SyncClasses(); //sync database to local database
                 return new FestispecContainer();
             }
             else
