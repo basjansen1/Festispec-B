@@ -68,6 +68,10 @@
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -99,6 +103,8 @@
     <Compile Include="State\IState.cs" />
     <Compile Include="State\State.cs" />
     <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
+    <Compile Include="ViewModels\Regulation\RegulationListVM.cs" />
+    <Compile Include="ViewModels\Regulation\RegulationVM.cs" />
     <Compile Include="ViewModels\Template\TemplateQuestionAddViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateQuestionAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeAddOrUpdateViewModel.cs" />
@@ -111,6 +117,8 @@
     <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateViewModelFactory.cs" />
+    <Compile Include="ViewModels\InspectionProcessing\CustomerVM.cs" />
+    <Compile Include="ViewModels\InspectionProcessing\InspectionListFilterVM.cs" />
     <Compile Include="ViewModels\Factory\Interface\IInspectorViewModelFactory.cs" />
     <Compile Include="ViewModels\Inspector\InspectorAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Inspector\InspectorListViewModel.cs" />
@@ -132,11 +140,25 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\InspectionProcessing\AddInspectionVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\EditInspectionVM.cs" />
-    <Compile Include="ViewModels\InspectionProcessing\InspectionListFilterVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\ProcessInspectionVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionListVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\AddInspection.xaml.cs">
+      <DependentUpon>AddInspection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Crud_Employees\Crud_Employees.xaml.cs">
+      <DependentUpon>Crud_Employees.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditInspection.xaml.cs">
+      <DependentUpon>EditInspection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InspectionList.xaml.cs">
+      <DependentUpon>InspectionList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowRegulation.xaml.cs">
+      <DependentUpon>ShowRegulation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Template\TemplateQuestionAdd.xaml.cs">
       <DependentUpon>TemplateQuestionAdd.xaml</DependentUpon>
     </Compile>
@@ -176,6 +198,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Crud_Employees\Crud_Employees.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ShowRegulation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Template\TemplateQuestionAdd.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -197,8 +227,20 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Inspector\InspectorList.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AddInspection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\EditInspection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InspectionList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Template\TemplateList.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -231,6 +273,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages 2.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -243,12 +286,19 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Festispec.Domain\Festispec.Domain.csproj">
       <Project>{09979796-e638-48d5-8666-fa0ac1f54a2e}</Project>
       <Name>Festispec.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProofOfConcept.Geodan\ProofOfConcept.Geodan.csproj">
+      <Project>{86E3678B-98F7-4E37-BE12-D682B3F7D7AE}</Project>
+      <Name>ProofOfConcept.Geodan</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Views\Crud_Employees\Images\garbage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
