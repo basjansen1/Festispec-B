@@ -44,7 +44,7 @@ namespace Festispec.ViewModels.Planning
             using (var inspectorRepository = InspectorRepositoryFactory.CreateRepository())
             {
                 var query = inspectorRepository.GetAvailableNearby(EntityViewModel.Date,
-                    EntityViewModel.Inspection.Location, EntityViewModel.InspectorId);
+                    EntityViewModel.Inspection.Location);
 
                 if (!string.IsNullOrWhiteSpace(SearchInspectorFirstName))
                     query = query.Where(inspector => inspector.FirstName.Contains(SearchInspectorFirstName));
