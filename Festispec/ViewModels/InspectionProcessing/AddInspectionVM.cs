@@ -125,12 +125,6 @@ namespace Festispec.ViewModels.Employees
                     return false;
                 }
 
-                if (InspectionList.SelectedInspection.PostalCode.Length < 6)
-                {
-                    MessageBox.Show("Postcode moet zes karakters bevatten");
-                    return false;
-                }
-
                 return true;
             }
 

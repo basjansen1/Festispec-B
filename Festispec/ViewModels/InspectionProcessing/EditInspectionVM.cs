@@ -24,6 +24,7 @@ namespace Festispec.ViewModels.Employees
         public ICommand CancelInspectionCommand { get; set; }
         public ICommand ShowRegulationCommand { get; set; }
         public ICommand SearchAddressCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         #endregion
 
         #region properties
@@ -49,6 +50,7 @@ namespace Festispec.ViewModels.Employees
             CancelInspectionCommand = new RelayCommand(_navigationService.GoBack);
             ShowRegulationCommand = new RelayCommand(OpenRegulation);
             SearchAddressCommand = new RelayCommand(()=>SearchAddress());
+            DeleteCommand = new RelayCommand(DeleteSelectedInspection);
 
             InspectionStatusList = new List<string>();
             InspectionStatusList.Add("Accepted");
@@ -97,7 +99,7 @@ namespace Festispec.ViewModels.Employees
                 MessageBox.Show("Er is iets fout gegaan met het bewerken van een inspectie! Vul alle velden in");
         }
 
-        public void OpenRegulation()
+        private void OpenRegulation()
         {
             _navigationService.NavigateTo(Routes.Routes.RegulationList, _selectedMunicipality);
         }
@@ -142,6 +144,13 @@ namespace Festispec.ViewModels.Employees
             }
 
             return false;
+        }
+        
+        private void DeleteSelectedInspection()
+        {
+            InspectionList.DeleteSelectedInspection();
+
+            _navigationService.GoBack();
         }
         #endregion
     }
