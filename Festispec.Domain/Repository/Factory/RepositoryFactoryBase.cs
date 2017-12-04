@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Data.Common;
 using System.Diagnostics;
 using System.Windows;
+using System.Data;
 
 namespace Festispec.Domain.Repository.Factory
 {
@@ -24,6 +25,7 @@ namespace Festispec.Domain.Repository.Factory
         /// <returns> A new instance of the DbContext. </returns>
         protected DbContext GetDbContext()
         {
+
             if (CanConnect())
             {
                 MessageBox.Show("Verbonden met de database!");
@@ -33,9 +35,8 @@ namespace Festispec.Domain.Repository.Factory
             {
                 Debug.WriteLine("Geen verbinding");
                 return null;
-            }           
+            }
         }
-
         protected bool CanConnect()
         {
             //    string connection = "(localDB)\\dev";
@@ -70,4 +71,9 @@ namespace Festispec.Domain.Repository.Factory
             return canConnectToDatabase;
         }
     }
+
 }
+
+
+
+
