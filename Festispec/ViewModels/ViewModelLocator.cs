@@ -122,6 +122,9 @@ namespace Festispec.ViewModels
         public IEmployeeRepositoryFactory EmployeeRepositoryFactory =
             ServiceLocator.Current.GetInstance<IEmployeeRepositoryFactory>();
 
+        public ICustomerRepositoryFactory CustomerRepositoryFactory =
+            ServiceLocator.Current.GetInstance<ICustomerRepositoryFactory>();
+
         public IEmployeeViewModelFactory EmployeeViewModelFactory =
             ServiceLocator.Current.GetInstance<IEmployeeViewModelFactory>();
 
@@ -174,7 +177,7 @@ namespace Festispec.ViewModels
 
         public RegulationListVM GetRegulationList => new RegulationListVM(RegulationsViewModelFactory, NavigationService, GetInspectionList);
 
-        public AddInspectionVM GetAddInspectionVM => ServiceLocator.Current.GetInstance<AddInspectionVM>();
+        public AddInspectionVM GetAddInspectionVM => new AddInspectionVM(GetInspectionList, CustomerRepositoryFactory, NavigationService);
 
         public EditInspectionVM GetEditInspection => ServiceLocator.Current.GetInstance<EditInspectionVM>();
 

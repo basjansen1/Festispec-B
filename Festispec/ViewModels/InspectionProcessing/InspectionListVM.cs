@@ -56,7 +56,6 @@ namespace Festispec.ViewModels.Employees
         public ICommand ShowAddInspectionWindowCommand { get; set; }
         public ICommand ShowEditInspectionWindowCommand { get; set; }
         public ICommand ShowProcessInspectionWindowCommand { get; set; }
-        public ICommand DeleteInspectionCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand DeleteSearchCommand { get; set; }
         #endregion
@@ -78,7 +77,6 @@ namespace Festispec.ViewModels.Employees
             ShowAddInspectionWindowCommand = new RelayCommand(ShowAddInspectionWindow);
             ShowEditInspectionWindowCommand = new RelayCommand(ShowEditInspectionWindow);
             ShowProcessInspectionWindowCommand = new RelayCommand(ShowProcessInspectionWindow);
-            DeleteInspectionCommand = new RelayCommand(DeleteSelectedInspection);
             SearchCommand = new RelayCommand(Search);
             DeleteSearchCommand = new RelayCommand(DeleteFilter);
             _searchInput = null;
