@@ -32,5 +32,11 @@ namespace Festispec.Domain.LocalDatabase
         {
             return new SqlDataAdapter("Select * From " + TableName + "", objConn);
         }
+
+        public void FillDataSet()
+        {
+            GetAdapter().FillSchema(dsPubs, SchemaType.Source, "Authors");
+            daAuthors.Fill(dsPubs, "Authors");
+        }
     }
 }
