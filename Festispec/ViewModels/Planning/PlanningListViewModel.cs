@@ -39,7 +39,7 @@ namespace Festispec.ViewModels.Planning
         public ICommand PlanningDeleteCommand { get; set; }
         public ICommand SearchPlanningCommand { get; set; }
 
-        public ObservableCollection<PlanningViewModel> Plannings { get; private set; }
+        public ObservableCollection<PlanningViewModel> Plannings { get; private set; } = new ObservableCollection<PlanningViewModel>();
 
         public PlanningViewModel SelectedPlanning { get; set; }
 
@@ -90,9 +90,13 @@ namespace Festispec.ViewModels.Planning
                 if (SearchDate.HasValue)
                     query = query.Where(planning => planning.Date.Equals(SearchDate.Value));
 
-                Plannings = new ObservableCollection<PlanningViewModel>(
-                    query.ToList().Select(planning => _planningViewModelFactory.CreateViewModel(planning)));
-                RaisePropertyChanged(nameof(Plannings));
+                var plannings = query.ToList().Select(planning => _planningViewModelFactory.CreateViewModel(planning));
+
+                // Clear plannings
+                Plannings.Clear();
+                // Fill plannings with  new values to trigger observablecollection updates.
+                foreach (var planning in plannings)
+                    Plannings.Add(planning);
             }
         }
     }
