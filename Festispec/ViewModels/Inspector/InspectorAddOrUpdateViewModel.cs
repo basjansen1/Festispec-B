@@ -29,7 +29,7 @@ namespace Festispec.ViewModels.Inspector
                     .Where(e => e.Role_Role == "Manager").ToList());
             }
 
-            SearchAddressCommand = new RelayCommand(SearchAddress);
+            SearchAddressCommand = new RelayCommand(() => SearchAddress());
         }
         public ICommand SearchAddressCommand { get; set; }
 
@@ -49,7 +49,7 @@ namespace Festispec.ViewModels.Inspector
         {
         }
 
-        private void SearchAddress()
+        private bool SearchAddress()
         {
             using (_geoRepository)
             {
@@ -64,6 +64,8 @@ namespace Festispec.ViewModels.Inspector
                     EntityViewModel.City = EntityViewModel.UpdatedEntity.City = address.City;
                     EntityViewModel.Municipality = EntityViewModel.UpdatedEntity.Municipality = address.Municipality;
                     EntityViewModel.Country = EntityViewModel.UpdatedEntity.Country = address.Country;
+
+                    return true;
                 }
                 catch (ArgumentNullException exception)
                 {
@@ -87,12 +89,13 @@ namespace Festispec.ViewModels.Inspector
                     MessageBox.Show($"{EntityViewModel.PostalCode} is geen geldige postcode");
                 }
             }
+            return false;
         }
 
         public override void Save()
         {
             // TODO: Validation
-            var saved = EntityViewModel.Save();
+            var saved = SearchAddress() && EntityViewModel.Save();
 
             if(saved) NavigationService.GoBack(EntityViewModel);
         }
