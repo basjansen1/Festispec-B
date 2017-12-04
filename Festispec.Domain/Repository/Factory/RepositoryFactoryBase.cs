@@ -4,6 +4,7 @@ using Festispec.Domain.Repository.Interface;
 using System.Data.SqlClient;
 using System.Data.Common;
 using System.Diagnostics;
+using System.Windows;
 
 namespace Festispec.Domain.Repository.Factory
 {
@@ -23,33 +24,50 @@ namespace Festispec.Domain.Repository.Factory
         /// <returns> A new instance of the DbContext. </returns>
         protected DbContext GetDbContext()
         {
-            try
+            if (CanConnect())
             {
+                MessageBox.Show("Verbonden met de database!");
                 return new FestispecContainer();
             }
-            catch
+            else
             {
                 Debug.WriteLine("Geen verbinding");
                 return null;
             }           
         }
 
-        //protected bool IsConnected()
-        //{
-        //    string connection = "(localDB)\\dev";
+        protected bool CanConnect()
+        {
+            //    string connection = "(localDB)\\dev";
 
-        //    try
-        //    {
-        //        using (var connection = new SqlConnection())
-        //        {
-        //            connection.Open();
-        //            return true;
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        return false;
-        //    }
-        //}
+            //    try
+            //    {
+            //        using (var connection = new SqlConnection())
+            //        {
+            //            connection.Open();
+            //            return true;
+            //        }
+            //    }
+            //    catch
+            //    {
+            //        return false;
+            //    }
+            //}
+
+            bool canConnectToDatabase = false;
+
+            try
+            {
+                using (var dbContext = new FestispecContainer())
+                {
+                    canConnectToDatabase = dbContext.Database.Exists();
+                }
+            }
+            catch
+            {
+                Debug.WriteLine("Geen verbinding");
+            }
+            return canConnectToDatabase;
+        }
     }
 }

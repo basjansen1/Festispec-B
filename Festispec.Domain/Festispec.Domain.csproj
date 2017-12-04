@@ -46,6 +46,7 @@
       <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
