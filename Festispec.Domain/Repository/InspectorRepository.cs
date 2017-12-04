@@ -49,8 +49,10 @@ namespace Festispec.Domain.Repository
                 .Where(inspector => !inspector.Schedule.Any(schedule => schedule.NotAvailableFrom > dateAvailable && schedule.NotAvailableTo < dateAvailable))
                 // Where inspector has no planning on the date available
                 .Where(inspector => inspector.Planning.All(planning => planning.Date != dateAvailable) || inspector.Id == inspectorId)
-                // TODO: Where certification date is still valid at dateAvailable
-                // TODO: Where hired date is still valid at dateAvailable
+                // Where certification date is still valid at dateAvailable
+                .Where(inspector => inspector.CertificationFrom < dateAvailable && inspector.CertificationTo > dateAvailable)
+                // Where hired date is still valid at dateAvailable
+                .Where(inspector => inspector.HiredFrom < dateAvailable && inspector.HiredTo > dateAvailable)
                 // Order by distance to center
                 .OrderBy(inspector => inspector.Location.Distance(center));
         }
