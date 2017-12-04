@@ -120,12 +120,6 @@ namespace Festispec.ViewModels.Employees
                     return false;
                 }
 
-                if (InspectionList.SelectedInspection.PostalCode.Length < 6)
-                {
-                    MessageBox.Show("Postcode moet zes karakters bevatten");
-                    return false;
-                }
-
                 return true;
             }
 
@@ -140,7 +134,7 @@ namespace Festispec.ViewModels.Employees
             {
                 using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
                 {
-                    inspectionRepository.Add(NewInspection.toModel());
+                 //   inspectionRepository.Add(NewInspection.toModel());
                 }
 
                 InspectionList.InspectionVMList.Add(NewInspection);
