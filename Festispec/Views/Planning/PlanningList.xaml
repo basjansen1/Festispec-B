@@ -55,6 +55,7 @@
                     <Button Content="Planning toevoegen" Command="{Binding NavigateToAddPlanningCommand}" Margin="0 0 0 10"></Button>
                     <Button Content="Planning wijzigen" Command="{Binding NavigateToAddOrUpdatePlanningCommand}" Margin="0 0 0 10"></Button>
                     <Button Content="Planning verwijderen" Command="{Binding PlanningDeleteCommand}" Margin="0 0 0 10"></Button>
+                    <Button Content="Terug" Command="{Binding NavigateBackCommand}" Margin="0 0 0 10"></Button>
                 </StackPanel>
             </Border>
         </Grid>

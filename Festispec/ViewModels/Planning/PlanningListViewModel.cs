@@ -37,6 +37,7 @@ namespace Festispec.ViewModels.Planning
         public ICommand NavigateToAddOrUpdatePlanningCommand { get; set; }
         public ICommand PlanningDeleteCommand { get; set; }
         public ICommand SearchPlanningCommand { get; set; }
+        public ICommand NavigateBackCommand { get; set; }
 
         public ObservableCollection<PlanningViewModel> Plannings { get; } =
             new ObservableCollection<PlanningViewModel>();
@@ -84,6 +85,7 @@ namespace Festispec.ViewModels.Planning
                 LoadPlannings();
             }, () => SelectedPlanning != null);
             SearchPlanningCommand = new RelayCommand(LoadPlannings);
+            NavigateBackCommand = new RelayCommand(GoBack);
         }
 
         private void LoadPlannings()
@@ -108,6 +110,11 @@ namespace Festispec.ViewModels.Planning
                 foreach (var planning in plannings)
                     Plannings.Add(planning);
             }
+        }
+
+        private void GoBack()
+        {
+            NavigationService.GoBack();
         }
     }
 }
