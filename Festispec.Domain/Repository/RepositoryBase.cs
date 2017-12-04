@@ -26,6 +26,8 @@ namespace Festispec.Domain.Repository
             DbContext = dbContext;
         }
 
+     
+
         /// <inheritdoc />
         public void Dispose()
         {

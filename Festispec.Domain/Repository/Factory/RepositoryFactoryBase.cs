@@ -1,6 +1,9 @@
 ﻿using System.Data.Entity;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
+using System.Data.SqlClient;
+using System.Data.Common;
+using System.Diagnostics;
 
 namespace Festispec.Domain.Repository.Factory
 {
@@ -20,7 +23,33 @@ namespace Festispec.Domain.Repository.Factory
         /// <returns> A new instance of the DbContext. </returns>
         protected DbContext GetDbContext()
         {
-            return new FestispecContainer();
+            try
+            {
+                return new FestispecContainer();
+            }
+            catch
+            {
+                Debug.WriteLine("Geen verbinding");
+                return null;
+            }           
         }
+
+        //protected bool IsConnected()
+        //{
+        //    string connection = "(localDB)\\dev";
+
+        //    try
+        //    {
+        //        using (var connection = new SqlConnection())
+        //        {
+        //            connection.Open();
+        //            return true;
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        return false;
+        //    }
+        //}
     }
 }
