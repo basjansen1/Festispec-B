@@ -144,6 +144,7 @@ namespace Festispec.ViewModels
         public IRegulationRepositoryFactory RegulationsViewModelFactory =
             ServiceLocator.Current.GetInstance<IRegulationRepositoryFactory>();
 
+        public IGeoRepository GeoRepository = ServiceLocator.Current.GetInstance<IGeoRepository>();
         public INavigationService NavigationService = ServiceLocator.Current.GetInstance<INavigationService>();
 
 
@@ -181,7 +182,7 @@ namespace Festispec.ViewModels
 
         public RegulationListVM GetRegulationList => new RegulationListVM(RegulationsViewModelFactory, NavigationService, GetInspectionList);
 
-        public AddInspectionVM GetAddInspectionVM => new AddInspectionVM(GetInspectionList, CustomerRepositoryFactory, NavigationService);
+        public AddInspectionVM GetAddInspectionVM => new AddInspectionVM(GetInspectionList, CustomerRepositoryFactory, NavigationService, GeoRepository);
 
         public EditInspectionVM GetEditInspection => ServiceLocator.Current.GetInstance<EditInspectionVM>();
 
