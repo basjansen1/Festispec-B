@@ -120,6 +120,13 @@ namespace Festispec.ViewModels.Planning
 
         public override bool Save()
         {
+            if (TimeFrom >= TimeTo)
+            {
+                MessageBox.Show("Tijd tot moet later zijn dan tijd van.");
+
+                return false;
+            }
+
             try
             {
                 Domain.Planning updated;
