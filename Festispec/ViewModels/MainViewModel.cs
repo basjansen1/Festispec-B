@@ -1,10 +1,5 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Windows.Input;
-using Festispec.Domain;
-using Festispec.Domain.Repository;
+﻿using System.Windows.Input;
 using Festispec.NavigationService;
-using Festispec.ViewModels.Employees;
 using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels
@@ -15,13 +10,6 @@ namespace Festispec.ViewModels
         public MainViewModel(INavigationService navigationService) : base(navigationService)
         {
             _navigationService = navigationService;
-
-            // TODO: Temp remove
-            using (var inspectionRepository = new InspectionRepository(new FestispecContainer()))
-            {
-                _inspection = inspectionRepository.Get().FirstOrDefault();
-            }
-
             RegisterCommands();
         }
 
@@ -29,10 +17,7 @@ namespace Festispec.ViewModels
         public ICommand NavigateToEmployeeListCommand { get; private set; }
 
         public ICommand NavigateToInspectorListCommand { get; private set; }
-
-        public ICommand NavigateToInspectionPlanningCommand { get; private set; }
-
-        private readonly Inspection _inspection;
+        public ICommand NavigateToInspectionListCommand { get; private set; }
 
         public void RegisterCommands()
         {
@@ -42,10 +27,8 @@ namespace Festispec.ViewModels
                 new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.EmployeeList), () => _navigationService.HasAccess(Routes.Routes.EmployeeList));
             NavigateToInspectorListCommand = 
                 new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.InspectorList), () => _navigationService.HasAccess(Routes.Routes.InspectorList));
-
-
-            // TODO: Temp remove
-            NavigateToInspectionPlanningCommand = new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.PlanningList, _inspection), () => _navigationService.HasAccess(Routes.Routes.PlanningList));
+            NavigateToInspectionListCommand =
+                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.InspectionList), () => _navigationService.HasAccess(Routes.Routes.InspectionList));
         }
     }
 }

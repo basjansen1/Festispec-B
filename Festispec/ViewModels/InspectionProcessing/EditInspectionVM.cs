@@ -1,35 +1,75 @@
-﻿using GalaSoft.MvvmLight;
+﻿using Festispec.Domain;
+using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Domain.Repository.Interface;
+using Festispec.NavigationService;
+using Festispec.ViewModels.InspectionProcessing;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Festispec.ViewModels.Employees
 {
     public class EditInspectionVM : ViewModelBase
     {
-        // getters and setters
-        public InspectionVM InspectionVM { get; set; }
-
-        // commands
+        #region commands
         public ICommand EditInspectionCommand { get; set; }
+        public ICommand CancelInspectionCommand { get; set; }
+        public ICommand ShowRegulationCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        #endregion
 
-        // fields
+        #region properties
+        public InspectionListVM InspectionList { get; set; }
+        public List<string> InspectionStatusList { get; set; }
+        public string SelectedInspection { get; set; }
+        #endregion
 
-        // constructors
-        public EditInspectionVM(InspectionVM InspectionVM)
+        #region fields
+        private INavigationService _navigationService;
+        private string _selectedMunicipality;
+        #endregion
+
+        #region constructor and methods
+        public EditInspectionVM(InspectionListVM inspectionList, INavigationService navigationService)
         {
+            InspectionList = inspectionList;
+            _navigationService = navigationService;
+            _selectedMunicipality = inspectionList.SelectedInspection.Municipality;
 
+            EditInspectionCommand = new RelayCommand(SaveChanges);
+            CancelInspectionCommand = new RelayCommand(_navigationService.GoBack);
+            ShowRegulationCommand = new RelayCommand(OpenRegulation);
+            DeleteCommand = new RelayCommand(DeleteSelectedInspection);
+
+            InspectionStatusList = new List<string>();
+            InspectionStatusList.Add("Accepted");
+            InspectionStatusList.Add("Declined");
+            InspectionStatusList.Add("Pending");
         }
 
-        // methods
         public bool CanEditInspection()
         {
-            if (InspectionVM.Name != null && InspectionVM.StartDate != null
-                 && InspectionVM.EndDate != null)
+            if (InspectionList.SelectedInspection.Name != "" && InspectionList.SelectedInspection.StartDate != null
+                && InspectionList.SelectedInspection.EndDate != null && InspectionList.SelectedInspection.Website != ""
+                && InspectionList.SelectedInspection.Status != "" && InspectionList.SelectedInspection.Street != ""
+                && InspectionList.SelectedInspection.HouseNumber != "" && InspectionList.SelectedInspection.PostalCode != ""
+                && InspectionList.SelectedInspection.Country != "" && InspectionList.SelectedInspection.City != ""
+                && InspectionList.SelectedInspection.Municipality != ""
+                && InspectionList.SelectedInspection.StartDate <= InspectionList.SelectedInspection.EndDate)
+            {
+                if (InspectionList.SelectedInspection.PostalCode.Length < 6)
+                {
+                    MessageBox.Show("Postcode moet zes karakters bevatten");
+                    return false;
+                }
                 return true;
+            }
 
             return false;
         }
@@ -38,8 +78,29 @@ namespace Festispec.ViewModels.Employees
         {
             if (CanEditInspection())
             {
-
+           //     InspectionList.SelectedInspection.Status = new InspectionStatus() { Status = SelectedInspection };
+                using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
+                {
+                    Inspection inspection = InspectionList.SelectedInspection.toModel();
+                    inspectionRepository.AddOrUpdate(inspection);
+                }
+                _navigationService.GoBack();
             }
+            else
+                MessageBox.Show("Er is iets fout gegaan met het bewerken van een inspectie! Vul alle velden in");
         }
+
+        private void OpenRegulation()
+        {
+            _navigationService.NavigateTo(Routes.Routes.RegulationList, _selectedMunicipality);
+        }
+
+        private void DeleteSelectedInspection()
+        {
+            InspectionList.DeleteSelectedInspection();
+
+            _navigationService.GoBack();
+        }
+        #endregion
     }
 }
