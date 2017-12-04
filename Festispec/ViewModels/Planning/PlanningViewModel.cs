@@ -88,7 +88,7 @@ namespace Festispec.ViewModels.Planning
                 Entity.Inspection = value;
 
                 // Update inspector Id value
-                InspectionId = value.Id;
+                InspectionId = value?.Id ?? 0;
 
                 RaisePropertyChanged();
             }
@@ -102,7 +102,7 @@ namespace Festispec.ViewModels.Planning
                 Entity.Inspector = value;
 
                 // Update inspector Id value
-                InspectorId = value.Id;
+                InspectorId = value?.Id ?? 0;
 
                 RaisePropertyChanged();
             }

@@ -53,6 +53,7 @@ namespace Festispec.ViewModels.Planning
 
         private void LoadInspectors()
         {
+            EntityViewModel.Inspector = null;
             using (var inspectorRepository = _inspectorRepositoryFactory.CreateRepository())
             {
                 var query = inspectorRepository.GetAvailableNearby(EntityViewModel.Date,
