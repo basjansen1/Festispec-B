@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
       Title="PlanningAdd"
-        DataContext="{Binding Source={StaticResource Locator}, Path=PlanningAddOrUpdate}">
+        DataContext="{Binding Source={StaticResource Locator}, Path=PlanningAdd}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

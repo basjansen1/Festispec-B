@@ -12,11 +12,11 @@ namespace Festispec.Views.Planning
     public partial class PlanningAdd
     {
         private Inspection _inspection;
-        private PlanningAddOrUpdateViewModel _planningAddOrUpdateViewModel;
+        private PlanningAddViewModel _planningAddOrUpdateViewModel;
 
         public void InitializeMap()
         {
-            _planningAddOrUpdateViewModel = DataContext as PlanningAddOrUpdateViewModel;
+            _planningAddOrUpdateViewModel = DataContext as PlanningAddViewModel;
             if (_planningAddOrUpdateViewModel == null)
                 throw new ArgumentNullException(nameof(PlanningListViewModel));
             _inspection = _planningAddOrUpdateViewModel.EntityViewModel.Inspection;

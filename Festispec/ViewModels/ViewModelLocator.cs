@@ -78,6 +78,7 @@ namespace Festispec.ViewModels
 
             SimpleIoc.Default.Register<PlanningListViewModel>();
             SimpleIoc.Default.Register<PlanningAddOrUpdateViewModel>();
+            SimpleIoc.Default.Register<PlanningAddViewModel>();
         }
 
         private static void RegisterNavigationService()
@@ -183,6 +184,7 @@ namespace Festispec.ViewModels
 
         public PlanningListViewModel PlanningList => new PlanningListViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory);
         public PlanningAddOrUpdateViewModel PlanningAddOrUpdate => new PlanningAddOrUpdateViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory, InspectorRepositoryFactory);
+        public PlanningAddViewModel PlanningAdd => new PlanningAddViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory, InspectorRepositoryFactory);
 
         #endregion
 

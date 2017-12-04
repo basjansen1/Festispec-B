@@ -22,7 +22,6 @@ namespace Festispec.Views.Planning
 
             MapHelper.InitializeMapOptions();
 
-            _planningAddOrUpdateViewModel.Inspectors.CollectionChanged += (sender, args) => RefreshMap();
             RefreshMap();
 
             CenterMap();

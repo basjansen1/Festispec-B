@@ -154,6 +154,7 @@
     <Compile Include="ViewModels\Factory\PlanningViewModelFactory.cs" />
     <Compile Include="ViewModels\Planning\PlanningAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningListViewModel.cs" />
+    <Compile Include="ViewModels\Planning\PlanningAddViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningViewModel.cs" />
     <Compile Include="ViewModels\Regulation\RegulationListVM.cs" />
     <Compile Include="ViewModels\Regulation\RegulationVM.cs" />
