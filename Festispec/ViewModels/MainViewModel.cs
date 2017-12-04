@@ -15,8 +15,8 @@ namespace Festispec.ViewModels
 
         public ICommand NavigateToTemplateListCommand { get; private set; }
         public ICommand NavigateToEmployeeListCommand { get; private set; }
-
         public ICommand NavigateToInspectorListCommand { get; private set; }
+        public ICommand NavigateToInspectionListCommand { get; private set; }
 
         public void RegisterCommands()
         {
@@ -26,6 +26,8 @@ namespace Festispec.ViewModels
                 new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.EmployeeList), () => _navigationService.HasAccess(Routes.Routes.EmployeeList));
             NavigateToInspectorListCommand = 
                 new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.InspectorList), () => _navigationService.HasAccess(Routes.Routes.InspectorList));
+            NavigateToInspectionListCommand =
+                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.InspectionList), () => _navigationService.HasAccess(Routes.Routes.InspectionList));
         }
     }
 }

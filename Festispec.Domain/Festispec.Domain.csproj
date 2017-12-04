@@ -131,6 +131,9 @@
     <Compile Include="Regulation.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\CustomerRepository.cs" />
+    <Compile Include="Repository\Factory\CustomerRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\ICustomerRepositoryFactory.cs" />
     <Compile Include="Repository\EmployeeRepository.cs" />
     <Compile Include="Repository\Factory\EmployeeRepositoryFactory.cs" />
     <Compile Include="Repository\EmployeeRoleRepository.cs" />
@@ -140,10 +143,12 @@
     <Compile Include="Repository\Factory\Interface\IEmployeeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IInspectorRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ILoginRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IRegulationRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\LoginRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\QuestionTypeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IQuestionTypeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ITemplateQuestionRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\RegulationRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\TemplateQuestionRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\TemplateRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\InspectionRepositoryFactory.cs" />
@@ -152,16 +157,19 @@
     <Compile Include="Repository\Factory\Interface\IRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\RepositoryFactoryBase.cs" />
     <Compile Include="Repository\GeoRepository.cs" />
+    <Compile Include="Repository\Interface\ICustomerRepository.cs" />
     <Compile Include="Repository\InspectorRepository.cs" />
     <Compile Include="Repository\Interface\IEmployeeRepository.cs" />
     <Compile Include="Repository\Interface\IEmployeeRoleRepository.cs" />
     <Compile Include="Repository\Interface\IGeoRepository.cs" />
     <Compile Include="Repository\Interface\IInspectorRepository.cs" />
     <Compile Include="Repository\Interface\ILoginRepository.cs" />
+    <Compile Include="Repository\Interface\IRegulationRepository.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="Repository\QuestionTypeRepository.cs" />
     <Compile Include="Repository\Interface\ITemplateQuestionRepository.cs" />
     <Compile Include="Repository\Interface\IQuestionTypeRepository.cs" />
+    <Compile Include="Repository\RegulationRepository.cs" />
     <Compile Include="Repository\TemplateQuestionRepository.cs" />
     <Compile Include="Repository\TemplateRepository.cs" />
     <Compile Include="Repository\Interface\ITemplateRepository.cs" />
