@@ -4,6 +4,7 @@ using Festispec.Domain.Repository.Interface;
 using System.Data.SqlClient;
 using System.Data.Common;
 using System.Diagnostics;
+using System.Data;
 
 namespace Festispec.Domain.Repository.Factory
 {
@@ -23,33 +24,40 @@ namespace Festispec.Domain.Repository.Factory
         /// <returns> A new instance of the DbContext. </returns>
         protected DbContext GetDbContext()
         {
-            try
+            if (isConnected())
             {
                 return new FestispecContainer();
             }
-            catch
+            else
             {
                 Debug.WriteLine("Geen verbinding");
                 return null;
-            }           
+            }
         }
+        protected bool isConnected()
+        {
+           // string connectionString = "metadata = res://*/Festispec.csdl|res://*/Festispec.ssdl|res://*/Festispec.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(localdb)\\dev;initial catalog=Festispec;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;";
 
-        //protected bool IsConnected()
-        //{
-        //    string connection = "(localDB)\\dev";
-
-        //    try
-        //    {
-        //        using (var connection = new SqlConnection())
-        //        {
-        //            connection.Open();
-        //            return true;
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        return false;
-        //    }
-        //}
+            using(SqlConnection connection = new SqlConnection("Data Source='(localdb)\\dev';Initial Catalog='Festispec';"))
+            {
+                try
+                {
+                    connection.Open();
+                    Debug.WriteLine("You have been successfully connected to the database!");
+                        return true;
+                }
+                catch (SqlException)
+                {
+                Debug.WriteLine("Connection failed.");
+                return false;
+                }
+            }
+            
+        }
     }
+
 }
+
+
+
+
