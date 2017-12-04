@@ -17,10 +17,13 @@ namespace Festispec.ViewModels.Employees
 {
     public class EditInspectionVM : ViewModelBase
     {
+        IGeoRepository _geoRepository;
+
         #region commands
         public ICommand EditInspectionCommand { get; set; }
         public ICommand CancelInspectionCommand { get; set; }
         public ICommand ShowRegulationCommand { get; set; }
+        public ICommand SearchAddressCommand { get; set; }
         #endregion
 
         #region properties
@@ -35,15 +38,17 @@ namespace Festispec.ViewModels.Employees
         #endregion
 
         #region constructor and methods
-        public EditInspectionVM(InspectionListVM inspectionList, INavigationService navigationService)
+        public EditInspectionVM(InspectionListVM inspectionList, INavigationService navigationService, IGeoRepository geoRepository)
         {
             InspectionList = inspectionList;
             _navigationService = navigationService;
+            _geoRepository = geoRepository;
             _selectedMunicipality = inspectionList.SelectedInspection.Municipality;
 
             EditInspectionCommand = new RelayCommand(SaveChanges);
             CancelInspectionCommand = new RelayCommand(_navigationService.GoBack);
             ShowRegulationCommand = new RelayCommand(OpenRegulation);
+            SearchAddressCommand = new RelayCommand(()=>SearchAddress());
 
             InspectionStatusList = new List<string>();
             InspectionStatusList.Add("Accepted");
@@ -77,6 +82,10 @@ namespace Festispec.ViewModels.Employees
             if (CanEditInspection())
             {
            //     InspectionList.SelectedInspection.Status = new InspectionStatus() { Status = SelectedInspection };
+                if (!SearchAddress())
+                {
+                    return;
+                }
                 using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
                 {
                     Inspection inspection = InspectionList.SelectedInspection.toModel();
@@ -91,6 +100,48 @@ namespace Festispec.ViewModels.Employees
         public void OpenRegulation()
         {
             _navigationService.NavigateTo(Routes.Routes.RegulationList, _selectedMunicipality);
+        }
+
+        private bool SearchAddress()
+        {
+            using (_geoRepository)
+            {
+                try
+                {
+                    var address = _geoRepository.Find(InspectionList.SelectedInspection.PostalCode,
+                        InspectionList.SelectedInspection.HouseNumber);
+
+                    InspectionList.SelectedInspection.Street = address.Street;
+                    InspectionList.SelectedInspection.City = address.City;
+                    InspectionList.SelectedInspection.Municipality = address.Municipality;
+                    InspectionList.SelectedInspection.Country = address.Country;
+
+                    return true;
+                }
+                catch (ArgumentNullException exception)
+                {
+                    switch (exception.ParamName)
+                    {
+                        case "PostalCode":
+                        case "HouseNumber":
+                            MessageBox.Show("Geef een postcode en huisnummer op");
+                            break;
+                        case "json":
+                            MessageBox.Show(
+                                $"Geen adres gevonden op {InspectionList.SelectedInspection.PostalCode} {InspectionList.SelectedInspection.HouseNumber}");
+                            break;
+                        default:
+                            MessageBox.Show("Er is iets fout gegaan");
+                            break;
+                    }
+                }
+                catch (InvalidOperationException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
+            }
+
+            return false;
         }
         #endregion
     }
