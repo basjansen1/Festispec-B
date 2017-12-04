@@ -26,9 +26,14 @@ namespace Festispec.ViewModels.Planning
             _inspectorRepositoryFactory = inspectorRepositoryFactory;
 
             RegisterCommands();
+
+            EntityViewModel.Date = EntityViewModel.Inspection.Start.Date;
+            LoadInspectors();
         }
 
-        public ICommand SearchInspectors { get; set; }
+        public string SearchInspectorFirstName { get; set; }
+        public string SearchInspectorLastName { get; set; }
+        public ICommand SearchInspectorsCommand { get; set; }
 
         public ObservableCollection<Domain.Inspector> Inspectors { get; set; } = new ObservableCollection<Domain.Inspector>();
 
@@ -43,7 +48,7 @@ namespace Festispec.ViewModels.Planning
 
         private void RegisterCommands()
         {
-            SearchInspectors = new RelayCommand(LoadInspectors);
+            SearchInspectorsCommand = new RelayCommand(LoadInspectors);
         }
 
         private void LoadInspectors()
@@ -53,7 +58,11 @@ namespace Festispec.ViewModels.Planning
                 var query = inspectorRepository.GetAvailableNearby(EntityViewModel.Date,
                     EntityViewModel.Inspection.Location, EntityViewModel.InspectorId);
 
-                // TODO: Filter
+                if (!string.IsNullOrWhiteSpace(SearchInspectorFirstName))
+                    query = query.Where(inspector => inspector.FirstName.Contains(SearchInspectorFirstName));
+
+                if (!string.IsNullOrWhiteSpace(SearchInspectorLastName))
+                    query = query.Where(inspector => inspector.LastName.Contains(SearchInspectorLastName));
 
                 // Clear inspectors
                 Inspectors.Clear();

@@ -6,7 +6,6 @@ using System.Windows.Input;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.NavigationService;
-using Festispec.ViewModels.Employees;
 using Festispec.ViewModels.Factory.Interface;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -17,11 +16,9 @@ namespace Festispec.ViewModels.Planning
         private readonly IPlanningRepositoryFactory _planningRepositoryFactory;
         private readonly IPlanningViewModelFactory _planningViewModelFactory;
 
-        public Inspection Inspection;
-
         public PlanningListViewModel(INavigationService navigationService,
             IPlanningRepositoryFactory planningRepositoryFactory, IPlanningViewModelFactory planningViewModelFactory) :
-            base(navigationService)
+                base(navigationService)
         {
             _planningRepositoryFactory = planningRepositoryFactory;
             _planningViewModelFactory = planningViewModelFactory;
@@ -34,16 +31,22 @@ namespace Festispec.ViewModels.Planning
             NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
         }
 
+        public Inspection Inspection { get; private set; }
+
         public ICommand NavigateToAddPlanningCommand { get; set; }
         public ICommand NavigateToAddOrUpdatePlanningCommand { get; set; }
         public ICommand PlanningDeleteCommand { get; set; }
         public ICommand SearchPlanningCommand { get; set; }
 
-        public ObservableCollection<PlanningViewModel> Plannings { get; private set; } = new ObservableCollection<PlanningViewModel>();
+        public ObservableCollection<PlanningViewModel> Plannings { get; } =
+            new ObservableCollection<PlanningViewModel>();
 
         public PlanningViewModel SelectedPlanning { get; set; }
 
-        public DateTime? SearchDate { get; set; }
+        public string SearchInspectorFirstName { get; set; }
+        public string SearchInspectorLastName { get; set; }
+        public DateTime SearchDate { get; set; }
+
 
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -63,6 +66,8 @@ namespace Festispec.ViewModels.Planning
                 Inspection = parameter;
             else
                 throw new ArgumentNullException(nameof(Domain.Inspection));
+
+            SearchDate = Inspection.Start.Date;
         }
 
         private void RegisterCommands()
@@ -87,8 +92,13 @@ namespace Festispec.ViewModels.Planning
             {
                 var query = planningRepository.GetByInspectionId(Inspection.Id);
 
-                if (SearchDate.HasValue)
-                    query = query.Where(planning => planning.Date.Equals(SearchDate.Value));
+                query = query.Where(planning => planning.Date.Equals(SearchDate));
+
+                if (!string.IsNullOrWhiteSpace(SearchInspectorFirstName))
+                    query = query.Where(planning => planning.Inspector.FirstName.Contains(SearchInspectorFirstName));
+
+                if (!string.IsNullOrWhiteSpace(SearchInspectorLastName))
+                    query = query.Where(planning => planning.Inspector.LastName.Contains(SearchInspectorLastName));
 
                 var plannings = query.ToList().Select(planning => _planningViewModelFactory.CreateViewModel(planning));
 

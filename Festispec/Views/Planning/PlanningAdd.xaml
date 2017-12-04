@@ -24,11 +24,20 @@
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <DataGrid Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True" SelectedValue="{Binding Path=EntityViewModel.Inspector, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Inspectors}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Naam" Binding="{Binding FullName}" Width="*" />
-                </DataGrid.Columns>
-            </DataGrid>
+            <StackPanel Grid.Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <Label>Voornaam</Label>
+                    <TextBox Text="{Binding SearchInspectorFirstName}" Width="100" Margin="0 0 5 0"></TextBox>
+                    <Label>Achternaam</Label>
+                    <TextBox Text="{Binding SearchInspectorLastName}" Width="100" Margin="0 0 5 0"></TextBox>
+                    <Button Content="Zoek" Command="{Binding SearchInspectorsCommand}"/>
+                </StackPanel>
+                <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedValue="{Binding Path=EntityViewModel.Inspector, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Inspectors}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Naam" Binding="{Binding FullName}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
 
             <Border Grid.Column="1" Padding="10">
                 <StackPanel DataContext="{Binding Path=EntityViewModel.Inspector, Mode=TwoWay}">
@@ -56,7 +65,7 @@
                                   SelectedIndex="0"
                                   SelectedValue="{Binding Path=EntityViewModel.Date, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 5" />
 
-                        <Button Content="Zoek inspecteurs" Command="{Binding SearchInspectors}" Margin="0 0 0 5"></Button>
+                        <Button Content="Zoek inspecteurs" Command="{Binding SearchInspectorsCommand}" Margin="0 0 0 5"></Button>
                     </StackPanel>
                     
                     <StackPanel Grid.Row="1">

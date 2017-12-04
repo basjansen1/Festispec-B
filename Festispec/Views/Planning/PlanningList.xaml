@@ -27,14 +27,28 @@
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <DataGrid Grid.Row="1" Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedPlanning}" ItemsSource="{Binding Plannings}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Inspector" Binding="{Binding Inspector.FullName}" Width="*" />
-                    <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="*" />
-                    <DataGridTextColumn Header="TimeFrom" Binding="{Binding TimeFrom}" Width="*" />
-                    <DataGridTextColumn Header="TimeTo" Binding="{Binding TimeTo}" Width="*" />
-                </DataGrid.Columns>
-            </DataGrid>
+            <StackPanel Grid.Row="1" Grid.Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <Label>Voornaam</Label>
+                    <TextBox Text="{Binding SearchInspectorFirstName}" Width="100" Margin="0 0 5 0"></TextBox>
+                    <Label>Achternaam</Label>
+                    <TextBox Text="{Binding SearchInspectorLastName}" Width="100" Margin="0 0 5 0"></TextBox>
+                    <Label>Datum</Label>
+                    <ComboBox ItemsSource="{Binding Path=Inspection.Dates, Mode=OneWay}" Width="100"
+                                  SelectedIndex="0"
+                                  SelectedValue="{Binding Path=SearchDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 5 0" />
+                    <Button Content="Zoek" Command="{Binding SearchPlanningCommand}"/>
+                </StackPanel>
+                
+                <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedPlanning}" ItemsSource="{Binding Plannings}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Inspector" Binding="{Binding Inspector.FullName}" Width="*" />
+                        <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="*" />
+                        <DataGridTextColumn Header="TimeFrom" Binding="{Binding TimeFrom}" Width="*" />
+                        <DataGridTextColumn Header="TimeTo" Binding="{Binding TimeTo}" Width="*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
 
             <Border Grid.Row="1" Grid.Column="1" Padding="10">
                 <StackPanel>
