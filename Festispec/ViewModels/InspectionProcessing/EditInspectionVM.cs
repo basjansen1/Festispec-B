@@ -60,7 +60,14 @@ namespace Festispec.ViewModels.Employees
                 && InspectionList.SelectedInspection.Country != "" && InspectionList.SelectedInspection.City != ""
                 && InspectionList.SelectedInspection.Municipality != ""
                 && InspectionList.SelectedInspection.StartDate <= InspectionList.SelectedInspection.EndDate)
+            {
+                if (InspectionList.SelectedInspection.PostalCode.Length < 6)
+                {
+                    MessageBox.Show("Postcode moet zes karakters bevatten");
+                    return false;
+                }
                 return true;
+            }
 
             return false;
         }
