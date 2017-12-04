@@ -59,7 +59,7 @@
             <DatePicker x:Name="dpStartDate" FirstDayOfWeek="Monday" Cursor="Hand" Grid.Column="3" Grid.Row="2" SelectedDate="{Binding InspectionList.SelectedInspection.StartDate}"/>
             <DatePicker x:Name="dpEndDate" FirstDayOfWeek="Monday" Cursor="Hand" Grid.Column="3" Grid.Row="3" SelectedDate="{Binding InspectionList.SelectedInspection.EndDate}"/>
             <TextBox x:Name="txtStreetname" TextWrapping="Wrap" Grid.Column="3" Grid.Row="4" Text="{Binding InspectionList.SelectedInspection.Street}"/>
-            <TextBox x:Name="txtPostalCode" TextWrapping="Wrap" Grid.Column="3" Grid.Row="5" Text="{Binding InspectionList.SelectedInspection.PostalCode}"/>
+            <TextBox x:Name="txtPostalCode" MaxLength="6" TextWrapping="Wrap" Grid.Column="3" Grid.Row="5" Text="{Binding InspectionList.SelectedInspection.PostalCode}"/>
             <TextBox x:Name="txtHousenumber" TextWrapping="Wrap" Grid.Column="3" Grid.Row="6" Text="{Binding InspectionList.SelectedInspection.HouseNumber}"/>
             <TextBox x:Name="txtCity" TextWrapping="Wrap" Grid.Column="3" Grid.Row="7" Text="{Binding InspectionList.SelectedInspection.City}"/>
             <TextBox x:Name="txtCountry" TextWrapping="Wrap" Grid.Column="3" Grid.Row="8" Text="{Binding InspectionList.SelectedInspection.Country}"/>

@@ -51,7 +51,7 @@
             <DatePicker x:Name="dpStartDate" FirstDayOfWeek="Monday" Cursor="Hand" SelectedDate="{Binding FromDate}" Grid.Column="3" Grid.Row="2" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
             <DatePicker x:Name="dpEndDate"  FirstDayOfWeek="Monday" Cursor="Hand" SelectedDate="{Binding ToDate}" Grid.Column="3" Grid.Row="3" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
             <TextBox x:Name="txtStreetname" TextWrapping="Wrap" Text="{Binding NewInspection.Street}" Grid.Column="3" Grid.Row="4"/>
-            <TextBox x:Name="txtPostalCode" TextWrapping="Wrap" Text="{Binding NewInspection.PostalCode}" Grid.Column="3" Grid.Row="5"/>
+            <TextBox x:Name="txtPostalCode" MaxLength="6" TextWrapping="Wrap" Text="{Binding NewInspection.PostalCode}" Grid.Column="3" Grid.Row="5"/>
             <TextBox x:Name="txtHousenumber" TextWrapping="Wrap" Text="{Binding NewInspection.HouseNumber}" Grid.Column="3" Grid.Row="6"/>
             <TextBox x:Name="txtCity" TextWrapping="Wrap" Text="{Binding NewInspection.City}" Grid.Column="3" Grid.Row="7"/>
             <TextBox x:Name="txtCountry" TextWrapping="Wrap" Text="{Binding NewInspection.Country}" Grid.Column="3" Grid.Row="8"/>
