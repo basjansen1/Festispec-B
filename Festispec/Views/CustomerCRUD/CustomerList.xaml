@@ -34,24 +34,23 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
             <DockPanel Grid.Row="0"  Grid.Column="0">
-                <Label>Zoek op naam</Label>
-                <TextBox Text="{Binding SearchName}"></TextBox>
+                <Label>Zoek op:</Label>
+                <ComboBox SelectedItem="{Binding SelectedSearchOption}" ItemsSource="{Binding SearchItems}"></ComboBox>
             </DockPanel>
             <DockPanel Grid.Row="0" Grid.Column="1">
-                <Label>Zoek op email</Label>
-                <TextBox Text="{Binding SearchEmail}"></TextBox>
+                <TextBox Text="{Binding SearchName}"></TextBox>
             </DockPanel>
-            <Button Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand}">Zoek</Button>
+
+            <Button Grid.Row="0" Grid.Column="2" Command="{Binding SelectedSearch}">Zoek</Button>
 
             <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
                     <DataGridTextColumn Header="Gemeente" Binding="{Binding Municipality}" Width="*" />
-                    <DataGridTextColumn Header="Voornaam Contactpersoon" Binding="{Binding FirstName}" Width="*" />
-                    <DataGridTextColumn Header="Achternaam Contactpersoon" Binding="{Binding LastName}" Width="*" />
+                    <DataGridTextColumn Header="Voornaam Contact" Binding="{Binding FirstName}" Width="*" />
+                    <DataGridTextColumn Header="Achternaam Contact" Binding="{Binding LastName}" Width="*" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
