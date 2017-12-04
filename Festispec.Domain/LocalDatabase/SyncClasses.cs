@@ -35,8 +35,15 @@ namespace Festispec.Domain.LocalDatabase
 
         public void FillDataSet()
         {
-            GetAdapter().FillSchema(dsPubs, SchemaType.Source, "Authors");
-            daAuthors.Fill(dsPubs, "Authors");
+            string[] TableList = { "Address"};
+
+            foreach (string s in TableList)
+            {
+                SqlDataAdapter temp = GetAdapter(s);
+
+                temp.FillSchema(myDataSet, SchemaType.Source, s);
+                temp.Fill(myDataSet, s);
+            }
         }
     }
 }
