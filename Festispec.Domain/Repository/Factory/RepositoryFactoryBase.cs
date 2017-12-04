@@ -4,6 +4,7 @@ using Festispec.Domain.Repository.Interface;
 using System.Data.SqlClient;
 using System.Data.Common;
 using System.Diagnostics;
+using System.Net;
 
 namespace Festispec.Domain.Repository.Factory
 {
@@ -51,5 +52,27 @@ namespace Festispec.Domain.Repository.Factory
         //        return false;
         //    }
         //}
+
+        /// <summary>
+        /// Checks if there is an active internet connection
+        /// </summary>
+        /// <returns>true or false</returns>
+        public bool HasInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    using (var stream = client.OpenRead("http://www.google.nl"))
+                    {
+                        return true;
+                    }
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }
