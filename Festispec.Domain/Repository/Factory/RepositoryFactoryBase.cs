@@ -64,7 +64,7 @@ namespace Festispec.Domain.Repository.Factory
         /// Checks if there is an active internet connection
         /// </summary>
         /// <returns></returns>
-        public static bool HasInternetConnection()
+        public bool HasInternetConnection()
         {
             try
             {
