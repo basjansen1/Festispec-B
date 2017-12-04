@@ -3,7 +3,7 @@ using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.NavigationService;
 using Festispec.ViewModels.Customer;
 using Festispec.ViewModels.Factory.Interface;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
