@@ -52,7 +52,7 @@ namespace Festispec.Domain.Repository
                 // Where certification date is still valid at dateAvailable
                 .Where(inspector => inspector.CertificationFrom < dateAvailable && inspector.CertificationTo > dateAvailable)
                 // Where hired date is still valid at dateAvailable
-                .Where(inspector => inspector.HiredFrom < dateAvailable && inspector.HiredTo > dateAvailable)
+                .Where(inspector => inspector.HiredFrom < dateAvailable && ( inspector.HiredTo > dateAvailable || inspector.HiredTo == null ))
                 // Order by distance to center
                 .OrderBy(inspector => inspector.Location.Distance(center));
         }
