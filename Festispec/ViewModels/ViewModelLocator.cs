@@ -165,7 +165,7 @@ namespace Festispec.ViewModels
         public InspectorAddOrUpdateViewModel InspectorAddOrUpdate =>
             ServiceLocator.Current.GetInstance<InspectorAddOrUpdateViewModel>();
 
-        public PlanningListViewModel PlanningList => ServiceLocator.Current.GetInstance<PlanningListViewModel>();
+        public PlanningListViewModel PlanningList => new PlanningListViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory);
         public PlanningAddOrUpdateViewModel PlanningAddOrUpdate => new PlanningAddOrUpdateViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory, InspectorRepositoryFactory);
 
         #endregion
