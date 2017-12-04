@@ -9,8 +9,10 @@
  DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 */
 
+using Festispec.Domain.Repository;
 using Festispec.Domain.Repository.Factory;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Domain.Repository.Interface;
 using Festispec.NavigationService;
 using Festispec.State;
 using Festispec.ViewModels.Factory;
@@ -20,6 +22,7 @@ using Festispec.ViewModels.Employees;
 using Festispec.ViewModels.Inspector;
 using Festispec.ViewModels.Template;
 using GalaSoft.MvvmLight.Ioc;
+using GeodanApi;
 using Microsoft.Practices.ServiceLocation;
 using Festispec.ViewModels.Regulation;
 
@@ -52,6 +55,8 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IInspectionRepositoryFactory, InspectionRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectorRepositoryFactory, InspectorRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectorViewModelFactory, InspectorViewModelFactory>();
+            SimpleIoc.Default.Register<IGeodanSearchApi, GeodanSearchApi>();
+            SimpleIoc.Default.Register<IGeoRepository, GeoRepository>();
             SimpleIoc.Default.Register<IRegulationRepositoryFactory, RegulationRepositoryFactory>();
 
             // Register viewmodels
@@ -62,7 +67,6 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<InspectionListVM>();
             SimpleIoc.Default.Register<AddInspectionVM>();
             SimpleIoc.Default.Register<EditInspectionVM>();
-            SimpleIoc.Default.Register<ProcessInspectionVM>();
             SimpleIoc.Default.Register<TemplateQuestionAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<TemplateQuestionAddViewModel>();
             SimpleIoc.Default.Register<EmployeeAddOrUpdateViewModel>();
@@ -140,6 +144,7 @@ namespace Festispec.ViewModels
         public IRegulationRepositoryFactory RegulationsViewModelFactory =
             ServiceLocator.Current.GetInstance<IRegulationRepositoryFactory>();
 
+        public IGeoRepository GeoRepository = ServiceLocator.Current.GetInstance<IGeoRepository>();
         public INavigationService NavigationService = ServiceLocator.Current.GetInstance<INavigationService>();
 
 
@@ -177,11 +182,9 @@ namespace Festispec.ViewModels
 
         public RegulationListVM GetRegulationList => new RegulationListVM(RegulationsViewModelFactory, NavigationService, GetInspectionList);
 
-        public AddInspectionVM GetAddInspectionVM => new AddInspectionVM(GetInspectionList, CustomerRepositoryFactory, NavigationService);
+        public AddInspectionVM GetAddInspectionVM => new AddInspectionVM(GetInspectionList, CustomerRepositoryFactory, NavigationService, GeoRepository);
 
         public EditInspectionVM GetEditInspection => ServiceLocator.Current.GetInstance<EditInspectionVM>();
-
-        public ProcessInspectionVM GetProcessInspection => ServiceLocator.Current.GetInstance<ProcessInspectionVM>();
 
         #endregion
     }

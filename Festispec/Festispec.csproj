@@ -140,7 +140,6 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\InspectionProcessing\AddInspectionVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\EditInspectionVM.cs" />
-    <Compile Include="ViewModels\InspectionProcessing\ProcessInspectionVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionListVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
@@ -290,6 +289,10 @@
     <ProjectReference Include="..\Festispec.Domain\Festispec.Domain.csproj">
       <Project>{09979796-e638-48d5-8666-fa0ac1f54a2e}</Project>
       <Name>Festispec.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GeodanApi\GeodanApi.csproj">
+      <Project>{D752A463-81C4-4DC3-A929-9E666EC6BBCB}</Project>
+      <Name>GeodanApi</Name>
     </ProjectReference>
     <ProjectReference Include="..\ProofOfConcept.Geodan\ProofOfConcept.Geodan.csproj">
       <Project>{86E3678B-98F7-4E37-BE12-D682B3F7D7AE}</Project>
