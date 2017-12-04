@@ -19,7 +19,7 @@ namespace Festispec.Domain.Repository
         }
 
         /// <summary>
-        /// Finds the address with the given postal code and house number
+        ///     Finds the address with the given postal code and house number
         /// </summary>
         /// <param name="postalCode"></param>
         /// <param name="houseNumber"></param>
@@ -35,8 +35,6 @@ namespace Festispec.Domain.Repository
 
             // Convert geometry data to DbGeography
             var location = DbGeography.PointFromText(data.geom.ToString(), CoordinateSystemId);
-//            if (!location.Longitude.HasValue || !location.Latitude.HasValue)
-//                throw new InvalidOperationException($"Invalid DbGeography from Geometry text: {data.geom}");
 
             // Convert data to address
             var address = new Address
@@ -60,7 +58,7 @@ namespace Festispec.Domain.Repository
         }
 
         /// <summary>
-        /// Cleans the postal code of spaces and checks for valid dutch postal code
+        ///     Cleans the postal code of spaces and checks for valid dutch postal code
         /// </summary>
         /// <param name="postalCode"></param>
         /// <exception cref="InvalidOperationException">Invalid postalcode format</exception>
