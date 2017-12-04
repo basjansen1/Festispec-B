@@ -23,7 +23,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
-    <DefaultCollation>Latin1_General_CI_AS</DefaultCollation>
+    <DefaultCollation>SQL_Latin1_General_CP1_CI_AS</DefaultCollation>
     <DefaultFilegroup>PRIMARY</DefaultFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -81,7 +81,6 @@
     <Build Include="dbo\Tables\Address_Inspection.sql" />
     <Build Include="dbo\Tables\Question_TemplateQuestion.sql" />
     <Build Include="dbo\Tables\Question_InspectionQuestion.sql" />
-    <Build Include="dbo\Tables\CustomerInspection.sql" />
     <PostDeploy Include="dbo\Seeds\SeedScriptPostDeploy.sql" />
   </ItemGroup>
 </Project>
