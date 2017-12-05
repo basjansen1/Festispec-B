@@ -2,9 +2,11 @@
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Spatial;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Festispec.ViewModels.Employees
 {
@@ -55,11 +57,136 @@ namespace Festispec.ViewModels.Employees
             get
             {
                 return _inspection.End;
-            } 
+            }
             set
             {
                 _inspection.End = value;
                 RaisePropertyChanged("EndDate");
+            }
+        }
+        public string City
+        {
+            get
+            {
+                return _inspection.City;
+            }
+            set
+            {
+                _inspection.City = value;
+                RaisePropertyChanged("City");
+            }
+        }
+        public string Street
+        {
+            get
+            {
+                return _inspection.Street;
+            }
+            set
+            {
+                _inspection.Street = value;
+                RaisePropertyChanged("Street");
+            }
+        }
+
+        public string PostalCode
+        {
+            get
+            {
+                return _inspection.PostalCode;
+            }
+            set
+            {
+                _inspection.PostalCode = value;
+                RaisePropertyChanged("PostalCode");
+            }
+        }
+
+        public string HouseNumber
+        {
+            get
+            {
+                return _inspection.HouseNumber;
+            }
+            set
+            {
+                _inspection.HouseNumber = value;
+                RaisePropertyChanged("HouseNumber");
+            }
+        }
+
+        public string Country
+        {
+            get
+            {
+                return _inspection.Country;
+            }
+            set
+            {
+                _inspection.Country = value;
+                RaisePropertyChanged("Country");
+            }
+        }
+        public string Status
+        {
+            get
+            {
+                return _inspection.Status_Status;
+            }
+            set
+            {
+                _inspection.Status_Status = value;
+                RaisePropertyChanged("Status");
+            }
+        }
+
+        public int CustomerId
+        {
+            get
+            {
+                return _inspection.Customer_Id;
+            }
+            set
+            {
+                _inspection.Customer_Id = value;
+            }
+        }
+
+        public DbGeography Location
+        {
+            get
+            {
+                return _inspection.Location;
+            }
+            set
+            {
+                _inspection.Location = value;
+            }
+        }
+
+        public string Municipality
+        {
+            get
+            {
+                return _inspection.Municipality;
+            }
+            set
+            {
+                _inspection.Municipality = value;
+                RaisePropertyChanged("Municipality");
+            }
+        }
+
+        public Customer Customer
+        {
+            get
+            {
+                return _inspection.Customers;
+            }
+            set
+            {
+                _inspection.Customers = value;
+                RaisePropertyChanged("Customer");
             }
         }
 
@@ -67,7 +194,7 @@ namespace Festispec.ViewModels.Employees
         private Inspection _inspection;
 
         // constructors
-        
+
         public InspectionVM()
         {
             _inspection = new Inspection();

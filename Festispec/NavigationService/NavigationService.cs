@@ -138,6 +138,7 @@ namespace Festispec.NavigationService
 
         public bool HasAccess(Route route)
         {
+            if (route.Roles == null) return true;
             return route.Roles.Contains(_state.CurrentUser?.Role_Role);
         }
 
