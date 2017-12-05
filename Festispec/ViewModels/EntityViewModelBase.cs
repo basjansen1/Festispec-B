@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Reflection;
+using Festispec.Domain.Extension;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Interface;
@@ -46,24 +47,7 @@ namespace Festispec.ViewModels
             }
         }
 
-        public virtual void MapValues(TEntity from, TEntity to)
-        {
-            // TODO: Slow. Use manual mapping instead
-            // Get all the properties of the entity
-            var properties = typeof(TEntity).GetProperties();
-            foreach (var property in properties)
-            {
-                try
-                {
-                    // Map the properties
-                    property.SetValue(to, from.GetType().GetProperty(property.Name)?.GetValue(from, null));
-                }
-                catch (TargetInvocationException ex)
-                {
-                    
-                }
-            }
-        }
+        public virtual void MapValues(TEntity from, TEntity to) => from.CopyPropertiesTo(to);
 
         public void MapValuesFromOriginal() => MapValues(OriginalValues, Entity);
         public void MapValuesToOriginal() => MapValues(Entity, OriginalValues);

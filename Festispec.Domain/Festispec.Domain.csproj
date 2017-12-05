@@ -80,6 +80,7 @@
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ExtendedQuestion.cs" />
+    <Compile Include="Extension\CopyPropertiesExtension.cs" />
     <Compile Include="Festispec.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

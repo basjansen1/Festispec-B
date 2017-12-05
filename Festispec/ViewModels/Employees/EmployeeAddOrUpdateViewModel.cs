@@ -106,7 +106,14 @@ namespace Festispec.ViewModels.Employees
             // TODO: Validation
             var saved = SearchAddress() && EntityViewModel.Save();
 
-            if(saved) NavigationService.GoBack(EntityViewModel);
+            // Return is save failed
+            if (!saved)
+                return;
+
+            // Overwrite the original values with the new entity values
+            EntityViewModel.MapValuesToOriginal();
+
+            GoBack(EntityViewModel);
         }
     }
 }
