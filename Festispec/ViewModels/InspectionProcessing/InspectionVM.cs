@@ -209,5 +209,7 @@ namespace Festispec.ViewModels.Employees
         {
             return _inspection;
         }
+
+        public int Id => _inspection.Id;
     }
 }
