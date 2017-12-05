@@ -1,22 +1,19 @@
 ﻿using System.Collections.Generic;
-using Festispec.Domain;
+using System.Linq;
+using System.Windows;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
-using System.Data.Entity.Spatial;
-using System;
-using System.Windows;
-using System.Linq;
 
-namespace Festispec.ViewModels.Regulations
+namespace Festispec.ViewModels.Regulation
 {
-    public class RegulationsViewModel : EntityViewModelBase<IRegulationsRepositoryFactory, IRegulationsRepository, Regulation>
+    public class RegulationViewModel : EntityViewModelBase<IRegulationRepositoryFactory, IRegulationRepository, Domain.Regulation>
     {
-        public RegulationsViewModel(IRegulationsRepositoryFactory repositoryFactory) : base(repositoryFactory)
+        public RegulationViewModel(IRegulationRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
 
         }
 
-        public RegulationsViewModel(IRegulationsRepositoryFactory repositoryFactory, Domain.Regulation entity)
+        public RegulationViewModel(IRegulationRepositoryFactory repositoryFactory, Domain.Regulation entity)
             : base(repositoryFactory, entity)
         {
         }

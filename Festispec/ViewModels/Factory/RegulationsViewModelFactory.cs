@@ -1,26 +1,26 @@
 ﻿using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.Regulations;
+using Festispec.ViewModels.Regulation;
 
 namespace Festispec.ViewModels.Factory
 {
     public class RegulationsViewModelFactory : IRegulationsViewModelFactory
     {
-        private readonly IRegulationsRepositoryFactory _RegulationsRepositoryFactory;
+        private readonly IRegulationRepositoryFactory _RegulationsRepositoryFactory;
 
-        public RegulationsViewModelFactory(IRegulationsRepositoryFactory RegulationsRepositoryFactory)
+        public RegulationsViewModelFactory(IRegulationRepositoryFactory RegulationsRepositoryFactory)
         {
             _RegulationsRepositoryFactory = RegulationsRepositoryFactory;
         }
 
-        public RegulationsViewModel CreateViewModel()
+        public RegulationViewModel CreateViewModel()
         {
-            return new RegulationsViewModel(_RegulationsRepositoryFactory);
+            return new RegulationViewModel(_RegulationsRepositoryFactory);
         }
 
-        public RegulationsViewModel CreateViewModel(Domain.Regulation entity)
+        public RegulationViewModel CreateViewModel(Domain.Regulation entity)
         {
-            return new RegulationsViewModel(_RegulationsRepositoryFactory, entity);
+            return new RegulationViewModel(_RegulationsRepositoryFactory, entity);
         }
     }
 }

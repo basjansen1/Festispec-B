@@ -1,21 +1,16 @@
-﻿using Festispec.NavigationService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
-using Festispec.ViewModels.Factory.Interface;
+﻿using System.ComponentModel;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
+using Festispec.NavigationService;
+using Festispec.ViewModels.Factory.Interface;
 
-namespace Festispec.ViewModels.Regulations
+namespace Festispec.ViewModels.Regulation
 {
-    public class RegulationsAddOrUpdateViewModel : 
-        AddOrUpdateViewModelBase<IRegulationsViewModelFactory, RegulationsViewModel, IRegulationsRepository, Domain.Regulation>
+    public class RegulationAddOrUpdateViewModel : 
+        AddOrUpdateViewModelBase<IRegulationsViewModelFactory, RegulationViewModel, IRegulationRepository, Domain.Regulation>
     {
-        public RegulationsAddOrUpdateViewModel(INavigationService navigationService,
-            IRegulationsRepositoryFactory repositoryFactory,
+        public RegulationAddOrUpdateViewModel(INavigationService navigationService,
+            IRegulationRepositoryFactory repositoryFactory,
             IRegulationsViewModelFactory regulationsViewModelFactory)
             : base(navigationService, repositoryFactory, regulationsViewModelFactory)
         {

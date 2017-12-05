@@ -3,21 +3,20 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.NavigationService;
 using Festispec.ViewModels.Factory.Interface;
 using GalaSoft.MvvmLight.CommandWpf;
-using System;
-using Festispec.NavigationService;
 
-namespace Festispec.ViewModels.Regulations
+namespace Festispec.ViewModels.Regulation
 {
-    public class RegulationsListViewModel : NavigatableViewModelBase
+    public class RegulationListViewModel : NavigatableViewModelBase
     {
         private readonly INavigationService _navigationService;
-        private readonly IRegulationsRepositoryFactory _regulationsRepositoryFactory;
+        private readonly IRegulationRepositoryFactory _regulationsRepositoryFactory;
         private readonly IRegulationsViewModelFactory _regulationsViewModelFactory;
 
-        public RegulationsListViewModel(INavigationService navigationService,
-            IRegulationsRepositoryFactory regulationsRepositoryFactory,
+        public RegulationListViewModel(INavigationService navigationService,
+            IRegulationRepositoryFactory regulationsRepositoryFactory,
             IRegulationsViewModelFactory regulationsViewModelFactory) : base(navigationService)
         {
             _navigationService = navigationService;
@@ -34,9 +33,9 @@ namespace Festispec.ViewModels.Regulations
         public ICommand RegulationsDeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
 
-        public ObservableCollection<RegulationsViewModel> Regulations { get; private set; }
+        public ObservableCollection<RegulationViewModel> Regulations { get; private set; }
 
-        public RegulationsViewModel SelectedRegulations { get; set; }
+        public RegulationViewModel SelectedRegulations { get; set; }
 
         public string SearchName { get; set; } = "";
         public string SearchMunicipality { get; set; } = "";
@@ -78,7 +77,7 @@ namespace Festispec.ViewModels.Regulations
                 }
 
                 Regulations =
-                    new ObservableCollection<RegulationsViewModel>(
+                    new ObservableCollection<RegulationViewModel>(
                         query.ToList()
                             .Select(regulation => _regulationsViewModelFactory.CreateViewModel(regulation)));
                 RaisePropertyChanged(nameof(Regulations));
