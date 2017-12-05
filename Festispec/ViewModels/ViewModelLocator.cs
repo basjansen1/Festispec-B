@@ -32,26 +32,29 @@ namespace Festispec.ViewModels
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             // Register steate
-            SimpleIoc.Default.Register<IState, State.State>();
+            var state = new State.State();
+            SimpleIoc.Default.Register<IState>(() => state);
 
             // Register navigation
             RegisterNavigationService();
-            
-            // Register repositories
-            SimpleIoc.Default.Register<ITemplateRepositoryFactory, TemplateRepositoryFactory>();
+
+            // Register repository factories
+            SimpleIoc.Default.Register<ITemplateRepositoryFactory>(() => new TemplateRepositoryFactory(state.IsOnline));
+            SimpleIoc.Default.Register<ITemplateQuestionRepositoryFactory>(() => new TemplateQuestionRepositoryFactory(state.IsOnline));
+            SimpleIoc.Default.Register<IQuestionTypeRepositoryFactory>(() => new QuestionTypeRepositoryFactory(state.IsOnline));
+            SimpleIoc.Default.Register<IEmployeeRepositoryFactory>(() => new EmployeeRepositoryFactory(state.IsOnline));
+            SimpleIoc.Default.Register<IEmployeeRoleRepositoryFactory>(() => new EmployeeRoleRepositoryFactory(state.IsOnline));
+            SimpleIoc.Default.Register<ILoginRepositoryFactory>(() => new LoginRepositoryFactory(state.IsOnline));
+            SimpleIoc.Default.Register<IInspectionRepositoryFactory>(() => new InspectionRepositoryFactory(state.IsOnline));
+            SimpleIoc.Default.Register<IInspectorRepositoryFactory>(() => new InspectorRepositoryFactory(state.IsOnline));
+            SimpleIoc.Default.Register<IRegulationsRepositoryFactory>(() => new RegulationsRepositoryFactory(state.IsOnline));
+
+            // Register view model factories
             SimpleIoc.Default.Register<ITemplateViewModelFactory, TemplateViewModelFactory>();
-            SimpleIoc.Default.Register<ITemplateQuestionRepositoryFactory, TemplateQuestionRepositoryFactory>();
-            SimpleIoc.Default.Register<IQuestionTypeRepositoryFactory, QuestionTypeRepositoryFactory>();
             SimpleIoc.Default.Register<ITemplateQuestionViewModelFactory, TemplateQuestionViewModelFactory>();
-            SimpleIoc.Default.Register<IEmployeeRepositoryFactory, EmployeeRepositoryFactory>();
             SimpleIoc.Default.Register<IEmployeeViewModelFactory, EmployeeViewModelFactory>();
-            SimpleIoc.Default.Register<IEmployeeRoleRepositoryFactory, EmployeeRoleRepositoryFactory>();
-            SimpleIoc.Default.Register<ILoginRepositoryFactory, LoginRepositoryFactory>();
-            SimpleIoc.Default.Register<IInspectionRepositoryFactory, InspectionRepositoryFactory>();
-            SimpleIoc.Default.Register<IInspectorRepositoryFactory, InspectorRepositoryFactory>();
             SimpleIoc.Default.Register<IInspectorViewModelFactory, InspectorViewModelFactory>();
             SimpleIoc.Default.Register<IRegulationsViewModelFactory, RegulationsViewModelFactory>();
-            SimpleIoc.Default.Register<IRegulationsRepositoryFactory, RegulationsRepositoryFactory>();
 
             // Register viewmodels
             SimpleIoc.Default.Register<LoginViewModel>();

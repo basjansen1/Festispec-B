@@ -10,6 +10,10 @@ namespace Festispec.Domain.Repository.Factory
 {
     public class LoginRepositoryFactory : RepositoryFactoryBase<ILoginRepository, Employee>, ILoginRepositoryFactory
     {
+        public LoginRepositoryFactory(bool isOnline) : base(isOnline)
+        {
+        }
+
         public override ILoginRepository CreateRepository()
         {
             return new LoginRepository(GetDbContext());

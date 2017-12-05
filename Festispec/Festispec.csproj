@@ -282,6 +282,10 @@
       <Project>{09979796-e638-48d5-8666-fa0ac1f54a2e}</Project>
       <Name>Festispec.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Festispec.OfflineSync\Festispec.OfflineSync.csproj">
+      <Project>{29523B3F-FCCD-4528-B926-7487C8AE0755}</Project>
+      <Name>Festispec.OfflineSync</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

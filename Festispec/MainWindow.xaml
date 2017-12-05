@@ -8,7 +8,15 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanMinimize"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         Title="MainWindow" Height="600" Width="800">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding OnWindowClosingCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <ScrollViewer ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Visible">
         <Grid>
             <Grid.RowDefinitions>

@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Net;
 using System.Windows;
 using System.Data;
-using Festispec.Domain.LocalDatabase;
 
 namespace Festispec.Domain.Repository.Factory
 {
@@ -15,6 +14,12 @@ namespace Festispec.Domain.Repository.Factory
         where TRepository : IRepository<TEntity>
         where TEntity : class
     {
+        protected readonly bool IsOnline;
+        public RepositoryFactoryBase(bool isOnline)
+        {
+            IsOnline = isOnline;
+        }
+
         /// <summary>
         ///     Creates a repository of the given TEntity
         /// </summary>
@@ -27,58 +32,12 @@ namespace Festispec.Domain.Repository.Factory
         /// <returns> A new instance of the DbContext. </returns>
         protected DbContext GetDbContext()
         {
-            if (CanConnect())
+            if (IsOnline)
             {
-                new SyncClasses(); //sync database to local database
                 return new FestispecContainer();
-            }
-            else
+            } else
             {
-                MessageBox.Show("Error 1337: Niet verbonden met de database!");
-                return null;
-            }
-        }
-
-        protected bool CanConnect()
-        {
-            bool canConnectToDatabase = false;
-
-            try
-            {
-                using (var dbContext = new FestispecContainer())
-                {
-                    canConnectToDatabase = dbContext.Database.Exists();
-                }
-            }
-            catch
-            {
-                return false;
-            }
-
-            Debug.WriteLine("Geen verbinding");
-
-            return canConnectToDatabase;
-        }
-
-        /// <summary>
-        /// Checks if there is an active internet connection
-        /// </summary>
-        /// <returns></returns>
-        public bool HasInternetConnection()
-        {
-            try
-            {
-                using (var client = new WebClient())
-                {
-                    using (var stream = client.OpenRead("http://www.google.nl"))
-                    {
-                        return true;
-                    }
-                }
-            }
-            catch
-            {
-                return false;
+                return new LocalContainer();
             }
         }
     }
