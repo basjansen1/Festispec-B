@@ -173,6 +173,7 @@ namespace Festispec.ViewModels.Employees
             set
             {
                 _inspection.Municipality = value;
+                RaisePropertyChanged("Municipality");
             }
         }
 

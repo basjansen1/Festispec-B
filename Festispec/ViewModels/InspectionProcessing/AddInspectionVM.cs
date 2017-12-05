@@ -13,11 +13,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Festispec.NavigationService;
+using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.ViewModels.Employees
 {
     public class AddInspectionVM : ViewModelBase
     {
+        IGeoRepository _geoRepository;
+        public ICommand SearchAddressCommand { get; set; }
         #region fields
         private int _selectedIndexCustomerList;
         private DateTime _fromDate;
@@ -77,12 +80,13 @@ namespace Festispec.ViewModels.Employees
         #endregion
 
         #region constructor and methods
-        public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory, INavigationService navigationService)
+        public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory, INavigationService navigationService, IGeoRepository GeoRepository)
         {
             InspectionList = inspectionList;
             _navigationService = navigationService;
             NewInspection = new InspectionVM();
             NewInspection.Status = "Pending";
+            _geoRepository = GeoRepository;
 
             NewInspection.Location = DbGeography.PointFromText("POINT(50 5)", 4326);
             CustomerList = new List<CustomerVM>();
@@ -90,6 +94,7 @@ namespace Festispec.ViewModels.Employees
 
             AddInspectionCommand = new RelayCommand(AddInspection);
             CloseWindowCommand = new RelayCommand(_navigationService.GoBack);
+            SearchAddressCommand = new RelayCommand(() => SearchAddress());
 
             using (var customerRepository = customerRepositoryFactory.CreateRepository())
             {
@@ -132,14 +137,60 @@ namespace Festispec.ViewModels.Employees
         {
             if (CanAddInspection())
             {
+                if (!SearchAddress())
+                {
+                    return;
+                }
                 using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
                 {
                     inspectionRepository.Add(NewInspection.toModel());
                 }
 
                 InspectionList.InspectionVMList.Add(NewInspection);
+                InspectionList.ReloadInspectionVMList();
                 _navigationService.GoBack();
             }
+        }
+        private bool SearchAddress()
+        {
+            using (_geoRepository)
+            {
+                try
+                {
+                    var address = _geoRepository.Find(NewInspection.PostalCode,
+                        NewInspection.HouseNumber);
+
+                    NewInspection.Street = address.Street;
+                    NewInspection.City = address.City;
+                    NewInspection.Municipality = address.Municipality;
+                    NewInspection.Country = address.Country;
+
+                    return true;
+                }
+                catch (ArgumentNullException exception)
+                {
+                    switch (exception.ParamName)
+                    {
+                        case "PostalCode":
+                        case "HouseNumber":
+                            MessageBox.Show("Geef een postcode en huisnummer op");
+                            break;
+                        case "json":
+                            MessageBox.Show(
+                                $"Geen adres gevonden op {NewInspection.PostalCode} {NewInspection.HouseNumber}");
+                            break;
+                        default:
+                            MessageBox.Show("Er is iets fout gegaan");
+                            break;
+                    }
+                }
+                catch (InvalidOperationException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
+            }
+
+            return false;
         }
         #endregion
     }
