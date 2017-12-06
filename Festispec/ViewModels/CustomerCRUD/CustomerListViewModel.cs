@@ -62,7 +62,7 @@ namespace Festispec.ViewModels.CustomerCRUD
 
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            LoadCustomers();
+            SearchCustomers();
 
 
             if (args.PropertyName != nameof(NavigationService.CurrentRoute)) return;
@@ -89,63 +89,71 @@ namespace Festispec.ViewModels.CustomerCRUD
 
         private void SearchCustomers()
         {
-            using (var CustomerRepository = _CustomerRepositoryFactory.CreateRepository())
+
+            if (SearchName.Equals("")) //if searchbox is empty
             {
-                switch (SelectedSearchOption)
+                LoadCustomers();
+            }
+            else
+            {
+                using (var CustomerRepository = _CustomerRepositoryFactory.CreateRepository())
                 {
-                    case "Naam":
-                        Customers =
-                    new ObservableCollection<CustomerViewModel>(
-                        CustomerRepository.Get()
-                            .Where(Customer =>
-                                Customer.Name.Contains(SearchName))
-                            .ToList()
-                            .Select(Customer => _CustomerViewModelFactory.CreateViewModel(Customer)));
-                        RaisePropertyChanged(nameof(Customers));
-                 break;
-                    case "Gemeente":
-                        Customers =
-                             new ObservableCollection<CustomerViewModel>(
+                    switch (SelectedSearchOption)
+                    {
+                        case "Naam":
+                            Customers =
+                        new ObservableCollection<CustomerViewModel>(
                             CustomerRepository.Get()
-                            .Where(Customer =>
-                             Customer.Municipality.Contains(SearchName))
-                             .ToList()
-                             .Select(Customer => _CustomerViewModelFactory.CreateViewModel(Customer)));
-                        RaisePropertyChanged(nameof(Customers));
-                        break;
-                    case "Voornaam contact":
-                        Customers =
+                                .Where(Customer =>
+                                    Customer.Name.Contains(SearchName))
+                                .ToList()
+                                .Select(Customer => _CustomerViewModelFactory.CreateViewModel(Customer)));
+                            RaisePropertyChanged(nameof(Customers));
+                            break;
+                        case "Gemeente":
+                            Customers =
+                                 new ObservableCollection<CustomerViewModel>(
+                                CustomerRepository.Get()
+                                .Where(Customer =>
+                                 Customer.Municipality.Contains(SearchName))
+                                 .ToList()
+                                 .Select(Customer => _CustomerViewModelFactory.CreateViewModel(Customer)));
+                            RaisePropertyChanged(nameof(Customers));
+                            break;
+                        case "Voornaam contact":
+                            Customers =
+                                new ObservableCollection<CustomerViewModel>(
+                            CustomerRepository.Get()
+                             .Where(Customer =>
+                               Customer.FirstName.Contains(SearchName))
+                                 .ToList()
+                                 .Select(Customer => _CustomerViewModelFactory.CreateViewModel(Customer)));
+                            RaisePropertyChanged(nameof(Customers));
+                            break;
+                        case "Achternaam contact":
+                            Customers =
                             new ObservableCollection<CustomerViewModel>(
-                        CustomerRepository.Get()
-                         .Where(Customer =>
-                           Customer.FirstName.Contains(SearchName))
-                             .ToList()
+                            CustomerRepository.Get()
+                                 .Where(Customer =>
+                                    Customer.LastName.Contains(SearchName))
+                            .ToList()
                              .Select(Customer => _CustomerViewModelFactory.CreateViewModel(Customer)));
-                         RaisePropertyChanged(nameof(Customers));
-                        break;
-                    case "Achternaam contact":
-                        Customers =
+                            RaisePropertyChanged(nameof(Customers));
+                            break;
+                        case "Email":
+                            Customers =
                         new ObservableCollection<CustomerViewModel>(
                         CustomerRepository.Get()
-                             .Where(Customer =>
-                                Customer.LastName.Contains(SearchName))
-                        .ToList()
-                         .Select(Customer => _CustomerViewModelFactory.CreateViewModel(Customer)));
-                        RaisePropertyChanged(nameof(Customers));
-                        break;
-                    case "Email":
-                        Customers =
-                    new ObservableCollection<CustomerViewModel>(
-                    CustomerRepository.Get()
-                        .Where(Customer =>
-                             Customer.Email.Contains(SearchName))
-                        .ToList()
-                        .Select(Customer => _CustomerViewModelFactory.CreateViewModel(Customer)));
-                        RaisePropertyChanged(nameof(Customers));
-                        break;
-                }
+                            .Where(Customer =>
+                                 Customer.Email.Contains(SearchName))
+                            .ToList()
+                            .Select(Customer => _CustomerViewModelFactory.CreateViewModel(Customer)));
+                            RaisePropertyChanged(nameof(Customers));
+                            break;
+                    }
 
-            }
+                }
+            }         
   }
 
         //Loads in the customers from the database, is called when something changes

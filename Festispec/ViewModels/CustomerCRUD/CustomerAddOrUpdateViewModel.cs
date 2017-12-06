@@ -6,6 +6,7 @@ using Festispec.ViewModels.Factory.Interface;
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Festispec.ViewModels.CustomerCRUD
@@ -53,29 +54,11 @@ namespace Festispec.ViewModels.CustomerCRUD
 
                     return true;
                 }
-                catch (ArgumentNullException exception)
+                catch (Exception exception)
                 {
-                    //switch (exception.ParamName)
-                    //{
-                        //case "PostalCode":
-                        //case "HouseNumber":
-                          //  MessageBox.Show("Geef een postcode en huisnummer op");
-                         //   break;
-                       // case "json":
-                           // MessageBox.Show(
-                            //    $"Geen adres gevonden op {NewInspection.PostalCode} {NewInspection.HouseNumber}");
-                          //  break;
-                        //default:
-                       //     MessageBox.Show("Er is iets fout gegaan");
-                     //       break;
-                   // }
-                }
-                catch (InvalidOperationException exception)
-                {
-                 //   MessageBox.Show(exception.Message);
+                    MessageBox.Show(exception.Message);
                 }
             }
-
             return false;
         }
 
