@@ -4,15 +4,29 @@ namespace Festispec.Routes
 {
     public static class Routes
     {
-        public static Route Home = new Route {Key = "Home", PageType = new Uri("../MainWindow.xaml", UriKind.Relative)};
+        public static Route Home = new Route {Key = "Home", PageType = new Uri("../MainWindow.xaml", UriKind.Relative), Offline = true};
 
         #region Template
+
+        public static Route RegulationsList = new Route
+        {
+            Key = "RegulationsList",
+            PageType = new Uri("../Views/Regulations/RegulationsList.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+
+        public static Route RegulationsAddOrUpdate = new Route
+        {
+            Key = "RegulationsAddOrUpdate",
+            PageType = new Uri("../Views/Regulations/RegulationsAddOrUpdate.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
+        };
 
         public static Route TemplateList = new Route
         {
             Key = "TemplateList",
             PageType = new Uri("../Views/Template/TemplateList.xaml", UriKind.Relative),
-            Roles = new []{"Manager", "Medewerker"}
+            Roles = new[] { "Manager", "Medewerker" }
         };
 
         public static Route TemplateAddOrUpdate = new Route
@@ -63,13 +77,18 @@ namespace Festispec.Routes
 
         #endregion
 
+        
+
+       
+
         #region Employee
 
         public static Route EmployeeList = new Route
         {
             Key = "EmployeeList",
             PageType = new Uri("../Views/Employee/EmployeeList.xaml", UriKind.Relative),
-            Roles = new[] { "Manager" }
+            Roles = new[] { "Manager" },
+            Offline = true
         };
 
         public static Route EmployeeAddOrUpdate = new Route
@@ -83,7 +102,8 @@ namespace Festispec.Routes
         {
             Key = "InspectorList",
             PageType = new Uri("../Views/Inspector/InspectorList.xaml", UriKind.Relative),
-            Roles = new[] { "Manager" }
+            Roles = new[] { "Manager" },
+            Offline = true
         };
 
         public static Route InspectorAddOrUpdate = new Route

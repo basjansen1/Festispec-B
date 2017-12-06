@@ -21,6 +21,8 @@ namespace Festispec.NavigationService
 
         void Configure(Route route);
 
+        bool CanAndHasAccess(Route route);
+        bool CanAccess(Route route);
         bool HasAccess(Route route);
     }
 }

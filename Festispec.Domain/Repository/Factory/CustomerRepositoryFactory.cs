@@ -14,5 +14,9 @@ namespace Festispec.Domain.Repository.Factory
         {
             return new CustomerRepository(GetDbContext());
         }
+
+        public CustomerRepositoryFactory(bool isOnline) : base(isOnline)
+        {
+        }
     }
 }

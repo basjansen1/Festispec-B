@@ -14,9 +14,29 @@ namespace Festispec.Domain.Repository
         {
         }
 
-      //  public override IQueryable<Regulation> Get()
-        //{
-          //  return base.Get().Include(regulation => regulation.Name);
-        //}
+        public IQueryable<Regulation> GetByMunicipality(string municipality)
+        {
+            return base.Get().Where(r => r.Municipality == municipality);
+        }
+
+        public override Regulation Add(Regulation entity)
+        {
+            entity = CleanRelations(entity);
+
+            return base.Add(entity);
+        }
+
+        public override Regulation Update(Regulation updated, params object[] keyValues)
+        {
+            updated = CleanRelations(updated);
+
+            return base.Update(updated, keyValues);
+        }
+
+        private Regulation CleanRelations(Regulation entity)
+        {
+
+            return entity;
+        }
     }
 }

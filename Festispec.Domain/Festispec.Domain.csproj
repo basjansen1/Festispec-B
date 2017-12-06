@@ -38,8 +38,8 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
@@ -50,8 +50,10 @@
       <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -116,6 +118,7 @@
     <Compile Include="Inspector.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="LocalContainer.cs" />
     <Compile Include="Note.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
@@ -147,8 +150,8 @@
     <Compile Include="Repository\Factory\Interface\IEmployeeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IInspectorRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ILoginRepositoryFactory.cs" />
-    <Compile Include="Repository\Factory\Interface\IRegulationRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IPlanningRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IRegulationRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\LoginRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\PlanningRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\QuestionTypeRepositoryFactory.cs" />
