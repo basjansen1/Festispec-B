@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
+using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
-using Festispec.ViewModels.Factory.Interface;
 using Festispec.NavigationService;
+using Festispec.ViewModels.Factory.Interface;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels.Inspector
 {
@@ -13,38 +13,55 @@ namespace Festispec.ViewModels.Inspector
     {
         public InspectorAddOrUpdateViewModel(INavigationService navigationService,
             IInspectorRepositoryFactory repositoryFactory,
-            IInspectorViewModelFactory inspectorViewModelFactory, IEmployeeRepositoryFactory employeeRepositoryFactory)
-            : base(navigationService, repositoryFactory, inspectorViewModelFactory)
+            IInspectorViewModelFactory viewModelFactory)
+            : base(navigationService, repositoryFactory, viewModelFactory)
         {
-            using (var employeeRepository = employeeRepositoryFactory.CreateRepository())
-            {
-                Managers = new[] {new Domain.Employee {Id = -1}}.Concat(employeeRepository.Get()
-                    .Where(e => e.Role_Role == "Manager").ToList());
-            }
+            RegisterCommands();
         }
 
-        public IEnumerable<Domain.Employee> Managers { get; }
+        public ICommand NavigateToScheduleAddCommand { get; set; }
+        public ICommand NavigateToScheduleUpdateCommand { get; set; }
+        public ICommand ScheduleDeleteCommand { get; set; }
+
+        private void RegisterCommands()
+        {
+            NavigateToScheduleAddCommand =
+                new RelayCommand(
+                    () => NavigationService.NavigateTo(Routes.Routes.InspectorScheduleAdd, EntityViewModel),
+                    () => EntityViewModel != null);
+            NavigateToScheduleUpdateCommand = new RelayCommand(
+                () => NavigationService.NavigateTo(Routes.Routes.InspectorScheduleAddOrUpdate, EntityViewModel),
+                () => EntityViewModel.SelectedSchedule != null && !EntityViewModel.SelectedSchedule.IsDeleted);
+            ScheduleDeleteCommand = new RelayCommand(() =>
+            {
+                EntityViewModel.SelectedSchedule.IsDeleted = true;
+                EntityViewModel = EntityViewModel;
+            }, () => EntityViewModel.SelectedSchedule != null && !EntityViewModel.SelectedSchedule.IsDeleted);
+        }
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName != "CurrentRoute") return;
+            if (args.PropertyName != nameof(NavigationService.CurrentRoute)) return;
 
             if (NavigationService.CurrentRoute != Routes.Routes.InspectorAddOrUpdate) return;
 
             UpdateEntityViewModelFromNavigationParameter();
-            UpdateInspectorFromNavigationParameter();
         }
 
-        private void UpdateInspectorFromNavigationParameter()
+        protected override void UpdateEntityViewModelFromNavigationParameter()
         {
+            base.UpdateEntityViewModelFromNavigationParameter();
+
+            EntityViewModel.SelectedSchedule = null;
         }
 
         public override void Save()
         {
             // TODO: Validation
+
             var saved = EntityViewModel.Save();
 
-            if(saved) NavigationService.GoBack(EntityViewModel);
+            if (saved) GoBack(EntityViewModel);
         }
     }
 }

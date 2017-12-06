@@ -145,6 +145,9 @@
     <Compile Include="Views\Inspector\Schedule\InspectorSchedule.xaml.cs">
       <DependentUpon>InspectorSchedule.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Inspector\Schedule\InspectorScheduleAdd.xaml.cs">
+      <DependentUpon>InspectorScheduleAdd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Inspector\Schedule\InspectorScheduleAddOrUpdate.xaml.cs">
       <DependentUpon>InspectorScheduleAddOrUpdate.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Inspector\Schedule\InspectorSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Inspector\Schedule\InspectorScheduleAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

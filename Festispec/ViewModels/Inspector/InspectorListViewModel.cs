@@ -56,7 +56,7 @@ namespace Festispec.ViewModels.Inspector
         {
             NavigateToInspectorScheduleCommand =
                 new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.InspectorSchedule, SelectedInspector),
-                () => SelectedInspector != null);
+                () => SelectedInspector != null && _navigationService.HasAccess(Routes.Routes.InspectorSchedule));
             NavigateToInspectorAddCommand =
                 new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.InspectorAddOrUpdate));
             NavigateToInspectorUpdateCommand = new RelayCommand(

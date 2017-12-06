@@ -18,8 +18,6 @@ namespace Festispec.ViewModels.Inspector
         }
 
         public int Id => Entity.Id;
-
-
         
 
         public Domain.Inspector Inspector

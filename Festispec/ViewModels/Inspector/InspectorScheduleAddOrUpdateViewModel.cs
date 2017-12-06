@@ -17,7 +17,8 @@ namespace Festispec.ViewModels.Inspector
         protected InspectorViewModel InspectorViewModel;
 
         public InspectorScheduleAddOrUpdateViewModel(INavigationService navigationService,
-            IInspectorScheduleRepositoryFactory repositoryFactory, IInspectorScheduleViewModelFactory viewModelFactory)
+            IInspectorScheduleRepositoryFactory repositoryFactory, 
+            IInspectorScheduleViewModelFactory viewModelFactory)
             : base(navigationService, repositoryFactory, viewModelFactory)
         {
             
@@ -57,7 +58,8 @@ namespace Festispec.ViewModels.Inspector
             //TODO: Validation
 
             // Map updated fields
-
+            EntityViewModel.NotAvailableFrom = EntityViewModel.UpdatedEntity.NotAvailableFrom;
+            EntityViewModel.NotAvailableTo = EntityViewModel.UpdatedEntity.NotAvailableTo;
             GoBack();
         }
 
