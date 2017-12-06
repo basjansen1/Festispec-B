@@ -13,6 +13,10 @@
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Email}" />
         <Label>Inspecties</Label>
         <DataGrid ItemsSource="{Binding Inspections}"></DataGrid>
+        <Label>Huisnummer</Label>
+        <TextBox  Text="{Binding Path=EntityViewModel.UpdatedEntity.HouseNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Label>Postcode</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <Label>Stad</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.City}" />
         <Label>Land</Label>
@@ -23,16 +27,12 @@
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.LastName}" />
         <Label>Straatnaam</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Street}" />
-        <Label>Huisnummer</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.HouseNumber}" />
         <Label>KVK</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.KVK}" />
         <Label>IBAN</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.IBAN}" />
         <Label>Gemeente</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Municipality}" />
-        <Label>Postcode</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.PostalCode}" />
         <Label>Telefoonnummer</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Telephone}" />
         <Grid Height="50">
