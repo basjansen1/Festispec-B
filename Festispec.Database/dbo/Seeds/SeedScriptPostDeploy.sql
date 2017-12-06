@@ -193,7 +193,7 @@ INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (22, 
 SET IDENTITY_INSERT [dbo].[Regulation] ON
 INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (1, N'Alcohol Wet', N'Gij Mag Geen Alcohol Verkopen Aan Mensen Onder De 18 Jaar', null)
 INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (2, N'Drugs Wet', N'Gij Mag Geen Drugs Verkopen Aan Iedereen', null)
-INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (3, N'Bomen Wet', N'Gij Mag Niet Tegen Bomen Urineren', N's-Hertogenbosch')
+INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (3, N'Bomen Wet', N'Gij Mag Niet Tegen Bomen Urineren', N'Meierijstad')
 SET IDENTITY_INSERT [dbo].[Regulation] OFF
 
 
