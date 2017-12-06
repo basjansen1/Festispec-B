@@ -58,15 +58,15 @@ INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'Accepted')
 INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'Declined')
 INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'Pending')
 
-INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Paaspop', N'www.paaspop.nl', N'2017-01-19 03:14:07', N'2017-01-24 03:14:07', 12, 11, N'Accepted') -- Paaspop
-INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Festyland', N'www.festyland.nl', N'2038-01-19 03:14:07', N'2038-01-19 03:14:07', 14, 13, N'Pending') -- Festyland
+INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Paaspop', N'www.paaspop.nl', N'2016-09-17 00:00:00', N'2016-09-20 00:00:00', 12, 11, N'Accepted') -- Paaspop
+INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Festyland', N'www.festyland.nl', N'2018-01-18 03:14:07', N'2018-01-21 03:14:07', 14, 13, N'Pending') -- Festyland
 INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Mysteryland', N'www.mysteryland.nl', N'2038-01-19 03:14:08', N'2038-01-19 03:14:08', 16, 15, N'Declined') -- Mysteryland
 
 INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2009-01-19 03:14:08', N'2024-01-19 03:14:08', 3)
 INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2016-01-19 03:14:08', N'2022-01-19 03:14:08', 4)
-INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2017-01-19 03:14:08', N'2030-01-24 03:14:08', 5)
-INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2017-01-19 03:14:08', N'2030-01-24 03:14:08', 9)
-INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2017-01-19 03:14:08', N'2030-01-24 03:14:08', 10)
+INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2016-01-19 03:14:08', N'2030-01-24 03:14:08', 5)
+INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2016-01-19 03:14:08', N'2030-01-24 03:14:08', 9)
+INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2017-01-19 03:14:08', N'2040-01-24 03:14:08', 10)
 
 
 SET IDENTITY_INSERT [dbo].[Note] ON
@@ -191,9 +191,9 @@ INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (22, 
 
 
 SET IDENTITY_INSERT [dbo].[Regulation] ON
-INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (5, N'Alcohol Wet', N'Gij Mag Geen Alcohol Verkopen Aan Mensen Onder De 18 Jaar', N'Nederland')
-INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (6, N'Drugs Wet', N'Gij Mag Geen Drugs Verkopen Aan Iedereen', N'Nederland')
-INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (7, N'Bomen Wet', N'Gij Mag Niet Tegen Bomen Urineren', N's-Hertogenbosch')
+INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (1, N'Alcohol Wet', N'Gij Mag Geen Alcohol Verkopen Aan Mensen Onder De 18 Jaar', null)
+INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (2, N'Drugs Wet', N'Gij Mag Geen Drugs Verkopen Aan Iedereen', null)
+INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (3, N'Bomen Wet', N'Gij Mag Niet Tegen Bomen Urineren', N's-Hertogenbosch')
 SET IDENTITY_INSERT [dbo].[Regulation] OFF
 
 
