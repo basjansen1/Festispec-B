@@ -76,6 +76,7 @@
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ExtendedQuestion.cs" />
+    <Compile Include="ExtendedSchedule.cs" />
     <Compile Include="Festispec.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -136,12 +137,12 @@
     <Compile Include="Repository\Factory\Interface\IEmployeeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IInspectorRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ILoginRepositoryFactory.cs" />
-    <Compile Include="Repository\Factory\Interface\IScheduleRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IInspectorScheduleRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\LoginRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\QuestionTypeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IQuestionTypeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ITemplateQuestionRepositoryFactory.cs" />
-    <Compile Include="Repository\Factory\ScheduleRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\InspectorScheduleRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\TemplateQuestionRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\TemplateRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\InspectionRepositoryFactory.cs" />
@@ -154,12 +155,12 @@
     <Compile Include="Repository\Interface\IEmployeeRoleRepository.cs" />
     <Compile Include="Repository\Interface\IInspectorRepository.cs" />
     <Compile Include="Repository\Interface\ILoginRepository.cs" />
-    <Compile Include="Repository\Interface\IScheduleRepository.cs" />
+    <Compile Include="Repository\Interface\IInspectorScheduleRepository.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="Repository\QuestionTypeRepository.cs" />
     <Compile Include="Repository\Interface\ITemplateQuestionRepository.cs" />
     <Compile Include="Repository\Interface\IQuestionTypeRepository.cs" />
-    <Compile Include="Repository\ScheduleRepository.cs" />
+    <Compile Include="Repository\InspectorScheduleRepository.cs" />
     <Compile Include="Repository\TemplateQuestionRepository.cs" />
     <Compile Include="Repository\TemplateRepository.cs" />
     <Compile Include="Repository\Interface\ITemplateRepository.cs" />

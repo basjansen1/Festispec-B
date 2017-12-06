@@ -32,6 +32,7 @@ namespace Festispec.ViewModels.Inspector
 
         public ICommand NavigateToInspectorAddCommand { get; set; }
         public ICommand NavigateToInspectorUpdateCommand { get; set; }
+        public ICommand NavigateToInspectorScheduleCommand { get; set; }
         public ICommand InspectorDeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
 
@@ -53,6 +54,9 @@ namespace Festispec.ViewModels.Inspector
 
         private void RegisterCommands()
         {
+            NavigateToInspectorScheduleCommand =
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.InspectorSchedule, SelectedInspector),
+                () => SelectedInspector != null);
             NavigateToInspectorAddCommand =
                 new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.InspectorAddOrUpdate));
             NavigateToInspectorUpdateCommand = new RelayCommand(

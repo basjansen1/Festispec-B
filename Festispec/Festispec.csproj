@@ -99,11 +99,11 @@
     <Compile Include="State\IState.cs" />
     <Compile Include="State\State.cs" />
     <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
-    <Compile Include="ViewModels\Factory\Interface\IScheduleViewModelFactory.cs" />
-    <Compile Include="ViewModels\Factory\ScheduleViewModelFactory.cs" />
-    <Compile Include="ViewModels\Schedule\ScheduleListViewModel.cs" />
-    <Compile Include="ViewModels\Schedule\ScheduleUpdateViewModel.cs" />
-    <Compile Include="ViewModels\Schedule\ScheduleViewModel.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IInspectorScheduleViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\InspectorScheduleViewModelFactory.cs" />
+    <Compile Include="ViewModels\Inspector\InspectorScheduleAddOrUpdateViewModel.cs" />
+    <Compile Include="ViewModels\Inspector\InspectorScheduleAddViewModel.cs" />
+    <Compile Include="ViewModels\Inspector\InspectorScheduleViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateQuestionAddViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateQuestionAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeAddOrUpdateViewModel.cs" />
@@ -142,14 +142,11 @@
     <Compile Include="ViewModels\InspectionProcessing\InspectionListVM.cs" />
     <Compile Include="ViewModels\InspectionProcessing\InspectionVM.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
-    <Compile Include="Views\Schedule\ScheduleList.xaml.cs">
-      <DependentUpon>ScheduleList.xaml</DependentUpon>
+    <Compile Include="Views\Inspector\Schedule\InspectorSchedule.xaml.cs">
+      <DependentUpon>InspectorSchedule.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Schedule\ScheduleUpdate.xaml.cs">
-      <DependentUpon>ScheduleUpdate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Schedule\ScheduleView.xaml.cs">
-      <DependentUpon>ScheduleView.xaml</DependentUpon>
+    <Compile Include="Views\Inspector\Schedule\InspectorScheduleAddOrUpdate.xaml.cs">
+      <DependentUpon>InspectorScheduleAddOrUpdate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Template\TemplateQuestionAdd.xaml.cs">
       <DependentUpon>TemplateQuestionAdd.xaml</DependentUpon>
@@ -190,15 +187,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Schedule\ScheduleList.xaml">
+    <Page Include="Views\Inspector\Schedule\InspectorSchedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Schedule\ScheduleUpdate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Schedule\ScheduleView.xaml">
+    <Page Include="Views\Inspector\Schedule\InspectorScheduleAddOrUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Festispec.Domain.Repository.Interface
 {
-    public interface IScheduleRepository : IRepository<Schedule>
+    public interface IInspectorScheduleRepository : IRepository<Schedule>
     {
     }
 }

@@ -4,12 +4,11 @@ using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository
 {
-    public class ScheduleRepository : RepositoryBase<Schedule>, IScheduleRepository
+    public class InspectorScheduleRepository : RepositoryBase<Schedule>, IInspectorScheduleRepository
     {
-        public ScheduleRepository(DbContext dbContext) : base(dbContext)
+        public InspectorScheduleRepository(DbContext dbContext) : base(dbContext)
         {
         }
-
 
         public override IQueryable<Schedule> Get()
         {
@@ -23,14 +22,13 @@ namespace Festispec.Domain.Repository
             return base.Add(entity);
         }
 
-        public override Schedule Update(Schedule updated, params object[] keyValues)
+        public override int Delete(Schedule entity)
         {
-            updated = CleanRelations(updated);
-            
-            return base.Update(updated, keyValues);
+            entity = CleanRelations(entity);
+            return base.Delete(entity);
         }
 
-        private Schedule CleanRelations(Schedule entity)
+        private static Schedule CleanRelations(Schedule entity)
         {
             return entity;
         }

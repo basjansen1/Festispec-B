@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Festispec.Views.Schedule
+namespace Festispec.Views.Inspector.Schedule
 {
     /// <summary>
-    /// Interaction logic for ScheduleList.xaml
+    /// Interaction logic for InspectorScheduleAddOrUpdate.xaml
     /// </summary>
-    public partial class ScheduleList : Page
+    public partial class InspectorScheduleAddOrUpdate : Page
     {
-        public ScheduleList()
+        public InspectorScheduleAddOrUpdate()
         {
             InitializeComponent();
         }

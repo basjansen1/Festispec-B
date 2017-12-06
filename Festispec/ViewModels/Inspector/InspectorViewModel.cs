@@ -6,27 +6,59 @@ using System.Data.Entity.Spatial;
 using System;
 using System.Windows;
 using System.Linq;
+using Festispec.ViewModels.Factory.Interface;
 
 namespace Festispec.ViewModels.Inspector
 {
-    public class InspectorViewModel : EntityViewModelBase<IInspectorRepositoryFactory, IInspectorRepository, Domain.Inspector>
-    {
-        public InspectorViewModel(IInspectorRepositoryFactory repositoryFactory) : base(repositoryFactory)
+    
+        public class
+        InspectorViewModel : EntityViewModelBase<IInspectorRepositoryFactory, IInspectorRepository, Domain.Inspector>
         {
-            if (UpdatedEntity.HiredFrom == default(DateTime))
+            private readonly IInspectorScheduleViewModelFactory _inspectorScheduleViewModelFactory;
+
+            private InspectorScheduleViewModel _selectedSchedule;
+
+            public InspectorViewModel(IInspectorRepositoryFactory repositoryFactory,
+                IInspectorScheduleViewModelFactory inspectorScheduleViewModelFactory) : base(repositoryFactory)
             {
-                UpdatedEntity.HiredFrom = new DateTime(1990, 1, 1);
+                _inspectorScheduleViewModelFactory = inspectorScheduleViewModelFactory;
+            }
+
+            public InspectorViewModel(IInspectorRepositoryFactory repositoryFactory,
+                IInspectorScheduleViewModelFactory inspectorScheduleViewModelFactory, Domain.Inspector entity)
+                : base(repositoryFactory, entity)
+            {
+                _inspectorScheduleViewModelFactory = inspectorScheduleViewModelFactory;
+            }
+
+            public int Id => Entity.Id;
+
+
+
+        public ICollection<InspectorScheduleViewModel> Schedule
+        {
+            get { return ScheduleWithDeleted.Where(model => !model.IsDeleted).ToList(); }
+            set
+            {
+                Entity.Schedule = value.Select(inspectorScheduleViewModel => inspectorScheduleViewModel.Entity).ToList();
+                RaisePropertyChanged();
             }
         }
 
-        public InspectorViewModel(IInspectorRepositoryFactory repositoryFactory, Domain.Inspector entity)
-            : base(repositoryFactory, entity)
+        private IEnumerable<InspectorScheduleViewModel> ScheduleWithDeleted => Entity.Schedule
+            .Select(
+                inspectorSchedule => _inspectorScheduleViewModelFactory?.CreateViewModel(inspectorSchedule))
+            .ToList();
+
+        public InspectorScheduleViewModel SelectedSchedule
         {
+            get { return _selectedSchedule; }
+            set
+            {
+                _selectedSchedule = value;
+                RaisePropertyChanged();
+            }
         }
-
-        public int Id => Entity.Id;
-
-
         public string Username
         {
             get { return Entity.Username; }
@@ -246,7 +278,7 @@ namespace Festispec.ViewModels.Inspector
                 RaisePropertyChanged();
             }
         }
-
+      
         public DateTime? CertificationTo
         {
             get { return Entity.CertificationTo; }
@@ -314,6 +346,7 @@ namespace Festispec.ViewModels.Inspector
                 Lat = 5,
                 HiredFrom = HiredFrom,
                 HiredTo = HiredTo,
+                Schedule = Entity.Schedule,
                 CertificationFrom = CertificationFrom,
                 CertificationTo = CertificationTo
             };

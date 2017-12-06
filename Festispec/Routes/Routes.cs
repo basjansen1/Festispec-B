@@ -72,28 +72,26 @@ namespace Festispec.Routes
             PageType = new Uri("../Views/Inspector/InspectorAddOrUpdate.xaml", UriKind.Relative),
             Roles = new[] { "Manager" }
         };
-        #endregion
 
-        #region Schedule
-        public static Route ScheduleList = new Route
+        public static Route InspectorSchedule = new Route
         {
-            Key = "ScheduleList",
-            PageType = new Uri("../Views/Schedule/ScheduleList.xaml", UriKind.Relative),
-            Roles = new[] { "Manager", "Inspecteur", "Medewerker" }
+            Key = "InspectorSchedule",
+            PageType = new Uri("../Views/Inspector/Schedule/InspectorSchedule.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
         };
 
-        public static Route ScheduleUpdate = new Route
+        public static Route InspectorScheduleAddOrUpdate = new Route
         {
-            Key = "ScheduleUpdate",
-            PageType = new Uri("../Views/Schedule/ScheduleUpdate.xaml", UriKind.Relative),
-            Roles = new[] { "Manager", "Inspecteur", "Medewerker" }
+            Key = "InspectorScheduleAddOrUpdate",
+            PageType = new Uri("../Views/Inspector/Schedule/InspectorScheduleAddOrUpdate.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
         };
 
-        public static Route ScheduleView = new Route
+        public static Route InspectorScheduleAdd = new Route
         {
-            Key = "ScheduleView",
-            PageType = new Uri("../Views/Schedule/ScheduleView.xaml", UriKind.Relative),
-            Roles = new[] { "Manager", "Inspecteur", "Medewerker" }
+            Key = "InspectorScheduleAdd",
+            PageType = new Uri("../Views/Inspector/Schedule/InspectorScheduleAdd.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
         };
         #endregion
 
