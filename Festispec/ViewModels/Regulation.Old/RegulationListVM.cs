@@ -52,7 +52,7 @@ namespace Festispec.ViewModels.Regulation
             using (var regulationRepository = _regulationRepositoryFactory.CreateRepository())
             {
                 RegulationVMList = new ObservableCollection<RegulationVM>(regulationRepository.Get().ToList()
-                                    .Where(i => i.Municipality == _municipality)
+                                    .Where(i => i.Municipality == _municipality || String.IsNullOrEmpty(i.Municipality))
                                     .Select(i => new RegulationVM(i)));
             }
         }
