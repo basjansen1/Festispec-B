@@ -22,6 +22,9 @@ using Festispec.ViewModels.Template;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using Festispec.ViewModels.CustomerCRUD;
+using GeodanApi;
+using Festispec.Domain.Repository.Interface;
+using Festispec.Domain.Repository;
 
 namespace Festispec.ViewModels
 {
@@ -52,6 +55,8 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IInspectorViewModelFactory, InspectorViewModelFactory>();
             SimpleIoc.Default.Register<ICustomerViewModelFactory, CustomerViewModelFactory>();
             SimpleIoc.Default.Register<ICustomerRepositoryFactory,CustomerRepositoryFactory>();
+            SimpleIoc.Default.Register<IGeodanSearchApi, GeodanSearchApi>();
+            SimpleIoc.Default.Register<IGeoRepository, GeoRepository>();
 
             // Register viewmodels
             SimpleIoc.Default.Register<LoginViewModel>();
@@ -138,10 +143,12 @@ namespace Festispec.ViewModels
 
         public ICustomerViewModelFactory CustomerViewModelFactory =
             ServiceLocator.Current.GetInstance<ICustomerViewModelFactory>();
-
+        
 
 
         public INavigationService NavigationService = ServiceLocator.Current.GetInstance<INavigationService>();
+
+        public IGeoRepository GeoRepository = ServiceLocator.Current.GetInstance<IGeoRepository>();
 
 
         #endregion
