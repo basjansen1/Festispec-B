@@ -12,7 +12,8 @@ namespace Festispec.Routes
         {
             Key = "RegulationsList",
             PageType = new Uri("../Views/Regulations/RegulationsList.xaml", UriKind.Relative),
-            Roles = new[] { "Manager", "Medewerker" }
+            Roles = new[] { "Manager", "Medewerker" },
+            Offline = true
         };
 
         public static Route RegulationsAddOrUpdate = new Route
@@ -58,7 +59,8 @@ namespace Festispec.Routes
         {
             Key = nameof(PlanningList),
             PageType = new Uri("../Views/Planning/PlanningList.xaml", UriKind.Relative),
-            Roles = new[] { "Manager", "Medewerker" }
+            Roles = new[] { "Manager", "Medewerker" },
+            Offline = true
         };
 
         public static Route PlanningAdd = new Route
@@ -121,7 +123,8 @@ namespace Festispec.Routes
         {
             Key = "InspectionList",
             PageType = new Uri("../Views/InspectionList.xaml", UriKind.Relative),
-            Roles = new[] { "Manager", "Medewerker" }
+            Roles = new[] { "Manager", "Medewerker" },
+            Offline = true
         };
         public static Route EditInspection = new Route
         {
@@ -150,7 +153,8 @@ namespace Festispec.Routes
         {
             Key = "ShowRegulation",
             PageType = new Uri("../Views/ShowRegulation.xaml", UriKind.Relative),
-            Roles = new[] { "Manager", "Medewerker" }
+            Roles = new[] { "Manager", "Medewerker" },
+            Offline = true
         };
 
         #endregion
