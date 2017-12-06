@@ -44,13 +44,13 @@ namespace Festispec.ViewModels.CustomerCRUD
             {
                 try
                 {
-                    var address = _geoRepository.Find(EntityViewModel.PostalCode,
-                        EntityViewModel.HouseNumber);
+                    var address = _geoRepository.Find(EntityViewModel.UpdatedEntity.PostalCode,
+                        EntityViewModel.UpdatedEntity.HouseNumber);
 
-                    EntityViewModel.Street = address.Street;
-                    EntityViewModel.City = address.City;
-                    EntityViewModel.Municipality = address.Municipality;
-                    EntityViewModel.Country = address.Country;
+                    EntityViewModel.UpdatedEntity.Street = address.Street;
+                    EntityViewModel.UpdatedEntity.City = address.City;
+                    EntityViewModel.UpdatedEntity.Municipality = address.Municipality;
+                    EntityViewModel.UpdatedEntity.Country = address.Country;
 
                     return true;
                 }
