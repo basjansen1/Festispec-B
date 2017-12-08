@@ -51,6 +51,9 @@ namespace Festispec.ViewModels.CustomerCRUD
                     EntityViewModel.UpdatedEntity.City = address.City;
                     EntityViewModel.UpdatedEntity.Municipality = address.Municipality;
                     EntityViewModel.UpdatedEntity.Country = address.Country;
+                    EntityViewModel.UpdatedEntity.Lat = address.Lat;
+                    EntityViewModel.UpdatedEntity.Long = address.Long;
+                    EntityViewModel.UpdatedEntity.Location = address.Location;
 
                     return true;
                 }
