@@ -1,0 +1,28 @@
+﻿<Page x:Class="Festispec.Views.Regulations.RegulationsAddOrUpdate"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Festispec.Views.Regulations"
+      mc:Ignorable="d" 
+      Title="RegulationsAddOrUpdate"
+      DataContext="{Binding Source={StaticResource Locator}, Path=RegulationsAddOrUpdate}">
+
+    <StackPanel>
+        <Label>Titel</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Name}" />
+        <Label>Beschrijving</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Description}" />
+        <Label>Gemeente</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Municipality}" />
+        
+        <Grid Height="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Cancel" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
+            <Button Grid.Column="1"  Content="Save" Margin="5px 10px" Command="{Binding SaveEntityCommand}"/>
+        </Grid>
+    </StackPanel>
+</Page>

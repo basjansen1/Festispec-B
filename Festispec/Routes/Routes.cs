@@ -87,5 +87,89 @@ namespace Festispec.Routes
         };
 
         #endregion
+    
+
+
+        
+        #region Planning
+
+        public static Route PlanningList = new Route
+        {
+            Key = nameof(PlanningList),
+            PageType = new Uri("../Views/Planning/PlanningList.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+
+        public static Route PlanningAdd = new Route
+        {
+            Key = nameof(PlanningAdd),
+            PageType = new Uri("../Views/Planning/PlanningAdd.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+
+        public static Route PlanningUpdate = new Route
+        {
+            Key = nameof(PlanningUpdate),
+            PageType = new Uri("../Views/Planning/PlanningUpdate.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+
+        #endregion
+
+        
+
+       
+
+
+
+        
+
+        #region Inspection
+
+        public static Route InspectionList = new Route
+        {
+            Key = "InspectionList",
+            PageType = new Uri("../Views/InspectionList.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+        public static Route EditInspection = new Route
+        {
+            Key = "EditInspection",
+            PageType = new Uri("../Views/EditInspection.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+        public static Route AddInspection = new Route
+        {
+            Key = "AddInspection",
+            PageType = new Uri("../Views/AddInspection.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+        public static Route ProcessInspection = new Route
+        {
+            Key = "ProcessInspection",
+            PageType = new Uri("../Views/ProcessInspection.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+
+        #endregion
+
+        #region Regulation
+
+        public static Route RegulationList = new Route
+        {
+            Key = "ShowRegulation",
+            PageType = new Uri("../Views/ShowRegulation.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+
+        public static Route RegulationsAddOrUpdate = new Route
+        {
+            Key = "RegulationAddOrUpdate",
+            PageType = new Uri("../Views/Regulations/RegulationsAddOrUpdate.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+
+        #endregion
+
     }
 }

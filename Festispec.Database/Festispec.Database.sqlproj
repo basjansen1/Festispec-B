@@ -64,9 +64,6 @@
     <Folder Include="dbo\Seeds" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Festispec.Database.SVENS-XPS15.publish.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Build Include="dbo\Tables\Address.sql" />
     <Build Include="dbo\Tables\EmployeeRole.sql" />
     <Build Include="dbo\Tables\Schedule.sql" />
@@ -84,6 +81,6 @@
     <Build Include="dbo\Tables\Address_Inspection.sql" />
     <Build Include="dbo\Tables\Question_TemplateQuestion.sql" />
     <Build Include="dbo\Tables\Question_InspectionQuestion.sql" />
-    <PostDeploy Include="dbo\Seeds\SeedScriptPostDeploy.sql" />
+    <None Include="dbo\Seeds\SeedScriptPostDeploy.sql" />
   </ItemGroup>
 </Project>

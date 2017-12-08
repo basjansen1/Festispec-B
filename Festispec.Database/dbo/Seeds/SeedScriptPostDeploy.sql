@@ -191,10 +191,9 @@ INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (22, 
 
 
 SET IDENTITY_INSERT [dbo].[Regulation] ON
-INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (1, N'Bedrijfsnaam', N'Wat beschrijving', N'Meierijstad')
-INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (2, N'Bol', N'Wat bolschrijving', N'Den bosch')
-INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (3, N'Bluehole', N'Wat blueschrijving', N'Amerika')
-INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (4, N'Geentje', N'Wat geenschrijving', N'India')
+INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (5, N'Alcohol Wet', N'Gij Mag Geen Alcohol Verkopen Aan Mensen Onder De 18 Jaar', N'Nederland')
+INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (6, N'Drugs Wet', N'Gij Mag Geen Drugs Verkopen Aan Iedereen', N'Nederland')
+INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (7, N'Bomen Wet', N'Gij Mag Niet Tegen Bomen Urineren', N's-Hertogenbosch')
 SET IDENTITY_INSERT [dbo].[Regulation] OFF
 
 
