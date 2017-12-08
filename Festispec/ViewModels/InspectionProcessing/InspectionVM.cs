@@ -152,6 +152,32 @@ namespace Festispec.ViewModels.Employees
             }
         }
 
+        public double Lat
+        {
+            get
+            {
+                return _inspection.Lat;
+            }
+            set
+            {
+                _inspection.Lat = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public double Long
+        {
+            get
+            {
+                return _inspection.Long;
+            }
+            set
+            {
+                _inspection.Long = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public DbGeography Location
         {
             get
@@ -161,6 +187,7 @@ namespace Festispec.ViewModels.Employees
             set
             {
                 _inspection.Location = value;
+                RaisePropertyChanged();
             }
         }
 

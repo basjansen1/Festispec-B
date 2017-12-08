@@ -8,6 +8,21 @@ namespace Festispec.Routes
 
         #region Template
 
+        public static Route RegulationsList = new Route
+        {
+            Key = "RegulationsList",
+            PageType = new Uri("../Views/Regulations/RegulationsList.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" },
+            Offline = true
+        };
+
+        public static Route RegulationsAddOrUpdate = new Route
+        {
+            Key = "RegulationsAddOrUpdate",
+            PageType = new Uri("../Views/Regulations/RegulationsAddOrUpdate.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
+        };
+
         public static Route TemplateList = new Route
         {
             Key = "TemplateList",
@@ -97,7 +112,8 @@ namespace Festispec.Routes
         {
             Key = nameof(PlanningList),
             PageType = new Uri("../Views/Planning/PlanningList.xaml", UriKind.Relative),
-            Roles = new[] { "Manager", "Medewerker" }
+            Roles = new[] { "Manager", "Medewerker" },
+            Offline = true
         };
 
         public static Route PlanningAdd = new Route
@@ -130,7 +146,8 @@ namespace Festispec.Routes
         {
             Key = "InspectionList",
             PageType = new Uri("../Views/InspectionList.xaml", UriKind.Relative),
-            Roles = new[] { "Manager", "Medewerker" }
+            Roles = new[] { "Manager", "Medewerker" },
+            Offline = true
         };
         public static Route EditInspection = new Route
         {
@@ -159,21 +176,8 @@ namespace Festispec.Routes
         {
             Key = "ShowRegulation",
             PageType = new Uri("../Views/ShowRegulation.xaml", UriKind.Relative),
-            Roles = new[] { "Manager", "Medewerker" }
-        };
-
-        public static Route RegulationList = new Route
-        {
-            Key = "RegulationList",
-            PageType = new Uri("../Views/Regulations/RegulationsList.xaml", UriKind.Relative),
-            Roles = new[] { "Manager", "Medewerker" }
-        };
-
-        public static Route RegulationsAddOrUpdate = new Route
-        {
-            Key = "RegulationAddOrUpdate",
-            PageType = new Uri("../Views/Regulations/RegulationsAddOrUpdate.xaml", UriKind.Relative),
-            Roles = new[] { "Manager", "Medewerker" }
+            Roles = new[] { "Manager", "Medewerker" },
+            Offline = true
         };
 
         #endregion
