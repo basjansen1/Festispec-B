@@ -155,10 +155,17 @@ namespace Festispec.Routes
 
         #region Regulation
 
-        public static Route RegulationList = new Route
+        public static Route ShowRegulation = new Route
         {
             Key = "ShowRegulation",
             PageType = new Uri("../Views/ShowRegulation.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+
+        public static Route RegulationList = new Route
+        {
+            Key = "RegulationList",
+            PageType = new Uri("../Views/Regulations/RegulationsList.xaml", UriKind.Relative),
             Roles = new[] { "Manager", "Medewerker" }
         };
 

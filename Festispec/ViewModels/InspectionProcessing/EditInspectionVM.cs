@@ -101,7 +101,7 @@ namespace Festispec.ViewModels.Employees
 
         private void OpenRegulation()
         {
-            _navigationService.NavigateTo(Routes.Routes.RegulationList, _selectedMunicipality);
+            _navigationService.NavigateTo(Routes.Routes.ShowRegulation, _selectedMunicipality);
         }
 
         private bool SearchAddress()

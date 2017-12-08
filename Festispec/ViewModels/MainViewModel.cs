@@ -40,9 +40,10 @@ namespace Festispec.ViewModels
                 new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.InspectorList), () => _navigationService.HasAccess(Routes.Routes.InspectorList));
             NavigateToInspectionListCommand =
                 new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.InspectionList), () => _navigationService.HasAccess(Routes.Routes.InspectionList));
-                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.InspectorList), () => _navigationService.CanAndHasAccess(Routes.Routes.InspectorList));
+            NavigateToCustomerListCommand =  
+                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.CustomerList), () => _navigationService.CanAndHasAccess(Routes.Routes.CustomerList));
             NavigateToRegulationsListCommand =
-                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.RegulationsList), () => _navigationService.CanAndHasAccess(Routes.Routes.RegulationsList));
+                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.RegulationList), () => _navigationService.CanAndHasAccess(Routes.Routes.RegulationList));
         }
 
         private void OnWindowClosing()

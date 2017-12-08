@@ -44,7 +44,7 @@ namespace Festispec.ViewModels.Regulation
         {
             if (args.PropertyName != "CurrentRoute") return;
 
-            if (NavigationService.CurrentRoute != Routes.Routes.RegulationsList) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.RegulationList) return;
 
             LoadRegulations();
         }

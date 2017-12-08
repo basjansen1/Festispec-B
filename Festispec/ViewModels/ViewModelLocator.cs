@@ -15,6 +15,7 @@ using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.NavigationService;
 using Festispec.State;
+using Festispec.ViewModels.CustomerCRUD;
 using Festispec.ViewModels.Factory;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.Employee;
@@ -65,6 +66,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IInspectorViewModelFactory, InspectorViewModelFactory>();
             SimpleIoc.Default.Register<IPlanningViewModelFactory, PlanningViewModelFactory>();
             SimpleIoc.Default.Register<IRegulationsViewModelFactory, RegulationsViewModelFactory>();
+            SimpleIoc.Default.Register<ICustomerViewModelFactory, CustomerViewModelFactory>();
 
             // Register APIs
             SimpleIoc.Default.Register<IGeodanSearchApi, GeodanSearchApi>();
@@ -90,9 +92,10 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<PlanningListViewModel>();
             SimpleIoc.Default.Register<PlanningAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<PlanningAddViewModel>();
+            SimpleIoc.Default.Register<CustomerListViewModel>();
+            SimpleIoc.Default.Register<CustomerAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<RegulationListViewModel>();
             SimpleIoc.Default.Register<RegulationAddOrUpdateViewModel>();
-            SimpleIoc.Default.Register<ICustomerRepositoryFactory, CustomerRepositoryFactory>();
             SimpleIoc.Default.Register<IGeodanSearchApi, GeodanSearchApi>();
             SimpleIoc.Default.Register<IGeoRepository, GeoRepository>();
         }
@@ -113,6 +116,7 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.AddInspection);
             navigationService.Configure(Routes.Routes.EditInspection);
             navigationService.Configure(Routes.Routes.RegulationList);
+            navigationService.Configure(Routes.Routes.ShowRegulation);
 
             navigationService.Configure(Routes.Routes.PlanningList);
             navigationService.Configure(Routes.Routes.PlanningAdd);
