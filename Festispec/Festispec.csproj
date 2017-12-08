@@ -196,7 +196,6 @@
     <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateViewModelFactory.cs" />
     <Compile Include="ViewModels\InspectionProcessing\CustomerVM.cs" />
-    <Compile Include="ViewModels\InspectionProcessing\InspectionListFilterVM.cs" />
     <Compile Include="ViewModels\Factory\Interface\IInspectorViewModelFactory.cs" />
     <Compile Include="ViewModels\Inspector\InspectorAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Inspector\InspectorListViewModel.cs" />
