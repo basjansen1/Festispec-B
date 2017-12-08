@@ -22,7 +22,13 @@
         <Label>Telefoonnummer</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Telephone}" />
         <Label>Inspecties</Label>
-        <DataGrid ItemsSource="{Binding Inspections}"></DataGrid>
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding EntityViewModel.UpdatedEntity.Inspections}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="Start datum" Binding="{Binding Start}" Width="*" />
+                <DataGridTextColumn Header="Eind" Binding="{Binding End}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
         <Label>Huisnummer</Label>
         <TextBox  Text="{Binding Path=EntityViewModel.UpdatedEntity.HouseNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <Label>Postcode</Label>
