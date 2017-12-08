@@ -165,6 +165,11 @@
     <Compile Include="State\IState.cs" />
     <Compile Include="State\State.cs" />
     <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
+    <Compile Include="ViewModels\CustomerCRUD\CustomerAddOrUpdateViewModel.cs" />
+    <Compile Include="ViewModels\CustomerCRUD\CustomerListViewModel.cs" />
+    <Compile Include="ViewModels\CustomerCRUD\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\Factory\CustomerViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\ICustomerViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IPlanningViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\PlanningViewModelFactory.cs" />
     <Compile Include="ViewModels\Planning\PlanningAddOrUpdateViewModel.cs" />
@@ -191,7 +196,6 @@
     <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateViewModelFactory.cs" />
     <Compile Include="ViewModels\InspectionProcessing\CustomerVM.cs" />
-    <Compile Include="ViewModels\InspectionProcessing\InspectionListFilterVM.cs" />
     <Compile Include="ViewModels\Factory\Interface\IInspectorViewModelFactory.cs" />
     <Compile Include="ViewModels\Inspector\InspectorAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Inspector\InspectorListViewModel.cs" />
@@ -221,6 +225,12 @@
     </Compile>
     <Compile Include="Views\Crud_Employees\Crud_Employees.xaml.cs">
       <DependentUpon>Crud_Employees.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomerCRUD\CustomerAddOrUpdate.xaml.cs">
+      <DependentUpon>CustomerAddOrUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomerCRUD\CustomerList.xaml.cs">
+      <DependentUpon>CustomerList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditInspection.xaml.cs">
       <DependentUpon>EditInspection.xaml</DependentUpon>
@@ -288,6 +298,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\CustomerCRUD\CustomerAddOrUpdate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CustomerCRUD\CustomerList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Planning\PlanningUpdate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

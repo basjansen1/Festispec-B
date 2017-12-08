@@ -204,7 +204,7 @@ namespace Festispec.ViewModels.Employees
             }
         }
 
-        public Customer Customer
+        public Domain.Customer Customer
         {
             get
             {
