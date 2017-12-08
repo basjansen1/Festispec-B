@@ -11,30 +11,30 @@
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Name}" />
         <Label>Email</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Email}" />
+        <Label>KVK</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.KVK}" />
+        <Label>IBAN</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.IBAN}" />
+        <Label>Voornaam Contactpersoon</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.FirstName}" />
+        <Label>Achternaam Contactpersoon</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.LastName}" />
+        <Label>Telefoonnummer</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Telephone}" />
         <Label>Inspecties</Label>
         <DataGrid ItemsSource="{Binding Inspections}"></DataGrid>
         <Label>Huisnummer</Label>
         <TextBox  Text="{Binding Path=EntityViewModel.UpdatedEntity.HouseNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <Label>Postcode</Label>
         <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-        <Label>Stad</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.City}" />
-        <Label>Land</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Country}" />
-        <Label>Voornaam Contactpersoon</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.FirstName}" />
-        <Label>Achternaam Contactpersoon</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.LastName}" />
         <Label>Straatnaam</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Street}" />
-        <Label>KVK</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.KVK}" />
-        <Label>IBAN</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.IBAN}" />
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Street}" IsEnabled="False" />
         <Label>Gemeente</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Municipality}" />
-        <Label>Telefoonnummer</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Telephone}" />
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Municipality}" IsEnabled="False" />
+        <Label>Stad</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.City}" IsEnabled="False" />
+        <Label>Land</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Country}" IsEnabled="False" />
         <Grid Height="50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
