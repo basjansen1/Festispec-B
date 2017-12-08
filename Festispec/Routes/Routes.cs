@@ -4,7 +4,12 @@ namespace Festispec.Routes
 {
     public static class Routes
     {
-        public static Route Home = new Route {Key = "Home", PageType = new Uri("../MainWindow.xaml", UriKind.Relative)};
+        public static Route Home = new Route
+        {
+            Key = "Home",
+            PageType = new Uri("../MainWindow.xaml", UriKind.Relative),
+            Offline = true
+        };
 
         #region Template
 
