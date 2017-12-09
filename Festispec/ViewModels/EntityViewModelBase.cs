@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Reflection;
-using Festispec.Domain.Extension;
+﻿using Festispec.Domain.Extension;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Interface;

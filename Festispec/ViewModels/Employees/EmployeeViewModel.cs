@@ -1,31 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Linq;
+using System.Windows;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
-using System.Data.Entity.Spatial;
-using System;
-using System.Windows;
-using System.Linq;
-using System.Reflection;
+using Festispec.ViewModels.Address;
 
 namespace Festispec.ViewModels.Employee
 {
-    public class EmployeeViewModel : EntityViewModelBase<IEmployeeRepositoryFactory, IEmployeeRepository, Domain.Employee>
+    public class EmployeeViewModel :
+        AddressViewModelBase<IEmployeeRepositoryFactory, IEmployeeRepository, Domain.Employee>
     {
         public EmployeeViewModel(IEmployeeRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
-            if(HiredFrom == default(DateTime))
-            {
+            if (HiredFrom == default(DateTime))
                 HiredFrom = new DateTime(1990, 1, 1);
-            }
         }
 
         public EmployeeViewModel(IEmployeeRepositoryFactory repositoryFactory, Domain.Employee entity)
             : base(repositoryFactory, entity)
         {
         }
-
-        public int Id => Entity.Id;
 
 
         public string Username
@@ -34,17 +31,6 @@ namespace Festispec.ViewModels.Employee
             set
             {
                 Entity.Username = value;
-                RaisePropertyChanged();
-            }
-        }
-
-
-        public string City
-        {
-            get { return Entity.City; }
-            set
-            {
-                Entity.City = value;
                 RaisePropertyChanged();
             }
         }
@@ -59,40 +45,12 @@ namespace Festispec.ViewModels.Employee
             }
         }
 
-        public string Country
-        {
-            get { return Entity.Country; }
-            set
-            {
-                Entity.Country = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public string FirstName
         {
             get { return Entity.FirstName; }
             set
             {
                 Entity.FirstName = value;
-                RaisePropertyChanged();
-            }
-        }
-        public string HouseNumber
-        {
-            get { return Entity.HouseNumber; }
-            set
-            {
-                Entity.HouseNumber = value;
-                RaisePropertyChanged();
-            }
-        }
-        public string IBAN
-        {
-            get { return Entity.IBAN; }
-            set
-            {
-                Entity.IBAN = value;
                 RaisePropertyChanged();
             }
         }
@@ -106,6 +64,7 @@ namespace Festispec.ViewModels.Employee
                 RaisePropertyChanged();
             }
         }
+
         public Domain.Employee Manager
         {
             get { return Entity.Manager; }
@@ -115,6 +74,7 @@ namespace Festispec.ViewModels.Employee
                 RaisePropertyChanged();
             }
         }
+
         public string Password
         {
             get { return Entity.Password; }
@@ -124,24 +84,7 @@ namespace Festispec.ViewModels.Employee
                 RaisePropertyChanged();
             }
         }
-        public string Municipality
-        {
-            get { return Entity.Municipality; }
-            set
-            {
-                Entity.Municipality = value;
-                RaisePropertyChanged();
-            }
-        }
-        public string PostalCode
-        {
-            get { return Entity.PostalCode; }
-            set
-            {
-                Entity.PostalCode = value;
-                RaisePropertyChanged();
-            }
-        }
+
         public EmployeeRole Role
         {
             get { return Entity.Role; }
@@ -151,15 +94,7 @@ namespace Festispec.ViewModels.Employee
                 RaisePropertyChanged();
             }
         }
-        public string Street
-        {
-            get { return Entity.Street; }
-            set
-            {
-                Entity.Street = value;
-                RaisePropertyChanged();
-            }
-        }
+
         public string Telephone
         {
             get { return Entity.Telephone; }
@@ -180,48 +115,16 @@ namespace Festispec.ViewModels.Employee
             }
         }
 
-        public DbGeography Location
-        {
-            get { return Entity.Location; }
-            set
-            {
-                Entity.Location = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public double Long
-        {
-            get { return Entity.Long; }
-            set
-            {
-                Entity.Long = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public double Lat
-        {
-            get { return Entity.Lat; }
-            set
-            {
-                Entity.Lat = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public DateTime HiredFrom
         {
-            get
-            {
-                return Entity.HiredFrom;
-            }
+            get { return Entity.HiredFrom; }
             set
             {
                 Entity.HiredFrom = value;
                 RaisePropertyChanged();
             }
         }
+
         public DateTime? HiredTo
         {
             get { return Entity.HiredTo; }
@@ -244,7 +147,6 @@ namespace Festispec.ViewModels.Employee
 
         public override bool Save()
         {
-
             try
             {
                 Domain.Employee updated;
@@ -254,23 +156,19 @@ namespace Festispec.ViewModels.Employee
                         ? InspectorRepository.Add(Entity)
                         : InspectorRepository.Update(Entity, Id);
                 }
-                
+
                 // First we map the updated values to the entity
                 MapValues(updated, Entity);
                 // Then we overwrite the original values with the new entity values
                 MapValuesToOriginal();
             }
-            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            catch (DbEntityValidationException ex)
             {
-                List<string> ErrorList = new List<string>();
+                var ErrorList = new List<string>();
                 foreach (var eve in ex.EntityValidationErrors)
-                {
-                    foreach (var ve in eve.ValidationErrors)
-                    {
-                        ErrorList.Add(ve.PropertyName);
-                    }
-                }
-                string joined = string.Join(",", ErrorList.Select(x => x));
+                foreach (var ve in eve.ValidationErrors)
+                    ErrorList.Add(ve.PropertyName);
+                var joined = string.Join(",", ErrorList.Select(x => x));
                 MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
                 return false;
             }

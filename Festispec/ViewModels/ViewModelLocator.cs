@@ -55,7 +55,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IRegulationRepositoryFactory>(() => new RegulationRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<ICustomerRepositoryFactory>(() => new CustomerRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<IPlanningRepositoryFactory>(() => new PlanningRepositoryFactory(state.IsOnline));
-            SimpleIoc.Default.Register<IGeoRepository, GeoRepository>();
+            SimpleIoc.Default.Register<IGeoRepositoryFactory, GeoRepositoryFactory>();
 
 
 

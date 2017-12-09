@@ -8,24 +8,19 @@ using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using Festispec.ViewModels.Address;
 
 namespace Festispec.ViewModels.CustomerCRUD
 {
    public class CustomerAddOrUpdateViewModel :
-        AddOrUpdateViewModelBase<ICustomerViewModelFactory, CustomerViewModel, ICustomerRepository, Domain.Customer>
+        AddressAddOrUpdateViewModelBase<ICustomerViewModelFactory, CustomerViewModel, ICustomerRepository, Domain.Customer>
     {
-
-        IGeoRepository _geoRepository;
-        public ICommand SearchAddressCommand { get; set; }
-
         public CustomerAddOrUpdateViewModel(INavigationService navigationService,
             ICustomerRepositoryFactory repositoryFactory,
-            ICustomerViewModelFactory CustomerViewModelFactory, IGeoRepository geoRepository)
-            : base(navigationService, repositoryFactory, CustomerViewModelFactory)
+            ICustomerViewModelFactory CustomerViewModelFactory, IGeoRepositoryFactory geoRepositoryFactory)
+            : base(navigationService, repositoryFactory, CustomerViewModelFactory, geoRepositoryFactory)
         {
-            _geoRepository = geoRepository;
             RaisePropertyChanged();
-            SearchAddressCommand = new RelayCommand(() => SearchAddress());
         }
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
@@ -38,38 +33,8 @@ namespace Festispec.ViewModels.CustomerCRUD
             UpdateEntityViewModelFromNavigationParameter();
         }
 
-        private bool SearchAddress()
-        {
-            using (_geoRepository)
-            {
-                try
-                {
-                    var address = _geoRepository.Find(EntityViewModel.PostalCode,
-                        EntityViewModel.HouseNumber);
-
-                    EntityViewModel.Street = address.Street;
-                    EntityViewModel.City = address.City;
-                    EntityViewModel.Municipality = address.Municipality;
-                    EntityViewModel.Country = address.Country;
-                    EntityViewModel.Lat = address.Lat;
-                    EntityViewModel.Long = address.Long;
-                    EntityViewModel.Location = address.Location;
-
-                    return true;
-                }
-                catch (Exception exception)
-                {
-                    MessageBox.Show(exception.Message);
-                }
-            }
-            return false;
-        }
-
         public override void Save()
         {
-            if (SearchAddress())
-                return;
-
             // TODO: Validation
 
             base.Save();

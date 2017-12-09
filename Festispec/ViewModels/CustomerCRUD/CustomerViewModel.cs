@@ -2,14 +2,14 @@
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
-using System.Data.Entity.Spatial;
 using System;
 using System.Windows;
 using System.Linq;
+using Festispec.ViewModels.Address;
 
 namespace Festispec.ViewModels.Customer
 {
-    public class CustomerViewModel : EntityViewModelBase<ICustomerRepositoryFactory, ICustomerRepository, Domain.Customer>
+    public class CustomerViewModel : AddressViewModelBase<ICustomerRepositoryFactory, ICustomerRepository, Domain.Customer>
     {
         public CustomerViewModel(ICustomerRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
@@ -21,34 +21,12 @@ namespace Festispec.ViewModels.Customer
         {
         }
 
-        public int Id => Entity.Id;
-
-        public string City
-        {
-            get { return Entity.City; }
-            set
-            {
-                Entity.City = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public string Email
         {
             get { return Entity.Email; }
             set
             {
                 Entity.Email = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public string Country
-        {
-            get { return Entity.Country; }
-            set
-            {
-                Entity.Country = value;
                 RaisePropertyChanged();
             }
         }
@@ -64,15 +42,6 @@ namespace Festispec.ViewModels.Customer
             }
         }
 
-        public string HouseNumber
-        {
-            get { return Entity.HouseNumber; }
-            set
-            {
-                Entity.HouseNumber = value;
-                RaisePropertyChanged();
-            }
-        }
         public string IBAN
         {
             get { return Entity.IBAN; }
@@ -88,7 +57,7 @@ namespace Festispec.ViewModels.Customer
             get { return Entity.LastName; }
             set
             {
-                Entity.IBAN = value;
+                Entity.LastName = value;
                 RaisePropertyChanged();
             }
         }
@@ -104,73 +73,12 @@ namespace Festispec.ViewModels.Customer
             }
         }
 
-
-        public string Municipality
-        {
-            get { return Entity.Municipality; }
-            set
-            {
-                Entity.Municipality = value;
-                RaisePropertyChanged();
-            }
-        }
-        public string PostalCode
-        {
-            get { return Entity.PostalCode; }
-            set
-            {
-                Entity.PostalCode = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public string Street
-        {
-            get { return Entity.Street; }
-            set
-            {
-                Entity.Street = value;
-                RaisePropertyChanged();
-            }
-        }
         public string Telephone
         {
             get { return Entity.Telephone; }
             set
             {
                 Entity.Telephone = value;
-                RaisePropertyChanged();
-            }
-        }
-
-
-
-        public DbGeography Location
-        {
-            get { return Entity.Location; }
-            set
-            {
-                Entity.Location = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public double Long
-        {
-            get { return Entity.Long; }
-            set
-            {
-                Entity.Long = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public double Lat
-        {
-            get { return Entity.Lat; }
-            set
-            {
-                Entity.Lat = value;
                 RaisePropertyChanged();
             }
         }
@@ -207,20 +115,16 @@ namespace Festispec.ViewModels.Customer
             }
         }
 
-
-
         public override bool Save()
         {
-
-
             try
             {
                 Domain.Customer updated;
-                using (var InspectorRepository = RepositoryFactory.CreateRepository())
+                using (var customerRepository = RepositoryFactory.CreateRepository())
                 {
                     updated = Id == 0
-                        ? InspectorRepository.Add(Entity)
-                        : InspectorRepository.Update(Entity, Id);
+                        ? customerRepository.Add(Entity)
+                        : customerRepository.Update(Entity, Id);
                 }
 
                 // First we map the updated values to the entity
@@ -249,10 +153,10 @@ namespace Festispec.ViewModels.Customer
 
         public override bool Delete()
         {
-            using (var CustomerRepository = RepositoryFactory.CreateRepository())
+            using (var customerRepository = RepositoryFactory.CreateRepository())
             {
                 RaisePropertyChanged();
-                return CustomerRepository.Delete(Entity) != 0;
+                return customerRepository.Delete(Entity) != 0;
             }
         }
     }
