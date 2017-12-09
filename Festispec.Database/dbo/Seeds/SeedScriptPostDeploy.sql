@@ -48,25 +48,25 @@ INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role],
 INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id], [HiredFrom]) VALUES (N'Pieter', N'Pieter123', 3, N'Inspecteur', 1, N'2016-01-01 00:00:00')
 INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id], [HiredFrom]) VALUES (N'Katy', N'Katy123', 4, N'Inspecteur', 1, N'2016-01-01 00:00:00')
 INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id], [HiredFrom]) VALUES (N'Luke', N'Luke123', 5, N'Inspecteur', 1, N'2016-01-01 00:00:00')
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id], [HiredFrom]) VALUES (N'david', N'david123', 6, N'Manager', null, N'2016-01-01 00:00:00')
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id], [HiredFrom]) VALUES (N'Niels', N'Niels123', 7, N'Medewerker', 2, N'2016-01-01 00:00:00')
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id], [HiredFrom]) VALUES (N'Kevin', N'Kevin123', 8, N'Medewerker', 2, N'2016-01-01 00:00:00')
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id], [HiredFrom]) VALUES (N'Anne', N'Anne123', 9, N'Inspecteur', 2, N'2016-01-01 00:00:00')
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id], [HiredFrom]) VALUES (N'Kim', N'Kim123', 10, N'Inspecteur', 2, N'2016-01-01 00:00:00')
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id], [HiredFrom]) VALUES (N'David', N'david123', 6, N'Manager', null, N'2016-01-01 00:00:00')
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id], [HiredFrom]) VALUES (N'Niels', N'Niels123', 7, N'Medewerker', 6, N'2016-01-01 00:00:00')
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id], [HiredFrom]) VALUES (N'Kevin', N'Kevin123', 8, N'Medewerker', 6, N'2016-01-01 00:00:00')
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id], [HiredFrom]) VALUES (N'Anne', N'Anne123', 9, N'Inspecteur', 6, N'2016-01-01 00:00:00')
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id], [HiredFrom]) VALUES (N'Kim', N'Kim123', 10, N'Inspecteur', 6, N'2016-01-01 00:00:00')
 
 INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'Accepted')
 INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'Declined')
 INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'Pending')
 
-INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Paaspop', N'www.paaspop.nl', N'2017-01-19 03:14:07', N'2017-01-24 03:14:07', 12, 11, N'Accepted') -- Paaspop
-INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Festyland', N'www.festyland.nl', N'2038-01-19 03:14:07', N'2038-01-19 03:14:07', 14, 13, N'Pending') -- Festyland
+INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Paaspop', N'www.paaspop.nl', N'2016-09-17 00:00:00', N'2016-09-20 00:00:00', 12, 11, N'Accepted') -- Paaspop
+INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Festyland', N'www.festyland.nl', N'2018-01-18 03:14:07', N'2018-01-21 03:14:07', 14, 13, N'Pending') -- Festyland
 INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Mysteryland', N'www.mysteryland.nl', N'2038-01-19 03:14:08', N'2038-01-19 03:14:08', 16, 15, N'Declined') -- Mysteryland
 
 INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2009-01-19 03:14:08', N'2024-01-19 03:14:08', 3)
 INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2016-01-19 03:14:08', N'2022-01-19 03:14:08', 4)
-INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2017-01-19 03:14:08', N'2030-01-24 03:14:08', 5)
-INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2017-01-19 03:14:08', N'2030-01-24 03:14:08', 9)
-INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2017-01-19 03:14:08', N'2030-01-24 03:14:08', 10)
+INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2016-01-19 03:14:08', N'2030-01-24 03:14:08', 5)
+INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2016-01-19 03:14:08', N'2030-01-24 03:14:08', 9)
+INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2017-01-19 03:14:08', N'2040-01-24 03:14:08', 10)
 
 
 SET IDENTITY_INSERT [dbo].[Note] ON
@@ -87,7 +87,7 @@ INSERT INTO [dbo].[QuestionType] ([Type], [Metadata]) VALUES (N'Aantal mensen in
 INSERT INTO [dbo].[QuestionType] ([Type], [Metadata]) VALUES (N'Drukte', N'["Tijd","Drukte"]')
 
 SET IDENTITY_INSERT [dbo].[Template] ON
-INSERT INTO [dbo].[Template] ([Id], [Name], [Description]) VALUES (1, N'Standaard Festival', N'Deze template is bedoeld voor een standaar festival')
+INSERT INTO [dbo].[Template] ([Id], [Name], [Description]) VALUES (1, N'Standaard Festival', N'Deze template is bedoeld voor een standaard festival')
 INSERT INTO [dbo].[Template] ([Id], [Name], [Description]) VALUES (2, N'Techno Festival', N'Deze template is bedoeld voor een techno festival')
 INSERT INTO [dbo].[Template] ([Id], [Name], [Description]) VALUES (3, N'Eet Festival', N'Deze template is bedoeld voor eetfestivals')
 SET IDENTITY_INSERT [dbo].[Template] OFF
@@ -191,10 +191,9 @@ INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (22, 
 
 
 SET IDENTITY_INSERT [dbo].[Regulation] ON
-INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (1, N'Bedrijfsnaam', N'Wat beschrijving', N'Meierijstad')
-INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (2, N'Bol', N'Wat bolschrijving', N'Den bosch')
-INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (3, N'Bluehole', N'Wat blueschrijving', N'Amerika')
-INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (4, N'Geentje', N'Wat geenschrijving', N'India')
+INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (1, N'Alcohol Wet', N'Gij Mag Geen Alcohol Verkopen Aan Mensen Onder De 18 Jaar', null)
+INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (2, N'Drugs Wet', N'Gij Mag Geen Drugs Verkopen Aan Iedereen', null)
+INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (3, N'Bomen Wet', N'Gij Mag Niet Tegen Bomen Urineren', N'Meierijstad')
 SET IDENTITY_INSERT [dbo].[Regulation] OFF
 
 
@@ -204,4 +203,5 @@ INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspe
 INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (3, N'2018-05-17 00:00:00', N'2018-06-05 00:00:00', 9)
 INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (4, N'2018-04-22 00:00:00', N'2018-05-05 00:00:00', 4)
 SET IDENTITY_INSERT [dbo].[Schedule] OFF
+
 

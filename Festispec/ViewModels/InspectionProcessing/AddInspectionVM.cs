@@ -164,6 +164,9 @@ namespace Festispec.ViewModels.Employees
                     NewInspection.City = address.City;
                     NewInspection.Municipality = address.Municipality;
                     NewInspection.Country = address.Country;
+                    NewInspection.Lat = address.Lat;
+                    NewInspection.Long = address.Long;
+                    NewInspection.Location = address.Location;
 
                     return true;
                 }

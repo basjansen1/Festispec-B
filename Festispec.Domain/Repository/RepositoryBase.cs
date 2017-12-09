@@ -26,6 +26,8 @@ namespace Festispec.Domain.Repository
             DbContext = dbContext;
         }
 
+     
+
         /// <inheritdoc />
         public void Dispose()
         {
@@ -248,7 +250,8 @@ namespace Festispec.Domain.Repository
         ///     Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
         ///     that any asynchronous operations have completed before calling another method on this context.
         /// </remarks>
-        /// <param name="updated"> The entity with the updated values. </param>
+        /// <param name="updated"> The entity with the updatll
+        /// ed values. </param>
         /// <param name="keyValues"> The values of the primary key for the entity to be updated. </param>
         /// <returns> A task that represents the asynchronous add operation. The task result contains the entity updated. </returns>
         /// <exception cref="T:System.ArgumentNullException">

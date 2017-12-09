@@ -55,6 +55,7 @@ namespace Festispec.ViewModels
             }
             if (foundEmployee != null)
             {
+                //cache database if online
                 _state.CurrentUser = foundEmployee;
                 var mainWindow = new MainWindow();
                 mainWindow.Show();

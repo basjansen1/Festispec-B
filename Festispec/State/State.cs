@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using Festispec.Domain;
 using Festispec.Routes;
@@ -8,6 +9,11 @@ namespace Festispec.State
 {
     public class State : IState
     {
+        public State()
+        {
+            IsOnline = CheckConnection();
+        }
+
         public Route CurrrentRoute { get; set; }
 
         private Employee _currentEmployee;
@@ -27,6 +33,24 @@ namespace Festispec.State
                     loginWindow.Show();
                     Application.Current.Windows.OfType<MainWindow>().FirstOrDefault()?.Close();
                 }
+            }
+        }
+
+        public bool IsOnline { get; private set; }
+
+        private bool CheckConnection()
+        {
+//            return false; // only for testing if works offline
+            try
+            {
+                using (var dbContext = new FestispecContainer())
+                {
+                    return dbContext.Database.Exists();
+                }
+            }
+            catch
+            {
+                return false;
             }
         }
     }

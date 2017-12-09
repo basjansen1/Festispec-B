@@ -4,7 +4,7 @@ using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.InspectionProcessing;
 using Festispec.Views;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -58,6 +58,7 @@ namespace Festispec.ViewModels.Employees
         public ICommand ShowProcessInspectionWindowCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand DeleteSearchCommand { get; set; }
+        public ICommand NavigateToPlanningCommand { get; set; }
         #endregion
 
         #region fields
@@ -79,6 +80,7 @@ namespace Festispec.ViewModels.Employees
             ShowProcessInspectionWindowCommand = new RelayCommand(ShowProcessInspectionWindow);
             SearchCommand = new RelayCommand(Search);
             DeleteSearchCommand = new RelayCommand(DeleteFilter);
+            NavigateToPlanningCommand = new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.PlanningList, _selectedInspection.toModel()), () => _selectedInspection != null && _navigationService.HasAccess(Routes.Routes.PlanningList));
             _searchInput = null;
 
             // instantiate views   

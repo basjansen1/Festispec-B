@@ -101,7 +101,7 @@ namespace Festispec.ViewModels.Employees
 
         private void OpenRegulation()
         {
-            _navigationService.NavigateTo(Routes.Routes.RegulationList, _selectedMunicipality);
+            _navigationService.NavigateTo(Routes.Routes.ShowRegulation, _selectedMunicipality);
         }
 
         private bool SearchAddress()
@@ -117,6 +117,9 @@ namespace Festispec.ViewModels.Employees
                     InspectionList.SelectedInspection.City = address.City;
                     InspectionList.SelectedInspection.Municipality = address.Municipality;
                     InspectionList.SelectedInspection.Country = address.Country;
+                    InspectionList.SelectedInspection.Lat = address.Lat;
+                    InspectionList.SelectedInspection.Long = address.Long;
+                    InspectionList.SelectedInspection.Location = address.Location;
 
                     return true;
                 }

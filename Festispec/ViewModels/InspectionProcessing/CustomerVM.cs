@@ -179,19 +179,19 @@ namespace Festispec.ViewModels.InspectionProcessing
             }
         }
 
-        private Customer _customer;
+        private Domain.Customer _customer;
 
         public CustomerVM()
         {
-            _customer = new Customer();
+            _customer = new Domain.Customer();
         }
 
-        public CustomerVM(Customer i)
+        public CustomerVM(Domain.Customer i)
         {
             _customer = i;
         }
 
-        public Customer ToModel()
+        public Domain.Customer ToModel()
         {
             return _customer;
         }

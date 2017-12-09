@@ -48,10 +48,13 @@ namespace Festispec.ViewModels.Employees
                     var address = _geoRepository.Find(EntityViewModel.PostalCode,
                         EntityViewModel.HouseNumber);
                     
-                    EntityViewModel.Street = EntityViewModel.Street = address.Street;
-                    EntityViewModel.City = EntityViewModel.City = address.City;
-                    EntityViewModel.Municipality = EntityViewModel.Municipality = address.Municipality;
-                    EntityViewModel.Country = EntityViewModel.Country = address.Country;
+                    EntityViewModel.Street = address.Street;
+                    EntityViewModel.City = address.City;
+                    EntityViewModel.Municipality = address.Municipality;
+                    EntityViewModel.Country = address.Country;
+                    EntityViewModel.Lat = address.Lat;
+                    EntityViewModel.Long = address.Long;
+                    EntityViewModel.Location = address.Location;
 
                     return true;
                 }

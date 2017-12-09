@@ -244,7 +244,6 @@ namespace Festispec.ViewModels.Employee
 
         public override bool Save()
         {
-
             using (var InspectorRepository = RepositoryFactory.CreateRepository())
             {
                 try

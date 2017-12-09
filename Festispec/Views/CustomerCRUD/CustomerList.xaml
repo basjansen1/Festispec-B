@@ -1,0 +1,58 @@
+﻿<Page x:Class="Festispec.Views.CustomerCRUD.CustomerList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        DataContext="{Binding Source={StaticResource Locator}, Path=CustomerList}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="1" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToCustomerAddCommand}" />
+            <Button Grid.Column="2" Content="Wijzigen / Extra informatie" Margin="5px 10px" Command="{Binding NavigateToCustomerUpdateCommand}" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <DockPanel Grid.Row="0"  Grid.Column="0">
+                <Label>Zoek op:</Label>
+                <ComboBox SelectedItem="{Binding SelectedSearchOption}" ItemsSource="{Binding SearchItems}"></ComboBox>
+            </DockPanel>
+            <DockPanel Grid.Row="0" Grid.Column="1">
+                <TextBox Text="{Binding SearchName}"></TextBox>
+            </DockPanel>
+
+            <Button Grid.Row="0" Grid.Column="2" Command="{Binding SelectedSearch}">Zoek</Button>
+
+            <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
+                    <DataGridTextColumn Header="Gemeente" Binding="{Binding Municipality}" Width="*" />
+                    <DataGridTextColumn Header="Voornaam Contact" Binding="{Binding FirstName}" Width="*" />
+                    <DataGridTextColumn Header="Achternaam Contact" Binding="{Binding LastName}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Page>
