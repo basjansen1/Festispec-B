@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/09/2017 15:23:25
+-- Date Created: 12/09/2017 15:32:23
 -- Generated from EDMX file: C:\Workspace\Avans\Projects\42IN06SOb\Festispec\Festispec.Domain\Festispec.edmx
 -- --------------------------------------------------
 
@@ -479,7 +479,7 @@ ADD CONSTRAINT [FK_InspectionPlanning]
     FOREIGN KEY ([Inspection_Id])
     REFERENCES [dbo].[Address_Inspection]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating foreign key on [Inspector_Id] in table 'Planning'

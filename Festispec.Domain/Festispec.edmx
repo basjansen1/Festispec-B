@@ -316,7 +316,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="InspectionPlanning">
-    <End Role="Inspection" Type="Festispec.Store.Address_Inspection" Multiplicity="1" />
+    <End Role="Inspection" Type="Festispec.Store.Address_Inspection" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Planning" Type="Festispec.Store.Planning" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Inspection">
@@ -740,7 +742,9 @@
                               ToRole="InspectionQuestion" />
         </EntityType>
         <Association Name="InspectionPlanning">
-          <End Type="Festispec.Inspection" Role="Inspection" Multiplicity="1" />
+          <End Type="Festispec.Inspection" Role="Inspection" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Festispec.Planning" Role="Planning" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inspection">
