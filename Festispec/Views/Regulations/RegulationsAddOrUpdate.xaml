@@ -10,11 +10,11 @@
 
     <StackPanel>
         <Label>Titel</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Name}" />
+        <TextBox Text="{Binding Path=EntityViewModel.Name}" />
         <Label>Beschrijving</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Description}" />
+        <TextBox Text="{Binding Path=EntityViewModel.Description}" />
         <Label>Gemeente</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Municipality}" />
+        <TextBox Text="{Binding Path=EntityViewModel.Municipality}" />
         
         <Grid Height="50">
             <Grid.ColumnDefinitions>
