@@ -136,8 +136,11 @@ namespace Festispec.ViewModels.Planning
                         ? planningRepository.Add(Entity)
                         : planningRepository.Update(Entity, Entity.Inspection_Id, Entity.Inspector_Id, Entity.Date);
                 }
-
-                // TODO: MapValues
+                
+                // First we map the updated values to the entity
+                MapValues(updated, Entity);
+                // Then we overwrite the original values with the new entity values
+                MapValuesToOriginal();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {

@@ -259,23 +259,31 @@ namespace Festispec.ViewModels.Inspector
 
         public override bool Save()
         {
-
-            using (var InspectorRepository = RepositoryFactory.CreateRepository())
+            try
             {
-                try
+                Domain.Inspector updated;
+                using (var InspectorRepository = RepositoryFactory.CreateRepository())
                 {
-                    var updated = Id == 0
+                    updated = Id == 0
                         ? InspectorRepository.Add(Entity)
                         : InspectorRepository.Update(Entity, Id);
                 }
-                catch(System.Data.Entity.Validation.DbEntityValidationException ex)
-                {
-                    var ErrorList = (from eve in ex.EntityValidationErrors from ve in eve.ValidationErrors select ve.PropertyName).ToList();
-                    string joined = string.Join(",", ErrorList.Select(x => x));
-                    MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
-                    return false;
-                }
+                
+                // First we map the updated values to the entity
+                MapValues(updated, Entity);
+                // Then we overwrite the original values with the new entity values
+                MapValuesToOriginal();
             }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                var ErrorList = (from eve in ex.EntityValidationErrors
+                    from ve in eve.ValidationErrors
+                    select ve.PropertyName).ToList();
+                string joined = string.Join(",", ErrorList.Select(x => x));
+                MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                return false;
+            }
+
             return true;
         }
 

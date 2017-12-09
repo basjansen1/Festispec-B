@@ -63,16 +63,7 @@ namespace Festispec.ViewModels.Template
         {
             // TODO: Validation
 
-            var saved = EntityViewModel.Save();
-
-            // Return is save failed
-            if (!saved)
-                return;
-
-            // Overwrite the original values with the new entity values
-            EntityViewModel.MapValuesToOriginal();
-
-            GoBack(EntityViewModel);
+            base.Save();
         }
     }
 }

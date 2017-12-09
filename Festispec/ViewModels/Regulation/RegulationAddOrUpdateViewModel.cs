@@ -29,9 +29,8 @@ namespace Festispec.ViewModels.Regulation
         public override void Save()
         {
             // TODO: Validation
-            var saved = EntityViewModel.Save();
 
-            if (saved) NavigationService.GoBack(EntityViewModel);
+            base.Save();
         }
     }
 }

@@ -33,9 +33,7 @@ namespace Festispec.ViewModels.Planning
         {
             // TODO: Validation
 
-            var saved = EntityViewModel.Save();
-
-            if (saved) GoBack();
+            Save(EntityViewModel.Inspection);
         }
 
         public override void GoBack()

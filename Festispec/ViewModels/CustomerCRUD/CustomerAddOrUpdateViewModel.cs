@@ -67,10 +67,12 @@ namespace Festispec.ViewModels.CustomerCRUD
 
         public override void Save()
         {
+            if (SearchAddress())
+                return;
+
             // TODO: Validation
-            var saved = SearchAddress() && EntityViewModel.Save();
-            RaisePropertyChanged();
-            if (saved) NavigationService.GoBack(EntityViewModel);
+
+            base.Save();
         }
     }
 }

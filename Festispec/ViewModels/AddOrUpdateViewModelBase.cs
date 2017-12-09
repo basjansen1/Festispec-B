@@ -41,13 +41,23 @@ namespace Festispec.ViewModels
 
         public TEntityViewModel EntityViewModel { get; set; }
 
-        public virtual void Save()
+        public void Save(object backParameter)
         {
-            // TODO: Validation
-
             var saved = EntityViewModel.Save();
 
-            if (saved) GoBack(EntityViewModel);
+            // Return is save failed
+            if (!saved)
+                return;
+
+            // Overwrite the original values with the new entity values
+            EntityViewModel.MapValuesToOriginal();
+
+            GoBack(backParameter);
+        }
+
+        public virtual void Save()
+        {
+            Save(EntityViewModel);
         }
 
         public virtual void Cancel()

@@ -96,17 +96,12 @@ namespace Festispec.ViewModels.Inspector
 
         public override void Save()
         {
-            // TODO: Validation
-            var saved = SearchAddress() && EntityViewModel.Save();
-
-            // Return is save failed
-            if (!saved)
+            if (!SearchAddress())
                 return;
 
-            // Overwrite the original values with the new entity values
-            EntityViewModel.MapValuesToOriginal();
+            // TODO: Validation
 
-            GoBack(EntityViewModel);
+            base.Save();
         }
     }
 }
