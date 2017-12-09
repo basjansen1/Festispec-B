@@ -150,14 +150,5 @@ namespace Festispec.ViewModels.Customer
             RaisePropertyChanged();
             return true;
         }
-
-        public override bool Delete()
-        {
-            using (var customerRepository = RepositoryFactory.CreateRepository())
-            {
-                RaisePropertyChanged();
-                return customerRepository.Delete(Entity) != 0;
-            }
-        }
     }
 }

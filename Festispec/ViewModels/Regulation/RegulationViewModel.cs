@@ -82,14 +82,6 @@ namespace Festispec.ViewModels.Regulation
 
             return true;
         }
-
-        public override bool Delete()
-        {
-            using (var RegulationsRepository = RepositoryFactory.CreateRepository())
-            {
-                return RegulationsRepository.Delete(Entity) != 0;
-            }
-        }
     }
 }
 

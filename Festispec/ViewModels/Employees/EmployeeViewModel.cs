@@ -175,13 +175,5 @@ namespace Festispec.ViewModels.Employee
 
             return true;
         }
-
-        public override bool Delete()
-        {
-            using (var EmployeeRepository = RepositoryFactory.CreateRepository())
-            {
-                return EmployeeRepository.Delete(Entity) != 0;
-            }
-        }
     }
 }

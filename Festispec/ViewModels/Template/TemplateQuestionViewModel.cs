@@ -125,21 +125,5 @@ namespace Festispec.ViewModels.Template
 
             return true;
         }
-
-        public override bool Delete()
-        {
-            try
-            {
-                using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
-                {
-                    return templateQuestionRepository.Delete(Entity) != 0;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Er is iets fout gegaan");
-                return false;
-            }
-        }
     }
 }

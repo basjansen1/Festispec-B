@@ -1,4 +1,6 @@
-﻿using Festispec.Domain.Extension;
+﻿using System;
+using System.Windows;
+using Festispec.Domain.Extension;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Interface;
@@ -39,10 +41,20 @@ namespace Festispec.ViewModels
 
         public virtual bool Delete()
         {
-            using (var repository = RepositoryFactory.CreateRepository())
+            try
             {
-                return repository.Delete(Entity) != 0;
+                using (var repository = RepositoryFactory.CreateRepository())
+                {
+                    return repository.Delete(Entity) != 0;
+                }
             }
+            catch (Exception exception)
+            {
+                // TODO: Generic error message instead of exception message: MessageBox.Show("Er is iets fout gegaan");
+                MessageBox.Show(exception.Message);
+            }
+
+            return false;
         }
 
         public virtual void MapValues(TEntity from, TEntity to) => from.CopyPropertiesTo(to);

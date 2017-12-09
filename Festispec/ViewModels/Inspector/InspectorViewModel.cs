@@ -192,13 +192,5 @@ namespace Festispec.ViewModels.Inspector
 
             return true;
         }
-
-        public override bool Delete()
-        {
-            using (var InspectorRepository = RepositoryFactory.CreateRepository())
-            {
-                return InspectorRepository.Delete(Entity) != 0;
-            }
-        }
     }
 }
