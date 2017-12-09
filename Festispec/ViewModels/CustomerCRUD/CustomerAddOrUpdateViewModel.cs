@@ -44,16 +44,16 @@ namespace Festispec.ViewModels.CustomerCRUD
             {
                 try
                 {
-                    var address = _geoRepository.Find(EntityViewModel.UpdatedEntity.PostalCode,
-                        EntityViewModel.UpdatedEntity.HouseNumber);
+                    var address = _geoRepository.Find(EntityViewModel.PostalCode,
+                        EntityViewModel.HouseNumber);
 
-                    EntityViewModel.UpdatedEntity.Street = address.Street;
-                    EntityViewModel.UpdatedEntity.City = address.City;
-                    EntityViewModel.UpdatedEntity.Municipality = address.Municipality;
-                    EntityViewModel.UpdatedEntity.Country = address.Country;
-                    EntityViewModel.UpdatedEntity.Lat = address.Lat;
-                    EntityViewModel.UpdatedEntity.Long = address.Long;
-                    EntityViewModel.UpdatedEntity.Location = address.Location;
+                    EntityViewModel.Street = address.Street;
+                    EntityViewModel.City = address.City;
+                    EntityViewModel.Municipality = address.Municipality;
+                    EntityViewModel.Country = address.Country;
+                    EntityViewModel.Lat = address.Lat;
+                    EntityViewModel.Long = address.Long;
+                    EntityViewModel.Location = address.Location;
 
                     return true;
                 }
@@ -64,8 +64,6 @@ namespace Festispec.ViewModels.CustomerCRUD
             }
             return false;
         }
-
-
 
         public override void Save()
         {

@@ -23,10 +23,6 @@ namespace Festispec.ViewModels.Customer
 
         public int Id => Entity.Id;
 
-
-        
-
-
         public string City
         {
             get { return Entity.City; }
@@ -220,9 +216,9 @@ namespace Festispec.ViewModels.Customer
             {
                 try
                 {
-                    var updated = UpdatedEntity.Id == 0
-                        ? InspectorRepository.Add(UpdatedEntity)
-                        : InspectorRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                    var updated = Id == 0
+                        ? InspectorRepository.Add(Entity)
+                        : InspectorRepository.Update(Entity, Id);
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException ex)
                 {
@@ -250,32 +246,6 @@ namespace Festispec.ViewModels.Customer
                 RaisePropertyChanged();
                 return CustomerRepository.Delete(Entity) != 0;
             }
-        }
-
-        public override Domain.Customer Copy()
-        {
-            return new Domain.Customer
-            {
-                Id = Id,
-                Email = Email,
-                City = City,
-                Country = Country,
-                FirstName = FirstName,
-                HouseNumber = HouseNumber,
-                IBAN = IBAN,
-                LastName = LastName,
-                Municipality = Municipality,
-                PostalCode = PostalCode,
-                Street = Street,
-                Telephone = Telephone,
-                Location = DbGeography.PointFromText("POINT(50 5)", 4326),
-                Long = 50,
-                Lat = 5,
-                Inspections = Inspections,
-                KVK = KVK,
-                Notes = Notes,
-                Name = Name
-            };
         }
     }
 }

@@ -55,9 +55,9 @@ namespace Festispec.ViewModels.Regulation
             {
                 try
                 {
-                    var updated = UpdatedEntity.Id == 0
-                        ? RegulationsRepository.Add(UpdatedEntity)
-                        : RegulationsRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                    var updated = Id == 0
+                        ? RegulationsRepository.Add(Entity)
+                        : RegulationsRepository.Update(Entity, Id);
                 }
                 catch (System.Data.Entity.Validation.DbEntityValidationException ex)
                 {
@@ -83,17 +83,6 @@ namespace Festispec.ViewModels.Regulation
             {
                 return RegulationsRepository.Delete(Entity) != 0;
             }
-        }
-
-        public override Domain.Regulation Copy()
-        {
-            return new Domain.Regulation
-            {
-                Id = Id,
-                Description = Description,
-                Municipality = Municipality,
-                Name = Name
-            };
         }
     }
 }

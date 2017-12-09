@@ -154,21 +154,5 @@ namespace Festispec.ViewModels.Planning
             }
             return true;
         }
-
-        public override Domain.Planning Copy()
-        {
-            return new Domain.Planning
-            {
-                Inspection_Id = InspectionId,
-                Inspector_Id = InspectorId,
-                Date = Date,
-                TimeFrom = TimeFrom,
-                TimeTo = TimeTo,
-                Hours = Hours,
-                Inspection = Inspection,
-                Inspector = Inspector,
-                Questions = Questions
-            };
-        }
     }
 }
