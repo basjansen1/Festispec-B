@@ -10,17 +10,29 @@ namespace Festispec.Domain.Repository
         {
         }
 
-//        public override IQueryable<Template> Get()
-//        {
-//            return base.Get().Include(template => template.Questions.Select(question => question.QuestionType));
-//        }
-//
-//        public override int Delete(Template entity)
-//        {
-//            entity = CleanRelations(entity);
-//            return base.Delete(entity);
-//        }
-//
+        public override IQueryable<Template> Get()
+        {
+            return base.Get().Include($"{nameof(TemplateQuestion)}.{nameof(Question)}.{nameof(QuestionType)}");
+        }
+
+        public override Template Add(Template entity)
+        {
+            entity = CleanRelations(entity);
+            return base.Add(entity);
+        }
+
+        public override Template Update(Template updated, params object[] keyValues)
+        {
+            updated = CleanRelations(updated);
+            return base.Update(updated, keyValues);
+        }
+
+        public override int Delete(Template entity)
+        {
+            entity = CleanRelations(entity);
+            return base.Delete(entity);
+        }
+
         public void AddQuestion(Template template, Question question)
         {
             if (question.Id == 0)
@@ -33,11 +45,11 @@ namespace Festispec.Domain.Repository
                 .Add(new TemplateQuestion {Template_Id = template.Id, Question_Id = question.Id});
             DbContext.SaveChanges();
         }
-//
-//        private Template CleanRelations(Template entity)
-//        {
-//            entity.Questions = null;
-//            return entity;
-//        }
+
+        private Template CleanRelations(Template entity)
+        {
+            entity.TemplateQuestion = null;
+            return entity;
+        }
     }
 }

@@ -6,28 +6,29 @@ using System.Windows;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
+using Festispec.ViewModels.Question;
 
 namespace Festispec.ViewModels.Template
 {
     public class
         TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, ITemplateRepository, Domain.Template>
     {
-        private TemplateQuestionViewModel _selectedQuestion;
+        private QuestionViewModel _selectedQuestion;
 
         public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory,
-            ITemplateQuestionViewModelFactory templateQuestionViewModelFactory) : base(repositoryFactory)
+            IQuestionViewModelFactory questionViewModelFactory) : base(repositoryFactory)
         {
-            Questions = new ObservableCollection<TemplateQuestionViewModel>(
-                Entity.Questions.Select(templateQuestionViewModelFactory.CreateViewModel));
+            Questions = new ObservableCollection<QuestionViewModel>(
+                Entity.TemplateQuestion.Select(question => questionViewModelFactory.CreateViewModel(question.Question));
             Questions.CollectionChanged += QuestionsOnCollectionChanged;
         }
 
         public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory,
-            ITemplateQuestionViewModelFactory templateQuestionViewModelFactory, Domain.Template entity)
+            IQuestionViewModelFactory questionViewModelFactory, Domain.Template entity)
             : base(repositoryFactory, entity)
         {
-            Questions = new ObservableCollection<TemplateQuestionViewModel>(
-                Entity.Questions.Select(templateQuestionViewModelFactory.CreateViewModel));
+            Questions = new ObservableCollection<QuestionViewModel>(
+                Entity.TemplateQuestion.Select(question => questionViewModelFactory.CreateViewModel(question.Question));
             Questions.CollectionChanged += QuestionsOnCollectionChanged;
         }
 
@@ -55,9 +56,9 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        public ObservableCollection<TemplateQuestionViewModel> Questions { get; }
+        public ObservableCollection<QuestionViewModel> Questions { get; }
 
-        public TemplateQuestionViewModel SelectedQuestion
+        public QuestionViewModel SelectedQuestion
         {
             get { return _selectedQuestion; }
             set

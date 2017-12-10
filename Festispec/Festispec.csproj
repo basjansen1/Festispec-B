@@ -179,6 +179,7 @@
     <Compile Include="ViewModels\Planning\PlanningListViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningAddViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningViewModel.cs" />
+    <Compile Include="ViewModels\Question\QuestionViewModel.cs" />
     <Compile Include="ViewModels\Regulation.Old\RegulationListVM.cs" />
     <Compile Include="ViewModels\Regulation.Old\RegulationVM.cs" />
     <Compile Include="ViewModels\Factory\Interface\IRegulationsViewModelFactory.cs" />
@@ -214,7 +215,6 @@
     <Compile Include="Routes\Route.cs" />
     <Compile Include="Routes\Routes.cs" />
     <Compile Include="ViewModels\Template\TemplateListViewModel.cs" />
-    <Compile Include="ViewModels\Template\TemplateQuestionViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
