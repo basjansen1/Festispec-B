@@ -2,5 +2,6 @@
 {
     public interface IInspectionRepository : IRepository<Inspection>
     {
+        void AddQuestion(Inspection inspection, Question question);
     }
 }

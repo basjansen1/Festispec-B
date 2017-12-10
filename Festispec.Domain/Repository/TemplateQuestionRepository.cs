@@ -12,7 +12,7 @@ namespace Festispec.Domain.Repository
 
         public override IQueryable<TemplateQuestion> Get()
         {
-            return base.Get().Include(templateQuestion => templateQuestion.QuestionType);
+            return base.Get().Include(templateQuestion => templateQuestion.Question);
         }
 
         public override TemplateQuestion Add(TemplateQuestion entity)
@@ -38,12 +38,12 @@ namespace Festispec.Domain.Repository
                 entity.Template = null;
             }
 
-            if (entity.QuestionType != null)
+            if (entity.Question != null)
             {
                 // Set foreign key and unset the navigation property
                 // This is needed because we are working with disconnected entities.
-                entity.QuestionType_Type = entity.QuestionType.Type;
-                entity.QuestionType = null;
+                entity.Question_Id = entity.Question.Id;
+                entity.Question = null;
             }
 
             return entity;

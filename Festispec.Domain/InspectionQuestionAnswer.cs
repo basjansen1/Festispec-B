@@ -12,12 +12,15 @@ namespace Festispec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class TemplateQuestion
+    public partial class InspectionQuestionAnswer
     {
-        public int Template_Id { get; set; }
+        public int Inspection_Id { get; set; }
+        public int Inspector_Id { get; set; }
+        public System.DateTime Date { get; set; }
         public int Question_Id { get; set; }
+        public string Answer { get; set; }
     
-        public virtual Template Template { get; set; }
-        public virtual Question Question { get; set; }
+        public virtual Planning Planning { get; set; }
+        public virtual InspectionQuestion InspectionQuestion { get; set; }
     }
 }

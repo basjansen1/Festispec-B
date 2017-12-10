@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0c3f7037040646c3b622e45d6214b03f" Name="Diagram1" ZoomLevel="67" >
-        <EntityTypeShape EntityType="Festispec.Address" Width="1.5" PointX="4.25" PointY="2.875" />
+      <Diagram DiagramId="0c3f7037040646c3b622e45d6214b03f" Name="Diagram1" ZoomLevel="57" >
+        <EntityTypeShape EntityType="Festispec.Address" Width="1.5" PointX="4.25" PointY="2.625" />
         <EntityTypeShape EntityType="Festispec.Contact" Width="1.5" PointX="4.25" PointY="5.875" />
         <EntityTypeShape EntityType="Festispec.Employee" Width="1.5" PointX="0.625" PointY="5.375" />
         <InheritanceConnector EntityType="Festispec.Contact" />
@@ -33,14 +33,17 @@
         <EntityTypeShape EntityType="Festispec.Question" Width="1.5" PointX="15.125" PointY="6.75" />
         <EntityTypeShape EntityType="Festispec.QuestionType" Width="1.5" PointX="17.375" PointY="6.875" />
         <AssociationConnector Association="Festispec.QuestionTypeQuestion" />
-        <EntityTypeShape EntityType="Festispec.InspectionQuestion" Width="1.5" PointX="12.125" PointY="6" />
-        <InheritanceConnector EntityType="Festispec.InspectionQuestion" />
-        <EntityTypeShape EntityType="Festispec.TemplateQuestion" Width="1.5" PointX="13" PointY="9" />
-        <InheritanceConnector EntityType="Festispec.TemplateQuestion" />
-        <EntityTypeShape EntityType="Festispec.Template" Width="1.5" PointX="12.5" PointY="10.875" />
+        <EntityTypeShape EntityType="Festispec.Template" Width="1.5" PointX="17.5" PointY="9.75" />
+        <EntityTypeShape EntityType="Festispec.InspectionQuestion" PointX="12.375" PointY="5.375" Width="1.5" />
+        <AssociationConnector Association="Festispec.InspectionInspectionQuestion" />
+        <EntityTypeShape EntityType="Festispec.TemplateQuestion" Width="1.5" PointX="15.125" PointY="9.75" />
         <AssociationConnector Association="Festispec.TemplateTemplateQuestion" />
-        <AssociationConnector Association="Festispec.PlanningInspectionQuestion" />
-      </Diagram>
+        <AssociationConnector Association="Festispec.QuestionInspectionQuestion" />
+        <EntityTypeShape EntityType="Festispec.InspectionQuestionAnswer" Width="1.5" PointX="12.125" PointY="8.75" />
+        <AssociationConnector Association="Festispec.PlanningInspectionQuestionAnswer" />
+        <AssociationConnector Association="Festispec.InspectionQuestionInspectionQuestionAnswer" />
+        <AssociationConnector Association="Festispec.QuestionTemplateQuestion" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
