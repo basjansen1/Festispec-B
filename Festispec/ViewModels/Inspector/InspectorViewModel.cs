@@ -58,6 +58,16 @@ namespace Festispec.ViewModels.Inspector
             get { return Entity.LastName; }
             set
             {
+                Entity.LastName = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string IBAN
+        {
+            get { return Entity.IBAN; }
+            set
+            {
                 Entity.IBAN = value;
                 RaisePropertyChanged();
             }

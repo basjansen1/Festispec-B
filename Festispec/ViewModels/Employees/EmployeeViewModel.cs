@@ -65,6 +65,16 @@ namespace Festispec.ViewModels.Employee
             }
         }
 
+        public string IBAN
+        {
+            get { return Entity.IBAN; }
+            set
+            {
+                Entity.IBAN = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public Domain.Employee Manager
         {
             get { return Entity.Manager; }
