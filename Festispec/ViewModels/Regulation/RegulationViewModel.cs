@@ -50,50 +50,37 @@ namespace Festispec.ViewModels.Regulation
 
         public override bool Save()
         {
-
-            using (var RegulationsRepository = RepositoryFactory.CreateRepository())
+            try
             {
-                try
+                Domain.Regulation updated;
+                using (var RegulationsRepository = RepositoryFactory.CreateRepository())
                 {
-                    var updated = UpdatedEntity.Id == 0
-                        ? RegulationsRepository.Add(UpdatedEntity)
-                        : RegulationsRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                    updated = Id == 0
+                        ? RegulationsRepository.Add(Entity)
+                        : RegulationsRepository.Update(Entity, Id);
                 }
-                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+
+                // First we map the updated values to the entity
+                MapValues(updated, Entity);
+                // Then we overwrite the original values with the new entity values
+                MapValuesToOriginal();
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                List<string> ErrorList = new List<string>();
+                foreach (var eve in ex.EntityValidationErrors)
                 {
-                    List<string> ErrorList = new List<string>();
-                    foreach (var eve in ex.EntityValidationErrors)
+                    foreach (var ve in eve.ValidationErrors)
                     {
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            ErrorList.Add(ve.PropertyName);
-                        }
+                        ErrorList.Add(ve.PropertyName);
                     }
-                    string joined = string.Join(",", ErrorList.Select(x => x));
-                    MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
-                    return false;
                 }
+                string joined = string.Join(",", ErrorList.Select(x => x));
+                MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                return false;
             }
+
             return true;
-        }
-
-        public override bool Delete()
-        {
-            using (var RegulationsRepository = RepositoryFactory.CreateRepository())
-            {
-                return RegulationsRepository.Delete(Entity) != 0;
-            }
-        }
-
-        public override Domain.Regulation Copy()
-        {
-            return new Domain.Regulation
-            {
-                Id = Id,
-                Description = Description,
-                Municipality = Municipality,
-                Name = Name
-            };
         }
     }
 }

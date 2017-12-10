@@ -136,8 +136,11 @@ namespace Festispec.ViewModels.Planning
                         ? planningRepository.Add(Entity)
                         : planningRepository.Update(Entity, Entity.Inspection_Id, Entity.Inspector_Id, Entity.Date);
                 }
-
-                // TODO: MapValues
+                
+                // First we map the updated values to the entity
+                MapValues(updated, Entity);
+                // Then we overwrite the original values with the new entity values
+                MapValuesToOriginal();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {
@@ -153,22 +156,6 @@ namespace Festispec.ViewModels.Planning
                 return false;
             }
             return true;
-        }
-
-        public override Domain.Planning Copy()
-        {
-            return new Domain.Planning
-            {
-                Inspection_Id = InspectionId,
-                Inspector_Id = InspectorId,
-                Date = Date,
-                TimeFrom = TimeFrom,
-                TimeTo = TimeTo,
-                Hours = Hours,
-                Inspection = Inspection,
-                Inspector = Inspector,
-                Questions = Questions
-            };
         }
     }
 }

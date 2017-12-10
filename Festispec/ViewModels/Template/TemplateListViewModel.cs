@@ -65,7 +65,7 @@ namespace Festispec.ViewModels.Template
             SearchCommand = new RelayCommand(LoadTemplates);
         }
 
-        private void LoadTemplates()
+        public void LoadTemplates()
         {
             using (var templateRepository = _templateRepositoryFactory.CreateRepository())
             {

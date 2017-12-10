@@ -27,10 +27,10 @@ namespace Festispec.ViewModels.Template
         public override void Save()
         {
             //TODO: Validation
+            
+            TemplateViewModel.Questions.Add(EntityViewModel);
 
-            TemplateViewModel.UpdatedEntity.Questions.Add(EntityViewModel.UpdatedEntity);
-
-            GoBack();
+            base.Save();
         }
     }
 }

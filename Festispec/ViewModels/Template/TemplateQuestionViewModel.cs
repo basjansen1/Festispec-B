@@ -97,63 +97,33 @@ namespace Festispec.ViewModels.Template
         {
             try
             {
-                if (Entity.IsDeleted)
+                if (IsDeleted)
                 {
-                    return UpdatedEntity.Id == 0 || Delete();
+                    return Id == 0 || Delete();
                 }
 
                 TemplateQuestion updated;
                 using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
                 {
-                    updated = UpdatedEntity.Id == 0
-                        ? templateQuestionRepository.Add(UpdatedEntity)
-                        : templateQuestionRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                    updated = Id == 0
+                        ? templateQuestionRepository.Add(Entity)
+                        : templateQuestionRepository.Update(Entity, Id);
                 }
 
-                // Map updated values
-                Entity.Id = updated.Id;
-                Entity.Name = updated.Name;
-                Entity.Description = updated.Description;
+                // First we map the updated values to the entity
+                MapValues(updated, Entity);
+                // Then we overwrite the original values with the new entity values
+                MapValuesToOriginal();
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException ex)
             {
-                var ErrorList = (from eve in ex.EntityValidationErrors from ve in eve.ValidationErrors select ve.PropertyName).ToList();
-                string joined = string.Join(",", ErrorList.Select(x => x));
+                var errorList = (from eve in ex.EntityValidationErrors from ve in eve.ValidationErrors select ve.PropertyName).ToList();
+                var joined = string.Join(",", errorList.Select(x => x));
                 MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
                 return false;
             }
 
             return true;
-        }
-
-        public override bool Delete()
-        {
-            try
-            {
-                using (var templateQuestionRepository = RepositoryFactory.CreateRepository())
-                {
-                    return templateQuestionRepository.Delete(Entity) != 0;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Er is iets fout gegaan");
-                return false;
-            }
-        }
-
-        public override TemplateQuestion Copy()
-        {
-            return new TemplateQuestion
-            {
-                Id = Id,
-                Name = Name,
-                Description = Description,
-                Template = Template,
-                Template_Id = Template_Id,
-                QuestionType = QuestionType,
-                QuestionType_Type = QuestionType_Type
-            };
         }
     }
 }

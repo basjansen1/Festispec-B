@@ -30,23 +30,43 @@ namespace Festispec.ViewModels
 
             NavigateBackCommand = new RelayCommand(GoBack);
             SaveEntityCommand = new RelayCommand(Save);
+            CancelEntityCommand = new RelayCommand(Cancel);
 
             NavigationService.PropertyChanged += OnNavigationServicePropertyChange;
         }
 
         public ICommand NavigateBackCommand { get; }
         public ICommand SaveEntityCommand { get; }
+        public ICommand CancelEntityCommand { get; }
 
         public TEntityViewModel EntityViewModel { get; set; }
 
+        public void Save(object backParameter)
+        {
+            var saved = EntityViewModel.Save();
+
+            // Return is save failed
+            if (!saved)
+                return;
+
+            // Overwrite the original values with the new entity values
+            EntityViewModel.MapValuesToOriginal();
+
+            GoBack(backParameter);
+        }
+
         public virtual void Save()
         {
-            // TODO: Validation
-            EntityViewModel.Save();
+            Save(EntityViewModel);
+        }
+
+        public virtual void Cancel()
+        {
+            EntityViewModel.MapValuesFromOriginal();
 
             GoBack(EntityViewModel);
         }
-        
+
         public virtual void GoBack()
         {
             GoBack(null);
@@ -62,10 +82,7 @@ namespace Festispec.ViewModels
         protected virtual void UpdateEntityViewModelFromNavigationParameter()
         {
             var entityViewModel = NavigationService.Parameter as TEntityViewModel;
-            // Create copy or new instance of TEntityViewModel
-            //            EntityViewModel = entityViewModel != null
-            //                ? ViewModelFactory.CreateViewModel(entityViewModel.Entity)
-            //                : ViewModelFactory.CreateViewModel();
+
             EntityViewModel = entityViewModel ?? ViewModelFactory.CreateViewModel();
         }
     }

@@ -17,12 +17,7 @@ namespace Festispec.Domain.Repository
 
         public override int Delete(Template entity)
         {
-            foreach (var templateQuestion in entity.Questions.ToList())
-            {
-                DbContext.Set<TemplateQuestion>().Attach(templateQuestion);
-                DbContext.Set<TemplateQuestion>().Remove(templateQuestion);
-            }
-
+            entity = CleanRelations(entity);
             return base.Delete(entity);
         }
 
@@ -31,6 +26,12 @@ namespace Festispec.Domain.Repository
             templateQuestion.Template = null;
             template.Questions.Add(templateQuestion);
             DbContext.SaveChanges();
+        }
+
+        private Template CleanRelations(Template entity)
+        {
+            entity.Questions = null;
+            return entity;
         }
     }
 }

@@ -6,6 +6,7 @@ using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.NavigationService;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels.Template
 {
@@ -54,18 +55,23 @@ namespace Festispec.ViewModels.Template
                 EntityViewModel = ViewModelFactory.CreateViewModel();
 
                 EntityViewModel.Template = TemplateViewModel.Entity;
-                EntityViewModel.Template_Id = templateViewModel.Id;
+                EntityViewModel.Template_Id = TemplateViewModel.Id;
             }
+        }
+
+        public override void Cancel()
+        {
+            EntityViewModel.MapValuesFromOriginal();
+
+            GoBack();
         }
 
         public override void Save()
         {
             //TODO: Validation
 
-            // Map updated fields
-            EntityViewModel.Name = EntityViewModel.UpdatedEntity.Name;
-            EntityViewModel.Description = EntityViewModel.UpdatedEntity.Description;
-            EntityViewModel.QuestionType_Type = EntityViewModel.UpdatedEntity.QuestionType_Type;
+            // Overwrite the original values with the new entity values
+            EntityViewModel.MapValuesToOriginal();
             
             GoBack();
         }

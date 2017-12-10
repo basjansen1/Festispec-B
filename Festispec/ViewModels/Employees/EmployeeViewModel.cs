@@ -1,30 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity.Validation;
+using System.Linq;
+using System.Windows;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
-using System.Data.Entity.Spatial;
-using System;
-using System.Windows;
-using System.Linq;
+using Festispec.ViewModels.Address;
 
 namespace Festispec.ViewModels.Employee
 {
-    public class EmployeeViewModel : EntityViewModelBase<IEmployeeRepositoryFactory, IEmployeeRepository, Domain.Employee>
+    public class EmployeeViewModel :
+        AddressViewModelBase<IEmployeeRepositoryFactory, IEmployeeRepository, Domain.Employee>
     {
         public EmployeeViewModel(IEmployeeRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
-            if(UpdatedEntity.HiredFrom == default(DateTime))
-            {
-                UpdatedEntity.HiredFrom = new DateTime(1990, 1, 1);
-            }
+            if (HiredFrom == default(DateTime))
+                HiredFrom = new DateTime(1990, 1, 1);
         }
 
         public EmployeeViewModel(IEmployeeRepositoryFactory repositoryFactory, Domain.Employee entity)
             : base(repositoryFactory, entity)
         {
         }
-
-        public int Id => Entity.Id;
 
 
         public string Username
@@ -33,17 +31,6 @@ namespace Festispec.ViewModels.Employee
             set
             {
                 Entity.Username = value;
-                RaisePropertyChanged();
-            }
-        }
-
-
-        public string City
-        {
-            get { return Entity.City; }
-            set
-            {
-                Entity.City = value;
                 RaisePropertyChanged();
             }
         }
@@ -58,16 +45,6 @@ namespace Festispec.ViewModels.Employee
             }
         }
 
-        public string Country
-        {
-            get { return Entity.Country; }
-            set
-            {
-                Entity.Country = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public string FirstName
         {
             get { return Entity.FirstName; }
@@ -77,15 +54,17 @@ namespace Festispec.ViewModels.Employee
                 RaisePropertyChanged();
             }
         }
-        public string HouseNumber
+
+        public string LastName
         {
-            get { return Entity.HouseNumber; }
+            get { return Entity.LastName; }
             set
             {
-                Entity.HouseNumber = value;
+                Entity.LastName = value;
                 RaisePropertyChanged();
             }
         }
+
         public string IBAN
         {
             get { return Entity.IBAN; }
@@ -96,15 +75,6 @@ namespace Festispec.ViewModels.Employee
             }
         }
 
-        public string LastName
-        {
-            get { return Entity.LastName; }
-            set
-            {
-                Entity.IBAN = value;
-                RaisePropertyChanged();
-            }
-        }
         public Domain.Employee Manager
         {
             get { return Entity.Manager; }
@@ -114,6 +84,7 @@ namespace Festispec.ViewModels.Employee
                 RaisePropertyChanged();
             }
         }
+
         public string Password
         {
             get { return Entity.Password; }
@@ -123,24 +94,7 @@ namespace Festispec.ViewModels.Employee
                 RaisePropertyChanged();
             }
         }
-        public string Municipality
-        {
-            get { return Entity.Municipality; }
-            set
-            {
-                Entity.Municipality = value;
-                RaisePropertyChanged();
-            }
-        }
-        public string PostalCode
-        {
-            get { return Entity.PostalCode; }
-            set
-            {
-                Entity.PostalCode = value;
-                RaisePropertyChanged();
-            }
-        }
+
         public EmployeeRole Role
         {
             get { return Entity.Role; }
@@ -150,15 +104,7 @@ namespace Festispec.ViewModels.Employee
                 RaisePropertyChanged();
             }
         }
-        public string Street
-        {
-            get { return Entity.Street; }
-            set
-            {
-                Entity.Street = value;
-                RaisePropertyChanged();
-            }
-        }
+
         public string Telephone
         {
             get { return Entity.Telephone; }
@@ -179,48 +125,16 @@ namespace Festispec.ViewModels.Employee
             }
         }
 
-        public DbGeography Location
-        {
-            get { return Entity.Location; }
-            set
-            {
-                Entity.Location = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public double Long
-        {
-            get { return Entity.Long; }
-            set
-            {
-                Entity.Long = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public double Lat
-        {
-            get { return Entity.Lat; }
-            set
-            {
-                Entity.Lat = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public DateTime HiredFrom
         {
-            get
-            {
-                return Entity.HiredFrom;
-            }
+            get { return Entity.HiredFrom; }
             set
             {
                 Entity.HiredFrom = value;
                 RaisePropertyChanged();
             }
         }
+
         public DateTime? HiredTo
         {
             get { return Entity.HiredTo; }
@@ -243,68 +157,33 @@ namespace Festispec.ViewModels.Employee
 
         public override bool Save()
         {
-            using (var InspectorRepository = RepositoryFactory.CreateRepository())
+            try
             {
-                try
+                Domain.Employee updated;
+                using (var InspectorRepository = RepositoryFactory.CreateRepository())
                 {
-                    var updated = UpdatedEntity.Id == 0
-                        ? InspectorRepository.Add(UpdatedEntity)
-                        : InspectorRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                    updated = Id == 0
+                        ? InspectorRepository.Add(Entity)
+                        : InspectorRepository.Update(Entity, Id);
                 }
-                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
-                {
-                    List<string> ErrorList = new List<string>();
-                    foreach (var eve in ex.EntityValidationErrors)
-                    {
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            ErrorList.Add(ve.PropertyName);
-                        }
-                    }
-                    string joined = string.Join(",", ErrorList.Select(x => x));
-                    MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
-                    return false;
-                }
+
+                // First we map the updated values to the entity
+                MapValues(updated, Entity);
+                // Then we overwrite the original values with the new entity values
+                MapValuesToOriginal();
             }
+            catch (DbEntityValidationException ex)
+            {
+                var ErrorList = new List<string>();
+                foreach (var eve in ex.EntityValidationErrors)
+                foreach (var ve in eve.ValidationErrors)
+                    ErrorList.Add(ve.PropertyName);
+                var joined = string.Join(",", ErrorList.Select(x => x));
+                MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                return false;
+            }
+
             return true;
-        }
-
-        public override bool Delete()
-        {
-            using (var EmployeeRepository = RepositoryFactory.CreateRepository())
-            {
-                return EmployeeRepository.Delete(Entity) != 0;
-            }
-        }
-
-        public override Domain.Employee Copy()
-        {
-            return new Domain.Employee
-            {
-                Id = Id,
-                Email = Email,
-                City = City,
-                Username = Username,
-                Country = Country,
-                FirstName = FirstName,
-                HouseNumber = HouseNumber,
-                IBAN = IBAN,
-                LastName = LastName,
-                Manager = Manager,
-                Password = Password,
-                Municipality = Municipality,
-                Manager_Id = Manager_Id,
-                PostalCode = PostalCode,
-                Role_Role = Role_Role,
-                Role = Role,
-                Street = Street,
-                Telephone = Telephone,
-                Location = DbGeography.PointFromText("POINT(50 5)", 4326),
-                Long = 50,
-                Lat = 5,
-                HiredFrom = HiredFrom,
-                HiredTo = HiredTo
-            };
         }
     }
 }

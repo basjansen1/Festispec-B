@@ -8,32 +8,32 @@
         DataContext="{Binding Source={StaticResource Locator}, Path=InspectorAddOrUpdate}">
     <StackPanel>
         <Label>Gebruikersnaam</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Username}" />
+        <TextBox Text="{Binding Path=EntityViewModel.Username}" />
         <Label>Voornaam</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.FirstName}" />
+        <TextBox Text="{Binding Path=EntityViewModel.FirstName}" />
         <Label>Achternaam</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.LastName}" />
+        <TextBox Text="{Binding Path=EntityViewModel.LastName}" />
         <Label>Email</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Email}" />
+        <TextBox Text="{Binding Path=EntityViewModel.Email}" />
         <Label>IBAN</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.IBAN}" />
+        <TextBox Text="{Binding Path=EntityViewModel.IBAN}" />
         <Label>Manager</Label>
         <ComboBox ItemsSource="{Binding Managers}"
                   DisplayMemberPath="Username"
                   SelectedValuePath="Id"
-                  SelectedValue="{Binding EntityViewModel.UpdatedEntity.Manager_Id}"></ComboBox>
+                  SelectedValue="{Binding EntityViewModel.Manager_Id}"></ComboBox>
         <Label>Password</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Password}" />
+        <TextBox Text="{Binding Path=EntityViewModel.Password}" />
         <Label>Telefoonnummer</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Telephone}" />
+        <TextBox Text="{Binding Path=EntityViewModel.Telephone}" />
         <Label>In dienst genomen op</Label>
-        <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.HiredFrom}"/>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.HiredFrom}"/>
         <Label>Uit dienst gegaan</Label>
-        <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.HiredTo}"/>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.HiredTo}"/>
         <Label>Certificatie startdatum</Label>
-        <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.CertificationFrom}"/>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.CertificationFrom}"/>
         <Label>Certificatie einddatum</Label>
-        <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.CertificationTo}"/>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.CertificationTo}"/>
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -44,12 +44,12 @@
 
             <StackPanel Grid.Column="0">
                 <Label>Postcode</Label>
-                <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="6" />
+                <TextBox Text="{Binding Path=EntityViewModel.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="6" />
             </StackPanel>
 
             <StackPanel Grid.Column="1">
                 <Label>Huisnummer</Label>
-                <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.HouseNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox Text="{Binding Path=EntityViewModel.HouseNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
 
             <Button Grid.Column="2" Command="{Binding SearchAddressCommand}">Zoek adres</Button>

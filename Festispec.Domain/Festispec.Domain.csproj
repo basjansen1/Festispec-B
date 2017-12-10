@@ -69,10 +69,12 @@
     <Compile Include="Address.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AddressExtended.cs" />
     <Compile Include="Contact.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Extension\DateRangeExtension.cs" />
+    <Compile Include="IAddress.cs" />
     <Compile Include="InspectionExtended.cs" />
     <Compile Include="PlanningExtended.cs" />
     <Compile Include="Customer.cs">
@@ -86,6 +88,7 @@
     </Compile>
     <Compile Include="ContactExtended.cs" />
     <Compile Include="ExtendedQuestion.cs" />
+    <Compile Include="Extension\CopyPropertiesExtension.cs" />
     <Compile Include="Festispec.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -140,6 +143,7 @@
     </Compile>
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\Factory\CustomerRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\GeoRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ICustomerRepositoryFactory.cs" />
     <Compile Include="Repository\EmployeeRepository.cs" />
     <Compile Include="Repository\Factory\EmployeeRepositoryFactory.cs" />
@@ -148,6 +152,7 @@
     <Compile Include="Repository\Factory\InspectorRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IEmployeeRoleRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IEmployeeRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IGeoRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IInspectorRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ILoginRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IPlanningRepositoryFactory.cs" />

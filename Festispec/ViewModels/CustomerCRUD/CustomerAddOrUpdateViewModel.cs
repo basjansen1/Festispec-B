@@ -8,24 +8,19 @@ using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
+using Festispec.ViewModels.Address;
 
 namespace Festispec.ViewModels.CustomerCRUD
 {
    public class CustomerAddOrUpdateViewModel :
-        AddOrUpdateViewModelBase<ICustomerViewModelFactory, CustomerViewModel, ICustomerRepository, Domain.Customer>
+        AddressAddOrUpdateViewModelBase<ICustomerViewModelFactory, CustomerViewModel, ICustomerRepository, Domain.Customer>
     {
-
-        IGeoRepository _geoRepository;
-        public ICommand SearchAddressCommand { get; set; }
-
         public CustomerAddOrUpdateViewModel(INavigationService navigationService,
             ICustomerRepositoryFactory repositoryFactory,
-            ICustomerViewModelFactory CustomerViewModelFactory, IGeoRepository geoRepository)
-            : base(navigationService, repositoryFactory, CustomerViewModelFactory)
+            ICustomerViewModelFactory CustomerViewModelFactory, IGeoRepositoryFactory geoRepositoryFactory)
+            : base(navigationService, repositoryFactory, CustomerViewModelFactory, geoRepositoryFactory)
         {
-            _geoRepository = geoRepository;
             RaisePropertyChanged();
-            SearchAddressCommand = new RelayCommand(() => SearchAddress());
         }
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
@@ -38,41 +33,11 @@ namespace Festispec.ViewModels.CustomerCRUD
             UpdateEntityViewModelFromNavigationParameter();
         }
 
-        private bool SearchAddress()
-        {
-            using (_geoRepository)
-            {
-                try
-                {
-                    var address = _geoRepository.Find(EntityViewModel.UpdatedEntity.PostalCode,
-                        EntityViewModel.UpdatedEntity.HouseNumber);
-
-                    EntityViewModel.UpdatedEntity.Street = address.Street;
-                    EntityViewModel.UpdatedEntity.City = address.City;
-                    EntityViewModel.UpdatedEntity.Municipality = address.Municipality;
-                    EntityViewModel.UpdatedEntity.Country = address.Country;
-                    EntityViewModel.UpdatedEntity.Lat = address.Lat;
-                    EntityViewModel.UpdatedEntity.Long = address.Long;
-                    EntityViewModel.UpdatedEntity.Location = address.Location;
-
-                    return true;
-                }
-                catch (Exception exception)
-                {
-                    MessageBox.Show(exception.Message);
-                }
-            }
-            return false;
-        }
-
-
-
         public override void Save()
         {
             // TODO: Validation
-            var saved = SearchAddress() && EntityViewModel.Save();
-            RaisePropertyChanged();
-            if (saved) NavigationService.GoBack(EntityViewModel);
+
+            base.Save();
         }
     }
 }

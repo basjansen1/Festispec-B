@@ -2,14 +2,14 @@
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
-using System.Data.Entity.Spatial;
 using System;
 using System.Windows;
 using System.Linq;
+using Festispec.ViewModels.Address;
 
 namespace Festispec.ViewModels.Customer
 {
-    public class CustomerViewModel : EntityViewModelBase<ICustomerRepositoryFactory, ICustomerRepository, Domain.Customer>
+    public class CustomerViewModel : AddressViewModelBase<ICustomerRepositoryFactory, ICustomerRepository, Domain.Customer>
     {
         public CustomerViewModel(ICustomerRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
@@ -21,38 +21,12 @@ namespace Festispec.ViewModels.Customer
         {
         }
 
-        public int Id => Entity.Id;
-
-
-        
-
-
-        public string City
-        {
-            get { return Entity.City; }
-            set
-            {
-                Entity.City = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public string Email
         {
             get { return Entity.Email; }
             set
             {
                 Entity.Email = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public string Country
-        {
-            get { return Entity.Country; }
-            set
-            {
-                Entity.Country = value;
                 RaisePropertyChanged();
             }
         }
@@ -68,15 +42,6 @@ namespace Festispec.ViewModels.Customer
             }
         }
 
-        public string HouseNumber
-        {
-            get { return Entity.HouseNumber; }
-            set
-            {
-                Entity.HouseNumber = value;
-                RaisePropertyChanged();
-            }
-        }
         public string IBAN
         {
             get { return Entity.IBAN; }
@@ -92,7 +57,7 @@ namespace Festispec.ViewModels.Customer
             get { return Entity.LastName; }
             set
             {
-                Entity.IBAN = value;
+                Entity.LastName = value;
                 RaisePropertyChanged();
             }
         }
@@ -108,73 +73,12 @@ namespace Festispec.ViewModels.Customer
             }
         }
 
-
-        public string Municipality
-        {
-            get { return Entity.Municipality; }
-            set
-            {
-                Entity.Municipality = value;
-                RaisePropertyChanged();
-            }
-        }
-        public string PostalCode
-        {
-            get { return Entity.PostalCode; }
-            set
-            {
-                Entity.PostalCode = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public string Street
-        {
-            get { return Entity.Street; }
-            set
-            {
-                Entity.Street = value;
-                RaisePropertyChanged();
-            }
-        }
         public string Telephone
         {
             get { return Entity.Telephone; }
             set
             {
                 Entity.Telephone = value;
-                RaisePropertyChanged();
-            }
-        }
-
-
-
-        public DbGeography Location
-        {
-            get { return Entity.Location; }
-            set
-            {
-                Entity.Location = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public double Long
-        {
-            get { return Entity.Long; }
-            set
-            {
-                Entity.Long = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public double Lat
-        {
-            get { return Entity.Lat; }
-            set
-            {
-                Entity.Lat = value;
                 RaisePropertyChanged();
             }
         }
@@ -211,71 +115,40 @@ namespace Festispec.ViewModels.Customer
             }
         }
 
-
-
         public override bool Save()
         {
-
-            using (var InspectorRepository = RepositoryFactory.CreateRepository())
+            try
             {
-                try
+                Domain.Customer updated;
+                using (var customerRepository = RepositoryFactory.CreateRepository())
                 {
-                    var updated = UpdatedEntity.Id == 0
-                        ? InspectorRepository.Add(UpdatedEntity)
-                        : InspectorRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                    updated = Id == 0
+                        ? customerRepository.Add(Entity)
+                        : customerRepository.Update(Entity, Id);
                 }
-                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
-                {
-                    List<string> ErrorList = new List<string>();
-                    foreach (var eve in ex.EntityValidationErrors)
-                    {
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            ErrorList.Add(ve.PropertyName);
-                        }
-                    }
-                    string joined = string.Join(",", ErrorList.Select(x => x));
-                    MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
-                    return false;
-                }
+
+                // First we map the updated values to the entity
+                MapValues(updated, Entity);
+                // Then we overwrite the original values with the new entity values
+                MapValuesToOriginal();
             }
+            catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+            {
+                List<string> ErrorList = new List<string>();
+                foreach (var eve in ex.EntityValidationErrors)
+                {
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        ErrorList.Add(ve.PropertyName);
+                    }
+                }
+                string joined = string.Join(",", ErrorList.Select(x => x));
+                MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                return false;
+            }
+
             RaisePropertyChanged();
             return true;
-        }
-
-        public override bool Delete()
-        {
-            using (var CustomerRepository = RepositoryFactory.CreateRepository())
-            {
-                RaisePropertyChanged();
-                return CustomerRepository.Delete(Entity) != 0;
-            }
-        }
-
-        public override Domain.Customer Copy()
-        {
-            return new Domain.Customer
-            {
-                Id = Id,
-                Email = Email,
-                City = City,
-                Country = Country,
-                FirstName = FirstName,
-                HouseNumber = HouseNumber,
-                IBAN = IBAN,
-                LastName = LastName,
-                Municipality = Municipality,
-                PostalCode = PostalCode,
-                Street = Street,
-                Telephone = Telephone,
-                Location = DbGeography.PointFromText("POINT(50 5)", 4326),
-                Long = 50,
-                Lat = 5,
-                Inspections = Inspections,
-                KVK = KVK,
-                Notes = Notes,
-                Name = Name
-            };
         }
     }
 }
