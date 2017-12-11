@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
+using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
@@ -19,8 +20,8 @@ namespace Festispec.ViewModels.Template
             IQuestionViewModelFactory questionViewModelFactory) : base(repositoryFactory)
         {
             Questions = new ObservableCollection<QuestionViewModel>(
-                Entity.TemplateQuestion.Select(question => questionViewModelFactory.CreateViewModel(question.Question));
-            Questions.CollectionChanged += QuestionsOnCollectionChanged;
+                Entity.TemplateQuestion.Select(question => questionViewModelFactory.CreateViewModel(question.Question)));
+//            Questions.CollectionChanged += QuestionsOnCollectionChanged;
         }
 
         public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory,
@@ -28,12 +29,11 @@ namespace Festispec.ViewModels.Template
             : base(repositoryFactory, entity)
         {
             Questions = new ObservableCollection<QuestionViewModel>(
-                Entity.TemplateQuestion.Select(question => questionViewModelFactory.CreateViewModel(question.Question));
-            Questions.CollectionChanged += QuestionsOnCollectionChanged;
+                Entity.TemplateQuestion.Select(question => questionViewModelFactory.CreateViewModel(question.Question)));
+//            Questions.CollectionChanged += QuestionsOnCollectionChanged;
         }
 
         public int Id => Entity.Id;
-
 
         public string Name
         {
@@ -44,7 +44,6 @@ namespace Festispec.ViewModels.Template
                 RaisePropertyChanged();
             }
         }
-
 
         public string Description
         {
@@ -68,24 +67,26 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        private void QuestionsOnCollectionChanged(object sender,
-            NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
-        {
-            switch (notifyCollectionChangedEventArgs.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Entity.Questions.Add(((TemplateQuestionViewModel) notifyCollectionChangedEventArgs.NewItems[0])
-                        .Entity);
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Entity.Questions.Remove(((TemplateQuestionViewModel) notifyCollectionChangedEventArgs.OldItems[0])
-                        .Entity);
-                    break;
-            }
-        }
+//        private void QuestionsOnCollectionChanged(object sender,
+//            NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+//        {
+//            switch (notifyCollectionChangedEventArgs.Action)
+//            {
+//                case NotifyCollectionChangedAction.Add:
+//                    Entity.Questions.Add(((TemplateQuestionViewModel) notifyCollectionChangedEventArgs.NewItems[0])
+//                        .Entity);
+//                    break;
+//                case NotifyCollectionChangedAction.Remove:
+//                    Entity.Questions.Remove(((TemplateQuestionViewModel) notifyCollectionChangedEventArgs.OldItems[0])
+//                        .Entity);
+//                    break;
+//            }
+//        }
 
         public override bool Save()
         {
+            // TODO: Validation
+
             try
             {
                 Domain.Template updated;
@@ -95,19 +96,20 @@ namespace Festispec.ViewModels.Template
                     updated = Id == 0
                         ? templateRepository.Add(Entity)
                         : templateRepository.Update(Entity, Id);
+
+                    foreach (var questionViewModel in questionsToUpdate)
+                    {
+                        if (questionViewModel.IsDeleted)
+                            templateRepository.DetachQuestions(updated, questionViewModel.Entity);
+                        else
+                            templateRepository.TryAttachQuestion(updated, questionViewModel.Entity);
+                    }
                 }
 
                 // First we map the updated values to the entity
                 MapValues(updated, Entity);
                 // Then we overwrite the original values with the new entity values
                 MapValuesToOriginal();
-
-                foreach (var templateQuestionViewModel in questionsToUpdate)
-                {
-                    // Manually attach the template by id
-                    templateQuestionViewModel.Template_Id = Entity.Id;
-                    templateQuestionViewModel.Save();
-                }
             }
             catch (DbEntityValidationException ex)
             {

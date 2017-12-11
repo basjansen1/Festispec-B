@@ -64,21 +64,34 @@ namespace Festispec.ViewModels.Question
             }
         }
 
+        public bool IsDeleted
+        {
+            get { return Entity.IsDeleted; }
+            set
+            {
+                Entity.IsDeleted = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public override bool Save()
         {
             // TODO: Validation
+
+            // Only allow add not update
+            if (Entity.Id != 0)
+                return true;
+
             try
             {
-                Domain.Question updated;
+                Domain.Question added;
                 using (var questionRepository = RepositoryFactory.CreateRepository())
                 {
-                    updated = Entity.Id == 0
-                        ? questionRepository.Add(Entity)
-                        : questionRepository.Update(Entity, Entity.Id);
+                    added = questionRepository.Add(Entity);
                 }
 
                 // First we map the updated values to the entity
-                MapValues(updated, Entity);
+                MapValues(added, Entity);
                 // Then we overwrite the original values with the new entity values
                 MapValuesToOriginal();
 

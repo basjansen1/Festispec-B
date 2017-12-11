@@ -27,20 +27,6 @@ namespace Festispec.Routes
             Roles = new[] {"Manager", "Medewerker"}
         };
 
-        public static Route TemplateQuestionAddOrUpdate = new Route
-        {
-            Key = "UpdateQuestion",
-            PageType = new Uri("../Views/Template/TemplateQuestionAddOrUpdate.xaml", UriKind.Relative),
-            Roles = new[] {"Manager", "Medewerker"}
-        };
-
-        public static Route TemplateQuestionAdd = new Route
-        {
-            Key = "AddQuestion",
-            PageType = new Uri("../Views/Template/TemplateQuestionAdd.xaml", UriKind.Relative),
-            Roles = new[] {"Manager", "Medewerker"}
-        };
-
         #endregion
 
         #region Employee
@@ -192,6 +178,13 @@ namespace Festispec.Routes
         };
 
         #endregion
+
+        public static Route QuestionAdd = new Route()
+        {
+            Key = "QuestionAdd",
+            PageType = new Uri("../Views/Question/QuestionAdd.xaml", UriKind.Relative),
+            Roles = new[] {"Manager", "Medewerker"}
+        };
 
     }
 }

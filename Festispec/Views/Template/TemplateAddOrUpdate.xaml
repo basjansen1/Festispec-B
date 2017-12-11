@@ -8,7 +8,7 @@
         Title="TemplateAddOrUpdate"
         DataContext="{Binding Source={StaticResource Locator}, Path=TemplateAddOrUpdate}">
     <Page.Resources>
-        <converter:InverseBooleanConverter x:Key="inverseBooleanConverter" />
+        <converter:InverseBooleanConverter x:Key="InverseBooleanConverter" />
     </Page.Resources>
     
     <StackPanel>
@@ -17,12 +17,10 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" x:Name="AddQuestion" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToQuestionAddCommand}"/>
-            <Button Grid.Column="2" x:Name="UpdateQuestion" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToQuestionUpdateCommand}" />
-            <Button Grid.Column="3" x:Name="RemoveQuestion" Content="Verwijderen" Margin="5px 10px" Command="{Binding QuestionDeleteCommand}" />
+            <Button Grid.Column="1" x:Name="AddQuestion" Content="Vraag Toevoegen" Margin="5px 10px" Command="{Binding NavigateToQuestionAddCommand}"/>
+            <Button Grid.Column="2" x:Name="RemoveQuestion" Content="Vraag Verwijderen" Margin="5px 10px" Command="{Binding QuestionDeleteCommand}" />
         </Grid>
         <Label>Naam</Label>
         <TextBox Text="{Binding Path=EntityViewModel.Name}" />
@@ -31,13 +29,14 @@
         <Label>Vragen</Label>
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding EntityViewModel.SelectedQuestion}" ItemsSource="{Binding EntityViewModel.Questions}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Vraag" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Omschrijving" Binding="{Binding Description}" Width="*"/>
                 <DataGridTextColumn Header="Type" Binding="{Binding QuestionType_Type}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsDeleted, Converter={StaticResource inverseBooleanConverter}}" Value="False">
+                        <DataTrigger Binding="{Binding IsDeleted, Converter={StaticResource InverseBooleanConverter}}" Value="False">
                             <Setter Property="Background" Value="Red" />
                         </DataTrigger>
                     </Style.Triggers>

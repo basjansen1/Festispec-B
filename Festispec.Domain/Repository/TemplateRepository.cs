@@ -33,20 +33,32 @@ namespace Festispec.Domain.Repository
             return base.Delete(entity);
         }
 
-        public void AddQuestion(Template template, Question question)
+        public void TryAttachQuestion(Template template, Question question)
         {
-            if (question.Id == 0)
-            {
-                DbContext.Set<Question>().Add(question);
-                DbContext.SaveChanges();
-            }
+            var exists = DbContext.Set<TemplateQuestion>().Any(templateQuestion =>
+                templateQuestion.Template_Id == template.Id && templateQuestion.Question_Id == question.Id);
 
+            if (exists)
+                return;
+
+            AttachQuestions(template, question);
+        }
+
+        public void AttachQuestions(Template template, Question question)
+        {
             DbContext.Set<TemplateQuestion>()
                 .Add(new TemplateQuestion {Template_Id = template.Id, Question_Id = question.Id});
             DbContext.SaveChanges();
         }
 
-        private Template CleanRelations(Template entity)
+        public void DetachQuestions(Template template, Question question)
+        {
+            DbContext.Set<TemplateQuestion>()
+                .Remove(new TemplateQuestion {Template_Id = template.Id, Question_Id = question.Id});
+            DbContext.SaveChanges();
+        }
+
+        private static Template CleanRelations(Template entity)
         {
             entity.TemplateQuestion = null;
             return entity;
