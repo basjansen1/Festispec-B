@@ -12,7 +12,7 @@ using Festispec.ViewModels.Question;
 namespace Festispec.ViewModels.Template
 {
     public class
-        TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, ITemplateRepository, Domain.Template>
+        TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, ITemplateRepository, Domain.Template>, IHasQuestionCollection
     {
         private QuestionViewModel _selectedQuestion;
 
@@ -122,6 +122,11 @@ namespace Festispec.ViewModels.Template
             }
 
             return true;
+        }
+
+        public void AddQuestion(QuestionViewModel question)
+        {
+            Questions.Add(question);
         }
     }
 }

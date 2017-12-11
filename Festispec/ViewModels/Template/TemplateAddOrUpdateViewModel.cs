@@ -10,7 +10,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 namespace Festispec.ViewModels.Template
 {
     public class TemplateAddOrUpdateViewModel :
-        AddOrUpdateViewModelBase<ITemplateViewModelFactory, TemplateViewModel, ITemplateRepository, Domain.Template>, IHasQuestionCollection
+        AddOrUpdateViewModelBase<ITemplateViewModelFactory, TemplateViewModel, ITemplateRepository, Domain.Template>
     {
         public TemplateAddOrUpdateViewModel(INavigationService navigationService,
             ITemplateRepositoryFactory repositoryFactory,
@@ -59,11 +59,6 @@ namespace Festispec.ViewModels.Template
             // TODO: Validation
 
             base.Save();
-        }
-
-        public void AddQuestion(QuestionViewModel question)
-        {
-            EntityViewModel.Questions.Add(question);
         }
     }
 }

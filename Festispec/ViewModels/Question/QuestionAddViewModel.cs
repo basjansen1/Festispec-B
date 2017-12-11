@@ -5,7 +5,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Festispec.Domain;
-using Festispec.Domain.Extension;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.NavigationService;
@@ -46,8 +45,9 @@ namespace Festispec.ViewModels.Question
                 _questionViewModel = value;
 
                 EntityViewModel.MapValues(_questionViewModel?.Entity ?? new Domain.Question(), EntityViewModel.Entity);
-//                _questionViewModel.CopyPropertiesTo(EntityViewModel);
+
                 RaisePropertyChanged(nameof(EntityViewModel));
+                RaisePropertyChanged(nameof(IsNewQuestion));
                 RaisePropertyChanged();
             }
         }
