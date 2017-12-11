@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
@@ -28,6 +28,12 @@ namespace Festispec.ViewModels.Question
                 QuestionTypes = questionTypeRepository.Get().ToList();
             }
 
+            EntityViewModel.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == nameof(EntityViewModel.QuestionType_Type))
+                    RaisePropertyChanged(nameof(MetadataVisibility));
+            };
+
             RegisterCommands();
 
             LoadQuestions();
@@ -40,6 +46,11 @@ namespace Festispec.ViewModels.Question
 
         public bool IsNewQuestion => SelectedQuestion == null;
 
+        // Allow metadata only when "tabel" or "reeks"
+        public Visibility MetadataVisibility => EntityViewModel.QuestionType_Type == "Tabel"
+            ? Visibility.Visible
+            : Visibility.Collapsed;
+
         public QuestionViewModel SelectedQuestion
         {
             get { return _questionViewModel; }
@@ -51,6 +62,7 @@ namespace Festispec.ViewModels.Question
 
                 RaisePropertyChanged(nameof(EntityViewModel));
                 RaisePropertyChanged(nameof(IsNewQuestion));
+                RaisePropertyChanged(nameof(MetadataVisibility));
                 RaisePropertyChanged();
             }
         }
@@ -72,13 +84,9 @@ namespace Festispec.ViewModels.Question
                 var query = questionRepository.Get();
 
                 if (!string.IsNullOrWhiteSpace(EntityViewModel.Name))
-                {
                     query = query.Where(question => question.Name.Contains(EntityViewModel.Name));
-                }
                 if (!string.IsNullOrWhiteSpace(EntityViewModel.Description))
-                {
                     query = query.Where(question => question.Description.Contains(EntityViewModel.Description));
-                }
 
                 var hasQuestionCollection = NavigationService.Parameter as IHasQuestionCollection;
                 if (hasQuestionCollection != null)

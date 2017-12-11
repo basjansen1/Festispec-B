@@ -74,8 +74,34 @@ namespace Festispec.ViewModels.Question
             }
         }
 
+        public string MetadataParameter1
+        {
+            get { return Entity.MetadataParameter1; }
+            set
+            {
+                Entity.MetadataParameter1 = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string MetadataParameter2
+        {
+            get { return Entity.MetadataParameter2; }
+            set
+            {
+                Entity.MetadataParameter2 = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public override bool Save()
         {
+            if (QuestionType_Type == "Tabel" && (string.IsNullOrWhiteSpace(MetadataParameter1) || string.IsNullOrWhiteSpace(MetadataParameter2)))
+            {
+                MessageBox.Show("Vul de kolom namen in van de tabel");
+                return false;
+            }
+
             // TODO: Validation
 
             // Only allow add not update

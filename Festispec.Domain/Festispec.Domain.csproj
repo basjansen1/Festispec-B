@@ -108,7 +108,7 @@
     </Compile>
     <Compile Include="PlanningExtended.cs" />
     <Compile Include="ContactExtended.cs" />
-    <Compile Include="ExtendedQuestion.cs" />
+    <Compile Include="QuestionExtended.cs" />
     <Compile Include="Extension\CopyPropertiesExtension.cs" />
     <Compile Include="Festispec.Context.cs">
       <AutoGen>True</AutoGen>
