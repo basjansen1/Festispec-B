@@ -66,5 +66,10 @@ namespace Festispec.ViewModels.Inspector
 
             base.Save();
         }
+
+        public override void Cancel()
+        {
+            base.Cancel();
+        }
     }
 }

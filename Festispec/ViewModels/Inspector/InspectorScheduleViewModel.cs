@@ -3,6 +3,7 @@ using System.Windows;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
+using System;
 
 namespace Festispec.ViewModels.Inspector
 {
@@ -10,11 +11,19 @@ namespace Festispec.ViewModels.Inspector
     {
         public InspectorScheduleViewModel(IInspectorScheduleRepositoryFactory repositoryFactory) : base(repositoryFactory)
         {
+            if (NotAvailableFrom == default(DateTime))
+                NotAvailableFrom = new DateTime(1990, 1, 1);
+            if (NotAvailableTo == default(DateTime))
+                NotAvailableTo = new DateTime(1990, 1, 1);
         }
 
         public InspectorScheduleViewModel(IInspectorScheduleRepositoryFactory repositoryFactory, Domain.Schedule entity)
             : base(repositoryFactory, entity)
         {
+            if (NotAvailableFrom == default(DateTime))
+                NotAvailableFrom = new DateTime(1990, 1, 1);
+            if (NotAvailableTo == default(DateTime))
+                NotAvailableTo = new DateTime(1990, 1, 1);
         }
 
         public int Id => Entity.Id;

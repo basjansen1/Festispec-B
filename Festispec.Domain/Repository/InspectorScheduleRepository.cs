@@ -30,6 +30,12 @@ namespace Festispec.Domain.Repository
 
         private static Schedule CleanRelations(Schedule entity)
         {
+            if (entity.Inspector != null)
+            {
+                entity.Inspector_Id = entity.Inspector.Id;
+                entity.Inspector = null;
+            }
+
             return entity;
         }
     }

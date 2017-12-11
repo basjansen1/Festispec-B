@@ -174,7 +174,7 @@ namespace Festispec.ViewModels
 
         public IEmployeeRoleRepositoryFactory EmployeeRoleViewModelFactory =
             ServiceLocator.Current.GetInstance<IEmployeeRoleRepositoryFactory>();
-        
+
         public IInspectorViewModelFactory InspectorViewModelFactory =
             ServiceLocator.Current.GetInstance<IInspectorViewModelFactory>();
         public IInspectorRepositoryFactory InspectorRepositoryFactory =
@@ -215,7 +215,7 @@ namespace Festispec.ViewModels
 
         public TemplateAddOrUpdateViewModel TemplateAddOrUpdate
             => ServiceLocator.Current.GetInstance<TemplateAddOrUpdateViewModel>();
-        
+
         public QuestionAddViewModel QuestionAdd => new QuestionAddViewModel(NavigationService, QuestionRepositoryFactory, QuestionViewModelFactory, QuestionTypeRepositoryFactory);
 
         public LoginViewModel LoginViewModel => ServiceLocator.Current.GetInstance<LoginViewModel>();
@@ -229,7 +229,7 @@ namespace Festispec.ViewModels
         public InspectorScheduleAddOrUpdateViewModel InspectorScheduleAddOrUpdate =>
             new InspectorScheduleAddOrUpdateViewModel(NavigationService, InspectorScheduleRepositoryFactory, InspectorScheduleViewModelFactory);
         public InspectorAddOrUpdateViewModel InspectorAddOrUpdate =>
-            ServiceLocator.Current.GetInstance<InspectorAddOrUpdateViewModel>();
+            new InspectorAddOrUpdateViewModel(NavigationService, InspectorRepositoryFactory, InspectorViewModelFactory, EmployeeRepositoryFactory, new GeoRepositoryFactory(new GeodanSearchApi()));
 
         public PlanningListViewModel PlanningList => new PlanningListViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory);
         public PlanningAddOrUpdateViewModel PlanningAddOrUpdate => new PlanningAddOrUpdateViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory, InspectorRepositoryFactory);

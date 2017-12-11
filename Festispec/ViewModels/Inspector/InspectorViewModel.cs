@@ -250,5 +250,6 @@ namespace Festispec.ViewModels.Inspector
 
             return true;
         }
+
     }
 }
