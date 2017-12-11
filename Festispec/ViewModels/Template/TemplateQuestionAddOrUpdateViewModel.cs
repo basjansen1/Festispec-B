@@ -6,7 +6,6 @@ using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.NavigationService;
-using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels.Template
 {

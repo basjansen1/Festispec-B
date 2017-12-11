@@ -62,6 +62,12 @@ namespace Festispec.ViewModels.Inspector
             EntityViewModel.NotAvailableTo = EntityViewModel.NotAvailableTo;
             GoBack();
         }
+        public override void Cancel()
+        {
+            EntityViewModel.MapValuesFromOriginal();
+
+            GoBack();
+        }
 
         public override void GoBack()
         {
