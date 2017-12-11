@@ -53,9 +53,9 @@ namespace Festispec.ViewModels.Employees
             DeleteCommand = new RelayCommand(DeleteSelectedInspection);
 
             InspectionStatusList = new List<string>();
-            InspectionStatusList.Add("Accepted");
-            InspectionStatusList.Add("Declined");
-            InspectionStatusList.Add("Pending");
+            InspectionStatusList.Add("Geaccepteerd");
+            InspectionStatusList.Add("Afgewezen");
+            InspectionStatusList.Add("In afwachting");
         }
 
         public bool CanEditInspection()
@@ -83,7 +83,7 @@ namespace Festispec.ViewModels.Employees
         {
             if (CanEditInspection())
             {
-           //     InspectionList.SelectedInspection.Status = new InspectionStatus() { Status = SelectedInspection };
+                //InspectionList.SelectedInspection.Status = new InspectionStatus() { Status = SelectedInspection };
                 if (!SearchAddress())
                 {
                     return;
