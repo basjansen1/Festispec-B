@@ -93,7 +93,7 @@ INSERT INTO [dbo].[Template] ([Id], [Name], [Description]) VALUES (3, N'Eet Fest
 SET IDENTITY_INSERT [dbo].[Template] OFF
 
 SET IDENTITY_INSERT [dbo].[Question] ON
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (1, N'Op een schaal van 1 tot 10 wat was de sfeer bij de eetgelegenheden', N'*1 – Er is niemand, 5 - Het is redelijk druk, 10 – Er is geen doorkomen aan', N'Reeks', N'["1","10"]')
+INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (1, N'Op een schaal van 1 tot 10 wat was de sfeer bij de eetgelegenheden', N'*1 – Er is niemand, 5 - Het is redelijk druk, 10 – Er is geen doorkomen aan', N'Reeks', null)
 INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (2, N'Geef een indruk van de sfeer impressie bij de eetgelegenheden', null, N'Tekst', null)
 INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (3, N'Maak een foto van opvallende situaties', N'Benoem hier de geüploade foto’s:', N'Beeld', null)
 INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (4, N'Meet de afstand tussen de verschillende food trucks', null, N'Tekst', null)
