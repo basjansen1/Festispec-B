@@ -42,10 +42,10 @@
                 
                 <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedPlanning}" ItemsSource="{Binding Plannings}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Inspector" Binding="{Binding Inspector.FullName}" Width="*" />
-                        <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="*" />
-                        <DataGridTextColumn Header="TimeFrom" Binding="{Binding TimeFrom}" Width="*" />
-                        <DataGridTextColumn Header="TimeTo" Binding="{Binding TimeTo}" Width="*" />
+                        <DataGridTextColumn Header="Inspecteur" Binding="{Binding Inspector.FullName}" Width="*" />
+                        <DataGridTextColumn Header="Datum" Binding="{Binding Date}" Width="*" />
+                        <DataGridTextColumn Header="Tijd van" Binding="{Binding TimeFrom}" Width="*" />
+                        <DataGridTextColumn Header="Tijd tot" Binding="{Binding TimeTo}" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

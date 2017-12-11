@@ -48,8 +48,8 @@
 
             <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedTemplate}" ItemsSource="{Binding Templates}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
-                    <DataGridTextColumn Header="Name" Binding="{Binding Description}" Width="*" />
+                    <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
+                    <DataGridTextColumn Header="Omschrijving" Binding="{Binding Description}" Width="*" />
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

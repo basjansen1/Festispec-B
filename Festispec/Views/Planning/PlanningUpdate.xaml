@@ -43,17 +43,17 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0">
-                        <Label>Date</Label>
+                        <Label>Datum</Label>
                         <DatePicker SelectedDate="{Binding Path=EntityViewModel.Date, Mode=OneWay}" IsEnabled="False"/>
-                        <Label>TimeFrom</Label>
+                        <Label>Tijd van</Label>
                         <TextBox Text="{Binding Path=EntityViewModel.TimeFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 5" />
-                        <Label>TimeTo</Label>
+                        <Label>Tijd tot</Label>
                         <TextBox Text="{Binding Path=EntityViewModel.TimeTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 5" />
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
-                        <Button Content="Cancel" Command="{Binding NavigateBackCommand}" Margin="0 0 5 0"></Button>
-                        <Button Content="Save" Command="{Binding SaveEntityCommand}"></Button>
+                        <Button Content="Annuleer" Command="{Binding NavigateBackCommand}" Margin="0 0 5 0"></Button>
+                        <Button Content="Opslaan" Command="{Binding SaveEntityCommand}"></Button>
                     </StackPanel>
                 </Grid>
             </Border>
