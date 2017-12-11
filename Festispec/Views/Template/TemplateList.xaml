@@ -7,7 +7,8 @@
         DataContext="{Binding Source={StaticResource Locator}, Path=TemplateList}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -19,40 +20,43 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToTemplateAddCommand}" />
-            <Button Grid.Column="2" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToTemplateUpdateCommand}" />
-            <Button Grid.Column="3" Content="Verwijder" Margin="5px 10px" Command="{Binding TemplateDeleteCommand}" />
+            <Button Grid.Column="1" Content="Toevoegen" Margin="5px 5px" Command="{Binding NavigateToTemplateAddCommand}" />
+            <Button Grid.Column="2" Content="Wijzigen" Margin="5px 5px" Command="{Binding NavigateToTemplateUpdateCommand}" />
+            <Button Grid.Column="3" Content="Verwijder" Margin="5px 5px" Command="{Binding TemplateDeleteCommand}" />
         </Grid>
 
         <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
-            
-            <DockPanel Grid.Row="0"  Grid.Column="0">
-                <Label>Zoek op naam</Label>
-                <TextBox Text="{Binding SearchName}"></TextBox>
-            </DockPanel>
-            <DockPanel Grid.Row="0" Grid.Column="1">
-                <Label>Zoek op omschrijving</Label>
-                <TextBox Text="{Binding SearchDescription}"></TextBox>
-            </DockPanel>
-            <Button Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand}">Zoek</Button>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedTemplate}" ItemsSource="{Binding Templates}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
-                    <DataGridTextColumn Header="Name" Binding="{Binding Description}" Width="*" />
-                </DataGrid.Columns>
-            </DataGrid>
+                <Label Grid.Column="0" Grid.Row="1">Zoek op naam</Label>
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SearchName}"></TextBox>
+
+                <Label Grid.Column="2" Grid.Row="1" >Zoek op omschrijving</Label>
+                <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding SearchDescription}"></TextBox>
+            </Grid>
+            <Button Grid.Column="1" Margin="5px 5px" Command="{Binding SearchCommand}">Zoek</Button>
         </Grid>
+        <DataGrid Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedTemplate}" 
+                  ItemsSource="{Binding Templates}" GridLinesVisibility="Horizontal" HeadersVisibility="Column" VerticalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Description}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>
 
