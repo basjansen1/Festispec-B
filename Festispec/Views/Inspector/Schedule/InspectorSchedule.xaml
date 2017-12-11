@@ -28,7 +28,8 @@
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding EntityViewModel.SelectedSchedule}" ItemsSource="{Binding EntityViewModel.Schedule}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Niet beschikbaar vanaf" Binding="{Binding UpdatedEntity.NotAvailableFrom}" Width="*"/>
-                <DataGridTextColumn Header="Niet beschikbaar tot" Binding="{Binding UpdatedEntity.NotAvailableTo}" Width="*"/>
+                <DataGridTextColumn Header="Niet beschikbaar vanaf" Binding="{Binding NotAvailableFrom}" Width="*"/>
+                <DataGridTextColumn Header="Niet beschikbaar tot" Binding="{Binding NotAvailableTo}" Width="*"/>
             </DataGrid.Columns>
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
