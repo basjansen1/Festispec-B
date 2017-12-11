@@ -105,90 +105,32 @@ INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) 
 INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (10, N'Hoe druk is het bij de Main Stage? Maak elk half uur een schatting', null, N'Drukte')
 INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (11, N'Hoe druk was het bij de foodtrucks? Maak elk uur een schatting', null, N'Drukte')
 INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (12, N'Losse opmerkingen', N'Plaats hier eventuele opmerkingen:', N'Tekst')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (13, N'Maak een foto van opvallende situaties', N'Benoem hier de geüploade foto’s:', N'Foto''s')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (14, N'Meet de afstand tussen de verschillende food trucks', null, N'Tekst')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (15, N'Teken de algemene stroom van mensen op de kaart (bijlage A).', N'Eventuele opmerkingen:', N'Tekst')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (16, N'Tel het aantal tafels en zitplaatsen bij de foodtrucks', null, N'Tekst')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (17, N'Wat beschrijft het beste de sfeer bij het publiek na de shows bij de main stage?', N'-A: De sfeer is grimmig -B: Het publiek is rustig -C: Het publiek is dronken/aangeschoten -D: Het is chaos', N'Sfeer')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (18, N'Geef het aantal mensen in de rij 5 minuten voor het begin van de elke theater show', null, N'Aantal mensen in rij')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (19, N'Hoe druk was het bij de WC''s? Maak elk uur een schatting', N'*(Gebruik je inschattingstechniek geleerd op de training dag)', N'Drukte')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (20, N'Hoe druk is het bij de Main Stage? Maak elk half uur een schatting', null, N'Drukte')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (21, N'Hoe druk was het bij de foodtrucks? Maak elk uur een schatting', null, N'Drukte')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (22, N'Losse opmerkingen', N'Plaats hier eventuele opmerkingen:', N'Tekst')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (23, N'Op een schaal van 1 tot 10 wat was de sfeer bij de eetgelegenheden', N'*1 – Er is niemand, 5 - Het is redelijk druk, 10 – Er is geen doorkomen aan', N'Beoordeling')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (24, N'Geef een indruk van de sfeer impressie bij de eetgelegenheden', null, N'Beoordeling')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (25, N'Maak een foto van opvallende situaties', N'Benoem hier de geüploade foto’s:', N'Foto''s')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (26, N'Meet de afstand tussen de verschillende food trucks', null, N'Tekst')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (27, N'Teken de algemene stroom van mensen op de kaart (bijlage A).', N'Eventuele opmerkingen:', N'Tekst')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (28, N'Tel het aantal tafels en zitplaatsen bij de foodtrucks', null, N'Tekst')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (29, N'Wat beschrijft het beste de sfeer bij het publiek na de shows bij de main stage?', N'-A: De sfeer is grimmig -B: Het publiek is rustig -C: Het publiek is dronken/aangeschoten -D: Het is chaos', N'Sfeer')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (30, N'Geef het aantal mensen in de rij 5 minuten voor het begin van de elke theater show', null, N'Aantal mensen in rij')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (31, N'Hoe druk was het bij de WC''s? Maak elk uur een schatting', N'*(Gebruik je inschattingstechniek geleerd op de training dag)', N'Drukte')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (32, N'Hoe druk is het bij de Main Stage? Maak elk half uur een schatting', null, N'Drukte')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (33, N'Hoe druk was het bij de foodtrucks? Maak elk uur een schatting', null, N'Drukte')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (34, N'Losse opmerkingen', N'Plaats hier eventuele opmerkingen:', N'Tekst')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (35, N'Op een schaal van 1 tot 10 wat was de sfeer bij de eetgelegenheden', N'*1 – Er is niemand, 5 - Het is redelijk druk, 10 – Er is geen doorkomen aan', N'Beoordeling')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (36, N'Geef een indruk van de sfeer impressie bij de eetgelegenheden', null, N'Beoordeling')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (37, N'Maak een foto van opvallende situaties', N'Benoem hier de geüploade foto’s:', N'Foto''s')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (38, N'Meet de afstand tussen de verschillende food trucks', null, N'Tekst')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (39, N'Teken de algemene stroom van mensen op de kaart (bijlage A).', N'Eventuele opmerkingen:', N'Tekst')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (40, N'Tel het aantal tafels en zitplaatsen bij de foodtrucks', null, N'Tekst')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (41, N'Wat beschrijft het beste de sfeer bij het publiek na de shows bij de main stage?', N'-A: De sfeer is grimmig -B: Het publiek is rustig -C: Het publiek is dronken/aangeschoten -D: Het is chaos', N'Sfeer')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (42, N'Geef het aantal mensen in de rij 5 minuten voor het begin van de elke theater show', null, N'Aantal mensen in rij')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (43, N'Hoe druk was het bij de WC''s? Maak elk uur een schatting', N'*(Gebruik je inschattingstechniek geleerd op de training dag)', N'Drukte')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (44, N'Hoe druk is het bij de Main Stage? Maak elk half uur een schatting', null, N'Drukte')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (45, N'Hoe druk was het bij de foodtrucks? Maak elk uur een schatting', null, N'Drukte')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type]) VALUES (46, N'Losse opmerkingen', N'Plaats hier eventuele opmerkingen:', N'Tekst')
 SET IDENTITY_INSERT [dbo].[Question] OFF
 
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 23, 12, 3, N'2016-09-17 00:00:00') -- Paaspop - inspector 1
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 24, 12, 3, N'2016-09-17 00:00:00') -- Paaspop - inspector 1
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 25, 12, 3, N'2016-09-17 00:00:00') -- Paaspop - inspector 1
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 26, 12, 3, N'2016-09-17 00:00:00') -- Paaspop - inspector 1
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 27, 12, 3, N'2016-09-17 00:00:00') -- Paaspop - inspector 1
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 28, 12, 3, N'2016-09-17 00:00:00') -- Paaspop - inspector 1
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 29, 12, 3, N'2016-09-17 00:00:00') -- Paaspop - inspector 1
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 30, 12, 3, N'2016-09-17 00:00:00') -- Paaspop - inspector 1
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 31, 12, 3, N'2016-09-17 00:00:00') -- Paaspop - inspector 1
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 32, 12, 3, N'2016-09-17 00:00:00') -- Paaspop - inspector 1
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 33, 12, 3, N'2016-09-17 00:00:00') -- Paaspop - inspector 1
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 34, 12, 3, N'2016-09-17 00:00:00') -- Paaspop - inspector 1
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 35, 12, 4, N'2016-09-17 00:00:00') -- Paaspop - inspector 2
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 36, 12, 4, N'2016-09-17 00:00:00') -- Paaspop - inspector 2
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 37, 12, 4, N'2016-09-17 00:00:00') -- Paaspop - inspector 2
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 38, 12, 4, N'2016-09-17 00:00:00') -- Paaspop - inspector 2
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 39, 12, 4, N'2016-09-17 00:00:00') -- Paaspop - inspector 2
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 40, 12, 4, N'2016-09-17 00:00:00') -- Paaspop - inspector 2
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 41, 12, 4, N'2016-09-17 00:00:00') -- Paaspop - inspector 2
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 42, 12, 4, N'2016-09-17 00:00:00') -- Paaspop - inspector 2
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 43, 12, 4, N'2016-09-17 00:00:00') -- Paaspop - inspector 2
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 44, 12, 4, N'2016-09-17 00:00:00') -- Paaspop - inspector 2
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 45, 12, 4, N'2016-09-17 00:00:00') -- Paaspop - inspector 2
-INSERT INTO [dbo].[Question_InspectionQuestion] ([Answer], [Id], [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]) VALUES (N'', 46, 12, 4, N'2016-09-17 00:00:00') -- Paaspop - inspector 2
-
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (1, 1) -- Template 1
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (2, 1) -- Template 1
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (3, 1) -- Template 1
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (4, 1) -- Template 1
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (5, 1) -- Template 1
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (6, 1) -- Template 1
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (7, 1) -- Template 1
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (8, 1) -- Template 1
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (9, 1) -- Template 1
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (10, 1) -- Template 1
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (11, 1) -- Template 1
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (12, 1) -- Template 1
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (13, 2) -- Template 2
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (14, 2) -- Template 2
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (15, 2) -- Template 2
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (16, 2) -- Template 2
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (17, 2) -- Template 2
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (18, 2) -- Template 2
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (19, 2) -- Template 2
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (20, 2) -- Template 2
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (21, 2) -- Template 2
-INSERT INTO [dbo].[Question_TemplateQuestion] ([Id], [Template_Id]) VALUES (22, 2) -- Template 2
-
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (1, 1)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (2, 1)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (3, 1)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (4, 1)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (5, 1)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (6, 1)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (7, 1)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (8, 1)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (9, 1)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (10, 1)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (11, 1)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (12, 1)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (1, 2)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (2, 2)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (3, 2)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (4, 2)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (5, 2)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (6, 2)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (7, 2)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (8, 2)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (9, 2)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (10, 2)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (11, 2)
+INSERT INTO [dbo].[TemplateQuestion] ([Question_Id], [Template_Id]) VALUES (12, 2)
 
 SET IDENTITY_INSERT [dbo].[Regulation] ON
 INSERT INTO [dbo].[Regulation] ([Id], [Name], [Description], [Municipality]) VALUES (1, N'Alcohol Wet', N'Gij Mag Geen Alcohol Verkopen Aan Mensen Onder De 18 Jaar', null)
