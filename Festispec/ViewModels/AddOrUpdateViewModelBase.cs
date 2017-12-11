@@ -60,11 +60,16 @@ namespace Festispec.ViewModels
             Save(EntityViewModel);
         }
 
-        public virtual void Cancel()
+        public void Cancel(object backParameter)
         {
             EntityViewModel.MapValuesFromOriginal();
 
-            GoBack(EntityViewModel);
+            GoBack(backParameter);
+        }
+
+        public virtual void Cancel()
+        {
+            Cancel(EntityViewModel);
         }
 
         public virtual void GoBack()

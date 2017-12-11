@@ -22,6 +22,7 @@ using Festispec.ViewModels.Employee;
 using Festispec.ViewModels.Employees;
 using Festispec.ViewModels.Inspector;
 using Festispec.ViewModels.Planning;
+using Festispec.ViewModels.Question;
 using Festispec.ViewModels.Regulation;
 using Festispec.ViewModels.Template;
 using GalaSoft.MvvmLight.Ioc;
@@ -45,7 +46,7 @@ namespace Festispec.ViewModels
 
             // Register repository factories
             SimpleIoc.Default.Register<ITemplateRepositoryFactory>(() => new TemplateRepositoryFactory(state.IsOnline));
-            SimpleIoc.Default.Register<ITemplateQuestionRepositoryFactory>(() => new TemplateQuestionRepositoryFactory(state.IsOnline));
+            SimpleIoc.Default.Register<IQuestionRepositoryFactory>(() => new QuestionRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<IQuestionTypeRepositoryFactory>(() => new QuestionTypeRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<IEmployeeRepositoryFactory>(() => new EmployeeRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<IEmployeeRoleRepositoryFactory>(() => new EmployeeRoleRepositoryFactory(state.IsOnline));
@@ -62,7 +63,7 @@ namespace Festispec.ViewModels
 
             // Register view model factories
             SimpleIoc.Default.Register<ITemplateViewModelFactory, TemplateViewModelFactory>();
-            SimpleIoc.Default.Register<ITemplateQuestionViewModelFactory, TemplateQuestionViewModelFactory>();
+            SimpleIoc.Default.Register<IQuestionViewModelFactory, QuestionViewModelFactory>();
             SimpleIoc.Default.Register<IEmployeeViewModelFactory, EmployeeViewModelFactory>();
             SimpleIoc.Default.Register<IInspectorViewModelFactory, InspectorViewModelFactory>();
             SimpleIoc.Default.Register<IInspectorScheduleViewModelFactory, InspectorScheduleViewModelFactory>();
@@ -82,8 +83,6 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<InspectionListVM>();
             SimpleIoc.Default.Register<AddInspectionVM>();
             SimpleIoc.Default.Register<EditInspectionVM>();
-            SimpleIoc.Default.Register<TemplateQuestionAddOrUpdateViewModel>();
-            SimpleIoc.Default.Register<TemplateQuestionAddViewModel>();
             SimpleIoc.Default.Register<EmployeeAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<InspectorScheduleAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<EmployeeListViewModel>();
@@ -111,8 +110,6 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.Home);
             navigationService.Configure(Routes.Routes.TemplateList);
             navigationService.Configure(Routes.Routes.TemplateAddOrUpdate);
-            navigationService.Configure(Routes.Routes.TemplateQuestionAddOrUpdate);
-            navigationService.Configure(Routes.Routes.TemplateQuestionAdd);
             navigationService.Configure(Routes.Routes.EmployeeAddOrUpdate);
             navigationService.Configure(Routes.Routes.EmployeeList);
             navigationService.Configure(Routes.Routes.InspectorList);
@@ -122,7 +119,6 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.EditInspection);
             navigationService.Configure(Routes.Routes.RegulationList);
             navigationService.Configure(Routes.Routes.ShowRegulation);
-
             navigationService.Configure(Routes.Routes.PlanningList);
             navigationService.Configure(Routes.Routes.PlanningAdd);
             navigationService.Configure(Routes.Routes.PlanningUpdate);
@@ -132,6 +128,7 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.InspectorSchedule);
             navigationService.Configure(Routes.Routes.InspectorScheduleAddOrUpdate);
             navigationService.Configure(Routes.Routes.InspectorScheduleAdd);
+            navigationService.Configure(Routes.Routes.QuestionAdd);
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }
@@ -154,11 +151,11 @@ namespace Festispec.ViewModels
         public ITemplateViewModelFactory TemplateViewModelFactory =
             ServiceLocator.Current.GetInstance<ITemplateViewModelFactory>();
 
-        public ITemplateQuestionRepositoryFactory TemplateQuestionRepositoryFactory =
-            ServiceLocator.Current.GetInstance<ITemplateQuestionRepositoryFactory>();
+        public IQuestionRepositoryFactory QuestionRepositoryFactory =
+            ServiceLocator.Current.GetInstance<IQuestionRepositoryFactory>();
 
-        public ITemplateQuestionViewModelFactory TemplateQuestionViewModelFactory =
-            ServiceLocator.Current.GetInstance<ITemplateQuestionViewModelFactory>();
+        public IQuestionViewModelFactory QuestionViewModelFactory =
+            ServiceLocator.Current.GetInstance<IQuestionViewModelFactory>();
 
         public IInspectionRepositoryFactory InspectionRepositoryFactory =
             ServiceLocator.Current.GetInstance<IInspectionRepositoryFactory>();
@@ -218,10 +215,8 @@ namespace Festispec.ViewModels
 
         public TemplateAddOrUpdateViewModel TemplateAddOrUpdate
             => ServiceLocator.Current.GetInstance<TemplateAddOrUpdateViewModel>();
-
-        public TemplateQuestionAddOrUpdateViewModel TemplateQuestionAddOrUpdate => new TemplateQuestionAddOrUpdateViewModel(NavigationService, TemplateQuestionRepositoryFactory, TemplateQuestionViewModelFactory, QuestionTypeRepositoryFactory);
-            
-        public TemplateQuestionAddViewModel TemplateQuestionAdd => new TemplateQuestionAddViewModel(NavigationService, TemplateQuestionRepositoryFactory, TemplateQuestionViewModelFactory, QuestionTypeRepositoryFactory);
+        
+        public QuestionAddViewModel QuestionAdd => new QuestionAddViewModel(NavigationService, QuestionRepositoryFactory, QuestionViewModelFactory, QuestionTypeRepositoryFactory);
 
         public LoginViewModel LoginViewModel => ServiceLocator.Current.GetInstance<LoginViewModel>();
 

@@ -171,12 +171,17 @@
     <Compile Include="ViewModels\Factory\CustomerViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\ICustomerViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IPlanningViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\PlanningViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\QuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Interface\IAddressViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningListViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningAddViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningViewModel.cs" />
+    <Compile Include="ViewModels\Question\IHasQuestionCollection.cs" />
+    <Compile Include="ViewModels\Question\QuestionAddViewModel.cs" />
+    <Compile Include="ViewModels\Question\QuestionViewModel.cs" />
     <Compile Include="ViewModels\Regulation.Old\RegulationListVM.cs" />
     <Compile Include="ViewModels\Regulation.Old\RegulationVM.cs" />
     <Compile Include="ViewModels\Factory\Interface\IRegulationsViewModelFactory.cs" />
@@ -189,8 +194,6 @@
     <Compile Include="ViewModels\Inspector\InspectorScheduleAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Inspector\InspectorScheduleAddViewModel.cs" />
     <Compile Include="ViewModels\Inspector\InspectorScheduleViewModel.cs" />
-    <Compile Include="ViewModels\Template\TemplateQuestionAddViewModel.cs" />
-    <Compile Include="ViewModels\Template\TemplateQuestionAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeListViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeViewModel.cs" />
@@ -198,8 +201,6 @@
     <Compile Include="ViewModels\Factory\EmployeeViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\InspectorViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IEmployeeViewModelFactory.cs" />
-    <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
-    <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IInspectorViewModelFactory.cs" />
     <Compile Include="ViewModels\Inspector\InspectorAddOrUpdateViewModel.cs" />
@@ -216,7 +217,6 @@
     <Compile Include="Routes\Route.cs" />
     <Compile Include="Routes\Routes.cs" />
     <Compile Include="ViewModels\Template\TemplateListViewModel.cs" />
-    <Compile Include="ViewModels\Template\TemplateQuestionViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -242,6 +242,9 @@
     </Compile>
     <Compile Include="Views\InspectionList.xaml.cs">
       <DependentUpon>InspectionList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Question\QuestionAdd.xaml.cs">
+      <DependentUpon>QuestionAdd.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShowRegulation.xaml.cs">
       <DependentUpon>ShowRegulation.xaml</DependentUpon>
@@ -272,12 +275,6 @@
     </Compile>
     <Compile Include="Views\Inspector\Schedule\InspectorScheduleAddOrUpdate.xaml.cs">
       <DependentUpon>InspectorScheduleAddOrUpdate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Template\TemplateQuestionAdd.xaml.cs">
-      <DependentUpon>TemplateQuestionAdd.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Template\TemplateQuestionAddOrUpdate.xaml.cs">
-      <DependentUpon>TemplateQuestionAddOrUpdate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\EmployeeAddOrUpdate.xaml.cs">
       <DependentUpon>EmployeeAddOrUpdate.xaml</DependentUpon>
@@ -336,6 +333,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Question\QuestionAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ShowRegulation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -357,14 +358,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Inspector\Schedule\InspectorScheduleAddOrUpdate.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Template\TemplateQuestionAdd.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Template\TemplateQuestionAddOrUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
