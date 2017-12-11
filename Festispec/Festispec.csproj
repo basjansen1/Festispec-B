@@ -265,12 +265,6 @@
     <Compile Include="Views\Regulations\RegulationsList.xaml.cs">
       <DependentUpon>RegulationsList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Template\TemplateQuestionAdd.xaml.cs">
-      <DependentUpon>TemplateQuestionAdd.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Template\TemplateQuestionAddOrUpdate.xaml.cs">
-      <DependentUpon>TemplateQuestionAddOrUpdate.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Employee\EmployeeAddOrUpdate.xaml.cs">
       <DependentUpon>EmployeeAddOrUpdate.xaml</DependentUpon>
     </Compile>
@@ -341,14 +335,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Regulations\RegulationsList.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Template\TemplateQuestionAdd.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Template\TemplateQuestionAddOrUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

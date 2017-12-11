@@ -4,7 +4,7 @@ using Festispec.ViewModels.Question;
 
 namespace Festispec.ViewModels.Factory
 {
-    internal class QuestionViewModelFactory : IQuestionViewModelFactory
+    public class QuestionViewModelFactory : IQuestionViewModelFactory
     {
         private readonly IQuestionRepositoryFactory _customerRepositoryFactory;
 

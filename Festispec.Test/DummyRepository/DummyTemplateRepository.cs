@@ -118,12 +118,17 @@ namespace Festispec.Test.DummyRepository
             throw new NotImplementedException();
         }
 
-        public void AddQuestion(Template template, Question question)
+        public void TryAttachQuestion(Template template, Question question)
         {
             throw new NotImplementedException();
         }
 
-        public void AddQuestion(Template template, TemplateQuestion templateQuestion)
+        public void AttachQuestions(Template template, Question question)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DetachQuestions(Template template, Question question)
         {
             throw new NotImplementedException();
         }
