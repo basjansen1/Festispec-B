@@ -29,10 +29,10 @@
             <Label Grid.Column="0" Grid.Row="0">Vraag</Label>
             <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=EntityViewModel.Name}" IsEnabled="{Binding Path=IsNewQuestion}" />
 
-            <Label Grid.Column="0" Grid.Row="1">Vraag beschrijving</Label>
+            <Label Grid.Column="0" Grid.Row="1">Beschrijving</Label>
             <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=EntityViewModel.Description}" IsEnabled="{Binding Path=IsNewQuestion}" />
 
-            <Label Grid.Column="0" Grid.Row="2">Vraag Hoetype</Label>
+            <Label Grid.Column="0" Grid.Row="2">Type</Label>
             <ComboBox ItemsSource="{Binding Path=QuestionTypes}" IsEnabled="{Binding Path=IsNewQuestion}"
                   DisplayMemberPath="Type"
                   SelectedValuePath="Type"

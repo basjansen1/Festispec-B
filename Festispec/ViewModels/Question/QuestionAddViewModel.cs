@@ -49,7 +49,7 @@ namespace Festispec.ViewModels.Question
         // Allow metadata only when "tabel" or "reeks"
         public Visibility MetadataVisibility => EntityViewModel.QuestionType_Type == "Tabel"
             ? Visibility.Visible
-            : Visibility.Collapsed;
+            : Visibility.Hidden;
 
         public QuestionViewModel SelectedQuestion
         {
