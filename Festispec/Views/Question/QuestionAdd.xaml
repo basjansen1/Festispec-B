@@ -7,36 +7,64 @@
       Title="QuestionAddOrUpdate"
       DataContext="{Binding Source={StaticResource Locator}, Path=QuestionAdd}">
 
-    <StackPanel>
-        <Label>Vraag</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.Name}" IsEnabled="{Binding Path=IsNewQuestion}" />
-        <Label>Vraag beschrijving</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.Description}" IsEnabled="{Binding Path=IsNewQuestion}" />
-        <Label>Vraag type</Label>
-        <ComboBox ItemsSource="{Binding Path=QuestionTypes}" IsEnabled="{Binding Path=IsNewQuestion}"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0">Vraag</Label>
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=EntityViewModel.Name}" IsEnabled="{Binding Path=IsNewQuestion}" />
+
+            <Label Grid.Column="0" Grid.Row="1">Vraag beschrijving</Label>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=EntityViewModel.Description}" IsEnabled="{Binding Path=IsNewQuestion}" />
+
+            <Label Grid.Column="0" Grid.Row="2">Vraag type</Label>
+            <ComboBox ItemsSource="{Binding Path=QuestionTypes}" IsEnabled="{Binding Path=IsNewQuestion}"
                   DisplayMemberPath="Type"
                   SelectedValuePath="Type"
-                  SelectedValue="{Binding Path=EntityViewModel.QuestionType_Type}" />
+                  SelectedValue="{Binding Path=EntityViewModel.QuestionType_Type}" 
+                  Grid.Column="1" Grid.Row="2"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Handmatig invoeren" Margin="5px 5px" Command="{Binding ClearSelectedQuestionCommand}" Grid.Column="0"/>            
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Text="Voer een vraag in of selecteer een vraag uit de lijst"/>
+            <Button Content="Zoek vraag" Margin="5px 5px" Command="{Binding SearchQuestionCommand}" Grid.Column="2"/>
+        </Grid>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Nieuwe vraag" Margin="5px 10px" Command="{Binding ClearSelectedQuestionCommand}" />
-            <Button Content="Zoek vraag" Margin="5px 10px" Command="{Binding SearchQuestionCommand}" />
-        </StackPanel>
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestion}" ItemsSource="{Binding Questions}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestion}" ItemsSource="{Binding Questions}" GridLinesVisibility="Horizontal" 
+                  HeadersVisibility="Column" VerticalAlignment="Stretch" Grid.Row="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vraag" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Omschrijving" Binding="{Binding Description}" Width="*"/>
                 <DataGridTextColumn Header="Type" Binding="{Binding QuestionType_Type}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Height="50">
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="Cancel" Margin="5px 10px" Command="{Binding CancelEntityCommand}" />
-            <Button Grid.Column="1" Content="Save" Margin="5px 10px" Command="{Binding SaveEntityCommand}" />
+            <Button Grid.Column="0" Content="Cancel" Margin="5px 5px" Command="{Binding CancelEntityCommand}" />
+            <Button Grid.Column="2" Content="Save" Margin="5px 5px" Command="{Binding SaveEntityCommand}" />
         </Grid>
-    </StackPanel>
+    </Grid>
 </Page>
