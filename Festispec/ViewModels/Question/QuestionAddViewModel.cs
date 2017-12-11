@@ -29,11 +29,14 @@ namespace Festispec.ViewModels.Question
             }
 
             RegisterCommands();
+
+            LoadQuestions();
         }
 
         public IEnumerable<QuestionType> QuestionTypes { get; }
 
-        public ObservableCollection<QuestionViewModel> Questions { get; set; }
+        public ObservableCollection<QuestionViewModel> Questions { get; set; } =
+            new ObservableCollection<QuestionViewModel>();
 
         public bool IsNewQuestion => SelectedQuestion == null;
 
@@ -77,9 +80,17 @@ namespace Festispec.ViewModels.Question
                     query = query.Where(question => question.Description.Contains(EntityViewModel.Description));
                 }
 
-                Questions = new ObservableCollection<QuestionViewModel>(query.ToList()
-                    .Select(question => ViewModelFactory.CreateViewModel(question)));
-                RaisePropertyChanged(nameof(Questions));
+                var hasQuestionCollection = NavigationService.Parameter as IHasQuestionCollection;
+                if (hasQuestionCollection != null)
+                {
+                    var ignoreIds = hasQuestionCollection.Questions.Select(model => model.Id);
+                    query = query.Where(question => !ignoreIds.Contains(question.Id));
+                }
+
+                // Clear questions
+                Questions.Clear();
+                foreach (var question in query.ToList())
+                    Questions.Add(ViewModelFactory.CreateViewModel(question));
             }
         }
 
