@@ -30,8 +30,6 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -191,6 +189,11 @@
     <Compile Include="ViewModels\Regulation\RegulationAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Regulation\RegulationListViewModel.cs" />
     <Compile Include="ViewModels\Regulation\RegulationViewModel.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IInspectorScheduleViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\InspectorScheduleViewModelFactory.cs" />
+    <Compile Include="ViewModels\Inspector\InspectorScheduleAddOrUpdateViewModel.cs" />
+    <Compile Include="ViewModels\Inspector\InspectorScheduleAddViewModel.cs" />
+    <Compile Include="ViewModels\Inspector\InspectorScheduleViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeListViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeViewModel.cs" />
@@ -199,7 +202,6 @@
     <Compile Include="ViewModels\Factory\InspectorViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IEmployeeViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateViewModelFactory.cs" />
-    <Compile Include="ViewModels\InspectionProcessing\CustomerVM.cs" />
     <Compile Include="ViewModels\Factory\Interface\IInspectorViewModelFactory.cs" />
     <Compile Include="ViewModels\Inspector\InspectorAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Inspector\InspectorListViewModel.cs" />
@@ -264,6 +266,15 @@
     </Compile>
     <Compile Include="Views\Regulations\RegulationsList.xaml.cs">
       <DependentUpon>RegulationsList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inspector\Schedule\InspectorSchedule.xaml.cs">
+      <DependentUpon>InspectorSchedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inspector\Schedule\InspectorScheduleAdd.xaml.cs">
+      <DependentUpon>InspectorScheduleAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inspector\Schedule\InspectorScheduleAddOrUpdate.xaml.cs">
+      <DependentUpon>InspectorScheduleAddOrUpdate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\EmployeeAddOrUpdate.xaml.cs">
       <DependentUpon>EmployeeAddOrUpdate.xaml</DependentUpon>
@@ -335,6 +346,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Regulations\RegulationsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Inspector\Schedule\InspectorSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Inspector\Schedule\InspectorScheduleAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Inspector\Schedule\InspectorScheduleAddOrUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
