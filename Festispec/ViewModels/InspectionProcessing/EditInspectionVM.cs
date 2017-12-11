@@ -151,6 +151,9 @@ namespace Festispec.ViewModels.Employees
         
         private void DeleteSelectedInspection()
         {
+            var result = MessageBox.Show("Weet je zeker dat je deze inspectie wilt verwijderen?", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result != MessageBoxResult.Yes) return;
             InspectionList.DeleteSelectedInspection();
 
             _navigationService.GoBack();

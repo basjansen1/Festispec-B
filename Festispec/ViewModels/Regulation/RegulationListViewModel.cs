@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.NavigationService;
@@ -56,6 +57,9 @@ namespace Festispec.ViewModels.Regulation
                 () => _navigationService.NavigateTo(Routes.Routes.RegulationsAddOrUpdate, SelectedRegulations),
                 () => SelectedRegulations != null);
             RegulationsDeleteCommand = new RelayCommand(() => {
+                var result = MessageBox.Show("Weet je zeker dat je deze regel wilt verwijderen?", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result != MessageBoxResult.Yes) return;
                 SelectedRegulations.Delete();
                 LoadRegulations();
             }, () => SelectedRegulations != null);
