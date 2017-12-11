@@ -1,18 +1,17 @@
-﻿<Page x:Class="Festispec.Views.Template.TemplateAddOrUpdate"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:converter="clr-namespace:Festispec.Converter"
-        mc:Ignorable="d"
-        Title="TemplateAddOrUpdate"
-        DataContext="{Binding Source={StaticResource Locator}, Path=TemplateAddOrUpdate}">
+﻿<Page x:Class="Festispec.Views.Inspection.InspectionQuestionnaire"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:converter="clr-namespace:Festispec.Converter"
+      mc:Ignorable="d" 
+      Title="InspectionQuestionnaire"
+        DataContext="{Binding Source={StaticResource Locator}, Path=InspectionQuestionnaire}">
     <Page.Resources>
         <converter:InverseBooleanConverter x:Key="InverseBooleanConverter" />
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -27,24 +26,8 @@
             <Button Grid.Column="1" x:Name="AddQuestion" Content="Vraag Toevoegen" Margin="5px 10px" Command="{Binding NavigateToQuestionAddCommand}"/>
             <Button Grid.Column="2" x:Name="RemoveQuestion" Content="Vraag Verwijderen" Margin="5px 10px" Command="{Binding QuestionDeleteCommand}" />
         </Grid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Column="0" Grid.Row="0">Naam</Label>
-            <TextBox Text="{Binding Path=EntityViewModel.Name}" Grid.Column="1" Grid.Row="0"/>
-            <Label Grid.Column="0" Grid.Row="1">Omschrijving</Label>
-            <TextBox Text="{Binding Path=EntityViewModel.Description}" Grid.Column="1" Grid.Row="1"/>
-            <Label Grid.Column="0" Grid.Row="2">Vragen</Label>
-        </Grid>
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding EntityViewModel.SelectedQuestion}" ItemsSource="{Binding EntityViewModel.Questions}"
-                  GridLinesVisibility="Horizontal" HeadersVisibility="Column" Grid.Row="2" VerticalAlignment="Stretch">
+                  GridLinesVisibility="Horizontal" HeadersVisibility="Column" Grid.Row="1" VerticalAlignment="Stretch">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Vraag" Binding="{Binding Name}" Width="*"/>
                 <DataGridTextColumn Header="Omschrijving" Binding="{Binding Description}" Width="*"/>
@@ -60,7 +43,7 @@
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />

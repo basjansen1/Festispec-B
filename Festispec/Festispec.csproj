@@ -241,6 +241,9 @@
     <Compile Include="Views\InspectionList.xaml.cs">
       <DependentUpon>InspectionList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Inspection\InspectionQuestionnaire.xaml.cs">
+      <DependentUpon>InspectionQuestionnaire.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Question\QuestionAdd.xaml.cs">
       <DependentUpon>QuestionAdd.xaml</DependentUpon>
     </Compile>
@@ -305,6 +308,10 @@
     <Page Include="Views\CustomerCRUD\CustomerList.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Inspection\InspectionQuestionnaire.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Planning\PlanningUpdate.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -428,7 +435,9 @@
       <Name>Festispec.OfflineSync</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\Inspection\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Crud_Employees\Images\garbage.png" />
   </ItemGroup>
