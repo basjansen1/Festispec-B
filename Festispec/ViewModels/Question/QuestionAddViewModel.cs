@@ -45,9 +45,9 @@ namespace Festispec.ViewModels.Question
             {
                 _questionViewModel = value;
 
-//                EntityViewModel.MapValues(_questionViewModel.Entity, EntityViewModel.Entity);
-                _questionViewModel.CopyPropertiesTo(EntityViewModel);
-
+                EntityViewModel.MapValues(_questionViewModel?.Entity ?? new Domain.Question(), EntityViewModel.Entity);
+//                _questionViewModel.CopyPropertiesTo(EntityViewModel);
+                RaisePropertyChanged(nameof(EntityViewModel));
                 RaisePropertyChanged();
             }
         }
