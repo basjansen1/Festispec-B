@@ -95,6 +95,13 @@ namespace Festispec.ViewModels.Inspector
                         : inspectorScheduleRepository.Update(Entity, Id);
                 }
 
+                // First we map the updated values to the entity
+                MapValues(updated, Entity);
+                // Then we overwrite the original values with the new entity values
+                MapValuesToOriginal();
+
+
+
                 // Map updated values
                 NotAvailableFrom = NotAvailableFrom;
             }

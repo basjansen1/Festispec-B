@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.NavigationService;
 using Festispec.ViewModels.Factory.Interface;
@@ -25,11 +26,18 @@ namespace Festispec.ViewModels.Inspector
 
         public override void Save()
         {
-            //TODO: Validation
 
-            InspectorViewModel.Schedule.Add(EntityViewModel);
+            //validation for checking if dates are entered correctly
+            if (EntityViewModel.Entity.NotAvailableFrom > EntityViewModel.Entity.NotAvailableTo)
+            {
+                MessageBox.Show("De datums zijn niet correct ingevoerd.");
+            }
+            else
+            {
+                InspectorViewModel.Schedule.Add(EntityViewModel);
 
-            GoBack();
+                GoBack();
+            }
         }
     }
 }

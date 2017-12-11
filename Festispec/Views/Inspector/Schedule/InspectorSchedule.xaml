@@ -24,7 +24,6 @@
             <Button Grid.Column="2" x:Name="UpdateSchedule" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToScheduleUpdateCommand}" />
             <Button Grid.Column="3" x:Name="RemoveSchedule" Content="Verwijderen" Margin="5px 10px" Command="{Binding ScheduleDeleteCommand}" />
         </Grid>
-        <Label>Niet beschikbaar:</Label>
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding EntityViewModel.SelectedSchedule}" ItemsSource="{Binding EntityViewModel.Schedule}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Niet beschikbaar vanaf" Binding="{Binding NotAvailableFrom}" Width="*"/>

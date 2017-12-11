@@ -6,6 +6,7 @@ using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.NavigationService;
+using System.Windows;
 
 namespace Festispec.ViewModels.Inspector
 {
@@ -55,12 +56,21 @@ namespace Festispec.ViewModels.Inspector
 
         public override void Save()
         {
-            //TODO: Validation
+            //validation for checking if dates are entered correctly
+            if(EntityViewModel.Entity.NotAvailableFrom > EntityViewModel.Entity.NotAvailableTo)
+            {
+                MessageBox.Show("De datums zijn niet correct ingevoerd.");
+            } else
+            {
+                //TODO: Validation
 
-            // Map updated fields
-            EntityViewModel.NotAvailableFrom = EntityViewModel.NotAvailableFrom;
-            EntityViewModel.NotAvailableTo = EntityViewModel.NotAvailableTo;
-            GoBack();
+                // Map updated fields
+                EntityViewModel.NotAvailableFrom = EntityViewModel.NotAvailableFrom;
+                EntityViewModel.NotAvailableTo = EntityViewModel.NotAvailableTo;
+                GoBack();
+            }
+
+           
         }
         public override void Cancel()
         {

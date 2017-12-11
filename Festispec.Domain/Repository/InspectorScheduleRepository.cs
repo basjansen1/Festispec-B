@@ -10,11 +10,6 @@ namespace Festispec.Domain.Repository
         {
         }
 
-        public override IQueryable<Schedule> Get()
-        {
-            return base.Get();
-        }
-
         public override Schedule Add(Schedule entity)
         {
             entity = CleanRelations(entity);

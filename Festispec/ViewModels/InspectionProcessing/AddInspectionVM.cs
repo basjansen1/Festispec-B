@@ -15,7 +15,6 @@ using System.Windows.Input;
 using Festispec.NavigationService;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Customer;
-// Comments for errors that are TODO
 namespace Festispec.ViewModels.Employees
 {
     public class AddInspectionVM : ViewModelBase
