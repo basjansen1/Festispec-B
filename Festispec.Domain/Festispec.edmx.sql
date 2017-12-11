@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/10/2017 15:44:03
+-- Date Created: 12/11/2017 16:04:51
 -- Generated from EDMX file: C:\Workspace\Avans\Projects\42IN06SOb\Festispec\Festispec.Domain\Festispec.edmx
 -- --------------------------------------------------
 
@@ -45,22 +45,22 @@ IF OBJECT_ID(N'[dbo].[FK_QuestionTypeQuestion]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Question] DROP CONSTRAINT [FK_QuestionTypeQuestion];
 GO
 IF OBJECT_ID(N'[dbo].[FK_InspectionInspectionQuestion]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[InspectionQuestionSet] DROP CONSTRAINT [FK_InspectionInspectionQuestion];
+    ALTER TABLE [dbo].[InspectionQuestion] DROP CONSTRAINT [FK_InspectionInspectionQuestion];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TemplateTemplateQuestion]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TemplateQuestionSet] DROP CONSTRAINT [FK_TemplateTemplateQuestion];
+    ALTER TABLE [dbo].[TemplateQuestion] DROP CONSTRAINT [FK_TemplateTemplateQuestion];
 GO
 IF OBJECT_ID(N'[dbo].[FK_QuestionInspectionQuestion]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[InspectionQuestionSet] DROP CONSTRAINT [FK_QuestionInspectionQuestion];
+    ALTER TABLE [dbo].[InspectionQuestion] DROP CONSTRAINT [FK_QuestionInspectionQuestion];
 GO
 IF OBJECT_ID(N'[dbo].[FK_PlanningInspectionQuestionAnswer]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[InspectionQuestionAnswerSet] DROP CONSTRAINT [FK_PlanningInspectionQuestionAnswer];
+    ALTER TABLE [dbo].[InspectionQuestionAnswer] DROP CONSTRAINT [FK_PlanningInspectionQuestionAnswer];
 GO
 IF OBJECT_ID(N'[dbo].[FK_InspectionQuestionInspectionQuestionAnswer]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[InspectionQuestionAnswerSet] DROP CONSTRAINT [FK_InspectionQuestionInspectionQuestionAnswer];
+    ALTER TABLE [dbo].[InspectionQuestionAnswer] DROP CONSTRAINT [FK_InspectionQuestionInspectionQuestionAnswer];
 GO
 IF OBJECT_ID(N'[dbo].[FK_QuestionTemplateQuestion]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TemplateQuestionSet] DROP CONSTRAINT [FK_QuestionTemplateQuestion];
+    ALTER TABLE [dbo].[TemplateQuestion] DROP CONSTRAINT [FK_QuestionTemplateQuestion];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Contact_inherits_Address]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Address_Contact] DROP CONSTRAINT [FK_Contact_inherits_Address];
@@ -112,14 +112,14 @@ GO
 IF OBJECT_ID(N'[dbo].[Template]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Template];
 GO
-IF OBJECT_ID(N'[dbo].[InspectionQuestionSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[InspectionQuestionSet];
+IF OBJECT_ID(N'[dbo].[InspectionQuestion]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[InspectionQuestion];
 GO
-IF OBJECT_ID(N'[dbo].[InspectionQuestionAnswerSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[InspectionQuestionAnswerSet];
+IF OBJECT_ID(N'[dbo].[InspectionQuestionAnswer]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[InspectionQuestionAnswer];
 GO
-IF OBJECT_ID(N'[dbo].[TemplateQuestionSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TemplateQuestionSet];
+IF OBJECT_ID(N'[dbo].[TemplateQuestion]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TemplateQuestion];
 GO
 IF OBJECT_ID(N'[dbo].[Address_Contact]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Address_Contact];
@@ -210,14 +210,14 @@ CREATE TABLE [dbo].[Question] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Description] nvarchar(max)  NULL,
-    [QuestionType_Type] nvarchar(64)  NOT NULL
+    [QuestionType_Type] nvarchar(64)  NOT NULL,
+    [Metadata] nvarchar(max)  NULL
 );
 GO
 
 -- Creating table 'QuestionType'
 CREATE TABLE [dbo].[QuestionType] (
-    [Type] nvarchar(64)  NOT NULL,
-    [Metadata] nvarchar(max)  NULL
+    [Type] nvarchar(64)  NOT NULL
 );
 GO
 

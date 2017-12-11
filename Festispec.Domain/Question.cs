@@ -25,6 +25,7 @@ namespace Festispec.Domain
         public string Name { get; set; }
         public string Description { get; set; }
         public string QuestionType_Type { get; set; }
+        public string Metadata { get; set; }
     
         public virtual QuestionType QuestionType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

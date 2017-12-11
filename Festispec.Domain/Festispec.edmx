@@ -180,13 +180,13 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
     <Property Name="QuestionType_Type" Type="nvarchar" Nullable="false" MaxLength="64" />
+    <Property Name="Metadata" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="QuestionType">
     <Key>
       <PropertyRef Name="Type" />
     </Key>
     <Property Name="Type" Type="nvarchar" Nullable="false" MaxLength="64" />
-    <Property Name="Metadata" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Template">
     <Key>
@@ -858,13 +858,13 @@
           <Property Name="QuestionType_Type" Type="String" Nullable="false" MaxLength="64" />
           <NavigationProperty Name="InspectionQuestion" Relationship="Festispec.QuestionInspectionQuestion" FromRole="Question" ToRole="InspectionQuestion" />
           <NavigationProperty Name="TemplateQuestion" Relationship="Festispec.QuestionTemplateQuestion" FromRole="Question" ToRole="TemplateQuestion" />
+          <Property Name="Metadata" Type="String" Nullable="true" />
         </EntityType>
         <EntityType Name="QuestionType">
           <Key>
             <PropertyRef Name="Type" />
           </Key>
           <Property Name="Type" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="64" />
-          <Property Name="Metadata" Type="String" Nullable="true" />
           <NavigationProperty Name="Questions" Relationship="Festispec.QuestionTypeQuestion" FromRole="QuestionType"
                               ToRole="Question" />
         </EntityType>
@@ -1133,6 +1133,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="QuestionType_Type" ColumnName="QuestionType_Type" />
+          <ScalarProperty Name="Metadata" ColumnName="Metadata" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1140,7 +1141,6 @@
       <EntityTypeMapping TypeName="IsTypeOf(Festispec.QuestionType)">
         <MappingFragment StoreEntitySet="QuestionType">
           <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="Metadata" ColumnName="Metadata" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
