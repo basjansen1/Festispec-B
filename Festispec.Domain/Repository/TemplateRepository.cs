@@ -53,8 +53,11 @@ namespace Festispec.Domain.Repository
 
         public void DetachQuestions(Template template, Question question)
         {
-            var templateQuestion = new TemplateQuestion {Template_Id = template.Id, Question_Id = question.Id};
-            DbContext.Entry(templateQuestion).State = EntityState.Deleted;
+            var existing = DbContext.Set<TemplateQuestion>().Find(template.Id, question.Id);
+
+            if (existing == null) return;
+
+            DbContext.Entry(existing).State = EntityState.Deleted;
             DbContext.SaveChanges();
         }
 

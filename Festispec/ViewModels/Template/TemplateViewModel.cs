@@ -86,10 +86,13 @@ namespace Festispec.ViewModels.Template
                         : templateRepository.Update(Entity, Id);
 
                     foreach (var questionViewModel in questionsToUpdate)
+                    {
+                        // Delete if needed, else try attach
                         if (questionViewModel.IsDeleted)
                             templateRepository.DetachQuestions(updated, questionViewModel.Entity);
                         else
                             templateRepository.TryAttachQuestion(updated, questionViewModel.Entity);
+                    }
                 }
 
                 // First we map the updated values to the entity
