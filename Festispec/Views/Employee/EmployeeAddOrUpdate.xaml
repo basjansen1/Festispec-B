@@ -8,44 +8,61 @@
         DataContext="{Binding Source={StaticResource Locator}, Path=EmployeeAddOrUpdate}">
     <StackPanel>
         <Label>Gebruikersnaam</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Username}" />
-        <Label>Email</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Email}" />
-        <Label>Stad</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.City}" />
-        <Label>Straat</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Street}" />
-        <Label>Land</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Country}" />
+        <TextBox Text="{Binding Path=EntityViewModel.Username}" />
         <Label>Voornaam</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.FirstName}" />
+        <TextBox Text="{Binding Path=EntityViewModel.FirstName}" />
         <Label>Achternaam</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.LastName}" />
-        <Label>Huisnummer</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.HouseNumber}" />
+        <TextBox Text="{Binding Path=EntityViewModel.LastName}" />
+        <Label>Email</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.Email}" />
         <Label>IBAN</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.IBAN}" />
+        <TextBox Text="{Binding Path=EntityViewModel.IBAN}" />
         <Label>Manager</Label>
         <ComboBox ItemsSource="{Binding Managers}"
                   DisplayMemberPath="Username"
                   SelectedValuePath="Id"
-                  SelectedValue="{Binding EntityViewModel.UpdatedEntity.Manager_Id}"></ComboBox>
-        <Label>Gemeente</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Municipality}" />
+                  SelectedValue="{Binding EntityViewModel.Manager_Id}"></ComboBox>
         <Label>Password</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Password}" />
-        <Label>Postcode</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.PostalCode}" MaxLength="6" />
+        <TextBox Text="{Binding Path=EntityViewModel.Password}" />
         <Label>Functie</Label>
         <ComboBox ItemsSource="{Binding Path=Roles}" 
             DisplayMemberPath="Role" SelectedValuePath="Role"
-            SelectedValue="{Binding Path=EntityViewModel.UpdatedEntity.Role_Role}" />
+            SelectedValue="{Binding Path=EntityViewModel.Role_Role}" />
         <Label>Telefoonnummer</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.UpdatedEntity.Telephone}" />
+        <TextBox Text="{Binding Path=EntityViewModel.Telephone}" />
         <Label>In dienst genomen op</Label>
-        <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.HiredFrom}"/>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.HiredFrom}"/>
         <Label>Uit dienst gegaan</Label>
-        <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.HiredTo}"/>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.HiredTo}"/>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <Label>Postcode</Label>
+                <TextBox Text="{Binding Path=EntityViewModel.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="6" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <Label>Huisnummer</Label>
+                <TextBox Text="{Binding Path=EntityViewModel.HouseNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            
+            <Button Grid.Column="2" Command="{Binding SearchAddressCommand}">Zoek adres</Button>
+        </Grid>
+
+        <Label>Straat</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.Street}" IsEnabled="false" />
+        <Label>Stad</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.City}" IsEnabled="false" />
+        <Label>Gemeente</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.Municipality}" IsEnabled="false" />
+        <Label>Land</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.Country}" IsEnabled="false" />
         <Grid Height="50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

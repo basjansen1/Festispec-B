@@ -8,5 +8,7 @@ namespace Festispec.State
         Route CurrrentRoute { get; set; }
         
         Employee CurrentUser { get; set; }
+
+        bool IsOnline { get; }
     }
 }

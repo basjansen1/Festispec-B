@@ -58,8 +58,8 @@ namespace Festispec.ViewModels.Inspector
             //TODO: Validation
 
             // Map updated fields
-            EntityViewModel.NotAvailableFrom = EntityViewModel.UpdatedEntity.NotAvailableFrom;
-            EntityViewModel.NotAvailableTo = EntityViewModel.UpdatedEntity.NotAvailableTo;
+            EntityViewModel.NotAvailableFrom = EntityViewModel.NotAvailableFrom;
+            EntityViewModel.NotAvailableTo = EntityViewModel.NotAvailableTo;
             GoBack();
         }
 

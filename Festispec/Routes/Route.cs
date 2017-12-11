@@ -8,5 +8,6 @@ namespace Festispec.Routes
         public Uri PageType { get; set; }
         public object Parameter { get; set; }
         public string[] Roles { get; set; }
+        public bool Offline { get; set; } = false;
     }
 }

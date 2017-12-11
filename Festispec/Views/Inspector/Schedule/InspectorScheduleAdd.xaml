@@ -10,9 +10,9 @@
     <StackPanel>
         <Label>Niet beschikbaar:</Label>
         <Label>- vanaf:</Label>
-        <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.NotAvailableFrom}"/>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.NotAvailableFrom}"/>
         <Label>- tot:</Label>
-        <DatePicker SelectedDate="{Binding Path=EntityViewModel.UpdatedEntity.NotAvailableTo}"/>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.NotAvailableTo}"/>
         <Grid Height="50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

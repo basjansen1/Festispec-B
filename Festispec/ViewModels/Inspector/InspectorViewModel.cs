@@ -1,54 +1,59 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Data.Entity.Validation;
+using System.Linq;
+using System.Windows;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
-using System.Data.Entity.Spatial;
-using System;
-using System.Windows;
-using System.Linq;
+using Festispec.ViewModels.Address;
+using System.Collections.Generic;
 using Festispec.ViewModels.Factory.Interface;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace Festispec.ViewModels.Inspector
 {
-    
-        public class
-        InspectorViewModel : EntityViewModelBase<IInspectorRepositoryFactory, IInspectorRepository, Domain.Inspector>
+    public class InspectorViewModel :
+        AddressViewModelBase<IInspectorRepositoryFactory, IInspectorRepository, Domain.Inspector>
+    {
+        private InspectorScheduleViewModel _selectedSchedule;
+        public InspectorViewModel(IInspectorRepositoryFactory repositoryFactory, IInspectorScheduleViewModelFactory inspectorScheduleViewModelFactory) : base(repositoryFactory)
         {
-            private readonly IInspectorScheduleViewModelFactory _inspectorScheduleViewModelFactory;
-
-            private InspectorScheduleViewModel _selectedSchedule;
-
-            public InspectorViewModel(IInspectorRepositoryFactory repositoryFactory,
-                IInspectorScheduleViewModelFactory inspectorScheduleViewModelFactory) : base(repositoryFactory)
-            {
-                _inspectorScheduleViewModelFactory = inspectorScheduleViewModelFactory;
-            }
-
-            public InspectorViewModel(IInspectorRepositoryFactory repositoryFactory,
-                IInspectorScheduleViewModelFactory inspectorScheduleViewModelFactory, Domain.Inspector entity)
-                : base(repositoryFactory, entity)
-            {
-                _inspectorScheduleViewModelFactory = inspectorScheduleViewModelFactory;
-            }
-
-            public int Id => Entity.Id;
-
-
-
-        public ICollection<InspectorScheduleViewModel> Schedule
-        {
-            get { return ScheduleWithDeleted.Where(model => !model.IsDeleted).ToList(); }
-            set
-            {
-                Entity.Schedule = value.Select(inspectorScheduleViewModel => inspectorScheduleViewModel.Entity).ToList();
-                RaisePropertyChanged();
-            }
+            Schedule = new ObservableCollection<InspectorScheduleViewModel>(
+                Entity.Schedule.Select(inspectorScheduleViewModelFactory.CreateViewModel));
+            Schedule.CollectionChanged += ScheduleOnCollectionChanged;
+            if (HiredFrom == default(DateTime))
+                HiredFrom = new DateTime(1990, 1, 1);
         }
 
-        private IEnumerable<InspectorScheduleViewModel> ScheduleWithDeleted => Entity.Schedule
-            .Select(
-                inspectorSchedule => _inspectorScheduleViewModelFactory?.CreateViewModel(inspectorSchedule))
-            .ToList();
+        public InspectorViewModel(IInspectorRepositoryFactory repositoryFactory,
+            IInspectorScheduleViewModelFactory inspectorScheduleViewModelFactory, Domain.Inspector entity)
+            : base(repositoryFactory, entity)
+        {
+            Schedule = new ObservableCollection<InspectorScheduleViewModel>(
+                Entity.Schedule.Select(inspectorScheduleViewModelFactory.CreateViewModel));
+            Schedule.CollectionChanged += ScheduleOnCollectionChanged;
+        }
+
+        public int Id => Entity.Id;
+
+        public ObservableCollection<InspectorScheduleViewModel> Schedule { get; }
+
+        private void ScheduleOnCollectionChanged(object sender,
+            NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            switch (notifyCollectionChangedEventArgs.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    Entity.Schedule.Add(((InspectorScheduleViewModel)notifyCollectionChangedEventArgs.NewItems[0])
+                        .Entity);
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    Entity.Schedule.Remove(((InspectorScheduleViewModel)notifyCollectionChangedEventArgs.OldItems[0])
+                        .Entity);
+                    break;
+            }
+        }
 
         public InspectorScheduleViewModel SelectedSchedule
         {
@@ -69,33 +74,12 @@ namespace Festispec.ViewModels.Inspector
             }
         }
 
-
-        public string City
-        {
-            get { return Entity.City; }
-            set
-            {
-                Entity.City = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public string Email
         {
             get { return Entity.Email; }
             set
             {
                 Entity.Email = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public string Country
-        {
-            get { return Entity.Country; }
-            set
-            {
-                Entity.Country = value;
                 RaisePropertyChanged();
             }
         }
@@ -109,15 +93,17 @@ namespace Festispec.ViewModels.Inspector
                 RaisePropertyChanged();
             }
         }
-        public string HouseNumber
+
+        public string LastName
         {
-            get { return Entity.HouseNumber; }
+            get { return Entity.LastName; }
             set
             {
-                Entity.HouseNumber = value;
+                Entity.LastName = value;
                 RaisePropertyChanged();
             }
         }
+
         public string IBAN
         {
             get { return Entity.IBAN; }
@@ -128,15 +114,6 @@ namespace Festispec.ViewModels.Inspector
             }
         }
 
-        public string LastName
-        {
-            get { return Entity.LastName; }
-            set
-            {
-                Entity.IBAN = value;
-                RaisePropertyChanged();
-            }
-        }
         public Domain.Employee Manager
         {
             get { return Entity.Manager; }
@@ -146,6 +123,7 @@ namespace Festispec.ViewModels.Inspector
                 RaisePropertyChanged();
             }
         }
+
         public string Password
         {
             get { return Entity.Password; }
@@ -155,24 +133,7 @@ namespace Festispec.ViewModels.Inspector
                 RaisePropertyChanged();
             }
         }
-        public string Municipality
-        {
-            get { return Entity.Municipality; }
-            set
-            {
-                Entity.Municipality = value;
-                RaisePropertyChanged();
-            }
-        }
-        public string PostalCode
-        {
-            get { return Entity.PostalCode; }
-            set
-            {
-                Entity.PostalCode = value;
-                RaisePropertyChanged();
-            }
-        }
+
         public EmployeeRole Role
         {
             get { return Entity.Role; }
@@ -182,61 +143,23 @@ namespace Festispec.ViewModels.Inspector
                 RaisePropertyChanged();
             }
         }
-        public string Street
-        {
-            get { return Entity.Street; }
-            set
-            {
-                Entity.Street = value;
-                RaisePropertyChanged();
-            }
-        }
-        public string Telephone
-        {
-            get { return Entity.Telephone; }
-            set
-            {
-                Entity.Telephone = value;
-                RaisePropertyChanged();
-            }
-        }
 
         public string Role_Role
         {
             get { return Entity.Role_Role; }
             set
             {
+                Entity.Role_Role = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string Telephone
+        {
+            get { return Entity.Telephone; }
+            set
+            {
                 Entity.Telephone = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public DbGeography Location
-        {
-            get { return Entity.Location; }
-            set
-            {
-                Entity.Location = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public double Long
-        {
-            get { return Entity.Long; }
-            set
-            {
-                Entity.Long = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public double Lat
-        {
-            get { return Entity.Lat; }
-            set
-            {
-                Entity.Lat = value;
                 RaisePropertyChanged();
             }
         }
@@ -250,6 +173,7 @@ namespace Festispec.ViewModels.Inspector
                 RaisePropertyChanged();
             }
         }
+
         public DateTime? HiredTo
         {
             get { return Entity.HiredTo; }
@@ -259,6 +183,7 @@ namespace Festispec.ViewModels.Inspector
                 RaisePropertyChanged();
             }
         }
+
         public DateTime? CertificationFrom
         {
             get { return Entity.CertificationFrom; }
@@ -278,7 +203,7 @@ namespace Festispec.ViewModels.Inspector
                 RaisePropertyChanged();
             }
         }
-      
+
         public DateTime? CertificationTo
         {
             get { return Entity.CertificationTo; }
@@ -291,65 +216,39 @@ namespace Festispec.ViewModels.Inspector
 
         public override bool Save()
         {
-
-            using (var InspectorRepository = RepositoryFactory.CreateRepository())
+            try
             {
-                try
+                Domain.Inspector updated;
+                var scheduleToUpdate = Schedule;
+                using (var InspectorRepository = RepositoryFactory.CreateRepository())
                 {
-                    var updated = UpdatedEntity.Id == 0
-                        ? InspectorRepository.Add(UpdatedEntity)
-                        : InspectorRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                    updated = Id == 0
+                        ? InspectorRepository.Add(Entity)
+                        : InspectorRepository.Update(Entity, Id);
                 }
-                catch(System.Data.Entity.Validation.DbEntityValidationException ex)
+
+                // First we map the updated values to the entity
+                MapValues(updated, Entity);
+                // Then we overwrite the original values with the new entity values
+                MapValuesToOriginal();
+                foreach (var inspectorScheduleViewModel in scheduleToUpdate)
                 {
-                    var ErrorList = (from eve in ex.EntityValidationErrors from ve in eve.ValidationErrors select ve.PropertyName).ToList();
-                    string joined = string.Join(",", ErrorList.Select(x => x));
-                    MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
-                    return false;
+                    // Manually attach the template by id
+                    inspectorScheduleViewModel.Inspector_Id = Entity.Id;
+                    inspectorScheduleViewModel.Save();
                 }
             }
+            catch (DbEntityValidationException ex)
+            {
+                var ErrorList = (from eve in ex.EntityValidationErrors
+                                 from ve in eve.ValidationErrors
+                                 select ve.PropertyName).ToList();
+                var joined = string.Join(",", ErrorList.Select(x => x));
+                MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                return false;
+            }
+
             return true;
-        }
-
-        public override bool Delete()
-        {
-            using (var InspectorRepository = RepositoryFactory.CreateRepository())
-            {
-                return InspectorRepository.Delete(Entity) != 0;
-            }
-        }
-
-        public override Domain.Inspector Copy()
-        {
-            return new Domain.Inspector
-            {
-                Id = Id,
-                Email = Email,
-                City = City,
-                Username = Username,
-                Country = Country,
-                FirstName = FirstName,
-                HouseNumber = HouseNumber,
-                IBAN = IBAN,
-                LastName = LastName,
-                Manager_Id = Manager_Id,
-                Manager = Manager,
-                Password = Password,
-                Municipality = Municipality,
-                PostalCode = PostalCode,
-                Role_Role = Role_Role,
-                Role = Role,
-                Street = Street,
-                Telephone = Telephone,
-                Location = DbGeography.PointFromText("POINT(50 5)", 4326),
-                Long = 50,
-                Lat = 5,
-                HiredFrom = HiredFrom,
-                HiredTo = HiredTo,
-                Schedule = Entity.Schedule,
-                CertificationFrom = CertificationFrom,
-                CertificationTo = CertificationTo
-            };
         }
     }
 }

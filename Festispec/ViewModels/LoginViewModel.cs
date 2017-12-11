@@ -1,11 +1,14 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using System;
 using Festispec.State;
 
 namespace Festispec.ViewModels
@@ -51,6 +54,7 @@ namespace Festispec.ViewModels
             }
             if (foundEmployee != null)
             {
+                //cache database if online
                 _state.CurrentUser = foundEmployee;
                 var mainWindow = new MainWindow();
                 mainWindow.Show();

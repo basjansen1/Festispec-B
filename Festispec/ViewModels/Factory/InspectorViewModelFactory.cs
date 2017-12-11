@@ -1,4 +1,5 @@
-﻿using Festispec.Domain.Repository.Factory.Interface;
+﻿using System;
+using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.Inspector;
 

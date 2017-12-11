@@ -65,7 +65,7 @@ namespace Festispec.ViewModels.Employee
             SearchCommand = new RelayCommand(LoadEmployees);
         }
 
-        private void LoadEmployees()
+        public void LoadEmployees()
         {
             DateTime today = DateTime.Today;
             using (var EmployeeRepository = _employeeRepositoryFactory.CreateRepository())

@@ -73,17 +73,17 @@ namespace Festispec.ViewModels.Inspector
         {
             try
             {
-                if (Entity.IsDeleted)
+                if (IsDeleted)
                 {
-                    return UpdatedEntity.Id == 0 || Delete();
+                    return Id == 0 || Delete();
                 }
 
                 Domain.Schedule updated;
                 using (var inspectorScheduleRepository = RepositoryFactory.CreateRepository())
                 {
-                    updated = UpdatedEntity.Id == 0
-                        ? inspectorScheduleRepository.Add(UpdatedEntity)
-                        : inspectorScheduleRepository.Update(UpdatedEntity, UpdatedEntity.Id);
+                    updated = Id == 0
+                        ? inspectorScheduleRepository.Add(Entity)
+                        : inspectorScheduleRepository.Update(Entity, Id);
                 }
 
                 // Map updated values
@@ -114,19 +114,6 @@ namespace Festispec.ViewModels.Inspector
                 MessageBox.Show("Er is iets fout gegaan");
                 return false;
             }
-        }
-
-        public override Domain.Schedule Copy()
-        {
-            return new Schedule
-            {
-                Id = Id,
-                Inspector = Inspector,
-                Inspector_Id = Inspector_Id,
-                NotAvailableFrom = NotAvailableFrom,
-                IsDeleted = IsDeleted,
-                NotAvailableTo = NotAvailableTo
-            };
         }
     }
 }

@@ -3,18 +3,19 @@ using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.NavigationService;
+using Festispec.ViewModels.Address;
 using Festispec.ViewModels.Factory.Interface;
 using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels.Inspector
 {
     public class InspectorAddOrUpdateViewModel :
-        AddOrUpdateViewModelBase<IInspectorViewModelFactory, InspectorViewModel, IInspectorRepository, Domain.Inspector>
+        AddressAddOrUpdateViewModelBase<IInspectorViewModelFactory, InspectorViewModel, IInspectorRepository, Domain.Inspector>
     {
         public InspectorAddOrUpdateViewModel(INavigationService navigationService,
             IInspectorRepositoryFactory repositoryFactory,
-            IInspectorViewModelFactory viewModelFactory)
-            : base(navigationService, repositoryFactory, viewModelFactory)
+            IInspectorViewModelFactory inspectorViewModelFactory, IEmployeeRepositoryFactory employeeRepositoryFactory, IGeoRepositoryFactory geoRepositoryFactory)
+            : base(navigationService, repositoryFactory, inspectorViewModelFactory, geoRepositoryFactory)
         {
             RegisterCommands();
         }
@@ -27,7 +28,11 @@ namespace Festispec.ViewModels.Inspector
         {
             NavigateToScheduleAddCommand =
                 new RelayCommand(
-                    () => NavigationService.NavigateTo(Routes.Routes.InspectorScheduleAdd, EntityViewModel),
+                    () =>
+                    {
+                        EntityViewModel.SelectedSchedule = null;
+                        NavigationService.NavigateTo(Routes.Routes.InspectorScheduleAdd, EntityViewModel);
+                    },
                     () => EntityViewModel != null);
             NavigateToScheduleUpdateCommand = new RelayCommand(
                 () => NavigationService.NavigateTo(Routes.Routes.InspectorScheduleAddOrUpdate, EntityViewModel),
@@ -59,9 +64,7 @@ namespace Festispec.ViewModels.Inspector
         {
             // TODO: Validation
 
-            var saved = EntityViewModel.Save();
-
-            if (saved) GoBack(EntityViewModel);
+            base.Save();
         }
     }
 }

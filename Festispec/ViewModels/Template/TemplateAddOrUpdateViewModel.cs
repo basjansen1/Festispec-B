@@ -27,7 +27,11 @@ namespace Festispec.ViewModels.Template
         {
             NavigateToQuestionAddCommand =
                 new RelayCommand(
-                    () => NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAdd, EntityViewModel),
+                    () =>
+                    {
+                        EntityViewModel.SelectedQuestion = null;
+                        NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAdd, EntityViewModel);
+                    },
                     () => EntityViewModel != null);
             NavigateToQuestionUpdateCommand = new RelayCommand(
                 () => NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAddOrUpdate, EntityViewModel),
@@ -59,9 +63,7 @@ namespace Festispec.ViewModels.Template
         {
             // TODO: Validation
 
-            var saved = EntityViewModel.Save();
-
-            if(saved) GoBack(EntityViewModel);
+            base.Save();
         }
     }
 }

@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/20/2017 16:12:47
--- Generated from EDMX file: C:\Users\ylja0\OneDrive\Documents\GitHub\Festispec-B\Festispec.Domain\Festispec.edmx
+-- Date Created: 12/09/2017 15:32:23
+-- Generated from EDMX file: C:\Workspace\Avans\Projects\42IN06SOb\Festispec\Festispec.Domain\Festispec.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -479,7 +479,7 @@ ADD CONSTRAINT [FK_InspectionPlanning]
     FOREIGN KEY ([Inspection_Id])
     REFERENCES [dbo].[Address_Inspection]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating foreign key on [Inspector_Id] in table 'Planning'
@@ -533,7 +533,7 @@ ADD CONSTRAINT [FK_TemplateTemplateQuestion]
     FOREIGN KEY ([Template_Id])
     REFERENCES [dbo].[Template]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TemplateTemplateQuestion'
@@ -548,7 +548,7 @@ ADD CONSTRAINT [FK_PlanningInspectionQuestion]
     FOREIGN KEY ([Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date])
     REFERENCES [dbo].[Planning]
         ([Inspection_Id], [Inspector_Id], [Date])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_PlanningInspectionQuestion'

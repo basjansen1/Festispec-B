@@ -1,45 +1,65 @@
-﻿using Festispec.Domain.Repository.Factory.Interface;
+﻿using System;
+using System.Windows;
+using Festispec.Domain.Extension;
+using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Interface;
-using Festispec.ViewModels.Template;
 using GalaSoft.MvvmLight;
 
 namespace Festispec.ViewModels
 {
-    public abstract class EntityViewModelBase<TRepositoryFactory, TRepository, TEntity> : ViewModelBase, IEntityViewModel<TEntity>
+    public abstract class EntityViewModelBase<TRepositoryFactory, TRepository, TEntity> : ViewModelBase,
+        IEntityViewModel<TEntity>
         where TRepositoryFactory : IRepositoryFactory<TRepository, TEntity>
         where TRepository : IRepository<TEntity>
         where TEntity : class, new()
     {
-        public TEntity Entity { get; }
-        public TEntity UpdatedEntity { get; }
-
         protected readonly TRepositoryFactory RepositoryFactory;
 
         protected EntityViewModelBase(TRepositoryFactory repositoryFactory)
         {
             RepositoryFactory = repositoryFactory;
+            OriginalValues = new TEntity();
             Entity = new TEntity();
-            UpdatedEntity = Copy();
+
+            MapValuesToOriginal();
         }
 
         protected EntityViewModelBase(TRepositoryFactory repositoryFactory, TEntity entity)
         {
             RepositoryFactory = repositoryFactory;
+            OriginalValues = new TEntity();
             Entity = entity;
-            UpdatedEntity = Copy();
+
+            MapValuesToOriginal();
         }
+
+        public TEntity Entity { get; }
+        public TEntity OriginalValues { get; set; }
 
         public abstract bool Save();
 
         public virtual bool Delete()
         {
-            using (var repository = RepositoryFactory.CreateRepository())
+            try
             {
-                return repository.Delete(Entity) != 0;
+                using (var repository = RepositoryFactory.CreateRepository())
+                {
+                    return repository.Delete(Entity) != 0;
+                }
             }
+            catch (Exception exception)
+            {
+                // TODO: Generic error message instead of exception message: MessageBox.Show("Er is iets fout gegaan");
+                MessageBox.Show(exception.Message);
+            }
+
+            return false;
         }
 
-        public abstract TEntity Copy();
+        public virtual void MapValues(TEntity from, TEntity to) => from.CopyPropertiesTo(to);
+
+        public void MapValuesFromOriginal() => MapValues(OriginalValues, Entity);
+        public void MapValuesToOriginal() => MapValues(Entity, OriginalValues);
     }
 }

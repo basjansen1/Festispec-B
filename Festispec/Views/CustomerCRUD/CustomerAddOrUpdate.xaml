@@ -1,0 +1,53 @@
+﻿<Page x:Class="Festispec.Views.CustomerCRUD.CustomerAddOrUpdate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="CustomerAddOrUpdate"
+        DataContext="{Binding Source={StaticResource Locator}, Path=CustomerAddOrUpdate}">
+    <StackPanel>
+        <Label>Naam</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.Name}" />
+        <Label>Email</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.Email}" />
+        <Label>KVK</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.KVK}" />
+        <Label>IBAN</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.IBAN}" />
+        <Label>Voornaam Contactpersoon</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.FirstName}" />
+        <Label>Achternaam Contactpersoon</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.LastName}" />
+        <Label>Telefoonnummer</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.Telephone}" />
+        <Label>Inspecties</Label>
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding EntityViewModel.Inspections}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="Start datum" Binding="{Binding Start}" Width="*" />
+                <DataGridTextColumn Header="Eind" Binding="{Binding End}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label>Huisnummer</Label>
+        <TextBox  Text="{Binding Path=EntityViewModel.HouseNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Label>Postcode</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Label>Straatnaam</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.Street}" IsEnabled="False" />
+        <Label>Gemeente</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.Municipality}" IsEnabled="False" />
+        <Label>Stad</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.City}" IsEnabled="False" />
+        <Label>Land</Label>
+        <TextBox Text="{Binding Path=EntityViewModel.Country}" IsEnabled="False" />
+        <Grid Height="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Cancel" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
+            <Button Grid.Column="1"  Content="Save" Margin="5px 10px" Command="{Binding SaveEntityCommand}"/>
+        </Grid>
+    </StackPanel>
+</Page>

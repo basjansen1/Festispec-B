@@ -5,19 +5,20 @@ using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.NavigationService;
+using Festispec.ViewModels.Address;
 using Festispec.ViewModels.Employee;
 using Festispec.ViewModels.Factory.Interface;
 
 namespace Festispec.ViewModels.Employees
 {
     public class EmployeeAddOrUpdateViewModel :
-        AddOrUpdateViewModelBase<IEmployeeViewModelFactory, EmployeeViewModel, IEmployeeRepository, Domain.Employee>
+        AddressAddOrUpdateViewModelBase<IEmployeeViewModelFactory, EmployeeViewModel, IEmployeeRepository, Domain.Employee>
     {
         public EmployeeAddOrUpdateViewModel(INavigationService navigationService,
             IEmployeeRepositoryFactory repositoryFactory,
             IEmployeeRoleRepositoryFactory employeeRoleRepositoryFactory,
-            IEmployeeViewModelFactory employeeViewModelFactory)
-            : base(navigationService, repositoryFactory, employeeViewModelFactory)
+            IEmployeeViewModelFactory employeeViewModelFactory, IGeoRepositoryFactory geoRepositoryFactory)
+            : base(navigationService, repositoryFactory, employeeViewModelFactory, geoRepositoryFactory)
         {
             using (var employeeRepository = repositoryFactory.CreateRepository())
             {
@@ -29,7 +30,7 @@ namespace Festispec.ViewModels.Employees
                 Roles = employeeRoleRepository.Get().Where(e => e.Role != "Inspecteur").ToList();
             }
         }
-
+        
         public IEnumerable<Domain.Employee> Managers { get; }
         public IEnumerable<EmployeeRole> Roles { get; }
 
@@ -44,16 +45,15 @@ namespace Festispec.ViewModels.Employees
 
         public override void Save()
         {
-            if (EntityViewModel.UpdatedEntity.Manager_Id == -1)
+            // TODO: Validation
+
+            if (EntityViewModel.Manager_Id == -1)
             {
-                EntityViewModel.UpdatedEntity.Manager = null;
-                EntityViewModel.UpdatedEntity.Manager_Id = null;
+                EntityViewModel.Manager = null;
+                EntityViewModel.Manager_Id = null;
             }
 
-            // TODO: Validation
-            var saved = EntityViewModel.Save();
-
-            if(saved) NavigationService.GoBack(EntityViewModel);
+            base.Save();
         }
     }
 }

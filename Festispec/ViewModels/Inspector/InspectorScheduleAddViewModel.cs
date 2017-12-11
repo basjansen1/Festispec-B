@@ -27,7 +27,7 @@ namespace Festispec.ViewModels.Inspector
         {
             //TODO: Validation
 
-            InspectorViewModel.UpdatedEntity.Schedule.Add(EntityViewModel.UpdatedEntity);
+            InspectorViewModel.Schedule.Add(EntityViewModel);
 
             GoBack();
         }

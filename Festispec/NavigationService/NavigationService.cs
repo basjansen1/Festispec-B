@@ -12,7 +12,7 @@ using Festispec.State;
 
 namespace Festispec.NavigationService
 {
-    internal class NavigationService : INavigationService, INotifyPropertyChanged
+    public class NavigationService : INavigationService, INotifyPropertyChanged
     {
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -81,6 +81,12 @@ namespace Festispec.NavigationService
                 if (!_pagesByKey.ContainsKey(route.Key))
                     throw new ArgumentException($@"No such page: {route.Key} ", nameof(route.Key));
 
+                if (!CanAccess(route))
+                {
+                    MessageBox.Show("Deze pagina is niet offline beschikbaar");
+                    return;
+                }
+
                 if (!HasAccess(route))
                 {
                     MessageBox.Show("Geen bevoegdheid om deze pagina te bezoeken");
@@ -136,8 +142,19 @@ namespace Festispec.NavigationService
             return null;
         }
 
+        public bool CanAndHasAccess(Route route)
+        {
+            return CanAccess(route) && HasAccess(route);
+        }
+
+        public bool CanAccess(Route route)
+        {
+            return _state.IsOnline || route.Offline;
+        }
+
         public bool HasAccess(Route route)
         {
+            if (route.Roles == null) return true;
             return route.Roles.Contains(_state.CurrentUser?.Role_Role);
         }
 

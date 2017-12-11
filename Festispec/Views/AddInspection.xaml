@@ -1,0 +1,78 @@
+﻿<Page x:Class="Festispec.Views.AddInspection"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:Festispec.Views"
+        mc:Ignorable="d"
+        Title="Add Inspection" DataContext="{Binding GetAddInspectionVM, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="label" Content="Zoek een klant:" Grid.Column="0" Grid.Row="0"/>
+                <ComboBox x:Name="comboBox"  IsReadOnly="True" ItemsSource="{Binding CustomerNames}" SelectedIndex="{Binding SelectedIndexCustomerList}" IsEditable="False" Grid.Column="1" Grid.Row="0"/>
+
+            <Label x:Name="lblInspection" Content="Naam inspectie*:" Grid.Column="2" Grid.Row="0"/>
+            <Label x:Name="lblWebsite" Content="Website:*" Grid.Column="2" Grid.Row="1"/>
+            <Label x:Name="lblDateFrom" Content="Begindatum*:" Grid.Column="2" Grid.Row="2"/>
+            <Label x:Name="lblDateFrom_Copy" Content="Einddatum:*" Grid.Column="2" Grid.Row="3"/>
+            <Label x:Name="lblPostalCode" Content="Postcode:*" Grid.Column="2" Grid.Row="4"/>
+            <Label x:Name="lblHousenumber" Content="Nr:*" Grid.Column="2" Grid.Row="5"/>
+            <Label x:Name="lblStreetname" Content="Straatnaam:*" Grid.Column="2" Grid.Row="6"/>
+            <Label x:Name="lblCity_" Content="Stad*:" Grid.Column="2" Grid.Row="7"/>
+            <Label x:Name="lblCountry" Content="Land*:" Grid.Column="2" Grid.Row="8"/>
+            <Label x:Name="lblMunicipality" Content="Gemeente*:" Grid.Column="2" Grid.Row="9"/>
+
+            <TextBox x:Name="txtInspection" TextWrapping="Wrap" Text="{Binding NewInspection.Name}" Grid.Column="3" Grid.Row="0"/>
+            <TextBox x:Name="txtWebsite" TextWrapping="Wrap" Text="{Binding NewInspection.Website}" Grid.Column="3" Grid.Row="1"/>
+            <DatePicker x:Name="dpStartDate" FirstDayOfWeek="Monday" Cursor="Hand" SelectedDate="{Binding FromDate}" Grid.Column="3" Grid.Row="2" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
+            <DatePicker x:Name="dpEndDate"  FirstDayOfWeek="Monday" Cursor="Hand" SelectedDate="{Binding ToDate}" Grid.Column="3" Grid.Row="3" DisplayDateStart="{x:Static sys:DateTime.Now}"/>
+            <TextBox x:Name="txtPostalCode" MaxLength="6" TextWrapping="Wrap" Text="{Binding NewInspection.PostalCode}" Grid.Column="3" Grid.Row="4"/>
+            <Grid Grid.Column="3" Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="txtHousenumber" TextWrapping="Wrap" Grid.Column="0" Text="{Binding NewInspection.HouseNumber}"/>
+                <Button Grid.Column="1" Command="{Binding SearchAddressCommand}">Zoek adres</Button>
+            </Grid>
+            <TextBox x:Name="txtStreetname" TextWrapping="Wrap" Text="{Binding NewInspection.Street}" Grid.Column="3" Grid.Row="6" IsEnabled="False"/>
+            <TextBox x:Name="txtCity" TextWrapping="Wrap" Text="{Binding NewInspection.City}" Grid.Column="3" Grid.Row="7" IsEnabled="False"/>
+            <TextBox x:Name="txtCountry" TextWrapping="Wrap" Text="{Binding NewInspection.Country}" Grid.Column="3" Grid.Row="8" IsEnabled="False"/>
+            <TextBox x:Name="txtMunicipalityBox" TextWrapping="Wrap" Text="{Binding NewInspection.Municipality}" Grid.Column="3" Grid.Row="9" IsEnabled="False"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="txtCancel" Content="Cancel" IsCancel="True" Command="{Binding CloseWindowCommand}" Grid.Column="1"/>
+            <Button x:Name="btnAddInspection" Content="Verzoek toevoegen" Command="{Binding AddInspectionCommand}" Grid.Column="2"/>
+        </Grid>
+
+    </Grid>
+</Page>
