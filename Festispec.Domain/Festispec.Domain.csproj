@@ -73,10 +73,6 @@
     <Compile Include="Contact.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Extension\DateRangeExtension.cs" />
-    <Compile Include="IAddress.cs" />
-    <Compile Include="InspectionExtended.cs" />
-    <Compile Include="PlanningExtended.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
@@ -86,8 +82,33 @@
     <Compile Include="EmployeeRole.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extension\DateRangeExtension.cs" />
+    <Compile Include="IAddress.cs" />
+    <Compile Include="Inspection.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InspectionExtended.cs" />
+    <Compile Include="InspectionQuestion.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InspectionQuestionAnswer.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InspectionStatus.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inspector.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Note.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Planning.cs">
+      <DependentUpon>FestispecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PlanningExtended.cs" />
     <Compile Include="ContactExtended.cs" />
-    <Compile Include="ExtendedQuestion.cs" />
+    <Compile Include="QuestionExtended.cs" />
     <Compile Include="Extension\CopyPropertiesExtension.cs" />
     <Compile Include="Festispec.Context.cs">
       <AutoGen>True</AutoGen>
@@ -109,28 +130,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Inspection.cs">
-      <DependentUpon>FestispecModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InspectionQuestion.cs">
-      <DependentUpon>FestispecModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="InspectionStatus.cs">
-      <DependentUpon>FestispecModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Inspector.cs">
-      <DependentUpon>FestispecModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="LocalContainer.cs" />
-    <Compile Include="Note.cs">
-      <DependentUpon>FestispecModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="PDF\LayoutHelper.cs" />
     <Compile Include="PDF\PDFWriter.cs" />
     <Compile Include="PDF\PLanningListWriter.cs" />
-    <Compile Include="Planning.cs">
-      <DependentUpon>FestispecModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
@@ -156,14 +159,14 @@
     <Compile Include="Repository\Factory\Interface\IInspectorRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ILoginRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IPlanningRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IQuestionRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IRegulationRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\QuestionRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\LoginRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\PlanningRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\QuestionTypeRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\IQuestionTypeRepositoryFactory.cs" />
-    <Compile Include="Repository\Factory\Interface\ITemplateQuestionRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\RegulationRepositoryFactory.cs" />
-    <Compile Include="Repository\Factory\TemplateQuestionRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\TemplateRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\InspectionRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ITemplateRepositoryFactory.cs" />
@@ -179,14 +182,14 @@
     <Compile Include="Repository\Interface\IInspectorRepository.cs" />
     <Compile Include="Repository\Interface\ILoginRepository.cs" />
     <Compile Include="Repository\Interface\IPlanningRepository.cs" />
+    <Compile Include="Repository\Interface\IQuestionRepository.cs" />
     <Compile Include="Repository\Interface\IRegulationRepository.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="Repository\PlanningRepository.cs" />
+    <Compile Include="Repository\QuestionRepository.cs" />
     <Compile Include="Repository\QuestionTypeRepository.cs" />
-    <Compile Include="Repository\Interface\ITemplateQuestionRepository.cs" />
     <Compile Include="Repository\Interface\IQuestionTypeRepository.cs" />
     <Compile Include="Repository\RegulationRepository.cs" />
-    <Compile Include="Repository\TemplateQuestionRepository.cs" />
     <Compile Include="Repository\TemplateRepository.cs" />
     <Compile Include="Repository\Interface\ITemplateRepository.cs" />
     <Compile Include="Repository\RepositoryBase.cs" />

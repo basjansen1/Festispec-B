@@ -108,15 +108,15 @@ namespace Festispec.ViewModels.Planning
             }
         }
 
-        public virtual ICollection<InspectionQuestion> Questions
-        {
-            get { return Entity.Questions; }
-            set
-            {
-                Entity.Questions = value;
-                RaisePropertyChanged();
-            }
-        }
+//        public virtual ICollection<InspectionQuestion> Questions
+//        {
+//            get { return Entity.Questions; }
+//            set
+//            {
+//                Entity.Questions = value;
+//                RaisePropertyChanged();
+//            }
+//        }
 
         public override bool Save()
         {

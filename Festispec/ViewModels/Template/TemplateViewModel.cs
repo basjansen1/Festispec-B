@@ -1,38 +1,38 @@
 ﻿using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
+using Festispec.ViewModels.Question;
 
 namespace Festispec.ViewModels.Template
 {
     public class
-        TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, ITemplateRepository, Domain.Template>
+        TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, ITemplateRepository, Domain.Template>,
+            IHasQuestionCollection
     {
-        private TemplateQuestionViewModel _selectedQuestion;
+        private QuestionViewModel _selectedQuestion;
 
         public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory,
-            ITemplateQuestionViewModelFactory templateQuestionViewModelFactory) : base(repositoryFactory)
+            IQuestionViewModelFactory questionViewModelFactory) : base(repositoryFactory)
         {
-            Questions = new ObservableCollection<TemplateQuestionViewModel>(
-                Entity.Questions.Select(templateQuestionViewModelFactory.CreateViewModel));
-            Questions.CollectionChanged += QuestionsOnCollectionChanged;
+            Questions = new ObservableCollection<QuestionViewModel>(
+                Entity.TemplateQuestion.Select(question =>
+                    questionViewModelFactory.CreateViewModel(question.Question)));
         }
 
         public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory,
-            ITemplateQuestionViewModelFactory templateQuestionViewModelFactory, Domain.Template entity)
+            IQuestionViewModelFactory questionViewModelFactory, Domain.Template entity)
             : base(repositoryFactory, entity)
         {
-            Questions = new ObservableCollection<TemplateQuestionViewModel>(
-                Entity.Questions.Select(templateQuestionViewModelFactory.CreateViewModel));
-            Questions.CollectionChanged += QuestionsOnCollectionChanged;
+            Questions = new ObservableCollection<QuestionViewModel>(
+                Entity.TemplateQuestion.Select(question =>
+                    questionViewModelFactory.CreateViewModel(question.Question)));
         }
 
         public int Id => Entity.Id;
-
 
         public string Name
         {
@@ -44,7 +44,6 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-
         public string Description
         {
             get { return Entity.Description; }
@@ -55,9 +54,9 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        public ObservableCollection<TemplateQuestionViewModel> Questions { get; }
+        public ObservableCollection<QuestionViewModel> Questions { get; }
 
-        public TemplateQuestionViewModel SelectedQuestion
+        public QuestionViewModel SelectedQuestion
         {
             get { return _selectedQuestion; }
             set
@@ -67,24 +66,15 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        private void QuestionsOnCollectionChanged(object sender,
-            NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        public void AddQuestion(QuestionViewModel question)
         {
-            switch (notifyCollectionChangedEventArgs.Action)
-            {
-                case NotifyCollectionChangedAction.Add:
-                    Entity.Questions.Add(((TemplateQuestionViewModel) notifyCollectionChangedEventArgs.NewItems[0])
-                        .Entity);
-                    break;
-                case NotifyCollectionChangedAction.Remove:
-                    Entity.Questions.Remove(((TemplateQuestionViewModel) notifyCollectionChangedEventArgs.OldItems[0])
-                        .Entity);
-                    break;
-            }
+            Questions.Add(question);
         }
 
         public override bool Save()
         {
+            // TODO: Validation
+
             try
             {
                 Domain.Template updated;
@@ -94,19 +84,21 @@ namespace Festispec.ViewModels.Template
                     updated = Id == 0
                         ? templateRepository.Add(Entity)
                         : templateRepository.Update(Entity, Id);
+
+                    foreach (var questionViewModel in questionsToUpdate)
+                    {
+                        // Delete if needed, else try attach
+                        if (questionViewModel.IsDeleted)
+                            templateRepository.DetachQuestions(updated, questionViewModel.Entity);
+                        else
+                            templateRepository.TryAttachQuestion(updated, questionViewModel.Entity);
+                    }
                 }
 
                 // First we map the updated values to the entity
                 MapValues(updated, Entity);
                 // Then we overwrite the original values with the new entity values
                 MapValuesToOriginal();
-
-                foreach (var templateQuestionViewModel in questionsToUpdate)
-                {
-                    // Manually attach the template by id
-                    templateQuestionViewModel.Template_Id = Entity.Id;
-                    templateQuestionViewModel.Save();
-                }
             }
             catch (DbEntityValidationException ex)
             {
