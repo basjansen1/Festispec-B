@@ -3,9 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Festispec.Converter"
         mc:Ignorable="d"
         Title="CustomerAddOrUpdate"
         DataContext="{Binding Source={StaticResource Locator}, Path=CustomerAddOrUpdate}">
+    <Page.Resources>
+        <local:AmericanDateConverter x:Key="AmericanDateConverter" />
+    </Page.Resources>
     <StackPanel>
         <Label>Naam</Label>
         <TextBox Text="{Binding Path=EntityViewModel.Name}" />
@@ -25,7 +29,7 @@
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding EntityViewModel.Inspections}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
-                <DataGridTextColumn Header="Start datum" Binding="{Binding Start}" Width="*" />
+                <DataGridTextColumn Header="Start datum" Binding="{Binding Path=Start, Converter={StaticResource AmericanDateConverter}}" Width="*" />
                 <DataGridTextColumn Header="Eind" Binding="{Binding End}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
