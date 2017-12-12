@@ -11,11 +11,8 @@ namespace Festispec.ViewModels.PDF
 {
     public abstract class PDFWriter
     {
-        private string _title;
         private PdfDocument _document;
-        private XFont _font;
         private LayoutHelper _helper;
-        private XUnit _left = XUnit.FromCentimeter(2.5);
             
         public PDFWriter()
         {
@@ -25,38 +22,37 @@ namespace Festispec.ViewModels.PDF
         }
         public void SetDocumentTitle(string title)
         {
-            ChangeFont(new XFont("Verdana", 20, XFontStyle.Bold));
+            SetFont(new XFont("Verdana", 20, XFontStyle.Bold));
             AddText(title);
         }
 
         public void AddLine(string sentence)
         {
-            ChangeFont(new XFont("Verdana", 12, XFontStyle.Regular));
+            SetFont(new XFont("Verdana", 12, XFontStyle.Regular));
             AddText(sentence);
         }
 
         public void AddLine(string sentence, XFont font)
         {
-            ChangeFont(font);
+            SetFont(font);
             AddText(sentence);
         }
 
         public void AddEmptyLine()
         {
-            AddLine("");
+            AddText("");
         }
 
         public void AddParagraphTitle(string header)
         {
-            ChangeFont(new XFont("Verdana", 16, XFontStyle.Regular));
+            SetFont(new XFont("Verdana", 16, XFontStyle.Regular));
             AddText(header);
         }
 
         private void AddText(string text)
         {
-            XUnit top = _helper.GetLinePosition(_font.Size);
-            _helper.Gfx.DrawString(text, _font, XBrushes.Black, _left,
-                top, XStringFormats.TopLeft);
+            //  _helper.DrawText(text);
+            _helper.TextToDocument(text);
         }
 
         public void AddImage(XImage image)
@@ -64,9 +60,9 @@ namespace Festispec.ViewModels.PDF
 
         }
 
-        public void ChangeFont(XFont font)
+        public void SetFont(XFont font)
         {
-            _font = font;
+            _helper.Font = font;
         }
 
         public void SaveAs(string saveAsTitle)

@@ -1,5 +1,6 @@
 ﻿using PdfSharp;
 using PdfSharp.Drawing;
+using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,10 @@ namespace Festispec.ViewModels.PDF
         private readonly XUnit _topPosition;
         private readonly XUnit _bottomMargin;
         private XUnit _currentPosition;
+        private XUnit _left = XUnit.FromCentimeter(2.5);
+        public int MarginBetweenLines { get; set; }
+        public XFont Font { get; set; }
+        public XTextFormatter TF { get; set; }
 
         public LayoutHelper(PdfDocument document, XUnit topPosition, XUnit bottomMargin)
         {
@@ -22,7 +27,9 @@ namespace Festispec.ViewModels.PDF
             _topPosition = topPosition;
             _bottomMargin = bottomMargin;
             // Set a value outside the page - a new page will be created on the first request.
-            _currentPosition = bottomMargin + 10000;
+            // _currentPosition = bottomMargin + 10000;
+            CreatePage();
+            MarginBetweenLines = 23;
         }
 
         public XGraphics Gfx { get; private set; }
@@ -48,7 +55,54 @@ namespace Festispec.ViewModels.PDF
             Page = _document.AddPage();
             Page.Size = PageSize.A4;
             Gfx = XGraphics.FromPdfPage(Page);
+            TF = new XTextFormatter(Gfx); // new
             _currentPosition = _topPosition;
+        }
+
+        public void TextToDocument(string text)
+        {
+            string[] wordList = text.Split(' ');
+            string sentence = null;
+            string tempSentence = null;
+
+            //foreach (string word in wordList)
+            //{
+            //    sentenceLength = sentence == null ? 0 : sentence.Length;
+
+            //    if ((sentenceLength + word.Length) > (Page.Width.Centimeter - _left))
+            //    {
+            //        DrawText(sentence);
+            //        sentence = word;
+            //    }
+            //    else
+            //    {
+            //        sentence = sentence + " " + word;
+            //    }
+            //}
+            foreach (string word in wordList)
+            {
+                tempSentence = tempSentence == null ? word : tempSentence + word;
+
+                if (Gfx.MeasureString(tempSentence, Font).Width > (Page.Width - _left))
+                {
+                    DrawText(sentence);
+                    sentence = word;
+                    tempSentence = sentence;
+                }
+                else
+                {
+                    sentence = sentence + word;
+                }
+            }
+            DrawText(sentence);
+        }
+
+        public void DrawText(string text)
+        {
+            XUnit top = GetLinePosition(MarginBetweenLines);
+            Gfx.DrawString(text, Font, XBrushes.Black, _left, top, XStringFormats.TopLeft);
+            //XRect rect = new XRect(_left, top, Page.Width - _left, Page.Height); // new
+            //TF.DrawString(text, Font, XBrushes.Black, rect, XStringFormats.TopLeft); // new
         }
     }
 }
