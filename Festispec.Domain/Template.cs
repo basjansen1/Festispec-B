@@ -17,7 +17,7 @@ namespace Festispec.Domain
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Template()
         {
-            this.Questions = new HashSet<TemplateQuestion>();
+            this.TemplateQuestion = new HashSet<TemplateQuestion>();
         }
     
         public int Id { get; set; }
@@ -25,6 +25,6 @@ namespace Festispec.Domain
         public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TemplateQuestion> Questions { get; set; }
+        public virtual ICollection<TemplateQuestion> TemplateQuestion { get; set; }
     }
 }

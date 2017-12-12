@@ -1,22 +1,18 @@
-﻿<Page x:Class="Festispec.Views.Template.TemplateQuestionAdd"
+﻿<Page x:Class="Festispec.Views.Inspector.Schedule.InspectorScheduleAddOrUpdate"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      Title="TemplateQuestionAdd"
-      DataContext="{Binding Source={StaticResource Locator}, Path=TemplateQuestionAdd}">
+      Title="InspectorScheduleAddOrUpdate"
+      DataContext="{Binding Source={StaticResource Locator}, Path=InspectorScheduleAddOrUpdate}">
 
     <StackPanel>
-        <Label>Vraag</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.Name}" />
-        <Label>Vraag type</Label>
-        <ComboBox ItemsSource="{Binding Path=QuestionTypes}"
-                  DisplayMemberPath="Type"
-                  SelectedValuePath="Type"
-                  SelectedIndex="0"
-                  SelectedValue="{Binding Path=EntityViewModel.QuestionType_Type}" />
-
+        <Label>Niet beschikbaar:</Label>
+        <Label>- vanaf:</Label>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.NotAvailableFrom}"/>
+        <Label>- tot:</Label>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.NotAvailableTo}"/>
         <Grid Height="50">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

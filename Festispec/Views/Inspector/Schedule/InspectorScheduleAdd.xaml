@@ -1,0 +1,26 @@
+﻿<Page x:Class="Festispec.Views.Inspector.Schedule.InspectorScheduleAdd"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      Title="InspectorScheduleAdd"
+      DataContext="{Binding Source={StaticResource Locator}, Path=InspectorScheduleAdd}">
+
+    <StackPanel>
+        <Label>Niet beschikbaar:</Label>
+        <Label>- vanaf:</Label>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.NotAvailableFrom}"/>
+        <Label>- tot:</Label>
+        <DatePicker SelectedDate="{Binding Path=EntityViewModel.NotAvailableTo}"/>
+        <Grid Height="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content="Cancel" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
+            <Button Grid.Column="1" Content="Save" Margin="5px 10px" Command="{Binding SaveEntityCommand}" />
+        </Grid>
+    </StackPanel>
+</Page>

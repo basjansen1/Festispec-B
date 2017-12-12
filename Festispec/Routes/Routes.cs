@@ -27,20 +27,6 @@ namespace Festispec.Routes
             Roles = new[] {"Manager", "Medewerker"}
         };
 
-        public static Route TemplateQuestionAddOrUpdate = new Route
-        {
-            Key = "UpdateQuestion",
-            PageType = new Uri("../Views/Template/TemplateQuestionAddOrUpdate.xaml", UriKind.Relative),
-            Roles = new[] {"Manager", "Medewerker"}
-        };
-
-        public static Route TemplateQuestionAdd = new Route
-        {
-            Key = "AddQuestion",
-            PageType = new Uri("../Views/Template/TemplateQuestionAdd.xaml", UriKind.Relative),
-            Roles = new[] {"Manager", "Medewerker"}
-        };
-
         #endregion
 
         #region Employee
@@ -59,6 +45,11 @@ namespace Festispec.Routes
             PageType = new Uri("../Views/Employee/EmployeeAddOrUpdate.xaml", UriKind.Relative),
             Roles = new[] {"Manager"}
         };
+
+        #endregion
+
+        #region Inspector
+
 
         public static Route InspectorList = new Route
         {
@@ -191,7 +182,34 @@ namespace Festispec.Routes
             Roles = new[] {"Manager", "Medewerker"}
         };
 
+        public static Route InspectorSchedule = new Route
+        {
+            Key = "InspectorSchedule",
+            PageType = new Uri("../Views/Inspector/Schedule/InspectorSchedule.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
+        };
+
+        public static Route InspectorScheduleAddOrUpdate = new Route
+        {
+            Key = "InspectorScheduleAddOrUpdate",
+            PageType = new Uri("../Views/Inspector/Schedule/InspectorScheduleAddOrUpdate.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
+        };
+
+        public static Route InspectorScheduleAdd = new Route
+        {
+            Key = "InspectorScheduleAdd",
+            PageType = new Uri("../Views/Inspector/Schedule/InspectorScheduleAdd.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
+        };
         #endregion
+
+        public static Route QuestionAdd = new Route()
+        {
+            Key = "QuestionAdd",
+            PageType = new Uri("../Views/Question/QuestionAdd.xaml", UriKind.Relative),
+            Roles = new[] {"Manager", "Medewerker"}
+        };
 
     }
 }

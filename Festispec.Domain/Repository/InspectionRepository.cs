@@ -39,5 +39,18 @@ namespace Festispec.Domain.Repository
 
             return entity;
         }
+
+        public void AddQuestion(Inspection inspection, Question question)
+        {
+            if (question.Id == 0)
+            {
+                DbContext.Set<Question>().Add(question);
+                DbContext.SaveChanges();
+            }
+
+            DbContext.Set<InspectionQuestion>()
+                .Add(new InspectionQuestion {Inspection_Id = inspection.Id, Question_Id = question.Id});
+            DbContext.SaveChanges();
+        }
     }
 }

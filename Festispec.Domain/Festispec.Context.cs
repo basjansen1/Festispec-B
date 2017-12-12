@@ -35,5 +35,8 @@ namespace Festispec.Domain
         public virtual DbSet<Question> Question { get; set; }
         public virtual DbSet<QuestionType> QuestionType { get; set; }
         public virtual DbSet<Template> Template { get; set; }
+        public virtual DbSet<InspectionQuestion> InspectionQuestion { get; set; }
+        public virtual DbSet<InspectionQuestionAnswer> InspectionQuestionAnswer { get; set; }
+        public virtual DbSet<TemplateQuestion> TemplateQuestion { get; set; }
     }
 }

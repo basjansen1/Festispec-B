@@ -12,6 +12,10 @@ namespace Festispec.Domain.Repository
         {
         }
 
+        public override IQueryable<Inspector> Get()
+        {
+            return base.Get().Include(e => e.Schedule);
+        }
         public override Inspector Add(Inspector entity)
         {
             entity = CleanRelations(entity);
