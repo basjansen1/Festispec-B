@@ -24,13 +24,10 @@ namespace Festispec.ViewModels
 
         private void setTitle()
         {
-            if (_state.IsOnline)
-            {
-                Title = "Festispec - You are connected!";
-            } else
+            if (!_state.IsOnline)
             {
                 Title = "Festispec - You are NOT connected!";
-            }
+            } 
         }
 
         public ICommand OnWindowClosingCommand { get; private set; }

@@ -36,12 +36,12 @@ namespace Festispec.ViewModels
 
         private MessageBoxResult ShowPopup() //show if user is online or offline
         {
-            if (_state.IsOnline)
+            if (!_state.IsOnline)
             {
-                return MessageBox.Show("You are online!");
+                return MessageBox.Show("You are offline! Welcome!");
             } else
             {
-                return MessageBox.Show("You are offline!");
+                return MessageBox.Show("Welcome!");
             }
         }
 
