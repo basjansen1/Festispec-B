@@ -64,6 +64,11 @@ namespace Festispec.ViewModels.PDF
             _helper.Font = font;
         }
 
+        public void SetColor(XSolidBrush color)
+        {
+            _helper.Color = color;
+        }
+
         public void SaveAs(string saveAsTitle)
         {
             _document.Save(saveAsTitle + ".pdf");

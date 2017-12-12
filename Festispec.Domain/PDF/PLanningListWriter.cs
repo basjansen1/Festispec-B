@@ -39,7 +39,6 @@ namespace Festispec.Domain.PDF
 
         public void AddParagraphHeader(string header)
         {
-         //   AddEmptyLine();
             AddParagraphTitle(header);
         }
 
@@ -74,7 +73,7 @@ namespace Festispec.Domain.PDF
             AddEmptyLine();
             foreach (Planning planning in _planningList)
             {
-                AddParagraphHeader("Planning information Planning information Planning information Planning information Planning information"); // + planning.Date
+                AddParagraphHeader("Planning information Planning information Planning information Planning information Planning information Planning information Planning information Planning information");
                 AddPlanningData(planning);
                 AddParagraphHeader("Inspection information");
                 AddInspectionData(planning.Inspection);

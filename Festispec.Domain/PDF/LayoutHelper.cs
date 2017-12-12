@@ -20,6 +20,7 @@ namespace Festispec.ViewModels.PDF
         public int MarginBetweenLines { get; set; }
         public XFont Font { get; set; }
         public XTextFormatter TF { get; set; }
+        public XSolidBrush Color { get; set; }
 
         public LayoutHelper(PdfDocument document, XUnit topPosition, XUnit bottomMargin)
         {
@@ -28,6 +29,7 @@ namespace Festispec.ViewModels.PDF
             _bottomMargin = bottomMargin;
             CreatePage();
             MarginBetweenLines = 23;
+            Color = XBrushes.Black;
         }
 
         public XGraphics Gfx { get; private set; }
@@ -53,7 +55,6 @@ namespace Festispec.ViewModels.PDF
             Page = _document.AddPage();
             Page.Size = PageSize.A4;
             Gfx = XGraphics.FromPdfPage(Page);
-            TF = new XTextFormatter(Gfx); // new
             _currentPosition = _topPosition;
         }
 
@@ -67,7 +68,7 @@ namespace Festispec.ViewModels.PDF
             {
                 tempSentence = tempSentence == null ? word : tempSentence + word + " ";
 
-                if (Gfx.MeasureString(tempSentence, Font).Width > (Page.Width - _left))
+                if (Gfx.MeasureString(tempSentence, Font).Width > (Page.Width - _left)) // check whether a linebreak is needed
                 {
                     DrawText(sentence);
                     sentence = word;
@@ -78,13 +79,13 @@ namespace Festispec.ViewModels.PDF
                     sentence = sentence + word + " ";
                 }
             }
-            DrawText(sentence);
+            DrawText(sentence); // draw last sentence
         }
 
         public void DrawText(string text)
         {
             XUnit top = GetLinePosition(MarginBetweenLines);
-            Gfx.DrawString(text, Font, XBrushes.Black, _left, top, XStringFormats.TopLeft);
+            Gfx.DrawString(text, Font, Color, _left, top, XStringFormats.TopLeft);
         }
     }
 }
