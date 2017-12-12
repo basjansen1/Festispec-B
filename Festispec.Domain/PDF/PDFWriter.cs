@@ -51,7 +51,6 @@ namespace Festispec.ViewModels.PDF
 
         private void AddText(string text)
         {
-            //  _helper.DrawText(text);
             _helper.TextToDocument(text);
         }
 

@@ -26,8 +26,6 @@ namespace Festispec.ViewModels.PDF
             _document = document;
             _topPosition = topPosition;
             _bottomMargin = bottomMargin;
-            // Set a value outside the page - a new page will be created on the first request.
-            // _currentPosition = bottomMargin + 10000;
             CreatePage();
             MarginBetweenLines = 23;
         }
@@ -64,24 +62,10 @@ namespace Festispec.ViewModels.PDF
             string[] wordList = text.Split(' ');
             string sentence = null;
             string tempSentence = null;
-
-            //foreach (string word in wordList)
-            //{
-            //    sentenceLength = sentence == null ? 0 : sentence.Length;
-
-            //    if ((sentenceLength + word.Length) > (Page.Width.Centimeter - _left))
-            //    {
-            //        DrawText(sentence);
-            //        sentence = word;
-            //    }
-            //    else
-            //    {
-            //        sentence = sentence + " " + word;
-            //    }
-            //}
+            
             foreach (string word in wordList)
             {
-                tempSentence = tempSentence == null ? word : tempSentence + word;
+                tempSentence = tempSentence == null ? word : tempSentence + word + " ";
 
                 if (Gfx.MeasureString(tempSentence, Font).Width > (Page.Width - _left))
                 {
@@ -91,7 +75,7 @@ namespace Festispec.ViewModels.PDF
                 }
                 else
                 {
-                    sentence = sentence + word;
+                    sentence = sentence + word + " ";
                 }
             }
             DrawText(sentence);
@@ -101,8 +85,6 @@ namespace Festispec.ViewModels.PDF
         {
             XUnit top = GetLinePosition(MarginBetweenLines);
             Gfx.DrawString(text, Font, XBrushes.Black, _left, top, XStringFormats.TopLeft);
-            //XRect rect = new XRect(_left, top, Page.Width - _left, Page.Height); // new
-            //TF.DrawString(text, Font, XBrushes.Black, rect, XStringFormats.TopLeft); // new
         }
     }
 }
