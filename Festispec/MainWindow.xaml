@@ -8,7 +8,10 @@
         WindowStartupLocation="CenterScreen"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-        Title="Festispec" Height="600" Width="800">
+        Title="Festispec" Height="600" Width="950"
+        MinHeight="600" MinWidth="950"
+        
+        >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding OnWindowClosingCommand}"/>
