@@ -13,30 +13,30 @@ namespace Festispec.ViewModels.Regulation
     public class RegulationListViewModel : NavigatableViewModelBase
     {
         private readonly INavigationService _navigationService;
-        private readonly IRegulationRepositoryFactory _regulationsRepositoryFactory;
-        private readonly IRegulationsViewModelFactory _regulationsViewModelFactory;
+        private readonly IRegulationRepositoryFactory _regulationRepositoryFactory;
+        private readonly IRegulationViewModelFactory _regulationViewModelFactory;
 
         public RegulationListViewModel(INavigationService navigationService,
-            IRegulationRepositoryFactory regulationsRepositoryFactory,
-            IRegulationsViewModelFactory regulationsViewModelFactory) : base(navigationService)
+            IRegulationRepositoryFactory regulationRepositoryFactory,
+            IRegulationViewModelFactory regulationViewModelFactory) : base(navigationService)
         {
             _navigationService = navigationService;
-            _regulationsRepositoryFactory = regulationsRepositoryFactory;
-            _regulationsViewModelFactory = regulationsViewModelFactory;
+            _regulationRepositoryFactory = regulationRepositoryFactory;
+            _regulationViewModelFactory = regulationViewModelFactory;
 
             RegisterCommands();
             LoadRegulations();
 
             NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
         }
-        public ICommand NavigateToRegulationsAddCommand { get; set; }
-        public ICommand NavigateToRegulationsUpdateCommand { get; set; }
-        public ICommand RegulationsDeleteCommand { get; set; }
+        public ICommand NavigateToRegulationAddCommand { get; set; }
+        public ICommand NavigateToRegulationUpdateCommand { get; set; }
+        public ICommand RegulationDeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
 
-        public ObservableCollection<RegulationViewModel> Regulations { get; private set; }
+        public ObservableCollection<RegulationViewModel> Regulation { get; private set; }
 
-        public RegulationViewModel SelectedRegulations { get; set; }
+        public RegulationViewModel SelectedRegulation { get; set; }
 
         public string SearchName { get; set; } = "";
         public string SearchMunicipality { get; set; } = "";
@@ -51,23 +51,23 @@ namespace Festispec.ViewModels.Regulation
         }
         private void RegisterCommands()
         {
-            NavigateToRegulationsAddCommand =
-                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.RegulationsAddOrUpdate));
-            NavigateToRegulationsUpdateCommand = new RelayCommand(
-                () => _navigationService.NavigateTo(Routes.Routes.RegulationsAddOrUpdate, SelectedRegulations),
-                () => SelectedRegulations != null);
-            RegulationsDeleteCommand = new RelayCommand(() => {
+            NavigateToRegulationAddCommand =
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.RegulationAddOrUpdate));
+            NavigateToRegulationUpdateCommand = new RelayCommand(
+                () => _navigationService.NavigateTo(Routes.Routes.RegulationAddOrUpdate, SelectedRegulation),
+                () => SelectedRegulation != null);
+            RegulationDeleteCommand = new RelayCommand(() => {
                 var result = MessageBox.Show("Weet je zeker dat je deze regel wilt verwijderen?", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 if (result != MessageBoxResult.Yes) return;
-                SelectedRegulations.Delete();
+                SelectedRegulation.Delete();
                 LoadRegulations();
-            }, () => SelectedRegulations != null);
+            }, () => SelectedRegulation != null);
             SearchCommand = new RelayCommand(LoadRegulations);
         }
         private void LoadRegulations()
         {
-            using (var RegulationsRepository = _regulationsRepositoryFactory.CreateRepository())
+            using (var RegulationsRepository = _regulationRepositoryFactory.CreateRepository())
             {
                 var query = RegulationsRepository.Get();
 
@@ -80,11 +80,11 @@ namespace Festispec.ViewModels.Regulation
                     query = query.Where(regulation => regulation.Municipality.Contains(SearchMunicipality));
                 }
 
-                Regulations =
+                Regulation =
                     new ObservableCollection<RegulationViewModel>(
                         query.ToList()
-                            .Select(regulation => _regulationsViewModelFactory.CreateViewModel(regulation)));
-                RaisePropertyChanged(nameof(Regulations));
+                            .Select(regulation => _regulationViewModelFactory.CreateViewModel(regulation)));
+                RaisePropertyChanged(nameof(Regulation));
             }
         }
     }

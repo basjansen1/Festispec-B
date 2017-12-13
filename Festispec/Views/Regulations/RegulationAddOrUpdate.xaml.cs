@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Festispec.Views.Regulations
 {
     /// <summary>
-    /// Interaction logic for RegulationsList.xaml
+    /// Interaction logic for RegulationsAddOrUpdate.xaml
     /// </summary>
-    public partial class RegulationsList : Page
+    public partial class RegulationAddOrUpdate : Page
     {
-        public RegulationsList()
+        public RegulationAddOrUpdate()
         {
             InitializeComponent();
         }

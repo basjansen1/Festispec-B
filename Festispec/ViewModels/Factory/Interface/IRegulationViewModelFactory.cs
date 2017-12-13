@@ -3,7 +3,7 @@ using Festispec.ViewModels.Regulation;
 
 namespace Festispec.ViewModels.Factory.Interface
 {
-    public interface IRegulationsViewModelFactory : IViewModelFactory<RegulationViewModel, Domain.Regulation>
+    public interface IRegulationViewModelFactory : IViewModelFactory<RegulationViewModel, Domain.Regulation>
     {
 
     }

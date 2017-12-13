@@ -1,10 +1,10 @@
-﻿<Page x:Class="Festispec.Views.Regulations.RegulationsList"
+﻿<Page x:Class="Festispec.Views.Regulations.RegulationList"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       mc:Ignorable="d" 
-      DataContext="{Binding Source={StaticResource Locator}, Path=RegulationsList}">
+      DataContext="{Binding Source={StaticResource Locator}, Path=RegulationList}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80" />
@@ -19,9 +19,9 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToRegulationsAddCommand}" />
-            <Button Grid.Column="2" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToRegulationsUpdateCommand}" />
-            <Button Grid.Column="3" Content="Verwijder" Margin="5px 10px" Command="{Binding RegulationsDeleteCommand}" />
+            <Button Grid.Column="1" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToRegulationAddCommand}" />
+            <Button Grid.Column="2" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToRegulationUpdateCommand}" />
+            <Button Grid.Column="3" Content="Verwijder" Margin="5px 10px" Command="{Binding RegulationDeleteCommand}" />
         </Grid>
 
         <Grid Grid.Row="1">
@@ -46,7 +46,7 @@
             </DockPanel>
             <Button Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand}">Zoek</Button>
 
-            <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedRegulations}" ItemsSource="{Binding Regulations}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+            <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedRegulation}" ItemsSource="{Binding Regulation}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Titel" Binding="{Binding Name}" Width="*" />
                     <DataGridTextColumn Header="Beschrijving" Binding="{Binding Description}" Width="*" />

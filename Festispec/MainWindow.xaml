@@ -44,7 +44,7 @@
                 <Button Grid.Column="4" Content="Inspecteurs" Margin="5px 15px" Command="{Binding NavigateToInspectorListCommand}"/>
                 <Button Grid.Column="5" Content="Klanten" Margin="5px 15px" Command="{Binding NavigateToCustomerListCommand}"/>
                 <Button Grid.Column="6" Content="Inspecties" Margin="5px 15px" Command="{Binding NavigateToInspectionListCommand}"/>
-                <Button Grid.Column="7" Content="Regelgeving" Margin="5px 15px" Command="{Binding NavigateToRegulationsListCommand}"/>
+                <Button Grid.Column="7" Content="Regelgeving" Margin="5px 15px" Command="{Binding NavigateToRegulationListCommand}"/>
             </Grid>
 
             <Frame Grid.Row="1" Name="MainFrame" NavigationUIVisibility="Hidden"/>

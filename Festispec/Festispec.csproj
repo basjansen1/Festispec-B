@@ -186,8 +186,8 @@
     <Compile Include="ViewModels\Planning\PlanningViewModel.cs" />
     <Compile Include="ViewModels\Regulation.Old\RegulationListVM.cs" />
     <Compile Include="ViewModels\Regulation.Old\RegulationVM.cs" />
-    <Compile Include="ViewModels\Factory\Interface\IRegulationsViewModelFactory.cs" />
-    <Compile Include="ViewModels\Factory\RegulationsViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IRegulationViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\RegulationViewModelFactory.cs" />
     <Compile Include="ViewModels\Regulation\RegulationAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Regulation\RegulationListViewModel.cs" />
     <Compile Include="ViewModels\Regulation\RegulationViewModel.cs" />
@@ -261,11 +261,11 @@
     <Compile Include="Views\Planning\PlanningList.xaml.cs">
       <DependentUpon>PlanningList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Regulations\RegulationsAddOrUpdate.xaml.cs">
-      <DependentUpon>RegulationsAddOrUpdate.xaml</DependentUpon>
+    <Compile Include="Views\Regulations\RegulationAddOrUpdate.xaml.cs">
+      <DependentUpon>RegulationAddOrUpdate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Regulations\RegulationsList.xaml.cs">
-      <DependentUpon>RegulationsList.xaml</DependentUpon>
+    <Compile Include="Views\Regulations\RegulationList.xaml.cs">
+      <DependentUpon>RegulationList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Template\TemplateQuestionAdd.xaml.cs">
       <DependentUpon>TemplateQuestionAdd.xaml</DependentUpon>
@@ -334,11 +334,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Regulations\RegulationsAddOrUpdate.xaml">
+    <Page Include="Views\Regulations\RegulationAddOrUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Regulations\RegulationsList.xaml">
+    <Page Include="Views\Regulations\RegulationList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
