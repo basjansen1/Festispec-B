@@ -78,7 +78,7 @@ namespace Festispec.Domain.PDF
                 AddParagraphHeader("Inspection information");
                 AddInspectionData(planning.Inspection);
                 AddParagraphHeader("Inspector information: ");
-                AddImage("C:\\Users\\Gebruiker\\Pictures\\Ik 20 jaar\\IMG-20170509-WA0020.jpg");
+                AddImage("C:\\Users\\Gebruiker\\Pictures\\Vtech\\PA_Parrot.jpg");
                 AddInspectorData(planning.Inspector);
             }
             SaveAs("AllPlanningInformation");
