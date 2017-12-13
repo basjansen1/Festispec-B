@@ -10,12 +10,15 @@ namespace Festispec.Converter
         {
             if (value == null) return null;
             DateTime dateTime = (DateTime) value;
-            return dateTime.ToString("dd MMMM yyyy");
+            var date = dateTime.ToString("dd MMMM yyyy");
+            return date;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value == null) return null;
+            DateTime dateTime = (DateTime)value;
+            return dateTime.ToString("mm/dd/yyyy");
         }
     }
 }

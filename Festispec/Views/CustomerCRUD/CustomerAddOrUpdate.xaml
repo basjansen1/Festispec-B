@@ -30,7 +30,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
                 <DataGridTextColumn Header="Start datum" Binding="{Binding Path=Start, Converter={StaticResource AmericanDateConverter}}" Width="*" />
-                <DataGridTextColumn Header="Eind" Binding="{Binding End}" Width="*" />
+                <DataGridTextColumn Header="Eind" Binding="{Binding Path=End, Converter={StaticResource AmericanDateConverter}}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
         <Label>Huisnummer</Label>
