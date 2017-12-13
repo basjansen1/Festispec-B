@@ -34,7 +34,7 @@ namespace Festispec.Domain.PDF
         }
         public void SetTitle(string title)
         {
-            SetDocumentTitle(title);
+            AddTitle(title);
         }
 
         public void AddParagraphHeader(string header)
@@ -78,6 +78,7 @@ namespace Festispec.Domain.PDF
                 AddParagraphHeader("Inspection information");
                 AddInspectionData(planning.Inspection);
                 AddParagraphHeader("Inspector information: ");
+                AddImage("C:\\Users\\Gebruiker\\Pictures\\Ik 20 jaar\\IMG-20170509-WA0020.jpg");
                 AddInspectorData(planning.Inspector);
             }
             SaveAs("AllPlanningInformation");

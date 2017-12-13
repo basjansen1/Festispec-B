@@ -20,7 +20,7 @@ namespace Festispec.ViewModels.PDF
             // Use standard A4, page height is 29.7 cm. Use margins of 2.5 cm.
             _helper = new LayoutHelper(_document, XUnit.FromCentimeter(2.5), XUnit.FromCentimeter(29.7 - 2.5));
         }
-        public void SetDocumentTitle(string title)
+        public void AddTitle(string title)
         {
             SetFont(new XFont("Verdana", 20, XFontStyle.Bold));
             AddText(title);
@@ -54,9 +54,9 @@ namespace Festispec.ViewModels.PDF
             _helper.TextToDocument(text);
         }
 
-        public void AddImage(XImage image)
+        public void AddImage(string pathToImage)
         {
-
+            _helper.DrawImage(pathToImage);
         }
 
         public void SetFont(XFont font)

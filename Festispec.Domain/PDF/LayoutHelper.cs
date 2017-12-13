@@ -19,8 +19,8 @@ namespace Festispec.ViewModels.PDF
         private XUnit _left = XUnit.FromCentimeter(2.5);
         public int MarginBetweenLines { get; set; }
         public XFont Font { get; set; }
-        public XTextFormatter TF { get; set; }
         public XSolidBrush Color { get; set; }
+        public XStringFormat Allignment { get; set; }
 
         public LayoutHelper(PdfDocument document, XUnit topPosition, XUnit bottomMargin)
         {
@@ -30,6 +30,7 @@ namespace Festispec.ViewModels.PDF
             CreatePage();
             MarginBetweenLines = 23;
             Color = XBrushes.Black;
+            Allignment = XStringFormats.TopLeft;
         }
 
         public XGraphics Gfx { get; private set; }
@@ -85,7 +86,24 @@ namespace Festispec.ViewModels.PDF
         public void DrawText(string text)
         {
             XUnit top = GetLinePosition(MarginBetweenLines);
-            Gfx.DrawString(text, Font, Color, _left, top, XStringFormats.TopLeft);
+            Gfx.DrawString(text, Font, Color, _left, top, Allignment);
+        }
+
+        public void DrawImage(string pathToImage)
+        {
+            XImage image = XImage.FromFile(pathToImage);
+            double imageWidth = image.PixelWidth;
+            double imageHeight = image.PixelHeight;
+            // imageWidth = image.PixelWidth <= Page.Width - (_left * 2) ? image.PixelWidth : 200;
+
+            while (imageWidth > Page.Width - (_left * 2)) // scale the image so that it fits within the page
+            {
+                imageWidth *= 0.9;
+                imageHeight *= 0.9;
+            }
+            XUnit top = GetLinePosition(imageHeight);
+            Gfx.DrawImage(image, _left, top, imageWidth, imageHeight);
+            GetLinePosition(MarginBetweenLines); // provide space between the end of the image and the first text line
         }
     }
 }
