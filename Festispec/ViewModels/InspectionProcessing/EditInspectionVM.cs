@@ -2,7 +2,7 @@
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.NavigationService;
-using Festispec.ViewModels.InspectionProcessing;
+//using Festispec.ViewModels.InspectionProcessing;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;

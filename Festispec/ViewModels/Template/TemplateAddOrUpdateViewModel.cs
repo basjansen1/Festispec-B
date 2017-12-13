@@ -5,6 +5,7 @@ using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.NavigationService;
 using Festispec.ViewModels.Factory.Interface;
+using Festispec.ViewModels.Question;
 using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels.Template
@@ -26,17 +27,11 @@ namespace Festispec.ViewModels.Template
 
         private void RegisterCommands()
         {
-            NavigateToQuestionAddCommand =
-                new RelayCommand(
-                    () =>
-                    {
-                        EntityViewModel.SelectedQuestion = null;
-                        NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAdd, EntityViewModel);
-                    },
-                    () => EntityViewModel != null);
-            NavigateToQuestionUpdateCommand = new RelayCommand(
-                () => NavigationService.NavigateTo(Routes.Routes.TemplateQuestionAddOrUpdate, EntityViewModel),
-                () => EntityViewModel.SelectedQuestion != null && !EntityViewModel.SelectedQuestion.IsDeleted);
+            NavigateToQuestionAddCommand = new RelayCommand(() =>
+            {
+                EntityViewModel.SelectedQuestion = null;
+                NavigationService.NavigateTo(Routes.Routes.QuestionAdd, EntityViewModel);
+            }, () => EntityViewModel != null);
             QuestionDeleteCommand = new RelayCommand(() =>
             {
                 var result = MessageBox.Show("Weet je zeker dat je deze Template wilt verwijderen?", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Question);

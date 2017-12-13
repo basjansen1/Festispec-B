@@ -21,6 +21,7 @@
 
             <Button Grid.Column="1" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToInspectorAddCommand}" />
             <Button Grid.Column="2" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToInspectorUpdateCommand}" />
+            <Button Grid.Column="3" Content="Rooster" Margin="5px 10px" Command="{Binding NavigateToInspectorScheduleCommand}" />
         </Grid>
 
         <Grid Grid.Row="1">

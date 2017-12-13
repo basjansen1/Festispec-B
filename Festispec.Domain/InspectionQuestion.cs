@@ -12,13 +12,20 @@ namespace Festispec.Domain
     using System;
     using System.Collections.Generic;
     
-    public partial class InspectionQuestion : Question
+    public partial class InspectionQuestion
     {
-        public string Answer { get; set; }
-        public int Planning_Inspection_Id { get; set; }
-        public int Planning_Inspector_Id { get; set; }
-        public System.DateTime Planning_Date { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public InspectionQuestion()
+        {
+            this.InspectionQuestionAnswer = new HashSet<InspectionQuestionAnswer>();
+        }
     
-        public virtual Planning Planning { get; set; }
+        public int Inspection_Id { get; set; }
+        public int Question_Id { get; set; }
+    
+        public virtual Inspection Inspection { get; set; }
+        public virtual Question Question { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InspectionQuestionAnswer> InspectionQuestionAnswer { get; set; }
     }
 }

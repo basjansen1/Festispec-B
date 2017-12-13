@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/09/2017 15:32:23
+-- Date Created: 12/11/2017 16:04:51
 -- Generated from EDMX file: C:\Workspace\Avans\Projects\42IN06SOb\Festispec\Festispec.Domain\Festispec.edmx
 -- --------------------------------------------------
 
@@ -44,11 +44,23 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_QuestionTypeQuestion]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Question] DROP CONSTRAINT [FK_QuestionTypeQuestion];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TemplateTemplateQuestion]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Question_TemplateQuestion] DROP CONSTRAINT [FK_TemplateTemplateQuestion];
+IF OBJECT_ID(N'[dbo].[FK_InspectionInspectionQuestion]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[InspectionQuestion] DROP CONSTRAINT [FK_InspectionInspectionQuestion];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PlanningInspectionQuestion]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Question_InspectionQuestion] DROP CONSTRAINT [FK_PlanningInspectionQuestion];
+IF OBJECT_ID(N'[dbo].[FK_TemplateTemplateQuestion]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TemplateQuestion] DROP CONSTRAINT [FK_TemplateTemplateQuestion];
+GO
+IF OBJECT_ID(N'[dbo].[FK_QuestionInspectionQuestion]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[InspectionQuestion] DROP CONSTRAINT [FK_QuestionInspectionQuestion];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PlanningInspectionQuestionAnswer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[InspectionQuestionAnswer] DROP CONSTRAINT [FK_PlanningInspectionQuestionAnswer];
+GO
+IF OBJECT_ID(N'[dbo].[FK_InspectionQuestionInspectionQuestionAnswer]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[InspectionQuestionAnswer] DROP CONSTRAINT [FK_InspectionQuestionInspectionQuestionAnswer];
+GO
+IF OBJECT_ID(N'[dbo].[FK_QuestionTemplateQuestion]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TemplateQuestion] DROP CONSTRAINT [FK_QuestionTemplateQuestion];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Contact_inherits_Address]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Address_Contact] DROP CONSTRAINT [FK_Contact_inherits_Address];
@@ -64,12 +76,6 @@ IF OBJECT_ID(N'[dbo].[FK_Customer_inherits_Contact]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_Inspection_inherits_Address]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Address_Inspection] DROP CONSTRAINT [FK_Inspection_inherits_Address];
-GO
-IF OBJECT_ID(N'[dbo].[FK_TemplateQuestion_inherits_Question]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Question_TemplateQuestion] DROP CONSTRAINT [FK_TemplateQuestion_inherits_Question];
-GO
-IF OBJECT_ID(N'[dbo].[FK_InspectionQuestion_inherits_Question]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Question_InspectionQuestion] DROP CONSTRAINT [FK_InspectionQuestion_inherits_Question];
 GO
 
 -- --------------------------------------------------
@@ -106,6 +112,15 @@ GO
 IF OBJECT_ID(N'[dbo].[Template]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Template];
 GO
+IF OBJECT_ID(N'[dbo].[InspectionQuestion]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[InspectionQuestion];
+GO
+IF OBJECT_ID(N'[dbo].[InspectionQuestionAnswer]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[InspectionQuestionAnswer];
+GO
+IF OBJECT_ID(N'[dbo].[TemplateQuestion]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TemplateQuestion];
+GO
 IF OBJECT_ID(N'[dbo].[Address_Contact]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Address_Contact];
 GO
@@ -120,12 +135,6 @@ IF OBJECT_ID(N'[dbo].[Address_Customer]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Address_Inspection]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Address_Inspection];
-GO
-IF OBJECT_ID(N'[dbo].[Question_TemplateQuestion]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Question_TemplateQuestion];
-GO
-IF OBJECT_ID(N'[dbo].[Question_InspectionQuestion]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Question_InspectionQuestion];
 GO
 
 -- --------------------------------------------------
@@ -201,14 +210,14 @@ CREATE TABLE [dbo].[Question] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Description] nvarchar(max)  NULL,
-    [QuestionType_Type] nvarchar(64)  NOT NULL
+    [QuestionType_Type] nvarchar(64)  NOT NULL,
+    [Metadata] nvarchar(max)  NULL
 );
 GO
 
 -- Creating table 'QuestionType'
 CREATE TABLE [dbo].[QuestionType] (
-    [Type] nvarchar(64)  NOT NULL,
-    [Metadata] nvarchar(max)  NULL
+    [Type] nvarchar(64)  NOT NULL
 );
 GO
 
@@ -217,6 +226,30 @@ CREATE TABLE [dbo].[Template] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Description] nvarchar(max)  NULL
+);
+GO
+
+-- Creating table 'InspectionQuestion'
+CREATE TABLE [dbo].[InspectionQuestion] (
+    [Inspection_Id] int  NOT NULL,
+    [Question_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'InspectionQuestionAnswer'
+CREATE TABLE [dbo].[InspectionQuestionAnswer] (
+    [Inspection_Id] int  NOT NULL,
+    [Inspector_Id] int  NOT NULL,
+    [Date] datetime  NOT NULL,
+    [Question_Id] int  NOT NULL,
+    [Answer] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'TemplateQuestion'
+CREATE TABLE [dbo].[TemplateQuestion] (
+    [Template_Id] int  NOT NULL,
+    [Question_Id] int  NOT NULL
 );
 GO
 
@@ -267,23 +300,6 @@ CREATE TABLE [dbo].[Address_Inspection] (
     [End] datetime  NOT NULL,
     [Status_Status] nvarchar(128)  NOT NULL,
     [Customer_Id] int  NOT NULL,
-    [Id] int  NOT NULL
-);
-GO
-
--- Creating table 'Question_TemplateQuestion'
-CREATE TABLE [dbo].[Question_TemplateQuestion] (
-    [Template_Id] int  NOT NULL,
-    [Id] int  NOT NULL
-);
-GO
-
--- Creating table 'Question_InspectionQuestion'
-CREATE TABLE [dbo].[Question_InspectionQuestion] (
-    [Answer] nvarchar(max)  NULL,
-    [Planning_Inspection_Id] int  NOT NULL,
-    [Planning_Inspector_Id] int  NOT NULL,
-    [Planning_Date] datetime  NOT NULL,
     [Id] int  NOT NULL
 );
 GO
@@ -352,6 +368,24 @@ ADD CONSTRAINT [PK_Template]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [Inspection_Id], [Question_Id] in table 'InspectionQuestion'
+ALTER TABLE [dbo].[InspectionQuestion]
+ADD CONSTRAINT [PK_InspectionQuestion]
+    PRIMARY KEY CLUSTERED ([Inspection_Id], [Question_Id] ASC);
+GO
+
+-- Creating primary key on [Inspection_Id], [Inspector_Id], [Date], [Question_Id] in table 'InspectionQuestionAnswer'
+ALTER TABLE [dbo].[InspectionQuestionAnswer]
+ADD CONSTRAINT [PK_InspectionQuestionAnswer]
+    PRIMARY KEY CLUSTERED ([Inspection_Id], [Inspector_Id], [Date], [Question_Id] ASC);
+GO
+
+-- Creating primary key on [Template_Id], [Question_Id] in table 'TemplateQuestion'
+ALTER TABLE [dbo].[TemplateQuestion]
+ADD CONSTRAINT [PK_TemplateQuestion]
+    PRIMARY KEY CLUSTERED ([Template_Id], [Question_Id] ASC);
+GO
+
 -- Creating primary key on [Id] in table 'Address_Contact'
 ALTER TABLE [dbo].[Address_Contact]
 ADD CONSTRAINT [PK_Address_Contact]
@@ -379,18 +413,6 @@ GO
 -- Creating primary key on [Id] in table 'Address_Inspection'
 ALTER TABLE [dbo].[Address_Inspection]
 ADD CONSTRAINT [PK_Address_Inspection]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
--- Creating primary key on [Id] in table 'Question_TemplateQuestion'
-ALTER TABLE [dbo].[Question_TemplateQuestion]
-ADD CONSTRAINT [PK_Question_TemplateQuestion]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
--- Creating primary key on [Id] in table 'Question_InspectionQuestion'
-ALTER TABLE [dbo].[Question_InspectionQuestion]
-ADD CONSTRAINT [PK_Question_InspectionQuestion]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -527,34 +549,76 @@ ON [dbo].[Question]
     ([QuestionType_Type]);
 GO
 
--- Creating foreign key on [Template_Id] in table 'Question_TemplateQuestion'
-ALTER TABLE [dbo].[Question_TemplateQuestion]
+-- Creating foreign key on [Inspection_Id] in table 'InspectionQuestion'
+ALTER TABLE [dbo].[InspectionQuestion]
+ADD CONSTRAINT [FK_InspectionInspectionQuestion]
+    FOREIGN KEY ([Inspection_Id])
+    REFERENCES [dbo].[Address_Inspection]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [Template_Id] in table 'TemplateQuestion'
+ALTER TABLE [dbo].[TemplateQuestion]
 ADD CONSTRAINT [FK_TemplateTemplateQuestion]
     FOREIGN KEY ([Template_Id])
     REFERENCES [dbo].[Template]
         ([Id])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_TemplateTemplateQuestion'
-CREATE INDEX [IX_FK_TemplateTemplateQuestion]
-ON [dbo].[Question_TemplateQuestion]
-    ([Template_Id]);
+-- Creating foreign key on [Question_Id] in table 'InspectionQuestion'
+ALTER TABLE [dbo].[InspectionQuestion]
+ADD CONSTRAINT [FK_QuestionInspectionQuestion]
+    FOREIGN KEY ([Question_Id])
+    REFERENCES [dbo].[Question]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating foreign key on [Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date] in table 'Question_InspectionQuestion'
-ALTER TABLE [dbo].[Question_InspectionQuestion]
-ADD CONSTRAINT [FK_PlanningInspectionQuestion]
-    FOREIGN KEY ([Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date])
+-- Creating non-clustered index for FOREIGN KEY 'FK_QuestionInspectionQuestion'
+CREATE INDEX [IX_FK_QuestionInspectionQuestion]
+ON [dbo].[InspectionQuestion]
+    ([Question_Id]);
+GO
+
+-- Creating foreign key on [Inspection_Id], [Inspector_Id], [Date] in table 'InspectionQuestionAnswer'
+ALTER TABLE [dbo].[InspectionQuestionAnswer]
+ADD CONSTRAINT [FK_PlanningInspectionQuestionAnswer]
+    FOREIGN KEY ([Inspection_Id], [Inspector_Id], [Date])
     REFERENCES [dbo].[Planning]
         ([Inspection_Id], [Inspector_Id], [Date])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_PlanningInspectionQuestion'
-CREATE INDEX [IX_FK_PlanningInspectionQuestion]
-ON [dbo].[Question_InspectionQuestion]
-    ([Planning_Inspection_Id], [Planning_Inspector_Id], [Planning_Date]);
+-- Creating foreign key on [Inspection_Id], [Question_Id] in table 'InspectionQuestionAnswer'
+ALTER TABLE [dbo].[InspectionQuestionAnswer]
+ADD CONSTRAINT [FK_InspectionQuestionInspectionQuestionAnswer]
+    FOREIGN KEY ([Inspection_Id], [Question_Id])
+    REFERENCES [dbo].[InspectionQuestion]
+        ([Inspection_Id], [Question_Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_InspectionQuestionInspectionQuestionAnswer'
+CREATE INDEX [IX_FK_InspectionQuestionInspectionQuestionAnswer]
+ON [dbo].[InspectionQuestionAnswer]
+    ([Inspection_Id], [Question_Id]);
+GO
+
+-- Creating foreign key on [Question_Id] in table 'TemplateQuestion'
+ALTER TABLE [dbo].[TemplateQuestion]
+ADD CONSTRAINT [FK_QuestionTemplateQuestion]
+    FOREIGN KEY ([Question_Id])
+    REFERENCES [dbo].[Question]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_QuestionTemplateQuestion'
+CREATE INDEX [IX_FK_QuestionTemplateQuestion]
+ON [dbo].[TemplateQuestion]
+    ([Question_Id]);
 GO
 
 -- Creating foreign key on [Id] in table 'Address_Contact'
@@ -598,24 +662,6 @@ ALTER TABLE [dbo].[Address_Inspection]
 ADD CONSTRAINT [FK_Inspection_inherits_Address]
     FOREIGN KEY ([Id])
     REFERENCES [dbo].[Address]
-        ([Id])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Id] in table 'Question_TemplateQuestion'
-ALTER TABLE [dbo].[Question_TemplateQuestion]
-ADD CONSTRAINT [FK_TemplateQuestion_inherits_Question]
-    FOREIGN KEY ([Id])
-    REFERENCES [dbo].[Question]
-        ([Id])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Id] in table 'Question_InspectionQuestion'
-ALTER TABLE [dbo].[Question_InspectionQuestion]
-ADD CONSTRAINT [FK_InspectionQuestion_inherits_Question]
-    FOREIGN KEY ([Id])
-    REFERENCES [dbo].[Question]
         ([Id])
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO

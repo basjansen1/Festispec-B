@@ -8,84 +8,84 @@ using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Test.DummyRepository
 {
-    public class DummyTemplateQuestionRepository : ITemplateQuestionRepository
+    public class DummyQuestionRepository : IQuestionRepository
     {
         public void Dispose()
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<TemplateQuestion> Get()
+        public IQueryable<Question> Get()
         {
             throw new NotImplementedException();
         }
 
-        public TemplateQuestion Get(params object[] keyValues)
+        public Question Get(params object[] keyValues)
         {
             throw new NotImplementedException();
         }
 
-        public Task<TemplateQuestion> GetAsync(params object[] keyValues)
+        public Task<Question> GetAsync(params object[] keyValues)
         {
             throw new NotImplementedException();
         }
 
-        public TemplateQuestion Find(Expression<Func<TemplateQuestion, bool>> predicate)
+        public Question Find(Expression<Func<Question, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public Task<TemplateQuestion> FindAsync(Expression<Func<TemplateQuestion, bool>> predicate)
+        public Task<Question> FindAsync(Expression<Func<Question, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public ICollection<TemplateQuestion> FindAll(Expression<Func<TemplateQuestion, bool>> predicate)
+        public ICollection<Question> FindAll(Expression<Func<Question, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ICollection<TemplateQuestion>> FindAllAsync(Expression<Func<TemplateQuestion, bool>> predicate)
+        public Task<ICollection<Question>> FindAllAsync(Expression<Func<Question, bool>> predicate)
         {
             throw new NotImplementedException();
         }
 
-        public TemplateQuestion Add(TemplateQuestion entity)
+        public Question Add(Question entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<TemplateQuestion> AddAsync(TemplateQuestion entity)
+        public Task<Question> AddAsync(Question entity)
         {
             throw new NotImplementedException();
         }
 
-        public TemplateQuestion Update(TemplateQuestion updated, params object[] keyValues)
+        public Question Update(Question updated, params object[] keyValues)
         {
             throw new NotImplementedException();
         }
 
-        public Task<TemplateQuestion> UpdateAsync(TemplateQuestion updated, params object[] keyValues)
+        public Task<Question> UpdateAsync(Question updated, params object[] keyValues)
         {
             throw new NotImplementedException();
         }
 
-        public TemplateQuestion AddOrUpdate(TemplateQuestion entity)
+        public Question AddOrUpdate(Question entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<TemplateQuestion> AddOrUpdateAsync(TemplateQuestion entity)
+        public Task<Question> AddOrUpdateAsync(Question entity)
         {
             throw new NotImplementedException();
         }
 
-        public int Delete(TemplateQuestion entity)
+        public int Delete(Question entity)
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> DeleteAsync(TemplateQuestion entity)
+        public Task<int> DeleteAsync(Question entity)
         {
             throw new NotImplementedException();
         }

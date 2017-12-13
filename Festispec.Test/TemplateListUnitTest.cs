@@ -18,9 +18,9 @@ namespace Festispec.Test
             var state = CreateDummyState();
             var navigationService = CreateDummyNavigationService(state);
             var templateRepositoryFactory = CreateDummyTemplateRepositoryFactory();
-            var templateQuestionRepositoryFactory = CreateDummyTemplateQuestionRepositoryFactory();
+            var templateQuestionRepositoryFactory = CreateDummyQuestionRepositoryFactory();
             var templateQuestionViewModelFactory =
-                CreateDummyTemplateQuestionViewModelFactory(templateQuestionRepositoryFactory);
+                CreateDummyQuestionViewModelFactory(templateQuestionRepositoryFactory);
             var templateViewModelFactory = CreateTemplateViewModelFactory(templateRepositoryFactory,
                 templateQuestionViewModelFactory);
 
@@ -47,26 +47,26 @@ namespace Festispec.Test
             return templateRepositoryFactoryMock.Object;
         }
 
-        private static ITemplateQuestionRepositoryFactory CreateDummyTemplateQuestionRepositoryFactory()
+        private static IQuestionRepositoryFactory CreateDummyQuestionRepositoryFactory()
         {
-            var templateQuestionRepositoryFactoryMock = new Mock<ITemplateQuestionRepositoryFactory>();
+            var templateQuestionRepositoryFactoryMock = new Mock<IQuestionRepositoryFactory>();
 
-            var dummyTemplateQuestionRepository = new DummyTemplateQuestionRepository();
+            var dummyQuestionRepository = new DummyQuestionRepository();
             templateQuestionRepositoryFactoryMock.Setup(factory => factory.CreateRepository())
-                .Returns(dummyTemplateQuestionRepository);
+                .Returns(dummyQuestionRepository);
 
             return templateQuestionRepositoryFactoryMock.Object;
         }
 
-        private static ITemplateQuestionViewModelFactory CreateDummyTemplateQuestionViewModelFactory(
-            ITemplateQuestionRepositoryFactory templateQuestionRepositoryFactory)
+        private static IQuestionViewModelFactory CreateDummyQuestionViewModelFactory(
+            IQuestionRepositoryFactory templateQuestionRepositoryFactory)
         {
-            return new TemplateQuestionViewModelFactory(templateQuestionRepositoryFactory);
+            return new QuestionViewModelFactory(templateQuestionRepositoryFactory);
         }
 
         private static ITemplateViewModelFactory CreateTemplateViewModelFactory(
             ITemplateRepositoryFactory templateRepositoryFactory,
-            ITemplateQuestionViewModelFactory templateQuestionViewModelFactory)
+            IQuestionViewModelFactory templateQuestionViewModelFactory)
         {
             return new TemplateViewModelFactory(templateRepositoryFactory, templateQuestionViewModelFactory);
         }
