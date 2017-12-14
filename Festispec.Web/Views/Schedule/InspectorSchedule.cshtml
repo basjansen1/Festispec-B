@@ -9,15 +9,21 @@
 
 <div class="container">
     <div class="row">
+        <div class=col-sm-2>Inspector_ID</div>
+        <div class=col-sm-5>Niet beschikbaar vanaf</div>
+        <div class=col-sm-5>Niet beschikbaar tot</div>
+    </div>
+    <div class="row">
         @foreach (var inspector in Model)
-        {
+            {
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-3>@inspector.Id</div>
-                    <li>@inspector.NotAvailableFrom</li>
-                    <li>@inspector.NotAvailableTo</li>
+                    <div class="col-sm-2" style="background-color:aquamarine;">@inspector.Id</div>
+                    <div class="col-sm-5" style="background-color:antiquewhite;">@inspector.NotAvailableFrom</div>
+                    <div class="col-sm-5" style="background-color:antiquewhite;">@inspector.NotAvailableTo</div>
                 </div>
             </div>
         }
     </div>
+
 </div>
