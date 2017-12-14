@@ -17,25 +17,27 @@ namespace Festispec.Web.Controllers
             _inspectorScheduleRepositoryFactory = new InspectorScheduleRepositoryFactory(true);
         }
 
-        //copy pasta inspectioncontroller
+        public ActionResult InspectorSchedule()
+        {
+            ViewBag.Message = "Rooster Inspecteur.";
+            using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
+            {
+                var schedule = scheduleRepository.Get().ToList();
 
-        //public ActionResult Index()
-        //{
-        //    ViewBag.Message = "Inspecties.";
+                return View(schedule);
+            }
+        }
 
-        //    return View();
-        //}
+        public ActionResult GetSchedule(int inspectorId)
+        {
+            ViewBag.Message = "Rooster uitvoeren.";
 
-        //public ActionResult Inspect(int inspectionId)
-        //{
-        //    ViewBag.Message = "Inspectie uitvoeren.";
+            using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
+            {
+                var schedule = scheduleRepository.Get(inspectorId);
 
-        //    using (var inspectionRepository = _inspectionRepositoryFactory.CreateRepository())
-        //    {
-        //        var inspection = inspectionRepository.Get(inspectionId);
-
-        //        return View(inspection);
-        //    }
-        //}
+                return View(schedule);
+            }
+        }
     }
 }

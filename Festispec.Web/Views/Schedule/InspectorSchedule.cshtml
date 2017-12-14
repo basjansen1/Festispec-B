@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "InspectorSchedule";
+}
+
+<h2>InspectorSchedule</h2>
+
+@model IEnumerable<Festispec.Domain.Schedule>
+
+<div class="container">
+    <div class="row">
+        @foreach (var inspector in Model)
+        {
+            <div class="col-md-6">
+                <div class="box employee">
+                    <h2>@inspector.Id</h2>
+                    <h2>@inspector.NotAvailableFrom</h2>
+                    <h2>@inspector.NotAvailableTo</h2>
+                </div>
+            </div>
+        }
+    </div>
+</div>
