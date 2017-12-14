@@ -1,4 +1,5 @@
 ﻿using Festispec.Domain;
+using Festispec.ViewModels.Question;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
@@ -7,21 +8,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Collections.ObjectModel;
+using Festispec.ViewModels.Interface;
+using Festispec.Domain.Repository.Interface;
+using Festispec.Domain.Repository.Factory.Interface;
 
-namespace Festispec.ViewModels.Employees
+namespace Festispec.ViewModels.Inspection
 {
-    public class InspectionVM : ViewModelBase
+    public class InspectionVM : EntityViewModelBase<IInspectionRepositoryFactory, IInspectionRepository, Domain.Inspection>, IHasQuestionCollection
     {
+        public InspectionVM(IInspectionRepositoryFactory repositoryFactory) : base(repositoryFactory)
+        {
+        }
+
+        public InspectionVM(IInspectionRepositoryFactory repositoryFactory, Domain.Inspection entity)
+            : base(repositoryFactory, entity)
+        {
+        }
+
+
         // getters and setters
         public string Name
         {
             get
             {
-                return _inspection.Name;
+                return Entity.Name;
             }
             set
             {
-                _inspection.Name = value;
+                Entity.Name = value;
                 RaisePropertyChanged("Name");
             }
         }
@@ -30,11 +45,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.Website;
+                return Entity.Website;
             }
             set
             {
-                _inspection.Website = value;
+                Entity.Website = value;
                 RaisePropertyChanged("Website");
             }
         }
@@ -43,11 +58,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.Start;
+                return Entity.Start;
             }
             set
             {
-                _inspection.Start = value;
+                Entity.Start = value;
                 RaisePropertyChanged("StartDate");
             }
         }
@@ -56,11 +71,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.End;
+                return Entity.End;
             }
             set
             {
-                _inspection.End = value;
+                Entity.End = value;
                 RaisePropertyChanged("EndDate");
             }
         }
@@ -68,11 +83,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.City;
+                return Entity.City;
             }
             set
             {
-                _inspection.City = value;
+                Entity.City = value;
                 RaisePropertyChanged("City");
             }
         }
@@ -80,11 +95,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.Street;
+                return Entity.Street;
             }
             set
             {
-                _inspection.Street = value;
+                Entity.Street = value;
                 RaisePropertyChanged("Street");
             }
         }
@@ -93,11 +108,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.PostalCode;
+                return Entity.PostalCode;
             }
             set
             {
-                _inspection.PostalCode = value;
+                Entity.PostalCode = value;
                 RaisePropertyChanged("PostalCode");
             }
         }
@@ -106,11 +121,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.HouseNumber;
+                return Entity.HouseNumber;
             }
             set
             {
-                _inspection.HouseNumber = value;
+                Entity.HouseNumber = value;
                 RaisePropertyChanged("HouseNumber");
             }
         }
@@ -119,11 +134,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.Country;
+                return Entity.Country;
             }
             set
             {
-                _inspection.Country = value;
+                Entity.Country = value;
                 RaisePropertyChanged("Country");
             }
         }
@@ -131,11 +146,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.Status_Status;
+                return Entity.Status_Status;
             }
             set
             {
-                _inspection.Status_Status = value;
+                Entity.Status_Status = value;
                 RaisePropertyChanged("Status");
             }
         }
@@ -144,11 +159,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.Customer_Id;
+                return Entity.Customer_Id;
             }
             set
             {
-                _inspection.Customer_Id = value;
+                Entity.Customer_Id = value;
             }
         }
 
@@ -156,11 +171,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.Lat;
+                return Entity.Lat;
             }
             set
             {
-                _inspection.Lat = value;
+                Entity.Lat = value;
                 RaisePropertyChanged();
             }
         }
@@ -169,11 +184,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.Long;
+                return Entity.Long;
             }
             set
             {
-                _inspection.Long = value;
+                Entity.Long = value;
                 RaisePropertyChanged();
             }
         }
@@ -182,11 +197,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.Location;
+                return Entity.Location;
             }
             set
             {
-                _inspection.Location = value;
+                Entity.Location = value;
                 RaisePropertyChanged();
             }
         }
@@ -195,11 +210,11 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.Municipality;
+                return Entity.Municipality;
             }
             set
             {
-                _inspection.Municipality = value;
+                Entity.Municipality = value;
                 RaisePropertyChanged("Municipality");
             }
         }
@@ -208,35 +223,35 @@ namespace Festispec.ViewModels.Employees
         {
             get
             {
-                return _inspection.Customers;
+                return Entity.Customers;
             }
             set
             {
-                _inspection.Customers = value;
+                Entity.Customers = value;
                 RaisePropertyChanged("Customer");
             }
         }
 
         // field
-        private Inspection _inspection;
+        //private Domain.Inspection Entity;
 
-        // constructors
-
-        public InspectionVM()
+        public Domain.Inspection toModel()
         {
-            _inspection = new Inspection();
+            return Entity;
         }
 
-        public InspectionVM(Inspection i)
+        public void AddQuestion(QuestionViewModel question)
         {
-            _inspection = i;
+            Questions.Add(question);
         }
 
-        public Inspection toModel()
+        public override bool Save()
         {
-            return _inspection;
+            throw new NotImplementedException();
         }
 
-        public int Id => _inspection.Id;
+        public int Id => Entity.Id;
+
+        public ObservableCollection<QuestionViewModel> Questions { get; }
     }
 }

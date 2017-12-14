@@ -172,10 +172,13 @@
     <Compile Include="ViewModels\CustomerCRUD\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Factory\CustomerViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\ICustomerViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IInspectionViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\InspectionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IPlanningViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\PlanningViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\QuestionViewModelFactory.cs" />
+    <Compile Include="ViewModels\Inspection\InspectionQuestionnaireViewModel.cs" />
     <Compile Include="ViewModels\Interface\IAddressViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningListViewModel.cs" />
@@ -435,9 +438,7 @@
       <Name>Festispec.OfflineSync</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\Inspection\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Views\Crud_Employees\Images\garbage.png" />
   </ItemGroup>

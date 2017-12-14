@@ -80,7 +80,7 @@ namespace Festispec.ViewModels.Planning
             }
         }
 
-        public virtual Inspection Inspection
+        public virtual Domain.Inspection Inspection
         {
             get { return Entity.Inspection; }
             set

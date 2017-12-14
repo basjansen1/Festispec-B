@@ -28,6 +28,7 @@ using Festispec.ViewModels.Template;
 using GalaSoft.MvvmLight.Ioc;
 using GeodanApi;
 using Microsoft.Practices.ServiceLocation;
+using Festispec.ViewModels.Inspection;
 
 namespace Festispec.ViewModels
 {
@@ -68,6 +69,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IPlanningViewModelFactory, PlanningViewModelFactory>();
             SimpleIoc.Default.Register<IRegulationsViewModelFactory, RegulationsViewModelFactory>();
             SimpleIoc.Default.Register<ICustomerViewModelFactory, CustomerViewModelFactory>();
+            SimpleIoc.Default.Register<IInspectionViewModelFactory, InspectionViewModelFactory>();
 
             // Register APIs
             SimpleIoc.Default.Register<IGeodanSearchApi, GeodanSearchApi>();
@@ -78,6 +80,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<LoginViewModel>();
             SimpleIoc.Default.Register<TemplateListViewModel>();
             SimpleIoc.Default.Register<TemplateAddOrUpdateViewModel>();
+            SimpleIoc.Default.Register<InspectionQuestionnaireViewModel>();
             SimpleIoc.Default.Register<InspectionListVM>();
             SimpleIoc.Default.Register<AddInspectionVM>();
             SimpleIoc.Default.Register<EditInspectionVM>();
@@ -97,6 +100,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<RegulationAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<IGeodanSearchApi, GeodanSearchApi>();
             SimpleIoc.Default.Register<IGeoRepository, GeoRepository>();
+            
         }
 
         private static void RegisterNavigationService()
@@ -121,6 +125,7 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.CustomerAddOrUpdate);
             navigationService.Configure(Routes.Routes.CustomerList);
             navigationService.Configure(Routes.Routes.QuestionAdd);
+            navigationService.Configure(Routes.Routes.InspectionQuestionnaire);
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }
@@ -202,7 +207,9 @@ namespace Festispec.ViewModels
 
         public TemplateAddOrUpdateViewModel TemplateAddOrUpdate
             => ServiceLocator.Current.GetInstance<TemplateAddOrUpdateViewModel>();
-        
+        public InspectionQuestionnaireViewModel InspectionQuestionnaire
+            => ServiceLocator.Current.GetInstance<InspectionQuestionnaireViewModel>();
+
         public QuestionAddViewModel QuestionAdd => new QuestionAddViewModel(NavigationService, QuestionRepositoryFactory, QuestionViewModelFactory, QuestionTypeRepositoryFactory);
 
         public LoginViewModel LoginViewModel => ServiceLocator.Current.GetInstance<LoginViewModel>();
@@ -228,7 +235,7 @@ namespace Festispec.ViewModels
 
         public RegulationListVM GetRegulationList => new RegulationListVM(RegulationRepositoryFactory, NavigationService, GetInspectionList);
 
-        public AddInspectionVM GetAddInspectionVM => new AddInspectionVM(GetInspectionList, CustomerRepositoryFactory, NavigationService, GeoRepository);
+        public AddInspectionVM GetAddInspectionVM => new AddInspectionVM(GetInspectionList, CustomerRepositoryFactory, InspectionRepositoryFactory, NavigationService, GeoRepository);
 
         public EditInspectionVM GetEditInspection => ServiceLocator.Current.GetInstance<EditInspectionVM>();
 

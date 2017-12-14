@@ -15,7 +15,7 @@ using System.Windows.Input;
 using Festispec.NavigationService;
 using Festispec.Domain.Repository.Interface;
 
-namespace Festispec.ViewModels.Employees
+namespace Festispec.ViewModels.Inspection
 {
     public class AddInspectionVM : ViewModelBase
     {
@@ -80,11 +80,11 @@ namespace Festispec.ViewModels.Employees
         #endregion
 
         #region constructor and methods
-        public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory, INavigationService navigationService, IGeoRepository GeoRepository)
+        public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory, IInspectionRepositoryFactory inspectionRepositoryFactory, INavigationService navigationService, IGeoRepository GeoRepository)
         {
             InspectionList = inspectionList;
             _navigationService = navigationService;
-            NewInspection = new InspectionVM();
+            NewInspection = new InspectionVM(inspectionRepositoryFactory);
             NewInspection.Status = "Pending";
             _geoRepository = GeoRepository;
 

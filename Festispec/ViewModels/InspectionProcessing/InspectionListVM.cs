@@ -15,7 +15,7 @@ using System.Windows;
 using System.Windows.Input;
 using Festispec.NavigationService;
 
-namespace Festispec.ViewModels.Employees
+namespace Festispec.ViewModels.Inspection
 {
     // The view variables and view methods will be implemented when the views are created
     public class InspectionListVM : ViewModelBase
@@ -59,6 +59,7 @@ namespace Festispec.ViewModels.Employees
         public ICommand SearchCommand { get; set; }
         public ICommand DeleteSearchCommand { get; set; }
         public ICommand NavigateToPlanningCommand { get; set; }
+        public ICommand NavigateToQuestionnaireCommand { get; set; }
         #endregion
 
         #region fields
@@ -82,11 +83,13 @@ namespace Festispec.ViewModels.Employees
             DeleteSearchCommand = new RelayCommand(DeleteFilter);
             NavigateToPlanningCommand = new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.PlanningList, _selectedInspection.toModel()), () => _selectedInspection != null && _navigationService.HasAccess(Routes.Routes.PlanningList));
             _searchInput = null;
+            NavigateToQuestionnaireCommand = new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.InspectionQuestionnaire, _selectedInspection.toModel()), () => _selectedInspection != null && _navigationService.HasAccess(Routes.Routes.InspectionQuestionnaire));
+            _searchInput = null;
 
             // instantiate views   
             using (var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
-                 InspectionVMList = new ObservableCollection<InspectionVM>(inspectionRepository.Get().ToList().Select(i => new InspectionVM(i)));
+                 InspectionVMList = new ObservableCollection<InspectionVM>(inspectionRepository.Get().ToList().Select(i => new InspectionVM(InspectionRepositoryFactory, i)));
             }            
         }
 
@@ -143,7 +146,7 @@ namespace Festispec.ViewModels.Employees
             using (var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
                 InspectionVMList.Clear();
-                inspectionRepository.Get().ToList().ForEach(i => InspectionVMList.Add(new InspectionVM(i)));
+                inspectionRepository.Get().ToList().ForEach(i => InspectionVMList.Add(new InspectionVM(InspectionRepositoryFactory, i)));
             }
         }
         private void DeleteFilter()
