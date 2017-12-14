@@ -94,9 +94,8 @@ namespace Festispec.ViewModels.PDF
             XImage image = XImage.FromFile(pathToImage);
             double imageWidth = image.PixelWidth;
             double imageHeight = image.PixelHeight;
-            // imageWidth = image.PixelWidth <= Page.Width - (_left * 2) ? image.PixelWidth : 200;
 
-            while (imageWidth > Page.Width - (_left * 2)) // scale the image so that it fits within the page
+            while (imageWidth > Page.Width - (_left * 2) || image.PixelHeight > Page.Height) // scale the image so that it fits within the page
             {
                 imageWidth *= 0.9;
                 imageHeight *= 0.9;
