@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Festispec.NavigationService;
+using Festispec.ViewModels.Factory.Interface;
 
 namespace Festispec.ViewModels.Inspection
 {
@@ -66,12 +67,14 @@ namespace Festispec.ViewModels.Inspection
         private InspectionVM _selectedInspection;
         private List<InspectionVM> _inspectionList;
         private readonly INavigationService _navigationService;
+        private readonly IInspectionViewModelFactory _inspectionViewModelFactory;
         #endregion
 
         // constructor
-        public InspectionListVM(IInspectionRepositoryFactory inspectionRepositoryFactory, INavigationService navigationService)
+        public InspectionListVM(IInspectionRepositoryFactory inspectionRepositoryFactory, IInspectionViewModelFactory inspectionViewModelFactory, INavigationService navigationService)
         {
             InspectionRepositoryFactory = inspectionRepositoryFactory;
+            _inspectionViewModelFactory = inspectionViewModelFactory;
             _navigationService = navigationService;
             _inspectionList = new List<InspectionVM>();
 
@@ -89,7 +92,7 @@ namespace Festispec.ViewModels.Inspection
             // instantiate views   
             using (var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
-                 InspectionVMList = new ObservableCollection<InspectionVM>(inspectionRepository.Get().ToList().Select(i => new InspectionVM(InspectionRepositoryFactory, i)));
+                 InspectionVMList = new ObservableCollection<InspectionVM>(inspectionRepository.Get().ToList().Select(_inspectionViewModelFactory.CreateViewModel));
             }            
         }
 
@@ -146,7 +149,7 @@ namespace Festispec.ViewModels.Inspection
             using (var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
                 InspectionVMList.Clear();
-                inspectionRepository.Get().ToList().ForEach(i => InspectionVMList.Add(new InspectionVM(InspectionRepositoryFactory, i)));
+                inspectionRepository.Get().ToList().ForEach(i => InspectionVMList.Add(_inspectionViewModelFactory.CreateViewModel(i)));
             }
         }
         private void DeleteFilter()

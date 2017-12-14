@@ -15,12 +15,12 @@ namespace Festispec.ViewModels.Factory.Interface
 
         public InspectionVM CreateViewModel()
         {
-            return new InspectionVM(_inspectionRepositoryFactory);
+            return new InspectionVM(_inspectionRepositoryFactory, _questionViewModelFactory);
         }
 
         public InspectionVM CreateViewModel(Domain.Inspection entity)
         {
-            return new InspectionVM(_inspectionRepositoryFactory, entity);
+            return new InspectionVM(_inspectionRepositoryFactory, _questionViewModelFactory, entity);
         }
     }
 }

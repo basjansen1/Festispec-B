@@ -21,10 +21,15 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" x:Name="AddQuestion" Content="Vraag Toevoegen" Margin="5px 10px" Command="{Binding NavigateToQuestionAddCommand}"/>
-            <Button Grid.Column="2" x:Name="RemoveQuestion" Content="Vraag Verwijderen" Margin="5px 10px" Command="{Binding QuestionDeleteCommand}" />
+            <ComboBox x:Name="cbTemplate" Grid.Column="1" MinWidth="150" ItemsSource="{Binding Templates}" SelectedItem="{Binding SelectedTemplate}"/>
+            <Button Grid.Column="2" x:Name="AddTemplate" Content="Voeg template toe" Margin="5px 5px" Command="{Binding TemplateImportCommand}"/>
+            
+            <Button Grid.Column="3" x:Name="AddQuestion" Content="Vraag Toevoegen" Margin="5px 5px" Command="{Binding NavigateToQuestionAddCommand}"/>
+            <Button Grid.Column="4" x:Name="RemoveQuestion" Content="Vraag Verwijderen" Margin="5px 5px" Command="{Binding QuestionDeleteCommand}" />
         </Grid>
         <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding EntityViewModel.SelectedQuestion}" ItemsSource="{Binding EntityViewModel.Questions}"
                   GridLinesVisibility="Horizontal" HeadersVisibility="Column" Grid.Row="1" VerticalAlignment="Stretch">

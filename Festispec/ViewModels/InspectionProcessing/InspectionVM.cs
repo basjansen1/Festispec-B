@@ -12,18 +12,25 @@ using System.Collections.ObjectModel;
 using Festispec.ViewModels.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.ViewModels.Factory.Interface;
 
 namespace Festispec.ViewModels.Inspection
 {
     public class InspectionVM : EntityViewModelBase<IInspectionRepositoryFactory, IInspectionRepository, Domain.Inspection>, IHasQuestionCollection
     {
-        public InspectionVM(IInspectionRepositoryFactory repositoryFactory) : base(repositoryFactory)
+        public InspectionVM(IInspectionRepositoryFactory repositoryFactory, IQuestionViewModelFactory questionViewModelFactory) : base(repositoryFactory)
         {
+            Questions = new ObservableCollection<QuestionViewModel>(
+                Entity.InspectionQuestion.Select(question =>
+                    questionViewModelFactory.CreateViewModel(question.Question)));
         }
 
-        public InspectionVM(IInspectionRepositoryFactory repositoryFactory, Domain.Inspection entity)
+        public InspectionVM(IInspectionRepositoryFactory repositoryFactory, IQuestionViewModelFactory questionViewModelFactory, Domain.Inspection entity )
             : base(repositoryFactory, entity)
         {
+            Questions = new ObservableCollection<QuestionViewModel>(
+                 Entity.InspectionQuestion.Select(question =>
+                     questionViewModelFactory.CreateViewModel(question.Question)));
         }
 
 
@@ -253,5 +260,7 @@ namespace Festispec.ViewModels.Inspection
         public int Id => Entity.Id;
 
         public ObservableCollection<QuestionViewModel> Questions { get; }
+
+        public QuestionViewModel SelectedQuestion { get; set; }
     }
 }

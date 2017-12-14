@@ -14,6 +14,7 @@ using System.Windows;
 using System.Windows.Input;
 using Festispec.NavigationService;
 using Festispec.Domain.Repository.Interface;
+using Festispec.ViewModels.Factory.Interface;
 
 namespace Festispec.ViewModels.Inspection
 {
@@ -26,6 +27,7 @@ namespace Festispec.ViewModels.Inspection
         private DateTime _fromDate;
         private DateTime _toDate;
         private readonly INavigationService _navigationService;
+        private readonly IInspectionViewModelFactory _inspectionViewModelFactory;
         #endregion
 
         #region properties
@@ -80,11 +82,12 @@ namespace Festispec.ViewModels.Inspection
         #endregion
 
         #region constructor and methods
-        public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory, IInspectionRepositoryFactory inspectionRepositoryFactory, INavigationService navigationService, IGeoRepository GeoRepository)
+        public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory, IInspectionRepositoryFactory inspectionRepositoryFactory, IInspectionViewModelFactory inspectionViewModelFactory, INavigationService navigationService, IGeoRepository GeoRepository)
         {
             InspectionList = inspectionList;
             _navigationService = navigationService;
-            NewInspection = new InspectionVM(inspectionRepositoryFactory);
+            _inspectionViewModelFactory = inspectionViewModelFactory;
+            NewInspection = _inspectionViewModelFactory.CreateViewModel();
             NewInspection.Status = "Pending";
             _geoRepository = GeoRepository;
 
