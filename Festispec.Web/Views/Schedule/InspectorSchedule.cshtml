@@ -11,11 +11,11 @@
     <div class="row">
         @foreach (var inspector in Model)
         {
-            <div class="col-md-6">
-                <div class="box employee">
-                    <h2>@inspector.Id</h2>
-                    <h2>@inspector.NotAvailableFrom</h2>
-                    <h2>@inspector.NotAvailableTo</h2>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-3>@inspector.Id</div>
+                    <li>@inspector.NotAvailableFrom</li>
+                    <li>@inspector.NotAvailableTo</li>
                 </div>
             </div>
         }
