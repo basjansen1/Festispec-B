@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Festispec.Domain.PDF
 {
-    public class PLanningListWriter : PDFWriter
+    public class PLanningListWriter : PDFWriter // example class that inherits PDFWriter
     {
         private List<Planning> _planningList;
 

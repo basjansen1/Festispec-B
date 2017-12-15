@@ -76,6 +76,7 @@
     <Compile Include="Extension\DateRangeExtension.cs" />
     <Compile Include="IAddress.cs" />
     <Compile Include="InspectionExtended.cs" />
+    <Compile Include="PDF\InspectionResultsWriter.cs" />
     <Compile Include="PlanningExtended.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
