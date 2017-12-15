@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Festispec.Views
 {
     /// <summary>
-    /// Interaction logic for InspectionReport.xaml
+    /// Interaction logic for CustomerReportView.xaml
     /// </summary>
-    public partial class InspectionReport : Page
+    public partial class CustomerReportView : Page
     {
-        public InspectionReport()
+        public CustomerReportView()
         {
             InitializeComponent();
         }
