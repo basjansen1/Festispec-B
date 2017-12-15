@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Festispec.Domain.Repository.Factory;
@@ -23,13 +24,19 @@ namespace Festispec.Web.Controllers
 
             return View();
         }
-        public ActionResult Inspect(int inspectionId)
+        public ActionResult Inspect(int? id)
         {
+            if(!id.HasValue)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             ViewBag.Message = "Inspectie uitvoeren.";
 
             using (var inspectionRepository = _inspectionRepositoryFactory.CreateRepository())
             {
-                var inspection = inspectionRepository.Get(inspectionId);
+                var inspection = inspectionRepository.Get().FirstOrDefault(i => i.Id == id.Value);
+
+                if (inspection == null)
+                    return HttpNotFound();
 
                 return View(inspection);
             }
