@@ -38,5 +38,6 @@
                 <DataGridTextColumn Header="Achternaam Contact" Binding="{Binding LastName}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
+        <Button Grid.Row="3" Grid.Column="3">Rapporten</Button>
     </Grid>
 </Page>
