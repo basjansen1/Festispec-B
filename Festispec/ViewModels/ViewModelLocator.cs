@@ -27,6 +27,7 @@ using Festispec.ViewModels.Template;
 using GalaSoft.MvvmLight.Ioc;
 using GeodanApi;
 using Microsoft.Practices.ServiceLocation;
+using Festispec.ViewModels.Reports;
 
 namespace Festispec.ViewModels
 {
@@ -98,6 +99,8 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<RegulationAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<IGeodanSearchApi, GeodanSearchApi>();
             SimpleIoc.Default.Register<IGeoRepository, GeoRepository>();
+
+            SimpleIoc.Default.Register<GenerateReportVM>();
         }
 
         private static void RegisterNavigationService()
@@ -236,6 +239,8 @@ namespace Festispec.ViewModels
         public AddInspectionVM GetAddInspectionVM => new AddInspectionVM(GetInspectionList, CustomerRepositoryFactory, NavigationService, GeoRepository);
 
         public EditInspectionVM GetEditInspection => ServiceLocator.Current.GetInstance<EditInspectionVM>();
+
+        public GenerateReportVM GetGenerateReport => ServiceLocator.Current.GetInstance<GenerateReportVM>();
 
         #endregion
     }
