@@ -11,10 +11,12 @@ namespace Festispec.Web.Providers
     public class FestispecMembershipProvider : MembershipProvider
     {
         private readonly ILoginRepositoryFactory _loginRepositoryFactory;
+        private readonly IInspectorRepositoryFactory _inspectorRepositoryFactory;
 
         public FestispecMembershipProvider()
         {
             _loginRepositoryFactory = new LoginRepositoryFactory(true);
+            _inspectorRepositoryFactory = new InspectorRepositoryFactory(true);
         }
 
         public override bool EnablePasswordRetrieval { get; }
@@ -71,7 +73,7 @@ namespace Festispec.Web.Providers
 
         public override bool ValidateUser(string username, string password)
         {
-            using (var loginRepository = _loginRepositoryFactory.CreateRepository())
+            using (var loginRepository = _inspectorRepositoryFactory.CreateRepository())
             {
                 return loginRepository.TryLogin(GetUserNameByEmail(username), password);
             }
@@ -85,9 +87,9 @@ namespace Festispec.Web.Providers
 
         public override MembershipUser GetUser(object providerUserKey, bool userIsOnline)
         {
-            using (var loginRepository = _loginRepositoryFactory.CreateRepository())
+            using (var inspectorRepository = _inspectorRepositoryFactory.CreateRepository())
             {
-                var employee = (Inspector) loginRepository.Get(providerUserKey);
+                var employee = inspectorRepository.Get(providerUserKey);
 
                 return employee?.ConvertToMembershipUser();
             }
@@ -95,9 +97,9 @@ namespace Festispec.Web.Providers
 
         public override MembershipUser GetUser(string email, bool userIsOnline)
         {
-            using (var loginRepository = _loginRepositoryFactory.CreateRepository())
+            using (var inspectorRepository = _inspectorRepositoryFactory.CreateRepository())
             {
-                var employee = (Inspector) loginRepository.Find(e => e.Email == email);
+                var employee = inspectorRepository.Find(e => e.Email == email);
 
                 return employee?.ConvertToMembershipUser();
             }

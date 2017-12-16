@@ -1,6 +1,4 @@
-﻿using System;
-using System.Security.Principal;
-using System.Web.Security;
+﻿using System.Security.Principal;
 using Festispec.Domain;
 
 namespace Festispec.Web.Models
@@ -29,17 +27,5 @@ namespace Festispec.Web.Models
 
     public class InspectorPrincipalSerializeModel : Inspector
     {
-    }
-
-    public class InspectorMembershipUser : MembershipUser
-    {
-        public InspectorMembershipUser(string providerName, string name, object providerUserKey, string email,
-            string passwordQuestion, string comment, bool isApproved, bool isLockedOut, DateTime creationDate,
-            DateTime lastLoginDate, DateTime lastActivityDate, DateTime lastPasswordChangedDate,
-            DateTime lastLockoutDate) : base(providerName, name, providerUserKey, email, passwordQuestion, comment,
-            isApproved, isLockedOut, creationDate, lastLoginDate, lastActivityDate, lastPasswordChangedDate,
-            lastLockoutDate)
-        {
-        }
     }
 }
