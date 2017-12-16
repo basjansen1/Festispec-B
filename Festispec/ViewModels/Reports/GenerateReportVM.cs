@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Festispec.ViewModels.Reports
@@ -19,10 +20,13 @@ namespace Festispec.ViewModels.Reports
         public List<Inspection> InspectionList { get; set; }
         private InspectionResultsWriter _pdfWriter;
 
-        public GenerateReportVM()
+        public GenerateReportVM(List<Inspection> inspectionList)
         {
             DownloadCommand = new RelayCommand(Download);
             _pdfWriter = new InspectionResultsWriter(InspectionList);
+            InspectionList = inspectionList;
+
+            if (InspectionList.Count == 0) MessageBox.Show("LEEG");
         }
 
         private void Download()
