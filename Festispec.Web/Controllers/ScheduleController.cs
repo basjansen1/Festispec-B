@@ -1,4 +1,5 @@
-﻿using Festispec.Domain.Repository.Factory;
+﻿using Festispec.Domain;
+using Festispec.Domain.Repository.Factory;
 using Festispec.Domain.Repository.Factory.Interface;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,30 @@ namespace Festispec.Web.Controllers
 
                 return View(schedule);
             }
+        }
+
+        public ActionResult AddAvailability()
+        {
+            ViewBag.Message = "Beschikbaarheid toevoegen";
+            using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
+            {
+                var schedule = scheduleRepository.Get().ToList();
+
+                return View(schedule);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Create()
+        {
+            Schedule temp = new Schedule();
+            using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
+            {
+                scheduleRepository.Add(temp);
+                var schedule = scheduleRepository.Get().ToList();
+                return View(schedule);
+            }
+
         }
 
         public ActionResult GetSchedule(int inspectorId)
