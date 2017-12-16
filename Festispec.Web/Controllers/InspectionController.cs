@@ -26,7 +26,7 @@ namespace Festispec.Web.Controllers
         }
         public ActionResult Inspect(int? id)
         {
-            if(!id.HasValue)
+            if (!id.HasValue)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             ViewBag.Message = "Inspectie uitvoeren.";
@@ -40,6 +40,30 @@ namespace Festispec.Web.Controllers
 
                 return View(inspection);
             }
+        }
+        [HttpPost]
+        public ActionResult Inspect(int? id, Dictionary<int, string> answers)
+        {
+            if (!id.HasValue)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            int inspectionId = id.Value;
+            int inspectorId = 3; // TODO: User.EntityKey;
+            DateTime date = new DateTime();
+
+            using (var _inspectionRepository = _inspectionRepositoryFactory.CreateRepository())
+            {
+                foreach (KeyValuePair<int, string> answer in answers)
+                {
+                    // TODO: AddorUpdate(answer.key, answer.value);
+                    var a = answer.Key;
+                    var b = answer.Value;
+
+                    _inspectionRepository.AddOrUpdateQuestionAnswer(inspectionId, inspectorId, date, answer.Key, answer.Value);
+                }
+            }
+
+            return RedirectToAction(nameof(Inspect), inspectionId);
         }
     }
 }

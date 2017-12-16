@@ -1,6 +1,129 @@
 ﻿@model Festispec.Domain.Inspection
-    
-@foreach (var question in Model.InspectionQuestion.Select(question => question.Question))
-{
-    <h1>@question.Name</h1>
-}
+
+@*@using (Html.BeginForm("Inspect", "Inspection", FormMethod.Post)) {*@
+<form id="inspectionForm" action="/Inspection/Inspect/@Model.Id" method="post">
+
+    @foreach (var inspectionQuestion in Model.InspectionQuestion)
+    {
+        <div class="row">
+            <h3>@inspectionQuestion.Question.Name</h3>
+            <p>@inspectionQuestion.Question.Description</p>
+            @switch (inspectionQuestion.Question.QuestionType_Type)
+            {
+                case "Beeld":
+                    break;
+                case "Getal":
+                    <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type" />
+                    break;
+                case "Reeks":
+                    <div name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">
+                        @for (int i = 1; i < 11; i++)
+                        {
+                            <label> <input name="radio-@inspectionQuestion.Question_Id" type="radio" value="@i">@i</label>
+                        }
+                    </div>
+                    break;
+                case "Tabel":
+                    <table name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">
+                        <thead>
+                            <tr>
+                                <th>@inspectionQuestion.Question.MetadataParameter1</th>
+                                <th>@inspectionQuestion.Question.MetadataParameter2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int j = 0; j < 4; j++)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="text">
+                                    </td>
+                                    <td>
+                                        <input type="text">
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    break;
+                case "Tekst":
+                    <textarea name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type"></textarea>
+                    break;
+            }
+        </div>
+    }
+
+    <input type="submit" value="versturen" />
+
+</form>
+
+
+<script>
+    var inspectionForm = document.getElementById('inspectionForm');
+    inspectionForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Get all answer elements
+        var elements = inspectionForm.querySelectorAll('[name="answers"]');
+
+        // Create dictionary
+        var answers = new Object();
+
+        // Loop through the answer elements
+        for (var i = 0, l = elements.length; i < l; i++) {
+            var element = elements[i];
+            var questionId = element.dataset.questionId;
+
+            // Add the parsed answer from the element to the answers dictionary on the question id index
+            //answers[questionId] = parseElementAnswer(element);
+
+            answers[`answers[${i}].Key`] = questionId;
+            answers[`answers[${i}].Value`] = parseElementAnswer(element);
+        }
+
+        console.log(answers);
+
+        $.post('/Inspection/Inspect/@Model.Id', answers);
+    });
+
+    function parseElementAnswer(element) {
+        var questionType = element.dataset.questionType;
+        var answer;
+        switch (questionType) {
+            case "Getal":
+            case "Tekst":
+                answer = element.value;
+                break;
+            case "Reeks":
+                answer = parseReeksAnswer(element);
+                break;
+            case "Tabel":
+                answer = parse
+        }
+        return answer;
+    }
+
+    function parseReeksAnswer(element) {
+        var questionId = element.dataset.questionId;
+        var reeks = element.querySelectorAll(`[name="radio-${questionId}"]`);
+
+        return getSelectedRadioButton(reeks);
+    }
+
+    function parseTableAnswer(element) {
+        var questionId = element.dataset.questionId;
+        var table = element.
+
+        return getSelectedTable();
+    }
+
+    function getSelectedRadioButton(radioButtons) {
+        for (var i = 0, l = radioButtons.length; i < l; i++) {
+            var radioButton = radioButtons[i];
+            if (radioButton.checked) {
+                return radioButton.value;
+            }
+        }
+        return '';
+    }
+</script>

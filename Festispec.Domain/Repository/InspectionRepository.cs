@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using Festispec.Domain.Repository.Interface;
 using System.Linq;
+using System;
 
 namespace Festispec.Domain.Repository
 {
@@ -52,6 +53,28 @@ namespace Festispec.Domain.Repository
 
             DbContext.Set<InspectionQuestion>()
                 .Add(new InspectionQuestion {Inspection_Id = inspection.Id, Question_Id = question.Id});
+            DbContext.SaveChanges();
+        }
+
+        public void AddOrUpdateQuestionAnswer(int inspectionId, int inspectorId, DateTime date, int questionId, string answer)
+        {
+            var existing = DbContext.Set<InspectionQuestionAnswer>().Find(inspectionId, inspectorId, date, questionId);
+
+            if(existing != null)
+            {
+                existing.Answer = answer;
+            } else
+            {
+                DbContext.Set<InspectionQuestionAnswer>().Add(new InspectionQuestionAnswer
+                {
+                    Inspection_Id = inspectionId,
+                    Inspector_Id = inspectorId,
+                    Date = date,
+                    Question_Id = questionId,
+                    Answer = answer
+                });
+            }
+
             DbContext.SaveChanges();
         }
     }
