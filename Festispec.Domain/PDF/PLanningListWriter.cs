@@ -69,6 +69,15 @@ namespace Festispec.Domain.PDF
 
         public void CreateDocument()
         {
+            for (int counter = 10; counter > 0; counter--)
+            {
+                AddEmptyLine();
+            }
+            AddLine("Inspectie resultaten ", new XFont("Verdana", 35, XFontStyle.Bold));
+            AddLine("Customername", new XFont("Verdana", 16, XFontStyle.Bold));
+            AddLine("Customername", new XFont("Verdana", 16, XFontStyle.Bold));
+            AddNewPage();
+
             this.SetTitle("Plannings");
             AddEmptyLine();
             foreach (Planning planning in _planningList)

@@ -59,9 +59,15 @@ namespace Festispec.ViewModels.PDF
             _helper.DrawImage(pathToImage);
         }
 
+        public void AddNewPage()
+        {
+            _helper.CreatePage();
+        }
+
         public void SetFont(XFont font)
         {
             _helper.Font = font;
+           // _helper.MarginBetweenLines = (int) Math.Ceiling(font.Size); Todo set margin based on fontSize
         }
 
         public void SetColor(XSolidBrush color)

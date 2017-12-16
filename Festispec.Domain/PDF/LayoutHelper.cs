@@ -31,6 +31,7 @@ namespace Festispec.ViewModels.PDF
             MarginBetweenLines = 23;
             Color = XBrushes.Black;
             Allignment = XStringFormats.TopLeft;
+            Font = new XFont("Verdana", 11);
         }
 
         public XGraphics Gfx { get; private set; }
@@ -51,7 +52,7 @@ namespace Festispec.ViewModels.PDF
             return result;
         }
 
-        void CreatePage()
+        public void CreatePage()
         {
             Page = _document.AddPage();
             Page.Size = PageSize.A4;
