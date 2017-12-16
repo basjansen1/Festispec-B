@@ -6,6 +6,5 @@ namespace Festispec.Domain.Repository.Interface
     {
         void AddQuestion(Inspection inspection, Question question);
 
-        void AddOrUpdateQuestionAnswer(int inspectionId, int inspectorId, DateTime date, int questionId, string answer);
     }
 }

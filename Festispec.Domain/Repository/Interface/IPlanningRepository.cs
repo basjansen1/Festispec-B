@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Festispec.Domain.Repository.Interface
 {
@@ -6,6 +7,8 @@ namespace Festispec.Domain.Repository.Interface
     {
         IQueryable<Planning> GetByInspectionId(int inspectionId);
 
-//        Planning AddOrUpdate(Planning entity, params object[] keyValues);
+        //        Planning AddOrUpdate(Planning entity, params object[] keyValues);
+        void AddOrUpdateQuestionAnswer(int inspectionId, int inspectorId, DateTime date, int questionId, string answer);
+
     }
 }

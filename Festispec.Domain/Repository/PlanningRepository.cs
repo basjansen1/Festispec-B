@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.Sockets;
 using Festispec.Domain.Repository.Interface;
+using System;
 
 namespace Festispec.Domain.Repository
 {
@@ -15,8 +16,8 @@ namespace Festispec.Domain.Repository
         {
             return base.Get()
                     .Include(planning => planning.Inspector)
-                    .Include(planning => planning.Inspection)
-//                .Include(planning => planning.Questions)
+                    .Include($"{nameof(Inspection)}.{nameof(InspectionQuestion)}.{nameof(Question)}.{nameof(QuestionType)}")
+                //                .Include(planning => planning.Questions)
                 ;
         }
 
@@ -85,6 +86,29 @@ namespace Festispec.Domain.Repository
             DbContext.Entry(entity).Reference(planning => planning.Inspector).Load();
             // TODO: Enable when inspection questions
             //DbContext.Entry(entity).Collection(planning => planning.Questions).Load();
+        }
+
+        public void AddOrUpdateQuestionAnswer(int inspectionId, int inspectorId, DateTime date, int questionId, string answer)
+        {
+            var existing = DbContext.Set<InspectionQuestionAnswer>().Find(inspectionId, inspectorId, date, questionId);
+
+            if (existing != null)
+            {
+                existing.Answer = answer;
+            }
+            else
+            {
+                DbContext.Set<InspectionQuestionAnswer>().Add(new InspectionQuestionAnswer
+                {
+                    Inspection_Id = inspectionId,
+                    Inspector_Id = inspectorId,
+                    Date = date,
+                    Question_Id = questionId,
+                    Answer = answer
+                });
+            }
+
+            DbContext.SaveChanges();
         }
     }
 }

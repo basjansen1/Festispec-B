@@ -11,11 +11,11 @@ namespace Festispec.Web.Controllers
 {
     public class InspectionController : Controller
     {
-        private readonly IInspectionRepositoryFactory _inspectionRepositoryFactory;
+        private readonly IPlanningRepositoryFactory _planningRepositoryFactory;
 
         public InspectionController()
         {
-            _inspectionRepositoryFactory = new InspectionRepositoryFactory(true);
+            _planningRepositoryFactory = new PlanningRepositoryFactory(true);
         }
 
         public ActionResult Index()
@@ -24,46 +24,50 @@ namespace Festispec.Web.Controllers
 
             return View();
         }
-        public ActionResult Inspect(int? id)
+        
+        [Route("Inspection/Inspect/{id:int}/{date:datetime}")]
+        public ActionResult Inspect(int? id, DateTime? date)
         {
-            if (!id.HasValue)
+            if (!id.HasValue || !date.HasValue)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             ViewBag.Message = "Inspectie uitvoeren.";
+            int inspectorId = 3;
 
-            using (var inspectionRepository = _inspectionRepositoryFactory.CreateRepository())
+            using (var planningRepository = _planningRepositoryFactory.CreateRepository())
             {
-                var inspection = inspectionRepository.Get().FirstOrDefault(i => i.Id == id.Value);
+                var planning = planningRepository.Get().FirstOrDefault(i => i.Inspection_Id == id.Value && i.Inspector_Id == inspectorId && i.Date == date);
 
-                if (inspection == null)
+                if (planning == null)
                     return HttpNotFound();
 
-                return View(inspection);
+                return View(planning);
             }
         }
+
         [HttpPost]
-        public ActionResult Inspect(int? id, Dictionary<int, string> answers)
+        [Route("Inspection/Inspect/{id:int}/{date:datetime}")]
+        public ActionResult Inspect(int? id, DateTime? date, Dictionary<int, string> answers)
         {
-            if (!id.HasValue)
+            if (!id.HasValue || !date.HasValue)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            int inspectionId = id.Value;
+            
             int inspectorId = 3; // TODO: User.EntityKey;
-            DateTime date = new DateTime();
 
-            using (var _inspectionRepository = _inspectionRepositoryFactory.CreateRepository())
+            using (var _planningRepository = _planningRepositoryFactory.CreateRepository())
             {
+                var exists = _planningRepository.Get().Any(planning => planning.Inspection_Id == id && planning.Inspector_Id == inspectorId && planning.Date == date);
+                if(!exists)
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                
                 foreach (KeyValuePair<int, string> answer in answers)
                 {
-                    // TODO: AddorUpdate(answer.key, answer.value);
-                    var a = answer.Key;
-                    var b = answer.Value;
-
-                    _inspectionRepository.AddOrUpdateQuestionAnswer(inspectionId, inspectorId, date, answer.Key, answer.Value);
+                    _planningRepository.AddOrUpdateQuestionAnswer(id.Value, inspectorId, date.Value, answer.Key, answer.Value);
                 }
             }
 
-            return RedirectToAction(nameof(Inspect), inspectionId);
+            return Inspect(id, date);
         }
     }
 }
