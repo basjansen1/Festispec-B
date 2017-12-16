@@ -25,7 +25,8 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <ComboBox x:Name="cbTemplate" Grid.Column="1" MinWidth="150" ItemsSource="{Binding Templates}" SelectedItem="{Binding SelectedTemplate}"/>
+            <ComboBox Grid.Column="1" MinWidth="150" ItemsSource="{Binding Templates}" SelectedItem="{Binding SelectedTemplate}" 
+                      DisplayMemberPath="Name"/>
             <Button Grid.Column="2" x:Name="AddTemplate" Content="Voeg template toe" Margin="5px 5px" Command="{Binding TemplateImportCommand}"/>
             
             <Button Grid.Column="3" x:Name="AddQuestion" Content="Vraag Toevoegen" Margin="5px 5px" Command="{Binding NavigateToQuestionAddCommand}"/>

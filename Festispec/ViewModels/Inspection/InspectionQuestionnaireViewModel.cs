@@ -7,6 +7,8 @@ using System.Windows.Input;
 using Festispec.ViewModels.Factory.Interface;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Festispec.ViewModels.Template;
 using System.Windows;
 
@@ -14,9 +16,14 @@ namespace Festispec.ViewModels.Inspection
 {
     public class InspectionQuestionnaireViewModel : AddOrUpdateViewModelBase<IInspectionViewModelFactory, InspectionVM, IInspectionRepository, Domain.Inspection>
     {
-        public InspectionQuestionnaireViewModel(INavigationService navigationService, IInspectionRepositoryFactory repositoryFactory, IInspectionViewModelFactory viewModelFactory) : 
+        public InspectionQuestionnaireViewModel(INavigationService navigationService, IInspectionRepositoryFactory repositoryFactory, IInspectionViewModelFactory viewModelFactory, ITemplateRepositoryFactory templateRepositoryFactory) : 
             base(navigationService, repositoryFactory, viewModelFactory)
         {
+            using (var templateRepository = templateRepositoryFactory.CreateRepository())
+            {
+                Templates = new ObservableCollection<Domain.Template>(templateRepository.Get().ToList());;
+            }
+
             RegisterCommands();
         }
         public ICommand NavigateToQuestionAddCommand { get; set; }
@@ -24,7 +31,8 @@ namespace Festispec.ViewModels.Inspection
         public ICommand QuestionDeleteCommand { get; set; }
         public ICommand TemplateImportCommand { get; set; }
 
-        public TemplateViewModel SelectedTemplate { get; set; }
+        public Domain.Template SelectedTemplate { get; set; }
+        public ObservableCollection<Domain.Template> Templates { get; set; }
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
@@ -56,7 +64,7 @@ namespace Festispec.ViewModels.Inspection
                 }, () => SelectedTemplate != null);
         }
 
-        private void ImportTemplate(TemplateViewModel selectedTemplate)
+        private void ImportTemplate(Domain.Template selectedTemplate)
         {
             throw new NotImplementedException();
         }
