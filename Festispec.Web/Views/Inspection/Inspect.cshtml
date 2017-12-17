@@ -19,7 +19,7 @@
                     <div name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">
                         <div class="camera">
                             <video id="video">Video stream not available.</video>
-                            <button id="startbutton">Take photo</button>
+                            <button id="startbutton" class="btn btn-default">Take photo</button>
                         </div>
                         <canvas id="canvas"></canvas>
                         <div class="output">
@@ -148,14 +148,14 @@
                     </div>
                     break;
                 case "Getal":
-                        @: <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type" />
+                        @: <input type="text" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type" />
                         break;
                         case "Reeks":
                         <div name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">
                             @for (var i = 1; i < 11; i++)
-                        {
+                            {
                                 <label>
-                                    <input name="radio-@inspectionQuestion.Question_Id" type="radio" value="@i">@i
+                                    <input name="radio-@inspectionQuestion.Question_Id" type="radio" value="@i" @(inspectionQuestionAnswer.Answer == i.ToString() ? "checked" : "")>@i
                                 </label>
                             }
                         </div>
@@ -186,13 +186,13 @@
                         </table>
                         break;
                         case "Tekst":
-                        <textarea name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">@inspectionQuestionAnswer.Answer</textarea>
+                        <textarea name="answers" class="form-control" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">@inspectionQuestionAnswer.Answer</textarea>
                         break;
                         }
                     </div>
                                     }
 
-    <input type="submit" value="versturen"/>
+    <input type="submit" class="btn btn-primary" value="versturen"/>
 
 </form>
 
@@ -222,7 +222,13 @@
             }
 
 
-            $.post('/Inspection/Inspect/@Model.Inspection_Id/@Model.Date.ToString("yyyy-MM-dd")', data);
+            $.post('/Inspection/Inspect/@Model.Inspection_Id/@Model.Date.ToString("yyyy-MM-dd")', data)
+            .done(() => {
+                alert('Formulier opgeslagen');
+                location.reload();
+            }).fail(() => {
+                alert('Er is iets foutgegaan');
+            });
         });
 
     function parseElementAnswer(element) {
