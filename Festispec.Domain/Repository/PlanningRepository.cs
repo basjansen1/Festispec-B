@@ -17,7 +17,7 @@ namespace Festispec.Domain.Repository
             return base.Get()
                     .Include(planning => planning.Inspector)
                     .Include($"{nameof(Inspection)}.{nameof(InspectionQuestion)}.{nameof(Question)}.{nameof(QuestionType)}")
-                //                .Include(planning => planning.Questions)
+                    .Include(planning => planning.InspectionQuestionAnswer)
                 ;
         }
 
