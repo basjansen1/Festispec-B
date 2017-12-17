@@ -19,7 +19,7 @@
                 case "Beeld":
                     break;
                 case "Getal":
-                    <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type" />
+                    @:<input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type" />
                     break;
                 case "Reeks":
                     <div name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">
@@ -38,17 +38,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for (int j = 0; j < 4; j++)
+                        @{
+                            var table = inspectionQuestionAnswer.DeserializeTabelAnswer();
+                    foreach(var row in table)
                             {
-                                <tr>
-                                    <td>
-                                        <input type="text" class="form-control">
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control">
-                                    </td>
-                                </tr>
-                            }
+                        <tr>
+                            <td>
+                                <input type="text" class="form-control" value="@row[0]"/>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" value="@row[1]"/>
+                            </td>
+                        </tr>
+                    }}
                         </tbody>
                     </table>
                     break;
