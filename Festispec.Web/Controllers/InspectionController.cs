@@ -24,6 +24,24 @@ namespace Festispec.Web.Controllers
 
             return View();
         }
+
+        [Route("Inspection/Inform/")]
+        public ActionResult Inform()
+        {
+            //if (!id.HasValue)
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            ViewBag.Messsage = "Komende Inspecties";
+            IInspectionRepositoryFactory _inspectionRepositoryFactory = new InspectionRepositoryFactory(true);
+            List<Festispec.Domain.Inspection> Inspections = null;
+            using(var InspectionRepository = _inspectionRepositoryFactory.CreateRepository())
+            {
+                Inspections = new List<Festispec.Domain.Inspection>(InspectionRepository.Get());
+                return View(Inspections);
+
+            }
+
+        }
         
         [Route("Inspection/Inspect/{id:int}/{date:datetime}")]
         public ActionResult Inspect(int? id, DateTime? date)

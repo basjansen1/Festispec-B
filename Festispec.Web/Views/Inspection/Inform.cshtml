@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Festispec.Domain.Inspection>
+
+<div class="jumbotron">
+    <h1>@ViewBag.Title</h1>
+    <div class="list-group">
+        <!-- Items in the list of inspections. -->
+        @foreach (var tmp in Model)
+        {
+        <div class="list-group-item">
+            <h1>@tmp.Name</h1>
+            <h1>@tmp.Dates</h1>
+            <h1>@tmp.Id</h1>
+            <h1>@tmp.Municipality</h1>
+            <h1>@tmp.PostalCode</h1>
+            <h1>@tmp.Street</h1>
+        </div>
+        }
+
+    </div>
+</div>
