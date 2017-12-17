@@ -86,7 +86,7 @@ namespace Festispec.ViewModels.Inspection
             DeleteSearchCommand = new RelayCommand(DeleteFilter);
             NavigateToPlanningCommand = new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.PlanningList, _selectedInspection.toModel()), () => _selectedInspection != null && _navigationService.HasAccess(Routes.Routes.PlanningList));
             _searchInput = null;
-            NavigateToQuestionnaireCommand = new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.InspectionQuestionnaire, _selectedInspection.toModel()), () => _selectedInspection != null && _navigationService.HasAccess(Routes.Routes.InspectionQuestionnaire));
+            NavigateToQuestionnaireCommand = new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.InspectionQuestionnaire, _selectedInspection), () => _selectedInspection != null && _navigationService.HasAccess(Routes.Routes.InspectionQuestionnaire));
             _searchInput = null;
 
             // instantiate views   

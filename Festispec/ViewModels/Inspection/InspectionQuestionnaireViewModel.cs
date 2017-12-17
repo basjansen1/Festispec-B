@@ -16,9 +16,10 @@ namespace Festispec.ViewModels.Inspection
 {
     public class InspectionQuestionnaireViewModel : AddOrUpdateViewModelBase<IInspectionViewModelFactory, InspectionVM, IInspectionRepository, Domain.Inspection>
     {
-        public InspectionQuestionnaireViewModel(INavigationService navigationService, IInspectionRepositoryFactory repositoryFactory, IInspectionViewModelFactory viewModelFactory, ITemplateRepositoryFactory templateRepositoryFactory) : 
+        public InspectionQuestionnaireViewModel(INavigationService navigationService, IInspectionRepositoryFactory repositoryFactory, IInspectionViewModelFactory viewModelFactory, ITemplateRepositoryFactory templateRepositoryFactory, IQuestionViewModelFactory questionViewModelFactory) : 
             base(navigationService, repositoryFactory, viewModelFactory)
         {
+            _questionViewModelFactory = questionViewModelFactory;
             using (var templateRepository = templateRepositoryFactory.CreateRepository())
             {
                 Templates = new ObservableCollection<Domain.Template>(templateRepository.Get().ToList());;
@@ -33,6 +34,8 @@ namespace Festispec.ViewModels.Inspection
 
         public Domain.Template SelectedTemplate { get; set; }
         public ObservableCollection<Domain.Template> Templates { get; set; }
+
+        private readonly IQuestionViewModelFactory _questionViewModelFactory;
 
         public override void OnNavigationServicePropertyChange(object sender, PropertyChangedEventArgs args)
         {
@@ -56,7 +59,7 @@ namespace Festispec.ViewModels.Inspection
                 EntityViewModel = EntityViewModel;
             }, () => EntityViewModel.SelectedQuestion != null && !EntityViewModel.SelectedQuestion.IsDeleted);
             TemplateImportCommand = new RelayCommand(() => {
-                var result = MessageBox.Show("Weet je zeker dat je een template in wilt laden? Dit overschrijft de huidige vragenlijst.", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var result = MessageBox.Show("Weet je zeker dat je een template in wilt laden? Dit voegt een vragenlijst aan de huidige vragen toe.", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
                 if (result != MessageBoxResult.Yes) return;
 
@@ -66,7 +69,11 @@ namespace Festispec.ViewModels.Inspection
 
         private void ImportTemplate(Domain.Template selectedTemplate)
         {
-            throw new NotImplementedException();
+            foreach (var question in selectedTemplate.TemplateQuestion)
+            {
+                EntityViewModel.AddQuestion(_questionViewModelFactory.CreateViewModel(question.Question));
+            }
+                
         }
 
         protected override void UpdateEntityViewModelFromNavigationParameter()

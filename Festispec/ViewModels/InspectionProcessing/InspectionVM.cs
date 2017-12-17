@@ -13,6 +13,7 @@ using Festispec.ViewModels.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.ViewModels.Factory.Interface;
+using System.Data.Entity.Validation;
 
 namespace Festispec.ViewModels.Inspection
 {
@@ -249,12 +250,37 @@ namespace Festispec.ViewModels.Inspection
 
         public void AddQuestion(QuestionViewModel question)
         {
+            if (Questions.Any(q => q.Id == question.Id))
+            {
+                return;
+            }
             Questions.Add(question);
         }
 
         public override bool Save()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var questionsToUpdate = Questions;
+                using (var InspectionRepository = RepositoryFactory.CreateRepository())
+                {
+                    foreach (var questionViewModel in questionsToUpdate)
+                    {
+                        // Delete if needed, else try attach
+                        if (questionViewModel.IsDeleted)
+                            InspectionRepository.DetachQuestions(Entity, questionViewModel.Entity);
+                        else
+                            InspectionRepository.TryAttachQuestion(Entity, questionViewModel.Entity);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Er is iets fout gegaan");
+                return false;
+            }
+
+            return true;
         }
 
         public int Id => Entity.Id;

@@ -210,8 +210,7 @@ namespace Festispec.ViewModels
 
         public TemplateAddOrUpdateViewModel TemplateAddOrUpdate
             => ServiceLocator.Current.GetInstance<TemplateAddOrUpdateViewModel>();
-        public InspectionQuestionnaireViewModel InspectionQuestionnaire
-            => ServiceLocator.Current.GetInstance<InspectionQuestionnaireViewModel>();
+        public InspectionQuestionnaireViewModel InspectionQuestionnaire => new InspectionQuestionnaireViewModel(NavigationService, InspectionRepositoryFactory, InspectionViewModelFactory, TemplateRepositoryFactory, QuestionViewModelFactory); //ServiceLocator.Current.GetInstance<InspectionQuestionnaireViewModel>();
 
         public QuestionAddViewModel QuestionAdd => new QuestionAddViewModel(NavigationService, QuestionRepositoryFactory, QuestionViewModelFactory, QuestionTypeRepositoryFactory);
 
@@ -234,7 +233,7 @@ namespace Festispec.ViewModels
 
         #region ViewModels
 
-        public InspectionListVM GetInspectionList => ServiceLocator.Current.GetInstance<InspectionListVM>();
+        public InspectionListVM GetInspectionList => new InspectionListVM(InspectionRepositoryFactory, InspectionViewModelFactory, NavigationService); //ServiceLocator.Current.GetInstance<InspectionListVM>();
 
         public RegulationListVM GetRegulationList => new RegulationListVM(RegulationRepositoryFactory, NavigationService, GetInspectionList);
 
