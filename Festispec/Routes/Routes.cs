@@ -46,6 +46,11 @@ namespace Festispec.Routes
             Roles = new[] {"Manager"}
         };
 
+        #endregion
+
+        #region Inspector
+
+
         public static Route InspectorList = new Route
         {
             Key = "InspectorList",
@@ -165,18 +170,38 @@ namespace Festispec.Routes
         public static Route RegulationList = new Route
         {
             Key = "RegulationList",
-            PageType = new Uri("../Views/Regulations/RegulationsList.xaml", UriKind.Relative),
+            PageType = new Uri("../Views/Regulations/RegulationList.xaml", UriKind.Relative),
             Roles = new[] {"Manager", "Medewerker"},
             Offline = true
         };
 
-        public static Route RegulationsAddOrUpdate = new Route
+        public static Route RegulationAddOrUpdate = new Route
         {
             Key = "RegulationAddOrUpdate",
-            PageType = new Uri("../Views/Regulations/RegulationsAddOrUpdate.xaml", UriKind.Relative),
+            PageType = new Uri("../Views/Regulations/RegulationAddOrUpdate.xaml", UriKind.Relative),
             Roles = new[] {"Manager", "Medewerker"}
         };
 
+        public static Route InspectorSchedule = new Route
+        {
+            Key = "InspectorSchedule",
+            PageType = new Uri("../Views/Inspector/Schedule/InspectorSchedule.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
+        };
+
+        public static Route InspectorScheduleAddOrUpdate = new Route
+        {
+            Key = "InspectorScheduleAddOrUpdate",
+            PageType = new Uri("../Views/Inspector/Schedule/InspectorScheduleAddOrUpdate.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
+        };
+
+        public static Route InspectorScheduleAdd = new Route
+        {
+            Key = "InspectorScheduleAdd",
+            PageType = new Uri("../Views/Inspector/Schedule/InspectorScheduleAdd.xaml", UriKind.Relative),
+            Roles = new[] { "Manager" }
+        };
         #endregion
 
         public static Route QuestionAdd = new Route()

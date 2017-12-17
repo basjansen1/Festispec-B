@@ -88,8 +88,9 @@
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Content="Cancel" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
-            <Button Grid.Column="2"  Content="Save" Margin="5px 10px" Command="{Binding SaveEntityCommand}"/>
+
+            <Button Grid.Column="1" Content="Annuleer" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
+            <Button Grid.Column="2"  Content="Opslaan" Margin="5px 10px" Command="{Binding SaveEntityCommand}"/>
         </Grid>
     </Grid>
 </Page>

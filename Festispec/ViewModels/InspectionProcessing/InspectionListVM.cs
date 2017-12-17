@@ -1,16 +1,9 @@
-﻿using Festispec.Domain;
-using Festispec.Domain.Repository.Factory.Interface;
-using Festispec.Domain.Repository.Interface;
-using Festispec.ViewModels.InspectionProcessing;
-using Festispec.Views;
+﻿using Festispec.Domain.Repository.Factory.Interface;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Festispec.NavigationService;

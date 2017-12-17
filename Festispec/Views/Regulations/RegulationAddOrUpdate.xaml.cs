@@ -18,9 +18,9 @@ namespace Festispec.Views.Regulations
     /// <summary>
     /// Interaction logic for RegulationsAddOrUpdate.xaml
     /// </summary>
-    public partial class RegulationsAddOrUpdate : Page
+    public partial class RegulationAddOrUpdate : Page
     {
-        public RegulationsAddOrUpdate()
+        public RegulationAddOrUpdate()
         {
             InitializeComponent();
         }

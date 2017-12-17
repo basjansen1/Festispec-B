@@ -38,7 +38,7 @@ namespace Festispec.ViewModels
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            // Register steate
+            // Register state
             var state = new State.State();
             SimpleIoc.Default.Register<IState>(() => state);
 
@@ -54,6 +54,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<ILoginRepositoryFactory>(() => new LoginRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<IInspectionRepositoryFactory>(() => new InspectionRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<IInspectorRepositoryFactory>(() => new InspectorRepositoryFactory(state.IsOnline));
+            SimpleIoc.Default.Register<IInspectorScheduleRepositoryFactory>(() => new InspectorScheduleRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<IRegulationRepositoryFactory>(() => new RegulationRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<ICustomerRepositoryFactory>(() => new CustomerRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<IPlanningRepositoryFactory>(() => new PlanningRepositoryFactory(state.IsOnline));
@@ -66,8 +67,9 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IQuestionViewModelFactory, QuestionViewModelFactory>();
             SimpleIoc.Default.Register<IEmployeeViewModelFactory, EmployeeViewModelFactory>();
             SimpleIoc.Default.Register<IInspectorViewModelFactory, InspectorViewModelFactory>();
+            SimpleIoc.Default.Register<IInspectorScheduleViewModelFactory, InspectorScheduleViewModelFactory>();
             SimpleIoc.Default.Register<IPlanningViewModelFactory, PlanningViewModelFactory>();
-            SimpleIoc.Default.Register<IRegulationsViewModelFactory, RegulationsViewModelFactory>();
+            SimpleIoc.Default.Register<IRegulationViewModelFactory, RegulationViewModelFactory>();
             SimpleIoc.Default.Register<ICustomerViewModelFactory, CustomerViewModelFactory>();
             SimpleIoc.Default.Register<IInspectionViewModelFactory, InspectionViewModelFactory>();
 
@@ -85,6 +87,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<AddInspectionVM>();
             SimpleIoc.Default.Register<EditInspectionVM>();
             SimpleIoc.Default.Register<EmployeeAddOrUpdateViewModel>();
+            SimpleIoc.Default.Register<InspectorScheduleAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<EmployeeListViewModel>();
             SimpleIoc.Default.Register<InspectorListViewModel>();
             SimpleIoc.Default.Register<InspectorAddOrUpdateViewModel>();
@@ -100,11 +103,13 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<RegulationAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<IGeodanSearchApi, GeodanSearchApi>();
             SimpleIoc.Default.Register<IGeoRepository, GeoRepository>();
-            
+            SimpleIoc.Default.Register<InspectorScheduleAddViewModel>();
+
         }
 
         private static void RegisterNavigationService()
         {
+            //register views
             var navigationService = new NavigationService.NavigationService(ServiceLocator.Current.GetInstance<IState>());
             navigationService.Configure(Routes.Routes.Home);
             navigationService.Configure(Routes.Routes.TemplateList);
@@ -121,9 +126,12 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.PlanningList);
             navigationService.Configure(Routes.Routes.PlanningAdd);
             navigationService.Configure(Routes.Routes.PlanningUpdate);
-            navigationService.Configure(Routes.Routes.RegulationsAddOrUpdate);
+            navigationService.Configure(Routes.Routes.RegulationAddOrUpdate);
             navigationService.Configure(Routes.Routes.CustomerAddOrUpdate);
             navigationService.Configure(Routes.Routes.CustomerList);
+            navigationService.Configure(Routes.Routes.InspectorSchedule);
+            navigationService.Configure(Routes.Routes.InspectorScheduleAddOrUpdate);
+            navigationService.Configure(Routes.Routes.InspectorScheduleAdd);
             navigationService.Configure(Routes.Routes.QuestionAdd);
             navigationService.Configure(Routes.Routes.InspectionQuestionnaire);
 
@@ -139,8 +147,8 @@ namespace Festispec.ViewModels
         public IRegulationRepositoryFactory RegulationRepositoryFactory =
             ServiceLocator.Current.GetInstance<IRegulationRepositoryFactory>();
 
-        public IRegulationsViewModelFactory RegulationsViewModelFactory =
-            ServiceLocator.Current.GetInstance<IRegulationsViewModelFactory>();
+        public IRegulationViewModelFactory RegulationViewModelFactory =
+            ServiceLocator.Current.GetInstance<IRegulationViewModelFactory>();
 
         public ITemplateRepositoryFactory TemplateRepositoryFactory =
             ServiceLocator.Current.GetInstance<ITemplateRepositoryFactory>();
@@ -172,11 +180,16 @@ namespace Festispec.ViewModels
         public IEmployeeRoleRepositoryFactory EmployeeRoleViewModelFactory =
             ServiceLocator.Current.GetInstance<IEmployeeRoleRepositoryFactory>();
 
+        public IInspectorViewModelFactory InspectorViewModelFactory =
+            ServiceLocator.Current.GetInstance<IInspectorViewModelFactory>();
         public IInspectorRepositoryFactory InspectorRepositoryFactory =
             ServiceLocator.Current.GetInstance<IInspectorRepositoryFactory>();
 
-        public IInspectorViewModelFactory InspectorViewModelFactory =
-            ServiceLocator.Current.GetInstance<IInspectorViewModelFactory>();
+        public IInspectorScheduleRepositoryFactory InspectorScheduleRepositoryFactory =
+            ServiceLocator.Current.GetInstance<IInspectorScheduleRepositoryFactory>();
+
+        public IInspectorScheduleViewModelFactory InspectorScheduleViewModelFactory =
+            ServiceLocator.Current.GetInstance<IInspectorScheduleViewModelFactory>();
 
         public ICustomerViewModelFactory CustomerViewModelFactory =
             ServiceLocator.Current.GetInstance<ICustomerViewModelFactory>();
@@ -202,8 +215,8 @@ namespace Festispec.ViewModels
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
 
-        public RegulationListViewModel RegulationsList => ServiceLocator.Current.GetInstance<RegulationListViewModel>();
-        public RegulationAddOrUpdateViewModel RegulationsAddOrUpdate
+        public RegulationListViewModel RegulationList => ServiceLocator.Current.GetInstance<RegulationListViewModel>();
+        public RegulationAddOrUpdateViewModel RegulationAddOrUpdate
             => ServiceLocator.Current.GetInstance<RegulationAddOrUpdateViewModel>();
 
         public TemplateListViewModel TemplateList => ServiceLocator.Current.GetInstance<TemplateListViewModel>();
@@ -216,14 +229,16 @@ namespace Festispec.ViewModels
 
         public LoginViewModel LoginViewModel => ServiceLocator.Current.GetInstance<LoginViewModel>();
 
-        public EmployeeAddOrUpdateViewModel EmployeeAddOrUpdate =>
-            ServiceLocator.Current.GetInstance<EmployeeAddOrUpdateViewModel>();
-
         public EmployeeListViewModel EmployeeList => ServiceLocator.Current.GetInstance<EmployeeListViewModel>();
         public InspectorListViewModel InspectorList => ServiceLocator.Current.GetInstance<InspectorListViewModel>();
-
+        public EmployeeAddOrUpdateViewModel EmployeeAddOrUpdate =>
+            ServiceLocator.Current.GetInstance<EmployeeAddOrUpdateViewModel>();
+        public InspectorScheduleAddViewModel InspectorScheduleAdd =>
+            new InspectorScheduleAddViewModel(NavigationService, InspectorScheduleRepositoryFactory, InspectorScheduleViewModelFactory);
+        public InspectorScheduleAddOrUpdateViewModel InspectorScheduleAddOrUpdate =>
+            new InspectorScheduleAddOrUpdateViewModel(NavigationService, InspectorScheduleRepositoryFactory, InspectorScheduleViewModelFactory);
         public InspectorAddOrUpdateViewModel InspectorAddOrUpdate =>
-            ServiceLocator.Current.GetInstance<InspectorAddOrUpdateViewModel>();
+            new InspectorAddOrUpdateViewModel(NavigationService, InspectorRepositoryFactory, InspectorViewModelFactory, EmployeeRepositoryFactory, new GeoRepositoryFactory(new GeodanSearchApi()));
 
         public PlanningListViewModel PlanningList => new PlanningListViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory);
         public PlanningAddOrUpdateViewModel PlanningAddOrUpdate => new PlanningAddOrUpdateViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory, InspectorRepositoryFactory);

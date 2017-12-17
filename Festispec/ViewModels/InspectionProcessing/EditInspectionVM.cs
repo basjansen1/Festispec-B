@@ -2,7 +2,7 @@
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.NavigationService;
-using Festispec.ViewModels.InspectionProcessing;
+//using Festispec.ViewModels.InspectionProcessing;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -53,9 +53,9 @@ namespace Festispec.ViewModels.Inspection
             DeleteCommand = new RelayCommand(DeleteSelectedInspection);
 
             InspectionStatusList = new List<string>();
-            InspectionStatusList.Add("Accepted");
-            InspectionStatusList.Add("Declined");
-            InspectionStatusList.Add("Pending");
+            InspectionStatusList.Add("Geaccepteerd");
+            InspectionStatusList.Add("Afgewezen");
+            InspectionStatusList.Add("In afwachting");
         }
 
         public bool CanEditInspection()
@@ -83,7 +83,7 @@ namespace Festispec.ViewModels.Inspection
         {
             if (CanEditInspection())
             {
-           //     InspectionList.SelectedInspection.Status = new InspectionStatus() { Status = SelectedInspection };
+                //InspectionList.SelectedInspection.Status = new InspectionStatus() { Status = SelectedInspection };
                 if (!SearchAddress())
                 {
                     return;
@@ -151,6 +151,9 @@ namespace Festispec.ViewModels.Inspection
         
         private void DeleteSelectedInspection()
         {
+            var result = MessageBox.Show("Weet je zeker dat je deze inspectie wilt verwijderen?", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result != MessageBoxResult.Yes) return;
             InspectionList.DeleteSelectedInspection();
 
             _navigationService.GoBack();
