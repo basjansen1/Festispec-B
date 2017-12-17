@@ -41,9 +41,10 @@ namespace Festispec.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create()
+        public ActionResult Create(Schedule temp)
         {
-            Schedule temp = new Schedule();
+            temp.Inspector_Id = 3; //debug TODO: login authentication dignes
+
             using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
             {
                 scheduleRepository.Add(temp);

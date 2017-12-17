@@ -3,24 +3,25 @@
     ViewBag.Title = "AddAvailability";
 }
 
-@model IEnumerable<Festispec.Domain.Schedule>
+@model Festispec.Domain.Schedule
 
 <h2>Beschikbaarheid toevoegen</h2>
 
 <div class="container">
-    <form id="addData">
+    @using (Html.BeginForm("Create", "Schedule"))
+    {
         <div class="form-group">
-            <label for="notAvailableFrom">Niet beschikbaar vanaf:</label>
-            <input type="text" class="form-control" name="notAvailableFrom" placeholder="YYYY-MM-DD">
+            @Html.LabelFor(m => m.NotAvailableFrom)
+            @Html.EditorFor(m => m.NotAvailableFrom)
         </div>
         <div class="form-group">
-            <label for="notAvailableTo">Niet beschikbaar tot:</label>
-            <input type="text" class="form-control" name="notAvailableTo" placeholder="YYYY-MM-DD">
+            @Html.LabelFor(m => m.NotAvailableTo)
+            @Html.EditorFor(m => m.NotAvailableTo)
         </div>
 
             <input type="submit" class="btn btn-info" value="Toevoegen">
-            <a href="#" class="btn btn-info" role="button">Ga Terug</a>
-    </form>
+            <a href="InspectorSchedule" class="btn btn-info" role="button">Ga Terug</a>
+    }
 </div>
 
 }
