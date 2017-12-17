@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
 namespace Festispec.Domain
 {
@@ -13,6 +14,14 @@ namespace Festispec.Domain
             [Display(Name = "Niet beschikbaar vanaf")]
             public DateTime NotAvailableFrom { get; set; }
             [Display(Name = "Niet beschikbaar tot")]
+            public DateTime NotAvailableTo { get; set; }
+
+            [Required]
+            [DataType(DataType.Date)]
+            public DateTime NotAvailableFrom { get; set; }
+
+            [Required]
+            [DataType(DataType.Date)]
             public DateTime NotAvailableTo { get; set; }
         }
     }

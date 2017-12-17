@@ -32,26 +32,29 @@ namespace Festispec.Web.Controllers
         public ActionResult AddAvailability()
         {
             ViewBag.Message = "Beschikbaarheid toevoegen";
-            using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
-            {
-                var schedule = scheduleRepository.Get().ToList();
 
-                return View(schedule);
-            }
+            Schedule schedule = new Schedule();
+            schedule.Inspector_Id = 3; //debug TODO: login authentication dignes
+
+            return View(schedule);
+            
         }
 
         [HttpPost]
         public ActionResult Create(Schedule temp)
         {
-            temp.Inspector_Id = 3; //debug TODO: login authentication dignes
-
             using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
             {
-                scheduleRepository.Add(temp);
-                var schedule = scheduleRepository.Get().ToList();
-                return View(schedule);
+                if (!ModelState.IsValid)
+                {
+                    scheduleRepository.Add(temp);
+                    return RedirectToAction("InspectorSchedule");
+                } else
+                {
+                    var schedule = scheduleRepository.Get(3);
+                    return View(schedule);
+                }
             }
-
         }
 
         public ActionResult GetSchedule(int inspectorId)
