@@ -85,7 +85,7 @@ namespace Festispec.ViewModels.Employees
             InspectionList = inspectionList;
             _navigationService = navigationService;
             NewInspection = new InspectionVM();
-            NewInspection.Status = "Pending";
+            NewInspection.Status = "In afwachting";
             _geoRepository = GeoRepository;
 
             NewInspection.Location = DbGeography.PointFromText("POINT(50 5)", 4326);

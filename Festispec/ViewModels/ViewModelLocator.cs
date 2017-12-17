@@ -68,7 +68,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IInspectorViewModelFactory, InspectorViewModelFactory>();
             SimpleIoc.Default.Register<IInspectorScheduleViewModelFactory, InspectorScheduleViewModelFactory>();
             SimpleIoc.Default.Register<IPlanningViewModelFactory, PlanningViewModelFactory>();
-            SimpleIoc.Default.Register<IRegulationsViewModelFactory, RegulationsViewModelFactory>();
+            SimpleIoc.Default.Register<IRegulationViewModelFactory, RegulationViewModelFactory>();
             SimpleIoc.Default.Register<ICustomerViewModelFactory, CustomerViewModelFactory>();
 
             // Register APIs
@@ -122,7 +122,7 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.PlanningList);
             navigationService.Configure(Routes.Routes.PlanningAdd);
             navigationService.Configure(Routes.Routes.PlanningUpdate);
-            navigationService.Configure(Routes.Routes.RegulationsAddOrUpdate);
+            navigationService.Configure(Routes.Routes.RegulationAddOrUpdate);
             navigationService.Configure(Routes.Routes.CustomerAddOrUpdate);
             navigationService.Configure(Routes.Routes.CustomerList);
             navigationService.Configure(Routes.Routes.InspectorSchedule);
@@ -142,8 +142,8 @@ namespace Festispec.ViewModels
         public IRegulationRepositoryFactory RegulationRepositoryFactory =
             ServiceLocator.Current.GetInstance<IRegulationRepositoryFactory>();
 
-        public IRegulationsViewModelFactory RegulationsViewModelFactory =
-            ServiceLocator.Current.GetInstance<IRegulationsViewModelFactory>();
+        public IRegulationViewModelFactory RegulationViewModelFactory =
+            ServiceLocator.Current.GetInstance<IRegulationViewModelFactory>();
 
         public ITemplateRepositoryFactory TemplateRepositoryFactory =
             ServiceLocator.Current.GetInstance<ITemplateRepositoryFactory>();
@@ -207,8 +207,8 @@ namespace Festispec.ViewModels
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
 
-        public RegulationListViewModel RegulationsList => ServiceLocator.Current.GetInstance<RegulationListViewModel>();
-        public RegulationAddOrUpdateViewModel RegulationsAddOrUpdate
+        public RegulationListViewModel RegulationList => ServiceLocator.Current.GetInstance<RegulationListViewModel>();
+        public RegulationAddOrUpdateViewModel RegulationAddOrUpdate
             => ServiceLocator.Current.GetInstance<RegulationAddOrUpdateViewModel>();
 
         public TemplateListViewModel TemplateList => ServiceLocator.Current.GetInstance<TemplateListViewModel>();

@@ -48,7 +48,7 @@
 
             <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedInspector}" ItemsSource="{Binding Inspectors}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Username}" Width="*" />
+                    <DataGridTextColumn Header="Naam" Binding="{Binding Username}" Width="*" />
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
                     <DataGridTextColumn Header="Manager" Binding="{Binding Path=Manager.Username}" Width="*" />
                 </DataGrid.Columns>
