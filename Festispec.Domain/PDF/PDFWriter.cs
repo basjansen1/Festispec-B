@@ -1,4 +1,5 @@
-﻿using PdfSharp.Drawing;
+﻿using Festispec.ViewModels.PDF;
+using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Festispec.ViewModels.PDF
+namespace Festispec.Domain.PDF
 {
     public abstract class PDFWriter
     {

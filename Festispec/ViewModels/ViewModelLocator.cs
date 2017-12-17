@@ -28,6 +28,7 @@ using GalaSoft.MvvmLight.Ioc;
 using GeodanApi;
 using Microsoft.Practices.ServiceLocation;
 using Festispec.ViewModels.Reports;
+using Festispec.ViewModels.Customer;
 
 namespace Festispec.ViewModels
 {
@@ -101,6 +102,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IGeoRepository, GeoRepository>();
 
             SimpleIoc.Default.Register<GenerateReportVM>();
+            SimpleIoc.Default.Register<CustomerListVM>();
         }
 
         private static void RegisterNavigationService()
@@ -127,6 +129,9 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.RegulationsAddOrUpdate);
             navigationService.Configure(Routes.Routes.CustomerAddOrUpdate);
             navigationService.Configure(Routes.Routes.CustomerList);
+
+            navigationService.Configure(Routes.Routes.Reports);
+            navigationService.Configure(Routes.Routes.GenerateReport);
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }
@@ -228,6 +233,9 @@ namespace Festispec.ViewModels
         public PlanningAddOrUpdateViewModel PlanningAddOrUpdate => new PlanningAddOrUpdateViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory, InspectorRepositoryFactory);
         public PlanningAddViewModel PlanningAdd => new PlanningAddViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory, InspectorRepositoryFactory);
 
+        public CustomerListViewModel CustomerVMList =>
+                ServiceLocator.Current.GetInstance<CustomerListViewModel>();
+
         #endregion
 
         #region ViewModels
@@ -240,7 +248,9 @@ namespace Festispec.ViewModels
 
         public EditInspectionVM GetEditInspection => ServiceLocator.Current.GetInstance<EditInspectionVM>();
 
-        public GenerateReportVM GetGenerateReport => ServiceLocator.Current.GetInstance<GenerateReportVM>();
+        public GenerateReportVM GetGenerateReport => new GenerateReportVM(CustomerVMList, NavigationService);
+
+       // public ReportCustomerVM GetCustomerReport => new ReportCustomerVM(CustomerRepositoryFactory, NavigationService);
 
         #endregion
     }

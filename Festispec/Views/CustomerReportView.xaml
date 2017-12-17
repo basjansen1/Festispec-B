@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Festispec.Views"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="CustomerReportView">
+      Title="CustomerReportView" DataContext="{Binding CustomerVMList, Source={StaticResource Locator}}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -38,6 +38,6 @@
                 <DataGridTextColumn Header="Achternaam Contact" Binding="{Binding LastName}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="3" Grid.Column="3">Rapporten</Button>
+        <Button Grid.Row="3" Grid.Column="3" Command="{Binding NavigateToReport}">Rapporten</Button>
     </Grid>
 </Page>
