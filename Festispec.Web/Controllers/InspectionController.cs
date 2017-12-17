@@ -4,8 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Festispec.Domain;
 using Festispec.Domain.Repository.Factory;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Web.Models;
 
 namespace Festispec.Web.Controllers
 {
@@ -28,16 +30,25 @@ namespace Festispec.Web.Controllers
         [Route("Inspection/Inform/")]
         public ActionResult Inform()
         {
+
+            //TODO: Add Inspections loading in from certain ID
             //if (!id.HasValue)
             //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             ViewBag.Messsage = "Komende Inspecties";
             IInspectionRepositoryFactory _inspectionRepositoryFactory = new InspectionRepositoryFactory(true);
-            List<Festispec.Domain.Inspection> Inspections = null;
+            List<InspectionViewModel> _Inspections = new List<InspectionViewModel>();
             using(var InspectionRepository = _inspectionRepositoryFactory.CreateRepository())
             {
-                Inspections = new List<Festispec.Domain.Inspection>(InspectionRepository.Get());
-                return View(Inspections);
+
+                foreach(Inspection i in InspectionRepository.Get().ToList())
+                {
+                    _Inspections.Add(new InspectionViewModel(i));
+                }
+
+
+
+                return View(_Inspections);
 
             }
 

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Festispec.Domain.Inspection>
+﻿@model IEnumerable<Festispec.Web.Models.InspectionViewModel>
 
 <div class="jumbotron">
     <h1>@ViewBag.Title</h1>
@@ -8,11 +8,10 @@
         {
         <div class="list-group-item">
             <h1>@tmp.Name</h1>
-            <h1>@tmp.Dates</h1>
-            <h1>@tmp.Id</h1>
-            <h1>@tmp.Municipality</h1>
-            <h1>@tmp.PostalCode</h1>
-            <h1>@tmp.Street</h1>
+            <h7>@tmp.Municipality</h7>
+            <h7>@tmp.PostalCode</h7>
+            <h7>@tmp.Street</h7>
+            <h5>@tmp.StartDate - @tmp.EndDate</h5>
         </div>
         }
 
