@@ -34,14 +34,11 @@ namespace Festispec.ViewModels
             Employee = new Domain.Employee();
         }
 
-        private MessageBoxResult ShowPopup() //show if user is online or offline
+        private void ShowPopup() //show if user is online or offline
         {
             if (!_state.IsOnline)
             {
-                return MessageBox.Show("You are offline! Welcome!");
-            } else
-            {
-                return MessageBox.Show("Welcome!");
+                MessageBox.Show("You are offline! Welcome!");
             }
         }
 

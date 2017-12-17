@@ -5,6 +5,7 @@ using Festispec.OfflineSync;
 using System;
 using Festispec.State;
 using System.ComponentModel;
+using System.Windows;
 
 namespace Festispec.ViewModels
 {
@@ -12,22 +13,12 @@ namespace Festispec.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IState _state;
-        private string Title { get; set; }
-
+       
         public MainViewModel(INavigationService navigationService, IState state) : base(navigationService)
         {   
             _navigationService = navigationService;
             _state = state;
-            setTitle(); //doesnt work yet
             RegisterCommands();
-        }
-
-        private void setTitle()
-        {
-            if (!_state.IsOnline)
-            {
-                Title = "Festispec - You are NOT connected!";
-            } 
         }
 
         public ICommand OnWindowClosingCommand { get; private set; }
