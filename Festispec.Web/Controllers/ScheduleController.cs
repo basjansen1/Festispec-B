@@ -45,15 +45,11 @@ namespace Festispec.Web.Controllers
         {
             using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
             {
-                if (!ModelState.IsValid)
-                {
+                //if (!ModelState.IsValid)
+                //{
                     scheduleRepository.Add(temp);
                     return RedirectToAction("InspectorSchedule");
-                } else
-                {
-                    var schedule = scheduleRepository.Get(3);
-                    return View(schedule);
-                }
+                //}
             }
         }
 
