@@ -1,5 +1,6 @@
 ﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 
@@ -62,7 +63,7 @@ namespace Festispec.Domain.PDF
 
         public void SetFont(XFont font)
         {
-            _helper.Font = font;
+             _helper.Font = font;
         }
 
         public void SetColor(XSolidBrush color)

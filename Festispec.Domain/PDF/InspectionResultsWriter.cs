@@ -27,7 +27,9 @@ namespace Festispec.Domain.PDF
             {
                 AddEmptyLine();
             }
-            AddLine("Inspectie resultaten " + _inspectionList.Min(i => i.Start).ToShortDateString() + " - " + _inspectionList.Max(i => i.Start).ToShortDateString(), new XFont("Verdana", 35, XFontStyle.Bold));
+            AddLine("Inspectie resultaten", new XFont("Verdana", 35, XFontStyle.Bold));
+            AddEmptyLine();
+            AddLine("Periode: " +_inspectionList.Min(i => i.Start).ToShortDateString() + " - " + _inspectionList.Max(i => i.Start).ToShortDateString(), new XFont("Verdana", 16, XFontStyle.Bold));
             AddLine(_customerName, new XFont("Verdana", 16, XFontStyle.Bold));
             AddNewPage();
         }

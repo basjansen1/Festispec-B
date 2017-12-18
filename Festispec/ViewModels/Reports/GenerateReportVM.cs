@@ -80,7 +80,7 @@ namespace Festispec.ViewModels.Reports
 
             // open filechooser
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = "Selecteer een locatie"; 
+            dlg.FileName = "Naam"; 
             dlg.DefaultExt = ".pdf"; // 
             dlg.Filter = "PDF documents (.pdf)|*.pdf";
             string filename = null;

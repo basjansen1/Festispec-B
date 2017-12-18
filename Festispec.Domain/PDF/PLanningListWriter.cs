@@ -68,7 +68,7 @@ namespace Festispec.Domain.PDF
             {
                 AddEmptyLine();
             }
-            AddLine("Inspectie resultaten ", new XFont("Verdana", 35, XFontStyle.Bold));
+            AddLine("Inspectie resultaten", new XFont("Verdana", 35, XFontStyle.Bold));
             AddEmptyLine();
             AddLine("Customername", new XFont("Verdana", 16, XFontStyle.Bold));
             AddLine("Customername", new XFont("Verdana", 16, XFontStyle.Bold));
