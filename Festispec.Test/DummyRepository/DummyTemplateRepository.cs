@@ -98,6 +98,11 @@ namespace Festispec.Test.DummyRepository
             throw new NotImplementedException();
         }
 
+        public int Delete(params object[] keyValues)
+        {
+            throw new NotImplementedException();
+        }
+
         public int Delete(Template entity)
         {
             throw new NotImplementedException();

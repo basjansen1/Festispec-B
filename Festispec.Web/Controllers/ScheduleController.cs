@@ -13,12 +13,15 @@ namespace Festispec.Web.Controllers
     public class ScheduleController : Controller
     {
         private readonly IInspectorScheduleRepositoryFactory _inspectorScheduleRepositoryFactory;
-        //var user = ((IInspectorPrincipal)User);
-        //int userId = user.Id;
+
+        private readonly int _inspectorId;
 
         public ScheduleController()
         {
             _inspectorScheduleRepositoryFactory = new InspectorScheduleRepositoryFactory(true);
+
+            var user = ((IInspectorPrincipal)User);
+            _inspectorId = user.Id;
         }
 
         public ActionResult InspectorSchedule(int? id)
@@ -82,7 +85,7 @@ namespace Festispec.Web.Controllers
 
             using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
             {
-                var schedule = scheduleRepository.Get(inspectorId);
+                var schedule = scheduleRepository.Get(_inspectorId);
 
                 return View(schedule);
             }

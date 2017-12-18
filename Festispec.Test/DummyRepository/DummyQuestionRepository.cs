@@ -80,6 +80,11 @@ namespace Festispec.Test.DummyRepository
             throw new NotImplementedException();
         }
 
+        public int Delete(params object[] keyValues)
+        {
+            throw new NotImplementedException();
+        }
+
         public int Delete(Question entity)
         {
             throw new NotImplementedException();
