@@ -9,20 +9,21 @@
 
 <div class="container">
     <div class="row">
-        <div class=col-sm-2>Inspector_ID</div>
         <div class=col-sm-5>Niet beschikbaar vanaf</div>
         <div class=col-sm-5>Niet beschikbaar tot</div>
     </div>
     <div class="row">
         @foreach (var inspector in Model)
+        {
+            if (@inspector.Inspector_Id == 4) //moet ingelogd id zijn
             {
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-2" style="background-color:aquamarine;">@inspector.Id</div>
                     <div class="col-sm-5" style="background-color:antiquewhite;">@inspector.NotAvailableFrom</div>
                     <div class="col-sm-5" style="background-color:antiquewhite;">@inspector.NotAvailableTo</div>
                 </div>
             </div>
+            }
         }
 
         <a href="AddAvailability" class="btn btn-info" role="button">Voeg beschikbaarheid toe</a>

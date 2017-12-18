@@ -34,7 +34,6 @@ namespace Festispec.Web.Controllers
             ViewBag.Message = "Beschikbaarheid toevoegen";
 
             Schedule schedule = new Schedule();
-            schedule.Inspector_Id = 3; //debug TODO: login authentication dignes
 
             return View(schedule);
             
@@ -47,6 +46,7 @@ namespace Festispec.Web.Controllers
             {
                 //if (!ModelState.IsValid)
                 //{
+                    temp.Inspector_Id = 4; //debug TODO: login authentication dignes
                     scheduleRepository.Add(temp);
                     return RedirectToAction("InspectorSchedule");
                 //}

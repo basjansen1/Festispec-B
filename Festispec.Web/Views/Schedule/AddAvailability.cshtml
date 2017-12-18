@@ -18,8 +18,8 @@
         </div>
         <div class="form-group">
             <label>Niet beschikbaar tot:</label>
-            @Html.EditorFor(m => m.NotAvailableFrom, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(m => m.NotAvailableFrom, "", new { @class = "text-danger" })
+            @Html.EditorFor(m => m.NotAvailableTo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.NotAvailableTo, "", new { @class = "text-danger" })
         </div>
 
             <input type="submit" class="btn btn-info" value="Toevoegen">

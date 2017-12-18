@@ -17,11 +17,11 @@ namespace Festispec.Domain
             public DateTime NotAvailableTo { get; set; }
 
             [Required]
-            [DataType(DataType.Date)]
+            [DataType(DataType.DateTime)]
             public DateTime NotAvailableDateFrom { get; set; }
 
             [Required]
-            [DataType(DataType.Date)]
+            [DataType(DataType.DateTime)]
             public DateTime NotAvailableDateTo { get; set; }
         }
     }
