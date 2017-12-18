@@ -30,22 +30,21 @@ namespace Festispec.Web.Controllers
         [Route("Inspection/Inform/")]
         public ActionResult Inform()
         {
+            var user = ((IInspectorPrincipal)User);
+            var id = user.Id;
 
-            //TODO: Add Inspections loading in from certain ID
-            //if (!id.HasValue)
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             ViewBag.Messsage = "Komende Inspecties";
-            IInspectionRepositoryFactory _inspectionRepositoryFactory = new InspectionRepositoryFactory(true);
+            IPlanningRepositoryFactory _inspectionRepositoryFactory = new PlanningRepositoryFactory(true);
             List<InspectionViewModel> _Inspections = new List<InspectionViewModel>();
             using(var InspectionRepository = _inspectionRepositoryFactory.CreateRepository())
             {
-
-                foreach(Inspection i in InspectionRepository.Get().ToList())
+                var temp = InspectionRepository.Get().Where(  Inspection => Inspection.Inspector_Id == id);
+                foreach (Planning i in temp)
                 {
-                    if (i.End >= DateTime.Now && i.Status.Status != "Declined")
+                    if (i.Inspection.End >= DateTime.Now && i.Inspection.Status_Status != "Declined")
                     {
-                        _Inspections.Add(new InspectionViewModel(i));
+                        _Inspections.Add(new InspectionViewModel(i.Inspection));
                     }
                 }
 

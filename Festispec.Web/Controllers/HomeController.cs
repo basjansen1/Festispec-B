@@ -11,7 +11,7 @@ namespace Festispec.Web.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Inform", "Inspection");
         }
     }
 }
