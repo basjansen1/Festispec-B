@@ -43,7 +43,10 @@ namespace Festispec.Web.Controllers
 
                 foreach(Inspection i in InspectionRepository.Get().ToList())
                 {
-                    _Inspections.Add(new InspectionViewModel(i));
+                    if (i.End >= DateTime.Now)
+                    {
+                        _Inspections.Add(new InspectionViewModel(i));
+                    }
                 }
 
 
