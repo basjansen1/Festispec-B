@@ -22,8 +22,18 @@
                             <button id="startbutton" class="btn btn-default">Take photo</button>
                         </div>
                         <canvas id="canvas"></canvas>
-                        <div class="output">
-                            <img id="photo" alt="The screen capture will appear in this box." src="@inspectionQuestionAnswer.Answer">
+                        <div class="row" name="beeld-row-@inspectionQuestion.Question_Id">
+                            @foreach (var beeldItem in inspectionQuestionAnswer.DeserializeBeeldAnswer())
+                            {
+                                <div class="col-sm-6 col-md-4 col-lg-4">
+                                    <div class="card beeld-item-@inspectionQuestion.Question_Id">
+                                        <img class="card-img-top" src="@beeldItem[0]"/>
+                                        <p class="card-block">
+                                            <textarea class="form-control">@beeldItem[1]</textarea>
+                                        </p>
+                                    </div>
+                                </div>
+                            }
                         </div>
                         <script>
                             (function () {
@@ -46,12 +56,14 @@
                                 var canvas = null;
                                 var photo = null;
                                 var startbutton = null;
+                                var beeldRow = null;
 
                                 function startup() {
                                     video = document.getElementById('video');
                                     canvas = document.getElementById('canvas');
                                     photo = document.getElementById('photo');
                                     startbutton = document.getElementById('startbutton');
+                                    beeldRow = document.querySelector('[name="beeld-row-@inspectionQuestion.Question_Id"]');
 
                                     navigator.getMedia = (navigator.getUserMedia ||
                                         navigator.webkitGetUserMedia ||
@@ -134,7 +146,19 @@
                                         context.drawImage(video, 0, 0, width, height);
 
                                         var data = canvas.toDataURL('image/png');
-                                        photo.setAttribute('src', data);
+//                                        photo.setAttribute('src', data);
+
+                                        var beeldItemHtml =
+                                            '<div class="col-sm-6 col-md-4 col-lg-4 mt-4">' +
+                                                '<div class="card beeld-item-@inspectionQuestion.Question_Id">' +
+                                                    '<img class="card-img-top" src="' + data + '" />' +
+                                                    '<p class="card-block">' +
+                                                        '<textarea class="form-control"></textarea>' +
+                                                    '</p>' +
+                                                '</div>' +
+                                            '</div>';
+
+                                        beeldRow.innerHTML += beeldItemHtml;
                                     } else {
                                         clearphoto();
                                     }
@@ -214,9 +238,6 @@
                 var element = elements[i];
                 var questionId = element.dataset.questionId;
 
-                // Add the parsed answer from the element to the answers dictionary on the question id index
-                //answers[questionId] = parseElementAnswer(element);
-
                 data[`answers[${i}].Key`] = questionId;
                 data[`answers[${i}].Value`] = parseElementAnswer(element);
             }
@@ -261,10 +282,19 @@
 
     function parseBeeldAnswer(element) {
         var questionId = element.dataset.questionId;
-        var canvas = element.querySelector(`canvas`);
-        var img = element.querySelector(`img`);
-        console.log(img.src);
-        return img.src;
+        var beeldItems = element.querySelectorAll(`.beeld-item-${questionId}`);
+
+        var beeldAnswers = [];
+
+        for (var i = 0, l = beeldItems.length; i < l; i++) {
+            var beeldItem = beeldItems[i];
+            var image = beeldItem.querySelector('img');
+            var textarea = beeldItem.querySelector('textarea');
+
+            beeldAnswers.push([image.src, textarea.value]);
+        }
+
+        return JSON.stringify(beeldAnswers);
     }
 
     function parseTableAnswer(element) {
@@ -299,6 +329,119 @@
 </script>
 
 <style>
+    .card {
+        font-size: 1em;
+        overflow: hidden;
+        padding: 0;
+        border: none;
+        border-radius: .28571429rem;
+        box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+        margin-bottom: 25px;
+    }
+
+    .card-block {
+        font-size: 1em;
+        position: relative;
+        margin: 0;
+        padding: 1em;
+        border: none;
+        border-top: 1px solid rgba(34, 36, 38, .1);
+        box-shadow: none;
+    }
+
+    .card-img-top {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .card-title {
+        font-size: 1.28571429em;
+        font-weight: 700;
+        line-height: 1.2857em;
+    }
+
+    .card-text {
+        clear: both;
+        margin-top: .5em;
+        color: rgba(0, 0, 0, .68);
+    }
+
+    .card-footer {
+        font-size: 1em;
+        position: static;
+        top: 0;
+        left: 0;
+        max-width: 100%;
+        padding: .75em 1em;
+        color: rgba(0, 0, 0, .4);
+        border-top: 1px solid rgba(0, 0, 0, .05) !important;
+        background: #fff;
+    }
+
+    .card-inverse .btn {
+        border: 1px solid rgba(0, 0, 0, .05);
+    }
+
+    .profile {
+        position: absolute;
+        top: -12px;
+        display: inline-block;
+        overflow: hidden;
+        box-sizing: border-box;
+        width: 25px;
+        height: 25px;
+        margin: 0;
+        border: 1px solid #fff;
+        border-radius: 50%;
+    }
+
+    .profile-avatar {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+    }
+
+    .profile-inline {
+        position: relative;
+        top: 0;
+        display: inline-block;
+    }
+
+    .profile-inline ~ .card-title {
+        display: inline-block;
+        margin-left: 4px;
+        vertical-align: top;
+    }
+
+    .text-bold {
+        font-weight: 700;
+    }
+
+    .meta {
+        font-size: 1em;
+        color: rgba(0, 0, 0, .4);
+    }
+
+    .meta a {
+        text-decoration: none;
+        color: rgba(0, 0, 0, .4);
+    }
+
+    .meta a:hover {
+        color: rgba(0, 0, 0, .87);
+    }
+
+    textarea,
+    input {
+        -moz-min-width: 100%;
+        -ms-min-width: 100%;
+        -o-min-width: 100%;
+        -webkit-min-width: 100%;
+        min-width: 100%;
+    }
+
     #video {
         border: 1px solid black;
         box-shadow: 2px 2px 3px black;

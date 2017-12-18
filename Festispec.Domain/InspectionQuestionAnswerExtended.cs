@@ -31,9 +31,21 @@ namespace Festispec.Domain
             }
         }
 
-        //        private void SerializeMetadata(object deserializedAnswer)
-        //        {
-        //            Answer = JsonConvert.SerializeObject(deserializedAnswer);
-        //        }
+        public List<List<string>> DeserializeBeeldAnswer()
+        {
+            return DeserializeBeeldAnswer(Answer);
+        }
+        public List<List<string>> DeserializeBeeldAnswer(string answer)
+        {
+            try
+            {
+                var table = (JArray)JsonConvert.DeserializeObject(answer);
+                return table.Select(row => new List<string> { row[0].ToString(), row[1].ToString() }).ToList();
+            }
+            catch
+            {
+                return new List<List<string>>();
+            }
+        }
     }
 }
