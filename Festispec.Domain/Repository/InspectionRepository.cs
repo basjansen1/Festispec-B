@@ -1,6 +1,7 @@
 ﻿using System.Data.Entity;
 using Festispec.Domain.Repository.Interface;
 using System.Linq;
+using System;
 
 namespace Festispec.Domain.Repository
 {
