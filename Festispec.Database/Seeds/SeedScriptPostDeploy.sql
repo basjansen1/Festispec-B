@@ -146,4 +146,17 @@ INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspe
 INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (4, N'2018-04-22 00:00:00', N'2018-05-05 00:00:00', 4)
 SET IDENTITY_INSERT [dbo].[Schedule] OFF
 
+INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (1, 12)
+INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (2, 12)
+INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (3, 12)
+INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (4, 12)
+INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (5, 12)
+INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (6, 12)
+INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (7, 12)
+INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (8, 12)
+INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (9, 12)
+INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (10, 12)
+INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (11, 12)
+INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (12, 12)
+
 

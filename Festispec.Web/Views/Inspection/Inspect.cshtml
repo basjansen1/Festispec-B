@@ -1,6 +1,341 @@
-﻿@model Festispec.Domain.Inspection
-    
-@foreach (var question in Model.InspectionQuestion.Select(question => question.Question))
-{
-    <h1>@question.Name</h1>
-}
+﻿@using Festispec.Domain
+@model Festispec.Domain.Planning
+
+<form id="inspectionForm" method="post">
+
+    @foreach (var inspectionQuestion in Model.Inspection.InspectionQuestion)
+    {
+        var inspectionQuestionAnswer = Model.InspectionQuestionAnswer
+            .Where(answer => answer.Inspection_Id == inspectionQuestion.Inspection_Id && answer.Inspector_Id == Model.Inspector_Id && answer.Question_Id == inspectionQuestion.Question_Id && answer.Date == Model.Date)
+            .DefaultIfEmpty(new InspectionQuestionAnswer {Inspection_Id = inspectionQuestion.Inspection_Id, Inspector_Id = Model.Inspector_Id, Question_Id = inspectionQuestion.Question_Id, Date = Model.Date, Answer = ""})
+            .First();
+
+        <div class="row">
+            <h3>@inspectionQuestion.Question.Name</h3>
+            <p>@inspectionQuestion.Question.Description</p>
+            @switch (inspectionQuestion.Question.QuestionType_Type)
+            {
+                case "Beeld":
+                    <div name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">
+                        <div class="camera">
+                            <video id="video">Video stream not available.</video>
+                            <button id="startbutton">Take photo</button>
+                        </div>
+                        <canvas id="canvas"></canvas>
+                        <div class="output">
+                            <img id="photo" alt="The screen capture will appear in this box." src="@inspectionQuestionAnswer.Answer">
+                        </div>
+                        <script>
+                            (function () {
+                                // The width and height of the captured photo. We will set the
+                                // width to the value defined here, but the height will be
+                                // calculated based on the aspect ratio of the input stream.
+
+                                var width = 320; // We will scale the photo width to this
+                                var height = 0; // This will be computed based on the input stream
+
+                                // |streaming| indicates whether or not we're currently streaming
+                                // video from the camera. Obviously, we start at false.
+
+                                var streaming = false;
+
+                                // The various HTML elements we need to configure or control. These
+                                // will be set by the startup() function.
+
+                                var video = null;
+                                var canvas = null;
+                                var photo = null;
+                                var startbutton = null;
+
+                                function startup() {
+                                    video = document.getElementById('video');
+                                    canvas = document.getElementById('canvas');
+                                    photo = document.getElementById('photo');
+                                    startbutton = document.getElementById('startbutton');
+
+                                    navigator.getMedia = (navigator.getUserMedia ||
+                                        navigator.webkitGetUserMedia ||
+                                        navigator.mozGetUserMedia ||
+                                        navigator.msGetUserMedia);
+
+                                    navigator.getMedia(
+                                        {
+                                            video: true,
+                                            audio: false
+                                        },
+                                        function (stream) {
+                                            if (navigator.mozGetUserMedia) {
+                                                video.mozSrcObject = stream;
+                                            } else {
+                                                var vendorURL = window.URL || window.webkitURL;
+                                                video.src = vendorURL.createObjectURL(stream);
+                                            }
+                                            video.play();
+                                        },
+                                        function (err) {
+                                            console.log("An error occured! " + err);
+                                        }
+                                    );
+
+                                    video.addEventListener('canplay',
+                                        function (ev) {
+                                            if (!streaming) {
+                                                height = video.videoHeight / (video.videoWidth / width);
+
+                                                // Firefox currently has a bug where the height can't be read from
+                                                // the video, so we will make assumptions if this happens.
+
+                                                if (isNaN(height)) {
+                                                    height = width / (4 / 3);
+                                                }
+
+                                                video.setAttribute('width', width);
+                                                video.setAttribute('height', height);
+                                                canvas.setAttribute('width', width);
+                                                canvas.setAttribute('height', height);
+                                                streaming = true;
+                                            }
+                                        },
+                                        false);
+
+                                    startbutton.addEventListener('click',
+                                        function (ev) {
+                                            takepicture();
+                                            ev.preventDefault();
+                                        },
+                                        false);
+
+                                    //clearphoto();
+                                }
+
+                                // Fill the photo with an indication that none has been
+                                // captured.
+
+                                function clearphoto() {
+                                    var context = canvas.getContext('2d');
+                                    context.fillStyle = "#AAA";
+                                    context.fillRect(0, 0, canvas.width, canvas.height);
+
+                                    var data = canvas.toDataURL('image/png');
+                                    photo.setAttribute('src', data);
+                                }
+
+                                // Capture a photo by fetching the current contents of the video
+                                // and drawing it into a canvas, then converting that to a PNG
+                                // format data URL. By drawing it on an offscreen canvas and then
+                                // drawing that to the screen, we can change its size and/or apply
+                                // other changes before drawing it.
+
+                                function takepicture() {
+                                    var context = canvas.getContext('2d');
+                                    if (width && height) {
+                                        canvas.width = width;
+                                        canvas.height = height;
+                                        context.drawImage(video, 0, 0, width, height);
+
+                                        var data = canvas.toDataURL('image/png');
+                                        photo.setAttribute('src', data);
+                                    } else {
+                                        clearphoto();
+                                    }
+                                }
+
+                                // Set up our event listener to run the startup process
+                                // once loading is complete.
+                                window.addEventListener('load', startup, false);
+                            })();
+                        </script>
+                    </div>
+                    break;
+                case "Getal":
+                        @: <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type" />
+                        break;
+                        case "Reeks":
+                        <div name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">
+                            @for (var i = 1; i < 11; i++)
+                        {
+                                <label>
+                                    <input name="radio-@inspectionQuestion.Question_Id" type="radio" value="@i">@i
+                                </label>
+                            }
+                        </div>
+                        break;
+                        case "Tabel":
+                        <table name="answers" class="table table-bordered table-striped table-responsive" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">
+                            <thead>
+                                <tr>
+                                    <th>@inspectionQuestion.Question.MetadataParameter1</th>
+                                    <th>@inspectionQuestion.Question.MetadataParameter2</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var table = inspectionQuestionAnswer.DeserializeTabelAnswer();
+                                    foreach (var row in table)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" value="@row[0]" />
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" value="@row[1]" />
+                                            </td>
+                                        </tr>
+                                    }}
+                            </tbody>
+                        </table>
+                        break;
+                        case "Tekst":
+                        <textarea name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">@inspectionQuestionAnswer.Answer</textarea>
+                        break;
+                        }
+                    </div>
+                                    }
+
+    <input type="submit" value="versturen"/>
+
+</form>
+
+
+<script>
+    var inspectionForm = document.getElementById('inspectionForm');
+    inspectionForm.addEventListener('submit',
+        function(event) {
+            event.preventDefault();
+
+            // Get all answer elements
+            var elements = inspectionForm.querySelectorAll('[name="answers"]');
+
+            // Create dictionary
+            var data = new Object();
+
+            // Loop through the answer elements
+            for (var i = 0, l = elements.length; i < l; i++) {
+                var element = elements[i];
+                var questionId = element.dataset.questionId;
+
+                // Add the parsed answer from the element to the answers dictionary on the question id index
+                //answers[questionId] = parseElementAnswer(element);
+
+                data[`answers[${i}].Key`] = questionId;
+                data[`answers[${i}].Value`] = parseElementAnswer(element);
+            }
+
+
+            $.post('/Inspection/Inspect/@Model.Inspection_Id/@Model.Date.ToString("yyyy-MM-dd")', data);
+        });
+
+    function parseElementAnswer(element) {
+        var questionType = element.dataset.questionType;
+        var answer;
+        switch (questionType) {
+        case "Getal":
+        case "Tekst":
+            answer = element.value;
+            break;
+        case "Reeks":
+            answer = parseReeksAnswer(element);
+            break;
+            case "Tabel":
+                answer = parseTableAnswer(element);
+                break;
+            case "Beeld":
+                answer = parseBeeldAnswer(element);
+            break;
+        }
+        return answer;
+    }
+
+    function parseReeksAnswer(element) {
+        var questionId = element.dataset.questionId;
+        var reeks = element.querySelectorAll(`[name="radio-${questionId}"]`);
+
+        return getSelectedRadioButton(reeks);
+    }
+
+    function parseBeeldAnswer(element) {
+        var questionId = element.dataset.questionId;
+        var canvas = element.querySelector(`canvas`);
+        var img = element.querySelector(`img`);
+        console.log(img.src);
+        return img.src;
+    }
+
+    function parseTableAnswer(element) {
+        var questionId = element.dataset.questionId;
+        var tableRows = element.querySelectorAll('tbody tr');
+
+        var tableAnswers = [];
+
+        for (var i = 0, l = tableRows.length; i < l; i++) {
+            var tableRow = tableRows[i];
+            var tableColumnInputs = tableRow.querySelectorAll('td input');
+
+            var column1 = tableColumnInputs[0].value;
+            var column2 = tableColumnInputs[1].value;
+
+            tableAnswers.push({ column1, column2 });
+        }
+
+        return JSON.stringify(tableAnswers);
+    }
+
+    function getSelectedRadioButton(radioButtons) {
+        for (var i = 0, l = radioButtons.length; i < l; i++) {
+            var radioButton = radioButtons[i];
+            if (radioButton.checked) {
+                return radioButton.value;
+            }
+        }
+        return '';
+    }
+
+</script>
+
+<style>
+    #video {
+        border: 1px solid black;
+        box-shadow: 2px 2px 3px black;
+        height: 240px;
+        width: 320px;
+    }
+
+    #photo {
+        border: 1px solid black;
+        box-shadow: 2px 2px 3px black;
+        height: 240px;
+        width: 320px;
+    }
+
+    #canvas { display: none; }
+
+    .camera {
+        display: inline-block;
+        width: 340px;
+    }
+
+    .output {
+        display: inline-block;
+        width: 340px;
+    }
+
+    #startbutton {
+        background-color: rgba(0, 150, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        bottom: 32px;
+        box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, 0.2);
+        color: rgba(255, 255, 255, 1.0);
+        display: block;
+        font-family: "Lucida Grande", "Arial", sans-serif;
+        font-size: 14px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+    }
+
+    .contentarea {
+        font-family: "Lucida Grande", "Arial", sans-serif;
+        font-size: 16px;
+        width: 760px;
+    }
+</style>
