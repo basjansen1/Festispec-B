@@ -170,15 +170,15 @@ namespace Festispec.Routes
         public static Route RegulationList = new Route
         {
             Key = "RegulationList",
-            PageType = new Uri("../Views/Regulations/RegulationsList.xaml", UriKind.Relative),
+            PageType = new Uri("../Views/Regulations/RegulationList.xaml", UriKind.Relative),
             Roles = new[] {"Manager", "Medewerker"},
             Offline = true
         };
 
-        public static Route RegulationsAddOrUpdate = new Route
+        public static Route RegulationAddOrUpdate = new Route
         {
             Key = "RegulationAddOrUpdate",
-            PageType = new Uri("../Views/Regulations/RegulationsAddOrUpdate.xaml", UriKind.Relative),
+            PageType = new Uri("../Views/Regulations/RegulationAddOrUpdate.xaml", UriKind.Relative),
             Roles = new[] {"Manager", "Medewerker"}
         };
 
@@ -209,6 +209,13 @@ namespace Festispec.Routes
             Key = "QuestionAdd",
             PageType = new Uri("../Views/Question/QuestionAdd.xaml", UriKind.Relative),
             Roles = new[] {"Manager", "Medewerker"}
+        };
+
+        public static Route InspectionQuestionnaire = new Route()
+        {
+            Key = "InspectionQuestionnaire",
+            PageType = new Uri("../Views/Inspection/InspectionQuestionnaire.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
         };
 
     }

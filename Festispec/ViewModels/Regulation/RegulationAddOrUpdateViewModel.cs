@@ -7,11 +7,11 @@ using Festispec.ViewModels.Factory.Interface;
 namespace Festispec.ViewModels.Regulation
 {
     public class RegulationAddOrUpdateViewModel : 
-        AddOrUpdateViewModelBase<IRegulationsViewModelFactory, RegulationViewModel, IRegulationRepository, Domain.Regulation>
+        AddOrUpdateViewModelBase<IRegulationViewModelFactory, RegulationViewModel, IRegulationRepository, Domain.Regulation>
     {
         public RegulationAddOrUpdateViewModel(INavigationService navigationService,
             IRegulationRepositoryFactory repositoryFactory,
-            IRegulationsViewModelFactory regulationsViewModelFactory)
+            IRegulationViewModelFactory regulationsViewModelFactory)
             : base(navigationService, repositoryFactory, regulationsViewModelFactory)
         {
            
@@ -21,7 +21,7 @@ namespace Festispec.ViewModels.Regulation
         {
             if (args.PropertyName != "CurrentRoute") return;
 
-            if (NavigationService.CurrentRoute != Routes.Routes.RegulationsAddOrUpdate) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.RegulationAddOrUpdate) return;
 
             UpdateEntityViewModelFromNavigationParameter();
         }

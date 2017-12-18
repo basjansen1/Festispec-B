@@ -50,6 +50,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BruTile, Version=0.22.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\BruTile.0.22.1\lib\portable-net45+win+WindowsPhoneApp81+Xamarin.iOS10+MonoAndroid10+MonoTouch10\BruTile.dll</HintPath>
@@ -135,6 +138,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -157,6 +161,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\AmericanDateConverter.cs" />
     <Compile Include="Converter\InverseBooleanConverter.cs" />
     <Compile Include="Helper\MapHelper.cs" />
     <Compile Include="Properties\Annotations1.cs" />
@@ -170,10 +175,13 @@
     <Compile Include="ViewModels\CustomerCRUD\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Factory\CustomerViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\ICustomerViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IInspectionViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\InspectionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IPlanningViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\PlanningViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\QuestionViewModelFactory.cs" />
+    <Compile Include="ViewModels\Inspection\InspectionQuestionnaireViewModel.cs" />
     <Compile Include="ViewModels\Interface\IAddressViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningListViewModel.cs" />
@@ -184,8 +192,8 @@
     <Compile Include="ViewModels\Question\QuestionViewModel.cs" />
     <Compile Include="ViewModels\Regulation.Old\RegulationListVM.cs" />
     <Compile Include="ViewModels\Regulation.Old\RegulationVM.cs" />
-    <Compile Include="ViewModels\Factory\Interface\IRegulationsViewModelFactory.cs" />
-    <Compile Include="ViewModels\Factory\RegulationsViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IRegulationViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\RegulationViewModelFactory.cs" />
     <Compile Include="ViewModels\Regulation\RegulationAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Regulation\RegulationListViewModel.cs" />
     <Compile Include="ViewModels\Regulation\RegulationViewModel.cs" />
@@ -243,6 +251,9 @@
     <Compile Include="Views\InspectionList.xaml.cs">
       <DependentUpon>InspectionList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Inspection\InspectionQuestionnaire.xaml.cs">
+      <DependentUpon>InspectionQuestionnaire.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Question\QuestionAdd.xaml.cs">
       <DependentUpon>QuestionAdd.xaml</DependentUpon>
     </Compile>
@@ -261,11 +272,11 @@
     <Compile Include="Views\Planning\PlanningList.xaml.cs">
       <DependentUpon>PlanningList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Regulations\RegulationsAddOrUpdate.xaml.cs">
-      <DependentUpon>RegulationsAddOrUpdate.xaml</DependentUpon>
+    <Compile Include="Views\Regulations\RegulationAddOrUpdate.xaml.cs">
+      <DependentUpon>RegulationAddOrUpdate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Regulations\RegulationsList.xaml.cs">
-      <DependentUpon>RegulationsList.xaml</DependentUpon>
+    <Compile Include="Views\Regulations\RegulationList.xaml.cs">
+      <DependentUpon>RegulationList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Inspector\Schedule\InspectorSchedule.xaml.cs">
       <DependentUpon>InspectorSchedule.xaml</DependentUpon>
@@ -317,6 +328,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Inspection\InspectionQuestionnaire.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Planning\PlanningUpdate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -341,11 +356,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Regulations\RegulationsAddOrUpdate.xaml">
+    <Page Include="Views\Regulations\RegulationAddOrUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Regulations\RegulationsList.xaml">
+    <Page Include="Views\Regulations\RegulationList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -451,7 +466,9 @@
       <Name>Festispec.OfflineSync</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Icon.ico" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Crud_Employees\Images\garbage.png" />
   </ItemGroup>
@@ -466,6 +483,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\Logo.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SkiaSharp.1.59.2\build\net45\SkiaSharp.targets" Condition="Exists('..\packages\SkiaSharp.1.59.2\build\net45\SkiaSharp.targets')" />

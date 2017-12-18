@@ -14,8 +14,12 @@ using System.Windows;
 using System.Windows.Input;
 using Festispec.NavigationService;
 using Festispec.Domain.Repository.Interface;
+using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.Customer;
-namespace Festispec.ViewModels.Employees
+
+namespace Festispec.ViewModels.Inspection
+
+
 {
     public class AddInspectionVM : ViewModelBase
     {
@@ -26,6 +30,7 @@ namespace Festispec.ViewModels.Employees
         private DateTime _fromDate;
         private DateTime _toDate;
         private readonly INavigationService _navigationService;
+        private readonly IInspectionViewModelFactory _inspectionViewModelFactory;
         #endregion
 
         #region properties
@@ -80,12 +85,16 @@ namespace Festispec.ViewModels.Employees
         #endregion
 
         #region constructor and methods
-        public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory, INavigationService navigationService, IGeoRepository GeoRepository)
+        public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory, IInspectionRepositoryFactory inspectionRepositoryFactory, IInspectionViewModelFactory inspectionViewModelFactory, INavigationService navigationService, IGeoRepository GeoRepository)
         {
             InspectionList = inspectionList;
             _navigationService = navigationService;
-            NewInspection = new InspectionVM();
-            NewInspection.Status = "Pending";
+
+            _inspectionViewModelFactory = inspectionViewModelFactory;
+            NewInspection = _inspectionViewModelFactory.CreateViewModel();
+
+            NewInspection.Status = "In afwachting";
+
             _geoRepository = GeoRepository;
 
             NewInspection.Location = DbGeography.PointFromText("POINT(50 5)", 4326);

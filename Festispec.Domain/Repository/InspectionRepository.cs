@@ -55,7 +55,32 @@ namespace Festispec.Domain.Repository
                 .Add(new InspectionQuestion {Inspection_Id = inspection.Id, Question_Id = question.Id});
             DbContext.SaveChanges();
         }
+        public void TryAttachQuestion(Inspection inspection, Question question)
+        {
+            var exists = DbContext.Set<InspectionQuestion>().Any(inspectionQuestion =>
+                inspectionQuestion.Inspection_Id == inspection.Id && inspectionQuestion.Question_Id == question.Id);
 
-       
+            if (exists)
+                return;
+
+            AttachQuestions(inspection, question);
+        }
+
+        public void AttachQuestions(Inspection inspection, Question question)
+        {
+            DbContext.Set<InspectionQuestion>()
+                .Add(new InspectionQuestion { Inspection_Id = inspection.Id, Question_Id = question.Id });
+            DbContext.SaveChanges();
+        }
+
+        public void DetachQuestions(Inspection inspection, Question question)
+        {
+            var existing = DbContext.Set<InspectionQuestion>().Find(inspection.Id, question.Id);
+
+            if (existing == null) return;
+
+            DbContext.Entry(existing).State = EntityState.Deleted;
+            DbContext.SaveChanges();
+        }
     }
 }
