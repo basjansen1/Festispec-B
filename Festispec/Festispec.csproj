@@ -186,6 +186,9 @@
     <Compile Include="ViewModels\Regulation\RegulationAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Regulation\RegulationListViewModel.cs" />
     <Compile Include="ViewModels\Regulation\RegulationViewModel.cs" />
+    <Compile Include="ViewModels\Reports\CustomerListVM.cs" />
+    <Compile Include="ViewModels\Reports\GenerateReportVM.cs" />
+    <Compile Include="ViewModels\Reports\ReportCustomerVM.cs" />
     <Compile Include="ViewModels\Template\TemplateQuestionAddViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateQuestionAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeAddOrUpdateViewModel.cs" />
@@ -320,8 +323,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GenerateReport.xaml">
+    <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Planning\PlanningUpdate.xaml">
       <Generator>MSBuild:Compile</Generator>

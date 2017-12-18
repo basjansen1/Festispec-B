@@ -33,6 +33,7 @@
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
@@ -45,6 +46,7 @@
 
                 <Button Grid.Column="6" Content="Inspecties" Margin="5px 15px" Command="{Binding NavigateToInspectionListCommand}"/>
                 <Button Grid.Column="7" Content="Regelgeving" Margin="5px 15px" Command="{Binding NavigateToRegulationsListCommand}"/>
+                <Button Grid.Column="8" Content="Rapporten" Margin="5px 15px" Command="{Binding NavigateToReportCommand}"/>
             </Grid>
 
             <Frame Grid.Row="1" Name="MainFrame" NavigationUIVisibility="Hidden"/>

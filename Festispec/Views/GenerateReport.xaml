@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Festispec.Views"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="GenerateReport">
+      Title="GenerateReport" DataContext="{Binding GetGenerateReport, Source={StaticResource Locator}}">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <TextBlock FontSize="20">Genereer rapport</TextBlock>
         <Label Grid.Row="1">Selecteer periode</Label>
-        <ListBox Grid.Row="2"></ListBox>
-        <Button Grid.Row="3">Download PDF</Button>
+        <ListBox ItemsSource="{Binding OptionList}" SelectedItem="{Binding SelectedAmount}"  DisplayMemberPath="Name" Grid.Row="2"></ListBox>
+        <Button Command="{Binding Path=DownloadCommand}" Grid.Row="3">Download PDF</Button>
     </Grid>
 </Page>

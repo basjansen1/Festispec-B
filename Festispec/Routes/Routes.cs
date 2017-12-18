@@ -193,5 +193,27 @@ namespace Festispec.Routes
 
         #endregion
 
+        #region reports
+
+        public static Route Reports = new Route
+        {
+            Key = "Reports",
+            PageType = new Uri("../Views/CustomerReportView.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" },
+            Offline = true
+        };
+
+
+        public static Route GenerateReport = new Route
+        {
+            Key = "GenerateReport",
+            PageType = new Uri("../Views/GenerateReport.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" },
+            Offline = true
+        };
+        
+
+        #endregion
+
     }
 }

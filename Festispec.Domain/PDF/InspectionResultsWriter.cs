@@ -1,4 +1,5 @@
-﻿using Festispec.ViewModels.PDF;
+﻿using Festispec.Domain;
+using Festispec.ViewModels.PDF;
 using PdfSharp.Drawing;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,21 @@ namespace Festispec.Domain.PDF
     {
         private List<Inspection> _inspectionList;
         private Customer _customer;
-        public InspectionResultsWriter(List<Inspection>inspectionList, Customer customer)
+
+        public InspectionResultsWriter(List<Inspection> inspectionList, Customer customer)
         {
             _inspectionList = inspectionList;
             _customer = customer;
         }
+
+        public InspectionResultsWriter(List<Inspection> inspectionList)
+        {
+            _inspectionList = inspectionList;
+        }
+
         private void AddCoverPage()
         {
-            for(int counter = 8; counter > 0; counter--)
+            for (int counter = 8; counter > 0; counter--)
             {
                 AddEmptyLine();
             }
@@ -28,6 +36,7 @@ namespace Festispec.Domain.PDF
             AddLine(_customer.KVK, new XFont("Verdana", 16, XFontStyle.Bold));
             AddNewPage();
         }
+
         private void AddIntroduction()
         {
             AddLine("In deze rapport zullen de resulataten van de inspecties uit de periode " +
@@ -35,6 +44,7 @@ namespace Festispec.Domain.PDF
                 " worden weergeven. Indien u verdere vragen heeft kunt u gerust contact met ons opnemen.");
             AddNewPage();
         }
+
         private void AddQuestion(string question)
         {
             AddParagraphTitle(question);
@@ -52,13 +62,13 @@ namespace Festispec.Domain.PDF
         {
             AddLine(comment);
             AddEmptyLine();
-        } 
+        }
 
         public void CreateDocument()
         {
             this.AddCoverPage();
             this.AddIntroduction();
-            foreach(Inspection inspection in _inspectionList)
+            foreach (Inspection inspection in _inspectionList)
             {
                 AddTitle("Inspectie " + inspection.Dates);
                 // Todo: print question and answer(chart)

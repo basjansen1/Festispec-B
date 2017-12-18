@@ -3,6 +3,7 @@ using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.NavigationService;
 using Festispec.ViewModels.Customer;
 using Festispec.ViewModels.Factory.Interface;
+using Festispec.ViewModels.Reports;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
 using System.Collections.Generic;
@@ -11,18 +12,18 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Festispec.ViewModels.CustomerCRUD
 {
-    public class CustomerListViewModel : NavigatableViewModelBase
+    public class CustomerListVM : NavigatableViewModelBase
     {
-
         private readonly INavigationService _navigationService;
         private readonly ICustomerRepositoryFactory _CustomerRepositoryFactory;
         private readonly ICustomerViewModelFactory _CustomerViewModelFactory;
 
-        public CustomerListViewModel(INavigationService navigationService,
+        public CustomerListVM(INavigationService navigationService,
             ICustomerRepositoryFactory CustomerRepositoryFactory,
             ICustomerViewModelFactory CustomerViewModelFactory) : base(navigationService)
         {
@@ -53,13 +54,27 @@ namespace Festispec.ViewModels.CustomerCRUD
 
         public ObservableCollection<CustomerViewModel> Customers { get; private set; }
 
-        public CustomerViewModel SelectedCustomer { get; set; }
+        private CustomerViewModel _selectedCustomer;
+
+        public CustomerViewModel SelectedCustomer
+        {
+            get
+            {
+                return _selectedCustomer; 
+            }
+            set
+            {
+                _selectedCustomer = value;
+                RaisePropertyChanged("SelectedCustomer");
+               // MessageBox.Show(_selectedCustomer.City);
+            }
+        }
 
         public string SearchName { get; set; } = "";
 
         public string SelectedSearchOption { get; set; } = "";
 
-        public ObservableCollection<String> SearchItems {get; set;}
+        public ObservableCollection<String> SearchItems { get; set; }
 
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
@@ -77,7 +92,8 @@ namespace Festispec.ViewModels.CustomerCRUD
             NavigateToCustomerAddCommand =
                 new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate));
 
-            NavigateToReport = new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.GenerateReport));
+            NavigateToReport = new RelayCommand(()
+                => _navigationService.NavigateTo(Routes.Routes.GenerateReport));
 
             NavigateToCustomerUpdateCommand = new RelayCommand(
                 () => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate, SelectedCustomer),
@@ -154,8 +170,8 @@ namespace Festispec.ViewModels.CustomerCRUD
                     }
 
                 }
-            }         
-  }
+            }
+        }
 
         //Loads in the customers from the database, is called when something changes
         private void LoadCustomers()
