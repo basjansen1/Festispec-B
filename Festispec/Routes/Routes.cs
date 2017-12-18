@@ -211,5 +211,12 @@ namespace Festispec.Routes
             Roles = new[] {"Manager", "Medewerker"}
         };
 
+        public static Route InspectionQuestionnaire = new Route()
+        {
+            Key = "InspectionQuestionnaire",
+            PageType = new Uri("../Views/Inspection/InspectionQuestionnaire.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+
     }
 }

@@ -105,10 +105,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="addInspection" Content="Voeg een inspectie toe" Command="{Binding ShowAddInspectionWindowCommand}" Grid.Column="0"/>
-            <Button Content="Inspectieplanning" Command="{Binding NavigateToPlanningCommand}" Grid.Column="2" Margin="0 0 10 0"/>
-            <Button x:Name="btnManage" Content="Beheer inspectie" Command="{Binding ShowEditInspectionWindowCommand}" Grid.Column="3"/>
+            <Button Content="Vragenlijst" Command="{Binding NavigateToQuestionnaireCommand}" Grid.Column="2" Margin="0 0 10 0"/>
+            <Button Content="Inspectieplanning" Command="{Binding NavigateToPlanningCommand}" Grid.Column="3" Margin="0 0 10 0"/>
+            <Button x:Name="btnManage" Content="Beheer inspectie" Command="{Binding ShowEditInspectionWindowCommand}" Grid.Column="4"/>
+
         </Grid>
     </Grid>
 </Page>

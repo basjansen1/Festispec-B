@@ -24,7 +24,7 @@ namespace Festispec.ViewModels.Factory
             return new PlanningViewModel(_planningRepositoryFactory, entity);
         }
 
-        public PlanningViewModel CreateViewModelForInspection(Inspection inspection)
+        public PlanningViewModel CreateViewModelForInspection(Domain.Inspection inspection)
         {
             return new PlanningViewModel(_planningRepositoryFactory,
                 new Domain.Planning

@@ -1,6 +1,7 @@
 ﻿using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.NavigationService;
 using Festispec.ViewModels.Employees;
+using Festispec.ViewModels.Inspection;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;

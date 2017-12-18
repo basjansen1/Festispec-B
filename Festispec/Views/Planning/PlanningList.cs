@@ -12,7 +12,7 @@ namespace Festispec.Views.Planning
 {
     public partial class PlanningList
     {
-        private Inspection _inspection;
+        private Domain.Inspection _inspection;
         private PlanningListViewModel _planningListViewModel;
 
         public void InitializeMap()

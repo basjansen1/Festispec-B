@@ -83,7 +83,7 @@ namespace Festispec.ViewModels.Customer
             }
         }
 
-        public ICollection<Inspection> Inspections
+        public ICollection<Domain.Inspection> Inspections
         {
             get
             {
