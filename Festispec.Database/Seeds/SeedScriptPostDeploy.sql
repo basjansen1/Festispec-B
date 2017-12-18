@@ -141,8 +141,8 @@ SET IDENTITY_INSERT [dbo].[Regulation] OFF
 
 SET IDENTITY_INSERT [dbo].[Schedule] ON
 INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (1, N'2018-05-17 00:00:00', N'2018-06-05 00:00:00', 4)
-INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (2, N'2018-05-17 00:00:00', N'2018-06-05 00:00:00', 5)
-INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (3, N'2018-05-17 00:00:00', N'2018-06-05 00:00:00', 9)
+--INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (2, N'2018-05-17 00:00:00', N'2018-06-05 00:00:00', 5)
+--INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (3, N'2018-05-17 00:00:00', N'2018-06-05 00:00:00', 9)
 INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (4, N'2018-04-22 00:00:00', N'2018-05-05 00:00:00', 4)
 SET IDENTITY_INSERT [dbo].[Schedule] OFF
 

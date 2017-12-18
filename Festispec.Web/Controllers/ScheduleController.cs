@@ -27,15 +27,12 @@ namespace Festispec.Web.Controllers
                 if (id.HasValue)
                 {
 
-                    scheduleRepository.Delete(new Schedule
-                    { Id = id.Value
-                    });
-                    return RedirectToAction("InspectorSchedule");
+                    scheduleRepository.Delete(id.Value);
+                    return Redirect("/Schedule/InspectorSchedule");
                 }
-                
-                    var schedulee = scheduleRepository.Get().ToList();
-                    return View(schedulee);
-                
+
+                var schedulee = scheduleRepository.Get().ToList();
+                return View(schedulee);
             }
         }
 
