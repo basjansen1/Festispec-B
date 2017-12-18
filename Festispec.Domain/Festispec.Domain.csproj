@@ -58,6 +58,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -73,6 +76,17 @@
     <Compile Include="Contact.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+    <Compile Include="Extension\DateRangeExtension.cs" />
+    <Compile Include="IAddress.cs" />
+    <Compile Include="InspectionExtended.cs" />
+    <Compile Include="PDF\ChartExporter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PDF\InspectionResultsWriter.cs" />
+    <Compile Include="PlanningExtended.cs" />
+=======
+>>>>>>> b0cf8c2128c2491edabc28e66864609cb038478e
     <Compile Include="Customer.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
@@ -250,6 +264,15 @@
       <Project>{D752A463-81C4-4DC3-A929-9E666EC6BBCB}</Project>
       <Name>GeodanApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProofOfConcept.Geodan\ProofOfConcept.Geodan.csproj">
+      <Project>{86E3678B-98F7-4E37-BE12-D682B3F7D7AE}</Project>
+      <Name>ProofOfConcept.Geodan</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PDF\ChartExporter.resx">
+      <DependentUpon>ChartExporter.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

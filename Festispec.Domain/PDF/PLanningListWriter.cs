@@ -1,22 +1,17 @@
-﻿using Festispec.ViewModels.PDF;
-using PdfSharp.Charting;
-using PdfSharp.Drawing;
+﻿using PdfSharp.Drawing;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Festispec.Domain.PDF
 {
-    public class PLanningListWriter : PDFWriter
+    public class PLanningListWriter : PDFWriter // example class that inherits PDFWriter
     {
         private List<Planning> _planningList;
-
+        private ChartExporter _c;
         public PLanningListWriter()
         {
             _planningList = new List<Planning>();
-
+            _c = new ChartExporter();
             Planning planning = new Planning();
             planning.Date = DateTime.Now;
             planning.Inspection_Id = 1;
@@ -34,12 +29,11 @@ namespace Festispec.Domain.PDF
         }
         public void SetTitle(string title)
         {
-            SetDocumentTitle(title);
+            AddTitle(title);
         }
 
         public void AddParagraphHeader(string header)
         {
-            AddEmptyLine();
             AddParagraphTitle(header);
         }
 
@@ -70,14 +64,26 @@ namespace Festispec.Domain.PDF
 
         public void CreateDocument()
         {
+            for (int counter = 10; counter > 0; counter--)
+            {
+                AddEmptyLine();
+            }
+            AddLine("Inspectie resultaten ", new XFont("Verdana", 35, XFontStyle.Bold));
+            AddEmptyLine();
+            AddLine("Customername", new XFont("Verdana", 16, XFontStyle.Bold));
+            AddLine("Customername", new XFont("Verdana", 16, XFontStyle.Bold));
+            AddNewPage();
+
             this.SetTitle("Plannings");
+            AddEmptyLine();
             foreach (Planning planning in _planningList)
             {
-                AddParagraphHeader("Planning information " + planning.Date);
+                AddParagraphHeader("Planning information Planning information Planning information Planning information Planning information Planning information Planning information Planning information");
                 AddPlanningData(planning);
                 AddParagraphHeader("Inspection information");
                 AddInspectionData(planning.Inspection);
                 AddParagraphHeader("Inspector information: ");
+                AddImage(_c.Test());
                 AddInspectorData(planning.Inspector);
             }
             SaveAs("AllPlanningInformation");

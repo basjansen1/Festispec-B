@@ -204,6 +204,29 @@ namespace Festispec.Routes
         };
         #endregion
 
+<<<<<<< HEAD
+        #region reports
+
+        public static Route Reports = new Route
+        {
+            Key = "Reports",
+            PageType = new Uri("../Views/CustomerReportView.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" },
+            Offline = true
+        };
+
+
+        public static Route GenerateReport = new Route
+        {
+            Key = "GenerateReport",
+            PageType = new Uri("../Views/GenerateReport.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" },
+            Offline = true
+        };
+        
+
+        #endregion
+=======
         public static Route QuestionAdd = new Route()
         {
             Key = "QuestionAdd",
@@ -217,6 +240,7 @@ namespace Festispec.Routes
             PageType = new Uri("../Views/Inspection/InspectionQuestionnaire.xaml", UriKind.Relative),
             Roles = new[] { "Manager", "Medewerker" }
         };
+>>>>>>> b0cf8c2128c2491edabc28e66864609cb038478e
 
     }
 }
