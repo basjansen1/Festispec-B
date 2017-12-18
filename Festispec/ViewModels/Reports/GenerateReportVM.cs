@@ -43,29 +43,31 @@ namespace Festispec.ViewModels.Reports
             _selectedCustomer = customer;
             _inspectionVMList = inspectionList.InspectionVMList.ToList();
 
+            MessageBox.Show(_inspectionVMList.Count.ToString());
+
             OptionList = new List<int>()
             {
                 1, 2, 3, 4, 5
             };
 
             DownloadCommand = new RelayCommand(Download);
-
         }
 
         private void Download()
         {
-            _navigationService.GoBack();
-
             if (_inspectionVMList.Count < SelectedAmount)
             {
                 MessageBox.Show("Er zijn niet zoveel inspecties");
                 return;
             }
 
-             _inspectionVMList.Skip(Math.Max(0, _inspectionVMList.Count() - SelectedAmount));
-            _pdfWriter = new InspectionResultsWriter(_inspectionVMList.Select(i => i.toModel()).ToList(), _selectedCustomer.Id);
+            _inspectionVMList.Where(i => i.Name == _selectedCustomer.Name).ToList();
+            _inspectionVMList.Skip(Math.Max(0, _inspectionVMList.Count() - SelectedAmount));
 
+            _pdfWriter = new InspectionResultsWriter(_inspectionVMList.Select(i => i.toModel()).ToList());
             _pdfWriter.CreateDocument();
+
+            _navigationService.GoBack();
         }
     }
 }

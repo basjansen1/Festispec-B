@@ -14,10 +14,10 @@ namespace Festispec.Domain.PDF
         private List<Inspection> _inspectionList;
         private Customer _customer;
 
-        public InspectionResultsWriter(List<Inspection> inspectionList, int customerId)
+        public InspectionResultsWriter(List<Inspection> inspectionList, Customer customerId)
         {
             _inspectionList = inspectionList;
-            _customer = customer;
+            _customer = customerId;
         }
 
         public InspectionResultsWriter(List<Inspection> inspectionList)
