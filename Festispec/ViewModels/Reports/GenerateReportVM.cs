@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Festispec.ViewModels.Inspection;
 
 namespace Festispec.ViewModels.Reports
 {
@@ -43,6 +44,8 @@ namespace Festispec.ViewModels.Reports
             _inspectionVMList = inspectionList.InspectionVMList.ToList();
 
             MessageBox.Show(_inspectionVMList.Count.ToString());
+
+            SelectedAmount = 1;
 
             OptionList = new List<int>()
             {

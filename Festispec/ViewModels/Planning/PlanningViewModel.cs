@@ -80,7 +80,7 @@ namespace Festispec.ViewModels.Planning
             }
         }
 
-        public virtual Inspection Inspection
+        public virtual Domain.Inspection Inspection
         {
             get { return Entity.Inspection; }
             set
@@ -108,15 +108,15 @@ namespace Festispec.ViewModels.Planning
             }
         }
 
-        public virtual ICollection<InspectionQuestion> Questions
-        {
-            get { return Entity.Questions; }
-            set
-            {
-                Entity.Questions = value;
-                RaisePropertyChanged();
-            }
-        }
+//        public virtual ICollection<InspectionQuestion> Questions
+//        {
+//            get { return Entity.Questions; }
+//            set
+//            {
+//                Entity.Questions = value;
+//                RaisePropertyChanged();
+//            }
+//        }
 
         public override bool Save()
         {
@@ -148,11 +148,6 @@ namespace Festispec.ViewModels.Planning
                     (eve, ve) => ve.PropertyName).ToList();
                 var joined = string.Join(", ", errorList.Select(x => x));
                 MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
-                return false;
-            }
-            catch(Exception exception)
-            {
-                MessageBox.Show("Er is iets fout gegaan");
                 return false;
             }
             return true;

@@ -12,6 +12,10 @@ namespace Festispec.Domain.Repository
         {
         }
 
+        public override IQueryable<Inspector> Get()
+        {
+            return base.Get().Include(e => e.Schedule);
+        }
         public override Inspector Add(Inspector entity)
         {
             entity = CleanRelations(entity);
@@ -55,6 +59,11 @@ namespace Festispec.Domain.Repository
                 .Where(inspector => inspector.HiredFrom < dateAvailable && ( inspector.HiredTo > dateAvailable || inspector.HiredTo == null ))
                 // Order by distance to center
                 .OrderBy(inspector => inspector.Location.Distance(center));
+        }
+
+        public bool TryLogin(string username, string password)
+        {
+            return Get().Any(inspector => inspector.Username == username && inspector.Password == password);
         }
     }
 }

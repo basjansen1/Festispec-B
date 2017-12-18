@@ -11,7 +11,9 @@ namespace Festispec.Domain.Repository
         }
         public override IQueryable<Inspection> Get()
         {
-            return base.Get().Include(inspection => inspection.Customers);
+            return base.Get()
+                .Include(inspection => inspection.Customers)
+                .Include($"{nameof(InspectionQuestion)}.{nameof(Question)}.{nameof(QuestionType)}");
         }
 
         public override Inspection Add(Inspection entity)
@@ -38,6 +40,46 @@ namespace Festispec.Domain.Repository
             }
 
             return entity;
+        }
+
+        public void AddQuestion(Inspection inspection, Question question)
+        {
+            if (question.Id == 0)
+            {
+                DbContext.Set<Question>().Add(question);
+                DbContext.SaveChanges();
+            }
+
+            DbContext.Set<InspectionQuestion>()
+                .Add(new InspectionQuestion {Inspection_Id = inspection.Id, Question_Id = question.Id});
+            DbContext.SaveChanges();
+        }
+        public void TryAttachQuestion(Inspection inspection, Question question)
+        {
+            var exists = DbContext.Set<InspectionQuestion>().Any(inspectionQuestion =>
+                inspectionQuestion.Inspection_Id == inspection.Id && inspectionQuestion.Question_Id == question.Id);
+
+            if (exists)
+                return;
+
+            AttachQuestions(inspection, question);
+        }
+
+        public void AttachQuestions(Inspection inspection, Question question)
+        {
+            DbContext.Set<InspectionQuestion>()
+                .Add(new InspectionQuestion { Inspection_Id = inspection.Id, Question_Id = question.Id });
+            DbContext.SaveChanges();
+        }
+
+        public void DetachQuestions(Inspection inspection, Question question)
+        {
+            var existing = DbContext.Set<InspectionQuestion>().Find(inspection.Id, question.Id);
+
+            if (existing == null) return;
+
+            DbContext.Entry(existing).State = EntityState.Deleted;
+            DbContext.SaveChanges();
         }
     }
 }

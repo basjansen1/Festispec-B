@@ -70,7 +70,7 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="txtCancel" Content="Cancel" IsCancel="True" Command="{Binding CloseWindowCommand}" Grid.Column="1"/>
+            <Button x:Name="txtCancel" Content="Annuleer" IsCancel="True" Command="{Binding CloseWindowCommand}" Grid.Column="1"/>
             <Button x:Name="btnAddInspection" Content="Verzoek toevoegen" Command="{Binding AddInspectionCommand}" Grid.Column="2"/>
         </Grid>
 
