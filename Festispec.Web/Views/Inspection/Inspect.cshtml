@@ -1,0 +1,6 @@
+﻿@model Festispec.Domain.Inspection
+    
+@foreach (var question in Model.InspectionQuestion.Select(question => question.Question))
+{
+    <h1>@question.Name</h1>
+}

@@ -2,7 +2,7 @@
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.NavigationService;
-using Festispec.ViewModels.InspectionProcessing;
+//using Festispec.ViewModels.InspectionProcessing;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Festispec.ViewModels.Employees
+namespace Festispec.ViewModels.Inspection
 {
     public class EditInspectionVM : ViewModelBase
     {
@@ -90,7 +90,7 @@ namespace Festispec.ViewModels.Employees
                 }
                 using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
                 {
-                    Inspection inspection = InspectionList.SelectedInspection.toModel();
+                    Domain.Inspection inspection = InspectionList.SelectedInspection.toModel();
                     inspectionRepository.AddOrUpdate(inspection);
                 }
                 _navigationService.GoBack();
@@ -151,6 +151,9 @@ namespace Festispec.ViewModels.Employees
         
         private void DeleteSelectedInspection()
         {
+            var result = MessageBox.Show("Weet je zeker dat je deze inspectie wilt verwijderen?", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result != MessageBoxResult.Yes) return;
             InspectionList.DeleteSelectedInspection();
 
             _navigationService.GoBack();

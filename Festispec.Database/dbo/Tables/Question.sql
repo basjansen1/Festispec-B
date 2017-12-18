@@ -3,6 +3,7 @@
     [Name]              NVARCHAR (MAX) NOT NULL,
     [Description]       NVARCHAR (MAX) NULL,
     [QuestionType_Type] NVARCHAR (64)  NOT NULL,
+    [Metadata]          NVARCHAR (MAX) NULL,
     CONSTRAINT [PK_Question] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_QuestionTypeQuestion] FOREIGN KEY ([QuestionType_Type]) REFERENCES [dbo].[QuestionType] ([Type])
 );

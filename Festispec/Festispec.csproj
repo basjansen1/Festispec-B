@@ -30,8 +30,6 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -53,7 +51,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Logo.ico</ApplicationIcon>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BruTile, Version=0.22.1.0, Culture=neutral, processorArchitecture=MSIL">
@@ -140,6 +138,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -162,6 +161,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\AmericanDateConverter.cs" />
     <Compile Include="Converter\InverseBooleanConverter.cs" />
     <Compile Include="Helper\MapHelper.cs" />
     <Compile Include="Properties\Annotations1.cs" />
@@ -175,22 +175,33 @@
     <Compile Include="ViewModels\CustomerCRUD\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Factory\CustomerViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\ICustomerViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IInspectionViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\InspectionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IPlanningViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\PlanningViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\QuestionViewModelFactory.cs" />
+    <Compile Include="ViewModels\Inspection\InspectionQuestionnaireViewModel.cs" />
     <Compile Include="ViewModels\Interface\IAddressViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningListViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningAddViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningViewModel.cs" />
+    <Compile Include="ViewModels\Question\IHasQuestionCollection.cs" />
+    <Compile Include="ViewModels\Question\QuestionAddViewModel.cs" />
+    <Compile Include="ViewModels\Question\QuestionViewModel.cs" />
     <Compile Include="ViewModels\Regulation.Old\RegulationListVM.cs" />
     <Compile Include="ViewModels\Regulation.Old\RegulationVM.cs" />
-    <Compile Include="ViewModels\Factory\Interface\IRegulationsViewModelFactory.cs" />
-    <Compile Include="ViewModels\Factory\RegulationsViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IRegulationViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\RegulationViewModelFactory.cs" />
     <Compile Include="ViewModels\Regulation\RegulationAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Regulation\RegulationListViewModel.cs" />
     <Compile Include="ViewModels\Regulation\RegulationViewModel.cs" />
-    <Compile Include="ViewModels\Template\TemplateQuestionAddViewModel.cs" />
-    <Compile Include="ViewModels\Template\TemplateQuestionAddOrUpdateViewModel.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IInspectorScheduleViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\InspectorScheduleViewModelFactory.cs" />
+    <Compile Include="ViewModels\Inspector\InspectorScheduleAddOrUpdateViewModel.cs" />
+    <Compile Include="ViewModels\Inspector\InspectorScheduleAddViewModel.cs" />
+    <Compile Include="ViewModels\Inspector\InspectorScheduleViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeListViewModel.cs" />
     <Compile Include="ViewModels\Employees\EmployeeViewModel.cs" />
@@ -198,10 +209,7 @@
     <Compile Include="ViewModels\Factory\EmployeeViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\InspectorViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IEmployeeViewModelFactory.cs" />
-    <Compile Include="ViewModels\Factory\Interface\ITemplateQuestionViewModelFactory.cs" />
-    <Compile Include="ViewModels\Factory\TemplateQuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\TemplateViewModelFactory.cs" />
-    <Compile Include="ViewModels\InspectionProcessing\CustomerVM.cs" />
     <Compile Include="ViewModels\Factory\Interface\IInspectorViewModelFactory.cs" />
     <Compile Include="ViewModels\Inspector\InspectorAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Inspector\InspectorListViewModel.cs" />
@@ -217,7 +225,6 @@
     <Compile Include="Routes\Route.cs" />
     <Compile Include="Routes\Routes.cs" />
     <Compile Include="ViewModels\Template\TemplateListViewModel.cs" />
-    <Compile Include="ViewModels\Template\TemplateQuestionViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateViewModel.cs" />
     <Compile Include="ViewModels\Template\TemplateAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -244,6 +251,12 @@
     <Compile Include="Views\InspectionList.xaml.cs">
       <DependentUpon>InspectionList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Inspection\InspectionQuestionnaire.xaml.cs">
+      <DependentUpon>InspectionQuestionnaire.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Question\QuestionAdd.xaml.cs">
+      <DependentUpon>QuestionAdd.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ShowRegulation.xaml.cs">
       <DependentUpon>ShowRegulation.xaml</DependentUpon>
     </Compile>
@@ -259,17 +272,20 @@
     <Compile Include="Views\Planning\PlanningList.xaml.cs">
       <DependentUpon>PlanningList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Regulations\RegulationsAddOrUpdate.xaml.cs">
-      <DependentUpon>RegulationsAddOrUpdate.xaml</DependentUpon>
+    <Compile Include="Views\Regulations\RegulationAddOrUpdate.xaml.cs">
+      <DependentUpon>RegulationAddOrUpdate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Regulations\RegulationsList.xaml.cs">
-      <DependentUpon>RegulationsList.xaml</DependentUpon>
+    <Compile Include="Views\Regulations\RegulationList.xaml.cs">
+      <DependentUpon>RegulationList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Template\TemplateQuestionAdd.xaml.cs">
-      <DependentUpon>TemplateQuestionAdd.xaml</DependentUpon>
+    <Compile Include="Views\Inspector\Schedule\InspectorSchedule.xaml.cs">
+      <DependentUpon>InspectorSchedule.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Template\TemplateQuestionAddOrUpdate.xaml.cs">
-      <DependentUpon>TemplateQuestionAddOrUpdate.xaml</DependentUpon>
+    <Compile Include="Views\Inspector\Schedule\InspectorScheduleAdd.xaml.cs">
+      <DependentUpon>InspectorScheduleAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Inspector\Schedule\InspectorScheduleAddOrUpdate.xaml.cs">
+      <DependentUpon>InspectorScheduleAddOrUpdate.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\EmployeeAddOrUpdate.xaml.cs">
       <DependentUpon>EmployeeAddOrUpdate.xaml</DependentUpon>
@@ -312,6 +328,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Inspection\InspectionQuestionnaire.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Planning\PlanningUpdate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -328,23 +348,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Question\QuestionAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ShowRegulation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Regulations\RegulationsAddOrUpdate.xaml">
+    <Page Include="Views\Regulations\RegulationAddOrUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Regulations\RegulationsList.xaml">
+    <Page Include="Views\Regulations\RegulationList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Template\TemplateQuestionAdd.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Views\Inspector\Schedule\InspectorSchedule.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Template\TemplateQuestionAddOrUpdate.xaml">
+    <Page Include="Views\Inspector\Schedule\InspectorScheduleAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Inspector\Schedule\InspectorScheduleAddOrUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -439,7 +467,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Logo.ico" />
+    <Resource Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Crud_Employees\Images\garbage.png" />

@@ -7,21 +7,21 @@ namespace Festispec.ViewModels.Factory
     public class TemplateViewModelFactory :  ITemplateViewModelFactory
     {
         private readonly ITemplateRepositoryFactory _templateRepositoryFactory;
-        private readonly ITemplateQuestionViewModelFactory _templateQuestionViewModelFactory;
-        public TemplateViewModelFactory(ITemplateRepositoryFactory templateRepositoryFactory, ITemplateQuestionViewModelFactory templateQuestionViewModelFactory)
+        private readonly IQuestionViewModelFactory _questionViewModelFactory;
+        public TemplateViewModelFactory(ITemplateRepositoryFactory templateRepositoryFactory, IQuestionViewModelFactory questionViewModelFactory)
         {
             _templateRepositoryFactory = templateRepositoryFactory;
-            _templateQuestionViewModelFactory = templateQuestionViewModelFactory;
+            _questionViewModelFactory = questionViewModelFactory;
         }
 
         public TemplateViewModel CreateViewModel()
         {
-            return new TemplateViewModel(_templateRepositoryFactory, _templateQuestionViewModelFactory);
+            return new TemplateViewModel(_templateRepositoryFactory, _questionViewModelFactory);
         }
 
         public TemplateViewModel CreateViewModel(Domain.Template entity)
         {
-            return new TemplateViewModel(_templateRepositoryFactory, _templateQuestionViewModelFactory, entity);
+            return new TemplateViewModel(_templateRepositoryFactory, _questionViewModelFactory, entity);
         }
     }
 }
