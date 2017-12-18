@@ -168,7 +168,7 @@
                     </div>
                     break;
                 case "Getal":
-                        @: <input type="text" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type" />
+                        @: <input type="text" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type" value="@inspectionQuestionAnswer.Answer" />
                         break;
                         case "Reeks":
                         <div name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">
