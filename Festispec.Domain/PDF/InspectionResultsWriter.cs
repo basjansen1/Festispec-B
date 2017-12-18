@@ -12,17 +12,12 @@ namespace Festispec.Domain.PDF
     public class InspectionResultsWriter : PDFWriter
     {
         private List<Inspection> _inspectionList;
-        private Customer _customer;
-        public InspectionResultsWriter(List<Inspection> inspectionList, Customer customer)
+        private string _customerName;
+        public InspectionResultsWriter(List<Inspection> inspectionList, string customerName)
 
         {
             _inspectionList = inspectionList;
-            _customer = customer;
-        }
-
-        public InspectionResultsWriter(List<Inspection> inspectionList)
-        {
-            _inspectionList = inspectionList;
+            _customerName = customerName;
         }
 
         private void AddCoverPage()
@@ -32,8 +27,7 @@ namespace Festispec.Domain.PDF
                 AddEmptyLine();
             }
             AddLine("Inspectie resultaten " + _inspectionList.Min(i => i.Start).ToShortDateString() + " - " + _inspectionList.Max(i => i.Start).ToShortDateString(), new XFont("Verdana", 35, XFontStyle.Bold));
-           // AddLine(_customer.Name, new XFont("Verdana", 16, XFontStyle.Bold));
-           // AddLine(_customer.KVK, new XFont("Verdana", 16, XFontStyle.Bold));
+            AddLine(_customerName, new XFont("Verdana", 16, XFontStyle.Bold));
             AddNewPage();
         }
 
