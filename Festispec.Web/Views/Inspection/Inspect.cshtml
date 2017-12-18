@@ -17,11 +17,11 @@
             {
                 case "Beeld":
                     <div name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">
-                        <div class="camera-@inspectionQuestion.Question_Id">
-                            <video id="video-@inspectionQuestion.Question_Id">Video stream not available.</video>
+                        <div class="ccamera camera-@inspectionQuestion.Question_Id">
+                            <video class="vvideo" id="video-@inspectionQuestion.Question_Id">Video stream not available.</video>
                             <button id="startbutton-@inspectionQuestion.Question_Id" class="btn btn-default">Take photo</button>
                         </div>
-                        <canvas id="canvas-@inspectionQuestion.Question_Id"></canvas>
+                        <canvas class="ccanvas" id="canvas-@inspectionQuestion.Question_Id"></canvas>
                         <div class="row" name="beeld-row-@inspectionQuestion.Question_Id">
                             @foreach (var beeldItem in inspectionQuestionAnswer.DeserializeBeeldAnswer())
                             {
@@ -438,44 +438,18 @@
         min-width: 100%;
     }
 
-    #video {
+    .vvideo {
         border: 1px solid black;
         box-shadow: 2px 2px 3px black;
         height: 240px;
         width: 320px;
     }
 
-    #photo {
-        border: 1px solid black;
-        box-shadow: 2px 2px 3px black;
-        height: 240px;
-        width: 320px;
-    }
+    .ccanvas { display: none; }
 
-    #canvas { display: none; }
-
-    .camera {
+    .ccamera {
         display: inline-block;
         width: 340px;
-    }
-
-    .output {
-        display: inline-block;
-        width: 340px;
-    }
-
-    #startbutton {
-        background-color: rgba(0, 150, 0, 0.5);
-        border: 1px solid rgba(255, 255, 255, 0.7);
-        bottom: 32px;
-        box-shadow: 0px 0px 1px 2px rgba(0, 0, 0, 0.2);
-        color: rgba(255, 255, 255, 1.0);
-        display: block;
-        font-family: "Lucida Grande", "Arial", sans-serif;
-        font-size: 14px;
-        margin-left: auto;
-        margin-right: auto;
-        position: relative;
     }
 
     .contentarea {
