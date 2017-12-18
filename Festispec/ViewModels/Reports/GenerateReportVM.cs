@@ -64,7 +64,7 @@ namespace Festispec.ViewModels.Reports
             _inspectionVMList.Where(i => i.Name == _selectedCustomer.Name).ToList();
             _inspectionVMList.Skip(Math.Max(0, _inspectionVMList.Count() - SelectedAmount));
 
-            _pdfWriter = new InspectionResultsWriter(_inspectionVMList.Select(i => i.toModel()).ToList());
+            _pdfWriter = new InspectionResultsWriter(_inspectionVMList.Select(i => i.toModel()).ToList(), _selectedCustomer.Name);
             _pdfWriter.CreateDocument();
 
             _navigationService.GoBack();
