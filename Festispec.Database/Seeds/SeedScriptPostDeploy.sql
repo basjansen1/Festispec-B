@@ -147,5 +147,13 @@ INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspe
 SET IDENTITY_INSERT [dbo].[Schedule] OFF
 
 INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 1)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 3)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 4)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 10)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 11)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 5)
 INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (16, 2)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (16, 6)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (16, 7)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (16, 8)
 
