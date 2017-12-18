@@ -11,7 +11,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"></ColumnDefinition>
-            <ColumnDefinition Width="70"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -26,9 +26,9 @@
             <ComboBox SelectedItem="{Binding SelectedSearchOption}" ItemsSource="{Binding SearchItems}"></ComboBox>
         </DockPanel>
         <DockPanel Grid.Row="1" Grid.Column="1">
-            <TextBox Text="{Binding SearchName}"></TextBox>
+            <TextBox Width="90" Text="{Binding SearchName}"></TextBox>
+            <Button Grid.Row="1" Grid.Column="2" Command="{Binding SelectedSearch}" Width="80">Zoek</Button>
         </DockPanel>
-        <Button Grid.Row="1" Grid.Column="2" Command="{Binding SelectedSearch}">Zoek</Button>
         <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
@@ -38,6 +38,6 @@
                 <DataGridTextColumn Header="Achternaam Contact" Binding="{Binding LastName}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="3" Grid.Column="3" Command="{Binding NavigateToReport}">Rapporten</Button>
+        <Button Grid.Row="3" Grid.Column="0" Command="{Binding NavigateToReport}" Width="100">Rapporten</Button>
     </Grid>
 </Page>
