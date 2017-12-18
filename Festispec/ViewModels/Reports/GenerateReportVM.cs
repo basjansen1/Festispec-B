@@ -51,7 +51,8 @@ namespace Festispec.ViewModels.Reports
             DownloadCommand = new RelayCommand(Download);
 
             // Kan geen inspectionvm meesturen omdat die die niet kan importeren in de pdfwriter class.
-            //_pdfWriter = new InspectionResultsWriter(InspectionVMList.ToList());
+            // _pdfWriter = new InspectionResultsWriter(InspectionVMList.ToList());
+            _pdfWriter = new InspectionResultsWriter(InspectionVMList.Select(i => i.toModel()).ToList());
         }
 
         private void Download()
