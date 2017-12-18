@@ -1,10 +1,6 @@
-﻿using Festispec.ViewModels.PDF;
-using PdfSharp.Drawing;
-using System;
+﻿using PdfSharp.Drawing;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Festispec.Domain.PDF
 {

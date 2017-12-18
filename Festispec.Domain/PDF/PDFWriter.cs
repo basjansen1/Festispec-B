@@ -1,19 +1,15 @@
 ﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 
-namespace Festispec.ViewModels.PDF
+namespace Festispec.Domain.PDF
 {
     public abstract class PDFWriter
     {
         private PdfDocument _document;
         private LayoutHelper _helper;
-            
+
         public PDFWriter()
         {
             _document = new PdfDocument();
@@ -54,9 +50,9 @@ namespace Festispec.ViewModels.PDF
             _helper.TextToDocument(text);
         }
 
-        public void AddImage(string pathToImage)
+        public void AddImage(Image image)
         {
-            _helper.DrawImage(pathToImage);
+            _helper.DrawImage(image);
         }
 
         public void AddNewPage()
@@ -67,7 +63,7 @@ namespace Festispec.ViewModels.PDF
         public void SetFont(XFont font)
         {
             _helper.Font = font;
-           // _helper.MarginBetweenLines = (int) Math.Ceiling(font.Size); Todo set margin based on fontSize
+            // _helper.MarginBetweenLines = (int) Math.Ceiling(font.Size); Todo set margin based on fontSize
         }
 
         public void SetColor(XSolidBrush color)

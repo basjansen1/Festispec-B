@@ -1,7 +1,6 @@
 ﻿using Festispec.Domain;
 using Festispec.Domain.PDF;
 using Festispec.ViewModels.Employees;
-using Festispec.ViewModels.PDF;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;

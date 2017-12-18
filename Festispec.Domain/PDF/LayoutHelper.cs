@@ -7,8 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
-namespace Festispec.ViewModels.PDF
+namespace Festispec.Domain.PDF
 {
     public class LayoutHelper
     {
@@ -90,19 +91,19 @@ namespace Festispec.ViewModels.PDF
             Gfx.DrawString(text, Font, Color, _left, top, Allignment);
         }
 
-        public void DrawImage(string pathToImage)
+        public void DrawImage(Image image)
         {
-            XImage image = XImage.FromFile(pathToImage);
-            double imageWidth = image.PixelWidth;
-            double imageHeight = image.PixelHeight;
+            XImage ximage = XImage.FromGdiPlusImage(image);
+            double imageWidth = ximage.PixelWidth;
+            double imageHeight = ximage.PixelHeight;
 
-            while (imageWidth > Page.Width - (_left * 2) || image.PixelHeight > Page.Height) // scale the image so that it fits within the page
+            while (imageWidth > Page.Width - (_left * 2) || ximage.PixelHeight > Page.Height) // scale the image so that it fits within the page
             {
                 imageWidth *= 0.9;
                 imageHeight *= 0.9;
             }
             XUnit top = GetLinePosition(imageHeight);
-            Gfx.DrawImage(image, _left, top, imageWidth, imageHeight);
+            Gfx.DrawImage(ximage, _left, top, imageWidth, imageHeight);
             GetLinePosition(MarginBetweenLines); // provide space between the end of the image and the first text line
         }
     }

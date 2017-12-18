@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,8 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Festispec.Domain\Festispec.Domain.csproj">
-      <Project>{09979796-e638-48d5-8666-fa0ac1f54a2e}</Project>
+      <Project>{09979796-E638-48D5-8666-FA0AC1F54A2E}</Project>
       <Name>Festispec.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Festispec\Festispec.csproj">
+      <Project>{cb790ba5-9c82-472f-ad25-577bcc0c63d1}</Project>
+      <Name>Festispec</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -58,6 +58,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,6 +79,9 @@
     <Compile Include="Extension\DateRangeExtension.cs" />
     <Compile Include="IAddress.cs" />
     <Compile Include="InspectionExtended.cs" />
+    <Compile Include="PDF\ChartExporter.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PDF\InspectionResultsWriter.cs" />
     <Compile Include="PlanningExtended.cs" />
     <Compile Include="Customer.cs">
@@ -243,6 +249,11 @@
       <Project>{D752A463-81C4-4DC3-A929-9E666EC6BBCB}</Project>
       <Name>GeodanApi</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PDF\ChartExporter.resx">
+      <DependentUpon>ChartExporter.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

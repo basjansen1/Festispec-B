@@ -1,22 +1,17 @@
-﻿using Festispec.ViewModels.PDF;
-using PdfSharp.Charting;
-using PdfSharp.Drawing;
+﻿using PdfSharp.Drawing;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Festispec.Domain.PDF
 {
     public class PLanningListWriter : PDFWriter // example class that inherits PDFWriter
     {
         private List<Planning> _planningList;
-
+        private ChartExporter _c;
         public PLanningListWriter()
         {
             _planningList = new List<Planning>();
-
+            _c = new ChartExporter();
             Planning planning = new Planning();
             planning.Date = DateTime.Now;
             planning.Inspection_Id = 1;
@@ -87,7 +82,7 @@ namespace Festispec.Domain.PDF
                 AddParagraphHeader("Inspection information");
                 AddInspectionData(planning.Inspection);
                 AddParagraphHeader("Inspector information: ");
-                AddImage("C:\\Users\\Gebruiker\\Pictures\\Vtech\\PA_Parrot.jpg");
+                AddImage(_c.Test());
                 AddInspectorData(planning.Inspector);
             }
             SaveAs("AllPlanningInformation");
