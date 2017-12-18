@@ -310,7 +310,7 @@
             var column1 = tableColumnInputs[0].value;
             var column2 = tableColumnInputs[1].value;
 
-            tableAnswers.push({ column1, column2 });
+            tableAnswers.push([column1, column2]);
         }
 
         return JSON.stringify(tableAnswers);

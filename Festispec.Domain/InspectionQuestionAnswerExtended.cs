@@ -17,7 +17,7 @@ namespace Festispec.Domain
             try
             {
                 var table = (JArray) JsonConvert.DeserializeObject(answer);
-                return table.Select(row => new List<string> {row["column1"].ToString(), row["column2"].ToString()}).ToList();
+                return table.Select(row => new List<string> {row[0].ToString(), row[1].ToString()}).ToList();
             }
             catch
             {
