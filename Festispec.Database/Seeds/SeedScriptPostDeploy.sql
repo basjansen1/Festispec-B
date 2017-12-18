@@ -54,13 +54,13 @@ INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role],
 INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id], [HiredFrom]) VALUES (N'Anne',   N'5uO+GG4vxQ84i2TwJD/s/Q==', 9, N'Inspecteur', 6, N'2016-01-01 00:00:00')
 INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Id], [Role_Role], [Manager_Id], [HiredFrom]) VALUES (N'Kim',    N'CqwJs8j67GEiaOkdguM4tA==', 10, N'Inspecteur', 6, N'2016-01-01 00:00:00')
 
-INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'Accepted')
-INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'Declined')
-INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'Pending')
+INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'Geaccepteerd')
+INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'Afgewezen')
+INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'In afwachting')
 
-INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Paaspop', N'www.paaspop.nl', N'2016-09-17 00:00:00', N'2016-09-20 00:00:00', 12, 11, N'Accepted') -- Paaspop
-INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Festyland', N'www.festyland.nl', N'2018-01-18 03:14:07', N'2018-01-21 03:14:07', 14, 13, N'Pending') -- Festyland
-INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Mysteryland', N'www.mysteryland.nl', N'2038-01-19 03:14:08', N'2038-01-19 03:14:08', 16, 15, N'Declined') -- Mysteryland
+INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Paaspop', N'www.paaspop.nl', N'2016-09-17 00:00:00', N'2016-09-20 00:00:00', 12, 11, N'Geaccepteerd') -- Paaspop
+INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Festyland', N'www.festyland.nl', N'2018-01-18 03:14:07', N'2018-01-21 03:14:07', 14, 13, N'In afwachting') -- Festyland
+INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Mysteryland', N'www.mysteryland.nl', N'2038-01-19 03:14:08', N'2038-01-19 03:14:08', 16, 15, N'Afgewezen') -- Mysteryland
 
 INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2009-01-19 03:14:08', N'2024-01-19 03:14:08', 3)
 INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2016-01-19 03:14:08', N'2022-01-19 03:14:08', 4)

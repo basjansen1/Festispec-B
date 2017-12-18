@@ -5,6 +5,6 @@ namespace Festispec.ViewModels.Factory.Interface
 {
     public interface IPlanningViewModelFactory : IViewModelFactory<PlanningViewModel, Domain.Planning>
     {
-        PlanningViewModel CreateViewModelForInspection(Inspection inspection);
+        PlanningViewModel CreateViewModelForInspection(Domain.Inspection inspection);
     }
 }

@@ -11,7 +11,7 @@ namespace Festispec.Views.Planning
 {
     public partial class PlanningAdd
     {
-        private Inspection _inspection;
+        private Domain.Inspection _inspection;
         private PlanningAddViewModel _planningAddOrUpdateViewModel;
 
         public void InitializeMap()
