@@ -10,11 +10,12 @@ namespace Festispec.Domain.PDF
     {
         private List<Inspection> _inspectionList;
         private string _customerName;
+        private ChartExporter _chartExporter;
         public InspectionResultsWriter(List<Inspection> inspectionList, string customerName)
-
         {
             _inspectionList = inspectionList;
             _customerName = customerName;
+            _chartExporter = new ChartExporter();
         }
 
         private void AddCoverPage()
@@ -32,7 +33,7 @@ namespace Festispec.Domain.PDF
         {
             AddLine("In dit rapport zullen de resulataten van de inspecties uit de periode " +
                 _inspectionList.Min(i => i.Start).ToShortDateString() + " - " + _inspectionList.Max(i => i.Start).ToShortDateString() +
-                " worden weergeven. Indien u verdere vragen heeft kunt u gerust contact met ons opnemen.");
+                "  worden weergeven. Indien u verdere vragen heeft kunt u gerust contact met  ons opnemen.");
             AddNewPage();
         }
 
