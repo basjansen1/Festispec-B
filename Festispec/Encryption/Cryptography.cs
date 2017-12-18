@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Festispec.Encryption
 {
@@ -12,7 +14,8 @@ namespace Festispec.Encryption
     {
         public static string Encrypt(string encryptString)
         {
-            string EncryptionKey = "0ram@1234xxxxxxxxxxtttttuuuuuiiiiio";  //we can change the code converstion key as per our requirement    
+            string EncryptionKey = ConfigurationManager.AppSettings["EncryptionKey"];
+            //we can change the code converstion key as per our requirement    
             byte[] clearBytes = Encoding.Unicode.GetBytes(encryptString);
             using (Aes encryptor = Aes.Create())
             {
@@ -36,7 +39,7 @@ namespace Festispec.Encryption
 
         public static string Decrypt(string cipherText)
         {
-            string EncryptionKey = "0ram@1234xxxxxxxxxxtttttuuuuuiiiiio";  //we can change the code converstion key as per our requirement, but the decryption key should be same as encryption key    
+            string EncryptionKey = ConfigurationManager.AppSettings["EncryptionKey"];  //we can change the code converstion key as per our requirement, but the decryption key should be same as encryption key    
             cipherText = cipherText.Replace(" ", "+");
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
             using (Aes encryptor = Aes.Create())
