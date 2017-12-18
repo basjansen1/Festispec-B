@@ -24,7 +24,6 @@ namespace Festispec.ViewModels.Reports
     {
         #region commands
         public ICommand DownloadCommand { get; set; }
-        public List<InspectionVM> InspectionVMList { get; set; }
         public List<int> OptionList { get; set; }
         public int SelectedAmount { get; set; }
         #endregion
@@ -33,15 +32,16 @@ namespace Festispec.ViewModels.Reports
         private InspectionResultsWriter _pdfWriter;
         private readonly INavigationService _navigationService;
         private CustomerViewModel _selectedCustomer;
+        private List<InspectionVM> _inspectionVMList { get; set; }
+
         #endregion
 
         public GenerateReportVM(InspectionListVM inspectionList, CustomerViewModel customer, INavigationService navigationService)
         {
-            MessageBox.Show(customer.City);
             _navigationService = navigationService;
 
             _selectedCustomer = customer;
-            InspectionVMList = inspectionList.InspectionVMList.ToList();
+            _inspectionVMList = inspectionList.InspectionVMList.ToList();
 
             OptionList = new List<int>()
             {
@@ -56,14 +56,14 @@ namespace Festispec.ViewModels.Reports
         {
             _navigationService.GoBack();
 
-            if (InspectionVMList.Count < SelectedAmount)
+            if (_inspectionVMList.Count < SelectedAmount)
             {
                 MessageBox.Show("Er zijn niet zoveel inspecties");
                 return;
             }
 
-             InspectionVMList.Skip(Math.Max(0, InspectionVMList.Count() - SelectedAmount));
-            _pdfWriter = new InspectionResultsWriter(InspectionVMList.Select(i => i.toModel()).ToList());
+             _inspectionVMList.Skip(Math.Max(0, _inspectionVMList.Count() - SelectedAmount));
+            _pdfWriter = new InspectionResultsWriter(_inspectionVMList.Select(i => i.toModel()).ToList(), _selectedCustomer.Id);
 
             _pdfWriter.CreateDocument();
         }
