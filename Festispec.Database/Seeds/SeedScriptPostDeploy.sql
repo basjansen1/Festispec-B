@@ -146,4 +146,6 @@ INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspe
 INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (4, N'2018-04-22 00:00:00', N'2018-05-05 00:00:00', 4)
 SET IDENTITY_INSERT [dbo].[Schedule] OFF
 
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 1)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (16, 2)
 
