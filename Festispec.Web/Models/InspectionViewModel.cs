@@ -9,6 +9,8 @@ namespace Festispec.Web.Models
 {
     public class InspectionViewModel
     {
+
+        public Planning Planning { get; set; }
         // getters and setters
         public string Name
         {
@@ -209,15 +211,18 @@ namespace Festispec.Web.Models
             _inspection = new Inspection();
         }
 
-        public InspectionViewModel(Inspection i)
+        public InspectionViewModel(Planning i)
         {
-            _inspection = i;
+            this.Planning = i;
+            _inspection = i.Inspection;
         }
 
         public Inspection toModel()
         {
             return _inspection;
         }
+
+
 
         public int Id => _inspection.Id;
 
