@@ -30,6 +30,7 @@
                                         <img class="card-img-top" src="@beeldItem[0]"/>
                                         <p class="card-block">
                                             <textarea class="form-control">@beeldItem[1]</textarea>
+                                            <button type="button" class="btn btn-danger" onclick="deleteBeeldItem(this)">Verwijder</button>
                                         </p>
                                     </div>
                                 </div>
@@ -149,12 +150,13 @@
                                         var beeldItemHtml =
                                             '<div class="col-sm-6 col-md-4 col-lg-4 mt-4">' +
                                                 '<div class="card beeld-item-@inspectionQuestion.Question_Id">' +
-                                                    '<img class="card-img-top" src="' + data + '" />' +
-                                                    '<p class="card-block">' +
-                                                        '<textarea class="form-control"></textarea>' +
-                                                    '</p>' +
+                                                '<img class="card-img-top" src="' + data + '" />' +
+                                                '<p class="card-block">' +
+                                                '<textarea class="form-control"></textarea>' +
+                                                '<button type="button" class="btn btn-danger" onclick="deleteBeeldItem(this)">Verwijder</button>' +
+                                                '</p>' +
                                                 '</div>' +
-                                            '</div>';
+                                                '</div>';
 
                                         beeldRow.innerHTML += beeldItemHtml;
                                     }
@@ -218,6 +220,12 @@
 
 
 <script>
+    function deleteBeeldItem(e) {
+        console.log(e);
+        var parent = e.parentNode.parentNode.parentNode;
+        parent.parentNode.removeChild(parent);
+    }
+
     var inspectionForm = document.getElementById('inspectionForm');
     inspectionForm.addEventListener('submit',
         function(event) {
@@ -240,12 +248,12 @@
 
 
             $.post('/Inspection/Inspect/@Model.Inspection_Id/@Model.Date.ToString("yyyy-MM-dd")', data)
-            .done(() => {
-                alert('Formulier opgeslagen');
-                location.reload();
-            }).fail(() => {
-                alert('Er is iets foutgegaan');
-            });
+                .done(() => {
+                    alert('Formulier opgeslagen');
+                    location.reload();
+                }).fail(() => {
+                    alert('Er is iets foutgegaan');
+                });
         });
 
     function parseElementAnswer(element) {
@@ -259,11 +267,11 @@
         case "Reeks":
             answer = parseReeksAnswer(element);
             break;
-            case "Tabel":
-                answer = parseTableAnswer(element);
-                break;
-            case "Beeld":
-                answer = parseBeeldAnswer(element);
+        case "Tabel":
+            answer = parseTableAnswer(element);
+            break;
+        case "Beeld":
+            answer = parseBeeldAnswer(element);
             break;
         }
         return answer;
