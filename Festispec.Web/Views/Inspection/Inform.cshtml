@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Festispec.Web.Models.InspectionViewModel>
+
+<div class="jumbotron">
+    <h1>@ViewBag.Title</h1>
+    <div class="list-group">
+        <!-- Items in the list of inspections. -->
+        @foreach (var tmp in Model)
+        {
+        <div class="list-group-item">
+            <h1>@tmp.Name</h1>
+            <h6>@tmp.Website</h6>
+            <h7>@tmp.Street</h7>
+            <H7>@tmp.HouseNumber</H7>
+            <h7>@tmp.PostalCode</h7>
+            <h7>@tmp.Municipality</h7>
+            <h6>@tmp.Status</h6>
+            <h5>Ingeplanned op:</h5>
+            <h5>@tmp.Planning.Date.Day / @tmp.Planning.Date.Month / @tmp.Planning.Date.Year Om:  @tmp.Planning.TimeFrom - @tmp.Planning.TimeTo</h5>
+        </div>
+        }
+    </div>
+</div>

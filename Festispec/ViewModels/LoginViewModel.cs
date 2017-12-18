@@ -7,6 +7,8 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Festispec.State;
 using Festispec.Encryption;
+using System.Diagnostics;
+
 namespace Festispec.ViewModels
 {
     public class LoginViewModel : ViewModelBase
@@ -27,7 +29,13 @@ namespace Festispec.ViewModels
 
             Employee = new Domain.Employee();
         }
-        
+        private void ShowPopup() //show if user is online or offline
+        {
+            if (!_state.IsOnline)
+            {
+                MessageBox.Show("You are offline! Welcome!");
+            }
+        }
         private void Login(PasswordBox passwordBox)
         {
             //Code so you don't need to enter username and password each run
@@ -58,6 +66,7 @@ namespace Festispec.ViewModels
             }
             else MessageBox.Show("Gebruikersnaam of wachtwoord is verkeerd");
 
+            ShowPopup(); 
         }
 
     }

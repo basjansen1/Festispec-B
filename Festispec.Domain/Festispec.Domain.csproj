@@ -138,6 +138,7 @@
     <Compile Include="Question.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="InspectionQuestionAnswerExtended.cs" />
     <Compile Include="QuestionExtended.cs" />
     <Compile Include="QuestionType.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
