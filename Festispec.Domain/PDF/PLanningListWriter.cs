@@ -18,7 +18,7 @@ namespace Festispec.Domain.PDF
             planning.Inspector_Id = 2;
             planning.TimeFrom = new TimeSpan(1, 1, 1);
             planning.TimeTo = new TimeSpan(2, 2, 2);
-            planning.Inspection = new Inspection() { Name = "Inspection 1", Website = "www.festispec.nl", Start = DateTime.Now, End = DateTime.Now, Status_Status = "Pending", Customer_Id = 11 };
+            planning.Inspection = new Inspection() { Name = "Inspection 1", Website = "www.festispec.nl", Start = DateTime.Now, End = DateTime.Now, Status_Status = "In afwachting", Customer_Id = 11 };
             planning.Inspector = new Inspector() { FirstName = "TestVoornaam", LastName = "TestAchternaam", Telephone = "0610002000" };
 
             _planningList.Add(planning);

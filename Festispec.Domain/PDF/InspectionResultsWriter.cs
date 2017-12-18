@@ -10,11 +10,15 @@ namespace Festispec.Domain.PDF
     {
         private List<Inspection> _inspectionList;
         private string _customerName;
+        private ChartExporter _chart;
+
         public InspectionResultsWriter(List<Inspection> inspectionList, string customerName)
 
         {
             _inspectionList = inspectionList;
             _customerName = customerName;
+
+            _chart = new ChartExporter();
         }
 
         private void AddCoverPage()
@@ -63,7 +67,13 @@ namespace Festispec.Domain.PDF
             {
                 AddTitle("Inspectie " + inspection.Start.Date.ToShortDateString());
                 // Todo: print question and answer(chart)
+                //this.GenerateChart(new string[1] { inspection.Name } );
             }
+        }
+
+        private void GenerateChart(string[] inspectionName, string inspectiontitle, string label, string answer)
+        {
+           // _chart.GenerateChart(, )
         }
 
     }
