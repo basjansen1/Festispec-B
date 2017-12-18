@@ -83,6 +83,7 @@
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Extended\InspectionQuestionExtended.cs" />
+    <Compile Include="Encryption\Cryptography.cs" />
     <Compile Include="Extension\DateRangeExtension.cs" />
     <Compile Include="IAddress.cs" />
     <Compile Include="Inspection.cs">
@@ -140,6 +141,7 @@
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Extended\QuestionExtended.cs" />
+    <Compile Include="InspectionQuestionAnswerExtended.cs" />
     <Compile Include="QuestionType.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
