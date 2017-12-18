@@ -311,6 +311,13 @@ namespace Festispec.Domain.Repository
             return DbContext.SaveChanges();
         }
 
+        public virtual int Delete(params object[] keyValues)
+        {
+            var entity = Get(keyValues);
+            DbContext.Set<TEntity>().Remove(entity);
+            return DbContext.SaveChanges();
+        }
+
         /// <summary>
         ///     Asynchronously deletes the given entity from the database.
         ///     Note that the entity must exist in the context in some other state before this method
