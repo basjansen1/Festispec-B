@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
@@ -31,7 +32,7 @@ namespace Festispec.ViewModels.Planning
             NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
         }
 
-        public Inspection Inspection { get; private set; }
+        public Domain.Inspection Inspection { get; private set; }
 
         public ICommand NavigateToAddPlanningCommand { get; set; }
         public ICommand NavigateToAddOrUpdatePlanningCommand { get; set; }
@@ -62,7 +63,7 @@ namespace Festispec.ViewModels.Planning
 
         private void UpdateEntityViewModelFromNavigationParameter()
         {
-            var parameter = NavigationService.Parameter as Inspection;
+            var parameter = NavigationService.Parameter as Domain.Inspection;
             if (parameter != null)
                 Inspection = parameter;
             else
@@ -81,6 +82,9 @@ namespace Festispec.ViewModels.Planning
                 () => SelectedPlanning != null);
             PlanningDeleteCommand = new RelayCommand(() =>
             {
+                var result = MessageBox.Show("Weet je zeker dat je deze planning wilt verwijderen?", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result != MessageBoxResult.Yes) return;
                 SelectedPlanning.Delete();
                 LoadPlannings();
             }, () => SelectedPlanning != null);

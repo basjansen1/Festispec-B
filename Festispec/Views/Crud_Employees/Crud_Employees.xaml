@@ -10,9 +10,9 @@
         WindowStartupLocation="CenterScreen"
         DataContext="{Binding Source={StaticResource Locator}, Path=CrudList}">
     <Grid>
-        <Button x:Name="button" Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Height="30"/>
-        <Button x:Name="button1" Content="Add" HorizontalAlignment="Left" Margin="239,0,0,0" VerticalAlignment="Top" Width="85" Height="30"/>
-        <Label x:Name="label" Content="Search:" HorizontalAlignment="Left" Margin="351,0,0,0" VerticalAlignment="Top" Height="30" Width="46"/>
+        <Button x:Name="button" Content="Terug" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Height="30"/>
+        <Button x:Name="button1" Content="Toevoegen" HorizontalAlignment="Left" Margin="239,0,0,0" VerticalAlignment="Top" Width="85" Height="30"/>
+        <Label x:Name="label" Content="Zoek:" HorizontalAlignment="Left" Margin="351,0,0,0" VerticalAlignment="Top" Height="30" Width="46"/>
         <TextBox x:Name="textBox" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="402,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
         <Button BorderThickness="0" Margin="750,0,0,0" VerticalAlignment="Top" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">

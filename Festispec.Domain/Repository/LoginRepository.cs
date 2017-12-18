@@ -1,6 +1,5 @@
-﻿using System;
-using System.Data.Entity;
-using System.Linq.Expressions;
+﻿using System.Data.Entity;
+using System.Linq;
 using Festispec.Domain.Repository.Interface;
 
 namespace Festispec.Domain.Repository
@@ -9,12 +8,11 @@ namespace Festispec.Domain.Repository
     {
         public LoginRepository(DbContext dbContext) : base(dbContext)
         {
-
         }
 
-        public void TryLogin(Expression<Func<Employee, bool>> employee)
+        public bool TryLogin(string username, string password)
         {
-            Find(employee);
+            return Get().Any(employee => employee.Username == username && employee.Password == password);
         }
     }
 }

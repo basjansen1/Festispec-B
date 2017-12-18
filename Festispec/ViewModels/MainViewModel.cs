@@ -4,6 +4,8 @@ using GalaSoft.MvvmLight.CommandWpf;
 using Festispec.OfflineSync;
 using System;
 using Festispec.State;
+using System.ComponentModel;
+using System.Windows;
 
 namespace Festispec.ViewModels
 {
@@ -11,11 +13,22 @@ namespace Festispec.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly IState _state;
+        public string Title { get; set; }
         public MainViewModel(INavigationService navigationService, IState state) : base(navigationService)
-        {
+        {   
             _navigationService = navigationService;
             _state = state;
             RegisterCommands();
+            setTitle();
+        }
+
+        public void setTitle()
+        {
+            Title = "Festispec: Wij zetten de puntjes op de i ";
+            if (!_state.IsOnline)
+            {
+                Title += ": OFFLINE";
+            }
         }
 
         public ICommand OnWindowClosingCommand { get; private set; }
@@ -24,7 +37,7 @@ namespace Festispec.ViewModels
 
         public ICommand NavigateToInspectorListCommand { get; private set; }
         public ICommand NavigateToInspectionListCommand { get; private set; }
-        public ICommand NavigateToRegulationsListCommand { get; private set; }
+        public ICommand NavigateToRegulationListCommand { get; private set; }
 
         public ICommand NavigateToCustomerListCommand { get; private set; }
 
@@ -42,7 +55,7 @@ namespace Festispec.ViewModels
                 new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.InspectionList), () => _navigationService.HasAccess(Routes.Routes.InspectionList));
             NavigateToCustomerListCommand =  
                 new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.CustomerList), () => _navigationService.CanAndHasAccess(Routes.Routes.CustomerList));
-            NavigateToRegulationsListCommand =
+            NavigateToRegulationListCommand =
                 new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.RegulationList), () => _navigationService.CanAndHasAccess(Routes.Routes.RegulationList));
         }
 

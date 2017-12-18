@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Festispec.State;
+using System.Diagnostics;
 
 namespace Festispec.ViewModels
 {
@@ -30,6 +26,14 @@ namespace Festispec.ViewModels
             LoginCommand = new RelayCommand<PasswordBox>(Login);
 
             Employee = new Domain.Employee();
+        }
+
+        private void ShowPopup() //show if user is online or offline
+        {
+            if (!_state.IsOnline)
+            {
+                MessageBox.Show("You are offline! Welcome!");
+            }
         }
 
         private void Login(PasswordBox passwordBox)
@@ -62,6 +66,7 @@ namespace Festispec.ViewModels
             }
             else MessageBox.Show("Gebruikersnaam of wachtwoord is verkeerd");
 
+            ShowPopup(); 
         }
     }
 }

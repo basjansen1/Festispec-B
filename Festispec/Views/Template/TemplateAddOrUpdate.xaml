@@ -66,24 +66,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Content="Cancel" Command="{Binding CancelEntityCommand}" />
-            <Button Grid.Column="2"  Content="Save" Command="{Binding SaveEntityCommand}"/>
+            <Button Grid.Column="0" Content="Annuleer" Margin="5px 10px" Command="{Binding CancelEntityCommand}" />
+                <Button Grid.Column="1"  Content="Opslaan" Margin="5px 10px" Command="{Binding SaveEntityCommand}"/>
         </Grid>
     </Grid>
 </Page>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

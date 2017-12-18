@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Festispec.ViewModels.Employees
+namespace Festispec.ViewModels.Inspection
 {
     public class EditInspectionVM : ViewModelBase
     {
@@ -53,9 +53,9 @@ namespace Festispec.ViewModels.Employees
             DeleteCommand = new RelayCommand(DeleteSelectedInspection);
 
             InspectionStatusList = new List<string>();
-            InspectionStatusList.Add("Accepted");
-            InspectionStatusList.Add("Declined");
-            InspectionStatusList.Add("Pending");
+            InspectionStatusList.Add("Geaccepteerd");
+            InspectionStatusList.Add("Afgewezen");
+            InspectionStatusList.Add("In afwachting");
         }
 
         public bool CanEditInspection()
@@ -83,14 +83,14 @@ namespace Festispec.ViewModels.Employees
         {
             if (CanEditInspection())
             {
-           //     InspectionList.SelectedInspection.Status = new InspectionStatus() { Status = SelectedInspection };
+                //InspectionList.SelectedInspection.Status = new InspectionStatus() { Status = SelectedInspection };
                 if (!SearchAddress())
                 {
                     return;
                 }
                 using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
                 {
-                    Inspection inspection = InspectionList.SelectedInspection.toModel();
+                    Domain.Inspection inspection = InspectionList.SelectedInspection.toModel();
                     inspectionRepository.AddOrUpdate(inspection);
                 }
                 _navigationService.GoBack();
@@ -151,6 +151,9 @@ namespace Festispec.ViewModels.Employees
         
         private void DeleteSelectedInspection()
         {
+            var result = MessageBox.Show("Weet je zeker dat je deze inspectie wilt verwijderen?", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result != MessageBoxResult.Yes) return;
             InspectionList.DeleteSelectedInspection();
 
             _navigationService.GoBack();
