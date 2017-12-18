@@ -1,12 +1,7 @@
-﻿using Festispec.ViewModels.PDF;
-using PdfSharp.Drawing;
+﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Festispec.Domain.PDF
 {
@@ -14,7 +9,7 @@ namespace Festispec.Domain.PDF
     {
         private PdfDocument _document;
         private LayoutHelper _helper;
-            
+
         public PDFWriter()
         {
             _document = new PdfDocument();
@@ -55,9 +50,9 @@ namespace Festispec.Domain.PDF
             _helper.TextToDocument(text);
         }
 
-        public void AddImage(string pathToImage)
+        public void AddImage(Image image)
         {
-            _helper.DrawImage(pathToImage);
+            _helper.DrawImage(image);
         }
 
         public void AddNewPage()

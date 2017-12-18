@@ -6,7 +6,6 @@ using Festispec.ViewModels.Customer;
 using Festispec.ViewModels.CustomerCRUD;
 using Festispec.ViewModels.Employees;
 using Festispec.ViewModels.InspectionProcessing;
-using Festispec.ViewModels.PDF;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
