@@ -18,14 +18,24 @@ namespace Festispec.Web.Controllers
             _inspectorScheduleRepositoryFactory = new InspectorScheduleRepositoryFactory(true);
         }
 
-        public ActionResult InspectorSchedule()
+        public ActionResult InspectorSchedule(int? id)
         {
             ViewBag.Message = "Rooster Inspecteur.";
+
             using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
             {
-                var schedule = scheduleRepository.Get().ToList();
+                if (id.HasValue)
+                {
 
-                return View(schedule);
+                    scheduleRepository.Delete(new Schedule
+                    { Id = id.Value
+                    });
+                    return RedirectToAction("InspectorSchedule");
+                }
+                
+                    var schedulee = scheduleRepository.Get().ToList();
+                    return View(schedulee);
+                
             }
         }
 
@@ -49,7 +59,7 @@ namespace Festispec.Web.Controllers
         [HttpPost]
         public ActionResult Create(Schedule temp)
         {
-                using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
+            using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
             {
                     temp.Inspector_Id = 4; //debug TODO: login authentication dignes
                 if (temp.Id == 0)
