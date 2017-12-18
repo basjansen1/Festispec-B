@@ -11,7 +11,9 @@ namespace Festispec.Domain.Repository
         }
         public override IQueryable<Inspection> Get()
         {
-            return base.Get().Include(inspection => inspection.Customers);
+            return base.Get()
+                .Include(inspection => inspection.Customers)
+                .Include($"{nameof(InspectionQuestion)}.{nameof(Question)}.{nameof(QuestionType)}");
         }
 
         public override Inspection Add(Inspection entity)

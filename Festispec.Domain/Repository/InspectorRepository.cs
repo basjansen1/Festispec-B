@@ -60,5 +60,10 @@ namespace Festispec.Domain.Repository
                 // Order by distance to center
                 .OrderBy(inspector => inspector.Location.Distance(center));
         }
+
+        public bool TryLogin(string username, string password)
+        {
+            return Get().Any(inspector => inspector.Username == username && inspector.Password == password);
+        }
     }
 }
