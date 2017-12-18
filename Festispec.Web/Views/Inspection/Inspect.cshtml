@@ -17,11 +17,11 @@
             {
                 case "Beeld":
                     <div name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">
-                        <div class="camera">
-                            <video id="video">Video stream not available.</video>
-                            <button id="startbutton" class="btn btn-default">Take photo</button>
+                        <div class="camera-@inspectionQuestion.Question_Id">
+                            <video id="video-@inspectionQuestion.Question_Id">Video stream not available.</video>
+                            <button id="startbutton-@inspectionQuestion.Question_Id" class="btn btn-default">Take photo</button>
                         </div>
-                        <canvas id="canvas"></canvas>
+                        <canvas id="canvas-@inspectionQuestion.Question_Id"></canvas>
                         <div class="row" name="beeld-row-@inspectionQuestion.Question_Id">
                             @foreach (var beeldItem in inspectionQuestionAnswer.DeserializeBeeldAnswer())
                             {
@@ -54,15 +54,13 @@
 
                                 var video = null;
                                 var canvas = null;
-                                var photo = null;
                                 var startbutton = null;
                                 var beeldRow = null;
 
                                 function startup() {
-                                    video = document.getElementById('video');
-                                    canvas = document.getElementById('canvas');
-                                    photo = document.getElementById('photo');
-                                    startbutton = document.getElementById('startbutton');
+                                    video = document.getElementById('video-@inspectionQuestion.Question_Id');
+                                    canvas = document.getElementById('canvas-@inspectionQuestion.Question_Id');
+                                    startbutton = document.getElementById('startbutton-@inspectionQuestion.Question_Id');
                                     beeldRow = document.querySelector('[name="beeld-row-@inspectionQuestion.Question_Id"]');
 
                                     navigator.getMedia = (navigator.getUserMedia ||
@@ -159,8 +157,6 @@
                                             '</div>';
 
                                         beeldRow.innerHTML += beeldItemHtml;
-                                    } else {
-                                        clearphoto();
                                     }
                                 }
 
