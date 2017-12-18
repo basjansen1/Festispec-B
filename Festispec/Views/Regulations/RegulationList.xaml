@@ -7,7 +7,8 @@
       DataContext="{Binding Source={StaticResource Locator}, Path=RegulationList}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -25,34 +26,23 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
-            <DockPanel Grid.Row="0"  Grid.Column="0">
-                <Label>Zoek op titel</Label>
-                <TextBox Text="{Binding SearchName}"></TextBox>
-            </DockPanel>
-            <DockPanel Grid.Row="0" Grid.Column="1">
-                <Label>Zoek op gemeente</Label>
-                <TextBox Text="{Binding SearchMunicipality}"></TextBox>
-            </DockPanel>
-            <Button Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand}">Zoek</Button>
-
-            <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedRegulation}" ItemsSource="{Binding Regulation}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Titel" Binding="{Binding Name}" Width="*" />
-                    <DataGridTextColumn Header="Beschrijving" Binding="{Binding Description}" Width="*" />
-                    <DataGridTextColumn Header="Gemeente" Binding="{Binding Municipality}" Width="*" />
-                </DataGrid.Columns>
-            </DataGrid>
+            <TextBox x:Name="txtSearch" TextWrapping="Wrap" Text="{Binding SearchInput}" Opacity="0.7" Grid.Column="1" Width="150"/>
+            <Button x:Name="btnSearch" Content="Zoeken" Grid.Column="2" Command="{Binding SearchCommand}"/>
+            <Button x:Name="btnDeleteSearch" Content="Zoekveld wissen" Grid.Column="3" Command="{Binding DeleteFilterCommand}"/>
         </Grid>
+        
+        <DataGrid Grid.Row="2" Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedRegulation}" ItemsSource="{Binding Regulations}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Titel" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="Beschrijving" Binding="{Binding Description}" Width="*" />
+                <DataGridTextColumn Header="Gemeente" Binding="{Binding Municipality}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

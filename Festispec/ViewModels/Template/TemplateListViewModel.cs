@@ -86,7 +86,7 @@ namespace Festispec.ViewModels.Template
             SearchCommand = new RelayCommand(SearchTemplates);
             DeleteFilterCommand = new RelayCommand(DeleteFilter);
         }
-        private void SearchTemplates()
+        public void SearchTemplates()
         {
             if (SearchInput == null) return;
 

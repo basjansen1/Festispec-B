@@ -64,7 +64,6 @@ namespace Festispec.ViewModels.CustomerCRUD
         }
 
         private string _searchInput;
-        public string SelectedSearchOption { get; set; } = "";
 
         public ObservableCollection<String> SearchItems {get; set;}
 

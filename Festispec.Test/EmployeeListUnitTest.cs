@@ -70,8 +70,8 @@ namespace Festispec.Test
             var expectedEmployee = new Employee {Id = 3, Username = "David", FirstName = "David"};
 
             // 2. Act
-            employeeListViewModel.SearchUsername = "David";
-            employeeListViewModel.LoadEmployees();
+            employeeListViewModel.SearchInput = "David";
+            employeeListViewModel.SearchEmployees();
 
             // 3. Assert
             Assert.Single(employeeListViewModel.Employees);
