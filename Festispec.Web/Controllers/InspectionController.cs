@@ -43,7 +43,7 @@ namespace Festispec.Web.Controllers
 
                 foreach(Inspection i in InspectionRepository.Get().ToList())
                 {
-                    if (i.End >= DateTime.Now)
+                    if (i.End >= DateTime.Now && i.Status.Status != "Declined")
                     {
                         _Inspections.Add(new InspectionViewModel(i));
                     }
