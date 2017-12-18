@@ -45,7 +45,7 @@ namespace Festispec.ViewModels.CustomerCRUD
 
         public ICommand SelectedSearch { get; set; }
         public ICommand DeleteFilterCommand { get; set; }
-        private List<CustomerViewModel> _customerList;
+        private readonly List<CustomerViewModel> _customerList;
         public ObservableCollection<CustomerViewModel> Customers { get; private set; }
 
         public CustomerViewModel SelectedCustomer { get; set; }
@@ -97,35 +97,32 @@ namespace Festispec.ViewModels.CustomerCRUD
 
         private void SearchCustomers()
         {
+            if (SearchInput == null) return;
+            LoadCustomers();
+            _customerList.Clear();
+            Customers.ToList().ForEach(n => _customerList.Add(n));
+            Customers.Clear();
 
-            if (SearchInput != null) //if searchbox is empty
+            foreach (var i in _customerList)
             {
-                LoadCustomers();
-                _customerList.Clear();
-                Customers.ToList().ForEach(n => _customerList.Add(n));
-                Customers.Clear();
-
-                foreach (CustomerViewModel i in _customerList)
+                if (i.Name.ToLower().Contains(SearchInput.ToLower()) || i.Email.ToLower().Contains(SearchInput.ToLower()) || i.Municipality.ToLower().Contains(SearchInput.ToLower())
+                    || i.FirstName.ToLower().Contains(SearchInput.ToLower()) || i.LastName.ToLower().Contains(SearchInput.ToLower()))
                 {
-                    if (i.Name.ToLower().Contains(SearchInput.ToLower()) || i.Email.ToLower().Contains(SearchInput.ToLower()) || i.Municipality.ToLower().Contains(SearchInput.ToLower())
-                        || i.FirstName.ToLower().Contains(SearchInput.ToLower()) || i.LastName.ToLower().Contains(SearchInput.ToLower()))
-                    {
-                        Customers.Add(i);
-                    }
+                    Customers.Add(i);
                 }
-            }          
+            }
         }         
         //Loads in the customers from the database, is called when something changes
         private void LoadCustomers()
         {
             DateTime today = DateTime.Today;
-            using (var CustomerRepository = _CustomerRepositoryFactory.CreateRepository())
+            using (var customerRepository = _CustomerRepositoryFactory.CreateRepository())
             {
                 Customers =
                     new ObservableCollection<CustomerViewModel>(
-                        CustomerRepository.Get()
+                        customerRepository.Get()
                             .ToList()
-                            .Select(Customer => _CustomerViewModelFactory.CreateViewModel(Customer)));
+                            .Select(customer => _CustomerViewModelFactory.CreateViewModel(customer)));
                 RaisePropertyChanged(nameof(Customers));
             }
         }

@@ -119,25 +119,24 @@ namespace Festispec.ViewModels.Inspection
 
         private void Search()
         {
-            if (SearchInput != null)
-            {
-                ReloadInspectionVMList();
-                _inspectionList.Clear();
-                InspectionVMList.ToList().ForEach(n => _inspectionList.Add(n));
-                InspectionVMList.Clear();
+            if (SearchInput == null) return;
 
-                foreach(InspectionVM i in _inspectionList)
+            ReloadInspectionVmList();
+            _inspectionList.Clear();
+            InspectionVMList.ToList().ForEach(n => _inspectionList.Add(n));
+            InspectionVMList.Clear();
+
+            foreach(InspectionVM i in _inspectionList)
+            {
+                if (i.Name.ToLower().Contains(SearchInput.ToLower()) ||  i.Customer.Name.ToLower().Contains(SearchInput.ToLower()) || 
+                    i.City.ToLower().Contains(SearchInput.ToLower()) || i.Municipality.ToLower().Contains(SearchInput.ToLower()))
                 {
-                    if (i.Name.ToLower().Contains(SearchInput.ToLower()) ||  i.Customer.Name.ToLower().Contains(SearchInput.ToLower()) || 
-                        i.City.ToLower().Contains(SearchInput.ToLower()) || i.Municipality.ToLower().Contains(SearchInput.ToLower()))
-                    {
-                        InspectionVMList.Add(i);
-                    }
+                    InspectionVMList.Add(i);
                 }
             }
         }
 
-        public void ReloadInspectionVMList()
+        public void ReloadInspectionVmList()
         {
             using (var inspectionRepository = InspectionRepositoryFactory.CreateRepository())
             {
@@ -147,7 +146,7 @@ namespace Festispec.ViewModels.Inspection
         }
         private void DeleteFilter()
         {
-            ReloadInspectionVMList();
+            ReloadInspectionVmList();
             SearchInput = null;
         }
         #endregion

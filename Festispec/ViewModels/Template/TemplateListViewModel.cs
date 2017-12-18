@@ -27,7 +27,7 @@ namespace Festispec.ViewModels.Template
 
             RegisterCommands();
             LoadTemplates();
-            _templateList = new List<TemplateViewModel>();
+            TemplateList = new List<TemplateViewModel>();
             NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
         }
 
@@ -40,7 +40,7 @@ namespace Festispec.ViewModels.Template
 
         public TemplateViewModel SelectedTemplate { get; set; }
 
-        public List<TemplateViewModel> _templateList;
+        public List<TemplateViewModel> TemplateList;
 
         public string SearchInput
         {
@@ -91,11 +91,11 @@ namespace Festispec.ViewModels.Template
             if (SearchInput == null) return;
 
             LoadTemplates();
-            _templateList.Clear();
-            Templates.ToList().ForEach(n => _templateList.Add(n));
+            TemplateList.Clear();
+            Templates.ToList().ForEach(n => TemplateList.Add(n));
             Templates.Clear();
 
-            foreach (TemplateViewModel i in _templateList)
+            foreach (var i in TemplateList)
             {
                 if (i.Name.ToLower().Contains(SearchInput.ToLower()) || i.Description.ToLower().Contains(SearchInput.ToLower()))
                 {
