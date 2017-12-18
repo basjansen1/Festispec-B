@@ -6,8 +6,8 @@ using Festispec.Domain.Repository.Factory.Interface;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Festispec.State;
-using Festispec.Encryption;
 using System.Diagnostics;
+using Festispec.Domain.Encryption;
 
 namespace Festispec.ViewModels
 {

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Security;
 using Festispec.Domain;
+using Festispec.Domain.Encryption;
 using Festispec.Domain.Repository.Factory;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Web.Models;
@@ -75,7 +76,7 @@ namespace Festispec.Web.Providers
         {
             using (var loginRepository = _inspectorRepositoryFactory.CreateRepository())
             {
-                return loginRepository.TryLogin(GetUserNameByEmail(username), password);
+                return loginRepository.TryLogin(GetUserNameByEmail(username), Cryptography.Encrypt(password));
             }
         }
 
