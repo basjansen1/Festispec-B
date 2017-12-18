@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Festispec.ViewModels.Inspection;
 
 namespace Festispec.ViewModels.Reports
 {

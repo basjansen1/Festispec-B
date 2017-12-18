@@ -76,17 +76,12 @@
     <Compile Include="Contact.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Extension\DateRangeExtension.cs" />
     <Compile Include="IAddress.cs" />
-    <Compile Include="InspectionExtended.cs" />
     <Compile Include="PDF\ChartExporter.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PDF\InspectionResultsWriter.cs" />
-    <Compile Include="PlanningExtended.cs" />
-=======
->>>>>>> b0cf8c2128c2491edabc28e66864609cb038478e
     <Compile Include="Customer.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
@@ -96,8 +91,6 @@
     <Compile Include="EmployeeRole.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Extension\DateRangeExtension.cs" />
-    <Compile Include="IAddress.cs" />
     <Compile Include="Inspection.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
