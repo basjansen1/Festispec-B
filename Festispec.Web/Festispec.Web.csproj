@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -178,6 +179,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\InspectorPrincipal.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InspectionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\FestispecMembershipProvider.cs" />
     <Compile Include="Startup.cs" />
@@ -221,6 +223,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Inspection\Inspect.cshtml" />
     <Content Include="Views\InspectorSchedule\InspectorSchedule.cshtml" />
+    <Content Include="Views\Inspection\Inform.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

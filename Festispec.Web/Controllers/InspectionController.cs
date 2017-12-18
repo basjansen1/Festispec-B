@@ -4,8 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Festispec.Domain;
 using Festispec.Domain.Repository.Factory;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.Web.Models;
 
 namespace Festispec.Web.Controllers
 {
@@ -23,6 +25,35 @@ namespace Festispec.Web.Controllers
             ViewBag.Message = "Inspecties.";
 
             return View();
+        }
+
+        [Route("Inspection/Inform/")]
+        public ActionResult Inform()
+        {
+            var user = ((IInspectorPrincipal)User);
+            var id = user.Id;
+
+
+            ViewBag.Messsage = "Komende Inspecties";
+            IPlanningRepositoryFactory _inspectionRepositoryFactory = new PlanningRepositoryFactory(true);
+            List<InspectionViewModel> _Inspections = new List<InspectionViewModel>();
+            using(var InspectionRepository = _inspectionRepositoryFactory.CreateRepository())
+            {
+                var temp = InspectionRepository.Get().Where(  Inspection => Inspection.Inspector_Id == id);
+                foreach (Planning i in temp)
+                {
+                    if (i.Inspection.End >= DateTime.Now && i.Inspection.Status_Status != "Declined")
+                    {
+                        _Inspections.Add(new InspectionViewModel(i));
+                    }
+                }
+
+
+
+                return View(_Inspections);
+
+            }
+
         }
         
         [Route("Inspection/Inspect/{id:int}/{date:datetime}")]
