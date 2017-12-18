@@ -4,10 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:mapsui="clr-namespace:Mapsui.UI.Wpf;assembly=Mapsui.UI.Wpf"
+      xmlns:converter="clr-namespace:Festispec.Converter"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
       Title="PlanningList"
         DataContext="{Binding Source={StaticResource Locator}, Path=PlanningList}">
+    <Page.Resources>
+        <converter:AmericanDateConverter x:Key="AmericanDateConverter" />
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -34,18 +38,24 @@
                     <Label>Achternaam</Label>
                     <TextBox Text="{Binding SearchInspectorLastName}" Width="100" Margin="0 0 5 0"></TextBox>
                     <Label>Datum</Label>
-                    <ComboBox ItemsSource="{Binding Path=Inspection.Dates, Mode=OneWay}" Width="100"
+                    <ComboBox ItemsSource="{Binding Path=Inspection.Dates, Mode=OneWay}" Width="122"
                                   SelectedIndex="0"
-                                  SelectedValue="{Binding Path=SearchDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 5 0" />
+                                  SelectedValue="{Binding Path=SearchDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 5 0">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={StaticResource AmericanDateConverter}}"></TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     <Button Content="Zoek" Command="{Binding SearchPlanningCommand}"/>
                 </StackPanel>
                 
                 <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedPlanning}" ItemsSource="{Binding Plannings}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Inspector" Binding="{Binding Inspector.FullName}" Width="*" />
-                        <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="*" />
-                        <DataGridTextColumn Header="TimeFrom" Binding="{Binding TimeFrom}" Width="*" />
-                        <DataGridTextColumn Header="TimeTo" Binding="{Binding TimeTo}" Width="*" />
+                        <DataGridTextColumn Header="Inspecteur" Binding="{Binding Inspector.FullName}" Width="*" />
+                        <DataGridTextColumn Header="Datum" Binding="{Binding Date, Converter={StaticResource AmericanDateConverter}}" Width="*" />
+                        <DataGridTextColumn Header="Tijd van" Binding="{Binding TimeFrom}" Width="*" />
+                        <DataGridTextColumn Header="Tijd tot" Binding="{Binding TimeTo}" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
