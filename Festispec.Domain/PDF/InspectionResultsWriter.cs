@@ -13,8 +13,8 @@ namespace Festispec.Domain.PDF
     {
         private List<Inspection> _inspectionList;
         private Customer _customer;
-
         public InspectionResultsWriter(List<Inspection> inspectionList, Customer customer)
+
         {
             _inspectionList = inspectionList;
             _customer = customer;
@@ -31,16 +31,16 @@ namespace Festispec.Domain.PDF
             {
                 AddEmptyLine();
             }
-            AddLine("Inspectie resultaten " + _inspectionList.Min(i => i.Dates) + " - " + _inspectionList.Max(i => i.Dates), new XFont("Verdana", 35, XFontStyle.Bold));
-            AddLine(_customer.Name, new XFont("Verdana", 16, XFontStyle.Bold));
-            AddLine(_customer.KVK, new XFont("Verdana", 16, XFontStyle.Bold));
+            AddLine("Inspectie resultaten " + _inspectionList.Min(i => i.Start).ToShortDateString() + " - " + _inspectionList.Max(i => i.Start).ToShortDateString(), new XFont("Verdana", 35, XFontStyle.Bold));
+           // AddLine(_customer.Name, new XFont("Verdana", 16, XFontStyle.Bold));
+           // AddLine(_customer.KVK, new XFont("Verdana", 16, XFontStyle.Bold));
             AddNewPage();
         }
 
         private void AddIntroduction()
         {
-            AddLine("In deze rapport zullen de resulataten van de inspecties uit de periode " +
-                _inspectionList.Min(i => i.Dates) + " - " + _inspectionList.Max(i => i.Dates) +
+            AddLine("In dit rapport zullen de resulataten van de inspecties uit de periode " +
+                _inspectionList.Min(i => i.Start).ToShortDateString() + " - " + _inspectionList.Max(i => i.Start).ToShortDateString() +
                 " worden weergeven. Indien u verdere vragen heeft kunt u gerust contact met ons opnemen.");
             AddNewPage();
         }
@@ -70,7 +70,7 @@ namespace Festispec.Domain.PDF
             this.AddIntroduction();
             foreach (Inspection inspection in _inspectionList)
             {
-                AddTitle("Inspectie " + inspection.Dates);
+                AddTitle("Inspectie " + inspection.Start.Date.ToShortDateString());
                 // Todo: print question and answer(chart)
             }
         }

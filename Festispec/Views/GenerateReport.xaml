@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
         <TextBlock FontSize="20">Genereer rapport</TextBlock>
         <Label Grid.Row="1">Selecteer periode</Label>
-        <ListBox ItemsSource="{Binding OptionList}" SelectedItem="{Binding SelectedAmount}"  DisplayMemberPath="Name" Grid.Row="2"></ListBox>
+        <ListBox ItemsSource="{Binding OptionList}" SelectedItem="{Binding SelectedAmount}" Grid.Row="2"></ListBox>
         <Button Command="{Binding Path=DownloadCommand}" Grid.Row="3">Download PDF</Button>
     </Grid>
 </Page>
