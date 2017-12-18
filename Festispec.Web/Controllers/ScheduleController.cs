@@ -29,27 +29,38 @@ namespace Festispec.Web.Controllers
             }
         }
 
-        public ActionResult AddAvailability()
+        public ActionResult AddAvailability(int? id)
         {
             ViewBag.Message = "Beschikbaarheid toevoegen";
 
-            Schedule schedule = new Schedule();
-
-            return View(schedule);
+            if (!id.HasValue) {
+                return View(new Schedule());
+            }
             
+            using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
+            {
+                var schedule = scheduleRepository.Get(id.Value);
+
+                return View(schedule);
+            }
+
         }
 
         [HttpPost]
         public ActionResult Create(Schedule temp)
         {
-            using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
+                using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
             {
-                //if (!ModelState.IsValid)
-                //{
                     temp.Inspector_Id = 4; //debug TODO: login authentication dignes
+                if (temp.Id == 0)
+                {
                     scheduleRepository.Add(temp);
-                    return RedirectToAction("InspectorSchedule");
-                //}
+                } else
+                {
+                    scheduleRepository.Update(temp, temp.Id);
+                }
+
+                return RedirectToAction("InspectorSchedule");
             }
         }
 

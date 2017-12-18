@@ -13,11 +13,15 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
             <label>Niet beschikbaar vanaf:</label>
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Inspector_Id)
             @Html.EditorFor(m => m.NotAvailableFrom, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(m => m.NotAvailableFrom, "", new { @class = "text-danger" })
         </div>
         <div class="form-group">
             <label>Niet beschikbaar tot:</label>
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Inspector_Id)
             @Html.EditorFor(m => m.NotAvailableTo, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(m => m.NotAvailableTo, "", new { @class = "text-danger" })
         </div>
