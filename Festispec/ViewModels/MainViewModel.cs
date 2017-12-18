@@ -4,6 +4,8 @@ using GalaSoft.MvvmLight.CommandWpf;
 using Festispec.OfflineSync;
 using System;
 using Festispec.State;
+using System.ComponentModel;
+using System.Windows;
 
 namespace Festispec.ViewModels
 {
@@ -13,7 +15,7 @@ namespace Festispec.ViewModels
         private readonly IState _state;
         public string Title { get; set; }
         public MainViewModel(INavigationService navigationService, IState state) : base(navigationService)
-        {
+        {   
             _navigationService = navigationService;
             _state = state;
             RegisterCommands();
