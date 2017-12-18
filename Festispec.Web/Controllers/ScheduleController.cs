@@ -14,19 +14,19 @@ namespace Festispec.Web.Controllers
     {
         private readonly IInspectorScheduleRepositoryFactory _inspectorScheduleRepositoryFactory;
 
-        private readonly int _inspectorId;
+        private int _inspectorId;
 
         public ScheduleController()
         {
             _inspectorScheduleRepositoryFactory = new InspectorScheduleRepositoryFactory(true);
-
-            var user = ((IInspectorPrincipal)User);
-            _inspectorId = user.Id;
         }
 
         public ActionResult InspectorSchedule(int? id)
         {
             ViewBag.Message = "Rooster Inspecteur.";
+
+            var user = ((IInspectorPrincipal)User);
+            _inspectorId = user.Id;
 
             using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
             {
