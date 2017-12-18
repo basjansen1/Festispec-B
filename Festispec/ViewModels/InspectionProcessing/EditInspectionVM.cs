@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Festispec.ViewModels.Employees
+namespace Festispec.ViewModels.Inspection
 {
     public class EditInspectionVM : ViewModelBase
     {
@@ -90,7 +90,7 @@ namespace Festispec.ViewModels.Employees
                 }
                 using (var inspectionRepository = InspectionList.InspectionRepositoryFactory.CreateRepository())
                 {
-                    Inspection inspection = InspectionList.SelectedInspection.toModel();
+                    Domain.Inspection inspection = InspectionList.SelectedInspection.toModel();
                     inspectionRepository.AddOrUpdate(inspection);
                 }
                 _navigationService.GoBack();

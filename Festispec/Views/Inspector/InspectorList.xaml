@@ -7,14 +7,14 @@
         DataContext="{Binding Source={StaticResource Locator}, Path=InspectorList}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
@@ -25,28 +25,31 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="1">Zoek op gebruikersnaam</Label>
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SearchUsername}"></TextBox>
+                <Label Grid.Column="2" Grid.Row="1" >Zoek op email</Label>
+                <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding SearchEmail}"></TextBox>
+            </Grid>
+            <Button Grid.Column="1" Margin="5px 5px" Command="{Binding SearchCommand}">Zoek</Button>
+        </Grid>
 
-            <DockPanel Grid.Row="0"  Grid.Column="0">
-                <Label>Zoek op gebruikersnaam</Label>
-                <TextBox Text="{Binding SearchUsername}"></TextBox>
-            </DockPanel>
-            <DockPanel Grid.Row="0" Grid.Column="1">
-                <Label>Zoek op email</Label>
-                <TextBox Text="{Binding SearchEmail}"></TextBox>
-            </DockPanel>
-            <Button Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand}">Zoek</Button>
-
-            <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedInspector}" ItemsSource="{Binding Inspectors}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+        <Grid Grid.Row="2">
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedInspector}" ItemsSource="{Binding Inspectors}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Naam" Binding="{Binding Username}" Width="*" />
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />

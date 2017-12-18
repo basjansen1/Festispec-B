@@ -32,7 +32,7 @@ namespace Festispec.ViewModels.Planning
             NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
         }
 
-        public Inspection Inspection { get; private set; }
+        public Domain.Inspection Inspection { get; private set; }
 
         public ICommand NavigateToAddPlanningCommand { get; set; }
         public ICommand NavigateToAddOrUpdatePlanningCommand { get; set; }
@@ -63,7 +63,7 @@ namespace Festispec.ViewModels.Planning
 
         private void UpdateEntityViewModelFromNavigationParameter()
         {
-            var parameter = NavigationService.Parameter as Inspection;
+            var parameter = NavigationService.Parameter as Domain.Inspection;
             if (parameter != null)
                 Inspection = parameter;
             else
