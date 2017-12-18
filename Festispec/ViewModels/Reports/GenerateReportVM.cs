@@ -24,8 +24,7 @@ namespace Festispec.ViewModels.Reports
     {
         #region commands
         public ICommand DownloadCommand { get; set; }
-        public ObservableCollection<InspectionVM> InspectionVMList { get; set; }
-        public List<InspectionVM> InspectionList { get; set; }
+        public List<InspectionVM> InspectionVMList { get; set; }
         public List<int> OptionList { get; set; }
         public int SelectedAmount { get; set; }
         #endregion
@@ -36,12 +35,13 @@ namespace Festispec.ViewModels.Reports
         private CustomerViewModel _selectedCustomer;
         #endregion
 
-        public GenerateReportVM(CustomerViewModel customer, INavigationService navigationService)
+        public GenerateReportVM(InspectionListVM inspectionList, CustomerViewModel customer, INavigationService navigationService)
         {
             MessageBox.Show(customer.City);
             _navigationService = navigationService;
 
             _selectedCustomer = customer;
+            InspectionVMList = inspectionList.InspectionVMList.ToList();
 
             OptionList = new List<int>()
             {
@@ -50,15 +50,11 @@ namespace Festispec.ViewModels.Reports
 
             DownloadCommand = new RelayCommand(Download);
 
-            // Kan geen inspectionvm meesturen omdat die die niet kan importeren in de pdfwriter class.
-            // _pdfWriter = new InspectionResultsWriter(InspectionVMList.ToList());
-            _pdfWriter = new InspectionResultsWriter(InspectionVMList.Select(i => i.toModel()).ToList());
         }
 
         private void Download()
         {
             _navigationService.GoBack();
-            //_pdfWriter.CreateDocument();
 
             if (InspectionVMList.Count < SelectedAmount)
             {
@@ -66,9 +62,10 @@ namespace Festispec.ViewModels.Reports
                 return;
             }
 
-           // InspectionList = InspectionVMList.OrderByDescending(i => i.StartDate).ToList();
-          //  InspectionList = InspectionVMList.Take(SelectedAmount).ToList();
-           // InspectionList.Skip(Math.Max(0, InspectionList.Count() - SelectedAmount));
+             InspectionVMList.Skip(Math.Max(0, InspectionVMList.Count() - SelectedAmount));
+            _pdfWriter = new InspectionResultsWriter(InspectionVMList.Select(i => i.toModel()).ToList());
+
+            _pdfWriter.CreateDocument();
         }
     }
 }

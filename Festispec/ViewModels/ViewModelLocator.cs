@@ -247,7 +247,7 @@ namespace Festispec.ViewModels
 
         public EditInspectionVM GetEditInspection => ServiceLocator.Current.GetInstance<EditInspectionVM>();
 
-        public GenerateReportVM GetGenerateReport => new GenerateReportVM(CustomerList.SelectedCustomer, NavigationService);
+        public GenerateReportVM GetGenerateReport => new GenerateReportVM(GetInspectionList, CustomerList.SelectedCustomer, NavigationService);
         // public GenerateReportVM GetGenerateReport => new GenerateReportVM(CustomerVMList, NavigationService);
 
         // public ReportCustomerVM GetCustomerReport => new ReportCustomerVM(CustomerRepositoryFactory, NavigationService);
