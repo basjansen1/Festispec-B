@@ -67,10 +67,43 @@ namespace Festispec.ViewModels.Reports
             _inspectionVMList = _inspectionVMList.Skip(Math.Max(0, _inspectionVMList.Count() - SelectedAmount)).ToList();
 
             _pdfWriter = new InspectionResultsWriter(_inspectionVMList.Select(i => i.toModel()).ToList(), _selectedCustomer.Name);
-            _pdfWriter.CreateDocument();
-            _pdfWriter.SaveAs("testdocument");
-            _pdfWriter.OpenDocument("testdocument");
-            MessageBox.Show("Het rapport is opgeslagen");
+
+            // create document
+            try
+            {
+                _pdfWriter.CreateDocument();
+            } catch
+            {
+                MessageBox.Show("Er kan geen rapport gegeneerd worden");
+                _navigationService.GoBack();
+            }
+
+            // open filechooser
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.FileName = "Selecteer een locatie"; 
+            dlg.DefaultExt = ".pdf"; // 
+            dlg.Filter = "PDF documents (.pdf)|*.pdf";
+            string filename = null;
+            
+            Nullable<bool> result = dlg.ShowDialog();
+
+            if (result == true)
+            { 
+                filename = dlg.FileName;
+
+                // Save document
+                try
+                {
+                    _pdfWriter.Save(filename);
+                    _pdfWriter.OpenDocument("testdocument"); // Test methode, remove this when finished
+                }
+                catch
+                {
+                    MessageBox.Show("Kan het document niet opslaan op deze locatie");
+                    _navigationService.GoBack();
+                }
+                MessageBox.Show("Het rapport is opgeslagen");
+            }
             _navigationService.GoBack();
         }
     }

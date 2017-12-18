@@ -86,7 +86,7 @@ namespace Festispec.Domain.PDF
                 AddImage(_c.Test());
                 AddInspectorData(planning.Inspector);
             }
-            SaveAs("AllPlanningInformation");
+            Save("AllPlanningInformation");
             OpenDocument("AllPlanningInformation");
         }
     }

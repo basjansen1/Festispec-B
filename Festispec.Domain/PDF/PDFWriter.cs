@@ -7,7 +7,7 @@ namespace Festispec.Domain.PDF
 {
     public abstract class PDFWriter
     {
-        private PdfDocument _document;
+        protected PdfDocument _document;
         private LayoutHelper _helper;
 
         public PDFWriter()
@@ -70,9 +70,9 @@ namespace Festispec.Domain.PDF
             _helper.Color = color;
         }
 
-        public void SaveAs(string saveAsTitle)
+        public void Save(string path)
         {
-            _document.Save(saveAsTitle + ".pdf");
+            _document.Save(path + ".pdf");
         }
 
         public void OpenDocument(string documentTitle) // TestMethod
