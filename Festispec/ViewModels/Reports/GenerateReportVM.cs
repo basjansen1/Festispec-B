@@ -36,12 +36,12 @@ namespace Festispec.ViewModels.Reports
         private CustomerViewModel _selectedCustomer;
         #endregion
 
-        public GenerateReportVM(CustomerListViewModel customerList, INavigationService navigationService)
+        public GenerateReportVM(CustomerViewModel customer, INavigationService navigationService)
         {
-            MessageBox.Show(customerList.SelectedCustomer.City);
+            MessageBox.Show(customer.City);
             _navigationService = navigationService;
 
-            _selectedCustomer = customerList.SelectedCustomer;
+            _selectedCustomer = customer;
 
             OptionList = new List<int>()
             {

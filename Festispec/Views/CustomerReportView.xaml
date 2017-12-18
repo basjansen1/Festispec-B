@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Festispec.Views"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="CustomerReportView" DataContext="{Binding CustomerVMList, Source={StaticResource Locator}}">
+      Title="CustomerReportView" DataContext="{Binding Source={StaticResource Locator}, Path=CustomerList}">
 
     <Grid>
         <Grid.ColumnDefinitions>

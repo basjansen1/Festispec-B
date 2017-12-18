@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Festispec.ViewModels.CustomerCRUD
@@ -77,7 +78,8 @@ namespace Festispec.ViewModels.CustomerCRUD
             NavigateToCustomerAddCommand =
                 new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate));
 
-            NavigateToReport = new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.GenerateReport));
+            NavigateToReport = 
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.GenerateReport), () => SelectedCustomer != null);
 
             NavigateToCustomerUpdateCommand = new RelayCommand(
                 () => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate, SelectedCustomer),

@@ -102,7 +102,6 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IGeoRepository, GeoRepository>();
 
             SimpleIoc.Default.Register<GenerateReportVM>();
-            SimpleIoc.Default.Register<CustomerListVM>();
         }
 
         private static void RegisterNavigationService()
@@ -248,9 +247,10 @@ namespace Festispec.ViewModels
 
         public EditInspectionVM GetEditInspection => ServiceLocator.Current.GetInstance<EditInspectionVM>();
 
-        public GenerateReportVM GetGenerateReport => new GenerateReportVM(CustomerVMList, NavigationService);
+        public GenerateReportVM GetGenerateReport => new GenerateReportVM(CustomerList.SelectedCustomer, NavigationService);
+        // public GenerateReportVM GetGenerateReport => new GenerateReportVM(CustomerVMList, NavigationService);
 
-       // public ReportCustomerVM GetCustomerReport => new ReportCustomerVM(CustomerRepositoryFactory, NavigationService);
+        // public ReportCustomerVM GetCustomerReport => new ReportCustomerVM(CustomerRepositoryFactory, NavigationService);
 
         #endregion
     }
