@@ -37,6 +37,7 @@
                 <DataGridTextColumn Header="Naam verzoek" Width="2*" Binding="{Binding Name}"/>
                 <DataGridTextColumn Header="Begin inspectie" Width="2*" Binding="{Binding Path=StartDate, Converter={StaticResource AmericanDateConverter}}"/>
                 <DataGridTextColumn Header="Plaats" Width="2*" Binding="{Binding City}"/>
+                <DataGridTextColumn Header="Gemeente" Width="2*" Binding="{Binding Municipality}"/>
                 <DataGridTextColumn Header="Status" Width="2*" Binding="{Binding Status}"/>
             </DataGrid.Columns>
         </DataGrid>
