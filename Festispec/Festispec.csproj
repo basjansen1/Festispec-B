@@ -177,7 +177,9 @@
     <Compile Include="ViewModels\CustomerCRUD\CustomerListViewModel.cs" />
     <Compile Include="ViewModels\CustomerCRUD\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Factory\CustomerViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\InspectionQuestionAnswerViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\ICustomerViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IInspectionQuestionAnswerViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IInspectionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\InspectionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IPlanningViewModelFactory.cs" />
@@ -185,6 +187,7 @@
     <Compile Include="ViewModels\Factory\PlanningViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\QuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\InspectionProcessing\CustomerVM.cs" />
+    <Compile Include="ViewModels\InspectionQuestionAnswer\InspectionQuestionAnswerViewModel.cs" />
     <Compile Include="ViewModels\Inspection\InspectionQuestionnaireViewModel.cs" />
     <Compile Include="ViewModels\Interface\IAddressViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningAddOrUpdateViewModel.cs" />

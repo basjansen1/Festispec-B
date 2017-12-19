@@ -85,7 +85,7 @@ namespace Festispec.Domain.PDF
                     a.Answer
                 });
             }
-            AddImage(_chart.GenerateChartFromQuestion(title, inspectors, y));
+            AddImage(_chart.GenerateChartFromTableQuestion(series,title, inspectors, y));
         }
 
         private void AddQuestion(InspectionQuestion question)

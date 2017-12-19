@@ -62,9 +62,9 @@ namespace Festispec.Domain
                 chart1.Series.Add(x[inspectionNumber]);
                 chart1.Series[x[inspectionNumber]].ChartType = SeriesChartType.Column;
                 chart1.Series[x[inspectionNumber]].BorderWidth = 2;
-                for (int labelNumber = 0; labelNumber < x.Count; labelNumber++)
+                for (int dataNumber = 0; dataNumber < y[inspectionNumber].Count; dataNumber++)
                 {
-                    chart1.Series[x[inspectionNumber]].Points.AddXY(x[labelNumber], y[labelNumber][inspectionNumber]);
+                    chart1.Series[x[inspectionNumber]].Points.AddXY(x[inspectionNumber], y[inspectionNumber][dataNumber]);
                 }
             }
             chart1.ChartAreas.Add(new ChartArea("Area")

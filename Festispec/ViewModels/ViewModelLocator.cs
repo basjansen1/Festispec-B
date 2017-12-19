@@ -60,6 +60,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IRegulationRepositoryFactory>(() => new RegulationRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<ICustomerRepositoryFactory>(() => new CustomerRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<IPlanningRepositoryFactory>(() => new PlanningRepositoryFactory(state.IsOnline));
+            SimpleIoc.Default.Register<IInspectionQuestionAnswerRepositoryFactory>(() => new InspectionQuestionAnswerRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<IGeoRepositoryFactory, GeoRepositoryFactory>();
 
 
@@ -95,7 +96,6 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<InspectorAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<RegulationListVM>();
             SimpleIoc.Default.Register<RegulationVM>();
-
             SimpleIoc.Default.Register<PlanningListViewModel>();
             SimpleIoc.Default.Register<PlanningAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<PlanningAddViewModel>();
@@ -149,6 +149,9 @@ namespace Festispec.ViewModels
         }
 
         #region Singleton Repositories
+
+        public IInspectionQuestionAnswerRepositoryFactory InspectionAnswerRepositoryFactory =
+            ServiceLocator.Current.GetInstance<IInspectionQuestionAnswerRepositoryFactory>();
 
         public IRegulationRepositoryFactory RegulationRepositoryFactory =
             ServiceLocator.Current.GetInstance<IRegulationRepositoryFactory>();

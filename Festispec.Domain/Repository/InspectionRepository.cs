@@ -13,7 +13,9 @@ namespace Festispec.Domain.Repository
         {
             return base.Get()
                 .Include(inspection => inspection.Customers)
-                .Include($"{nameof(InspectionQuestion)}.{nameof(Question)}.{nameof(QuestionType)}");
+                .Include($"{nameof(InspectionQuestion)}.{nameof(Question)}.{nameof(QuestionType)}")
+                .Include($"{nameof(InspectionQuestion)}.{nameof(InspectionQuestionAnswer)}.{nameof(Planning)}.{nameof(Inspector)}")
+                ;
         }
 
         public override Inspection Add(Inspection entity)

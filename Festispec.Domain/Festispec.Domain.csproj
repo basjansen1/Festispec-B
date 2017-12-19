@@ -155,6 +155,8 @@
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\Factory\CustomerRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\GeoRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IInspectionQuestionAnswerRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\InspectionQuestionAnswerRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ICustomerRepositoryFactory.cs" />
     <Compile Include="Repository\EmployeeRepository.cs" />
     <Compile Include="Repository\Factory\EmployeeRepositoryFactory.cs" />
@@ -190,6 +192,7 @@
     <Compile Include="Repository\Interface\IEmployeeRepository.cs" />
     <Compile Include="Repository\Interface\IEmployeeRoleRepository.cs" />
     <Compile Include="Repository\Interface\IGeoRepository.cs" />
+    <Compile Include="Repository\Interface\IInspectionQuestionAnswerRepository.cs" />
     <Compile Include="Repository\Interface\IInspectorRepository.cs" />
     <Compile Include="Repository\Interface\IInspectorScheduleRepository.cs" />
     <Compile Include="Repository\Interface\ILoginRepository.cs" />
@@ -198,6 +201,7 @@
     <Compile Include="Repository\Interface\IRegulationRepository.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="Repository\PlanningRepository.cs" />
+    <Compile Include="Repository\InspectionQuestionAnswerRepository.cs" />
     <Compile Include="Repository\QuestionRepository.cs" />
     <Compile Include="Repository\QuestionTypeRepository.cs" />
     <Compile Include="Repository\Interface\IQuestionTypeRepository.cs" />
