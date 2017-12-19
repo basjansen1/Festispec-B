@@ -92,8 +92,6 @@
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Encryption\Cryptography.cs" />
-    <Compile Include="Extension\DateRangeExtension.cs" />
-    <Compile Include="IAddress.cs" />
     <Compile Include="Inspection.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
@@ -143,7 +141,6 @@
     <Compile Include="LocalContainer.cs" />
     <Compile Include="PDF\LayoutHelper.cs" />
     <Compile Include="PDF\PDFWriter.cs" />
-    <Compile Include="PDF\PLanningListWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>

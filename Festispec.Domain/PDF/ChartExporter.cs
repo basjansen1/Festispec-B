@@ -9,41 +9,33 @@ namespace Festispec.Domain
     public class ChartExporter : Form
     {
 
-        public Image Test()
-        {
-            List<string> inspectionNames = new List<string> { "Blalaland2017", "Blalaland2016" };
-            string title = "Prullenbaktevredenheid";
-            List<string> x = new List<string> { "Bij de wc", "Bij de foodtrucks", "Bij de podia" };
-            List<List<string>> y = new List<List<string>>{
-               new List<string> {
-                    "5","4"
-                } , new List<string> {
-                    "4","3"
-                },new List<string> {
-                    "4","1"
-                }
-            };
-            return GenerateChartFromTableQuestion(inspectionNames, title, x, y);
-        }
-
-        public Image GenerateChartFromTableQuestion(List<string> series, string title, List<string> x, List<List<string>> y)
+        public Image GenerateChartFromTableQuestion(List<string> group, string title, List<string> x, List<List<int>> y)
         {
             Chart chart1 = new Chart();
             chart1.Titles.Add(title);
-            for (int inspectionNumber = 0; inspectionNumber < series.Count; inspectionNumber++)
+            for (int groupNumber = 0; groupNumber < group.Count; groupNumber++)
             {
-                chart1.Series.Add(series[inspectionNumber]);
-                chart1.Series[series[inspectionNumber]].ChartType = SeriesChartType.Column;
-                chart1.Series[series[inspectionNumber]].BorderWidth = 2;
-                for (int labelNumber = 0; labelNumber < y.Count; labelNumber++)
+                chart1.Series.Add(group[groupNumber]);
+                chart1.Series[group[groupNumber]].ChartType = SeriesChartType.RangeColumn;
+                chart1.Series[group[groupNumber]].BorderWidth = 1;
+
+                for (int xNumber = 0; xNumber < x.Count; xNumber++)
                 {
-                    chart1.Series[series[inspectionNumber]].Points.AddXY(x[labelNumber], y[labelNumber][inspectionNumber]);
+                    for (int yxNumber = 0; yxNumber < y.Count; yxNumber++)
+                    {
+                        for (int yNumber = 0; yNumber < y[yxNumber].Count; yNumber++)
+                        {
+                            chart1.Series[group[groupNumber]].Points.AddXY(x[xNumber], y[yxNumber][yNumber]);
+                        }
+                    }
                 }
             }
+            chart1.Size = new Size(500,140);
             chart1.ChartAreas.Add(new ChartArea("Area")
             {
                 BackColor = Color.WhiteSmoke,
                 Area3DStyle = { Enable3D = false },
+                
             });
             chart1.Enabled = true;
             chart1.DataBind();

@@ -24,7 +24,7 @@ namespace Festispec.OfflineSync
         {
             string[] TableList = { "Address", "Address_Contact","EmployeeRole", "Address_Employee",  "Address_Inspector",
                 "Address_Customer", "Note", "InspectionStatus", "Address_Inspection", "Planning",
-                "QuestionType", "Question", "InspectionQuestion", "InspectionQuestionAnswer", "Regulation" }; 
+                "QuestionType", "Question", "InspectionQuestionAnswer", "InspectionQuestion", "Regulation" }; 
 
             using (SqlConnection sourceConnection =
                    new SqlConnection(ConnectionStringSource))

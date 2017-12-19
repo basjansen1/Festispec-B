@@ -75,17 +75,35 @@ namespace Festispec.Domain.PDF
 
         private void AddTableAnswer(InspectionQuestion question)
         {
-            List<string> inspectors = new List<string>();
+            List<string> series = new List<string>();
             string title = question.Question.Name;
-            List<List<string>> y = new List<List<string>>();
+            Dictionary<string, Dictionary<string, int>> xy = new Dictionary<string, Dictionary<string, int>>();
+
+            IEnumerable<string> labels = new List<string>();
+            IEnumerable<string> groups = new List<string>();
+            List<List<int>> y = new List<List<int>>();
             foreach (InspectionQuestionAnswer a in question.InspectionQuestionAnswer)
             {
-                inspectors.Add(a.Planning.Inspector.FullName);
-                y.Add(new List<string> {
-                    a.Answer
-                });
+                List<List<string>> answers = a.DeserializeTabelAnswer();
+
+                labels = answers.Select(row => row[0]).GroupBy(row => row).Select(row => row.First());
+                groups = answers.Select(row => row[1]).GroupBy(row => row).Select(row => row.First());
+                
+                foreach (var label in labels)
+                {
+                    var z = new List<int>();
+                    foreach (var group in groups)
+                    {
+                        z.Add(answers.Count(row => row[0] == label && row[1] == group));
+                    }
+                    y.Add(z);
+                }
             }
-            AddImage(_chart.GenerateChartFromTableQuestion(series,title, inspectors, y));
+
+            //var x = xy.Keys.ToList();
+            //var y = xy.Values.ToList().Select(a => a.Values.ToList()).ToList();
+
+            AddImage(_chart.GenerateChartFromTableQuestion(groups.ToList(), title, labels.ToList(), y));
         }
 
         private void AddQuestion(InspectionQuestion question)
