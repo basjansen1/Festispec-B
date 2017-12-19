@@ -42,44 +42,94 @@ namespace Festispec.Domain.PDF
             AddNewPage();
         }
 
-        private void AddQuestion(string question)
+        private void AddQuestionAnswer(InspectionQuestion question)
         {
-            AddParagraphTitle(question);
-            AddEmptyLine();
-
+            AddQuestion(question);
+            switch (question.Question.QuestionType_Type)
+            {
+                case "Tekst":
+                    AddTextAnswer(question);
+                    break;
+                case "Getal":
+                    AddNumberAnswer(question);
+                    break;
+                case "Reeks":
+                    AddNumberAnswer(question);
+                    break;
+                case "Beeld":
+                    AddPictureAnswer(question);
+                    break;
+                case "Tabel":
+                    AddTableAnswer(question);
+                    break;
+                default:
+                    AddTextAnswer(question);
+                    break;
+            }
         }
 
-        private void AddAnswer(string answer)
+        private void AddPictureAnswer(InspectionQuestion question)
         {
-            AddLine(answer);
+            AddTextAnswer(question);
+        }
+
+        private void AddTableAnswer(InspectionQuestion question)
+        {
+            List<string> inspectors = new List<string>();
+            string title = question.Question.Name;
+            List<List<string>> y = new List<List<string>>();
+            foreach (InspectionQuestionAnswer a in question.InspectionQuestionAnswer)
+            {
+                inspectors.Add(a.Planning.Inspector.FullName);
+                y.Add(new List<string> {
+                    a.Answer
+                });
+            }
+            AddImage(_chart.GenerateChartFromQuestion(title, inspectors, y));
+        }
+
+        private void AddQuestion(InspectionQuestion question)
+        {
+            AddParagraphTitle(question.Question.Name);
             AddEmptyLine();
         }
 
-        private void AddComment(string comment)
+        private void AddNumberAnswer(InspectionQuestion question)
         {
-            AddLine(comment);
-            AddEmptyLine();
+            List<string> inspectors = new List<string>();
+            string title = question.Question.Name;
+            List<List<string>> y = new List <List<string>>();
+            foreach (InspectionQuestionAnswer a in question.InspectionQuestionAnswer)
+            {
+                inspectors.Add(a.Planning.Inspector.FullName);
+                y.Add(new List<string> {
+                    a.Answer
+                });
+            }
+            AddImage(_chart.GenerateChartFromQuestion(title, inspectors, y));
+        }
+
+        private void AddTextAnswer(InspectionQuestion question)
+        {
+            foreach(InspectionQuestionAnswer answer in question.InspectionQuestionAnswer)
+            {
+                AddLine(answer.Planning.Inspector.FullName + ": " + answer.Answer);
+                AddEmptyLine();
+            }
         }
 
         public void CreateDocument()
         {
-            this.AddCoverPage();
-            this.AddIntroduction();
+            AddCoverPage();
+            AddIntroduction();
             foreach (Inspection inspection in _inspectionList)
             {
                 AddTitle("Inspectie " + inspection.Start.Date.ToShortDateString());
-                foreach(InspectionQuestion question in inspection.InspectionQuestion)
+                foreach(InspectionQuestion inspectionQuestion in inspection.InspectionQuestion)
                 {
-                    AddAnswer(question.Question.Name);
+                    AddQuestionAnswer(inspectionQuestion);
                 }
-                // Todo: print question and answer(chart)
-                //this.GenerateChart(new string[1] { inspection.Name } );
             }
-        }
-
-        private void GenerateChart(string[] inspectionName, string inspectiontitle, string label, string answer)
-        {
-          //  _chart.GenerateChart(_inspectionList.First().Id )
         }
 
     }

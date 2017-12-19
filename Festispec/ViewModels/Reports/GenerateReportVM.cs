@@ -42,9 +42,6 @@ namespace Festispec.ViewModels.Reports
 
             _selectedCustomer = customer;
             _inspectionVMList = inspectionList.InspectionVMList.ToList();
-
-            MessageBox.Show(_inspectionVMList.Count.ToString());
-
             SelectedAmount = 1;
 
             OptionList = new List<int>()
