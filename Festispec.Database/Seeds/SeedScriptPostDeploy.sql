@@ -78,6 +78,8 @@ SET IDENTITY_INSERT [dbo].[Note] OFF
 
 INSERT INTO [dbo].[Planning] ([Inspection_Id], [Inspector_Id], [Date], [TimeFrom], [TimeTo], [Hours]) VALUES (12, 3, N'2016-09-17 00:00:00', N'07:00:00', N'17:00:00', N'10:00:00')
 INSERT INTO [dbo].[Planning] ([Inspection_Id], [Inspector_Id], [Date], [TimeFrom], [TimeTo], [Hours]) VALUES (12, 4, N'2016-09-17 00:00:00', N'15:00:00', N'23:00:00', N'08:00:00')
+INSERT INTO [dbo].[Planning] ([Inspection_Id], [Inspector_Id], [Date], [TimeFrom], [TimeTo], [Hours]) VALUES (14, 4, N'2016-08-24 00:00:00', N'08:00:00', N'20:00:00', N'14:00:00')
+
 
 INSERT INTO [dbo].[QuestionType] ([Type]) VALUES (N'Tekst')
 INSERT INTO [dbo].[QuestionType] ([Type]) VALUES (N'Getal')
@@ -147,13 +149,23 @@ INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspe
 SET IDENTITY_INSERT [dbo].[Schedule] OFF
 
 INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 1)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 2)
 INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 3)
 INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 4)
-INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 10)
-INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 11)
 INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 5)
-INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (16, 2)
-INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (16, 6)
-INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (16, 7)
-INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (16, 8)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 6)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 7)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 8)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 9)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (14, 10)
 
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [Inspector_Id], [Date], [Answer]) VALUES(14, 1, 4, '2016-08-24 00:00:00', '9')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [Inspector_Id], [Date], [Answer]) VALUES(14, 2, 4, '2016-08-24 00:00:00', 'Sfeer was goed')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [Inspector_Id], [Date], [Answer]) VALUES(14, 3, 4, '2016-08-24 00:00:00', 'Park foto, terrein foto, en wc foto')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [Inspector_Id], [Date], [Answer]) VALUES(14, 4, 4, '2016-08-24 00:00:00', '150 meter')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [Inspector_Id], [Date], [Answer]) VALUES(14, 5, 4, '2016-08-24 00:00:00', 'Zie foto')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [Inspector_Id], [Date], [Answer]) VALUES(14, 6, 4, '2016-08-24 00:00:00', '30')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [Inspector_Id], [Date], [Answer]) VALUES(14, 7, 4, '2016-08-24 00:00:00', 'Gemoedelijk en gezellig druk')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [Inspector_Id], [Date], [Answer]) VALUES(14, 8, 4, '2016-08-24 00:00:00', '20')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [Inspector_Id], [Date], [Answer]) VALUES(14, 9, 4, '2016-08-24 00:00:00', 'Erg druk eigenlijk te weinig wcs voor het aantal mensen')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [Inspector_Id], [Date], [Answer]) VALUES(14, 10, 4, '2016-08-24 00:00:00', 'Erg druk, terrein staat elk halfuur zo goed als vol')
