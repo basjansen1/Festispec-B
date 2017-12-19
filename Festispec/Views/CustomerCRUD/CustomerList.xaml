@@ -7,7 +7,8 @@
         DataContext="{Binding Source={StaticResource Locator}, Path=CustomerList}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -19,40 +20,32 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToCustomerAddCommand}" />
+            <Button Grid.Column="1" Content="Toevoegen" Margin="5px 5px" Command="{Binding NavigateToCustomerAddCommand}" />
             <Button Grid.Column="2" Content="Wijzigen / Extra informatie" Margin="5px 10px" Command="{Binding NavigateToCustomerUpdateCommand}" />
         </Grid>
-
         <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
-            <DockPanel Grid.Row="0"  Grid.Column="0">
-                <Label>Zoek op:</Label>
-                <ComboBox SelectedItem="{Binding SelectedSearchOption}" ItemsSource="{Binding SearchItems}"></ComboBox>
-            </DockPanel>
-            <DockPanel Grid.Row="0" Grid.Column="1">
-                <TextBox Text="{Binding SearchName}"></TextBox>
-            </DockPanel>
+            <Label Grid.Column="1">Zoek op:</Label>
+            <ComboBox Grid.Column="2" SelectedItem="{Binding SelectedSearchOption}" ItemsSource="{Binding SearchItems}"/>
+            <TextBox Grid.Column="3" Text="{Binding SearchName}"/>
 
-            <Button Grid.Row="0" Grid.Column="2" Command="{Binding SelectedSearch}">Zoek</Button>
-
-            <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
-                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
-                    <DataGridTextColumn Header="Gemeente" Binding="{Binding Municipality}" Width="*" />
-                    <DataGridTextColumn Header="Voornaam Contact" Binding="{Binding FirstName}" Width="*" />
-                    <DataGridTextColumn Header="Achternaam Contact" Binding="{Binding LastName}" Width="*" />
-                </DataGrid.Columns>
-            </DataGrid>
+            <Button Grid.Column="4" Command="{Binding SelectedSearch}">Zoek</Button>
         </Grid>
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}" 
+                      GridLinesVisibility="Horizontal" HeadersVisibility="Column" VerticalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
+                <DataGridTextColumn Header="Gemeente" Binding="{Binding Municipality}" Width="*" />
+                <DataGridTextColumn Header="Voornaam Contact" Binding="{Binding FirstName}" Width="*" />
+                <DataGridTextColumn Header="Achternaam Contact" Binding="{Binding LastName}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>
