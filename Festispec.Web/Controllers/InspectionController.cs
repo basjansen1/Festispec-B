@@ -83,22 +83,22 @@ namespace Festispec.Web.Controllers
             if (!id.HasValue || !date.HasValue)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            
+
             int inspectorId = 3; // TODO: User.EntityKey;
 
             using (var _planningRepository = _planningRepositoryFactory.CreateRepository())
             {
                 var exists = _planningRepository.Get().Any(planning => planning.Inspection_Id == id && planning.Inspector_Id == inspectorId && planning.Date == date);
-                if(!exists)
+                if (!exists)
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                
+
                 foreach (KeyValuePair<int, string> answer in answers)
                 {
                     _planningRepository.AddOrUpdateQuestionAnswer(id.Value, inspectorId, date.Value, answer.Key, answer.Value);
                 }
             }
 
-            return Inspect(id, date);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }
