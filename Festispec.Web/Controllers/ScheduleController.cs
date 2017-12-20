@@ -32,7 +32,6 @@ namespace Festispec.Web.Controllers
             {
                 if (id.HasValue)
                 {
-
                     scheduleRepository.Delete(id.Value);
                     return Redirect("/Schedule/InspectorSchedule");
                 }
@@ -64,7 +63,9 @@ namespace Festispec.Web.Controllers
         {
             using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
             {
-                    temp.Inspector_Id = 4; //debug TODO: login authentication dignes
+                var user = ((IInspectorPrincipal)User);
+                _inspectorId = user.Id;
+
                 if (temp.Id == 0)
                 {
                     scheduleRepository.Add(temp);
