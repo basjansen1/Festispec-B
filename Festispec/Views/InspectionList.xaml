@@ -25,9 +25,9 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="txtSearch" TextWrapping="Wrap" Text="{Binding SearchInput}" Opacity="0.7" Grid.Column="1" Width="150"/>
-            <Button x:Name="btnSearch" Content="Zoeken" Grid.Column="2" Command="{Binding SearchCommand}"/>
-            <Button x:Name="btnDeleteSearch" Content="Zoekveld wissen" Grid.Column="3" Command="{Binding DeleteSearchCommand}"/>
+            <TextBox x:Name="txtSearch" TextWrapping="Wrap" Margin="5px 5px" Text="{Binding SearchInput}" Opacity="0.7" Grid.Column="1" Width="150"/>
+            <Button x:Name="btnSearch" Content="Zoeken" Margin="5px 5px" Grid.Column="2" Command="{Binding SearchCommand}"/>
+            <Button x:Name="btnDeleteSearch" Content="Zoekveld wissen" Margin="5px 5px" Grid.Column="3" Command="{Binding DeleteSearchCommand}"/>
         </Grid>
 
         <DataGrid x:Name="dgInspections" AutoGenerateColumns="False" IsReadOnly="True" HorizontalAlignment="Left" ScrollViewer.CanContentScroll="True" 
