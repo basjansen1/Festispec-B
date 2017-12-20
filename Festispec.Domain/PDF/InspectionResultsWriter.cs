@@ -79,29 +79,46 @@ namespace Festispec.Domain.PDF
             string title = question.Question.Name;
             Dictionary<string, Dictionary<string, int>> xy = new Dictionary<string, Dictionary<string, int>>();
 
-            IEnumerable<string> labels = new List<string>();
-            IEnumerable<string> groups = new List<string>();
-            List<List<int>> y = new List<List<int>>();
-            foreach (InspectionQuestionAnswer a in question.InspectionQuestionAnswer)
-            {
-                List<List<string>> answers = a.DeserializeTabelAnswer();
+            var labels = new List<string>();
+            var groups = new List<string>();
+            var y = new List<List<int>>();
 
-                labels = answers.Select(row => row[0]).GroupBy(row => row).Select(row => row.First());
-                groups = answers.Select(row => row[1]).GroupBy(row => row).Select(row => row.First());
-                
-                foreach (var label in labels)
+            foreach (var answers in question.InspectionQuestionAnswer.Select(answer => answer.DeserializeTabelAnswer()))
+            {
+                labels.AddRange(answers.Select(row => row[0]).GroupBy(row => row).Select(row => row.First()));
+                groups.AddRange(answers.Select(row => row[1]).GroupBy(row => row).Select(row => row.First()));
+            }
+
+            foreach (var label in labels)
+            {
+                var z = new List<int>();
+                foreach (var group in groups)
                 {
-                    var z = new List<int>();
-                    foreach (var group in groups)
+                    foreach (var answers in question.InspectionQuestionAnswer.Select(answer => answer.DeserializeTabelAnswer()))
                     {
                         z.Add(answers.Count(row => row[0] == label && row[1] == group));
                     }
-                    y.Add(z);
                 }
+                y.Add(z);
             }
+            //                    z.Add(answers.Count(row => row[0] == label && row[1] == group));
 
-            //var x = xy.Keys.ToList();
-            //var y = xy.Values.ToList().Select(a => a.Values.ToList()).ToList();
+
+            //            foreach (var answers in question.InspectionQuestionAnswer.Select(answer => answer.DeserializeTabelAnswer()))
+            //            {
+            //                labels = answers.Select(row => row[0]).GroupBy(row => row).Select(row => row.First());
+            //                groups = answers.Select(row => row[1]).GroupBy(row => row).Select(row => row.First());
+            //                
+            //                foreach (var label in labels)
+            //                {
+            //                    var z = new List<int>();
+            //                    foreach (var group in groups)
+            //                    {
+            //                        z.Add(answers.Count(row => row[0] == label && row[1] == group));
+            //                    }
+            //                    y.Add(z);
+            //                }
+            //            }
 
             AddImage(_chart.GenerateChartFromTableQuestion(groups.ToList(), title, labels.ToList(), y));
         }
