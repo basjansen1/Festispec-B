@@ -7,7 +7,8 @@
       DataContext="{Binding Source={StaticResource Locator}, Path=RegulationList}">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -19,40 +20,42 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToRegulationAddCommand}" />
-            <Button Grid.Column="2" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToRegulationUpdateCommand}" />
-            <Button Grid.Column="3" Content="Verwijder" Margin="5px 10px" Command="{Binding RegulationDeleteCommand}" />
+            <Button Grid.Column="1" Content="Toevoegen" Margin="5px 5px" Command="{Binding NavigateToRegulationAddCommand}" />
+            <Button Grid.Column="2" Content="Wijzigen" Margin="5px 5px" Command="{Binding NavigateToRegulationUpdateCommand}" />
+            <Button Grid.Column="3" Content="Verwijder" Margin="5px 5px" Command="{Binding RegulationDeleteCommand}" />
         </Grid>
 
         <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
-
-            <DockPanel Grid.Row="0"  Grid.Column="0">
-                <Label>Zoek op titel</Label>
-                <TextBox Text="{Binding SearchName}"></TextBox>
-            </DockPanel>
-            <DockPanel Grid.Row="0" Grid.Column="1">
-                <Label>Zoek op gemeente</Label>
-                <TextBox Text="{Binding SearchMunicipality}"></TextBox>
-            </DockPanel>
-            <Button Grid.Row="0" Grid.Column="2" Command="{Binding SearchCommand}">Zoek</Button>
-
-            <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedRegulation}" ItemsSource="{Binding Regulation}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Titel" Binding="{Binding Name}" Width="*" />
-                    <DataGridTextColumn Header="Beschrijving" Binding="{Binding Description}" Width="*" />
-                    <DataGridTextColumn Header="Gemeente" Binding="{Binding Municipality}" Width="*" />
-                </DataGrid.Columns>
-            </DataGrid>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="1">Zoek op titel</Label>
+                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SearchName}"></TextBox>
+                <Label Grid.Column="2" Grid.Row="1">Zoek op gemeente</Label>
+                <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding SearchMunicipality}"></TextBox>
+            </Grid>
+            <Button Grid.Column="4" Margin="5px 5px" Command="{Binding SearchCommand}">Zoek</Button>
         </Grid>
+
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedRegulation}" ItemsSource="{Binding Regulation}" 
+                      GridLinesVisibility="Horizontal" HeadersVisibility="Column" VerticalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Titel" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="Beschrijving" Binding="{Binding Description}" Width="*" />
+                <DataGridTextColumn Header="Gemeente" Binding="{Binding Municipality}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

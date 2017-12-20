@@ -17,17 +17,18 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToInspectorAddCommand}" />
-            <Button Grid.Column="2" Content="Wijzigen" Margin="5px 10px" Command="{Binding NavigateToInspectorUpdateCommand}" />
-            <Button Grid.Column="3" Content="Rooster" Margin="5px 10px" Command="{Binding NavigateToInspectorScheduleCommand}" />
+            <Button Grid.Column="1" Content="Toevoegen" Margin="5px 5px" Command="{Binding NavigateToInspectorAddCommand}" />
+            <Button Grid.Column="2" Content="Wijzigen" Margin="5px 5px" Command="{Binding NavigateToInspectorUpdateCommand}" />
+            <Button Grid.Column="3" Content="Rooster" Margin="5px 5px" Command="{Binding NavigateToInspectorScheduleCommand}" />
         </Grid>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -49,7 +50,8 @@
         </Grid>
 
         <Grid Grid.Row="2">
-            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedInspector}" ItemsSource="{Binding Inspectors}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedInspector}" ItemsSource="{Binding Inspectors}" GridLinesVisibility="Horizontal" HeadersVisibility="Column"
+                      VerticalAlignment="Stretch">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Naam" Binding="{Binding Username}" Width="*" />
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
