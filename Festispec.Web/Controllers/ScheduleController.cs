@@ -36,7 +36,7 @@ namespace Festispec.Web.Controllers
                     return Redirect("/Schedule/InspectorSchedule");
                 }
 
-                var schedulee = scheduleRepository.Get().ToList();
+                var schedulee = scheduleRepository.Get().Where(schedule => schedule.Inspector_Id == _inspectorId).ToList();
                 return View(schedulee);
             }
         }
@@ -67,13 +67,17 @@ namespace Festispec.Web.Controllers
                 _inspectorId = user.Id;
                 temp.Inspector_Id = _inspectorId;
 
-                if (temp.Id == 0)
+                if (temp.NotAvailableFrom < temp.NotAvailableTo)
                 {
-                    scheduleRepository.Add(temp);
-                } else
-                {
-                    scheduleRepository.Update(temp, temp.Id);
-                }
+                    if (temp.Id == 0)
+                    {
+                        scheduleRepository.Add(temp);
+                    }
+                    else
+                    {
+                        scheduleRepository.Update(temp, temp.Id);
+                    }
+                } 
 
                 return RedirectToAction("InspectorSchedule");
             }
