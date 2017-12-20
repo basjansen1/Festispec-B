@@ -3,6 +3,8 @@ using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 
 namespace Festispec.Domain.PDF
@@ -12,7 +14,7 @@ namespace Festispec.Domain.PDF
         private List<Inspection> _inspectionList;
         private string _customerName;
         private ChartExporter _chart;
-        
+
         public InspectionResultsWriter(List<Inspection> inspectionList, string customerName)
         {
             _inspectionList = inspectionList;
@@ -29,7 +31,7 @@ namespace Festispec.Domain.PDF
             }
             AddLine("Inspectie resultaten", new XFont("Verdana", 35, XFontStyle.Bold));
             AddEmptyLine();
-            AddLine("Periode: " +_inspectionList.Min(i => i.Start).ToShortDateString() + " - " + _inspectionList.Max(i => i.Start).ToShortDateString(), new XFont("Verdana", 16, XFontStyle.Bold));
+            AddLine("Periode: " + _inspectionList.Min(i => i.Start).ToShortDateString() + " - " + _inspectionList.Max(i => i.Start).ToShortDateString(), new XFont("Verdana", 16, XFontStyle.Bold));
             AddLine(_customerName, new XFont("Verdana", 16, XFontStyle.Bold));
             AddNewPage();
         }
@@ -70,7 +72,20 @@ namespace Festispec.Domain.PDF
 
         private void AddPictureAnswer(InspectionQuestion question)
         {
-            AddTextAnswer(question);
+            int i = 0;
+            List<InspectionQuestionAnswer> l = question.InspectionQuestionAnswer.ToList();
+            foreach (var answers in question.InspectionQuestionAnswer.Select(answer => answer.DeserializeBeeldAnswer()))
+            {
+                AddLine(l[i++].Planning.Inspector.FullName + ":");
+                foreach (var splitAnswers in answers)
+                {
+                    string image = splitAnswers[0].Remove(splitAnswers[0].IndexOf("data:image/png;base64,"), "data:image/png;base64,".Length);
+                    byte[] data = System.Convert.FromBase64String(image);
+                    MemoryStream ms = new MemoryStream(data);
+                    AddImage(Image.FromStream(ms));
+                    AddLine(splitAnswers[1]);
+                }
+            }
         }
 
         private void AddTableAnswer(InspectionQuestion question)
@@ -91,9 +106,9 @@ namespace Festispec.Domain.PDF
                         labels.Add(extraLabel);
 
                 var extraGroups = answers.Select(row => row[1]).GroupBy(row => row).Select(row => row.First());
-                foreach(var extraGroup in extraGroups)
+                foreach (var extraGroup in extraGroups)
                     if (!groups.Contains(extraGroup))
-                    groups.Add(extraGroup);
+                        groups.Add(extraGroup);
             }
 
 
@@ -141,7 +156,7 @@ namespace Festispec.Domain.PDF
         {
             List<string> inspectors = new List<string>();
             string title = question.Question.Name;
-            List<List<string>> y = new List <List<string>>();
+            List<List<string>> y = new List<List<string>>();
             foreach (InspectionQuestionAnswer a in question.InspectionQuestionAnswer)
             {
                 inspectors.Add(a.Planning.Inspector.FullName);
@@ -154,7 +169,7 @@ namespace Festispec.Domain.PDF
 
         private void AddTextAnswer(InspectionQuestion question)
         {
-            foreach(InspectionQuestionAnswer answer in question.InspectionQuestionAnswer)
+            foreach (InspectionQuestionAnswer answer in question.InspectionQuestionAnswer)
             {
                 AddLine(answer.Planning.Inspector.FullName + ": " + answer.Answer);
                 AddEmptyLine();
@@ -168,7 +183,7 @@ namespace Festispec.Domain.PDF
             foreach (Inspection inspection in _inspectionList)
             {
                 AddTitle("Inspectie " + inspection.Start.Date.ToShortDateString());
-                foreach(InspectionQuestion inspectionQuestion in inspection.InspectionQuestion)
+                foreach (InspectionQuestion inspectionQuestion in inspection.InspectionQuestion)
                 {
                     AddQuestionAnswer(inspectionQuestion);
                 }

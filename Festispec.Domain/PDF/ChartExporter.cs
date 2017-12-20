@@ -16,7 +16,7 @@ namespace Festispec.Domain
             for (int groupNumber = 0; groupNumber < group.Count; groupNumber++)
             {
                 chart1.Series.Add(group[groupNumber]);
-                chart1.Series[group[groupNumber]].ChartType = SeriesChartType.RangeColumn;
+                chart1.Series[group[groupNumber]].ChartType = SeriesChartType.Column;
                 chart1.Series[group[groupNumber]].BorderWidth = 1;
                 
                     for (int yxNumber = 0; yxNumber < x.Count; yxNumber++)
@@ -51,7 +51,8 @@ namespace Festispec.Domain
             {
                 chart1.Series.Add(x[inspectionNumber]);
                 chart1.Series[x[inspectionNumber]].ChartType = SeriesChartType.Column;
-                chart1.Series[x[inspectionNumber]].BorderWidth = 2;
+                chart1.Series[x[inspectionNumber]].BorderWidth = 1;
+                chart1.Series[x[inspectionNumber]].BorderColor = Color.White;
                 for (int dataNumber = 0; dataNumber < y[inspectionNumber].Count; dataNumber++)
                 {
                     chart1.Series[x[inspectionNumber]].Points.AddXY(x[inspectionNumber], y[inspectionNumber][dataNumber]);
