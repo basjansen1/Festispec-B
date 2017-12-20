@@ -18,17 +18,15 @@ namespace Festispec.Domain
                 chart1.Series.Add(group[groupNumber]);
                 chart1.Series[group[groupNumber]].ChartType = SeriesChartType.RangeColumn;
                 chart1.Series[group[groupNumber]].BorderWidth = 1;
-
-                for (int xNumber = 0; xNumber < x.Count; xNumber++)
-                {
-                    for (int yxNumber = 0; yxNumber < y.Count; yxNumber++)
+                
+                    for (int yxNumber = 0; yxNumber < x.Count; yxNumber++)
                     {
                         for (int yNumber = 0; yNumber < y[yxNumber].Count; yNumber++)
                         {
-                            chart1.Series[group[groupNumber]].Points.AddXY(x[xNumber], y[yxNumber][yNumber]);
+                            chart1.Series[group[groupNumber]].Points.AddXY(x[yxNumber], y[yxNumber][yNumber]);
                         }
                     }
-                }
+                
             }
             chart1.Size = new Size(500,140);
             chart1.ChartAreas.Add(new ChartArea("Area")
