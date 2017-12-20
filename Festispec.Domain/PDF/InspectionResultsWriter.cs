@@ -85,9 +85,17 @@ namespace Festispec.Domain.PDF
 
             foreach (var answers in question.InspectionQuestionAnswer.Select(answer => answer.DeserializeTabelAnswer()))
             {
-                labels.AddRange(answers.Select(row => row[0]).GroupBy(row => row).Select(row => row.First()));
-                groups.AddRange(answers.Select(row => row[1]).GroupBy(row => row).Select(row => row.First()));
+                var extraLabels = answers.Select(row => row[0]).GroupBy(row => row).Select(row => row.First());
+                foreach (var extraLabel in extraLabels)
+                    if (!labels.Contains(extraLabel))
+                        labels.Add(extraLabel);
+
+                var extraGroups = answers.Select(row => row[1]).GroupBy(row => row).Select(row => row.First());
+                foreach(var extraGroup in extraGroups)
+                    if (!groups.Contains(extraGroup))
+                    groups.Add(extraGroup);
             }
+
 
             foreach (var label in labels)
             {
