@@ -7,6 +7,7 @@
 
 @model IEnumerable<Festispec.Domain.Schedule>
 
+
 <div class="container">
     <div class="row">
         <div class=col-sm-5>Niet beschikbaar vanaf</div>
@@ -14,9 +15,8 @@
     </div>
     <div class="row">
         @foreach (var schedule in Model)
-        {
-            if (schedule.Inspector_Id == 4) //moet ingelogd id zijn
-            {
+        { 
+        if(schedule.Inspector_Id == _inspectorId)
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-5" style="background-color:antiquewhite;">@schedule.NotAvailableFrom</div>
@@ -25,7 +25,7 @@
                     <a href="./InspectorSchedule/@schedule.Id" class="btn btn-info" role="button">Delete</a>
                 </div>
             </div>
-            }
+            
         }
 
         <a href="AddAvailability" class="btn btn-info" role="button">Voeg beschikbaarheid toe</a>

@@ -14,7 +14,7 @@ namespace Festispec.Web.Controllers
     {
         private readonly IInspectorScheduleRepositoryFactory _inspectorScheduleRepositoryFactory;
 
-        private int _inspectorId;
+        public int _inspectorId { get; set; }
 
         public ScheduleController()
         {
@@ -65,6 +65,7 @@ namespace Festispec.Web.Controllers
             {
                 var user = ((IInspectorPrincipal)User);
                 _inspectorId = user.Id;
+                temp.Inspector_Id = _inspectorId;
 
                 if (temp.Id == 0)
                 {
@@ -81,8 +82,6 @@ namespace Festispec.Web.Controllers
         public ActionResult GetSchedule()
         {
             ViewBag.Message = "Rooster uitvoeren.";
-
-
 
             using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
             {
