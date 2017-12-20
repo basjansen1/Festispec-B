@@ -95,7 +95,8 @@ namespace Festispec.ViewModels.Employee
             {
                 if (i.Username.ToLower().Contains(SearchInput.ToLower()) ||
                     i.Email.ToLower().Contains(SearchInput.ToLower()) ||
-                    i.Role_Role.ToLower().Contains(SearchInput.ToLower()))
+                    i.Role_Role.ToLower().Contains(SearchInput.ToLower()) ||
+                    (i.Manager != null && i.Manager.Username.ToLower().Contains(SearchInput.ToLower())))
                 {
                     Employees.Add(i);
                 }

@@ -79,7 +79,7 @@ namespace Festispec.ViewModels.Regulation
                 LoadRegulations();
             }, () => SelectedRegulation != null);
 
-            SearchCommand = new RelayCommand(SearchCustomers);
+            SearchCommand = new RelayCommand(SearchRegulations);
             DeleteFilterCommand = new RelayCommand(DeleteFilter);
         }
 
@@ -95,9 +95,10 @@ namespace Festispec.ViewModels.Regulation
                 RaisePropertyChanged(nameof(Regulation));
             }
         }
-        private void SearchCustomers()
+        private void SearchRegulations()
         {
             if (SearchInput == null) return;
+
             LoadRegulations();
             _regulationList.Clear();
             Regulations.ToList().ForEach(n => _regulationList.Add(n));
@@ -106,12 +107,13 @@ namespace Festispec.ViewModels.Regulation
             foreach (var i in _regulationList)
             {
                 if (i.Name.ToLower().Contains(SearchInput.ToLower()) ||
-                    i.Municipality.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.Municipality != null && i.Municipality.ToLower().Contains(SearchInput.ToLower()) ||
                     i.Description.ToLower().Contains(SearchInput.ToLower()))
                 {
                     Regulations.Add(i);
                 }
             }
+            RaisePropertyChanged(nameof(Regulations));
         }
 
         private void DeleteFilter()

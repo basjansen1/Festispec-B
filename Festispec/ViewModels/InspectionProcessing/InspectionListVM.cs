@@ -129,7 +129,8 @@ namespace Festispec.ViewModels.Inspection
             foreach(InspectionVM i in _inspectionList)
             {
                 if (i.Name.ToLower().Contains(SearchInput.ToLower()) ||  i.Customer.Name.ToLower().Contains(SearchInput.ToLower()) || 
-                    i.City.ToLower().Contains(SearchInput.ToLower()) || i.Municipality.ToLower().Contains(SearchInput.ToLower()))
+                    i.City.ToLower().Contains(SearchInput.ToLower()) || i.Municipality.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.Status.ToLower().Contains(SearchInput.ToLower()))
                 {
                     InspectionVMList.Add(i);
                 }
