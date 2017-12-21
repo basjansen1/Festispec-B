@@ -97,8 +97,8 @@ namespace Festispec.Test
             };
 
             // 2. Act
-            templateListViewModel.SearchName = "Eet";
-            templateListViewModel.LoadTemplates();
+            templateListViewModel.SearchInput = "Eet";
+            templateListViewModel.SearchTemplates();
 
             // 3. Assert
             Assert.Single(templateListViewModel.Templates);

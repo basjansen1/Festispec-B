@@ -157,7 +157,7 @@ namespace Festispec.ViewModels.Inspection
                 }
 
                 InspectionList.InspectionVMList.Add(NewInspection);
-                InspectionList.ReloadInspectionVMList();
+                InspectionList.ReloadInspectionVmList();
                 _navigationService.GoBack();
             }
         }

@@ -6,7 +6,9 @@ using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
+using System.Collections.Generic;
 using Festispec.NavigationService;
+using Festispec.ViewModels.Customer;
 
 namespace Festispec.ViewModels.Employee
 {
@@ -28,19 +30,33 @@ namespace Festispec.ViewModels.Employee
             LoadEmployees();
 
             NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
+            EmployeeList = new List<EmployeeViewModel>();
         }
 
         public ICommand NavigateToEmployeeAddCommand { get; set; }
         public ICommand NavigateToEmployeeUpdateCommand { get; set; }
         public ICommand EmployeeDeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
-
+        public ICommand DeleteFilterCommand { get; set; }
         public ObservableCollection<EmployeeViewModel> Employees { get; private set; }
 
         public EmployeeViewModel SelectedEmployee { get; set; }
 
-        public string SearchUsername { get; set; } = "";
-        public string SearchEmail { get; set; } = "";
+        public List<EmployeeViewModel> EmployeeList;
+        public string SearchInput
+        {
+            get
+            {
+                return _searchInput;
+            }
+            set
+            {
+                _searchInput = value;
+                RaisePropertyChanged("SearchInput");
+            }
+        }
+
+        private string _searchInput;
 
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
@@ -62,26 +78,51 @@ namespace Festispec.ViewModels.Employee
                 SelectedEmployee.Delete();
                 LoadEmployees();
                 }, () => SelectedEmployee != null);
-            SearchCommand = new RelayCommand(LoadEmployees);
+            SearchCommand = new RelayCommand(SearchEmployees);
+            DeleteFilterCommand = new RelayCommand(DeleteFilter);
+        }
+
+        public void SearchEmployees()
+        {
+            if (SearchInput == null) return;
+
+            LoadEmployees();
+            EmployeeList.Clear();
+            Employees.ToList().ForEach(n => EmployeeList.Add(n));
+            Employees.Clear();
+
+            foreach (var i in EmployeeList)
+            {
+                if (i.Username.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.Email.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.Role_Role.ToLower().Contains(SearchInput.ToLower()) ||
+                    (i.Manager != null && i.Manager.Username.ToLower().Contains(SearchInput.ToLower())))
+                {
+                    Employees.Add(i);
+                }
+            }
         }
 
         public void LoadEmployees()
         {
             DateTime today = DateTime.Today;
-            using (var EmployeeRepository = _employeeRepositoryFactory.CreateRepository())
+            using (var employeeRepository = _employeeRepositoryFactory.CreateRepository())
             {
                 Employees =
                     new ObservableCollection<EmployeeViewModel>(
-                        EmployeeRepository.Get()
-                            .Where(Employee =>
-                                (Employee.HiredTo.HasValue ? Employee.HiredTo.Value > today : true)
-                                && Employee.Username.Contains(SearchUsername)
-                                && Employee.Email.Contains(SearchEmail)
-                                && !Employee.Role_Role.Equals("Inspecteur"))
+                        employeeRepository.Get()
+                            .Where(employee =>
+                                (employee.HiredTo.HasValue ? employee.HiredTo.Value > today : true)
+                                && !employee.Role_Role.Equals("Inspecteur"))
                             .ToList()
-                            .Select(Employee => _employeeViewModelFactory.CreateViewModel(Employee)));
+                            .Select(employee => _employeeViewModelFactory.CreateViewModel(employee)));
                 RaisePropertyChanged(nameof(Employees));
             }
+        }
+        private void DeleteFilter()
+        {
+            LoadEmployees();
+            SearchInput = null;
         }
     }
 }

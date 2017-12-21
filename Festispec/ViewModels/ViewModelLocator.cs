@@ -248,7 +248,7 @@ namespace Festispec.ViewModels
 
         #region ViewModels
 
-        public InspectionListVM GetInspectionList => new InspectionListVM(InspectionRepositoryFactory, InspectionViewModelFactory, NavigationService); //ServiceLocator.Current.GetInstance<InspectionListVM>();
+        public InspectionListVM GetInspectionList => ServiceLocator.Current.GetInstance<InspectionListVM>();
 
         public RegulationListVM GetRegulationList => new RegulationListVM(RegulationRepositoryFactory, NavigationService, GetInspectionList);
 
