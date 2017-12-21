@@ -104,8 +104,11 @@ namespace Festispec.ViewModels.CustomerCRUD
 
             foreach (var i in _customerList)
             {
-                if (i.Name.ToLower().Contains(SearchInput.ToLower()) || i.Email.ToLower().Contains(SearchInput.ToLower()) || i.Municipality.ToLower().Contains(SearchInput.ToLower())
-                    || i.FirstName.ToLower().Contains(SearchInput.ToLower()) || i.LastName.ToLower().Contains(SearchInput.ToLower()))
+                if (i.Name != null && i.Name.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.Email != null && i.Email.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.Municipality != null && i.Municipality.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.FirstName != null && i.FirstName.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.LastName != null && i.LastName.ToLower().Contains(SearchInput.ToLower()))
                 {
                     Customers.Add(i);
                 }

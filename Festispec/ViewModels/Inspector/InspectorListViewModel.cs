@@ -93,9 +93,9 @@ namespace Festispec.ViewModels.Inspector
 
             foreach (var i in _inspectorList)
             {
-                if (i.Username.ToLower().Contains(SearchInput.ToLower()) || 
-                    i.Email.ToLower().Contains(SearchInput.ToLower()) ||
-                    i.Manager.Username.ToLower().Contains(SearchInput.ToLower()))
+                if (i.Username != null && i.Username.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.Email != null && i.Email.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.Manager != null && i.Manager.Username.ToLower().Contains(SearchInput.ToLower()))
                 {
                     Inspectors.Add(i);
                 }

@@ -93,10 +93,10 @@ namespace Festispec.ViewModels.Employee
 
             foreach (var i in EmployeeList)
             {
-                if (i.Username.ToLower().Contains(SearchInput.ToLower()) ||
-                    i.Email.ToLower().Contains(SearchInput.ToLower()) ||
-                    i.Role_Role.ToLower().Contains(SearchInput.ToLower()) ||
-                    (i.Manager != null && i.Manager.Username.ToLower().Contains(SearchInput.ToLower())))
+                if (i.Username != null && i.Username.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.Email != null && i.Email.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.Role_Role != null && i.Role_Role.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.Manager != null && i.Manager.Username.ToLower().Contains(SearchInput.ToLower()))
                 {
                     Employees.Add(i);
                 }
