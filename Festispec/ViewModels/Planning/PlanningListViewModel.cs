@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Festispec.ViewModels.Planning
     {
         private readonly IPlanningRepositoryFactory _planningRepositoryFactory;
         private readonly IPlanningViewModelFactory _planningViewModelFactory;
-
+        private readonly List<PlanningViewModel> _plannngList;
         public PlanningListViewModel(INavigationService navigationService,
             IPlanningRepositoryFactory planningRepositoryFactory, IPlanningViewModelFactory planningViewModelFactory) :
                 base(navigationService)
@@ -30,7 +31,23 @@ namespace Festispec.ViewModels.Planning
             LoadPlannings();
 
             NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
+
+            _plannngList = new List<PlanningViewModel>();
         }
+        public string SearchInput
+        {
+            get
+            {
+                return _searchInput;
+            }
+            set
+            {
+                _searchInput = value;
+                RaisePropertyChanged("SearchInput");
+            }
+        }
+
+        private string _searchInput;
 
         public Domain.Inspection Inspection { get; private set; }
 
@@ -39,14 +56,12 @@ namespace Festispec.ViewModels.Planning
         public ICommand PlanningDeleteCommand { get; set; }
         public ICommand SearchPlanningCommand { get; set; }
         public ICommand NavigateBackCommand { get; set; }
-
+        public ICommand DeleteFilterCommand { get; set; }
         public ObservableCollection<PlanningViewModel> Plannings { get; } =
             new ObservableCollection<PlanningViewModel>();
 
         public PlanningViewModel SelectedPlanning { get; set; }
 
-        public string SearchInspectorFirstName { get; set; }
-        public string SearchInspectorLastName { get; set; }
         public DateTime SearchDate { get; set; }
 
 
@@ -88,24 +103,34 @@ namespace Festispec.ViewModels.Planning
                 SelectedPlanning.Delete();
                 LoadPlannings();
             }, () => SelectedPlanning != null);
-            SearchPlanningCommand = new RelayCommand(LoadPlannings);
+            SearchPlanningCommand = new RelayCommand(SearchPlannings);
             NavigateBackCommand = new RelayCommand(GoBack);
+            DeleteFilterCommand = new RelayCommand(DeleteFilter);
         }
 
+        public void SearchPlannings()
+        {
+            if (SearchInput == null) return;
+            LoadPlannings();
+            _plannngList.Clear();
+            Plannings.ToList().ForEach(n => _plannngList.Add(n));
+            Plannings.Clear();
+
+            foreach (var i in _plannngList)
+            {
+                if (i.Inspector.Username.ToLower().Contains(SearchInput.ToLower()) || 
+                    i.Inspector.LastName.ToLower().Contains(SearchInput.ToLower()) &&
+                    i.Date.Equals(SearchDate)
+                    ) {
+                    Plannings.Add(i);
+                }
+            }
+        }
         private void LoadPlannings()
         {
             using (var planningRepository = _planningRepositoryFactory.CreateRepository())
             {
                 var query = planningRepository.GetByInspectionId(Inspection.Id);
-
-                query = query.Where(planning => planning.Date.Equals(SearchDate));
-
-                if (!string.IsNullOrWhiteSpace(SearchInspectorFirstName))
-                    query = query.Where(planning => planning.Inspector.FirstName.Contains(SearchInspectorFirstName));
-
-                if (!string.IsNullOrWhiteSpace(SearchInspectorLastName))
-                    query = query.Where(planning => planning.Inspector.LastName.Contains(SearchInspectorLastName));
-
                 var plannings = query.ToList().Select(planning => _planningViewModelFactory.CreateViewModel(planning));
 
                 // Clear plannings
@@ -114,6 +139,12 @@ namespace Festispec.ViewModels.Planning
                 foreach (var planning in plannings)
                     Plannings.Add(planning);
             }
+        }
+
+        private void DeleteFilter()
+        {
+            LoadPlannings();
+            SearchInput = null;
         }
 
         private void GoBack()

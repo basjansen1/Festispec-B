@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -15,7 +16,7 @@ namespace Festispec.ViewModels.Regulation
         private readonly INavigationService _navigationService;
         private readonly IRegulationRepositoryFactory _regulationRepositoryFactory;
         private readonly IRegulationViewModelFactory _regulationViewModelFactory;
-
+        private readonly List<RegulationViewModel> _regulationList;
         public RegulationListViewModel(INavigationService navigationService,
             IRegulationRepositoryFactory regulationRepositoryFactory,
             IRegulationViewModelFactory regulationViewModelFactory) : base(navigationService)
@@ -27,19 +28,33 @@ namespace Festispec.ViewModels.Regulation
             RegisterCommands();
             LoadRegulations();
 
+            
             NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
+            _regulationList = new List<RegulationViewModel>();
         }
         public ICommand NavigateToRegulationAddCommand { get; set; }
         public ICommand NavigateToRegulationUpdateCommand { get; set; }
         public ICommand RegulationDeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
-
-        public ObservableCollection<RegulationViewModel> Regulation { get; private set; }
+        public ICommand DeleteFilterCommand { get; set; }
+        public ObservableCollection<RegulationViewModel> Regulations { get; private set; }
 
         public RegulationViewModel SelectedRegulation { get; set; }
 
-        public string SearchName { get; set; } = "";
-        public string SearchMunicipality { get; set; } = "";
+        public string SearchInput
+        {
+            get
+            {
+                return _searchInput;
+            }
+            set
+            {
+                _searchInput = value;
+                RaisePropertyChanged("SearchInput");
+            }
+        }
+
+        private string _searchInput;
 
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
@@ -63,29 +78,48 @@ namespace Festispec.ViewModels.Regulation
                 SelectedRegulation.Delete();
                 LoadRegulations();
             }, () => SelectedRegulation != null);
-            SearchCommand = new RelayCommand(LoadRegulations);
+
+            SearchCommand = new RelayCommand(SearchRegulations);
+            DeleteFilterCommand = new RelayCommand(DeleteFilter);
         }
+
         private void LoadRegulations()
         {
-            using (var RegulationsRepository = _regulationRepositoryFactory.CreateRepository())
+            using (var regulationsRepository = _regulationRepositoryFactory.CreateRepository())
             {
-                var query = RegulationsRepository.Get();
-
-                if (!string.IsNullOrWhiteSpace(SearchName))
-                {
-                    query = query.Where(regulation => regulation.Name.Contains(SearchName));
-                }
-                if (!string.IsNullOrWhiteSpace(SearchMunicipality))
-                {
-                    query = query.Where(regulation => regulation.Municipality.Contains(SearchMunicipality));
-                }
-
-                Regulation =
+                var query = regulationsRepository.Get();         
+                Regulations =
                     new ObservableCollection<RegulationViewModel>(
                         query.ToList()
                             .Select(regulation => _regulationViewModelFactory.CreateViewModel(regulation)));
                 RaisePropertyChanged(nameof(Regulation));
             }
+        }
+        private void SearchRegulations()
+        {
+            if (SearchInput == null) return;
+
+            LoadRegulations();
+            _regulationList.Clear();
+            Regulations.ToList().ForEach(n => _regulationList.Add(n));
+            Regulations.Clear();
+
+            foreach (var i in _regulationList)
+            {
+                if (i.Name.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.Municipality != null && i.Municipality.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.Description.ToLower().Contains(SearchInput.ToLower()))
+                {
+                    Regulations.Add(i);
+                }
+            }
+            RaisePropertyChanged(nameof(Regulations));
+        }
+
+        private void DeleteFilter()
+        {
+            LoadRegulations();
+            SearchInput = "";
         }
     }
 }

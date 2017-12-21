@@ -17,6 +17,8 @@ INSERT INTO [dbo].[Address] ([Id], [Street], [HouseNumber], [PostalCode], [City]
 INSERT INTO [dbo].[Address] ([Id], [Street], [HouseNumber], [PostalCode], [City], [Country], [Municipality], [Location], [Long], [Lat]) VALUES (16, N'Paviljoenlaan', N'1', N'2131LZ', N'Hoofddorp', N'Nederland', N'Haarlemmermeer', geography::STGeomFromText('POINT(4.66969 52.3294)', 4326), N'4.66969', N'52.3294') -- Mysteryland
 INSERT INTO [dbo].[Address] ([Id], [Street], [HouseNumber], [PostalCode], [City], [Country], [Municipality], [Location], [Long], [Lat]) VALUES (17, N'Oostbroekerweg', N'2', N'1981LR', N'Velsen-Zuid', N'Nederland', N'Velsen', geography::STGeomFromText('POINT(4.67034 52.44816)', 4326), N'4.67034', N'52.44816') -- Dutch Valley
 INSERT INTO [dbo].[Address] ([Id], [Street], [HouseNumber], [PostalCode], [City], [Country], [Municipality], [Location], [Long], [Lat]) VALUES (18, N'Oostbroekerweg', N'2', N'1981LR', N'Velsen-Zuid', N'Nederland', N'Velsen', geography::STGeomFromText('POINT(4.67034 52.44816)', 4326), N'4.67034', N'52.44816') -- Dutch Valley
+INSERT INTO [dbo].[Address] ([Id], [Street], [HouseNumber], [PostalCode], [City], [Country], [Municipality], [Location], [Long], [Lat]) VALUES (19, N'Onderwijsboulevard', N'215', N'5223DE', N'''s-Hertogenbosch', N'Nederland', N'''s-Hertogenbosch', N'POINT (5.28709 51.68864)', 5.28709, 51.68864) -- Festispec
+INSERT INTO [dbo].[Address] ([Id], [Street], [HouseNumber], [PostalCode], [City], [Country], [Municipality], [Location], [Long], [Lat]) VALUES (20, N'Onderwijsboulevard', N'215', N'5223DE', N'''s-Hertogenbosch', N'Nederland', N'''s-Hertogenbosch', N'POINT (5.28709 51.68864)', 5.28709, 51.68864) -- Festispec Winter 2017
 SET IDENTITY_INSERT [dbo].[Address] OFF
 
 INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Minke', N'Achterkamp', N'minke.achterkamp@festispec.nl', N'06-51712894', N'NL26RABO0367742883', 1)
@@ -33,11 +35,13 @@ INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephon
 INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Floyd', N'Wildenberg', N'floyd.wildenberg@festyland.nl', N'072-396734', null, 13) -- Festyland
 INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Paul', N'Lagendijk', N'paul.lagendijk@mysteryland.nl', N'020-893846', null, 15) -- Mysteryland
 INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Niko', N'Snoek', N'niko.snoek@dutchvalley.nl', N'020-632479', null, 17) -- Dutch Valley
+INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephone], [IBAN], [Id]) VALUES (N'Stijn', N'Smulders', N'info@festispec.nl', N'+31 612345678', N'NL95INGB0679641323', 19) -- Festispec
 
 INSERT INTO [dbo].[Address_Customer] ([Name], [KVK], [Id]) VALUES (N'Paaspop', N'KVKNoClue', 11)  -- Paaspop
 INSERT INTO [dbo].[Address_Customer] ([Name], [KVK], [Id]) VALUES (N'Festyland', N'KVKWattes', 13) -- Festyland
 INSERT INTO [dbo].[Address_Customer] ([Name], [KVK], [Id]) VALUES (N'Mysteryland', N'KVKGeenIdee', 15) -- Mysteryland
 INSERT INTO [dbo].[Address_Customer] ([Name], [KVK], [Id]) VALUES (N'Dutch Valley', N'KVKWatMoetHier', 17) -- Dutch Valley
+INSERT INTO [dbo].[Address_Customer] ([KVK], [Name], [Id]) VALUES (N'12345678', N'Festispec', 19) -- Festispec
 
 INSERT INTO [dbo].[EmployeeRole] ([Role]) VALUES (N'Manager')
 INSERT INTO [dbo].[EmployeeRole] ([Role]) VALUES (N'Medewerker')
@@ -61,6 +65,7 @@ INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'In afwachting')
 INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Paaspop', N'www.paaspop.nl', N'2016-09-17 00:00:00', N'2016-09-20 00:00:00', 12, 11, N'Geaccepteerd') -- Paaspop
 INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Festyland', N'www.festyland.nl', N'2018-01-18 03:14:07', N'2018-01-21 03:14:07', 14, 13, N'In afwachting') -- Festyland
 INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Mysteryland', N'www.mysteryland.nl', N'2038-01-19 03:14:08', N'2038-01-19 03:14:08', 16, 15, N'Afgewezen') -- Mysteryland
+INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Status_Status], [Customer_Id], [Id]) VALUES (N'Festispec Winter 2017', N'www.festispec.nl', N'2017-12-21 00:00:00', N'2017-12-21 00:00:00', N'In afwachting', 11, 20) -- Festispec
 
 INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2009-01-19 03:14:08', N'2024-01-19 03:14:08', 3)
 INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2016-01-19 03:14:08', N'2022-01-19 03:14:08', 4)
@@ -79,7 +84,11 @@ SET IDENTITY_INSERT [dbo].[Note] OFF
 INSERT INTO [dbo].[Planning] ([Inspection_Id], [Inspector_Id], [Date], [TimeFrom], [TimeTo], [Hours]) VALUES (12, 3, N'2016-09-17 00:00:00', N'07:00:00', N'17:00:00', N'10:00:00')
 INSERT INTO [dbo].[Planning] ([Inspection_Id], [Inspector_Id], [Date], [TimeFrom], [TimeTo], [Hours]) VALUES (12, 4, N'2016-09-17 00:00:00', N'15:00:00', N'23:00:00', N'08:00:00')
 INSERT INTO [dbo].[Planning] ([Inspection_Id], [Inspector_Id], [Date], [TimeFrom], [TimeTo], [Hours]) VALUES (14, 4, N'2016-08-24 00:00:00', N'08:00:00', N'20:00:00', N'14:00:00')
-
+INSERT INTO [dbo].[Planning] ([Inspection_Id], [Inspector_Id], [Date], [TimeFrom], [TimeTo], [Hours]) VALUES (20, 3, N'2017-12-21 00:00:00', N'15:00:00', N'23:00:00', NULL)
+INSERT INTO [dbo].[Planning] ([Inspection_Id], [Inspector_Id], [Date], [TimeFrom], [TimeTo], [Hours]) VALUES (20, 4, N'2017-12-21 00:00:00', N'07:00:00', N'15:00:00', NULL)
+INSERT INTO [dbo].[Planning] ([Inspection_Id], [Inspector_Id], [Date], [TimeFrom], [TimeTo], [Hours]) VALUES (20, 5, N'2017-12-21 00:00:00', N'07:00:00', N'15:00:00', NULL)
+INSERT INTO [dbo].[Planning] ([Inspection_Id], [Inspector_Id], [Date], [TimeFrom], [TimeTo], [Hours]) VALUES (20, 9, N'2017-12-21 00:00:00', N'15:00:00', N'23:00:00', NULL)
+INSERT INTO [dbo].[Planning] ([Inspection_Id], [Inspector_Id], [Date], [TimeFrom], [TimeTo], [Hours]) VALUES (20, 10, N'2017-12-21 00:00:00', N'15:00:00', N'23:00:00', NULL)
 
 INSERT INTO [dbo].[QuestionType] ([Type]) VALUES (N'Tekst')
 INSERT INTO [dbo].[QuestionType] ([Type]) VALUES (N'Getal')
@@ -143,8 +152,8 @@ SET IDENTITY_INSERT [dbo].[Regulation] OFF
 
 SET IDENTITY_INSERT [dbo].[Schedule] ON
 INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (1, N'2018-05-17 00:00:00', N'2018-06-05 00:00:00', 4)
-INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (2, N'2018-05-17 00:00:00', N'2018-06-05 00:00:00', 5)
-INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (3, N'2018-05-17 00:00:00', N'2018-06-05 00:00:00', 9)
+--INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (2, N'2018-05-17 00:00:00', N'2018-06-05 00:00:00', 5)
+--INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (3, N'2018-05-17 00:00:00', N'2018-06-05 00:00:00', 9)
 INSERT INTO [dbo].[Schedule] ([Id], [NotAvailableFrom], [NotAvailableTo], [Inspector_Id]) VALUES (4, N'2018-04-22 00:00:00', N'2018-05-05 00:00:00', 4)
 SET IDENTITY_INSERT [dbo].[Schedule] OFF
 
@@ -160,6 +169,7 @@ INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (
 INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (10, 12)
 INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (11, 12)
 INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (12, 12)
+
 INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (1, 14)
 INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (2, 14)
 INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (3, 14)
@@ -171,7 +181,20 @@ INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (
 INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (9, 14)
 INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (10, 14)
 INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (11, 14)
-INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (12, 14)
+INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (12, 14
+
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (20, 1)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (20, 2)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (20, 3)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (20, 4)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (20, 5)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (20, 6)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (20, 7)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (20, 8)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (20, 9)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (20, 10)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (20, 11)
+INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (20, 12)
 
 INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [Inspector_Id], [Date], [Answer]) VALUES(14, 1, 4, '2016-08-24 00:00:00', '8')
 INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [Inspector_Id], [Date], [Answer]) VALUES(14, 2, 4, '2016-08-24 00:00:00', 'Sfeer was goed')
@@ -209,3 +232,16 @@ INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [I
 INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [Inspector_Id], [Date], [Answer]) VALUES(12, 8, 3, '2016-09-17 00:00:00', '[["show 1","A"],["show 2","A"],["show 3","C"],["show 4","B"],["show 5","A"],["show 6","A"],["show 7","D"]]')
 INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [Inspector_Id], [Date], [Answer]) VALUES(12, 9, 3, '2016-09-17 00:00:00', '[["11:00","druk"],["12:00","druk"],["13:00","druk"],["14:00","druk"],["15:00","rustig"],["16:00","druk"],["17:00","matig"]]')
 INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Question_Id], [Inspector_Id], [Date], [Answer]) VALUES(12, 10, 3, '2016-09-17 00:00:00', '[["11:00","druk"],["11:30","druk"],["12:00","matig"],["12:30","druk"],["13:00","druk"],["13:30","druk"],["14:00","druk"],["14:30","druk"],["15:00","druk"],["15:30","matig"],["16:00","druk"],["16:30","druk"],["17:00","matig"]]')
+
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Inspector_Id], [Date], [Question_Id], [Answer]) VALUES (20, 3, N'2017-12-21 00:00:00', 1, N'3')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Inspector_Id], [Date], [Question_Id], [Answer]) VALUES (20, 3, N'2017-12-21 00:00:00', 2, N'Het is in de vroege ochtend vrij rustig bij de eetgelegenheden')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Inspector_Id], [Date], [Question_Id], [Answer]) VALUES (20, 3, N'2017-12-21 00:00:00', 3, N'[]')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Inspector_Id], [Date], [Question_Id], [Answer]) VALUES (20, 3, N'2017-12-21 00:00:00', 4, N'Gemiddeld 3 meter')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Inspector_Id], [Date], [Question_Id], [Answer]) VALUES (20, 3, N'2017-12-21 00:00:00', 5, N'De stroom van mensen gaat alle kanten op')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Inspector_Id], [Date], [Question_Id], [Answer]) VALUES (20, 3, N'2017-12-21 00:00:00', 6, N'Gemiddeld 12 tafels met gemiddeld 4 zitplaatsen')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Inspector_Id], [Date], [Question_Id], [Answer]) VALUES (20, 3, N'2017-12-21 00:00:00', 7, N'[["Act 1","B"],["Act 2","A"],["Act 3","A"],["Act 4","B"]]')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Inspector_Id], [Date], [Question_Id], [Answer]) VALUES (20, 3, N'2017-12-21 00:00:00', 8, N'[["Theater show 1","100"],["Theater show 2","80"],["Theater show 3","90"],["Theater show 4","80"]]')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Inspector_Id], [Date], [Question_Id], [Answer]) VALUES (20, 3, N'2017-12-21 00:00:00', 9, N'[["10:00","Rustig"],["11:00","Matig"],["12:00","Druk"],["13:00","Matig"]]')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Inspector_Id], [Date], [Question_Id], [Answer]) VALUES (20, 3, N'2017-12-21 00:00:00', 10, N'[["13:00","Rustig"],["13:30","Matig"],["14:00","Druk"],["14:30","Druk"]]')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Inspector_Id], [Date], [Question_Id], [Answer]) VALUES (20, 3, N'2017-12-21 00:00:00', 11, N'[["10:00","Rustig"],["11:00","Matig"],["12:00","Druk"],["13:00","Druk"]]')
+INSERT INTO [dbo].[InspectionQuestionAnswer] ([Inspection_Id], [Inspector_Id], [Date], [Question_Id], [Answer]) VALUES (20, 3, N'2017-12-21 00:00:00', 12, N'Geen bijzonderheden gezien')

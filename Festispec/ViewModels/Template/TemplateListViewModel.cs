@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -26,7 +27,7 @@ namespace Festispec.ViewModels.Template
 
             RegisterCommands();
             LoadTemplates();
-
+            TemplateList = new List<TemplateViewModel>();
             NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
         }
 
@@ -34,13 +35,27 @@ namespace Festispec.ViewModels.Template
         public ICommand NavigateToTemplateUpdateCommand { get; set; }
         public ICommand TemplateDeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
-
+        public ICommand DeleteFilterCommand { get; set; }
         public ObservableCollection<TemplateViewModel> Templates { get; private set; }
 
         public TemplateViewModel SelectedTemplate { get; set; }
 
-        public string SearchName { get; set; } = "";
-        public string SearchDescription { get; set; } = "";
+        public List<TemplateViewModel> TemplateList;
+
+        public string SearchInput
+        {
+            get
+            {
+                return _searchInput;
+            }
+            set
+            {
+                _searchInput = value;
+                RaisePropertyChanged("SearchInput");
+            }
+        }
+
+        private string _searchInput;
 
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
@@ -55,9 +70,11 @@ namespace Festispec.ViewModels.Template
         {
             NavigateToTemplateAddCommand =
                 new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate));
+
             NavigateToTemplateUpdateCommand = new RelayCommand(
                 () => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate, SelectedTemplate),
                 () => SelectedTemplate != null);
+
             TemplateDeleteCommand = new RelayCommand(() =>
             {
                 var result = MessageBox.Show("Weet je zeker dat je deze Template wilt verwijderen?", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -66,30 +83,42 @@ namespace Festispec.ViewModels.Template
                 SelectedTemplate.Delete();
                 LoadTemplates();
             }, () => SelectedTemplate != null);
-            SearchCommand = new RelayCommand(LoadTemplates);
+            SearchCommand = new RelayCommand(SearchTemplates);
+            DeleteFilterCommand = new RelayCommand(DeleteFilter);
         }
+        public void SearchTemplates()
+        {
+            if (SearchInput == null) return;
 
+            LoadTemplates();
+            TemplateList.Clear();
+            Templates.ToList().ForEach(n => TemplateList.Add(n));
+            Templates.Clear();
+
+            foreach (var i in TemplateList)
+            {
+                if (i.Name.ToLower().Contains(SearchInput.ToLower()) || i.Description.ToLower().Contains(SearchInput.ToLower()))
+                {
+                    Templates.Add(i);
+                }
+            }
+        }
         public void LoadTemplates()
         {
             using (var templateRepository = _templateRepositoryFactory.CreateRepository())
             {
                 var query = templateRepository.Get();
-
-                if (!string.IsNullOrWhiteSpace(SearchName))
-                {
-                    query = query.Where(template => template.Name.Contains(SearchName));
-                }
-                if (!string.IsNullOrWhiteSpace(SearchDescription))
-                {
-                    query = query.Where(template => template.Description.Contains(SearchDescription));
-                }
-
                 Templates =
                     new ObservableCollection<TemplateViewModel>(
                         query.ToList()
                             .Select(template => _templateViewModelFactory.CreateViewModel(template)));
                 RaisePropertyChanged(nameof(Templates));
             }
+        }
+        private void DeleteFilter()
+        {
+            LoadTemplates();
+            SearchInput = null;
         }
     }
 }

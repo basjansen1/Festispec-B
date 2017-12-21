@@ -15,42 +15,40 @@
             <i:InvokeCommandAction Command="{Binding OnWindowClosingCommand}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="1" Grid.RowSpan="4" BorderBrush="LightBlue" 
+             BorderThickness="2,0,0,0" />
 
-    <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Visible">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Border Grid.Column="0" Grid.RowSpan="4" BorderBrush="Black" 
-             BorderThickness="0,0,2,0" />
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+            <Image Source="Views/Images/Logo.jpg" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-                <Image Source="Views/Images/Logo.jpg" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
-
-                <Button Grid.Row="2" Content="Templates" Margin="5px 2.5px" Command="{Binding NavigateToTemplateListCommand}" />
-                <Button Grid.Row="3" Content="Medewerkers" Margin="5px 2.5px" Command="{Binding NavigateToEmployeeListCommand}"/>
-                <Button Grid.Row="4" Content="Inspecteurs" Margin="5px 2.5px" Command="{Binding NavigateToInspectorListCommand}"/>
-                <Button Grid.Row="5" Content="Klanten" Margin="5px 2.5px" Command="{Binding NavigateToCustomerListCommand}"/>
-                <Button Grid.Row="6" Content="Inspecties" Margin="5px 2.5px" Command="{Binding NavigateToInspectionListCommand}"/>
-                <Button Grid.Row="7" Content="Regelgeving" Margin="5px 2.5px" Command="{Binding NavigateToRegulationListCommand}"/>
-                <Button Grid.Row="8" Content="Rapporten" Margin="5px 2.5px" Command="{Binding NavigateToReportCommand}"/>
-            </Grid>
-
-            <Frame Grid.Column="1" Name="MainFrame" NavigationUIVisibility="Hidden"/>
+            <Button Grid.Row="2" Content="Templates" Margin="5px 2.5px" Command="{Binding NavigateToTemplateListCommand}" />
+            <Button Grid.Row="3" Content="Medewerkers" Margin="5px 2.5px" Command="{Binding NavigateToEmployeeListCommand}"/>
+            <Button Grid.Row="4" Content="Inspecteurs" Margin="5px 2.5px" Command="{Binding NavigateToInspectorListCommand}"/>
+            <Button Grid.Row="5" Content="Klanten" Margin="5px 2.5px" Command="{Binding NavigateToCustomerListCommand}"/>
+            <Button Grid.Row="6" Content="Inspecties" Margin="5px 2.5px" Command="{Binding NavigateToInspectionListCommand}"/>
+            <Button Grid.Row="7" Content="Regelgeving" Margin="5px 2.5px" Command="{Binding NavigateToRegulationListCommand}"/>
+            <Button Grid.Row="8" Content="Rapporten" Margin="5px 2.5px" Command="{Binding NavigateToReportCommand}"/>
         </Grid>
-    </ScrollViewer>
+
+        <Frame Grid.Column="2" Name="MainFrame" NavigationUIVisibility="Hidden"/>
+    </Grid>
 </Window>
