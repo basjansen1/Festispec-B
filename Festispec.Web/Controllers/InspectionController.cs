@@ -64,9 +64,9 @@ namespace Festispec.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             ViewBag.Message = "Inspectie uitvoeren.";
+
             var user = ((IInspectorPrincipal)User);
             var inspectorId = user.Id;
-//            int inspectorId = 3;
 
             using (var planningRepository = _planningRepositoryFactory.CreateRepository())
             {
@@ -85,9 +85,9 @@ namespace Festispec.Web.Controllers
         {
             if (!id.HasValue || !date.HasValue)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-
-            int inspectorId = 3; // TODO: User.EntityKey;
+            
+            var user = ((IInspectorPrincipal)User);
+            var inspectorId = user.Id;
 
             using (var _planningRepository = _planningRepositoryFactory.CreateRepository())
             {
