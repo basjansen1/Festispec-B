@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "AddAvailability";
+}
+
+@model Festispec.Domain.Schedule
+
+<h2>Beschikbaarheid opslaan</h2>
+
+<div class="container">
+    @using (Html.BeginForm("Create", "Schedule"))
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.Inspector_Id)
+        <div class="form-group">
+            <label>Niet beschikbaar vanaf:</label>
+            @Html.EditorFor(m => m.NotAvailableFrom, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.NotAvailableFrom, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <label>Niet beschikbaar tot:</label>
+            @Html.EditorFor(m => m.NotAvailableTo, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(m => m.NotAvailableTo, "", new { @class = "text-danger" })
+        </div>
+
+            <input type="submit" class="btn btn-info" value="Toevoegen">
+            <a href="InspectorSchedule" class="btn btn-info" role="button">Ga Terug</a>
+    }
+</div>
+
+
+
+
+

@@ -69,7 +69,7 @@
     <Compile Include="Address.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="AddressExtended.cs" />
+    <Compile Include="Extended\AddressExtended.cs" />
     <Compile Include="Contact.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
@@ -82,13 +82,14 @@
     <Compile Include="EmployeeRole.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extended\InspectionQuestionExtended.cs" />
     <Compile Include="Encryption\Cryptography.cs" />
     <Compile Include="Extension\DateRangeExtension.cs" />
     <Compile Include="IAddress.cs" />
     <Compile Include="Inspection.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="InspectionExtended.cs" />
+    <Compile Include="Extended\InspectionExtended.cs" />
     <Compile Include="InspectionQuestion.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
@@ -107,9 +108,9 @@
     <Compile Include="Planning.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="PlanningExtended.cs" />
-    <Compile Include="ContactExtended.cs" />
-    <Compile Include="ExtendedSchedule.cs" />
+    <Compile Include="Extended\PlanningExtended.cs" />
+    <Compile Include="Extended\ContactExtended.cs" />
+    <Compile Include="Extended\ExtendedSchedule.cs" />
     <Compile Include="Extension\CopyPropertiesExtension.cs" />
     <Compile Include="Festispec.Context.cs">
       <AutoGen>True</AutoGen>
@@ -139,8 +140,8 @@
     <Compile Include="Question.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extended\QuestionExtended.cs" />
     <Compile Include="InspectionQuestionAnswerExtended.cs" />
-    <Compile Include="QuestionExtended.cs" />
     <Compile Include="QuestionType.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
