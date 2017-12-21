@@ -7,15 +7,17 @@ namespace Festispec.ViewModels.Factory.Interface
     {
         private readonly IInspectionRepositoryFactory _inspectionRepositoryFactory;
         private readonly IQuestionViewModelFactory _questionViewModelFactory;
-        public InspectionViewModelFactory(IInspectionRepositoryFactory inspectionRepositoryFactory, IQuestionViewModelFactory questionViewModelFactory)
+        private readonly IInspectionQuestionAnswerRepositoryFactory _answerRepositoryFactory;
+        public InspectionViewModelFactory(IInspectionRepositoryFactory inspectionRepositoryFactory, IQuestionViewModelFactory questionViewModelFactory, IInspectionQuestionAnswerRepositoryFactory answerRepositoryFactory)
         {
             _inspectionRepositoryFactory = inspectionRepositoryFactory;
             _questionViewModelFactory = questionViewModelFactory;
+            _answerRepositoryFactory = answerRepositoryFactory;
         }
 
         public InspectionVM CreateViewModel()
         {
-            return new InspectionVM(_inspectionRepositoryFactory, _questionViewModelFactory);
+            return new InspectionVM(_inspectionRepositoryFactory, _questionViewModelFactory, _answerRepositoryFactory);
         }
 
         public InspectionVM CreateViewModel(Domain.Inspection entity)

@@ -1,4 +1,4 @@
-﻿using System.Data.Entity.Spatial;
+using System.Data.Entity.Spatial;
 
 namespace Festispec.Domain
 {

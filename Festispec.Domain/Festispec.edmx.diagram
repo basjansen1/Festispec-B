@@ -20,7 +20,7 @@
         <InheritanceConnector EntityType="Festispec.Customer" />
         <EntityTypeShape EntityType="Festispec.Note" Width="1.5" PointX="4.25" PointY="8.5" />
         <AssociationConnector Association="Festispec.CustomerNote" />
-        <EntityTypeShape EntityType="Festispec.Inspection" Width="1.5" PointX="9.5" PointY="4.125" />
+        <EntityTypeShape EntityType="Festispec.Inspection" Width="1.5" PointX="9.5" PointY="4" />
         <InheritanceConnector EntityType="Festispec.Inspection" />
         <EntityTypeShape EntityType="Festispec.InspectionStatus" Width="1.5" PointX="12" PointY="3.25" />
         <AssociationConnector Association="Festispec.InspectionStatusInspection" />
@@ -34,12 +34,12 @@
         <EntityTypeShape EntityType="Festispec.QuestionType" Width="1.5" PointX="17.375" PointY="6.875" />
         <AssociationConnector Association="Festispec.QuestionTypeQuestion" />
         <EntityTypeShape EntityType="Festispec.Template" Width="1.5" PointX="17.5" PointY="9.75" />
-        <EntityTypeShape EntityType="Festispec.InspectionQuestion" PointX="12.375" PointY="5.375" Width="1.5" />
+        <EntityTypeShape EntityType="Festispec.InspectionQuestion" PointX="12" PointY="5.375" Width="2.25" />
         <AssociationConnector Association="Festispec.InspectionInspectionQuestion" />
         <EntityTypeShape EntityType="Festispec.TemplateQuestion" Width="1.5" PointX="15.125" PointY="9.75" />
         <AssociationConnector Association="Festispec.TemplateTemplateQuestion" />
         <AssociationConnector Association="Festispec.QuestionInspectionQuestion" />
-        <EntityTypeShape EntityType="Festispec.InspectionQuestionAnswer" Width="1.5" PointX="12.125" PointY="8.75" />
+        <EntityTypeShape EntityType="Festispec.InspectionQuestionAnswer" Width="2.5" PointX="12.125" PointY="8.75" />
         <AssociationConnector Association="Festispec.PlanningInspectionQuestionAnswer" />
         <AssociationConnector Association="Festispec.InspectionQuestionInspectionQuestionAnswer" />
         <AssociationConnector Association="Festispec.QuestionTemplateQuestion" />

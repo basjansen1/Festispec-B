@@ -26,9 +26,11 @@ using Festispec.ViewModels.Question;
 using Festispec.ViewModels.Regulation;
 using Festispec.ViewModels.Template;
 using GalaSoft.MvvmLight.Ioc;
-using GeodanApi;
 using Microsoft.Practices.ServiceLocation;
+using Festispec.ViewModels.Reports;
+using Festispec.ViewModels.Customer;
 using Festispec.ViewModels.Inspection;
+using GeodanApi;
 
 namespace Festispec.ViewModels
 {
@@ -58,6 +60,7 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<IRegulationRepositoryFactory>(() => new RegulationRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<ICustomerRepositoryFactory>(() => new CustomerRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<IPlanningRepositoryFactory>(() => new PlanningRepositoryFactory(state.IsOnline));
+            SimpleIoc.Default.Register<IInspectionQuestionAnswerRepositoryFactory>(() => new InspectionQuestionAnswerRepositoryFactory(state.IsOnline));
             SimpleIoc.Default.Register<IGeoRepositoryFactory, GeoRepositoryFactory>();
 
 
@@ -93,7 +96,6 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<InspectorAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<RegulationListVM>();
             SimpleIoc.Default.Register<RegulationVM>();
-
             SimpleIoc.Default.Register<PlanningListViewModel>();
             SimpleIoc.Default.Register<PlanningAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<PlanningAddViewModel>();
@@ -103,8 +105,9 @@ namespace Festispec.ViewModels
             SimpleIoc.Default.Register<RegulationAddOrUpdateViewModel>();
             SimpleIoc.Default.Register<IGeodanSearchApi, GeodanSearchApi>();
             SimpleIoc.Default.Register<IGeoRepository, GeoRepository>();
-            SimpleIoc.Default.Register<InspectorScheduleAddViewModel>();
 
+            SimpleIoc.Default.Register<GenerateReportVM>();
+            SimpleIoc.Default.Register<InspectorScheduleAddViewModel>();
         }
 
         private static void RegisterNavigationService()
@@ -135,6 +138,9 @@ namespace Festispec.ViewModels
             navigationService.Configure(Routes.Routes.QuestionAdd);
             navigationService.Configure(Routes.Routes.InspectionQuestionnaire);
 
+            navigationService.Configure(Routes.Routes.Reports);
+            navigationService.Configure(Routes.Routes.GenerateReport);
+
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }
 
@@ -143,6 +149,9 @@ namespace Festispec.ViewModels
         }
 
         #region Singleton Repositories
+
+        public IInspectionQuestionAnswerRepositoryFactory InspectionAnswerRepositoryFactory =
+            ServiceLocator.Current.GetInstance<IInspectionQuestionAnswerRepositoryFactory>();
 
         public IRegulationRepositoryFactory RegulationRepositoryFactory =
             ServiceLocator.Current.GetInstance<IRegulationRepositoryFactory>();
@@ -244,6 +253,9 @@ namespace Festispec.ViewModels
         public PlanningAddOrUpdateViewModel PlanningAddOrUpdate => new PlanningAddOrUpdateViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory, InspectorRepositoryFactory);
         public PlanningAddViewModel PlanningAdd => new PlanningAddViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory, InspectorRepositoryFactory);
 
+        public CustomerListViewModel CustomerVMList =>
+                ServiceLocator.Current.GetInstance<CustomerListViewModel>();
+
         #endregion
 
         #region ViewModels
@@ -256,6 +268,7 @@ namespace Festispec.ViewModels
 
         public EditInspectionVM GetEditInspection => ServiceLocator.Current.GetInstance<EditInspectionVM>();
 
+        public GenerateReportVM GetGenerateReport => new GenerateReportVM(GetInspectionList, CustomerList.SelectedCustomer, NavigationService);
         #endregion
     }
 }

@@ -5,6 +5,7 @@ using System.Windows;
 using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
+using System.Collections.ObjectModel;
 
 namespace Festispec.ViewModels.Question
 {
@@ -31,6 +32,8 @@ namespace Festispec.ViewModels.Question
                 RaisePropertyChanged();
             }
         }
+
+        public ObservableCollection<InspectionQuestionAnswer> Answers { get; }
 
         public string Description
         {

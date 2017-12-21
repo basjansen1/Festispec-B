@@ -146,6 +146,8 @@
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -162,6 +164,7 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -181,7 +184,9 @@
     <Compile Include="ViewModels\CustomerCRUD\CustomerListViewModel.cs" />
     <Compile Include="ViewModels\CustomerCRUD\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Factory\CustomerViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\InspectionQuestionAnswerViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\ICustomerViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factory\Interface\IInspectionQuestionAnswerViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IInspectionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\InspectionViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\IPlanningViewModelFactory.cs" />
@@ -189,6 +194,7 @@
     <Compile Include="ViewModels\Factory\PlanningViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\QuestionViewModelFactory.cs" />
     <Compile Include="ViewModels\InspectionProcessing\CustomerVM.cs" />
+    <Compile Include="ViewModels\InspectionQuestionAnswer\InspectionQuestionAnswerViewModel.cs" />
     <Compile Include="ViewModels\Inspection\InspectionQuestionnaireViewModel.cs" />
     <Compile Include="ViewModels\Interface\IAddressViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningAddOrUpdateViewModel.cs" />
@@ -205,6 +211,7 @@
     <Compile Include="ViewModels\Regulation\RegulationAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Regulation\RegulationListViewModel.cs" />
     <Compile Include="ViewModels\Regulation\RegulationViewModel.cs" />
+    <Compile Include="ViewModels\Reports\GenerateReportVM.cs" />
     <Compile Include="ViewModels\Factory\Interface\IInspectorScheduleViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\InspectorScheduleViewModelFactory.cs" />
     <Compile Include="ViewModels\Inspector\InspectorScheduleAddOrUpdateViewModel.cs" />
@@ -253,8 +260,14 @@
     <Compile Include="Views\CustomerCRUD\CustomerList.xaml.cs">
       <DependentUpon>CustomerList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CustomerReportView.xaml.cs">
+      <DependentUpon>CustomerReportView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditInspection.xaml.cs">
       <DependentUpon>EditInspection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GenerateReport.xaml.cs">
+      <DependentUpon>GenerateReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InspectionList.xaml.cs">
       <DependentUpon>InspectionList.xaml</DependentUpon>
@@ -333,6 +346,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\CustomerCRUD\CustomerList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CustomerReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GenerateReport.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

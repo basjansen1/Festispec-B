@@ -58,6 +58,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -73,6 +76,12 @@
     <Compile Include="Contact.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extension\DateRangeExtension.cs" />
+    <Compile Include="IAddress.cs" />
+    <Compile Include="PDF\ChartExporter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PDF\InspectionResultsWriter.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
@@ -84,8 +93,6 @@
     </Compile>
     <Compile Include="Extended\InspectionQuestionExtended.cs" />
     <Compile Include="Encryption\Cryptography.cs" />
-    <Compile Include="Extension\DateRangeExtension.cs" />
-    <Compile Include="IAddress.cs" />
     <Compile Include="Inspection.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
@@ -135,7 +142,6 @@
     <Compile Include="LocalContainer.cs" />
     <Compile Include="PDF\LayoutHelper.cs" />
     <Compile Include="PDF\PDFWriter.cs" />
-    <Compile Include="PDF\PLanningListWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
@@ -151,6 +157,8 @@
     <Compile Include="Repository\CustomerRepository.cs" />
     <Compile Include="Repository\Factory\CustomerRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\GeoRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\Interface\IInspectionQuestionAnswerRepositoryFactory.cs" />
+    <Compile Include="Repository\Factory\InspectionQuestionAnswerRepositoryFactory.cs" />
     <Compile Include="Repository\Factory\Interface\ICustomerRepositoryFactory.cs" />
     <Compile Include="Repository\EmployeeRepository.cs" />
     <Compile Include="Repository\Factory\EmployeeRepositoryFactory.cs" />
@@ -186,6 +194,7 @@
     <Compile Include="Repository\Interface\IEmployeeRepository.cs" />
     <Compile Include="Repository\Interface\IEmployeeRoleRepository.cs" />
     <Compile Include="Repository\Interface\IGeoRepository.cs" />
+    <Compile Include="Repository\Interface\IInspectionQuestionAnswerRepository.cs" />
     <Compile Include="Repository\Interface\IInspectorRepository.cs" />
     <Compile Include="Repository\Interface\IInspectorScheduleRepository.cs" />
     <Compile Include="Repository\Interface\ILoginRepository.cs" />
@@ -194,6 +203,7 @@
     <Compile Include="Repository\Interface\IRegulationRepository.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="Repository\PlanningRepository.cs" />
+    <Compile Include="Repository\InspectionQuestionAnswerRepository.cs" />
     <Compile Include="Repository\QuestionRepository.cs" />
     <Compile Include="Repository\QuestionTypeRepository.cs" />
     <Compile Include="Repository\Interface\IQuestionTypeRepository.cs" />
@@ -253,6 +263,15 @@
       <Project>{D752A463-81C4-4DC3-A929-9E666EC6BBCB}</Project>
       <Name>GeodanApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ProofOfConcept.Geodan\ProofOfConcept.Geodan.csproj">
+      <Project>{86E3678B-98F7-4E37-BE12-D682B3F7D7AE}</Project>
+      <Name>ProofOfConcept.Geodan</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PDF\ChartExporter.resx">
+      <DependentUpon>ChartExporter.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
