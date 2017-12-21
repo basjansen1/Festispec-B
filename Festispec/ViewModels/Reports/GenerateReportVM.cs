@@ -41,7 +41,7 @@ namespace Festispec.ViewModels.Reports
             _navigationService = navigationService;
 
             _selectedCustomer = customer;
-            _inspectionVMList = inspectionList.InspectionVMList.ToList();
+            _inspectionVMList = inspectionList.InspectionVMList.Where(i => i.CustomerId == _selectedCustomer.Id).ToList();
             SelectedAmount = 1;
 
             OptionList = new List<int>()
@@ -54,8 +54,7 @@ namespace Festispec.ViewModels.Reports
 
         private void Download()
         {
-            _inspectionVMList = _inspectionVMList.Where(i => i.Name == _selectedCustomer.Name).ToList();
-
+            _inspectionVMList.OrderBy(i => i.Id).Reverse();
             if (_inspectionVMList.Count < SelectedAmount)
             {
                 MessageBox.Show("Er zijn niet zoveel inspecties");
