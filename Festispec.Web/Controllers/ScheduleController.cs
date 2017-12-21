@@ -73,10 +73,6 @@ namespace Festispec.Web.Controllers
 
             using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
             {
-//                var user = ((IInspectorPrincipal)User);
-//                _inspectorId = user.Id;
-//                temp.Inspector_Id = _inspectorId;
-
                 if (temp.NotAvailableFrom < temp.NotAvailableTo)
                 {
                     if (temp.Id == 0)
