@@ -20,10 +20,9 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="1" Content="Toevoegen" Margin="5px 10px" Command="{Binding NavigateToCustomerAddCommand}" />
-            <Button Grid.Column="2" Content="Wijzigen / Extra informatie" Margin="5px 10px" Command="{Binding NavigateToCustomerUpdateCommand}" />
+            <Button Grid.Column="1" Content="Toevoegen" Margin="5px 5px" Command="{Binding NavigateToCustomerAddCommand}" />
+            <Button Grid.Column="2" Content="Wijzigen / Extra informatie" Margin="5px 5px" Command="{Binding NavigateToCustomerUpdateCommand}" />
         </Grid>
-
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -35,11 +34,11 @@
             <Button x:Name="btnSearch" Content="Zoeken" Grid.Column="2" Command="{Binding SelectedSearch}"/>
             <Button x:Name="btnDeleteSearch" Content="Zoekveld wissen" Grid.Column="3" Command="{Binding DeleteFilterCommand}"/>
         </Grid>
-
-        <DataGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}" 
+                      GridLinesVisibility="Horizontal" HeadersVisibility="Column" VerticalAlignment="Stretch">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="230" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
                 <DataGridTextColumn Header="Gemeente" Binding="{Binding Municipality}" Width="*" />
                 <DataGridTextColumn Header="Voornaam Contact" Binding="{Binding FirstName}" Width="*" />
                 <DataGridTextColumn Header="Achternaam Contact" Binding="{Binding LastName}" Width="*" />

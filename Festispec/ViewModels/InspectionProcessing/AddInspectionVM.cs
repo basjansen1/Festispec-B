@@ -1,7 +1,7 @@
 ﻿using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.CommandWpf;
 using Festispec.ViewModels.CustomerCRUD;
 using System;
 using System.Collections.Generic;
@@ -10,12 +10,13 @@ using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using Festispec.NavigationService;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.Customer;
+using Festispec.ViewModels.InspectionProcessing;
 
 namespace Festispec.ViewModels.Inspection
 
@@ -85,7 +86,7 @@ namespace Festispec.ViewModels.Inspection
         #endregion
 
         #region constructor and methods
-        public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory, IInspectionRepositoryFactory inspectionRepositoryFactory, IInspectionViewModelFactory inspectionViewModelFactory, INavigationService navigationService, IGeoRepository GeoRepository)
+        public AddInspectionVM(InspectionListVM inspectionList, ICustomerRepositoryFactory customerRepositoryFactory, IInspectionRepositoryFactory inspectionRepositoryFactory, IInspectionViewModelFactory inspectionViewModelFactory, INavigationService navigationService, IGeoRepository GeoRepository, ICustomerViewModelFactory customerViewModelFactory)
         {
             InspectionList = inspectionList;
             _navigationService = navigationService;
@@ -98,7 +99,7 @@ namespace Festispec.ViewModels.Inspection
             _geoRepository = GeoRepository;
 
             NewInspection.Location = DbGeography.PointFromText("POINT(50 5)", 4326);
-            //CustomerList = new List<CustomerVM>();
+            CustomerList = new List<CustomerViewModel>();
             CustomerNames = new List<string>();
 
             AddInspectionCommand = new RelayCommand(AddInspection);
@@ -107,13 +108,13 @@ namespace Festispec.ViewModels.Inspection
 
             using (var customerRepository = customerRepositoryFactory.CreateRepository())
             {
-                //customerRepository.Get().ToList().ForEach(c => CustomerList.Add(new CustomerVM(c)));
+                customerRepository.Get().ToList().ForEach(c => CustomerList.Add(customerViewModelFactory.CreateViewModel(c)));
             }
 
             CustomerList.ForEach(c => CustomerNames.Add(c.Name));
 
             if (CustomerList.Any())
-                //NewInspection.Customer = CustomerList.ElementAt(0).ToModel();
+                NewInspection.Customer = CustomerList.ElementAt(0).Entity;
 
             _fromDate = DateTime.Now;
             _toDate = DateTime.Now;
