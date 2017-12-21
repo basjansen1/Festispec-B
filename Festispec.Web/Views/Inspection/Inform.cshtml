@@ -7,7 +7,7 @@
         @foreach (var tmp in Model)
         {
         <div class="list-group-item">
-            <h1>@tmp.Name</h1>
+            <a href="/Inspection/Inspect/@tmp.Id/@tmp.Planning.Date.ToString("yyyy-MM-dd")"><h1>@tmp.Name</h1></a>
             <h6>@tmp.Website</h6>
             <h7>@tmp.Street</h7>
             <H7>@tmp.HouseNumber</H7>

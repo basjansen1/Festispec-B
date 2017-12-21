@@ -11,6 +11,7 @@ using Festispec.Web.Models;
 
 namespace Festispec.Web.Controllers
 {
+    [Authorize]
     public class InspectionController : Controller
     {
         private readonly IPlanningRepositoryFactory _planningRepositoryFactory;

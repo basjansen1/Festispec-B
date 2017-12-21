@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Festispec.Web.Controllers
 {
+    [Authorize]
     public class ScheduleController : Controller
     {
         private readonly IInspectorScheduleRepositoryFactory _inspectorScheduleRepositoryFactory;

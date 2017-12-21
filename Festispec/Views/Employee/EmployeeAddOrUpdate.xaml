@@ -6,70 +6,95 @@
         mc:Ignorable="d"
         Title="EmployeeAddOrUpdate"
         DataContext="{Binding Source={StaticResource Locator}, Path=EmployeeAddOrUpdate}">
-    <StackPanel>
-        <Label>Gebruikersnaam</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.Username}" />
-        <Label>Voornaam</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.FirstName}" />
-        <Label>Achternaam</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.LastName}" />
-        <Label>Email</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.Email}" />
-        <Label>IBAN</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.IBAN}" />
-        <Label>Manager</Label>
-        <ComboBox ItemsSource="{Binding Managers}"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <Label Grid.Column="0" Grid.Row="0">Gebruikersnaam</Label>
+            <Label Grid.Column="0" Grid.Row="1">Voornaam</Label>
+            <Label Grid.Column="0" Grid.Row="2">Achternaam</Label>
+            <Label Grid.Column="0" Grid.Row="3">Email</Label>
+            <Label Grid.Column="0" Grid.Row="4">IBAN</Label>
+            <Label Grid.Column="0" Grid.Row="5">Manager</Label>
+            <Label Grid.Column="0" Grid.Row="6">Password</Label>
+            <Label Grid.Column="0" Grid.Row="7">Functie</Label>
+            <Label Grid.Column="0" Grid.Row="8">Telefoonnummer</Label>
+
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=EntityViewModel.Username}" />
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=EntityViewModel.FirstName}" />
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=EntityViewModel.LastName}" />
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=EntityViewModel.Email}" />
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=EntityViewModel.IBAN}" />
+            <ComboBox ItemsSource="{Binding Managers}"
                   DisplayMemberPath="Username"
                   SelectedValuePath="Id"
-                  SelectedValue="{Binding EntityViewModel.Manager_Id}"></ComboBox>
-        <Label>Password</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.Password}" />
-        <Label>Functie</Label>
-        <ComboBox ItemsSource="{Binding Path=Roles}" 
-            DisplayMemberPath="Role" SelectedValuePath="Role"
-            SelectedValue="{Binding Path=EntityViewModel.Role_Role}" />
-        <Label>Telefoonnummer</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.Telephone}" />
-        <Label>In dienst genomen op</Label>
-        <DatePicker SelectedDate="{Binding Path=EntityViewModel.HiredFrom}"/>
-        <Label>Uit dienst gegaan</Label>
-        <DatePicker SelectedDate="{Binding Path=EntityViewModel.HiredTo}"/>
-        
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto" />
-            </Grid.ColumnDefinitions>
+                  SelectedValue="{Binding EntityViewModel.Manager_Id}"
+                  Grid.Column="1" Grid.Row="5"/>
+            <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=EntityViewModel.Password}" />
+            <ComboBox ItemsSource="{Binding Path=Roles}" 
+                  DisplayMemberPath="Role" SelectedValuePath="Role"
+                  SelectedValue="{Binding Path=EntityViewModel.Role_Role}" 
+                  Grid.Column="1" Grid.Row="7"/>
+            <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding Path=EntityViewModel.Telephone}" />
 
-            <StackPanel Grid.Column="0">
-                <Label>Postcode</Label>
-                <TextBox Text="{Binding Path=EntityViewModel.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="6" />
-            </StackPanel>
-
-            <StackPanel Grid.Column="1">
-                <Label>Huisnummer</Label>
-                <TextBox Text="{Binding Path=EntityViewModel.HouseNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            </StackPanel>
+            <Label Grid.Column="2" Grid.Row="0">In dienst genomen op</Label>
+            <Label Grid.Column="2" Grid.Row="1">Uit dienst gegaan</Label>
+            <Label Grid.Column="2" Grid.Row="2">Postcode</Label>
+            <Label Grid.Column="2" Grid.Row="3">Huisnummer</Label>
+            <Label Grid.Column="2" Grid.Row="4">Straat</Label>
+            <Label Grid.Column="2" Grid.Row="5">Stad</Label>
+            <Label Grid.Column="2" Grid.Row="6">Gemeente</Label>
+            <Label Grid.Column="2" Grid.Row="7">Land</Label>
             
-            <Button Grid.Column="2" Command="{Binding SearchAddressCommand}">Zoek adres</Button>
-        </Grid>
+            <DatePicker Grid.Column="3" Grid.Row="0" SelectedDate="{Binding Path=EntityViewModel.HiredFrom}"/>
+            <DatePicker Grid.Column="3" Grid.Row="1" SelectedDate="{Binding Path=EntityViewModel.HiredTo}"/>
+            <TextBox Grid.Column="3" Grid.Row="2" Text="{Binding Path=EntityViewModel.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="6" />
 
-        <Label>Straat</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.Street}" IsEnabled="false" />
-        <Label>Stad</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.City}" IsEnabled="false" />
-        <Label>Gemeente</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.Municipality}" IsEnabled="false" />
-        <Label>Land</Label>
-        <TextBox Text="{Binding Path=EntityViewModel.Country}" IsEnabled="false" />
-        <Grid Height="50">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Annuleer" Margin="5px 10px" Command="{Binding NavigateBackCommand}" />
-            <Button Grid.Column="1"  Content="Opslaan" Margin="5px 10px" Command="{Binding SaveEntityCommand}"/>
+            <Grid Grid.Column="3" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Text="{Binding Path=EntityViewModel.HouseNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Grid.Column="1" Command="{Binding SearchAddressCommand}">Zoek adres</Button>
+            </Grid>
+
+            <TextBox Grid.Column="3" Grid.Row="4" Text="{Binding Path=EntityViewModel.Street}" IsEnabled="false" />
+            <TextBox Grid.Column="3" Grid.Row="5" Text="{Binding Path=EntityViewModel.City}" IsEnabled="false" />
+            <TextBox Grid.Column="3" Grid.Row="6" Text="{Binding Path=EntityViewModel.Municipality}" IsEnabled="false" />
+            <TextBox Grid.Column="3" Grid.Row="7" Text="{Binding Path=EntityViewModel.Country}" IsEnabled="false" />
         </Grid>
-    </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Annuleer" Margin="5px 5px" Command="{Binding NavigateBackCommand}" />
+            <Button Grid.Column="2"  Content="Opslaan" Margin="5px 5px" Command="{Binding SaveEntityCommand}"/>
+        </Grid>
+    </Grid>
 </Page>
