@@ -5,6 +5,7 @@ using Festispec.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -46,7 +47,10 @@ namespace Festispec.Web.Controllers
             ViewBag.Message = "Beschikbaarheid toevoegen";
 
             if (!id.HasValue) {
-                return View(new Schedule());
+                var user = ((IInspectorPrincipal)User);
+                _inspectorId = user.Id;
+
+                return View(new Schedule {Inspector_Id = _inspectorId});
             }
             
             using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
@@ -61,11 +65,16 @@ namespace Festispec.Web.Controllers
         [HttpPost]
         public ActionResult Create(Schedule temp)
         {
+            if (!ModelState.IsValid)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+
             using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
             {
-                var user = ((IInspectorPrincipal)User);
-                _inspectorId = user.Id;
-                temp.Inspector_Id = _inspectorId;
+//                var user = ((IInspectorPrincipal)User);
+//                _inspectorId = user.Id;
+//                temp.Inspector_Id = _inspectorId;
 
                 if (temp.NotAvailableFrom < temp.NotAvailableTo)
                 {
