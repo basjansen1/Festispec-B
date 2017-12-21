@@ -31,24 +31,45 @@
                 <ColumnDefinition Width="auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Row="1" Grid.Column="0">
-                <StackPanel Orientation="Horizontal">
-                    <TextBox x:Name="txtSearch" TextWrapping="Wrap" Text="{Binding SearchInput}" Opacity="0.7" Grid.Column="1" Width="150"/>
-                    <Label>Datum</Label>
-                    <ComboBox ItemsSource="{Binding Path=Inspection.Dates, Mode=OneWay}" Width="122"
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBox x:Name="txtSearch" TextWrapping="Wrap" Text="{Binding SearchInput}" Opacity="0.7" Grid.Column="0" Grid.Row="1" Width="150"/>
+                        <Label Grid.Column="1" Grid.Row="1">Datum</Label>
+                        <ComboBox ItemsSource="{Binding Path=Inspection.Dates, Mode=OneWay}" Width="150"
                                   SelectedIndex="0"
-                                  SelectedValue="{Binding Path=SearchDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 5 0">
+                                  SelectedValue="{Binding Path=SearchDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="1">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource AmericanDateConverter}}"></TextBlock>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                    <Button Content="Zoek" Command="{Binding SearchPlanningCommand}"/>
-                    <Button x:Name="btnDeleteSearch" Content="Zoekveld wissen" Grid.Column="3" Command="{Binding DeleteFilterCommand}"/>
-                </StackPanel>
+                    </Grid>
+                    <Button Content="Zoek" Margin="5px 5px" Grid.Column="1" Command="{Binding SearchPlanningCommand}"/>
+                    <Button x:Name="btnDeleteSearch" Margin="5px 5px" Content="Zoekveld wissen" Grid.Column="2" Command="{Binding DeleteFilterCommand}"/>
+                </Grid>
                 
-                <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedPlanning}" ItemsSource="{Binding Plannings}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
+                <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedPlanning}" ItemsSource="{Binding Plannings}" GridLinesVisibility="Horizontal" HeadersVisibility="Column"
+                          Grid.Row="1">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Inspecteur" Binding="{Binding Inspector.FullName}" Width="*" />
                         <DataGridTextColumn Header="Datum" Binding="{Binding Date, Converter={StaticResource AmericanDateConverter}}" Width="*" />
@@ -56,15 +77,22 @@
                         <DataGridTextColumn Header="Tijd tot" Binding="{Binding TimeTo}" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
-            </StackPanel>
+            </Grid>
 
             <Border Grid.Row="1" Grid.Column="1" Padding="10">
-                <StackPanel>
-                    <Button Content="Planning toevoegen" Command="{Binding NavigateToAddPlanningCommand}" Margin="0 0 0 10"></Button>
-                    <Button Content="Planning wijzigen" Command="{Binding NavigateToAddOrUpdatePlanningCommand}" Margin="0 0 0 10"></Button>
-                    <Button Content="Planning verwijderen" Command="{Binding PlanningDeleteCommand}" Margin="0 0 0 10"></Button>
-                    <Button Content="Terug" Command="{Binding NavigateBackCommand}" Margin="0 0 0 10"></Button>
-                </StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button Content="Planning toevoegen" Command="{Binding NavigateToAddPlanningCommand}" Margin="5px 5px" Grid.Row="0"/>
+                    <Button Content="Planning wijzigen" Command="{Binding NavigateToAddOrUpdatePlanningCommand}" Margin="5px 5px" Grid.Row="1"/>
+                    <Button Content="Planning verwijderen" Command="{Binding PlanningDeleteCommand}" Margin="5px 5px" Grid.Row="2"/>
+                    <Button Content="Terug" Command="{Binding NavigateBackCommand}" Margin="5px 5px" Grid.Row="3"/>
+                </Grid>
             </Border>
         </Grid>
     </Grid>
