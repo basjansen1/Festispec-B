@@ -181,7 +181,7 @@ INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (
 INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (9, 14)
 INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (10, 14)
 INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (11, 14)
-INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (12, 14
+INSERT INTO [dbo].[InspectionQuestion] ([Question_Id], [Inspection_Id]) VALUES (12, 14)
 
 INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (20, 1)
 INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (20, 2)
