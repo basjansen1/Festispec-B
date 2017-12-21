@@ -43,7 +43,7 @@ namespace Festispec.Web.Controllers
                 var temp = InspectionRepository.Get().Where(  Inspection => Inspection.Inspector_Id == id);
                 foreach (Planning i in temp)
                 {
-                    if (i.Inspection.End >= DateTime.Now && i.Inspection.Status_Status != "Declined")
+                    if (i.Inspection.End >= DateTime.Now.Date && i.Inspection.Status_Status != "Declined")
                     {
                         _Inspections.Add(new InspectionViewModel(i));
                     }
