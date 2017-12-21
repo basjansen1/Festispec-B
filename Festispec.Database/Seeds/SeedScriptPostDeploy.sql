@@ -63,7 +63,7 @@ INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'Afgewezen')
 INSERT INTO [dbo].[InspectionStatus] ([Status]) VALUES (N'In afwachting')
 
 INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Paaspop', N'www.paaspop.nl', N'2016-09-17 00:00:00', N'2016-09-20 00:00:00', 12, 11, N'Geaccepteerd') -- Paaspop
-INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Festyland', N'www.festyland.nl', N'2018-01-18 03:14:07', N'2018-01-21 03:14:07', 14, 13, N'In afwachting') -- Festyland
+INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Festyland', N'www.festyland.nl', N'2016-01-18 03:14:07', N'2016-01-21 03:14:07', 14, 13, N'In afwachting') -- Festyland
 INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Id], [Customer_Id], [Status_Status]) VALUES (N'Mysteryland', N'www.mysteryland.nl', N'2038-01-19 03:14:08', N'2038-01-19 03:14:08', 16, 15, N'Afgewezen') -- Mysteryland
 INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Status_Status], [Customer_Id], [Id]) VALUES (N'Festispec Winter 2017', N'www.festispec.nl', N'2017-12-21 00:00:00', N'2017-12-21 00:00:00', N'Geaccepteerd', 19, 20) -- Festispec
 
