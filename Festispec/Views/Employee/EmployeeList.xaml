@@ -31,9 +31,9 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="txtSearch" TextWrapping="Wrap" Text="{Binding SearchInput}" Opacity="0.7" Grid.Column="1" Width="150"/>
-            <Button x:Name="btnSearch" Content="Zoeken" Grid.Column="2" Command="{Binding SearchCommand}"/>
-            <Button x:Name="btnDeleteSearch" Content="Zoekveld wissen" Grid.Column="3" Command="{Binding DeleteFilterCommand}"/>
+            <TextBox x:Name="txtSearch" TextWrapping="Wrap" Margin="5px 5px" Text="{Binding SearchInput}" Opacity="0.7" Grid.Column="1" Width="150"/>
+            <Button x:Name="btnSearch" Content="Zoeken" Margin="5px 5px" Grid.Column="2" Command="{Binding SearchCommand}"/>
+            <Button x:Name="btnDeleteSearch" Content="Zoekveld wissen" Margin="5px 5px" Grid.Column="3" Command="{Binding DeleteFilterCommand}"/>
         </Grid>
         <DataGrid Grid.Row="2" Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedEmployee}" ItemsSource="{Binding Employees}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
             <DataGrid.Columns>
