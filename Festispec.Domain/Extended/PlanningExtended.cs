@@ -15,8 +15,6 @@ namespace Festispec.Domain
             public Inspection Inspection { get; set; }
             [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
             public Inspector Inspector { get; set; }
-            [Key]
-            public int Id { get; set; }
         }
     }
 }
