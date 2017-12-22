@@ -73,17 +73,20 @@ namespace Festispec.Web.Controllers
 
             using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
             {
-                if (temp.NotAvailableFrom < temp.NotAvailableTo)
+                if (!ModelState.IsValid)
                 {
-                    if (temp.Id == 0)
+                    if (temp.NotAvailableFrom < temp.NotAvailableTo)
                     {
-                        scheduleRepository.Add(temp);
+                        if (temp.Id == 0)
+                        {
+                            scheduleRepository.Add(temp);
+                        }
+                        else
+                        {
+                            scheduleRepository.Update(temp, temp.Id);
+                        }
                     }
-                    else
-                    {
-                        scheduleRepository.Update(temp, temp.Id);
-                    }
-                } 
+                }
 
                 return RedirectToAction("InspectorSchedule");
             }

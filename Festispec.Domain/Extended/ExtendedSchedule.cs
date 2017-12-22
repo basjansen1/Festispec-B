@@ -17,11 +17,13 @@ namespace Festispec.Domain
             public DateTime NotAvailableTo { get; set; }
 
             [Required]
-            [DataType(DataType.DateTime)]
+            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
             public DateTime NotAvailableDateFrom { get; set; }
 
             [Required]
-            [DataType(DataType.DateTime)]
+            [DataType(DataType.Date)]
+            [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
             public DateTime NotAvailableDateTo { get; set; }
         }
     }
