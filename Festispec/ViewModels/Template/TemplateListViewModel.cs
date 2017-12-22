@@ -97,7 +97,8 @@ namespace Festispec.ViewModels.Template
 
             foreach (var i in TemplateList)
             {
-                if (i.Name.ToLower().Contains(SearchInput.ToLower()) || i.Description.ToLower().Contains(SearchInput.ToLower()))
+                if (i.Name != null && i.Name.ToLower().Contains(SearchInput.ToLower()) || 
+                    i.Description != null && i.Description.ToLower().Contains(SearchInput.ToLower()))
                 {
                     Templates.Add(i);
                 }

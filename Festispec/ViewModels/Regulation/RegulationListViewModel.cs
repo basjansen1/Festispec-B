@@ -106,9 +106,9 @@ namespace Festispec.ViewModels.Regulation
 
             foreach (var i in _regulationList)
             {
-                if (i.Name.ToLower().Contains(SearchInput.ToLower()) ||
+                if (i.Name != null && i.Name.ToLower().Contains(SearchInput.ToLower()) ||
                     i.Municipality != null && i.Municipality.ToLower().Contains(SearchInput.ToLower()) ||
-                    i.Description.ToLower().Contains(SearchInput.ToLower()))
+                    i.Description != null && i.Description.ToLower().Contains(SearchInput.ToLower()))
                 {
                     Regulations.Add(i);
                 }

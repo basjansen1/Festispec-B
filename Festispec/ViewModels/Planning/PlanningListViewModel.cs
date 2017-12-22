@@ -118,10 +118,9 @@ namespace Festispec.ViewModels.Planning
 
             foreach (var i in _plannngList)
             {
-                if (i.Inspector.Username.ToLower().Contains(SearchInput.ToLower()) || 
-                    i.Inspector.LastName.ToLower().Contains(SearchInput.ToLower()) &&
-                    i.Date.Equals(SearchDate)
-                    ) {
+                if (i.Inspector.Username != null && i.Inspector.Username.ToLower().Contains(SearchInput.ToLower()) ||
+                    i.Inspector.LastName != null && i.Inspector.LastName.ToLower().Contains(SearchInput.ToLower()))
+                {
                     Plannings.Add(i);
                 }
             }
