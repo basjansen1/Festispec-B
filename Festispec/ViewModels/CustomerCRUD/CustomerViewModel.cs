@@ -150,5 +150,17 @@ namespace Festispec.ViewModels.Customer
             RaisePropertyChanged();
             return true;
         }
+
+        public override void MapValues(Domain.Customer from, Domain.Customer to)
+        {
+            // Call map values on parent model
+            MapValues(from, to);
+
+            // Map values
+            to.Inspections = from.Inspections;
+            to.KVK = from.KVK;
+            to.Name = from.Name;
+            to.Notes = from.Notes;
+        }
     }
 }

@@ -113,5 +113,20 @@ namespace Festispec.ViewModels.Address
                 RaisePropertyChanged();
             }
         }
+
+        public void MapValues(Domain.Address from, Domain.Address to)
+        {
+            // Map values
+            to.Id = from.Id;
+            to.City = from.City;
+            to.Country = from.Country;
+            to.HouseNumber = from.HouseNumber;
+            to.Lat = from.Lat;
+            to.Location = from.Location;
+            to.Long = from.Long;
+            to.Municipality = from.Municipality;
+            to.PostalCode = from.PostalCode;
+            to.Street = from.Street;
+        }
     }
 }

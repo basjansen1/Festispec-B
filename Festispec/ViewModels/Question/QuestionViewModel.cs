@@ -141,5 +141,18 @@ namespace Festispec.ViewModels.Question
                 return false;
             }
         }
+
+        public override void MapValues(Domain.Question @from, Domain.Question to)
+        {
+            // Map values
+            to.Id = from.Id;
+            to.Description = from.Description;
+            to.InspectionQuestion = from.InspectionQuestion;
+            to.IsDeleted = from.IsDeleted;
+            to.Metadata = from.Metadata;
+            to.Name = from.Name;
+            to.QuestionType_Type = from.QuestionType_Type;
+            to.TemplateQuestion = from.TemplateQuestion;
+        }
     }
 }

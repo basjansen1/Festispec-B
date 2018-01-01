@@ -112,5 +112,14 @@ namespace Festispec.ViewModels.Template
 
             return true;
         }
+
+        public override void MapValues(Domain.Template @from, Domain.Template to)
+        {
+            // Map values
+            to.Id = from.Id;
+            to.Description = from.Description;
+            to.Name = from.Name;
+            to.TemplateQuestion = from.TemplateQuestion;
+        }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Festispec.Domain
 {
-    public partial class Contact
+    public partial class Contact : IContact
     {
         [NotMapped]
         public string FullName => $"{FirstName} {LastName}";

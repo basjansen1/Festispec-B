@@ -185,5 +185,22 @@ namespace Festispec.ViewModels.Employee
 
             return true;
         }
+
+        public override void MapValues(Domain.Employee @from, Domain.Employee to)
+        {
+            // Call map values on parent model
+            MapValues(from, to);
+
+            // Map values
+            to.Employees = from.Employees;
+            to.HiredFrom = from.HiredFrom;
+            to.HiredTo = from.HiredTo;
+            to.Manager = from.Manager;
+            to.Manager_Id = from.Manager_Id;
+            to.Password = from.Password;
+            to.Role = from.Role;
+            to.Role_Role = from.Role_Role;
+            to.Username = from.Username;
+        }
     }
 }
