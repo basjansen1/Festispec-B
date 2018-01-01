@@ -137,10 +137,18 @@ namespace Festispec.ViewModels.Inspector
             // Map values
             to.Id = from.Id;
             to.Inspector_Id = from.Inspector_Id;
-            to.Inspector = from.Inspector;
             to.IsDeleted = from.IsDeleted;
             to.NotAvailableFrom = from.NotAvailableFrom;
             to.NotAvailableTo = from.NotAvailableTo;
+
+            try
+            {
+                to.Inspector = from.Inspector;
+            }
+            catch (InvalidOperationException)
+            {
+                //
+            }
         }
     }
 }

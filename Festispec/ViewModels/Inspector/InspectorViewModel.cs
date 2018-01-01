@@ -258,6 +258,14 @@ namespace Festispec.ViewModels.Inspector
             MapValues(from, to);
 
             // Map values
+            to.HiredFrom = from.HiredFrom;
+            to.HiredTo = from.HiredTo;
+            to.Manager = from.Manager;
+            to.Manager_Id = from.Manager_Id;
+            to.Password = from.Password;
+            to.Role = from.Role;
+            to.Role_Role = from.Role_Role;
+            to.Username = from.Username;
             to.CertificationFrom = from.CertificationFrom;
             to.CertificationTo = from.CertificationTo;
             to.Planning = from.Planning;

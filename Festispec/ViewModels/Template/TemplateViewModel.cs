@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
@@ -119,7 +120,15 @@ namespace Festispec.ViewModels.Template
             to.Id = from.Id;
             to.Description = from.Description;
             to.Name = from.Name;
-            to.TemplateQuestion = from.TemplateQuestion;
+
+            try
+            {
+                to.TemplateQuestion = from.TemplateQuestion;
+            }
+            catch (InvalidOperationException)
+            {
+                //
+            }
         }
     }
 }

@@ -147,12 +147,20 @@ namespace Festispec.ViewModels.Question
             // Map values
             to.Id = from.Id;
             to.Description = from.Description;
-            to.InspectionQuestion = from.InspectionQuestion;
             to.IsDeleted = from.IsDeleted;
             to.Metadata = from.Metadata;
             to.Name = from.Name;
             to.QuestionType_Type = from.QuestionType_Type;
-            to.TemplateQuestion = from.TemplateQuestion;
+
+            try
+            {
+                to.InspectionQuestion = from.InspectionQuestion;
+                to.TemplateQuestion = from.TemplateQuestion;
+            }
+            catch (InvalidOperationException)
+            {
+                //
+            }
         }
     }
 }
