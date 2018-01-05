@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Festispec.State;
 using System.Diagnostics;
+using System.Linq;
 using Festispec.Domain.Encryption;
 
 namespace Festispec.ViewModels
@@ -20,8 +21,15 @@ namespace Festispec.ViewModels
         private readonly IState _state;
 
         public Domain.Employee Employee { get; set; }
-        public LoginViewModel(ILoginRepositoryFactory iLoginRepositoryFactory, IState state)
+        public LoginViewModel(ILoginRepositoryFactory iLoginRepositoryFactory, IState state, IRegulationRepositoryFactory repositoryFactory)
         {
+            using (var repository = repositoryFactory.CreateRepository())
+            {
+                var entities = repository.Get().ToList();
+
+                var a = "";
+            }
+
             _iLoginRepositoryFactory = iLoginRepositoryFactory;
             _state = state;
 
