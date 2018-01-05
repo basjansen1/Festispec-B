@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using System.Data.SqlClient;
@@ -32,13 +33,18 @@ namespace Festispec.Domain.Repository.Factory
         /// <returns> A new instance of the DbContext. </returns>
         protected DbContext GetDbContext()
         {
+            DbContext dbContext;
             if (IsOnline)
             {
-                return new FestispecContainer();
+                dbContext = new FestispecContainer();
             } else
             {
-                return new LocalContainer();
+                dbContext = new LocalContainer();
             }
+
+            dbContext.Database.Log = Console.Write;
+
+            return dbContext;
         }
     }
 }
