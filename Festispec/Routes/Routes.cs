@@ -240,5 +240,12 @@ namespace Festispec.Routes
             Roles = new[] { "Manager", "Medewerker" }
         };
 
+        public static Route MapOverview = new Route()
+        {
+            Key = "MapOverview",
+            PageType = new Uri("../Views/Map/MapOverview.xaml", UriKind.Relative),
+            Roles = new[] { "Manager", "Medewerker" }
+        };
+
     }
 }

@@ -24,6 +24,11 @@ namespace Festispec.Helper
             return CreateMarkerWithLabel(lon, lat, text, Color.Yellow);
         }
 
+        public static ILayer CreateCustomerMarkerWithLabel(double lon, double lat, string text)
+        {
+            return CreateMarkerWithLabel(lon, lat, text, Color.Green);
+        }
+
         public static ILayer CreateMarkerWithLabel(double lon, double lat, string text, Color color)
         {
             // Prepare marker
