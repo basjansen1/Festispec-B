@@ -53,11 +53,14 @@ namespace Festispec.ViewModels.Inspection
                 EntityViewModel.SelectedQuestion = null;
                 NavigationService.NavigateTo(Routes.Routes.QuestionAdd, EntityViewModel);
             }, () => EntityViewModel != null);
+
             QuestionDeleteCommand = new RelayCommand(() =>
             {
                 EntityViewModel.SelectedQuestion.IsDeleted = true;
                 EntityViewModel = EntityViewModel;
+                EntityViewModel.DeleteQuestion(EntityViewModel.SelectedQuestion); //
             }, () => EntityViewModel.SelectedQuestion != null && !EntityViewModel.SelectedQuestion.IsDeleted);
+
             TemplateImportCommand = new RelayCommand(() => {
                 var result = MessageBox.Show("Weet je zeker dat je een template in wilt laden? Dit voegt een vragenlijst aan de huidige vragen toe.", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Question);
 

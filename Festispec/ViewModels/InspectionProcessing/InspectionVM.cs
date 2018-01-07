@@ -263,6 +263,11 @@ namespace Festispec.ViewModels.Inspection
             Questions.Add(question);
         }
 
+        public void DeleteQuestion(QuestionViewModel question) //
+        {
+            Questions.Remove(question);
+        }
+
         public override bool Save()
         {
             try
