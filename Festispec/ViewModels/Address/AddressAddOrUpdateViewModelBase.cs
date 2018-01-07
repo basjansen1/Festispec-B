@@ -66,7 +66,7 @@ namespace Festispec.ViewModels.Address
                             break;
                         default:
                             // TODO: Generic error message instead of exception message: MessageBox.Show("Er is iets fout gegaan");
-                            MessageBox.Show($"ArgumentNullException({exception.ParamName})");
+                            MessageBox.Show("Er is iets fout gegaan, zorg dat al de velden correct zijn ingevuld.");
                             break;
                     }
                 }
