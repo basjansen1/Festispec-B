@@ -22,6 +22,9 @@ namespace Festispec.Views
         public InspectionList()
         {
             InitializeComponent();
+
+            // Initialize the map in partial class
+            InitializeMap();
         }
     }
 }
