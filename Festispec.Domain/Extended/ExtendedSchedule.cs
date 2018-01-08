@@ -17,12 +17,12 @@ namespace Festispec.Domain
             public DateTime NotAvailableTo { get; set; }
 
             [Required]
-            [DataType(DataType.Date)]
+            [DataType(DataType.Date, ErrorMessage = "Datum groter dan x-x-1990")]
             [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
             public DateTime NotAvailableDateFrom { get; set; }
 
             [Required]
-            [DataType(DataType.Date)]
+            [DataType(DataType.Date, ErrorMessage = "Datum groter dan x-x-1990")]
             [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
             public DateTime NotAvailableDateTo { get; set; }
         }

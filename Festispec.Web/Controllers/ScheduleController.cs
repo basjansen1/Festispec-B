@@ -64,11 +64,11 @@ namespace Festispec.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Schedule temp)
+        public ActionResult AddAvailability(Schedule temp)
         {
             if (!ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+                return View(temp);
             }
 
             using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
