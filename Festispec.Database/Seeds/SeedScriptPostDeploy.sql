@@ -19,3 +19,4 @@ INSERT INTO [dbo].[QuestionType] ([Type]) VALUES (N'Getal')
 INSERT INTO [dbo].[QuestionType] ([Type]) VALUES (N'Reeks')
 INSERT INTO [dbo].[QuestionType] ([Type]) VALUES (N'Beeld')
 INSERT INTO [dbo].[QuestionType] ([Type]) VALUES (N'Tabel')
+
