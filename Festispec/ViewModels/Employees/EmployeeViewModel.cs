@@ -120,7 +120,7 @@ namespace Festispec.ViewModels.Employee
             get { return Entity.Role_Role; }
             set
             {
-                Entity.Telephone = value;
+                Entity.Role_Role = value;
                 RaisePropertyChanged();
             }
         }
