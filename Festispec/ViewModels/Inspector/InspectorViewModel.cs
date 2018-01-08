@@ -10,11 +10,12 @@ using System.Collections.Generic;
 using Festispec.ViewModels.Factory.Interface;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using Festispec.ViewModels.Contact;
 
 namespace Festispec.ViewModels.Inspector
 {
     public class InspectorViewModel :
-        AddressViewModelBase<IInspectorRepositoryFactory, IInspectorRepository, Domain.Inspector>
+        ContactViewModelBase<IInspectorRepositoryFactory, IInspectorRepository, Domain.Inspector>
     {
         private InspectorScheduleViewModel _selectedSchedule;
         public InspectorViewModel(IInspectorRepositoryFactory repositoryFactory, IInspectorScheduleViewModelFactory inspectorScheduleViewModelFactory) : base(repositoryFactory)
@@ -251,5 +252,24 @@ namespace Festispec.ViewModels.Inspector
             return true;
         }
 
+        public override void MapValues(Domain.Inspector @from, Domain.Inspector to)
+        {
+            // Call map values on parent model
+            MapValues(from, to);
+
+            // Map values
+            to.HiredFrom = from.HiredFrom;
+            to.HiredTo = from.HiredTo;
+            to.Manager = from.Manager;
+            to.Manager_Id = from.Manager_Id;
+            to.Password = from.Password;
+            to.Role = from.Role;
+            to.Role_Role = from.Role_Role;
+            to.Username = from.Username;
+            to.CertificationFrom = from.CertificationFrom;
+            to.CertificationTo = from.CertificationTo;
+            to.Planning = from.Planning;
+            to.Schedule = from.Schedule;
+        }
     }
 }
