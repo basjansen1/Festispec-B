@@ -134,10 +134,9 @@ namespace Festispec.ViewModels.Question
                 MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
                 return false;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                // TODO: Generic error message instead of exception message: MessageBox.Show("Er is iets fout gegaan");
-                MessageBox.Show(exception.Message);
+                MessageBox.Show("Er is iets fout gegaan. Controleer of alle velden correct zijn ingevuld.");
                 return false;
             }
         }

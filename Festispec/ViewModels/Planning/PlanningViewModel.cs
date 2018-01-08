@@ -150,6 +150,11 @@ namespace Festispec.ViewModels.Planning
                 MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
                 return false;
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Er is iets fout gegaan. Controleer of alle velden correct zijn ingevuld.");
+                return false;
+            }
             return true;
         }
     }

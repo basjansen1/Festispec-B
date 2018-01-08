@@ -24,7 +24,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Grid.Row="0">Titel</Label>
+            <Label Grid.Column="0" Grid.Row="0">Titel*</Label>
             <Label Grid.Column="0" Grid.Row="1">Beschrijving</Label>
             <Label Grid.Column="0" Grid.Row="2">Gemeente</Label>
 

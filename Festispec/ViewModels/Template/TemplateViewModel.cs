@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
@@ -107,6 +108,11 @@ namespace Festispec.ViewModels.Template
                     select ve.PropertyName).ToList();
                 var joined = string.Join(", ", errorList.Select(x => x));
                 MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                return false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Er is iets fout gegaan. Controleer of alle velden correct zijn ingevuld.");
                 return false;
             }
 

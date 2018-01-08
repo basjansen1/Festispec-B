@@ -8,10 +8,10 @@
       DataContext="{Binding Source={StaticResource Locator}, Path=InspectorScheduleAddOrUpdate}">
 
     <StackPanel>
-        <Label>Niet beschikbaar:</Label>
-        <Label>- vanaf:</Label>
+        <Label>Niet beschikbaar:*</Label>
+        <Label>- vanaf:*</Label>
         <DatePicker SelectedDate="{Binding Path=EntityViewModel.NotAvailableFrom}"/>
-        <Label>- tot:</Label>
+        <Label>- tot:*</Label>
         <DatePicker SelectedDate="{Binding Path=EntityViewModel.NotAvailableTo}"/>
         <Grid Height="50">
             <Grid.ColumnDefinitions>
