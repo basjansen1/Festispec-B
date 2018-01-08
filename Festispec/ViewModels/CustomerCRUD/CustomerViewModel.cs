@@ -106,6 +106,7 @@ namespace Festispec.ViewModels.Customer
                 }
         }
 
+
         public ICollection<Note> Notes
         {
             get { return Entity.Notes; }

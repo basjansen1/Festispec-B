@@ -50,7 +50,19 @@ namespace Festispec.ViewModels.CustomerCRUD
         private readonly List<CustomerViewModel> _customerList;
         public ObservableCollection<CustomerViewModel> Customers { get; private set; }
 
-        public CustomerViewModel SelectedCustomer { get; set; }
+        public CustomerViewModel _selectedCustomer;
+        public CustomerViewModel SelectedCustomer
+        {
+            get
+            {
+                return _selectedCustomer;
+            }
+            set
+            {
+                _selectedCustomer = value;
+                RaisePropertyChanged("SelectedCustomer");
+            }
+        }
 
         public string SearchInput
         {
