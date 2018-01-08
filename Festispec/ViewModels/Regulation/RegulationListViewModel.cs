@@ -16,7 +16,7 @@ namespace Festispec.ViewModels.Regulation
         private readonly INavigationService _navigationService;
         private readonly IRegulationRepositoryFactory _regulationRepositoryFactory;
         private readonly IRegulationViewModelFactory _regulationViewModelFactory;
-        private readonly List<RegulationViewModel> _regulationList;
+
         public RegulationListViewModel(INavigationService navigationService,
             IRegulationRepositoryFactory regulationRepositoryFactory,
             IRegulationViewModelFactory regulationViewModelFactory) : base(navigationService)
@@ -28,9 +28,8 @@ namespace Festispec.ViewModels.Regulation
             RegisterCommands();
             LoadRegulations();
 
-            
+            RegulationList = new List<RegulationViewModel>();
             NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
-            _regulationList = new List<RegulationViewModel>();
         }
         public ICommand NavigateToRegulationAddCommand { get; set; }
         public ICommand NavigateToRegulationUpdateCommand { get; set; }
@@ -40,6 +39,8 @@ namespace Festispec.ViewModels.Regulation
         public ObservableCollection<RegulationViewModel> Regulations { get; private set; }
 
         public RegulationViewModel SelectedRegulation { get; set; }
+
+        public List<RegulationViewModel> RegulationList;
 
         public string SearchInput
         {
@@ -58,7 +59,7 @@ namespace Festispec.ViewModels.Regulation
 
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName != "CurrentRoute") return;
+            if (args.PropertyName != nameof(NavigationService.CurrentRoute)) return;
 
             if (NavigationService.CurrentRoute != Routes.Routes.RegulationList) return;
 
@@ -83,28 +84,16 @@ namespace Festispec.ViewModels.Regulation
             DeleteFilterCommand = new RelayCommand(DeleteFilter);
         }
 
-        private void LoadRegulations()
-        {
-            using (var regulationsRepository = _regulationRepositoryFactory.CreateRepository())
-            {
-                var query = regulationsRepository.Get();         
-                Regulations =
-                    new ObservableCollection<RegulationViewModel>(
-                        query.ToList()
-                            .Select(regulation => _regulationViewModelFactory.CreateViewModel(regulation)));
-                RaisePropertyChanged(nameof(Regulation));
-            }
-        }
         private void SearchRegulations()
         {
             if (SearchInput == null) return;
 
             LoadRegulations();
-            _regulationList.Clear();
-            Regulations.ToList().ForEach(n => _regulationList.Add(n));
+            RegulationList.Clear();
+            Regulations.ToList().ForEach(n => RegulationList.Add(n));
             Regulations.Clear();
 
-            foreach (var i in _regulationList)
+            foreach (var i in RegulationList)
             {
                 if (i.Name != null && i.Name.ToLower().Contains(SearchInput.ToLower()) ||
                     i.Municipality != null && i.Municipality.ToLower().Contains(SearchInput.ToLower()) ||
@@ -113,13 +102,25 @@ namespace Festispec.ViewModels.Regulation
                     Regulations.Add(i);
                 }
             }
-            RaisePropertyChanged(nameof(Regulations));
+        }
+
+        private void LoadRegulations()
+        {
+            using (var regulationsRepository = _regulationRepositoryFactory.CreateRepository())
+            {
+                var query = regulationsRepository.Get();
+                Regulations =
+                    new ObservableCollection<RegulationViewModel>(
+                        query.ToList()
+                            .Select(regulation => _regulationViewModelFactory.CreateViewModel(regulation)));
+                RaisePropertyChanged(nameof(Regulations));
+            }
         }
 
         private void DeleteFilter()
         {
             LoadRegulations();
-            SearchInput = "";
+            SearchInput = null;
         }
     }
 }

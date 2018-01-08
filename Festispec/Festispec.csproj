@@ -271,6 +271,7 @@
     <Compile Include="Views\GenerateReport.xaml.cs">
       <DependentUpon>GenerateReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InspectionList.cs" />
     <Compile Include="Views\InspectionList.xaml.cs">
       <DependentUpon>InspectionList.xaml</DependentUpon>
     </Compile>
