@@ -266,7 +266,7 @@ namespace Festispec.ViewModels.Inspection
 
         public void DeleteQuestion(QuestionViewModel question) //
         {
-            Questions.Remove(question);
+            question.IsDeleted = true;
         }
 
         public override bool Save()
