@@ -73,7 +73,7 @@ namespace Festispec.Web.Controllers
 
             using (var scheduleRepository = _inspectorScheduleRepositoryFactory.CreateRepository())
             {
-                if (!ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     if (temp.NotAvailableFrom < temp.NotAvailableTo)
                     {
