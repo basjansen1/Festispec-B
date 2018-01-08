@@ -57,7 +57,7 @@ namespace Festispec.ViewModels
             return false;
         }
 
-        public virtual void MapValues(TEntity from, TEntity to) => from.CopyPropertiesTo(to);
+        public abstract void MapValues(TEntity from, TEntity to);
 
         public void MapValuesFromOriginal() => MapValues(OriginalValues, Entity);
         public void MapValuesToOriginal() => MapValues(Entity, OriginalValues);

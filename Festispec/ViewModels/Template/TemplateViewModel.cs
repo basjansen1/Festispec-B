@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Windows;
@@ -111,6 +112,23 @@ namespace Festispec.ViewModels.Template
             }
 
             return true;
+        }
+
+        public override void MapValues(Domain.Template @from, Domain.Template to)
+        {
+            // Map values
+            to.Id = from.Id;
+            to.Description = from.Description;
+            to.Name = from.Name;
+
+            try
+            {
+                to.TemplateQuestion = from.TemplateQuestion;
+            }
+            catch (InvalidOperationException)
+            {
+                //
+            }
         }
     }
 }

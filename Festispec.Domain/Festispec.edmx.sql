@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/11/2017 16:04:51
+-- Date Created: 01/08/2018 10:31:53
 -- Generated from EDMX file: C:\Workspace\Avans\Projects\42IN06SOb\Festispec\Festispec.Domain\Festispec.edmx
 -- --------------------------------------------------
 
@@ -564,7 +564,7 @@ ADD CONSTRAINT [FK_TemplateTemplateQuestion]
     FOREIGN KEY ([Template_Id])
     REFERENCES [dbo].[Template]
         ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating foreign key on [Question_Id] in table 'InspectionQuestion'

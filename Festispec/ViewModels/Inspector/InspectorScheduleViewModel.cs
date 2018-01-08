@@ -131,5 +131,24 @@ namespace Festispec.ViewModels.Inspector
                 return false;
             }
         }
+
+        public override void MapValues(Schedule @from, Schedule to)
+        {
+            // Map values
+            to.Id = from.Id;
+            to.Inspector_Id = from.Inspector_Id;
+            to.IsDeleted = from.IsDeleted;
+            to.NotAvailableFrom = from.NotAvailableFrom;
+            to.NotAvailableTo = from.NotAvailableTo;
+
+            try
+            {
+                to.Inspector = from.Inspector;
+            }
+            catch (InvalidOperationException)
+            {
+                //
+            }
+        }
     }
 }

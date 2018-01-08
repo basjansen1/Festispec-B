@@ -152,5 +152,20 @@ namespace Festispec.ViewModels.Planning
             }
             return true;
         }
+
+        public override void MapValues(Domain.Planning @from, Domain.Planning to)
+        {
+            // Map values
+            to.Date = from.Date;
+            to.Hours = from.Hours;
+            to.InspectionQuestionAnswer = from.InspectionQuestionAnswer;
+            to.Inspection = from.Inspection;
+            to.Inspection_Id = from.Inspection_Id;
+            to.Inspector = from.Inspector;
+            to.Inspector_Id = from.Inspector_Id;
+            to.IsAdded = from.IsAdded;
+            to.TimeFrom = from.TimeFrom;
+            to.TimeTo = from.TimeTo;
+        }
     }
 }

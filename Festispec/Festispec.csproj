@@ -180,6 +180,7 @@
     <Compile Include="ViewModels\AddOrUpdateViewModelBase.cs" />
     <Compile Include="ViewModels\Address\AddressAddOrUpdateViewModelBase.cs" />
     <Compile Include="ViewModels\Address\AddressViewModelBase.cs" />
+    <Compile Include="ViewModels\Contact\ContactViewModelBase.cs" />
     <Compile Include="ViewModels\CustomerCRUD\CustomerAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\CustomerCRUD\CustomerListViewModel.cs" />
     <Compile Include="ViewModels\CustomerCRUD\CustomerViewModel.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="ViewModels\InspectionProcessing\CustomerVM.cs" />
     <Compile Include="ViewModels\InspectionQuestionAnswer\InspectionQuestionAnswerViewModel.cs" />
     <Compile Include="ViewModels\Inspection\InspectionQuestionnaireViewModel.cs" />
+    <Compile Include="ViewModels\Interface\IContactViewModel.cs" />
     <Compile Include="ViewModels\Interface\IAddressViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningAddOrUpdateViewModel.cs" />
     <Compile Include="ViewModels\Planning\PlanningListViewModel.cs" />
@@ -269,6 +271,7 @@
     <Compile Include="Views\GenerateReport.xaml.cs">
       <DependentUpon>GenerateReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InspectionList.cs" />
     <Compile Include="Views\InspectionList.xaml.cs">
       <DependentUpon>InspectionList.xaml</DependentUpon>
     </Compile>

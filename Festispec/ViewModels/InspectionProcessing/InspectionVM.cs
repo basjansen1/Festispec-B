@@ -14,10 +14,11 @@ using Festispec.Domain.Repository.Interface;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.ViewModels.Factory.Interface;
 using System.Data.Entity.Validation;
+using Festispec.ViewModels.Address;
 
 namespace Festispec.ViewModels.Inspection
 {
-    public class InspectionVM : EntityViewModelBase<IInspectionRepositoryFactory, IInspectionRepository, Domain.Inspection>, IHasQuestionCollection
+    public class InspectionVM : AddressViewModelBase<IInspectionRepositoryFactory, IInspectionRepository, Domain.Inspection>, IHasQuestionCollection
     {
         public InspectionVM(IInspectionRepositoryFactory repositoryFactory, IQuestionViewModelFactory questionViewModelFactory, IInspectionQuestionAnswerRepositoryFactory answerRepositoryFactory) : base(repositoryFactory)
         {
@@ -292,6 +293,24 @@ namespace Festispec.ViewModels.Inspection
             }
 
             return true;
+        }
+
+        public override void MapValues(Domain.Inspection from, Domain.Inspection to)
+        {
+            // Call map values on parent model
+            MapValues(from, to);
+
+            // Map values
+            to.Customer_Id = from.Customer_Id;
+            to.Customers = from.Customers;
+            to.End = from.End;
+            to.InspectionQuestion = from.InspectionQuestion;
+            to.Name = from.Name;
+            to.Planning = from.Planning;
+            to.Start = from.Start;
+            to.Status = from.Status;
+            to.Status_Status = from.Status_Status;
+            to.Website = from.Website;
         }
 
         public int Id => Entity.Id;

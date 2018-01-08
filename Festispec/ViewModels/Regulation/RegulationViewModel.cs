@@ -82,6 +82,15 @@ namespace Festispec.ViewModels.Regulation
 
             return true;
         }
+
+        public override void MapValues(Domain.Regulation @from, Domain.Regulation to)
+        {
+            // Map values
+            to.Id = from.Id;
+            to.Description = from.Description;
+            to.Municipality = from.Municipality;
+            to.Name = from.Name;
+        }
     }
 }
 

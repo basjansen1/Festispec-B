@@ -399,7 +399,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="TemplateTemplateQuestion">
-    <End Role="Template" Type="Festispec.Store.Template" Multiplicity="1" />
+    <End Role="Template" Type="Festispec.Store.Template" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="TemplateQuestion" Type="Festispec.Store.TemplateQuestion" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Template">
@@ -923,7 +925,9 @@
           <NavigationProperty Name="Question" Relationship="Festispec.QuestionTemplateQuestion" FromRole="TemplateQuestion" ToRole="Question" />
         </EntityType>
         <Association Name="TemplateTemplateQuestion">
-          <End Type="Festispec.Template" Role="Template" Multiplicity="1" />
+          <End Type="Festispec.Template" Role="Template" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Festispec.TemplateQuestion" Role="TemplateQuestion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Template">

@@ -77,6 +77,7 @@
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Extension\DateRangeExtension.cs" />
+    <Compile Include="IContact.cs" />
     <Compile Include="IAddress.cs" />
     <Compile Include="PDF\ChartExporter.cs">
       <SubType>Form</SubType>
@@ -118,7 +119,6 @@
     <Compile Include="Extended\PlanningExtended.cs" />
     <Compile Include="Extended\ContactExtended.cs" />
     <Compile Include="Extended\ExtendedSchedule.cs" />
-    <Compile Include="Extension\CopyPropertiesExtension.cs" />
     <Compile Include="Festispec.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
