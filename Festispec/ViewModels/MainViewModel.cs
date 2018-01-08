@@ -42,6 +42,7 @@ namespace Festispec.ViewModels
         public ICommand NavigateToReportCommand { get; private set; }
 
         public ICommand NavigateToCustomerListCommand { get; private set; }
+        public ICommand NavigateToMapOverviewCommand { get; private set; }
 
         public void RegisterCommands()
         {
@@ -61,6 +62,9 @@ namespace Festispec.ViewModels
                 new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.RegulationList), () => _navigationService.CanAndHasAccess(Routes.Routes.RegulationList));
             NavigateToReportCommand =
                 new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.Reports), () => _navigationService.CanAndHasAccess(Routes.Routes.Reports));
+            NavigateToMapOverviewCommand =
+                new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.MapOverview),
+                    () => _navigationService.CanAndHasAccess(Routes.Routes.MapOverview));
 
         }
 

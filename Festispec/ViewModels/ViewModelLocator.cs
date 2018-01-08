@@ -30,6 +30,8 @@ using Microsoft.Practices.ServiceLocation;
 using Festispec.ViewModels.Reports;
 using Festispec.ViewModels.Customer;
 using Festispec.ViewModels.Inspection;
+using Festispec.ViewModels.Map;
+using Festispec.Views.Map;
 using GeodanApi;
 
 namespace Festispec.ViewModels
@@ -108,6 +110,7 @@ namespace Festispec.ViewModels
 
             SimpleIoc.Default.Register<GenerateReportVM>();
             SimpleIoc.Default.Register<InspectorScheduleAddViewModel>();
+            SimpleIoc.Default.Register<MapOverviewViewModel>();
         }
 
         private static void RegisterNavigationService()
@@ -140,6 +143,7 @@ namespace Festispec.ViewModels
 
             navigationService.Configure(Routes.Routes.Reports);
             navigationService.Configure(Routes.Routes.GenerateReport);
+            navigationService.Configure(Routes.Routes.MapOverview);
 
             SimpleIoc.Default.Register<INavigationService>(() => navigationService);
         }
@@ -269,6 +273,9 @@ namespace Festispec.ViewModels
         public EditInspectionVM GetEditInspection => ServiceLocator.Current.GetInstance<EditInspectionVM>();
 
         public GenerateReportVM GetGenerateReport => new GenerateReportVM(GetInspectionList, CustomerList.SelectedCustomer, NavigationService);
+
+        public MapOverviewViewModel MapOverview => ServiceLocator.Current.GetInstance<MapOverviewViewModel>();
+
         #endregion
     }
 }

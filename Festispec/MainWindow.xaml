@@ -36,6 +36,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Image Source="Views/Images/Logo.jpg" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -47,6 +48,7 @@
             <Button Grid.Row="6" Content="Inspecties" Margin="5px 2.5px" Command="{Binding NavigateToInspectionListCommand}"/>
             <Button Grid.Row="7" Content="Regelgeving" Margin="5px 2.5px" Command="{Binding NavigateToRegulationListCommand}"/>
             <Button Grid.Row="8" Content="Rapporten" Margin="5px 2.5px" Command="{Binding NavigateToReportCommand}"/>
+            <Button Grid.Row="9" Content="Kaart" Margin="5px 2.5px" Command="{Binding NavigateToMapOverviewCommand}"/>
         </Grid>
 
         <Frame Grid.Column="2" Name="MainFrame" NavigationUIVisibility="Hidden"/>
