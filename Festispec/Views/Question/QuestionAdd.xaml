@@ -26,22 +26,22 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Grid.Row="0">Vraag</Label>
+            <Label Grid.Column="0" Grid.Row="0">Vraag*</Label>
             <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=EntityViewModel.Name}" IsEnabled="{Binding Path=IsNewQuestion}" />
 
-            <Label Grid.Column="0" Grid.Row="1">Beschrijving</Label>
+            <Label Grid.Column="0" Grid.Row="1">Beschrijving*</Label>
             <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=EntityViewModel.Description}" IsEnabled="{Binding Path=IsNewQuestion}" />
 
-            <Label Grid.Column="0" Grid.Row="2">Type</Label>
+            <Label Grid.Column="0" Grid.Row="2">Type*</Label>
             <ComboBox ItemsSource="{Binding Path=QuestionTypes}" IsEnabled="{Binding Path=IsNewQuestion}"
                   DisplayMemberPath="Type"
                   SelectedValuePath="Type"
                   SelectedValue="{Binding Path=EntityViewModel.QuestionType_Type}" 
                   Grid.Column="1" Grid.Row="2"/>
 
-            <Label Grid.Column="0" Grid.Row="3" Visibility="{Binding Path=MetadataVisibility}">Tabel kolom 1</Label>
+            <Label Grid.Column="0" Grid.Row="3" Visibility="{Binding Path=MetadataVisibility}">Tabel kolom 1*</Label>
             <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=EntityViewModel.MetadataParameter1}" Visibility="{Binding Path=MetadataVisibility}" IsEnabled="{Binding Path=IsNewQuestion}" />
-            <Label Grid.Column="0" Grid.Row="4" Visibility="{Binding Path=MetadataVisibility}">Tabel kolom 2</Label>
+            <Label Grid.Column="0" Grid.Row="4" Visibility="{Binding Path=MetadataVisibility}">Tabel kolom 2*</Label>
             <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=EntityViewModel.MetadataParameter2}" Visibility="{Binding Path=MetadataVisibility}" IsEnabled="{Binding Path=IsNewQuestion}" />
 
         </Grid>

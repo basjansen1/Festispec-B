@@ -3,6 +3,7 @@ using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using System;
+using System.Data.Entity.Infrastructure;
 using System.Windows;
 using System.Linq;
 using Festispec.ViewModels.Address;
@@ -144,6 +145,11 @@ namespace Festispec.ViewModels.Customer
                 }
                 string joined = string.Join(",", ErrorList.Select(x => x));
                 MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                return false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Er is iets fout gegaan. Controleer of alle velden correct zijn ingevuld.");
                 return false;
             }
 

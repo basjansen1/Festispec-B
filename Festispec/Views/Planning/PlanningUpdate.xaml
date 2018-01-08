@@ -30,7 +30,7 @@
             <Border Grid.Column="0" Padding="10">
                 <StackPanel DataContext="{Binding Path=EntityViewModel.Inspector, Mode=TwoWay}">
                     <Label>Geselecteerde Inspecteur</Label>
-                    <Label>Naam</Label>
+                    <Label>Naam*</Label>
                     <TextBox Text="{Binding Path=FullName, Mode=OneWay}" IsEnabled="False" Margin="0 0 0 5" />
                     <Label>Email</Label>
                     <TextBox Text="{Binding Path=Email, Mode=OneWay}" IsEnabled="False" Margin="0 0 0 5" />
@@ -47,11 +47,11 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0">
-                        <Label>Datum</Label>
+                        <Label>Datum*</Label>
                         <DatePicker SelectedDate="{Binding Path=EntityViewModel.Date, Converter={StaticResource AmericanDateConverter}, Mode=OneWay}" IsEnabled="False"/>
-                        <Label>Tijd van</Label>
+                        <Label>Tijd van*</Label>
                         <TextBox Text="{Binding Path=EntityViewModel.TimeFrom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 5" />
-                        <Label>Tijd tot</Label>
+                        <Label>Tijd tot*</Label>
                         <TextBox Text="{Binding Path=EntityViewModel.TimeTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 5" />
                     </StackPanel>
 

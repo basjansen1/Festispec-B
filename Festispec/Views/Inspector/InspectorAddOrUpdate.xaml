@@ -32,11 +32,11 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="0" Grid.Row="0">Gebruikersnaam</Label>
+            <Label Grid.Column="0" Grid.Row="0">Gebruikersnaam*</Label>
             <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=EntityViewModel.Username}" />
             <Label Grid.Column="0" Grid.Row="1">Voornaam</Label>
             <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=EntityViewModel.FirstName}" />
-            <Label Grid.Column="0" Grid.Row="2">Achternaam</Label>
+            <Label Grid.Column="0" Grid.Row="2">Achternaam*</Label>
             <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=EntityViewModel.LastName}" />
             <Label Grid.Column="0" Grid.Row="3">Email</Label>
             <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=EntityViewModel.Email}" />
@@ -48,12 +48,12 @@
                   SelectedValuePath="Id"
                   SelectedValue="{Binding EntityViewModel.Manager_Id}"
                   Grid.Column="1" Grid.Row="5"></ComboBox>
-            <Label Grid.Column="0" Grid.Row="6">Password</Label>
+            <Label Grid.Column="0" Grid.Row="6">Password*</Label>
             <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=EntityViewModel.Password}" />
             <Label Grid.Column="0" Grid.Row="7">Telefoonnummer</Label>
             <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding Path=EntityViewModel.Telephone}" />
 
-            <Label Grid.Column="2" Grid.Row="0">In dienst genomen op</Label>
+            <Label Grid.Column="2" Grid.Row="0">In dienst genomen op*</Label>
             <DatePicker Grid.Column="3" Grid.Row="0" SelectedDate="{Binding Path=EntityViewModel.HiredFrom}"/>
             <Label Grid.Column="2" Grid.Row="1">Uit dienst gegaan</Label>
             <DatePicker Grid.Column="3" Grid.Row="1" SelectedDate="{Binding Path=EntityViewModel.HiredTo}"/>
@@ -61,9 +61,9 @@
             <DatePicker Grid.Column="3" Grid.Row="2" SelectedDate="{Binding Path=EntityViewModel.CertificationFrom}"/>
             <Label Grid.Column="2" Grid.Row="3">Certificatie einddatum</Label>
             <DatePicker Grid.Column="3" Grid.Row="3" SelectedDate="{Binding Path=EntityViewModel.CertificationTo}"/>
-            <Label Grid.Column="2" Grid.Row="4">Postcode</Label>
+            <Label Grid.Column="2" Grid.Row="4">Postcode*</Label>
             <TextBox Grid.Column="3" Grid.Row="4" Text="{Binding Path=EntityViewModel.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="6" />
-            <Label Grid.Column="2" Grid.Row="5">Huisnummer</Label>
+            <Label Grid.Column="2" Grid.Row="5">Huisnummer*</Label>
             <Grid Grid.Column="3" Grid.Row="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -73,13 +73,13 @@
                 <Button Grid.Column="1" Command="{Binding SearchAddressCommand}">Zoek adres</Button>
             </Grid>
 
-            <Label Grid.Column="2" Grid.Row="6">Straat</Label>
+            <Label Grid.Column="2" Grid.Row="6">Straat*</Label>
             <TextBox Grid.Column="3" Grid.Row="6" Text="{Binding Path=EntityViewModel.Street}" IsEnabled="false" />
-            <Label Grid.Column="2" Grid.Row="7">Stad</Label>
+            <Label Grid.Column="2" Grid.Row="7">Stad*</Label>
             <TextBox Grid.Column="3" Grid.Row="7" Text="{Binding Path=EntityViewModel.City}" IsEnabled="false" />
-            <Label Grid.Column="2" Grid.Row="8">Gemeente</Label>
+            <Label Grid.Column="2" Grid.Row="8">Gemeente*</Label>
             <TextBox Grid.Column="3" Grid.Row="8" Text="{Binding Path=EntityViewModel.Municipality}" IsEnabled="false" />
-            <Label Grid.Column="2" Grid.Row="9">Land</Label>
+            <Label Grid.Column="2" Grid.Row="9">Land*</Label>
             <TextBox Grid.Column="3" Grid.Row="9" Text="{Binding Path=EntityViewModel.Country}" IsEnabled="false" />
         </Grid>
         <Grid Grid.Row="2">

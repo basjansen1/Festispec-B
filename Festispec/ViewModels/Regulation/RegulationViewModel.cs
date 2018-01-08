@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using Festispec.Domain.Repository.Factory.Interface;
@@ -77,6 +78,11 @@ namespace Festispec.ViewModels.Regulation
                 }
                 string joined = string.Join(",", ErrorList.Select(x => x));
                 MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                return false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Er is iets fout gegaan. Controleer of alle velden correct zijn ingevuld.");
                 return false;
             }
 

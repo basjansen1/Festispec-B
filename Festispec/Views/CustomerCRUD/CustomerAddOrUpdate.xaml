@@ -33,12 +33,12 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             
-            <Label Grid.Column="0" Grid.Row="0">Naam</Label>
+            <Label Grid.Column="0" Grid.Row="0">Naam*</Label>
             <Label Grid.Column="0" Grid.Row="1">Email</Label>
             <Label Grid.Column="0" Grid.Row="2">KVK</Label>
             <Label Grid.Column="0" Grid.Row="3">IBAN</Label>
             <Label Grid.Column="0" Grid.Row="4">Voornaam Contactpersoon</Label>
-            <Label Grid.Column="0" Grid.Row="5">Achternaam Contactpersoon</Label>
+            <Label Grid.Column="0" Grid.Row="5">Achternaam Contactpersoon*</Label>
             <Label Grid.Column="0" Grid.Row="6">Telefoonnummer</Label>
 
             <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=EntityViewModel.Name}" />
@@ -49,12 +49,12 @@
             <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=EntityViewModel.LastName}" />
             <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=EntityViewModel.Telephone}" />
 
-            <Label Grid.Column="2" Grid.Row="0">Huisnummer</Label>
-            <Label Grid.Column="2" Grid.Row="1">Postcode</Label>
-            <Label Grid.Column="2" Grid.Row="2">Straatnaam</Label>
-            <Label Grid.Column="2" Grid.Row="3">Gemeente</Label>
-            <Label Grid.Column="2" Grid.Row="4">Stad</Label>
-            <Label Grid.Column="2" Grid.Row="5">Land</Label>
+            <Label Grid.Column="2" Grid.Row="0">Huisnummer*</Label>
+            <Label Grid.Column="2" Grid.Row="1">Postcode*</Label>
+            <Label Grid.Column="2" Grid.Row="2">Straatnaam*</Label>
+            <Label Grid.Column="2" Grid.Row="3">Gemeente*</Label>
+            <Label Grid.Column="2" Grid.Row="4">Stad*</Label>
+            <Label Grid.Column="2" Grid.Row="5">Land*</Label>
 
             <TextBox Grid.Column="3" Grid.Row="0" Text="{Binding Path=EntityViewModel.HouseNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding Path=EntityViewModel.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />

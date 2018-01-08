@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity.Infrastructure;
 using System.Windows;
 using System.Windows.Input;
 using Festispec.Domain;
@@ -66,14 +67,14 @@ namespace Festispec.ViewModels.Address
                             break;
                         default:
                             // TODO: Generic error message instead of exception message: MessageBox.Show("Er is iets fout gegaan");
-                            MessageBox.Show($"ArgumentNullException({exception.ParamName})");
+                            MessageBox.Show("Er is iets fout gegaan, zorg dat al de velden correct zijn ingevuld.");
                             break;
                     }
                 }
-                catch (InvalidOperationException exception)
+                catch (Exception)
                 {
-                    // TODO: Generic error message instead of exception message: MessageBox.Show("Er is iets fout gegaan");
-                    MessageBox.Show(exception.Message);
+                    MessageBox.Show("Er is iets fout gegaan. Controleer of alle velden correct zijn ingevuld.");
+                    return false;
                 }
             }
 
