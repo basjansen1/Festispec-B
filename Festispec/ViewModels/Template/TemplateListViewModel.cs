@@ -27,6 +27,7 @@ namespace Festispec.ViewModels.Template
 
             RegisterCommands();
             LoadTemplates();
+
             TemplateList = new List<TemplateViewModel>();
             NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
         }
