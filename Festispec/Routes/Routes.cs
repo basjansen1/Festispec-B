@@ -17,8 +17,7 @@ namespace Festispec.Routes
         {
             Key = "TemplateList",
             PageType = new Uri("../Views/Template/TemplateList.xaml", UriKind.Relative),
-            Roles = new[] { "Manager", "Medewerker" },
-            Offline = true // added
+            Roles = new[] { "Manager", "Medewerker" }
         };
 
         public static Route TemplateAddOrUpdate = new Route
