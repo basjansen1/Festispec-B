@@ -88,7 +88,7 @@ namespace Festispec.Views.Map
             foreach (var customer in customers)
                 // Add marker for inspector
                 MapControl.Map.Layers.Add(
-                    MapHelper.CreateCustomerMarkerWithLabel(customer.Long, customer.Lat, customer.FullName));
+                    MapHelper.CreateCustomerMarkerWithLabel(customer.Long, customer.Lat, customer.Name));
         }
     }
 }
