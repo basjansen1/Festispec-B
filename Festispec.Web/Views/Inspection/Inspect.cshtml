@@ -16,11 +16,23 @@
             @switch (inspectionQuestion.Question.QuestionType_Type)
             {
                 case "Beeld":
+                    //labels voor audio en video
+                    <div class="hide">
+                        <div class="select">
+                            <label for="audioSource">Audio source: </label><select id="audioSource"><option>-</option></select>
+                        </div>
+                    </div>
+
+                        <div class="select">
+                            <label for="videoSource">Video source: </label><select id="videoSource"></select>
+                        </div>
                     <div name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">
                         <div class="ccamera camera-@inspectionQuestion.Question_Id">
                             <video class="vvideo" id="video-@inspectionQuestion.Question_Id">Video stream not available.</video>
                             <button id="startbutton-@inspectionQuestion.Question_Id" class="btn btn-default">Take photo</button>
                         </div>
+
+                    
                         <canvas class="ccanvas" id="canvas-@inspectionQuestion.Question_Id"></canvas>
                         <div class="row" name="beeld-row-@inspectionQuestion.Question_Id">
                             @foreach (var beeldItem in inspectionQuestionAnswer.DeserializeBeeldAnswer())
@@ -220,6 +232,9 @@
 
 
 <script>
+
+   
+
     function deleteBeeldItem(e) {
         console.log(e);
         var parent = e.parentNode.parentNode.parentNode;
@@ -328,6 +343,68 @@
             }
         }
         return '';
+    }
+    //camera switch 
+    //audio moet erin blijven voor nu
+
+    'use strict';
+
+    var videoElement = document.querySelector('video');
+    var audioSelect = document.querySelector('select#audioSource');
+    var videoSelect = document.querySelector('select#videoSource');
+
+    navigator.mediaDevices.enumerateDevices()
+      .then(gotDevices).then(getStream).catch(handleError);
+
+    audioSelect.onchange = getStream;
+    videoSelect.onchange = getStream;
+
+    function gotDevices(deviceInfos) {
+        for (var i = 0; i !== deviceInfos.length; ++i) {
+            var deviceInfo = deviceInfos[i];
+            var option = document.createElement('option');
+            option.value = deviceInfo.deviceId;
+            if (deviceInfo.kind === 'audioinput') {
+                option.text = deviceInfo.label ||
+                  'microphone ' + (audioSelect.length + 1);
+                audioSelect.appendChild(option);
+            } else if (deviceInfo.kind === 'videoinput') {
+                option.text = deviceInfo.label || 'camera ' +
+                  (videoSelect.length + 1);
+                videoSelect.appendChild(option);
+            } else {
+                console.log('Found one other kind of source/device: ', deviceInfo);
+            }
+        }
+    }
+
+    function getStream() {
+        if (window.stream) {
+            window.stream.getTracks().forEach(function (track) {
+                track.stop();
+            });
+        }
+
+        var constraints = {
+            audio: {
+                deviceId: { exact: audioSelect.value }
+            },
+            video: {
+                deviceId: { exact: videoSelect.value }
+            }
+        };
+
+        navigator.mediaDevices.getUserMedia(constraints).
+          then(gotStream).catch(handleError);
+    }
+
+    function gotStream(stream) {
+        window.stream = stream; // make stream available to console
+        videoElement.srcObject = stream;
+    }
+
+    function handleError(error) {
+        console.log('Error: ', error);
     }
 
 </script>
@@ -464,5 +541,8 @@
         font-family: "Lucida Grande", "Arial", sans-serif;
         font-size: 16px;
         width: 760px;
+    }
+    .hide{
+        display:none;
     }
 </style>
