@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 namespace Festispec.Domain
 {
+    [MetadataType(typeof(ScheduleAttributes))]
     public partial class Schedule : IValidatableObject
     {
         [NotMapped]
@@ -12,15 +13,9 @@ namespace Festispec.Domain
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            List<ValidationResult> results = new List<ValidationResult>();
-            DateTime from = new DateTime(1970, 1, 1);
+            var results = new List<ValidationResult>();
 
-            if (NotAvailableFrom < from)
-            {
-                results.Add(new ValidationResult("ERROR: Minimaal 1/1/1970", new[] { "NotAvailableFrom" }));
-            }
-
-            if (NotAvailableTo < NotAvailableFrom)
+            if (NotAvailableTo <= NotAvailableFrom)
             {
                 results.Add(new ValidationResult("ERROR: Niet beschikbaar tot mag niet eerder zijn dan Niet beschikbaar vanaf", new[] { "NotAvailableTo" }));
             }
@@ -31,17 +26,14 @@ namespace Festispec.Domain
         public sealed class ScheduleAttributes
         {
             [Display(Name = "Niet beschikbaar vanaf")]
+            [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+            [Range(typeof(DateTime), "1/1/1970", "1/1/2200")]
             public DateTime NotAvailableFrom { get; set; }
+
             [Display(Name = "Niet beschikbaar tot")]
+            [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+            [Range(typeof(DateTime), "1/1/1970", "1/1/2200")]
             public DateTime NotAvailableTo { get; set; }
-
-            [Required]
-            [Range(typeof(DateTime), "1/1/1970", "1/1/2100")]
-            public DateTime NotAvailableDateFrom { get; set; }
-
-            [Required]
-            [Range(typeof(DateTime), "1/1/1970", "1/1/2100")]
-            public DateTime NotAvailableDateTo { get; set; }
         }
     }
 }
