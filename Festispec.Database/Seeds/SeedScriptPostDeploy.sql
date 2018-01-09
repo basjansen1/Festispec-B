@@ -39,15 +39,15 @@ INSERT INTO [dbo].[Address_Contact] ([FirstName], [LastName], [Email], [Telephon
 
 INSERT INTO [dbo].[Address_Customer] ([KVK], [Name], [Id]) VALUES (N'1234567890', N'van Aken', 10)
 
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Sven', N'oP5TegghNxgbFBJUol3UaOOODGyl1NnadCCjGjPv4x0=', N'Manager', NULL, N'2016-01-01 00:00:00', NULL, 1)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Thomas', N'Thomas123', N'Manager', NULL, N'2017-01-01 00:00:00', NULL, 2)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Bas', N'Bas123', N'Medewerker', 1, N'2017-01-01 00:00:00', NULL, 3)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Sven', N'Li6QGvnnHBuYDd/BD+32HA==', N'Manager', NULL, N'2016-01-01 00:00:00', NULL, 1)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Thomas', N'kMRZo+VqYe+MPK410WWJLu30EMApgVUtiqLyc0SJCFs=', N'Manager', NULL, N'2017-01-01 00:00:00', NULL, 2)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Bas', N'QvGyLNNo4QUNmgVRVjlWTQ==', N'Medewerker', 1, N'2017-01-01 00:00:00', NULL, 3)
 INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Martijn', N'Martijn123', N'Inspecteur', 2, N'2017-01-01 00:00:00', NULL, 4)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Sietse', N'Sietse123', N'Medewerker', 1, N'2017-01-01 00:00:00', NULL, 5)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Teun', N'Teun123', N'Medewerker', 2, N'2017-01-01 00:00:00', NULL, 6)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Arjun', N'Arjun123', N'Medewerker', 1, N'2017-01-01 00:00:00', NULL, 7)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Ylja', N'Ylja123', N'Medewerker', 2, N'2017-01-01 00:00:00', NULL, 8)
-INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Alex', N'Alex123', N'Medewerker', 1, N'2017-01-01 00:00:00', NULL, 9)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Sietse', N'QlSHFYRo3dsrrHBqX/tHQnh6XiTqphONmdwUkZIET4k=', N'Medewerker', 1, N'2017-01-01 00:00:00', NULL, 5)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Teun', N'tW52BNZXx1xY+nUDBNwGcw==', N'Medewerker', 2, N'2017-01-01 00:00:00', NULL, 6)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Arjun', N'D7PfSmahWH4Y9NoROsLC/ZQEWFL8Co0EDelmEmQ7rg0=', N'Medewerker', 1, N'2017-01-01 00:00:00', NULL, 7)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Ylja', N'7UngL3aamo7amLAvLU+dSA==', N'Medewerker', 2, N'2017-01-01 00:00:00', NULL, 8)
+INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Alex', N'CCQ8wetJxrAclKi81seEVA==', N'Medewerker', 1, N'2017-01-01 00:00:00', NULL, 9)
 
 INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Status_Status], [Customer_Id], [Id]) VALUES (N'Inspectie bij van Aken', N'http://werkwarenhuis.nl/food/', N'2018-01-11 00:00:00', N'2018-01-11 00:00:00', N'Geaccepteerd', 10, 11)
 
