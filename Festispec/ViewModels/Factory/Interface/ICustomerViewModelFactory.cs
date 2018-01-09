@@ -1,5 +1,4 @@
 ﻿using Festispec.ViewModels.Customer;
-using Festispec.ViewModels.CustomerCRUD;
 using Festispec.ViewModels.Interface;
 using Festispec.ViewModels.Template;
 

@@ -1,16 +1,11 @@
 ﻿using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.NavigationService;
-using Festispec.ViewModels.Customer;
 using Festispec.ViewModels.Factory.Interface;
-using GalaSoft.MvvmLight.Command;
-using System;
 using System.ComponentModel;
-using System.Windows;
-using System.Windows.Input;
 using Festispec.ViewModels.Address;
 
-namespace Festispec.ViewModels.CustomerCRUD
+namespace Festispec.ViewModels.Customer
 {
    public class CustomerAddOrUpdateViewModel :
         AddressAddOrUpdateViewModelBase<ICustomerViewModelFactory, CustomerViewModel, ICustomerRepository, Domain.Customer>

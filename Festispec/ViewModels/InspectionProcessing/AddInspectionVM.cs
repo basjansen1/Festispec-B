@@ -2,7 +2,6 @@
 using Festispec.Domain.Repository.Factory.Interface;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using Festispec.ViewModels.CustomerCRUD;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Spatial;
