@@ -22,7 +22,7 @@ namespace Festispec.ViewModels.Employees
         {
             using (var employeeRepository = repositoryFactory.CreateRepository())
             {
-                Managers = new[] {new Domain.Employee {Id = -1}}.Concat(employeeRepository.Get()
+                Managers = new[] { new Domain.Employee { Id = -1 } }.Concat(employeeRepository.Get()
                     .Where(e => e.Role_Role == "Manager" && e.Id != EntityViewModel.Id).ToList());
             }
             using (var employeeRoleRepository = employeeRoleRepositoryFactory.CreateRepository())
@@ -30,7 +30,7 @@ namespace Festispec.ViewModels.Employees
                 Roles = employeeRoleRepository.Get().Where(e => e.Role != "Inspecteur").ToList();
             }
         }
-        
+
         public IEnumerable<Domain.Employee> Managers { get; }
         public IEnumerable<EmployeeRole> Roles { get; }
 
