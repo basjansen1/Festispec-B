@@ -25,6 +25,9 @@ namespace Festispec.Domain
                 chart1.Series[group[groupNumber]].BorderWidth = 1;
                 chart1.Legends.Add(new Legend(group[groupNumber]));
                 chart1.Legends[group[groupNumber]].DockedToChartArea = "Area";
+                chart1.Legends[group[groupNumber]].IsDockedInsideChartArea = false;
+                chart1.Legends[group[groupNumber]].LegendStyle = LegendStyle.Column;
+                chart1.Legends[group[groupNumber]].Docking = Docking.Right;
                 chart1.Series[group[groupNumber]].Legend = group[groupNumber];
                 chart1.Series[group[groupNumber]].IsVisibleInLegend = true;
                 for (int yxNumber = 0; yxNumber < x.Count; yxNumber++)
@@ -36,7 +39,7 @@ namespace Festispec.Domain
                 }
 
             }
-            chart1.Size = new Size(500, 140);
+            chart1.Size = new Size(300, 700);
             chart1.Enabled = true;
             chart1.DataBind();
             MemoryStream memoryStream = new MemoryStream();
@@ -62,6 +65,9 @@ namespace Festispec.Domain
                 chart1.Series[x[inspectionNumber]].BorderColor = Color.White;
                 chart1.Legends.Add(new Legend(x[inspectionNumber]));
                 chart1.Legends[x[inspectionNumber]].DockedToChartArea = "Area";
+                chart1.Legends[x[inspectionNumber]].IsDockedInsideChartArea = false;
+                chart1.Legends[x[inspectionNumber]].Docking = Docking.Right;
+                chart1.Legends[x[inspectionNumber]].LegendStyle = LegendStyle.Column;
                 chart1.Series[x[inspectionNumber]].Legend = x[inspectionNumber];
                 chart1.Series[x[inspectionNumber]].IsVisibleInLegend = true;
                 for (int dataNumber = 0; dataNumber < y[inspectionNumber].Count; dataNumber++)
@@ -69,6 +75,7 @@ namespace Festispec.Domain
                     chart1.Series[x[inspectionNumber]].Points.AddXY(1, y[inspectionNumber][dataNumber]);
                 }
             }
+            chart1.Size = new Size(300, 700);
             chart1.Enabled = true;
             chart1.DataBind();
             MemoryStream memoryStream = new MemoryStream();
