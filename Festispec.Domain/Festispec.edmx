@@ -274,6 +274,7 @@
     <Property Name="End" Type="datetime" Nullable="false" />
     <Property Name="Status_Status" Type="nvarchar" Nullable="false" MaxLength="128" />
     <Property Name="Customer_Id" Type="int" Nullable="false" />
+    <Property Name="Instructions" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="EmployeeRoleEmployee">
@@ -749,6 +750,7 @@
           <Property Name="Status_Status" Type="String" Nullable="false" MaxLength="128" />
           <Property Name="Customer_Id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="InspectionQuestion" Relationship="Festispec.InspectionInspectionQuestion" FromRole="Inspection" ToRole="InspectionQuestion" />
+          <Property Name="Instructions" Type="String" Nullable="true" />
         </EntityType>
         <EntityType Name="InspectionStatus">
           <Key>
@@ -1072,6 +1074,7 @@
           <ScalarProperty Name="End" ColumnName="End" />
           <ScalarProperty Name="Status_Status" ColumnName="Status_Status" />
           <ScalarProperty Name="Customer_Id" ColumnName="Customer_Id" />
+          <ScalarProperty Name="Instructions" ColumnName="Instructions" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

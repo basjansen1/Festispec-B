@@ -6,6 +6,7 @@
     [Status_Status] NVARCHAR (128) NOT NULL,
     [Customer_Id]   INT            NOT NULL,
     [Id]            INT            NOT NULL,
+	[Instructions]  nvarchar (max) NULL,
     CONSTRAINT [PK_Address_Inspection] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_CustomerInspection] FOREIGN KEY ([Customer_Id]) REFERENCES [dbo].[Address_Customer] ([Id]),
     CONSTRAINT [FK_Inspection_inherits_Address] FOREIGN KEY ([Id]) REFERENCES [dbo].[Address] ([Id]) ON DELETE CASCADE,
