@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/08/2018 10:31:53
+-- Date Created: 01/09/2018 20:36:45
 -- Generated from EDMX file: C:\Workspace\Avans\Projects\42IN06SOb\Festispec\Festispec.Domain\Festispec.edmx
 -- --------------------------------------------------
 
@@ -300,6 +300,7 @@ CREATE TABLE [dbo].[Address_Inspection] (
     [End] datetime  NOT NULL,
     [Status_Status] nvarchar(128)  NOT NULL,
     [Customer_Id] int  NOT NULL,
+    [Instructions] nvarchar(max)  NULL,
     [Id] int  NOT NULL
 );
 GO
