@@ -176,8 +176,13 @@ namespace Festispec.Domain.PDF
         private void AddAdvise(string advise)
         {
             AddParagraphTitle("Advies:");
-            AddLine(advise);
-
+            if (advise != null)
+            {
+                AddLine(advise);
+            } else
+            {
+                AddLine("Geen advies ingevoerd");
+            }
             AddEmptyLine();
         }
     }
