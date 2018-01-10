@@ -6,6 +6,8 @@ using Festispec.NavigationService;
 using Festispec.ViewModels.Address;
 using Festispec.ViewModels.Factory.Interface;
 using GalaSoft.MvvmLight.CommandWpf;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Festispec.ViewModels.Inspector
 {
@@ -18,12 +20,17 @@ namespace Festispec.ViewModels.Inspector
             : base(navigationService, repositoryFactory, inspectorViewModelFactory, geoRepositoryFactory)
         {
             RegisterCommands();
+            using (var employeeRepository = employeeRepositoryFactory.CreateRepository())
+            {
+                Managers = new[] { new Domain.Employee { Id = -1 } }.Concat(employeeRepository.Get()
+                    .Where(e => e.Role_Role == "Manager" && e.Id != EntityViewModel.Id).ToList());
+            }
         }
 
         public ICommand NavigateToScheduleAddCommand { get; set; }
         public ICommand NavigateToScheduleUpdateCommand { get; set; }
         public ICommand ScheduleDeleteCommand { get; set; }
-
+        public IEnumerable<Domain.Employee> Managers { get; }
         private void RegisterCommands()
         {
             NavigateToScheduleAddCommand =

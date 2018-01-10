@@ -1,7 +1,6 @@
 ﻿using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.NavigationService;
-using Festispec.ViewModels.Customer;
 using Festispec.ViewModels.Factory.Interface;
 using GalaSoft.MvvmLight.CommandWpf;
 using System;
@@ -14,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Festispec.ViewModels.CustomerCRUD
+namespace Festispec.ViewModels.Customer
 {
     public class CustomerListViewModel : NavigatableViewModelBase
     {
@@ -49,20 +48,7 @@ namespace Festispec.ViewModels.CustomerCRUD
         public ICommand DeleteFilterCommand { get; set; }
         private readonly List<CustomerViewModel> _customerList;
         public ObservableCollection<CustomerViewModel> Customers { get; private set; }
-
-        public CustomerViewModel _selectedCustomer;
-        public CustomerViewModel SelectedCustomer
-        {
-            get
-            {
-                return _selectedCustomer;
-            }
-            set
-            {
-                _selectedCustomer = value;
-                RaisePropertyChanged("SelectedCustomer");
-            }
-        }
+        public CustomerViewModel SelectedCustomer { get; set; }
 
         public string SearchInput
         {
@@ -98,8 +84,9 @@ namespace Festispec.ViewModels.CustomerCRUD
 
             DeleteFilterCommand = new RelayCommand(DeleteFilter);
 
-            NavigateToReport = 
-                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.GenerateReport), () => SelectedCustomer != null);
+            NavigateToReport = new RelayCommand(
+                () => _navigationService.NavigateTo(Routes.Routes.GenerateReport, SelectedCustomer), 
+                () => SelectedCustomer != null);
 
             NavigateToCustomerUpdateCommand = new RelayCommand(
                 () => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate, SelectedCustomer),
