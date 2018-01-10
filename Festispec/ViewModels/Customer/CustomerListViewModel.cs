@@ -69,12 +69,11 @@ namespace Festispec.ViewModels.Customer
 
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            SearchCustomers();
-
-
             if (args.PropertyName != nameof(NavigationService.CurrentRoute)) return;
 
             if (NavigationService.CurrentRoute != Routes.Routes.CustomerList) return;
+
+            LoadCustomers();
         }
 
         //register ICommands

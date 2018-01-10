@@ -49,15 +49,15 @@
             <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding Path=EntityViewModel.LastName}" />
             <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding Path=EntityViewModel.Telephone}" />
 
-            <Label Grid.Column="2" Grid.Row="0">Huisnummer*</Label>
-            <Label Grid.Column="2" Grid.Row="1">Postcode*</Label>
+            <Label Grid.Column="2" Grid.Row="0">Postcode*</Label>
+            <Label Grid.Column="2" Grid.Row="1">Huisnummer*</Label>
             <Label Grid.Column="2" Grid.Row="2">Straatnaam*</Label>
             <Label Grid.Column="2" Grid.Row="3">Gemeente*</Label>
             <Label Grid.Column="2" Grid.Row="4">Stad*</Label>
             <Label Grid.Column="2" Grid.Row="5">Land*</Label>
 
-            <TextBox Grid.Column="3" Grid.Row="0" Text="{Binding Path=EntityViewModel.HouseNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding Path=EntityViewModel.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Column="3" Grid.Row="0" Text="{Binding Path=EntityViewModel.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="6" />
+            <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding Path=EntityViewModel.HouseNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <TextBox Grid.Column="3" Grid.Row="2" Text="{Binding Path=EntityViewModel.Street}" IsEnabled="False" />
             <TextBox Grid.Column="3" Grid.Row="3" Text="{Binding Path=EntityViewModel.Municipality}" IsEnabled="False" />
             <TextBox Grid.Column="3" Grid.Row="4" Text="{Binding Path=EntityViewModel.City}" IsEnabled="False" />

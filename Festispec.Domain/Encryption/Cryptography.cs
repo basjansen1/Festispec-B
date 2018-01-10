@@ -38,6 +38,8 @@ namespace Festispec.Domain.Encryption
         {
             var EncryptionKey = ConfigurationManager.AppSettings["EncryptionKey"];
                 //we can change the code converstion key as per our requirement, but the decryption key should be same as encryption key    
+            if (cipherText == null) return cipherText;
+
             cipherText = cipherText.Replace(" ", "+");
             var cipherBytes = Convert.FromBase64String(cipherText);
             using (var encryptor = Aes.Create())
@@ -59,6 +61,7 @@ namespace Festispec.Domain.Encryption
                 }
             }
             return cipherText;
+            
         }
     }
 }

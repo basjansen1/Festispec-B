@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using Festispec.ViewModels.Factory.Interface;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using Festispec.Domain.Encryption;
 using Festispec.ViewModels.Contact;
 
 namespace Festispec.ViewModels.Inspector
@@ -127,10 +128,10 @@ namespace Festispec.ViewModels.Inspector
 
         public string Password
         {
-            get { return Entity.Password; }
+            get { return Cryptography.Decrypt(Entity.Password); }
             set
             {
-                Entity.Password = value;
+                Entity.Password = Cryptography.Encrypt(value);
                 RaisePropertyChanged();
             }
         }

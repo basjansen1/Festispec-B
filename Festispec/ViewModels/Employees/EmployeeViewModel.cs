@@ -7,7 +7,7 @@ using Festispec.Domain;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.ViewModels.Address;
-
+using Festispec.Domain.Encryption;
 namespace Festispec.ViewModels.Employee
 {
     public class EmployeeViewModel :
@@ -87,10 +87,10 @@ namespace Festispec.ViewModels.Employee
 
         public string Password
         {
-            get { return Entity.Password; }
+            get { return Cryptography.Decrypt(Entity.Password); }
             set
             {
-                Entity.Password = value;
+                Entity.Password = Cryptography.Encrypt(value);
                 RaisePropertyChanged();
             }
         }
