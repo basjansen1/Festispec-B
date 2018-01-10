@@ -59,7 +59,7 @@ INSERT INTO [dbo].[Template] ([Id], [Name], [Description]) VALUES (1, N'van Aken
 SET IDENTITY_INSERT [dbo].[Template] OFF
 
 SET IDENTITY_INSERT [dbo].[Question] ON
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (1, N'Op een schaal van 1 tot 10 hoe geschikt is de tramkade voor het geven van Festivals?', N'*1 - Niet geschikt, 5 - Het kan maar niet praktisch, 10 - Perfecte plek voor een festival', N'Getal', NULL)
+INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (1, N'Op een schaal van 1 tot 10 hoe geschikt is de tramkade voor het geven van Festivals?', N'*1 - Niet geschikt, 5 - Het kan maar niet praktisch, 10 - Perfecte plek voor een festival', N'Reeks', NULL)
 INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (2, N'Geef een indruk van de sfeer impressie bij de mengfabriek. Is de omgeving gezellig aangekleed?', NULL, N'Tekst', NULL)
 INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (3, N'Maak een foto van de mooiste graffiti op de voersilo''s. ', NULL, N'Beeld', NULL)
 INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (4, N'Meet de afstand tussen de mengfabriek en het werkwarenhuis.', N'Er loopt een steeg tussen de deze 2 panden. Maak om de 5 meter een schatting wat de breedte is van de steeg.', N'Tabel', N'["Afstand in steeg","Breedte van steeg"]')
@@ -70,7 +70,7 @@ INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], 
 INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (9, N'Weet jij welke band er bij elke act aan het optreden is?', N'De kaaihallen zijn dicht, maar normaliter een mooie plek voor een main stage. Er hangen 4 foto''s aan de deur. 6 opties: Guus meeuwis, metallica, de toppers, adele, lil kleine, lady gaga', N'Tabel', N'["Act","Sfeer"]')
 INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (10, N'Hoe druk is het bij de Main stage?', N'Maak bij elke act een schatting. 4 foto''s en dan een schatting.', N'Beeld', NULL)
 INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (11, N'Hoe druk was het in het van Aken Restaurant?', N'Maak elk kwartier een schatting', N'Tabel', N'["Tijd","Drukte"]')
-INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (12, N'Op een schaal van 1 tot 10, hoe leuk vond je het om op deze manier de applicatie te testen?', N'*1 - Meh, *5 - Wel grappig, *10 - Een stuk leuker dan in een klaslokaal', N'Getal', NULL)
+INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (12, N'Op een schaal van 1 tot 10, hoe leuk vond je het om op deze manier de applicatie te testen?', N'*1 - Meh, *5 - Wel grappig, *10 - Een stuk leuker dan in een klaslokaal', N'Reeks', NULL)
 INSERT INTO [dbo].[Question] ([Id], [Name], [Description], [QuestionType_Type], [Metadata]) VALUES (13, N'Losse opmerking', NULL, N'Tekst', NULL)
 SET IDENTITY_INSERT [dbo].[Question] OFF
 
