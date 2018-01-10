@@ -10,17 +10,27 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock FontSize="20">Genereer rapport</TextBlock>
         <Label Grid.Row="1">Selecteer aantal inspecties</Label>
         <ComboBox ItemsSource="{Binding OptionList}" SelectedItem="{Binding SelectedAmount}" Grid.Row="2"></ComboBox>
-        <Button Command="{Binding Path=DownloadCommand}" Grid.Row="3">Download PDF</Button>
+        <Label Grid.Row="3">Voeg advies toe:</Label>
+        <TextBox Text="{Binding Advise}" Grid.Row="4" Grid.RowSpan="4"/>
+        <Button Command="{Binding Path=DownloadCommand}" Grid.Row="8">Download PDF</Button>
     </Grid>
 </Page>

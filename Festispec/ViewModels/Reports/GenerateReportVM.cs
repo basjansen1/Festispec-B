@@ -18,6 +18,8 @@ namespace Festispec.ViewModels.Reports
         public ICommand DownloadCommand { get; set; }
         public List<int> OptionList { get; set; }
         public int SelectedAmount { get; set; }
+
+        public string Advise { get; set; }
         #endregion
 
         #region fields
@@ -37,7 +39,7 @@ namespace Festispec.ViewModels.Reports
             SelectedAmount = 1;
 
             OptionList = new List<int>();
-            int j = 0;
+            int j = 1;
             foreach(InspectionVM ins in _inspectionVMList)
             {
                 OptionList.Add(j++);
@@ -48,25 +50,21 @@ namespace Festispec.ViewModels.Reports
         private void Download()
         {
             _inspectionVMList.OrderBy(i => i.Id).Reverse();
-            if (_inspectionVMList.Count < SelectedAmount)
-            {
-                MessageBox.Show("Er zijn niet zoveel inspecties");
-                return;
-            }
+            
             _inspectionVMList = _inspectionVMList.Skip(Math.Max(0, _inspectionVMList.Count() - SelectedAmount)).ToList();
 
             _pdfWriter = new InspectionResultsWriter(_inspectionVMList.Select(i => i.toModel()).ToList(), _selectedCustomer.Name);
             
-            _pdfWriter.CreateDocument();
+            _pdfWriter.CreateDocument(Advise);
 
             // open filechooser
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = "Naam"; 
-            dlg.DefaultExt = ".pdf"; // 
+            dlg.FileName = _inspectionVMList.First().Customer.Name + _inspectionVMList.First().Name; 
+            dlg.DefaultExt = ".pdf";
             dlg.Filter = "PDF documents (.pdf)|*.pdf";
             string filename = null;
             
-            Nullable<bool> result = dlg.ShowDialog();
+            bool? result = dlg.ShowDialog();
 
             if (result == true)
             { 
@@ -76,7 +74,6 @@ namespace Festispec.ViewModels.Reports
                 try
                 {
                     _pdfWriter.Save(filename);
-                    //_pdfWriter.OpenDocument("testdocument"); // Test methode, remove this when finished
                     MessageBox.Show("Het rapport is opgeslagen");
                 }
                 catch

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using Microsoft.VisualBasic;
 
 namespace Festispec.Domain.PDF
 {
@@ -124,25 +125,6 @@ namespace Festispec.Domain.PDF
                 }
                 y.Add(z);
             }
-            //                    z.Add(answers.Count(row => row[0] == label && row[1] == group));
-
-
-            //            foreach (var answers in question.InspectionQuestionAnswer.Select(answer => answer.DeserializeTabelAnswer()))
-            //            {
-            //                labels = answers.Select(row => row[0]).GroupBy(row => row).Select(row => row.First());
-            //                groups = answers.Select(row => row[1]).GroupBy(row => row).Select(row => row.First());
-            //                
-            //                foreach (var label in labels)
-            //                {
-            //                    var z = new List<int>();
-            //                    foreach (var group in groups)
-            //                    {
-            //                        z.Add(answers.Count(row => row[0] == label && row[1] == group));
-            //                    }
-            //                    y.Add(z);
-            //                }
-            //            }
-
             AddImage(_chart.GenerateChartFromTableQuestion(groups.ToList(), title, labels.ToList(), y));
         }
 
@@ -176,7 +158,7 @@ namespace Festispec.Domain.PDF
             }
         }
 
-        public void CreateDocument()
+        public void CreateDocument(string advise)
         {
             AddCoverPage();
             AddIntroduction();
@@ -188,7 +170,15 @@ namespace Festispec.Domain.PDF
                     AddQuestionAnswer(inspectionQuestion);
                 }
             }
+            AddAdvise(advise);
         }
 
+        private void AddAdvise(string advise)
+        {
+            AddParagraphTitle("Advies:");
+            AddLine(advise);
+
+            AddEmptyLine();
+        }
     }
 }
