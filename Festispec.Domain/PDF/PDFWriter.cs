@@ -73,12 +73,7 @@ namespace Festispec.Domain.PDF
 
         public void Save(string path)
         {
-            _document.Save(path + ".pdf");
-        }
-
-        public void OpenDocument(string documentTitle) // TestMethod
-        {
-            Process.Start(documentTitle + ".pdf");
+            _document.Save(path);
         }
     }
 }
