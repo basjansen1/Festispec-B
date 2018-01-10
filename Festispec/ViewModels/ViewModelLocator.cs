@@ -15,7 +15,6 @@ using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
 using Festispec.NavigationService;
 using Festispec.State;
-using Festispec.ViewModels.CustomerCRUD;
 using Festispec.ViewModels.Factory;
 using Festispec.ViewModels.Factory.Interface;
 using Festispec.ViewModels.Employee;
@@ -223,8 +222,7 @@ namespace Festispec.ViewModels
         public CustomerAddOrUpdateViewModel CustomerAddOrUpdate =>
     ServiceLocator.Current.GetInstance<CustomerAddOrUpdateViewModel>();
 
-        public CustomerListViewModel CustomerList =>
-            ServiceLocator.Current.GetInstance<CustomerListViewModel>();
+        public CustomerListViewModel CustomerList => ServiceLocator.Current.GetInstance<CustomerListViewModel>();
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
 
@@ -257,9 +255,6 @@ namespace Festispec.ViewModels
         public PlanningAddOrUpdateViewModel PlanningAddOrUpdate => new PlanningAddOrUpdateViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory, InspectorRepositoryFactory);
         public PlanningAddViewModel PlanningAdd => new PlanningAddViewModel(NavigationService, PlanningRepositoryFactory, PlanningViewModelFactory, InspectorRepositoryFactory);
 
-        public CustomerListViewModel CustomerVMList =>
-                ServiceLocator.Current.GetInstance<CustomerListViewModel>();
-
         #endregion
 
         #region ViewModels
@@ -272,7 +267,7 @@ namespace Festispec.ViewModels
 
         public EditInspectionVM GetEditInspection => ServiceLocator.Current.GetInstance<EditInspectionVM>();
 
-        public GenerateReportVM GetGenerateReport => new GenerateReportVM(GetInspectionList, CustomerList.SelectedCustomer, NavigationService);
+        public GenerateReportVM GetGenerateReport => new GenerateReportVM(GetInspectionList, CustomerList.SelectedCustomer,NavigationService);
 
         public MapOverviewViewModel MapOverview => ServiceLocator.Current.GetInstance<MapOverviewViewModel>();
 

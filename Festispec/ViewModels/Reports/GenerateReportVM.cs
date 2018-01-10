@@ -36,11 +36,12 @@ namespace Festispec.ViewModels.Reports
             _inspectionVMList = inspectionList.InspectionVMList.Where(i => i.CustomerId == _selectedCustomer.Id).ToList();
             SelectedAmount = 1;
 
-            OptionList = new List<int>()
+            OptionList = new List<int>();
+            int j = 0;
+            foreach(InspectionVM ins in _inspectionVMList)
             {
-                1, 2, 3, 4, 5
-            };
-
+                OptionList.Add(j++);
+            }
             DownloadCommand = new RelayCommand(Download);
         }
 

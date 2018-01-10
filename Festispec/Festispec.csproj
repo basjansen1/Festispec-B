@@ -181,9 +181,9 @@
     <Compile Include="ViewModels\Address\AddressAddOrUpdateViewModelBase.cs" />
     <Compile Include="ViewModels\Address\AddressViewModelBase.cs" />
     <Compile Include="ViewModels\Contact\ContactViewModelBase.cs" />
-    <Compile Include="ViewModels\CustomerCRUD\CustomerAddOrUpdateViewModel.cs" />
-    <Compile Include="ViewModels\CustomerCRUD\CustomerListViewModel.cs" />
-    <Compile Include="ViewModels\CustomerCRUD\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\Customer\CustomerAddOrUpdateViewModel.cs" />
+    <Compile Include="ViewModels\Customer\CustomerListViewModel.cs" />
+    <Compile Include="ViewModels\Customer\CustomerViewModel.cs" />
     <Compile Include="ViewModels\Factory\CustomerViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\InspectionQuestionAnswerViewModelFactory.cs" />
     <Compile Include="ViewModels\Factory\Interface\ICustomerViewModelFactory.cs" />

@@ -234,6 +234,19 @@ namespace Festispec.ViewModels.Inspection
             }
         }
 
+        public string Instructions
+        {
+            get
+            {
+                return Entity.Instructions;
+            }
+            set
+            {
+                Entity.Instructions = value;
+                RaisePropertyChanged("Instructions");
+            }
+        }
+
         public Domain.Customer Customer
         {
             get
@@ -311,6 +324,7 @@ namespace Festispec.ViewModels.Inspection
             to.Status = from.Status;
             to.Status_Status = from.Status_Status;
             to.Website = from.Website;
+            to.Instructions = from.Instructions;
         }
 
         public int Id => Entity.Id;
