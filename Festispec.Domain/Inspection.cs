@@ -27,6 +27,7 @@ namespace Festispec.Domain
         public System.DateTime End { get; set; }
         public string Status_Status { get; set; }
         public int Customer_Id { get; set; }
+        public string Instructions { get; set; }
     
         public virtual InspectionStatus Status { get; set; }
         public virtual Customer Customers { get; set; }

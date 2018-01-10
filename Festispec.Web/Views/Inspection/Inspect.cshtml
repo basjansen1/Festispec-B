@@ -2,8 +2,14 @@
 @model Festispec.Domain.Planning
 
 <form id="inspectionForm" method="post">
+    
+<div class="row">
+    <h1>@Model.Inspection.Name</h1>
+    <h3>Instructies:</h3>
+    <pre>@Model.Inspection.Instructions</pre>
+</div>
 
-    @foreach (var inspectionQuestion in Model.Inspection.InspectionQuestion)
+@foreach (var inspectionQuestion in Model.Inspection.InspectionQuestion)
     {
         var inspectionQuestionAnswer = Model.InspectionQuestionAnswer
             .Where(answer => answer.Inspection_Id == inspectionQuestion.Inspection_Id && answer.Inspector_Id == Model.Inspector_Id && answer.Question_Id == inspectionQuestion.Question_Id && answer.Date == Model.Date)
