@@ -49,7 +49,11 @@ INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Mana
 INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Ylja', N'7UngL3aamo7amLAvLU+dSA==', N'Medewerker', 2, N'2017-01-01 00:00:00', NULL, 8)
 INSERT INTO [dbo].[Address_Employee] ([Username], [Password], [Role_Role], [Manager_Id], [HiredFrom], [HiredTo], [Id]) VALUES (N'Alex', N'CCQ8wetJxrAclKi81seEVA==', N'Medewerker', 1, N'2017-01-01 00:00:00', NULL, 9)
 
-INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Status_Status], [Customer_Id], [Id]) VALUES (N'Inspectie bij van Aken', N'http://werkwarenhuis.nl/food/', N'2018-01-11 00:00:00', N'2018-01-11 00:00:00', N'Geaccepteerd', 10, 11)
+INSERT INTO [dbo].[Address_Inspection] ([Name], [Website], [Start], [End], [Status_Status], [Customer_Id], [Id], [Instructions]) VALUES (N'Inspectie bij van Aken', N'http://werkwarenhuis.nl/food/', N'2018-01-11 00:00:00', N'2018-01-11 00:00:00', N'Geaccepteerd', 10, 11, N'Vandaag gaan jullie een inspectie uitvoeren op de Tramkade omtrent de kwaliteit van het festival terrein met als focus de ruimte voor het plaatsen van foodtrucks. Naast deze informatie wil de Tramkade ook meer inzicht in de drukte op verschillende onderdelen in het festival. Om de drukte en optredens te simuleren hanger er op het festivalterrein pamfletten met afbeeldingen en informatie over festivals.
+
+Zorg voor een duidelijke en volledige omschrijving van wat je ziet en gebruik de juiste technieken om drukte in te schatten op verschillende locaties.
+
+Hieronder is een kaart van de tramkade en bijbehorende panden. De antwoorden op alle vragen vind je binnen het terrein (rode lijn). Je hoeft dus niet van het terrein af om een vraag te beantwoorden.')
 
 INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2017-01-01 00:00:00', N'2020-01-01 00:00:00', 4)
 --INSERT INTO [dbo].[Address_Inspector] ([CertificationFrom], [CertificationTo], [Id]) VALUES (N'2017-01-01 00:00:00', N'2020-01-01 00:00:00', ??)
