@@ -108,7 +108,7 @@ namespace Festispec.Domain.PDF
 
                 var extraGroups = answers.Select(row => row[1]).GroupBy(row => row).Select(row => row.First());
                 foreach (var extraGroup in extraGroups)
-                    if (!groups.Contains(extraGroup))
+                    if (!groups.Contains(extraGroup) && !string.IsNullOrWhiteSpace(extraGroup))
                         groups.Add(extraGroup);
             }
 
