@@ -107,3 +107,6 @@ INSERT INTO [dbo].[InspectionQuestion] ([Inspection_Id], [Question_Id]) VALUES (
 
 INSERT INTO [dbo].[Planning] ([Inspection_Id], [Inspector_Id], [Date], [TimeFrom], [TimeTo], [Hours]) VALUES (11, 4, N'2018-01-11 00:00:00', N'12:15:00', N'16:25:00', NULL)
 --INSERT INTO [dbo].[Planning] ([Inspection_Id], [Inspector_Id], [Date], [TimeFrom], [TimeTo], [Hours]) VALUES (11, ??, N'2018-01-11 00:00:00', N'12:15:00', N'16:25:00', NULL)
+INSERT INTO [DBO].[Regulation] ([Id], [Description], [Municipality], [Name]) VALUES (1, N'Er mag niet gerookt worden in het openbaar', N's-Hertogenbosch', N'Roken')
+INSERT INTO [DBO].[Regulation] ([Id], [Description], [Municipality], [Name]) VALUES (2, N'Er geen hard muziek afgespeeld worden na 11 uur in de avond', N's-Hertogenbosch', 'Muziek')
+INSERT INTO [DBO].[Regulation] ([Id], [Description], [Municipality], [Name]) VALUES (3, N'Er mag geen afval rondzwerven', N's-Hertogenbosch', N'Afval')
