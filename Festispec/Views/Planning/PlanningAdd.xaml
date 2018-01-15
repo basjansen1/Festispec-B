@@ -39,6 +39,7 @@
                 <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedValue="{Binding Path=EntityViewModel.Inspector, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Inspectors}" GridLinesVisibility="Horizontal" HeadersVisibility="Column">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Naam" Binding="{Binding FullName}" Width="*" />
+                        <DataGridTextColumn Header="Afstand" Binding="{Binding Path=Distance, StringFormat=~{0} km}" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

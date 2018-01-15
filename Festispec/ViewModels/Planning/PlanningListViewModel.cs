@@ -136,7 +136,12 @@ namespace Festispec.ViewModels.Planning
                 Plannings.Clear();
                 // Fill plannings with  new values to trigger observablecollection updates.
                 foreach (var planning in plannings)
+                {
+                    var d = planning.Inspector.Location.Distance(planning.Inspection.Location) / 1000;
+                    if (d != null)
+                        planning.Inspector.Distance = (int)(double)d;
                     Plannings.Add(planning);
+                }
             }
         }
 
