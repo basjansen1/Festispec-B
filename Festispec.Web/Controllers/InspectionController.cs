@@ -115,13 +115,13 @@ namespace Festispec.Web.Controllers
 
             using (var inspectionRepository = _inspectionRepositoryFactory.CreateRepository())
             {
-                var inspection = inspectionRepository.Get(id);
-                if(inspection == null)
+                var inspection = inspectionRepository.Get().FirstOrDefault(i => i.Id == id);
+                if (inspection == null)
                     return HttpNotFound();
 
                 using (var regulationRepository = _regulationRepositoryFactory.CreateRepository())
                 {
-                    var regulations = regulationRepository.Get().Where(regulation => regulation.Municipality == inspection.Municipality);
+                    var regulations = regulationRepository.Get().Where(regulation => regulation.Municipality == inspection.Municipality || regulation.Municipality == null || regulation.Municipality == "").ToList();
 
                     return View(regulations);
                 }
