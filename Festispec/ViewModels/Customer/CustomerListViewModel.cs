@@ -48,7 +48,17 @@ namespace Festispec.ViewModels.Customer
         public ICommand DeleteFilterCommand { get; set; }
         private readonly List<CustomerViewModel> _customerList;
         public ObservableCollection<CustomerViewModel> Customers { get; private set; }
-        public CustomerViewModel SelectedCustomer { get; set; }
+        private CustomerViewModel _selectedCustomer;
+
+        public CustomerViewModel SelectedCustomer
+        {
+            get { return _selectedCustomer; }
+            set
+            {
+                _selectedCustomer = value;
+                RaisePropertyChanged(nameof(SelectedCustomer));
+            }
+        }
 
         public string SearchInput
         {
