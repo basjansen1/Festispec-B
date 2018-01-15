@@ -13,13 +13,13 @@ namespace Festispec.Domain.PDF
     public class InspectionResultsWriter : PDFWriter
     {
         private List<Inspection> _inspectionList;
-        private string _customerName;
+        private Customer _customer;
         private ChartExporter _chart;
 
-        public InspectionResultsWriter(List<Inspection> inspectionList, string customerName)
+        public InspectionResultsWriter(List<Inspection> inspectionList, Customer customer)
         {
             _inspectionList = inspectionList;
-            _customerName = customerName;
+            _customer = customer;
 
             _chart = new ChartExporter();
         }
@@ -33,7 +33,10 @@ namespace Festispec.Domain.PDF
             AddLine("Inspectie resultaten", new XFont("Verdana", 35, XFontStyle.Bold));
             AddEmptyLine();
             AddLine("Periode: " + _inspectionList.Min(i => i.Start).ToShortDateString() + " - " + _inspectionList.Max(i => i.Start).ToShortDateString(), new XFont("Verdana", 16, XFontStyle.Bold));
-            AddLine(_customerName, new XFont("Verdana", 16, XFontStyle.Bold));
+            AddLine(_customer.Name, new XFont("Verdana", 16, XFontStyle.Bold));
+            AddLine(_customer.Email, new XFont("Verdana", 16, XFontStyle.Bold));
+            AddLine(_customer.Telephone, new XFont("Verdana", 16, XFontStyle.Bold));
+            AddLine(_inspectionList.First().Street + ", " + _inspectionList.First().Municipality);
             AddNewPage();
         }
 
@@ -108,7 +111,7 @@ namespace Festispec.Domain.PDF
 
                 var extraGroups = answers.Select(row => row[1]).GroupBy(row => row).Select(row => row.First());
                 foreach (var extraGroup in extraGroups)
-                    if (!groups.Contains(extraGroup))
+                    if (!groups.Contains(extraGroup) && !string.IsNullOrWhiteSpace(extraGroup))
                         groups.Add(extraGroup);
             }
 
