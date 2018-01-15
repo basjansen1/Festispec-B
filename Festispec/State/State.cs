@@ -40,7 +40,7 @@ namespace Festispec.State
 
         private bool CheckConnection()
         {
-            return false; // only for testing if works offline
+//            return false; // only for testing if works offline
             try
             {
                 using (var dbContext = new FestispecContainer())
