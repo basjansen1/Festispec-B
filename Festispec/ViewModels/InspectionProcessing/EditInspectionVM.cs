@@ -22,7 +22,6 @@ namespace Festispec.ViewModels.Inspection
         #region commands
         public ICommand EditInspectionCommand { get; set; }
         public ICommand CancelInspectionCommand { get; set; }
-        public ICommand ShowRegulationCommand { get; set; }
         public ICommand SearchAddressCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         #endregion
@@ -48,7 +47,6 @@ namespace Festispec.ViewModels.Inspection
 
             EditInspectionCommand = new RelayCommand(SaveChanges);
             CancelInspectionCommand = new RelayCommand(_navigationService.GoBack);
-            ShowRegulationCommand = new RelayCommand(OpenRegulation);
             SearchAddressCommand = new RelayCommand(()=>SearchAddress());
             DeleteCommand = new RelayCommand(DeleteSelectedInspection);
 
@@ -97,11 +95,6 @@ namespace Festispec.ViewModels.Inspection
             }
             else
                 MessageBox.Show("Er is iets fout gegaan met het bewerken van een inspectie! Vul alle velden in");
-        }
-
-        private void OpenRegulation()
-        {
-            _navigationService.NavigateTo(Routes.Routes.ShowRegulation, _selectedMunicipality);
         }
 
         private bool SearchAddress()

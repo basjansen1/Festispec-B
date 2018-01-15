@@ -80,17 +80,17 @@ namespace Festispec.ViewModels.Customer
         private void RegisterCommands()
         {
             NavigateToCustomerAddCommand =
-                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate));
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate), () => NavigationService.CanAndHasAccess(Routes.Routes.CustomerAddOrUpdate));
 
             DeleteFilterCommand = new RelayCommand(DeleteFilter);
 
             NavigateToReport = new RelayCommand(
                 () => _navigationService.NavigateTo(Routes.Routes.GenerateReport, SelectedCustomer), 
-                () => SelectedCustomer != null);
+                () => SelectedCustomer != null && NavigationService.CanAndHasAccess(Routes.Routes.GenerateReport));
 
             NavigateToCustomerUpdateCommand = new RelayCommand(
                 () => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate, SelectedCustomer),
-                () => SelectedCustomer != null
+                () => SelectedCustomer != null && NavigationService.CanAndHasAccess(Routes.Routes.CustomerAddOrUpdate)
                 );
 
             SelectedSearch = new RelayCommand(SearchCustomers);

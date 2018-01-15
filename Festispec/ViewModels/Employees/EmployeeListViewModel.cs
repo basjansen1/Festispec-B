@@ -70,10 +70,10 @@ namespace Festispec.ViewModels.Employee
         private void RegisterCommands()
         {
             NavigateToEmployeeAddCommand =
-                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.EmployeeAddOrUpdate));
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.EmployeeAddOrUpdate), () => NavigationService.CanAndHasAccess(Routes.Routes.EmployeeAddOrUpdate));
             NavigateToEmployeeUpdateCommand = new RelayCommand(
                 () => _navigationService.NavigateTo(Routes.Routes.EmployeeAddOrUpdate, SelectedEmployee),
-                () => SelectedEmployee != null);
+                () => SelectedEmployee != null && NavigationService.CanAndHasAccess(Routes.Routes.EmployeeAddOrUpdate));
             EmployeeDeleteCommand = new RelayCommand(() => {
                 SelectedEmployee.Delete();
                 LoadEmployees();
