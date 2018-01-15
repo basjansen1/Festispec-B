@@ -237,7 +237,8 @@ namespace Festispec.Routes
         {
             Key = "InspectionQuestionnaire",
             PageType = new Uri("../Views/Inspection/InspectionQuestionnaire.xaml", UriKind.Relative),
-            Roles = new[] { "Manager", "Medewerker" }
+            Roles = new[] { "Manager", "Medewerker" },
+            Offline = true
         };
 
         public static Route MapOverview = new Route()
