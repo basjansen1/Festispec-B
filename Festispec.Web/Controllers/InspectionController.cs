@@ -15,10 +15,14 @@ namespace Festispec.Web.Controllers
     public class InspectionController : Controller
     {
         private readonly IPlanningRepositoryFactory _planningRepositoryFactory;
+        private readonly IInspectionRepositoryFactory _inspectionRepositoryFactory;
+        private readonly IRegulationRepositoryFactory _regulationRepositoryFactory;
 
         public InspectionController()
         {
             _planningRepositoryFactory = new PlanningRepositoryFactory(true);
+            _inspectionRepositoryFactory = new InspectionRepositoryFactory(true);
+            _regulationRepositoryFactory = new RegulationRepositoryFactory(true);
         }
 
         public ActionResult Index()
@@ -102,6 +106,26 @@ namespace Festispec.Web.Controllers
             }
 
             return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        public ActionResult Regulations(int? id)
+        {
+            if (!id.HasValue)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            using (var inspectionRepository = _inspectionRepositoryFactory.CreateRepository())
+            {
+                var inspection = inspectionRepository.Get(id);
+                if(inspection == null)
+                    return HttpNotFound();
+
+                using (var regulationRepository = _regulationRepositoryFactory.CreateRepository())
+                {
+                    var regulations = regulationRepository.Get().Where(regulation => regulation.Municipality == inspection.Municipality);
+
+                    return View(regulations);
+                }
+            }
         }
     }
 }
