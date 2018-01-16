@@ -32,6 +32,7 @@ namespace Festispec.Domain.PDF
         public void AddLine(string sentence, XFont font)
         {
             SetFont(font);
+            if(sentence != null)
             AddText(sentence);
         }
 
