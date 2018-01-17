@@ -68,10 +68,10 @@ namespace Festispec.ViewModels.Regulation
         private void RegisterCommands()
         {
             NavigateToRegulationAddCommand =
-                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.RegulationAddOrUpdate));
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.RegulationAddOrUpdate), () => NavigationService.CanAndHasAccess(Routes.Routes.RegulationAddOrUpdate));
             NavigateToRegulationUpdateCommand = new RelayCommand(
                 () => _navigationService.NavigateTo(Routes.Routes.RegulationAddOrUpdate, SelectedRegulation),
-                () => SelectedRegulation != null);
+                () => SelectedRegulation != null && NavigationService.CanAndHasAccess(Routes.Routes.RegulationAddOrUpdate));
             RegulationDeleteCommand = new RelayCommand(() => {
                 var result = MessageBox.Show("Weet je zeker dat je deze regel wilt verwijderen?", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Question);
 

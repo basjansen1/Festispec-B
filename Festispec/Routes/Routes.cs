@@ -138,7 +138,7 @@ namespace Festispec.Routes
         {
             Key = "EditInspection",
             PageType = new Uri("../Views/EditInspection.xaml", UriKind.Relative),
-            Roles = new[] {"Manager", "Medewerker"}
+            Roles = new[] {"Manager", "Medewerker"},
         };
 
         public static Route AddInspection = new Route

@@ -52,7 +52,7 @@ namespace Festispec.ViewModels.Inspection
             {
                 EntityViewModel.SelectedQuestion = null;
                 NavigationService.NavigateTo(Routes.Routes.QuestionAdd, EntityViewModel);
-            }, () => EntityViewModel != null);
+            }, () => EntityViewModel != null && NavigationService.CanAndHasAccess(Routes.Routes.QuestionAdd));
 
             QuestionDeleteCommand = new RelayCommand(() =>
             {

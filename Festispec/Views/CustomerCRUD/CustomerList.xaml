@@ -35,7 +35,7 @@
             <Button x:Name="btnSearch" Content="Zoeken" Margin="5px 5px" Grid.Column="2" Command="{Binding SelectedSearch}"/>
             <Button x:Name="btnDeleteSearch" Content="Zoekveld wissen" Margin="5px 5px" Grid.Column="3" Command="{Binding DeleteFilterCommand}"/>
         </Grid>
-        <DataGrid Grid.Row="2" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}" 
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" ItemsSource="{Binding Customers}" 
                       GridLinesVisibility="Horizontal" HeadersVisibility="Column" VerticalAlignment="Stretch">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />

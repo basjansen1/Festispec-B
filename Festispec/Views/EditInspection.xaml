@@ -82,7 +82,6 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="btnCancel" Content="Annuleer" IsCancel="True" Grid.Column="0" Command="{Binding CancelInspectionCommand}"/>
-            <Button x:Name="btnRegulation" Content="Regelgeving" IsCancel="True" Grid.Column="2" Command="{Binding ShowRegulationCommand}"/>
             <Button x:Name="btnConfirmEdit" Content="Verzoek aanpassen" Grid.Column="3" Command="{Binding EditInspectionCommand}"/>
         </Grid>
     </Grid>

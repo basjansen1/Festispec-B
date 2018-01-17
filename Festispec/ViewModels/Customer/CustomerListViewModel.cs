@@ -48,7 +48,17 @@ namespace Festispec.ViewModels.Customer
         public ICommand DeleteFilterCommand { get; set; }
         private readonly List<CustomerViewModel> _customerList;
         public ObservableCollection<CustomerViewModel> Customers { get; private set; }
-        public CustomerViewModel SelectedCustomer { get; set; }
+        private CustomerViewModel _selectedCustomer;
+
+        public CustomerViewModel SelectedCustomer
+        {
+            get { return _selectedCustomer; }
+            set
+            {
+                _selectedCustomer = value;
+                RaisePropertyChanged(nameof(SelectedCustomer));
+            }
+        }
 
         public string SearchInput
         {
@@ -80,17 +90,17 @@ namespace Festispec.ViewModels.Customer
         private void RegisterCommands()
         {
             NavigateToCustomerAddCommand =
-                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate));
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate), () => NavigationService.CanAndHasAccess(Routes.Routes.CustomerAddOrUpdate));
 
             DeleteFilterCommand = new RelayCommand(DeleteFilter);
 
             NavigateToReport = new RelayCommand(
                 () => _navigationService.NavigateTo(Routes.Routes.GenerateReport, SelectedCustomer), 
-                () => SelectedCustomer != null);
+                () => SelectedCustomer != null && NavigationService.CanAndHasAccess(Routes.Routes.GenerateReport));
 
             NavigateToCustomerUpdateCommand = new RelayCommand(
                 () => _navigationService.NavigateTo(Routes.Routes.CustomerAddOrUpdate, SelectedCustomer),
-                () => SelectedCustomer != null
+                () => SelectedCustomer != null && NavigationService.CanAndHasAccess(Routes.Routes.CustomerAddOrUpdate)
                 );
 
             SelectedSearch = new RelayCommand(SearchCustomers);

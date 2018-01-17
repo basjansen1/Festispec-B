@@ -91,10 +91,10 @@ namespace Festispec.ViewModels.Planning
         {
             NavigateToAddPlanningCommand =
                 new RelayCommand(() => NavigationService.NavigateTo(Routes.Routes.PlanningAdd,
-                    _planningViewModelFactory.CreateViewModelForInspection(Inspection)));
+                    _planningViewModelFactory.CreateViewModelForInspection(Inspection)), () => NavigationService.CanAndHasAccess(Routes.Routes.PlanningAdd));
             NavigateToAddOrUpdatePlanningCommand = new RelayCommand(
                 () => NavigationService.NavigateTo(Routes.Routes.PlanningUpdate, SelectedPlanning),
-                () => SelectedPlanning != null);
+                () => SelectedPlanning != null && NavigationService.CanAndHasAccess(Routes.Routes.PlanningUpdate));
             PlanningDeleteCommand = new RelayCommand(() =>
             {
                 var result = MessageBox.Show("Weet je zeker dat je deze planning wilt verwijderen?", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Question);
