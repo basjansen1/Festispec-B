@@ -76,6 +76,7 @@
     <Compile Include="Contact.cs">
       <DependentUpon>FestispecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extended\InspectorExtended.cs" />
     <Compile Include="Extension\DateRangeExtension.cs" />
     <Compile Include="IContact.cs" />
     <Compile Include="IAddress.cs" />

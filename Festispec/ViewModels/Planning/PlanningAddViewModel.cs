@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
@@ -56,7 +57,12 @@ namespace Festispec.ViewModels.Planning
                 Inspectors.Clear();
                 // Fill inspectors with  new values to trigger observablecollection updates.
                 foreach (var inspector in query)
+                {
+                    var d = inspector.Location.Distance(EntityViewModel.Inspection.Location) / 1000;
+                    if (d != null)
+                        inspector.Distance = (int) (double) d;
                     Inspectors.Add(inspector);
+                }
             }
 
             // Raise property changed to update the UI

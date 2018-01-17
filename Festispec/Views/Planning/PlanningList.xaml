@@ -75,6 +75,7 @@
                         <DataGridTextColumn Header="Datum" Binding="{Binding Date, Converter={StaticResource AmericanDateConverter}}" Width="*" />
                         <DataGridTextColumn Header="Tijd van" Binding="{Binding TimeFrom}" Width="*" />
                         <DataGridTextColumn Header="Tijd tot" Binding="{Binding TimeTo}" Width="*" />
+                        <DataGridTextColumn Header="Afstand" Binding="{Binding Path=Inspector.Distance, StringFormat=~{0} km}" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

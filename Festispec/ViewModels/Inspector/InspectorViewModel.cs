@@ -216,6 +216,16 @@ namespace Festispec.ViewModels.Inspector
             }
         }
 
+        public int Distance
+        {
+            get { return Entity.Distance; }
+            set
+            {
+                Entity.Distance = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public override bool Save()
         {
             try
