@@ -1,6 +1,8 @@
 ﻿@using Festispec.Domain
 @model Festispec.Domain.Planning
 
+@Html.ActionLink("Regulations", "Regulations/" + Model.Inspection.Id, "Inspection", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+
 <form id="inspectionForm" method="post">
     
 <div class="row">
