@@ -27,6 +27,8 @@ namespace Festispec.Domain
                     new List<string> {"", ""},
                     new List<string> {"", ""},
                     new List<string> {"", ""},
+                    new List<string> {"", ""},
+                    new List<string> {"", ""},
                 };
             }
         }

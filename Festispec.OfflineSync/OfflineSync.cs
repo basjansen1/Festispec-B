@@ -35,6 +35,7 @@ namespace Festispec.OfflineSync
                 {
                     destinationConnection.Open();
 
+
                     foreach (string s in TableList.Reverse()) {
                         // Delete data from local database
                         SqlCommand deleteLocalDataSqlCommand = new SqlCommand(

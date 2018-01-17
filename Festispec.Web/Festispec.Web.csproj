@@ -196,7 +196,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="App.config" />
     <None Include="Properties\PublishProfiles\FestispecWeb42IN06SOb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -228,12 +227,12 @@
     <Content Include="Views\Inspection\Inspect.cshtml" />
     <Content Include="Views\Schedule\InspectorSchedule.cshtml" />
     <Content Include="Views\Schedule\AddAvailability.cshtml" />
-    <Content Include="Views\InspectorSchedule\InspectorSchedule.cshtml" />
     <Content Include="Views\Inspection\Inform.cshtml" />
     <Content Include="Views\Inspection\Regulations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\InspectorSchedule\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
