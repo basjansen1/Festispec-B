@@ -1,23 +1,39 @@
-﻿using System.Collections.Generic;
-using Festispec.Domain;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Data.Entity.Validation;
+using System.Linq;
+using System.Windows;
 using Festispec.Domain.Repository.Factory.Interface;
 using Festispec.Domain.Repository.Interface;
+using Festispec.ViewModels.Factory.Interface;
+using Festispec.ViewModels.Question;
 
 namespace Festispec.ViewModels.Template
 {
-    public class TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, Domain.Template>
+    public class
+        TemplateViewModel : EntityViewModelBase<ITemplateRepositoryFactory, ITemplateRepository, Domain.Template>,
+            IHasQuestionCollection
     {
-        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory) : base(repositoryFactory)
+        private QuestionViewModel _selectedQuestion;
+
+        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory,
+            IQuestionViewModelFactory questionViewModelFactory) : base(repositoryFactory)
         {
+            Questions = new ObservableCollection<QuestionViewModel>(
+                Entity.TemplateQuestion.Select(question =>
+                    questionViewModelFactory.CreateViewModel(question.Question)));
         }
 
-        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory, Domain.Template entity)
+        public TemplateViewModel(ITemplateRepositoryFactory repositoryFactory,
+            IQuestionViewModelFactory questionViewModelFactory, Domain.Template entity)
             : base(repositoryFactory, entity)
         {
+            Questions = new ObservableCollection<QuestionViewModel>(
+                Entity.TemplateQuestion.Select(question =>
+                    questionViewModelFactory.CreateViewModel(question.Question)));
         }
 
         public int Id => Entity.Id;
-
 
         public string Name
         {
@@ -26,14 +42,8 @@ namespace Festispec.ViewModels.Template
             {
                 Entity.Name = value;
                 RaisePropertyChanged();
-                // TODO: Figure out which one works...
-                //RaisePropertyChanged();
-                //RaisePropertyChanged(null);
-                //RaisePropertyChanged("");
-                //RaisePropertyChanged(string.Empty);
             }
         }
-
 
         public string Description
         {
@@ -45,49 +55,85 @@ namespace Festispec.ViewModels.Template
             }
         }
 
-        public ICollection<TemplateQuestion> Questions
+        public ObservableCollection<QuestionViewModel> Questions { get; }
+
+        public QuestionViewModel SelectedQuestion
         {
-            get { return Entity.Questions; }
+            get { return _selectedQuestion; }
             set
             {
-                Entity.Questions = value;
+                _selectedQuestion = value;
                 RaisePropertyChanged();
             }
         }
 
-        public TemplateQuestionViewModel SelectedQuestion { get; set; }
-
-        public override void Save()
+        public void AddQuestion(QuestionViewModel question)
         {
-            // Map updated values
-//            Entity.Id = UpdatedEntity.Id;
-//            Entity.Name = UpdatedEntity.Name;
-//            Entity.Description = UpdatedEntity.Description;
-//            Entity.Questions = UpdatedEntity.Questions;
-
-            using (var templateRepository = RepositoryFactory.CreateRepository())
-            {
-                var updated = templateRepository.AddOrUpdate(Entity);
-            }
+            Questions.Add(question);
         }
 
-        public override void Delete()
+        public override bool Save()
         {
-            using (var templateRepository = RepositoryFactory.CreateRepository())
+            // TODO: Validation
+
+            try
             {
-                templateRepository.Delete(Entity);
+                Domain.Template updated;
+                var questionsToUpdate = Questions;
+                using (var templateRepository = RepositoryFactory.CreateRepository())
+                {
+                    updated = Id == 0
+                        ? templateRepository.Add(Entity)
+                        : templateRepository.Update(Entity, Id);
+
+                    foreach (var questionViewModel in questionsToUpdate)
+                    {
+                        // Delete if needed, else try attach
+                        if (questionViewModel.IsDeleted)
+                            templateRepository.DetachQuestions(updated, questionViewModel.Entity);
+                        else
+                            templateRepository.TryAttachQuestion(updated, questionViewModel.Entity);
+                    }
+                }
+
+                // First we map the updated values to the entity
+                MapValues(updated, Entity);
+                // Then we overwrite the original values with the new entity values
+                MapValuesToOriginal();
             }
+            catch (DbEntityValidationException ex)
+            {
+                var errorList = (from eve in ex.EntityValidationErrors
+                    from ve in eve.ValidationErrors
+                    select ve.PropertyName).ToList();
+                var joined = string.Join(", ", errorList.Select(x => x));
+                MessageBox.Show("Veld(en) niet (correct) ingevuld: " + joined);
+                return false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Er is iets fout gegaan. Controleer of alle velden correct zijn ingevuld.");
+                return false;
+            }
+
+            return true;
         }
 
-        public override Domain.Template Copy()
+        public override void MapValues(Domain.Template @from, Domain.Template to)
         {
-            return new Domain.Template
+            // Map values
+            to.Id = from.Id;
+            to.Description = from.Description;
+            to.Name = from.Name;
+
+            try
             {
-                Id = Id,
-                Name = Name,
-                Description = Description,
-                Questions = Questions
-            };
+                to.TemplateQuestion = from.TemplateQuestion;
+            }
+            catch (InvalidOperationException)
+            {
+                //
+            }
         }
     }
 }

@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "InspectorSchedule";
+}
+
+<h2>InspectorSchedule</h2>
+
+@model IEnumerable<Festispec.Domain.Schedule>
+
+
+<div class="container">
+    <div class="row">
+        <div class=col-sm-5>Niet beschikbaar vanaf</div>
+        <div class=col-sm-5>Niet beschikbaar tot</div>
+    </div>
+    <div class="row">
+        @foreach (var schedule in Model)
+        { 
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-5" style="background-color:antiquewhite;">@schedule.NotAvailableFrom</div>
+                    <div class="col-sm-5" style="background-color:antiquewhite;">@schedule.NotAvailableTo</div>
+                    <a href="./AddAvailability/@schedule.Id" class="btn btn-info" role="button">Wijzig</a>
+                    <a href="./InspectorSchedule/@schedule.Id" class="btn btn-info" role="button">Delete</a>
+                </div>
+            </div>
+            
+        }
+
+        <a href="AddAvailability" class="btn btn-info" role="button">Voeg beschikbaarheid toe</a>
+    </div>
+
+</div>

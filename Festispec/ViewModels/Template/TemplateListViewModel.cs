@@ -1,10 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using Festispec.Domain.Repository.Factory.Interface;
+using Festispec.NavigationService;
 using Festispec.ViewModels.Factory.Interface;
-using Festispec.ViewModels.NavigationService;
 using GalaSoft.MvvmLight.CommandWpf;
 
 namespace Festispec.ViewModels.Template
@@ -26,6 +28,7 @@ namespace Festispec.ViewModels.Template
             RegisterCommands();
             LoadTemplates();
 
+            TemplateList = new List<TemplateViewModel>();
             NavigationService.PropertyChanged += OnNavigationServicePropertyChanged;
         }
 
@@ -33,66 +36,91 @@ namespace Festispec.ViewModels.Template
         public ICommand NavigateToTemplateUpdateCommand { get; set; }
         public ICommand TemplateDeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
-
+        public ICommand DeleteFilterCommand { get; set; }
         public ObservableCollection<TemplateViewModel> Templates { get; private set; }
 
         public TemplateViewModel SelectedTemplate { get; set; }
 
-        public string SearchName { get; set; } = "";
-        public string SearchDescription { get; set; } = "";
+        public List<TemplateViewModel> TemplateList;
+
+        public string SearchInput
+        {
+            get
+            {
+                return _searchInput;
+            }
+            set
+            {
+                _searchInput = value;
+                RaisePropertyChanged("SearchInput");
+            }
+        }
+
+        private string _searchInput;
 
         private void OnNavigationServicePropertyChanged(object sender, PropertyChangedEventArgs args)
         {
-            if (args.PropertyName != "CurrentPageKey") return;
+            if (args.PropertyName != nameof(NavigationService.CurrentRoute)) return;
 
-            if (NavigationService.CurrentPageKey != Routes.Routes.TemplateList.Key) return;
+            if (NavigationService.CurrentRoute != Routes.Routes.TemplateList) return;
 
-            UpdateTemplatesFromNavigationParameter();
-        }
-
-        private void UpdateTemplatesFromNavigationParameter()
-        {
-            var templateViewModel = NavigationService.Parameter as TemplateViewModel;
-            if (templateViewModel == null) return;
-
-            var existing = Templates.SingleOrDefault(template => template.Id == templateViewModel.Id);
-            if (existing == null)
-            {
-                Templates.Add(templateViewModel);
-            }
-            else
-            {
-                var index = Templates.IndexOf(existing);
-                Templates.RemoveAt(index);
-                Templates.Insert(index, templateViewModel);
-            }
+            LoadTemplates();
         }
 
         private void RegisterCommands()
         {
             NavigateToTemplateAddCommand =
-                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate.Key));
-            NavigateToTemplateUpdateCommand = new RelayCommand(
-                () => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate.Key, SelectedTemplate),
-                () => SelectedTemplate != null);
-            TemplateDeleteCommand = new RelayCommand(() => SelectedTemplate.Delete(), () => SelectedTemplate != null);
-            SearchCommand = new RelayCommand(LoadTemplates);
-        }
+                new RelayCommand(() => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate));
 
-        private void LoadTemplates()
+            NavigateToTemplateUpdateCommand = new RelayCommand(
+                () => _navigationService.NavigateTo(Routes.Routes.TemplateAddOrUpdate, SelectedTemplate),
+                () => SelectedTemplate != null);
+
+            TemplateDeleteCommand = new RelayCommand(() =>
+            {
+                var result = MessageBox.Show("Weet je zeker dat je deze Template wilt verwijderen?", "Waarschuwing", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result != MessageBoxResult.Yes) return;
+                SelectedTemplate.Delete();
+                LoadTemplates();
+            }, () => SelectedTemplate != null);
+            SearchCommand = new RelayCommand(SearchTemplates);
+            DeleteFilterCommand = new RelayCommand(DeleteFilter);
+        }
+        public void SearchTemplates()
+        {
+            if (SearchInput == null) return;
+
+            LoadTemplates();
+            TemplateList.Clear();
+            Templates.ToList().ForEach(n => TemplateList.Add(n));
+            Templates.Clear();
+
+            foreach (var i in TemplateList)
+            {
+                if (i.Name != null && i.Name.ToLower().Contains(SearchInput.ToLower()) || 
+                    i.Description != null && i.Description.ToLower().Contains(SearchInput.ToLower()))
+                {
+                    Templates.Add(i);
+                }
+            }
+        }
+        public void LoadTemplates()
         {
             using (var templateRepository = _templateRepositoryFactory.CreateRepository())
             {
+                var query = templateRepository.Get();
                 Templates =
                     new ObservableCollection<TemplateViewModel>(
-                        templateRepository.Get()
-                            .Where(template =>
-                                template.Name.Contains(SearchName)
-                                && template.Description.Contains(SearchDescription))
-                            .ToList()
+                        query.ToList()
                             .Select(template => _templateViewModelFactory.CreateViewModel(template)));
                 RaisePropertyChanged(nameof(Templates));
             }
+        }
+        private void DeleteFilter()
+        {
+            LoadTemplates();
+            SearchInput = null;
         }
     }
 }

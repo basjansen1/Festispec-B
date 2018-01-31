@@ -1,0 +1,93 @@
+﻿<Page x:Class="Festispec.Views.CustomerCRUD.CustomerList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        DataContext="{Binding Source={StaticResource Locator}, Path=CustomerList}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="1" Content="Toevoegen" Margin="5px 5px" Command="{Binding NavigateToCustomerAddCommand}" />
+            <Button Grid.Column="2" Content="Wijzigen / Extra informatie" Margin="5px 5px" Command="{Binding NavigateToCustomerUpdateCommand}" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="txtSearch" TextWrapping="Wrap" Margin="5px 5px" Text="{Binding SearchInput}" Opacity="0.7" Grid.Column="1" Width="150"/>
+            <Button x:Name="btnSearch" Content="Zoeken" Margin="5px 5px" Grid.Column="2" Command="{Binding SelectedSearch}"/>
+            <Button x:Name="btnDeleteSearch" Content="Zoekveld wissen" Margin="5px 5px" Grid.Column="3" Command="{Binding DeleteFilterCommand}"/>
+        </Grid>
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="3" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}" ItemsSource="{Binding Customers}" 
+                      GridLinesVisibility="Horizontal" HeadersVisibility="Column" VerticalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*" />
+                <DataGridTextColumn Header="Gemeente" Binding="{Binding Municipality}" Width="*" />
+                <DataGridTextColumn Header="Voornaam Contact" Binding="{Binding FirstName}" Width="*" />
+                <DataGridTextColumn Header="Achternaam Contact" Binding="{Binding LastName}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="lblCustomer" Content="Klantgegevens" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"/>
+            <Label x:Name="lblCustomerName" Content="Klantnaam:" Grid.Column="0" Grid.Row="1"/>
+            <TextBox x:Name="txtCustomerName" TextWrapping="Wrap" IsEnabled="False" Text="{Binding SelectedCustomer.Name}" Grid.Column="1" Grid.Row="1"/>
+            <Label x:Name="lblFirstName" Content="Voornaam:" Grid.Column="0" Grid.Row="2"/>
+            <TextBox x:Name="txtFirstName" TextWrapping="Wrap" IsEnabled="False" Text="{Binding SelectedCustomer.FirstName}" Grid.Column="1" Grid.Row="2"/>
+            <Label x:Name="lblLastName" Content="Achternaam:" Grid.Column="0" Grid.Row="3"/>
+            <TextBox x:Name="txtLastName" TextWrapping="Wrap" IsEnabled="False"  Grid.Column="1" Grid.Row="3" Text="{Binding SelectedCustomer.LastName}"/>
+            <Label x:Name="lblKVK" Content="KVK:" Grid.Column="0" Grid.Row="4"/>
+            <TextBox x:Name="txtKVK" TextWrapping="Wrap" IsEnabled="False"  Grid.Row="4" Grid.Column="1" Text="{Binding SelectedCustomer.KVK}"/>
+            <Label x:Name="lblIBAN" Content="IBAN:" Grid.Column="0" Grid.Row="5"/>
+            <TextBox x:Name="txtIBAN" TextWrapping="Wrap" IsEnabled="False"  Grid.Row="5" Grid.Column="1" Text="{Binding SelectedCustomer.IBAN}"/>
+            <Label x:Name="lblEmail" Content="Email adres:" Grid.Column="0" Grid.Row="6"/>
+            <TextBox x:Name="txtEmail" TextWrapping="Wrap" IsEnabled="False"  Grid.Row="6" Grid.Column="1" Text="{Binding SelectedCustomer.Email}"/>
+
+            <Label x:Name="lblAdresInformation" Content="Adresgegevens" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2"/>
+            <Label x:Name="lblHouseNumber" Content="Huisnummer:" Grid.Column="2" Grid.Row="1"/>
+            <TextBox x:Name="txtHouseNumber" TextWrapping="Wrap"  IsEnabled="False" Text="{Binding SelectedCustomer.HouseNumber}" Grid.Column="3" Grid.Row="1"/>
+            <Label x:Name="lblPostalcode" Content="Postcode:" Grid.Column="2" Grid.Row="2"/>
+            <TextBox x:Name="txtPostalcode" TextWrapping="Wrap" IsEnabled="False"  Grid.Column="3" Grid.Row="2" Text="{Binding SelectedCustomer.PostalCode}"/>
+            <Label x:Name="lblStreetName" Content="Straat:" Grid.Column="2" Grid.Row="3"/>
+            <TextBox x:Name="txtStreetName" TextWrapping="Wrap" IsEnabled="False"  Grid.Column="3" Grid.Row="3" Text="{Binding SelectedCustomer.Street}"/>
+            <Label x:Name="lblCity" Content="Stad:" Grid.Column="2" Grid.Row="4"/>
+            <TextBox x:Name="txtCity" TextWrapping="Wrap" IsEnabled="False" Grid.Column="3" Grid.Row="4" Text="{Binding SelectedCustomer.City}"/>
+            <Label x:Name="lblMuniplacity" Content="Gemeente:" Grid.Column="2" Grid.Row="5"/>
+            <TextBox x:Name="txtMuniplacity" TextWrapping="Wrap" IsEnabled="False" Grid.Column="3" Grid.Row="5" Text="{Binding SelectedCustomer.Municipality}"/>
+            <Label x:Name="lblCountry" Content="Land:" Grid.Column="2" Grid.Row="6"/>
+            <TextBox x:Name="txtCountry" TextWrapping="Wrap" IsEnabled="False" Grid.Column="3" Grid.Row="6" Text="{Binding SelectedCustomer.Country}"/>
+        </Grid>
+    </Grid>
+</Page>

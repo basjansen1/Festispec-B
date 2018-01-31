@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Core.Objects.DataClasses;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
@@ -22,6 +25,8 @@ namespace Festispec.Domain.Repository
         {
             DbContext = dbContext;
         }
+
+     
 
         /// <inheritdoc />
         public void Dispose()
@@ -184,7 +189,7 @@ namespace Festispec.Domain.Repository
         /// </exception>
         public virtual TEntity Add(TEntity entity)
         {
-            entity = DbContext.Set<TEntity>().Add(entity);
+            DbContext.Set<TEntity>().Add(entity);
             DbContext.SaveChanges();
             return entity;
         }
@@ -245,7 +250,8 @@ namespace Festispec.Domain.Repository
         ///     Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
         ///     that any asynchronous operations have completed before calling another method on this context.
         /// </remarks>
-        /// <param name="updated"> The entity with the updated values. </param>
+        /// <param name="updated"> The entity with the updatll
+        /// ed values. </param>
         /// <param name="keyValues"> The values of the primary key for the entity to be updated. </param>
         /// <returns> A task that represents the asynchronous add operation. The task result contains the entity updated. </returns>
         /// <exception cref="T:System.ArgumentNullException">
@@ -280,7 +286,7 @@ namespace Festispec.Domain.Repository
         {
             DbContext.Set<TEntity>().AddOrUpdate(entity);
             await DbContext.SaveChangesAsync();
-            return entity;
+            return entity;  
         }
 
         /// <summary>
@@ -301,6 +307,13 @@ namespace Festispec.Domain.Repository
         public virtual int Delete(TEntity entity)
         {
             DbContext.Set<TEntity>().Attach(entity);
+            DbContext.Set<TEntity>().Remove(entity);
+            return DbContext.SaveChanges();
+        }
+
+        public virtual int Delete(params object[] keyValues)
+        {
+            var entity = Get(keyValues);
             DbContext.Set<TEntity>().Remove(entity);
             return DbContext.SaveChanges();
         }
@@ -356,6 +369,26 @@ namespace Festispec.Domain.Repository
         public virtual async Task<int> CountAsync()
         {
             return await DbContext.Set<TEntity>().CountAsync();
+        }
+    }
+
+    public static class DbContextExtensionMethods
+    {
+        public static bool IsAttached(this DbContext dbContext, object entity)
+        {
+            // Get ObjectContext from DbContext
+            var objectContext = ((IObjectContextAdapter)dbContext).ObjectContext;
+
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity));
+            }
+            ObjectStateEntry entry;
+            if (objectContext.ObjectStateManager.TryGetObjectStateEntry(entity, out entry))
+            {
+                return (entry.State != EntityState.Detached);
+            }
+            return false;
         }
     }
 }

@@ -1,0 +1,78 @@
+﻿<Page x:Class="Festispec.Views.Question.QuestionAddOrUpdate"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      Title="QuestionAddOrUpdate"
+      DataContext="{Binding Source={StaticResource Locator}, Path=QuestionAdd}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0">Vraag*</Label>
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=EntityViewModel.Name}" IsEnabled="{Binding Path=IsNewQuestion}" />
+
+            <Label Grid.Column="0" Grid.Row="1">Beschrijving*</Label>
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=EntityViewModel.Description}" IsEnabled="{Binding Path=IsNewQuestion}" />
+
+            <Label Grid.Column="0" Grid.Row="2">Type*</Label>
+            <ComboBox ItemsSource="{Binding Path=QuestionTypes}" IsEnabled="{Binding Path=IsNewQuestion}"
+                  DisplayMemberPath="Type"
+                  SelectedValuePath="Type"
+                  SelectedValue="{Binding Path=EntityViewModel.QuestionType_Type}" 
+                  Grid.Column="1" Grid.Row="2"/>
+
+            <Label Grid.Column="0" Grid.Row="3" Visibility="{Binding Path=MetadataVisibility}">Tabel kolom 1*</Label>
+            <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Path=EntityViewModel.MetadataParameter1}" Visibility="{Binding Path=MetadataVisibility}" IsEnabled="{Binding Path=IsNewQuestion}" />
+            <Label Grid.Column="0" Grid.Row="4" Visibility="{Binding Path=MetadataVisibility}">Tabel kolom 2*</Label>
+            <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding Path=EntityViewModel.MetadataParameter2}" Visibility="{Binding Path=MetadataVisibility}" IsEnabled="{Binding Path=IsNewQuestion}" />
+
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Handmatig invoeren" Margin="5px 5px" Command="{Binding ClearSelectedQuestionCommand}" Grid.Column="0"/>            
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Text="Voer een vraag in of selecteer een vraag uit de lijst"/>
+            <Button Content="Zoek vraag" Margin="5px 5px" Command="{Binding SearchQuestionCommand}" Grid.Column="2"/>
+        </Grid>
+
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestion}" ItemsSource="{Binding Questions}" GridLinesVisibility="Horizontal" 
+                  HeadersVisibility="Column" VerticalAlignment="Stretch" Grid.Row="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Vraag" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Omschrijving" Binding="{Binding Description}" Width="*"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding QuestionType_Type}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content="Annuleer" Margin="5px 5px" Command="{Binding CancelEntityCommand}" />
+            <Button Grid.Column="2" Content="Opslaan" Margin="5px 5px" Command="{Binding SaveEntityCommand}" />
+        </Grid>
+    </Grid>
+</Page>

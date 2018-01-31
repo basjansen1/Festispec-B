@@ -1,0 +1,46 @@
+﻿<Page x:Class="Festispec.Views.Regulations.RegulationAddOrUpdate"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Festispec.Views.Regulations"
+      mc:Ignorable="d" 
+      Title="RegulationAddOrUpdate"
+      DataContext="{Binding Source={StaticResource Locator}, Path=RegulationAddOrUpdate}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>                
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0">Titel*</Label>
+            <Label Grid.Column="0" Grid.Row="1">Beschrijving</Label>
+            <Label Grid.Column="0" Grid.Row="2">Gemeente</Label>
+
+            <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Path=EntityViewModel.Name}" />
+            <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Path=EntityViewModel.Description}" />
+            <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Path=EntityViewModel.Municipality}" />
+        </Grid>
+                
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Annuleer" Margin="5px 5px" Command="{Binding NavigateBackCommand}" />
+            <Button Grid.Column="2"  Content="Opslaan" Margin="5px 5px" Command="{Binding SaveEntityCommand}"/>
+        </Grid>
+    </Grid>
+</Page>

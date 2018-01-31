@@ -1,0 +1,476 @@
+﻿@using Festispec.Domain
+@model Festispec.Domain.Planning
+
+@Html.ActionLink("Regulations", "Regulations/" + Model.Inspection.Id, "Inspection", routeValues: null, htmlAttributes: new { @class = "btn btn-default" })
+
+<form id="inspectionForm" method="post">
+    
+<div class="row">
+    <h1>@Model.Inspection.Name</h1>
+    <h3>Instructies:</h3>
+    <pre>@Model.Inspection.Instructions</pre>
+</div>
+
+@foreach (var inspectionQuestion in Model.Inspection.InspectionQuestion)
+    {
+        var inspectionQuestionAnswer = Model.InspectionQuestionAnswer
+            .Where(answer => answer.Inspection_Id == inspectionQuestion.Inspection_Id && answer.Inspector_Id == Model.Inspector_Id && answer.Question_Id == inspectionQuestion.Question_Id && answer.Date == Model.Date)
+            .DefaultIfEmpty(new InspectionQuestionAnswer {Inspection_Id = inspectionQuestion.Inspection_Id, Inspector_Id = Model.Inspector_Id, Question_Id = inspectionQuestion.Question_Id, Date = Model.Date, Answer = ""})
+            .First();
+
+        <div class="row">
+            <h3>@inspectionQuestion.Question.Name</h3>
+            <p>@inspectionQuestion.Question.Description</p>
+            @switch (inspectionQuestion.Question.QuestionType_Type)
+            {
+                case "Beeld":
+                    <div name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">
+                        <div class="ccamera camera-@inspectionQuestion.Question_Id">
+                            <video class="vvideo" id="video-@inspectionQuestion.Question_Id">Video stream not available.</video>
+                            <button id="startbutton-@inspectionQuestion.Question_Id" class="btn btn-default">Take photo</button>
+                        </div>
+                        <canvas class="ccanvas" id="canvas-@inspectionQuestion.Question_Id"></canvas>
+                        <div class="row" name="beeld-row-@inspectionQuestion.Question_Id">
+                            @foreach (var beeldItem in inspectionQuestionAnswer.DeserializeBeeldAnswer())
+                            {
+                                <div class="col-sm-6 col-md-4 col-lg-4">
+                                    <div class="card beeld-item-@inspectionQuestion.Question_Id">
+                                        <img class="card-img-top" src="@beeldItem[0]"/>
+                                        <p class="card-block">
+                                            <textarea class="form-control">@beeldItem[1]</textarea>
+                                            <button type="button" class="btn btn-danger" onclick="deleteBeeldItem(this)">Verwijder</button>
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <script>
+                            (function () {
+                                // The width and height of the captured photo. We will set the
+                                // width to the value defined here, but the height will be
+                                // calculated based on the aspect ratio of the input stream.
+
+                                var width = 320; // We will scale the photo width to this
+                                var height = 0; // This will be computed based on the input stream
+
+                                // |streaming| indicates whether or not we're currently streaming
+                                // video from the camera. Obviously, we start at false.
+
+                                var streaming = false;
+
+                                // The various HTML elements we need to configure or control. These
+                                // will be set by the startup() function.
+
+                                var video = null;
+                                var canvas = null;
+                                var startbutton = null;
+                                var beeldRow = null;
+
+                                function startup() {
+                                    video = document.getElementById('video-@inspectionQuestion.Question_Id');
+                                    canvas = document.getElementById('canvas-@inspectionQuestion.Question_Id');
+                                    startbutton = document.getElementById('startbutton-@inspectionQuestion.Question_Id');
+                                    beeldRow = document.querySelector('[name="beeld-row-@inspectionQuestion.Question_Id"]');
+
+                                    navigator.getMedia = (navigator.getUserMedia ||
+                                        navigator.webkitGetUserMedia ||
+                                        navigator.mozGetUserMedia ||
+                                        navigator.msGetUserMedia);
+
+                                    navigator.getMedia(
+                                        {
+                                            video: true,
+                                            audio: false
+                                        },
+                                        function (stream) {
+                                            if (navigator.mozGetUserMedia) {
+                                                video.mozSrcObject = stream;
+                                            } else {
+                                                var vendorURL = window.URL || window.webkitURL;
+                                                video.src = vendorURL.createObjectURL(stream);
+                                            }
+                                            video.play();
+                                        },
+                                        function (err) {
+                                            console.log("An error occured! " + err);
+                                        }
+                                    );
+
+                                    video.addEventListener('canplay',
+                                        function (ev) {
+                                            if (!streaming) {
+                                                height = video.videoHeight / (video.videoWidth / width);
+
+                                                // Firefox currently has a bug where the height can't be read from
+                                                // the video, so we will make assumptions if this happens.
+
+                                                if (isNaN(height)) {
+                                                    height = width / (4 / 3);
+                                                }
+
+                                                video.setAttribute('width', width);
+                                                video.setAttribute('height', height);
+                                                canvas.setAttribute('width', width);
+                                                canvas.setAttribute('height', height);
+                                                streaming = true;
+                                            }
+                                        },
+                                        false);
+
+                                    startbutton.addEventListener('click',
+                                        function (ev) {
+                                            takepicture();
+                                            ev.preventDefault();
+                                        },
+                                        false);
+
+                                    //clearphoto();
+                                }
+
+                                // Fill the photo with an indication that none has been
+                                // captured.
+
+                                function clearphoto() {
+                                    var context = canvas.getContext('2d');
+                                    context.fillStyle = "#AAA";
+                                    context.fillRect(0, 0, canvas.width, canvas.height);
+
+                                    var data = canvas.toDataURL('image/png');
+                                    photo.setAttribute('src', data);
+                                }
+
+                                // Capture a photo by fetching the current contents of the video
+                                // and drawing it into a canvas, then converting that to a PNG
+                                // format data URL. By drawing it on an offscreen canvas and then
+                                // drawing that to the screen, we can change its size and/or apply
+                                // other changes before drawing it.
+
+                                function takepicture() {
+                                    var context = canvas.getContext('2d');
+                                    if (width && height) {
+                                        canvas.width = width;
+                                        canvas.height = height;
+                                        context.drawImage(video, 0, 0, width, height);
+
+                                        var data = canvas.toDataURL('image/png');
+//                                        photo.setAttribute('src', data);
+
+                                        var beeldItemHtml =
+                                            '<div class="col-sm-6 col-md-4 col-lg-4 mt-4">' +
+                                                '<div class="card beeld-item-@inspectionQuestion.Question_Id">' +
+                                                '<img class="card-img-top" src="' + data + '" />' +
+                                                '<p class="card-block">' +
+                                                '<textarea class="form-control"></textarea>' +
+                                                '<button type="button" class="btn btn-danger" onclick="deleteBeeldItem(this)">Verwijder</button>' +
+                                                '</p>' +
+                                                '</div>' +
+                                                '</div>';
+
+                                        beeldRow.innerHTML += beeldItemHtml;
+                                    }
+                                }
+
+                                // Set up our event listener to run the startup process
+                                // once loading is complete.
+                                window.addEventListener('load', startup, false);
+                            })();
+                        </script>
+                    </div>
+                    break;
+                case "Getal":
+                        @: <input type="text" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type" value="@inspectionQuestionAnswer.Answer" />
+                        break;
+                        case "Reeks":
+                        <div name="answers" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">
+                            @for (var i = 1; i < 11; i++)
+                            {
+                                <label>
+                                    <input name="radio-@inspectionQuestion.Question_Id" type="radio" value="@i" @(inspectionQuestionAnswer.Answer == i.ToString() ? "checked" : "")>@i
+                                </label>
+                            }
+                        </div>
+                        break;
+                        case "Tabel":
+                        <table name="answers" class="table table-bordered table-striped table-responsive" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">
+                            <thead>
+                                <tr>
+                                    <th>@inspectionQuestion.Question.MetadataParameter1</th>
+                                    <th>@inspectionQuestion.Question.MetadataParameter2</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var table = inspectionQuestionAnswer.DeserializeTabelAnswer();
+                                    foreach (var row in table)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <input type="text" class="form-control" value="@row[0]" />
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" value="@row[1]" />
+                                            </td>
+                                        </tr>
+                                    }}
+                            </tbody>
+                        </table>
+                        break;
+                        case "Tekst":
+                        <textarea name="answers" class="form-control" data-question-id="@inspectionQuestion.Question_Id" data-question-type="@inspectionQuestion.Question.QuestionType_Type">@inspectionQuestionAnswer.Answer</textarea>
+                        break;
+                        }
+                    </div>
+                                    }
+
+    <input type="submit" class="btn btn-primary" value="versturen"/>
+
+</form>
+
+
+<script>
+    function deleteBeeldItem(e) {
+        console.log(e);
+        var parent = e.parentNode.parentNode.parentNode;
+        parent.parentNode.removeChild(parent);
+    }
+
+    var inspectionForm = document.getElementById('inspectionForm');
+    inspectionForm.addEventListener('submit',
+        function(event) {
+            event.preventDefault();
+
+            // Get all answer elements
+            var elements = inspectionForm.querySelectorAll('[name="answers"]');
+
+            // Create dictionary
+            var data = new Object();
+
+            // Loop through the answer elements
+            for (var i = 0, l = elements.length; i < l; i++) {
+                var element = elements[i];
+                var questionId = element.dataset.questionId;
+
+                data[`answers[${i}].Key`] = questionId;
+                data[`answers[${i}].Value`] = parseElementAnswer(element);
+            }
+
+
+            $.post('/Inspection/Inspect/@Model.Inspection_Id/@Model.Date.ToString("yyyy-MM-dd")', data)
+                .done(() => {
+                    alert('Formulier opgeslagen');
+                    location.reload();
+                }).fail(() => {
+                    alert('Er is iets foutgegaan');
+                });
+        });
+
+    function parseElementAnswer(element) {
+        var questionType = element.dataset.questionType;
+        var answer;
+        switch (questionType) {
+        case "Getal":
+        case "Tekst":
+            answer = element.value;
+            break;
+        case "Reeks":
+            answer = parseReeksAnswer(element);
+            break;
+        case "Tabel":
+            answer = parseTableAnswer(element);
+            break;
+        case "Beeld":
+            answer = parseBeeldAnswer(element);
+            break;
+        }
+        return answer;
+    }
+
+    function parseReeksAnswer(element) {
+        var questionId = element.dataset.questionId;
+        var reeks = element.querySelectorAll(`[name="radio-${questionId}"]`);
+
+        return getSelectedRadioButton(reeks);
+    }
+
+    function parseBeeldAnswer(element) {
+        var questionId = element.dataset.questionId;
+        var beeldItems = element.querySelectorAll(`.beeld-item-${questionId}`);
+
+        var beeldAnswers = [];
+
+        for (var i = 0, l = beeldItems.length; i < l; i++) {
+            var beeldItem = beeldItems[i];
+            var image = beeldItem.querySelector('img');
+            var textarea = beeldItem.querySelector('textarea');
+
+            beeldAnswers.push([image.src, textarea.value]);
+        }
+
+        return JSON.stringify(beeldAnswers);
+    }
+
+    function parseTableAnswer(element) {
+        var questionId = element.dataset.questionId;
+        var tableRows = element.querySelectorAll('tbody tr');
+
+        var tableAnswers = [];
+
+        for (var i = 0, l = tableRows.length; i < l; i++) {
+            var tableRow = tableRows[i];
+            var tableColumnInputs = tableRow.querySelectorAll('td input');
+
+            var column1 = tableColumnInputs[0].value;
+            var column2 = tableColumnInputs[1].value;
+
+            tableAnswers.push([column1, column2]);
+        }
+
+        return JSON.stringify(tableAnswers);
+    }
+
+    function getSelectedRadioButton(radioButtons) {
+        for (var i = 0, l = radioButtons.length; i < l; i++) {
+            var radioButton = radioButtons[i];
+            if (radioButton.checked) {
+                return radioButton.value;
+            }
+        }
+        return '';
+    }
+
+</script>
+
+<style>
+    .card {
+        font-size: 1em;
+        overflow: hidden;
+        padding: 0;
+        border: none;
+        border-radius: .28571429rem;
+        box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
+        margin-bottom: 25px;
+    }
+
+    .card-block {
+        font-size: 1em;
+        position: relative;
+        margin: 0;
+        padding: 1em;
+        border: none;
+        border-top: 1px solid rgba(34, 36, 38, .1);
+        box-shadow: none;
+    }
+
+    .card-img-top {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .card-title {
+        font-size: 1.28571429em;
+        font-weight: 700;
+        line-height: 1.2857em;
+    }
+
+    .card-text {
+        clear: both;
+        margin-top: .5em;
+        color: rgba(0, 0, 0, .68);
+    }
+
+    .card-footer {
+        font-size: 1em;
+        position: static;
+        top: 0;
+        left: 0;
+        max-width: 100%;
+        padding: .75em 1em;
+        color: rgba(0, 0, 0, .4);
+        border-top: 1px solid rgba(0, 0, 0, .05) !important;
+        background: #fff;
+    }
+
+    .card-inverse .btn {
+        border: 1px solid rgba(0, 0, 0, .05);
+    }
+
+    .profile {
+        position: absolute;
+        top: -12px;
+        display: inline-block;
+        overflow: hidden;
+        box-sizing: border-box;
+        width: 25px;
+        height: 25px;
+        margin: 0;
+        border: 1px solid #fff;
+        border-radius: 50%;
+    }
+
+    .profile-avatar {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+    }
+
+    .profile-inline {
+        position: relative;
+        top: 0;
+        display: inline-block;
+    }
+
+    .profile-inline ~ .card-title {
+        display: inline-block;
+        margin-left: 4px;
+        vertical-align: top;
+    }
+
+    .text-bold {
+        font-weight: 700;
+    }
+
+    .meta {
+        font-size: 1em;
+        color: rgba(0, 0, 0, .4);
+    }
+
+    .meta a {
+        text-decoration: none;
+        color: rgba(0, 0, 0, .4);
+    }
+
+    .meta a:hover {
+        color: rgba(0, 0, 0, .87);
+    }
+
+    textarea,
+    input {
+        -moz-min-width: 100%;
+        -ms-min-width: 100%;
+        -o-min-width: 100%;
+        -webkit-min-width: 100%;
+        min-width: 100%;
+    }
+
+    .vvideo {
+        border: 1px solid black;
+        box-shadow: 2px 2px 3px black;
+        height: 240px;
+        width: 320px;
+    }
+
+    .ccanvas { display: none; }
+
+    .ccamera {
+        display: inline-block;
+        width: 340px;
+    }
+
+    .contentarea {
+        font-family: "Lucida Grande", "Arial", sans-serif;
+        font-size: 16px;
+        width: 760px;
+    }
+</style>

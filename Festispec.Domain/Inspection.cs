@@ -18,6 +18,7 @@ namespace Festispec.Domain
         public Inspection()
         {
             this.Planning = new HashSet<Planning>();
+            this.InspectionQuestion = new HashSet<InspectionQuestion>();
         }
     
         public string Name { get; set; }
@@ -26,10 +27,13 @@ namespace Festispec.Domain
         public System.DateTime End { get; set; }
         public string Status_Status { get; set; }
         public int Customer_Id { get; set; }
+        public string Instructions { get; set; }
     
         public virtual InspectionStatus Status { get; set; }
         public virtual Customer Customers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Planning> Planning { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InspectionQuestion> InspectionQuestion { get; set; }
     }
 }

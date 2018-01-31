@@ -1,10 +1,13 @@
 ﻿namespace Festispec.ViewModels.Interface
 {
-    public interface IEntityViewModel<out TEntity> where TEntity : class
+    public interface IEntityViewModel<TEntity> where TEntity : class
     {
-        void Save();
-        void Delete();
-        TEntity Copy();
         TEntity Entity { get; }
+        TEntity OriginalValues { get; }
+        bool Save();
+        bool Delete();
+        void MapValues(TEntity from, TEntity to);
+        void MapValuesFromOriginal();
+        void MapValuesToOriginal();
     }
 }
